@@ -1,0 +1,29 @@
+.ProfilePhoto {
+  border-radius: 50%;
+  width: 5rem;
+  height: 5rem; 
+}
+
+/*
+.blur-on {
+    -webkit-filter: blur(var(--blur));
+    -moz-filter: blur(var(--blur));
+    -o-filter: blur(var(--blur));
+    -ms-filter: blur(var(--blur));
+    filter: blur(var(--blur));
+
+    -webkit-transition: all 5s linear;
+    transition        : all 5s linear;
+    -moz-transition   : all 5s linear;
+    -webkit-transition: all 5s linear;
+    -o-transition     : all 5s linear;
+}
+
+.blur-off {
+    -webkit-filter: blur(0px) !important;
+    -moz-filter   : blur(0px) !important;
+    -o-filter     : blur(0px) !important;
+    -ms-filter    : blur(0px) !important;
+    filter        : blur(0px) !important;
+}
+*/

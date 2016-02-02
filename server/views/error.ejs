@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/static/normalize.css">
+    <title> Open Collective </title>
+    <style>
+      #content-404 {
+        margin: 7% auto;
+        max-width: 400px;
+        font-size: 18px;
+      }
+
+      #content-404 img{
+        width: 100%;
+      }
+
+      #content-404 p{
+        margin-left: 13px;
+      }
+  </style>
+  </head>
+  <body>
+    <div id="content-404">
+      <a href='http://opencollective.com/'> <img src='/static/images/LogoLargeTransparent.png'></a>
+
+      <p><b><%= message %></b></p>
+
+      <p>Try our <a href='https://opencollective.com/'>homepage</a>, <a href='https://opencollective.com/faq'>FAQ</a> or <a href='https://medium.com/open-collective'>blog</a>. </p>
+
+      <p>Or chat with us on our <a href='https://slack.opencollective.com/'>Slack channel</a>.</p>
+
+      <img src='/static/images/404.gif'>
+
+    </div>
+    <% include google_analytics.ejs %>
+  </body>
+</html>

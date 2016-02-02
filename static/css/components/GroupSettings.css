@@ -1,0 +1,17 @@
+.GroupSettings .Field {
+	width: 90%;
+}
+
+.GroupSettings .ProfilePhotoUpload {
+	width: 5rem;
+  margin: 0 auto;
+}
+
+.GroupSettings .ProfilePhoto {
+ width: 5rem;
+ height: 5rem; 
+}
+
+.GroupSettings .leftColumn {
+	float: left;
+}

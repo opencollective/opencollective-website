@@ -1,0 +1,7 @@
+.Field,
+.DatePicker .datepicker__input {
+  background-color: var(--light-gray);
+  margin-bottom: calc(var(--spacing)/2);
+  padding: var(--spacing);
+  border: none;
+}

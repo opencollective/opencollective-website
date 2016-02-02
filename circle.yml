@@ -1,0 +1,11 @@
+machine:
+  node:
+    version: 5.1.0
+deployment:
+  staging:
+    branch: staging
+    heroku:
+      appname: opencollective-staging-app
+test:
+  pre:
+    - nohup bash -c "npm run testserver &"

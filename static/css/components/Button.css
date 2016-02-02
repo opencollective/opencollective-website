@@ -1,0 +1,96 @@
+.Button {
+  color: white;
+  background: var(--gray);
+  border-radius: 3px;
+  border: 1px solid transparent;
+  vertical-align: middle;
+  text-transform: uppercase;
+  padding: calc(var(--spacing) * 0.75) var(--spacing);
+  text-align: center;
+  cursor: pointer;
+  font-weight: bold
+}
+
+.Button span,
+.Button .Icon:before {
+  vertical-align: middle;
+}
+
+.Button .Icon {
+  margin-right: calc(var(--spacing) / 2);
+}
+
+.Button--submit {
+  background-color: var(--orange);
+}
+
+.Button--approve,
+.Button--save,
+.Button--green,
+.Button--add {
+  background-color: var(--green);
+  margin-right: calc(var(--spacing)/2);
+}
+
+.Button--approve:hover,
+.Button--save:hover,
+.Button--add:hover,
+.Button--green:hover,
+.Button--approve:active,
+.Button--save:active,
+.Button--add:active,
+.Button--green:active {
+  background-color: var(--dark-green);
+}
+
+.Button--red,
+.Button--reject,
+.Button--cancel {
+  background-color: var(--red);
+  margin-left: calc(var(--spacing)/2);
+}
+
+.Button--reject:hover,
+.Button--cancel:hover,
+.Button--red:hover,
+.Button--reject:active,
+.Button--red:active,
+.Button--cancel:active {
+  background-color: var(--dark-red);
+}
+
+.Button--approve,
+.Button--save,
+.Button--reject,
+.Button--cancel {
+  box-sizing: border-box;
+  width: calc(50% - calc(var(--spacing)/2));
+  float: left;
+}
+
+.Button--paypal,
+.Button--stripe {
+  background-color: #298ED8;
+}
+
+.Button--stripe {
+  margin-top: calc(var(--spacing)/2);
+}
+
+.Button--inProgress,
+.Button--inProgress:hover {
+  background-color: var(--gray);
+  -webkit-transition: all 350ms ease-out;
+  -moz-transition: all 350ms ease-out;
+  -ms-transition: all 350ms ease-out;
+  -o-transition: all 350ms ease-out;
+  transition: all 350ms ease-out;
+}
+
+/**
+ * Keep at the very bottom
+ */
+
+.Button--inProgress {
+  background-color: var(--dark-gray);
+}

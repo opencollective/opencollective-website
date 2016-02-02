@@ -1,0 +1,8 @@
+.Reminder {
+  color: var(--gold);
+  background-color: var(--yellow);
+  padding: var(--spacing);
+  margin: var(--spacing);
+  text-align: center;
+  border-radius: 4px;
+}

@@ -1,0 +1,49 @@
+.ImageUpload {
+  height: var(--image-upload-height);
+  margin-bottom: var(--spacing);
+  background-color: var(--light-gray);
+  text-transform: uppercase;
+  text-align: center;
+  color: #CDD0D4;
+}
+
+.ImageUpload div {
+  padding: var(--spacing);
+}
+
+.ImageUpload-content {
+  height: var(--image-upload-child-height);
+  /* simple way to center vertically */
+  margin-top: calc((var(--image-upload-height) - var(--image-upload-child-height)) / 2);
+}
+
+/* Need to be more specific to override the .App > div:not(.PublicGroup) label */
+.App .Content .ImageUpload label {
+  display: block;
+  width: 190px;
+  text-align: center;
+  margin: 0 auto;
+  color: #CDD0D4;
+}
+
+.ImageUpload-input {
+  opacity: 0;
+  height: 0;
+  width: 0;
+}
+
+.ImageUpload .placeholder img {
+  width: auto;
+  height: 5rem;
+}
+
+.ImageUpload .imagePreview {
+  width: auto;
+  padding: 0;
+  height: 100%;
+}
+
+.ImageUpload .imagePreview img {
+  width: auto;
+  height: 100%;
+}

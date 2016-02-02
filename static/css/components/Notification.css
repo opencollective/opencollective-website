@@ -1,0 +1,39 @@
+.Notification {
+  padding: 1rem;
+  color: white;
+  position: fixed;
+  top: var(--topbar-height);
+  left: 0;
+  right: 0;
+  text-align: left;
+  z-index: 100;
+}
+
+.Notification--error {
+  background-color: var(--red);
+}
+
+.Notification--success {
+  background-color: var(--green);
+}
+
+.Notification--warning {
+  background-color: var(--orange);
+}
+
+.Notification--info {
+  background-color: var(--light-blue);
+}
+
+.Notification--hide {
+  display: none;
+}
+
+.Notification span,
+.Notification .Icon:before {
+  vertical-align: middle;
+}
+
+.Notification .Icon {
+  margin-right: calc(var(--spacing) / 2);
+}

@@ -1,0 +1,4 @@
+.TableRow {
+  border-bottom: 1px solid var(--gray);
+  padding: var(--spacing) 0;
+}

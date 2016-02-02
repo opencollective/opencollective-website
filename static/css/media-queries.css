@@ -1,0 +1,102 @@
+@media (--large-viewport) {
+  .PublicContent {
+    max-width: calc(var(--max-container-width) - var(--spacing) * 2);
+    margin:
+      calc(var(--public-topbar-height) + var(--spacing))
+      auto
+      0
+      auto;
+  }
+}
+
+@media (--medium-viewport) {
+  html {
+    font-size: 14px; /* 1 rem = 14px; */
+  }
+  
+  .PublicGroup .PublicContent {
+    padding: 1rem 1rem 5rem 1rem;
+    max-width: calc(var(--public-topbar-height) + var(--spacing)) auto 0 auto;
+  }
+  .PublicTopBar .long {
+    display: none;
+  }
+  .PublicTopBar-tagLine .Tagline, .PublicTopBar-signup {
+    font-size: .8rem;
+  }
+  .PublicGroup-video, .PublicGroup-image, .PublicGroup-summary {
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+  
+  .PublicGroup-summary {
+    padding-left: 0;
+  }
+
+  .PublicGroup-metricContainer {
+    display: flex;
+  }
+  .PublicGroup-metricContainer .Metric {
+    flex: 1;
+    font-size: 1rem;
+  }
+  .Metric .Metric-value {
+    font-size: 1.5rem;
+  }
+  .Metric .Metric-label {
+    font-size: .8rem;
+  }
+  .PublicGroup label {
+    font-size: .9rem;
+    margin-right: 1rem;
+    line-height: 1.5rem;
+  }
+  .PublicGroup .Button {
+    margin-top: 0.5rem;
+    /* TODO: Either kill yourself of find a workaround */
+    display: block !important;
+  }
+  .PublicGroup-members {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .PublicGroup-members .UsersList {
+    display: inline-table;
+    width: 90%;
+    margin: 0 auto;
+    justify-content: space-between;
+  }
+  .PublicGroup-quoteText {
+    padding-left: 0px;
+  }
+  .PublicContent .PublicGroup-expenses, .PublicContent .PublicGroup-donations {
+    width: 100%;
+    padding-right: 0;
+    margin-bottom:1.5rem;
+  } 
+  .PublicGroup .TransactionItem .ProfilePhoto {
+    width: 3rem;
+    height: 3rem;
+  }
+  .DonationPicker label {
+    font-size: 1.2rem;
+    margin-right: 2rem;
+  }
+  .PublicFooter .PublicFooter-menu {
+    line-height: 30px;
+  }
+  .PublicFooter img {
+    max-height: 30px;
+  }
+}
+
+@media (--small-viewport) {
+  html {
+    font-size: 12px; /* 1 rem = 14px; */
+  }
+  
+  .DonationPicker label {
+    margin-right: 2rem;
+  }
+
+}

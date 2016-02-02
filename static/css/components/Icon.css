@@ -1,0 +1,87 @@
+.Icon:before {
+  font-family: "opencollective" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.Icon--upload:before {
+  content: "a";
+}
+
+.Icon--up:before {
+  content: "b";
+}
+
+.Icon--right:before {
+  content: "c";
+}
+
+.Icon--add:before {
+  content: "d";
+}
+
+.Icon--approved:before {
+  content: "e";
+}
+
+.Icon--down:before {
+  content: "i";
+}
+
+.Icon--left:before {
+  content: "j";
+}
+
+.Icon--pending:before {
+  content: "l";
+}
+
+.Icon--rejected:before {
+  content: "p";
+}
+
+.Icon--loading:before {
+  content: "f";
+}
+
+.Icon--oc:before {
+  content: "g";
+}
+
+.Icon--gear:before {
+  content: "m";
+}
+
+.Icon--mail:before {
+  content: "q";
+}
+
+.Icon--link:before {
+  content: "r";
+}
+
+.Icon--facebook:before {
+  content: "s";
+}
+
+.Icon--expense:before {
+  content: "t";
+}
+
+.Icon--embed:before {
+  content: "u";
+}
+
+.Icon--twitter:before {
+  content: "v";
+}
+
+.Icon--revenue:before {
+  content: "w";
+}

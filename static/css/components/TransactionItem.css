@@ -1,0 +1,51 @@
+.TransactionItem {
+  clear: both;
+  display: inline-block;
+  width: 100%;
+  padding-bottom: var(--spacing);
+}
+
+.TransactionItem .ProfilePhoto {
+  float: left;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+.TransactionItem-info {
+  float: left;
+  width: calc(100% - 86px - 1rem);
+  padding-left: var(--spacing);
+}
+
+.TransactionItem-meta {
+  font-weight: 14px;
+}
+
+.TransactionItem-created {
+  clear: both;
+  float: left;
+  font-size: 0.9rem;
+  width: 50%;
+  color: gray;
+}
+
+.TransactionItem-status {
+  float: right;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.TransactionItem-description {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 80%;
+  font-size: 1.25rem;
+  float:left;
+}
+
+.TransactionItem-amount {
+  font-size: 1.25rem;
+  float: right;
+  text-align: right;
+  width: 15%;
+}

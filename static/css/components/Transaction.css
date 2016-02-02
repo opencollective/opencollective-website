@@ -1,0 +1,57 @@
+.Transaction {
+  padding: var(--spacing);
+  border-bottom: 1px solid var(--gray);
+  cursor: pointer;
+}
+
+.Transaction a {
+  display: inline-block;
+  width: 100%;
+  color: var(--dark-gray);
+}
+
+/* Disable links when overlay */
+.Content.Content--hasPopOverMenuOpen .Transaction > a {
+  pointer-events: none;
+  cursor: default;
+}
+
+.Transaction-description {
+  text-transform: uppercase;
+  color: var(--dark-gray);
+  font-weight: bold;
+  vertical-align: top;
+  padding-top: calc(var(--spacing)/4);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.Transaction .ProfilePhoto {
+  float: left;
+  width: 3rem;
+  height: 3rem;
+}
+
+.Transaction-info {
+  float: left;
+  width: calc(100% - 55px);
+  box-sizing: border-box;
+  padding-left: var(--spacing);
+}
+
+.Transaction-amount {
+  float: left;
+}
+
+.Transaction-status {
+  padding-top: calc(var(--spacing)/4);
+}
+
+.Transaction-created {
+  font-size: 12px;
+}
+
+.Transaction-approved {
+  float: right;
+}

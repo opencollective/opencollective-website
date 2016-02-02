@@ -1,0 +1,5 @@
+.Public {
+  background-color: var(--light-gray);
+  background: url(/static/images/gradient.png) no-repeat no-repeat center center fixed;
+  background-size: cover;
+}

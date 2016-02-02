@@ -1,0 +1,7 @@
+{
+  "preset": "airbnb",
+  "esnext": true,
+  "excludeFiles": ["public/*.js"],
+  "requireCamelCaseOrUpperCaseIdentifiers": false,
+  "requireTrailingComma": false
+}

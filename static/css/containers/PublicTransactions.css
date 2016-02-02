@@ -1,0 +1,4 @@
+.PublicTransactions-well {
+  margin: 0 -var(--spacing);
+  border-top: 1px solid var(--gray);
+}

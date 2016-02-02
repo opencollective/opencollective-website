@@ -1,0 +1,54 @@
+.TopBar {
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  height: var(--topbar-height);
+  padding-left: var(--spacing);
+  padding-right: var(--spacing);
+  background-color: white;
+  border-bottom: 1px solid var(--gray);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.TopBar-title {
+  position: absolute;
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0 -var(--spacing);
+  font-size: 17px;
+  font-weight: 500;
+  line-height: var(--topbar-height);
+  text-align: center;
+  white-space: nowrap;
+  font-weight: bold;
+}
+
+.TopBar-backButton {
+  font-size: 20px;
+  float: left;
+  padding-top: 20px;
+  z-index: 20;
+  position: relative;
+  cursor: pointer;
+}
+
+.TopBar-groupSettingsButton {
+  font-size: 20px;
+  float: right;
+  padding-top: 20px;
+  z-index: 20;
+  position: relative;
+  cursor: pointer;
+}
+
+.TopBar-rightLink {
+  float: right;
+  line-height: var(--topbar-height);
+  z-index: 20;
+  cursor: pointer;
+  position: relative;
+}

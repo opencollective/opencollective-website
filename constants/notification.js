@@ -1,0 +1,2 @@
+export const NOTIFY = 'NOTIFY';
+export const RESET_NOTIFICATIONS = 'RESET_NOTIFICATIONS';

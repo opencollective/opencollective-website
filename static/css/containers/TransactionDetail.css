@@ -1,0 +1,59 @@
+.TransactionDetail-image {
+  float: left;
+  padding-right: var(--spacing);
+}
+
+.TransactionDetail-image img {
+  max-width: 100px;
+  max-height: 125px;
+}
+
+.TransactionDetail-info {
+  float: left;
+  padding-bottom: calc(var(--spacing) * 2);
+  width: calc(100% - 60px - 4rem);
+  box-sizing: border-box;
+}
+
+.TransactionDetail--noImage .TransactionDetail-info{
+  float: none;
+  padding-bottom: calc(var(--spacing) * 2);
+  width: 100%;
+}
+
+.TransactionDetail-price {
+  font-size: calc(var(--spacing) * 2);
+}
+
+.TransactionDetail-paymentMethod {
+  clear: both;
+}
+
+.TransactionDetail-vat {
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+}
+
+.TransactionDetail-category {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  padding-top: var(--spacing);
+}
+
+.TransactionDetail-category .SelectContainer {
+  margin-top: calc(var(--spacing) / 2);
+  display: block;
+  width: 100%;
+}
+
+.TransactionDetail-paymentMethod .SelectContainer {
+  width: 100%;
+}
+
+.TransactionDetail-status {
+  text-align: center;
+  padding: var(--spacing) 0;
+  border-top: 1px solid var(--gray);
+  border-bottom: 1px solid var(--gray);
+  clear: both;
+}

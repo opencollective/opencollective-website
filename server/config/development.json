@@ -1,0 +1,7 @@
+{
+  "apiKey": "0ac43519edcf4421d80342403fb5985d",
+  "apiUrl": "http://localhost:3060/",
+  "clientUrl": "http://localhost:3000/",
+  "stripePublicKey": "pk_test_5olkhgG5FgJDHcGpJllmCj6z",
+  "viewCache": false
+}

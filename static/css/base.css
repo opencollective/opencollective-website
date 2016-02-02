@@ -1,0 +1,166 @@
+html,
+body {
+  height: 100%;
+  font-size: 16px; /* 1 rem = 16px */
+}
+
+body {
+  color: var(--dark-gray);
+  font-family: 'Proxima Nova', Helvetica;
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: var(--light-blue);
+  text-decoration: none;
+}
+
+.Content {
+  padding-top: var(--topbar-height);
+  padding-bottom: var(--footer-height);
+}
+
+.PublicContent {
+  background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(255,255,255,1) 85%,rgba(255,255,255,0) 100%);
+  margin: calc(var(--public-topbar-height) + var(--spacing)) var(--spacing)
+    0
+    var(--spacing);
+  -webkit-box-shadow: 0 0 2px 0 rgba(0,0,0,.2);
+  box-shadow: 0 0 2px 0 rgba(0,0,0,.2);
+  padding: calc(var(--spacing) * 2) calc(var(--spacing) * 2) calc(var(--public-footer-height) + var(--spacing)) calc(var(--spacing) * 2);
+  border-top: 3px solid var(--gray);
+  position: relative;
+}
+
+/** forms **/
+input::-webkit-input-placeholder, input::-moz-placeholder, input:-ms-input-placeholder {  
+  font-style: italic;
+  color: --light-gray;
+  font-family: "Proxima Nova";
+}
+
+/**
+ * hide ugly gray gradient
+ */
+select, input {
+  -webkit-appearance: none;
+}
+
+/** Add all the magic for the radio buttons **/
+input[type="radio"] {
+  -webkit-appearance: none;
+  height: 1.4rem;
+  width: 1.4rem;
+  border-radius: 50%;
+  position: relative;
+  border: 1px solid var(--gray); 
+  background: white;
+  float: left;
+  margin-right: 0.5rem;
+}
+
+input[type="radio"]::after {
+  content: "";
+  position: absolute;
+  background: var(--light-blue);
+  opacity: 0;
+  -webkit-transform: scale(1.25); 
+  width: .8rem;
+  height: .8rem;
+  border-radius: 50%;
+  left: 0.25rem;
+  top: 0.25rem;
+  -webkit-transition: all 230ms ease-in;
+  transition: all 230ms ease-in; 
+}
+
+input[type="radio"]:hover {
+  background: #F9FAFA;
+  box-shadow: 0 1px 1px rgba(147, 157, 163, 0.3) inset, 0 0 0 2px rgba(0, 140, 221, 0.2);
+  -webkit-box-shadow: 0 1px 1px rgba(147, 157, 163, 0.3) inset, 0 0 0 2px rgba(0, 140, 221, 0.2); 
+}
+
+input[type="radio"]:focus{
+  outline: none;
+  box-shadow: 0 1px 1px rgba(147, 157, 163, 0.3) inset, 0 0 0 2px rgba(0, 140, 221, 0.2);
+  -webkit-box-shadow: 0 1px 1px rgba(147, 157, 163, 0.3) inset, 0 0 0 2px rgba(0, 140, 221, 0.2); 
+}
+
+input[type="radio"]:active {
+  background: white;
+  border: 1px solid var(--light-blue);
+  box-shadow: 0 1px 1px rgba(147, 157, 163, 0.3) inset, 0 0 0 2px rgba(0, 140, 221, 0.2);
+  -webkit-box-shadow: 0 1px 1px rgba(147, 157, 163, 0.3) inset, 0 0 0 2px rgba(0, 140, 221, 0.2); 
+}
+
+input[type="radio"]:disabled {
+  box-shadow: none;
+  background: #F9FAFA;
+  border: 1px solid var(--gray); 
+}
+
+input[type="radio"]:checked {
+  background: white;
+  border: 1px solid var(--gray); 
+}
+
+input[type="radio"]:checked:after {
+  opacity: 1;
+  -webkit-transform: scale(1); 
+}
+
+input[type="radio"]:checked:hover {
+  background: white;
+  border: 1px solid var(--light-blue);
+  box-shadow: 0 1px 1px rgba(147, 157, 163, 0.3) inset, 0 0 0 2px rgba(0, 140, 221, 0.2);
+  -webkit-box-shadow: 0 1px 1px rgba(147, 157, 163, 0.3) inset, 0 0 0 2px rgba(0, 140, 221, 0.2); 
+}
+
+input[type="radio"]:checked:focus{
+  border: 1px solid var(--gray); 
+}
+
+input[type="radio"]:checked:active {
+  background: white;
+  border: 1px solid var(--light-blue);
+  box-shadow: 0 1px 1px rgba(147, 157, 163, 0.3) inset, 0 0 0 2px rgba(0, 140, 221, 0.2);
+  -webkit-box-shadow: 0 1px 1px rgba(147, 157, 163, 0.3) inset, 0 0 0 2px rgba(0, 140, 221, 0.2); 
+}
+
+input[type="radio"]:checked:disabled {
+  opacity: 0.3;
+  box-shadow: none;
+  background: var(--gray);
+  border: 1px solid var(--gray); 
+}
+
+input[type="text"], textarea {
+    background-color: var(--light-gray);
+    color: var(--dark-gray);
+    border: 0 none;
+    font-size: 1.2rem;
+    padding: 1rem;
+    margin-top: .5rem;
+    min-width: 50%;
+    border: 1px solid transparent;
+}
+
+input[type="text"]:disabled {
+  background-color: var(--gray);
+}
+
+input[type="text"]:focus {
+  border: 1px solid var(--light-blue);
+  outline: 0;
+}
+
+input[type="text"]:hover {
+  color: var(--light-blue);
+  border: 1px solid var(--light-blue);
+}
+
+input[type="text"]:hover::-webkit-input-placeholder {
+  color: var(--light-blue);
+}

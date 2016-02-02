@@ -1,0 +1,11 @@
+.ShareIcon {
+  cursor: pointer;
+}
+
+.ShareIcon .Icon {
+  color: var(--gray);
+}
+
+.ShareIcon .Icon:hover {
+  color: var(--light-blue);
+}

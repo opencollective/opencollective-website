@@ -1,0 +1,31 @@
+.UsersList {
+
+}
+
+.UsersList-item {
+  display: inline-block;
+  padding-right: var(--spacing);
+  text-align: center;
+  width: 6rem;
+  height: 7rem;
+  vertical-align: top;
+  margin: 0.5rem 0;
+}
+
+.UsersList .ProfilePhoto {
+  margin: 1px auto;
+}
+
+.UsersList-name {
+  padding-top: calc(var(--spacing) / 2);
+  font-weight: bold;
+  font-size: 0.9rem;
+  height: 1rem;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.UsersList-amount {
+  padding-top: calc(var(--spacing) / 2);
+  font-size: calc(var(--spacing) * 1.3);
+}

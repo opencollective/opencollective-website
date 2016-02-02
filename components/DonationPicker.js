@@ -1,0 +1,91 @@
+import React from 'react';
+import classnames from 'classnames';
+
+import Currency from './Currency';
+import Input from './Input';
+import RadioGroup from 'react-radio-group';
+
+export default ({value, currency, frequency, onChange}) => {
+  const presetAmounts = [1, 5, 10, 20, 50, 'custom'];
+  const frequencies = [{
+    label: 'Monthly',
+    value: 'month'
+  }, {
+    label: 'Yearly',
+    value: 'year'
+  }, {
+    label: 'One time',
+    value: 'one-time'
+  }];
+
+  let isCustomMode = (presetAmounts.indexOf(value) === -1);
+
+  function className(selectedPreset, value) {
+    return classnames({
+      'DonationPicker-amount': true,
+      'DonationPicker-amount--selected': (selectedPreset === value) || (selectedPreset === 'custom' && isCustomMode)
+    });
+  }
+
+  function presetListItem(presetLabel) {
+    let amountLabel, amountValue;
+    if(presetLabel === 'custom') {
+      amountValue = '';
+      amountLabel = "Custom";
+    }
+    else {
+      amountValue = presetLabel;
+      amountLabel = (<Currency value={amountValue} currency={currency} precision={0} />);
+    }
+
+    return (
+      <li
+        className={className(presetLabel, value)}
+        key={presetLabel}
+        onClick={() => onChange({amount:amountValue}) }>
+        <label>{amountLabel}</label>
+      </li>
+    );
+
+  }
+
+  return (
+    <div className='DonationPicker'>
+      <ul className='DonationPicker-presets'>
+        {presetAmounts.map(presetListItem)}
+      </ul>
+      <div>
+        {isCustomMode && input({onChange, value, currency})}
+      </div>
+      <RadioGroup
+        name='frequency'
+        selectedValue={frequency}
+        onChange={frequency => onChange({frequency})}>
+        {Radio => (
+          <ul className='DonationPicker-frequency'>
+            {frequencies.map(({label, value}) => {
+              return (
+                <li key={value}>
+                  <label>
+                    <Radio value={value} key={value} />
+                    {label}
+                  </label>
+                </li>
+              );
+            })}
+          </ul>
+        )}
+      </RadioGroup>
+    </div>
+  );
+};
+
+function input({onChange, value}) {
+  return (
+    <Input
+      value={value}
+      placeholder='Enter a custom amount to donate'
+      customClass='DonationPicker-input'
+      handleChange={(amount) => onChange({amount})} />
+  );
+}

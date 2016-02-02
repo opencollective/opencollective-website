@@ -1,0 +1,28 @@
+.PublicFooter {
+  background-color: #3e4448;
+  padding: 20px 0;
+  color: #abb3c3;
+  height: 50px;
+  bottom: 0;
+  width: 100%;
+}
+
+.PublicFooter img {
+  height: 50px;
+}
+
+.PublicFooter-menu {
+  float: right;
+  line-height: 50px;
+  margin-right: var(--spacing);
+}
+
+.PublicFooter-menuItem {
+  display: inline-block;
+  padding: 0 var(--spacing);
+  font-weight: normal;
+  font-variant: small-caps;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: bold;
+}

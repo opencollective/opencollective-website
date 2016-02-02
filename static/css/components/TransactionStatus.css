@@ -1,0 +1,19 @@
+.TransactionStatus span {
+  vertical-align: top;
+}
+
+.TransactionStatus .Icon {
+  margin-right: calc(var(--spacing)/4);
+}
+
+.TransactionStatus .Icon--approved {
+  color: var(--green);
+}
+
+.TransactionStatus .Icon--rejected {
+  color: var(--red);
+}
+
+.TransactionStatus .Icon--pending {
+  color: var(--orange);
+}

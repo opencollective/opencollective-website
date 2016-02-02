@@ -1,0 +1,4 @@
+--compilers js:babel/register
+--recursive
+--timeout 5000
+--require ./test/unit/setup.js

@@ -1,0 +1,14 @@
+.PublicGroupThanks-icon {
+  background: url(/static/images/thankyou.svg) no-repeat top left;
+  background-size: contain;
+  height: 150px;
+  width: 150px;
+  margin: calc(var(--spacing) * 2) auto 0 auto;
+}
+
+.PublicGroupThanks-message {
+  font-weight: 600;
+  text-align: center;
+  font-size: 1.2rem;
+  padding-bottom: calc(var(--spacing) * 2);
+}
