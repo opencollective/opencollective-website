@@ -12,7 +12,7 @@
     ]
   },
   "scripts": {
-    "start": "NODE_CONFIG_DIR=./server/config node server",
+    "start": "NODE_CONFIG_DIR=./server/config nodemon server",
     "dev": "PORT=3000 nf start -j Procfile_dev",
     "hint": "eslint '**/*.js' --quiet",
     "test:unit": "NODE_CONFIG_DIR=./server/config NODE_ENV=test mocha test/unit/ --opts test/unit/mocha.opts",
@@ -31,7 +31,14 @@
     "testserver": "NODE_ENV=test_server npm start"
   },
   "dependencies": {
-    "babelify": "^6.1.3",
+    "babel-core": "^6.4.5",
+    "babel-plugin-add-module-exports": "^0.1.2",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.4.5",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babel-preset-stage-0": "^6.3.13",
+    "babel-register": "^6.4.3",
+    "babelify": "7.2.0",
     "basscss": "^7.0.4",
     "body-parser": "^1.14.1",
     "browserify": "^10.2.6",
@@ -81,6 +88,7 @@
   "devDependencies": {
     "babel": "^5.8.23",
     "babel-eslint": "^4.1.5",
+    "babel-plugin-add-module-exports": "^0.1.2",
     "chai": "^3.3.0",
     "chai-spies": "^0.7.1",
     "chromedriver": "^2.20.0",

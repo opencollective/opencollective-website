@@ -286,8 +286,8 @@ function mapStateToProps({
   users,
   session
 }) {
-  const slug = router.params.slug;
-  const status = router.location.query.status;
+  const slug = 'opencollective';
+  const status = '';
   const group = values(groups).find(g => g.slug === slug) || { stripeAccount: {} };
   const GroupId = Number(group.id);
 
@@ -319,7 +319,7 @@ function mapStateToProps({
     stripeKey: group.stripeAccount && group.stripeAccount.stripePublishableKey,
     inProgress: groups.donateInProgress,
     showThankYouPage: status === 'thankyou',
-    shareUrl: window.location.href,
+    shareUrl: '',
     profileForm: form.profile,
     showUserForm: users.showUserForm || false,
     saveInProgress: users.updateInProgress

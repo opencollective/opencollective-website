@@ -1,7 +1,4 @@
-import merge from 'lodash/object/merge';
-import values from 'lodash/object/values'
-import find from 'lodash/collection/find'
-import mapValues from 'lodash/object/mapValues'
+import merge from 'lodash.merge';
 
 import * as constants from '../constants/users';
 import {DONATE_GROUP_SUCCESS} from'../constants/groups';
@@ -42,8 +39,8 @@ export default function users(state={
       return merge({}, state, users);
 
     case constants.FETCH_USERS_BY_GROUP_SUCCESS:
-      const usersWithGroup = mapValues(users, obj => merge(obj, { GroupId }));
-      return merge({}, state, usersWithGroup);
+      // const usersWithGroup = mapValues(users, obj => merge(obj, { GroupId }));
+      return merge({}, state, users);
 
     case constants.GET_APPROVAL_KEY_FOR_USER_REQUEST:
       return merge({}, state, { inProgress: true });
@@ -106,7 +103,7 @@ export default function users(state={
 
 export function getPaypalCard(users, id) {
   const user = users[id] || {};
-  const cards = values(user.cards);
+  const cards = (user.cards || {}).values();
 
-  return find(cards, { service: 'paypal' }) || {};
+  return cards.find(() => service === 'paypal') || {};
 };

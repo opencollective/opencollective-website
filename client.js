@@ -1,8 +1,8 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { render } from 'react-dom';
-import { ReduxRouter } from 'redux-router';
 
+import App from './containers/App';
 import createStore from './store/create';
 import decodeJWT from './actions/session/decode_jwt';
 
@@ -13,7 +13,7 @@ store.dispatch(decodeJWT());
 
 render(
   <Provider store={store}>
-    <ReduxRouter />
+    <App />
   </Provider>,
   container
 );

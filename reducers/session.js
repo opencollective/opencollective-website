@@ -1,4 +1,4 @@
-import merge from 'lodash/object/merge';
+import merge from 'lodash.merge';
 import * as constants from '../constants/session';
 
 export default function session(state={

@@ -17,8 +17,11 @@ export default ({type, url, name, description}) => {
 
   const w = 650;
   const h = 450;
-  const left = (screen.width / 2) - (w / 2);
-  const top = (screen.height / 2) - (h / 2);
+  const top = 0;
+  const left = 0;
+
+  // const left = (screen.width / 2) - (w / 2);
+  // const top = (screen.height / 2) - (h / 2);
 
   return (
     <span

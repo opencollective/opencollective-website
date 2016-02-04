@@ -4,24 +4,24 @@ import { Link } from 'react-router';
 class PublicTopBar extends React.Component {
 
   showSession() {
-    const { session, logout } = this.props;
-    const redirect = window.location.pathname;
+    // const { session, logout } = this.props;
+    // const redirect = window.location.pathname;
 
-    if(session && session.isAuthenticated) {
-      return (
-        <div>
-          <span className="long">Logged in as</span> {session.user.username} &nbsp;
-          <a href="" onClick={logout}>[logout]</a>
-        </div>
-      );
-    }
-    else {
-      return (
-        <div>
-          <Link to={'/app/login?next='+redirect}>sign in</Link>
-        </div>
-      );
-    }
+    // if(session && session.isAuthenticated) {
+    //   return (
+    //     <div>
+    //       <span className="long">Logged in as</span> {session.user.username} &nbsp;
+    //       <a href="" onClick={logout}>[logout]</a>
+    //     </div>
+    //   );
+    // }
+    // else {
+    //   return (
+    //     <div>
+    //       <Link to={'/app/login?next='+redirect}>sign in</Link>
+    //     </div>
+    //   );
+    // }
   }
 
   render() {
@@ -42,7 +42,7 @@ class PublicTopBar extends React.Component {
         </div>
       </div>
     );
-  } 
+  }
 };
 
 export default PublicTopBar;

@@ -3,20 +3,9 @@ import classnames from 'classnames';
 
 import Currency from './Currency';
 import Input from './Input';
-import RadioGroup from 'react-radio-group';
 
-export default ({value, currency, frequency, onChange}) => {
+export default ({value, currency, onChange}) => {
   const presetAmounts = [1, 5, 10, 20, 50, 'custom'];
-  const frequencies = [{
-    label: 'Monthly',
-    value: 'month'
-  }, {
-    label: 'Yearly',
-    value: 'year'
-  }, {
-    label: 'One time',
-    value: 'one-time'
-  }];
 
   let isCustomMode = (presetAmounts.indexOf(value) === -1);
 
@@ -30,12 +19,12 @@ export default ({value, currency, frequency, onChange}) => {
   function presetListItem(presetLabel) {
     let amountLabel, amountValue;
     if(presetLabel === 'custom') {
-      amountValue = '';
+      amountValue = '100';
       amountLabel = "Custom";
     }
     else {
       amountValue = presetLabel;
-      amountLabel = (<Currency value={amountValue} currency={currency} precision={0} />);
+      amountLabel = (<Currency value={amountValue} currency={currency} precision={0} colorify={false} />);
     }
 
     return (
@@ -57,25 +46,6 @@ export default ({value, currency, frequency, onChange}) => {
       <div>
         {isCustomMode && input({onChange, value, currency})}
       </div>
-      <RadioGroup
-        name='frequency'
-        selectedValue={frequency}
-        onChange={frequency => onChange({frequency})}>
-        {Radio => (
-          <ul className='DonationPicker-frequency'>
-            {frequencies.map(({label, value}) => {
-              return (
-                <li key={value}>
-                  <label>
-                    <Radio value={value} key={value} />
-                    {label}
-                  </label>
-                </li>
-              );
-            })}
-          </ul>
-        )}
-      </RadioGroup>
     </div>
   );
 };
@@ -84,7 +54,7 @@ function input({onChange, value}) {
   return (
     <Input
       value={value}
-      placeholder='Enter a custom amount to donate'
+      placeholder='Enter a custom amount'
       customClass='DonationPicker-input'
       handleChange={(amount) => onChange({amount})} />
   );
