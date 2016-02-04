@@ -2,18 +2,15 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { render } from 'react-dom';
 
-import App from './containers/App';
+import PublicGroup from './containers/PublicGroup';
 import createStore from './store/create';
-import decodeJWT from './actions/session/decode_jwt';
 
-const container = document.querySelector('#content');
-const store = createStore();
-
-store.dispatch(decodeJWT());
+const initialState = window.__INITIAL_STATE__ || {};
+const store = createStore(initialState);
 
 render(
   <Provider store={store}>
-    <App />
+    <PublicGroup />
   </Provider>,
-  container
+  document.querySelector('#content')
 );

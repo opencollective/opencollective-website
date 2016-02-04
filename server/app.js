@@ -8,19 +8,10 @@ const React = require('react');
 const _ = require('lodash');
 const robots = require('robots.txt')
 const config = require('config');
-const renderToString = require('react-dom/server').renderToString;
 
-const Provider = require('react-redux').Provider;
+const apiUrl = require('./helpers/api_url');
+const renderClient = require('./helpers/render_client');
 
-const createStore = require('../store/create');
-const App = require('../containers/App').default;
-
-const apiUrl = url => {
-  const withoutParams = config.apiUrl + (url.replace('/api/', ''));
-  const hasParams = _.contains(url, '?');
-
-  return withoutParams + (hasParams ? '&' : '?') + `api_key=${config.apiKey}`;
-};
 
 /**
  * Express app
@@ -76,37 +67,47 @@ app.set('view engine', 'ejs');
  */
 
 app.get('/:slug([A-Za-z0-9-]+)', (req, res, next) => {
-  const options = {
-    showGA: process.env.NODE_ENV === 'production'
-  };
-
-  const store = createStore();
-
-  // Render the component to a string
-  const html = renderToString(
-    <Provider store={store}>
-      <App />
-    </Provider>
-  );
 
   request
     .get({
       url: apiUrl(`groups/${req.params.slug}/`),
       json: true
     }, (err, response, group) => {
-      if (err) return next(err);
+      if (err) {
+        return next(err);
+      }
+
       if (response.statusCode !== 200) {
         return next(response.body.error);
       }
 
+      // Meta data for facebook and twitter links (opengraph)
       const meta = {
         url: group.publicUrl,
-        title: 'Join ' + group.name + '\'s open collective',
-        description: group.name + ' is collecting funds to continue their activities. Chip in!',
+        title: `Join ${group.name}'s open collective`,
+        description: `${group.name} is collecting funds to continue their activities. Chip in!`,
         image: group.image || group.logo,
-        twitter: '@'+group.twitterHandle,
+        twitter: `@${group.twitterHandle}`,
       };
-      res.render('index', { meta, options, html });
+
+      // The initial state will contain the group
+      const initialState = {
+        groups: {
+          [group.id]: group
+        }
+      };
+
+      // Server side rendering of the client application
+      const html = renderClient(initialState);
+
+      res.render('index', {
+        meta,
+        html,
+        initialState,
+        options: {
+          showGA: process.env.NODE_ENV === 'production'
+        }
+      });
     });
 });
 
@@ -126,8 +127,10 @@ app.use((req, res, next) => {
  */
 
 app.use((err, req, res, next) => {
+
   console.log('err', err);
   console.log('err', err.stack);
+
   if (res.headersSent) {
     return next(err);
   }

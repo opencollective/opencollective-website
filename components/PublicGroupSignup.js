@@ -9,7 +9,8 @@ export class PublicGroupSignup extends Component {
     const {
       profileForm,
       saveInProgress,
-      users
+      users,
+      save
     } = this.props;
 
     return (
@@ -53,28 +54,5 @@ export class PublicGroupSignup extends Component {
       this.props.appendProfileForm(attribute);
   }
 }
-
-export function save() {
-    const {
-      users,
-      updateUser,
-      profileForm,
-      validateDonationProfile,
-      notify,
-      pushState,
-      groupid,
-      slug,
-      hideAdditionalUserInfoForm,
-      fetchUsers
-    } = this.props;
-
-    return validateDonationProfile(profileForm.attributes)
-    .then(() => updateUser(users.newUser.id, profileForm.attributes))
-    .then(() => hideAdditionalUserInfoForm())
-    .then(() => fetchUsers(groupid))
-    .then(() => pushState(null, `/${slug}?status=thankyou`))
-    .catch(({message}) => notify('error', message));
-  };
-
 
 export default PublicGroupSignup;
