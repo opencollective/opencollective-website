@@ -245,11 +245,11 @@ export function donateToGroup(amount, token) {
   payment.interval = 'month';
 
   return donate(group.id, payment)
-    .then((object) => {
-      if (!object.json.hasFullAccount) {
+    .then(({json}) => {
+      if (json && !json.hasFullAccount) {
         this.setState({ showUserForm: true })
       } else {
-        this.setState({ showThankYouMessage: true})
+        this.setState({ showThankYouMessage: true })
       }
     })
     .then(() => fetchGroup(group.id))

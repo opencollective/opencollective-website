@@ -27,6 +27,7 @@ describe('PublicGroup container', () => {
 
   it('should donate to the group', (done) => {
     const notify = chai.spy(noop);
+    const fetchGroup = chai.spy(noop);
     const setState = chai.spy(noop);
     const token = {
       id: 'tok_17BNlt2eZvKYlo2CVoTcWs9D',
@@ -38,7 +39,7 @@ describe('PublicGroup container', () => {
       expect(payment.email).to.be.equal(token.email);
       expect(payment.amount).to.be.equal(10);
 
-      return Promise.resolve();
+      return Promise.resolve({});
     });
 
     const props = {
@@ -49,7 +50,7 @@ describe('PublicGroup container', () => {
         currency: 'MXN'
       },
       notify,
-      fetchGroup: noop,
+      fetchGroup,
       fetchTransactions: noop
     };
 
@@ -57,6 +58,7 @@ describe('PublicGroup container', () => {
     .then(() => {
       expect(donate).to.have.been.called();
       expect(setState).to.have.been.called();
+      expect(fetchGroup).to.have.been.called();
       expect(notify).to.not.have.been.called();
       done();
     })
@@ -76,7 +78,7 @@ describe('PublicGroup container', () => {
       expect(payment.email).to.be.equal(token.email);
       expect(payment.currency).to.be.equal('MXN');
       expect(payment.amount).to.be.equal(10);
-      return Promise.resolve();
+      return Promise.resolve({});
     });
     const notify = chai.spy(noop);
 
