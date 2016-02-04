@@ -73,9 +73,11 @@ app.set('view engine', 'ejs');
 
 app.get('/:slug([A-Za-z0-9-]+)', (req, res, next) => {
 
+  const slug = req.params.slug.toLowerCase();
+
   request
     .get({
-      url: apiUrl(`groups/${req.params.slug}/`),
+      url: apiUrl(`groups/${slug}/`),
       json: true
     }, (err, response, group) => {
       if (err) {

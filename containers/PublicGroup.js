@@ -76,15 +76,12 @@ export class PublicGroup extends Component {
       expenses,
       shareUrl,
       users,
-      members
+      members,
+      isAuthenticated
     } = this.props;
 
-    const logoStyle = group.logo ? {
-      backgroundImage: 'url(' + group.logo + ')'
-    } : {};
-
     var donationSection;
-    if (this.state.showThankYouMessage) {
+    if (this.state.showThankYouMessage || (isAuthenticated && this.state.showUserForm)) { // we don't handle userform from logged in users) {
       donationSection = <PublicGroupThanks />;
     } else if (this.state.showUserForm) {
       donationSection = <PublicGroupSignup {...this.props} save={saveNewUser.bind(this)} />
@@ -101,7 +98,7 @@ export class PublicGroup extends Component {
         <div className='PublicContent'>
 
           <div className='PublicGroupHeader'>
-            <div className='PublicGroupHeader-logo' style={logoStyle} />
+            <img className='PublicGroupHeader-logo' src={group.logo} />
             <div className='PublicGroupHeader-website'><DisplayUrl url={group.website} /></div>
             <div className='PublicGroupHeader-description'>
               {group.description}
@@ -326,6 +323,7 @@ function mapStateToProps({
     shareUrl: window.location.href,
     profileForm: form.profile,
     showUserForm: users.showUserForm || false,
-    saveInProgress: users.updateInProgress
+    saveInProgress: users.updateInProgress,
+    isAuthenticated: session.isAuthenticated
   };
 }
