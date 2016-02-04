@@ -8,14 +8,19 @@ import _ from 'lodash';
 import robots from 'robots.txt';
 import config from 'config';
 
-import apiUrl from './helpers/api_url';
-import renderClient from './helpers/render_client';
-
+import apiUrl from './utils/api_url';
+import renderClient from './utils/render_client';
+import busted from './helpers/busted';
 
 /**
  * Express app
  */
 const app = express();
+
+/**
+ * Locals for the templates
+ */
+app.locals.busted = busted;
 
 /**
  * Server status
