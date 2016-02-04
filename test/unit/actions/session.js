@@ -10,7 +10,6 @@ import * as constants from '../../../constants/session';
 import login from '../../../actions/session/login';
 import logout from '../../../actions/session/logout';
 import decodeJWT from '../../../actions/session/decode_jwt';
-import showPopOverMenu from '../../../actions/session/show_popovermenu';
 
 describe('session actions', () => {
   beforeEach(() => {
@@ -118,20 +117,6 @@ describe('session actions', () => {
       });
 
       stub.restore();
-    });
-  });
-
-  describe('show popovermenu', () => {
-    it('should set the hasPopOverMenuOpen variable ', () => {
-      expect(showPopOverMenu(false)).toEqual({
-        type: constants.SHOW_POPOVERMENU,
-        hasPopOverMenuOpen: false
-      });
-
-      expect(showPopOverMenu(true)).toEqual({
-        type: constants.SHOW_POPOVERMENU,
-        hasPopOverMenuOpen: true
-      });
     });
   });
 

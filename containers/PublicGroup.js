@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
-import BodyClassName from 'react-body-classname';
 import take from 'lodash/array/take';
-import contains from 'lodash/collection/contains';
 import uniq from 'lodash/array/uniq';
 import values from 'lodash/object/values';
 import sortBy from 'lodash/collection/sortBy'
@@ -29,14 +27,11 @@ import PublicGroupSignup from '../components/PublicGroupSignup';
 import Markdown from '../components/Markdown';
 
 import appendDonationForm from '../actions/form/append_donation';
-import fetchGroup from '../actions/groups/fetch_by_id';
 import fetchUsers from '../actions/users/fetch_by_group';
 import fetchTransactions from '../actions/transactions/fetch_by_group';
 import donate from '../actions/groups/donate';
 import notify from '../actions/notification/notify';
 import resetNotifications from '../actions/notification/reset';
-import showAdditionalUserInfoForm from '../actions/users/show_additional_user_info_form';
-import hideAdditionalUserInfoForm from '../actions/users/hide_additional_user_info_form';
 import appendProfileForm from '../actions/form/append_profile';
 import updateUser from '../actions/users/update_user';
 import validateDonationProfile from '../actions/form/validate_donation_profile';
@@ -195,29 +190,26 @@ export class PublicGroup extends Component {
 
   componentWillMount() {
     const {
-      fetchGroup,
-      slug,
+      group,
       fetchTransactions,
       fetchUsers
     } = this.props;
 
-    fetchGroup(slug);
-
-    fetchTransactions(slug, {
+    fetchTransactions(group.id, {
       per_page: NUM_TRANSACTIONS_TO_SHOW,
       sort: 'createdAt',
       direction: 'desc',
       donation: true
     });
 
-    fetchTransactions(slug, {
+    fetchTransactions(group.id, {
       per_page: NUM_TRANSACTIONS_TO_SHOW,
       sort: 'createdAt',
       direction: 'desc',
       expense: true
     });
 
-    fetchUsers(slug);
+    fetchUsers(group.id);
   }
 }
 
@@ -227,7 +219,6 @@ export function donateToGroup(amount, token) {
     donate,
     group,
     fetchGroup,
-    slug,
     fetchTransactions
   } = this.props;
 
@@ -254,17 +245,14 @@ export function donateToGroup(amount, token) {
     .catch((err) => notify('error', err.message));
 }
 
-function saveNewUser() {
+export function saveNewUser() {
  const {
     users,
     updateUser,
     profileForm,
     validateDonationProfile,
     notify,
-    pushState,
     groupid,
-    slug,
-    hideAdditionalUserInfoForm,
     fetchUsers
   } = this.props;
 
@@ -279,7 +267,6 @@ function saveNewUser() {
 }
 
 export default connect(mapStateToProps, {
-  fetchGroup,
   appendDonationForm,
   donate,
   notify,
@@ -301,7 +288,6 @@ function mapStateToProps({
   session
 }) {
   const group = values(groups)[0] || {stripeAccount: {}}; // to refactor to allow only one group
-  const slug = group.slug;
   const GroupId = Number(group.id);
 
   const hosts = filterCollection(users, { role: roles.HOST });
@@ -316,7 +302,6 @@ function mapStateToProps({
 
   return {
     groupid: group.id,
-    slug,
     group,
     notification,
     users,
@@ -331,7 +316,7 @@ function mapStateToProps({
     stripeAmount: convertToCents(form.donation.attributes.amount),
     stripeKey: group.stripeAccount && group.stripeAccount.stripePublishableKey,
     inProgress: groups.donateInProgress,
-    shareUrl: '',
+    shareUrl: '', // need to implement without window
     profileForm: form.profile,
     showUserForm: users.showUserForm || false,
     saveInProgress: users.updateInProgress

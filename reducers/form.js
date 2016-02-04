@@ -33,76 +33,6 @@ function schema(state={
 }
 
 /**
- * New transaction form reducer
- */
-const transactionInitialState = {
-  attributes: {
-    tags: [],
-    description: '',
-    paymentMethod: 'paypal',
-    vat: null,
-    createdAt: new Date()
-  },
-  error: {}
-};
-
-function transaction(state=transactionInitialState, action={}) {
-  switch (action.type) {
-    case constants.RESET_TRANSACTION_FORM:
-      return merge({}, transactionInitialState);
-
-    case constants.APPEND_TRANSACTION_FORM:
-      return merge({}, state, { attributes: action.attributes });
-
-    case constants.VALIDATE_SCHEMA_FAILURE:
-    case constants.VALIDATE_TRANSACTION_FAILURE:
-      const { path, message } = errorDetail(action);
-
-      return merge({}, state, {
-        error: {
-          [path]: true,
-          message
-        }
-      });
-
-    case constants.VALIDATE_SCHEMA_FAILURE:
-    case constants.VALIDATE_TRANSACTION_REQUEST:
-      return merge({}, omit(state, 'error'), { error: {} });
-
-    default:
-      return state;
-  }
-}
-
-/**
- * Login form reducer
- */
-
-const loginInitialState = {
-  error: {}
-};
-
-function login(state=loginInitialState, action={}) {
-  switch (action.type) {
-    case constants.RESET_LOGIN_FORM:
-      return merge({}, loginInitialState);
-
-    case constants.VALIDATE_LOGIN_FAILURE:
-      const { message, path } = errorDetail(action);
-
-      return merge({}, state, {
-        error: {
-          [path]: true,
-          message
-        }
-      });
-
-    default:
-      return state;
-  }
-}
-
-/**
  * User profile form reducer
  */
 
@@ -143,38 +73,6 @@ function profile(state=profileInitialState, action={}) {
 }
 
 /**
- * Group settings form reducer
- */
-
-const groupSettingsInitialState = {
-  attributes: {},
-  error: {}
-};
-
-function groupSettings(state=groupSettingsInitialState, action={}) {
-  switch (action.type) {
-    case constants.APPEND_GROUP_SETTINGS_FORM:
-      return merge({}, state, { attributes: action.attributes });
-
-    case constants.VALIDATE_GROUP_SETTING_ATTRIBUTE_CHANGE_REQUEST:
-      return merge({}, omit(state, 'error'), { error: {} });
-
-    case constants.VALIDATE_GROUP_SETTING_ATTRIBUTE_CHANGE_FAILURE:
-      const { path, message } = errorDetail(action);
-
-      return merge({}, state, {
-        error: {
-          [path]: true,
-          message
-        }
-      });
-
-    default:
-      return state;
-  }
-}
-
-/**
  * Donation form
  */
 
@@ -193,10 +91,7 @@ function donation(state={
 }
 
 export default combineReducers({
-  transaction,
-  login,
   profile,
   donation,
-  groupSettings,
   schema
 });

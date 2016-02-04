@@ -1,27 +1,26 @@
 import React from 'react';
-import { Link } from 'react-router';
 
 class PublicTopBar extends React.Component {
 
   showSession() {
-    // const { session, logout } = this.props;
-    // const redirect = window.location.pathname;
+    const { session, logout } = this.props;
+    // const redirect = window.location.pathname; // need to implement poly-fill for server side
+    const redirect = '';
 
-    // if(session && session.isAuthenticated) {
-    //   return (
-    //     <div>
-    //       <span className="long">Logged in as</span> {session.user.username} &nbsp;
-    //       <a href="" onClick={logout}>[logout]</a>
-    //     </div>
-    //   );
-    // }
-    // else {
-    //   return (
-    //     <div>
-    //       <Link to={'/app/login?next='+redirect}>sign in</Link>
-    //     </div>
-    //   );
-    // }
+    if(session && session.isAuthenticated) {
+      return (
+        <div>
+          <span className="long">Logged in as</span> {session.user.username} &nbsp;
+          <a href="" onClick={logout}>[logout]</a>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <a href={'/app/login?next='+redirect}>sign in</a>
+        </div>
+      );
+    }
   }
 
   render() {

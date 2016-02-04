@@ -7,11 +7,8 @@ import noop from '../helpers/noop';
 import {
   PublicGroup,
   donateToGroup,
+  saveNewUser
 } from '../../../containers/PublicGroup';
-
-import {
-  save
-} from '../../../components/PublicGroupSignup';
 
 const {expect} = chai;
 const {
@@ -28,27 +25,9 @@ chai.use(spies);
 
 describe('PublicGroup container', () => {
 
-  it('should fetch the group on mount', () => {
-      const handler = chai.spy(noop);
-      createElement({
-        fetchGroup: handler,
-        groupid: 1,
-        resetNotifications: noop,
-        fetchTransactions: noop,
-        fetchUsers: noop,
-        notification: {},
-        group: {},
-        host: {},
-        expenses: [],
-        donations: [],
-        frequency: 'one-time'
-      });
-      expect(handler).to.have.been.called();
-  });
-
   it('should donate to the group', (done) => {
     const notify = chai.spy(noop);
-    const showAdditionalUserInfoForm = chai.spy(noop);
+    const setState = chai.spy(noop);
     const token = {
       id: 'tok_17BNlt2eZvKYlo2CVoTcWs9D',
       email: 'test@gmail.com'
@@ -66,24 +45,26 @@ describe('PublicGroup container', () => {
       groupid: 1,
       donate,
       group: {
+        id: 1,
         currency: 'MXN'
       },
       notify,
-      showAdditionalUserInfoForm,
       fetchGroup: noop,
       fetchTransactions: noop
     };
 
-    donateToGroup.call({props}, 10, token)
+    donateToGroup.call({props, setState}, 10, token)
     .then(() => {
       expect(donate).to.have.been.called();
+      expect(setState).to.have.been.called();
       expect(notify).to.not.have.been.called();
-      expect(showAdditionalUserInfoForm).to.have.been.called();
       done();
-    });
+    })
+    .catch(done)
   });
 
   it('should donate with subscription to the group', (done) => {
+    const setState = chai.spy(noop);
     const token = {
       id: 'tok_17BNlt2eZvKYlo2CVoTcWs9D',
       email: 'test@gmail.com'
@@ -98,7 +79,6 @@ describe('PublicGroup container', () => {
       return Promise.resolve();
     });
     const notify = chai.spy(noop);
-    const showAdditionalUserInfoForm = chai.spy(noop);
 
 
     const props = {
@@ -106,68 +86,29 @@ describe('PublicGroup container', () => {
       donate,
       notify,
       group: {
+        id: 1,
         currency: 'MXN'
       },
-      showAdditionalUserInfoForm,
       fetchGroup: noop,
       fetchTransactions: noop,
       frequency: 'month'
     };
 
-    donateToGroup.call({props}, 10, token)
+    donateToGroup.call({props, setState}, 10, token)
     .then(() => {
       expect(donate).to.have.been.called();
       expect(notify).to.not.have.been.called();
-      expect(showAdditionalUserInfoForm).to.have.been.called();
-      done();
-    });
-  });
-
-  it('should not donate with subscription to the group if frequency is none', (done) => {
-    const token = {
-      id: 'tok_17BNlt2eZvKYlo2CVoTcWs9D',
-      email: 'test@gmail.com'
-    };
-    const donate = chai.spy((groupid, payment) => {
-      expect(groupid).to.be.equal(1);
-      expect(payment.frequency).to.not.be.ok;
-      expect(payment.stripeToken).to.be.equal(token.id);
-      expect(payment.email).to.be.equal(token.email);
-      expect(payment.amount).to.be.equal(10);
-      expect(payment.amount).to.be.equal(10);
-      return Promise.resolve();
-    });
-    const notify = chai.spy(noop);
-    const showAdditionalUserInfoForm = chai.spy(noop);
-
-    const props = {
-      groupid: 1,
-      donate,
-      group: {
-        currency: 'MXN'
-      },
-      notify,
-      showAdditionalUserInfoForm,
-      fetchGroup: noop,
-      fetchTransactions: noop,
-      frequency: 'one-time'
-    };
-
-    donateToGroup.call({props}, 10, token)
-    .then(() => {
-      expect(donate).to.have.been.called();
-      expect(notify).to.not.have.been.called();
-      expect(showAdditionalUserInfoForm).to.have.been.called();
+      expect(setState).to.have.been.called();
       done();
     });
   });
 
   it('should save the user info', (done) => {
+    const setState = chai.spy(noop);
     const validateDonationProfile = chai.spy(noop);
     const notify = chai.spy(noop);
     const updateUser = chai.spy(noop);
     const fetchUsers = chai.spy(noop);
-    const hideAdditionalUserInfoForm = chai.spy(noop);
     const pushState = chai.spy((ctx, url) => {
       expect(url).to.be.equal('/groupslug?status=thankyou')
     });
@@ -185,21 +126,21 @@ describe('PublicGroup container', () => {
       profileForm,
       validateDonationProfile,
       updateUser,
-      hideAdditionalUserInfoForm,
       pushState,
       notify,
       slug: 'groupslug',
       fetchUsers
     }
-    save.call({props})
-    .then(() => {
-      expect(validateDonationProfile).to.have.been.called();
-      expect(notify).to.not.have.been.called();
-      expect(updateUser).to.have.been.called();
-      expect(hideAdditionalUserInfoForm).to.have.been.called();
-      expect(pushState).to.have.been.called();
-      done();
-    })
+
+    saveNewUser.call({props, setState})
+      .then(() => {
+        expect(validateDonationProfile).to.have.been.called();
+        expect(setState).to.have.been.called();
+        expect(notify).to.not.have.been.called();
+        expect(updateUser).to.have.been.called();
+        done();
+      })
+      .catch(done);
   });
 
   it('should send a notification if the donation fails', (done) => {

@@ -1,6 +1,10 @@
 {
-  "presets": ["es2015", "stage-0", "react"],
-  "plugins": [
-    "add-module-exports"
-  ]
+  "env": {
+    "development": { // does not interfere with test env
+      "presets": ["es2015", "stage-0", "react"],
+      "plugins": [
+        "add-module-exports"
+      ]
+    }
+  }
 }

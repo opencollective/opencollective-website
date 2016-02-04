@@ -4,7 +4,6 @@ const favicon = require('serve-favicon');
 const request = require('request');
 const morgan = require('morgan');
 const path = require('path');
-const React = require('react');
 const _ = require('lodash');
 const robots = require('robots.txt')
 const config = require('config');
