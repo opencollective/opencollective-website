@@ -1,10 +1,21 @@
 .PublicGroup-video, .PublicGroup-image {
   width: 70%;
   float: left;
+  background-color: var(--light-gray);
+  display: inline-block;
 }
 
 .PublicGroup-image img {
   max-width: 100%;
+}
+
+.PublicGroup-image-placeholder {
+  background: url('/static/images/media-placeholder.svg') no-repeat;
+  background-position: center center;
+  width: 300px;
+  height: 300px;
+  max-width: 100%;
+  margin: auto;
 }
 
 .PublicGroup-summary {

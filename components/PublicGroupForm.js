@@ -27,6 +27,7 @@ const PublicGroupForm = ({
         currency={group.currency}
         onChange={({amount}) => appendDonationForm({amount})} />
 
+      <div className='PublicGroupForm-checkout'>
       <StripeCheckout
         token={onToken}
         stripeKey={stripeKey}
@@ -41,10 +42,11 @@ const PublicGroupForm = ({
             Donate
           </AsyncButton>
         </div>
-        <span className='PublicGroupForm-disclaimer'>
-        By clicking above, you are pledging to support us monthly. We appreciate it! And you can cancel anytime. <a href='https://opencollective.com/faq'>Learn more</a>
-        </span>
       </StripeCheckout>
+      <span className='PublicGroupForm-disclaimer'>
+        By clicking above, you are pledging to support us monthly. We appreciate it! And you can cancel anytime. <a href='https://opencollective.com/faq'>Learn more</a>
+      </span>
+      </div>
     </div>
   );
 }
