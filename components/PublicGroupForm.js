@@ -35,7 +35,7 @@ const PublicGroupForm = ({
         currency={group.currency}
         amount={stripeAmount}
         description={stripeDescription}>
-        <div className='u-center'>
+        <div className='PublicGroupForm-button'>
           <AsyncButton
             color='green'
             inProgress={inProgress} >
