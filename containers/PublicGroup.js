@@ -29,6 +29,7 @@ import Markdown from '../components/Markdown';
 import appendDonationForm from '../actions/form/append_donation';
 import fetchUsers from '../actions/users/fetch_by_group';
 import fetchTransactions from '../actions/transactions/fetch_by_group';
+import fetchGroup from '../actions/groups/fetch_by_id';
 import donate from '../actions/groups/donate';
 import notify from '../actions/notification/notify';
 import resetNotifications from '../actions/notification/reset';
@@ -48,10 +49,16 @@ const Media = ({group}) => {
           <YoutubeVideo video={group.video} />
         </div>
       );
-  } else {
+  } else if (group.image) {
     return (
       <div className='PublicGroup-image'>
         <img src={group.image} />
+      </div>
+    );
+  } else {
+    return (
+      <div className='PublicGroup-image'>
+        <div className='PublicGroup-image-placeholder'/>
       </div>
     );
   }
@@ -76,15 +83,12 @@ export class PublicGroup extends Component {
       expenses,
       shareUrl,
       users,
-      members
+      members,
+      isAuthenticated
     } = this.props;
 
-    const logoStyle = group.logo ? {
-      backgroundImage: 'url(' + group.logo + ')'
-    } : {};
-
     var donationSection;
-    if (this.state.showThankYouMessage) {
+    if (this.state.showThankYouMessage || (isAuthenticated && this.state.showUserForm)) { // we don't handle userform from logged in users) {
       donationSection = <PublicGroupThanks />;
     } else if (this.state.showUserForm) {
       donationSection = <PublicGroupSignup {...this.props} save={saveNewUser.bind(this)} />
@@ -101,7 +105,7 @@ export class PublicGroup extends Component {
         <div className='PublicContent'>
 
           <div className='PublicGroupHeader'>
-            <div className='PublicGroupHeader-logo' style={logoStyle} />
+            <img className='PublicGroupHeader-logo' src={group.logo ? group.logo : '/static/images/media-placeholder.svg'} />
             <div className='PublicGroupHeader-website'><DisplayUrl url={group.website} /></div>
             <div className='PublicGroupHeader-description'>
               {group.description}
@@ -193,8 +197,11 @@ export class PublicGroup extends Component {
     const {
       group,
       fetchTransactions,
-      fetchUsers
+      fetchUsers,
+      fetchGroup
     } = this.props;
+
+    fetchGroup(group.id);
 
     fetchTransactions(group.id, {
       per_page: NUM_TRANSACTIONS_TO_SHOW,
@@ -238,7 +245,13 @@ export function donateToGroup(amount, token) {
   payment.interval = 'month';
 
   return donate(group.id, payment)
-    .then(() => this.setState({ showUserForm: true }))
+    .then(({json}) => {
+      if (json && !json.hasFullAccount) {
+        this.setState({ showUserForm: true })
+      } else {
+        this.setState({ showThankYouMessage: true })
+      }
+    })
     .then(() => fetchGroup(group.id))
     .then(() => {
       return fetchTransactions(group.id, {
@@ -279,6 +292,7 @@ export default connect(mapStateToProps, {
   resetNotifications,
   fetchTransactions,
   fetchUsers,
+  fetchGroup,
   appendProfileForm,
   updateUser,
   logout,
@@ -326,6 +340,7 @@ function mapStateToProps({
     shareUrl: window.location.href,
     profileForm: form.profile,
     showUserForm: users.showUserForm || false,
-    saveInProgress: users.updateInProgress
+    saveInProgress: users.updateInProgress,
+    isAuthenticated: session.isAuthenticated
   };
 }

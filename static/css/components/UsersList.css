@@ -1,15 +1,15 @@
 .UsersList {
-
+  max-width: 16rem;
 }
 
 .UsersList-item {
   display: inline-block;
   padding-right: var(--spacing);
   text-align: center;
-  width: 6rem;
+  width: 7rem;
   height: 7rem;
   vertical-align: top;
-  margin: 0.5rem 0;
+  margin: 0 0 1.5rem 0;
 }
 
 .UsersList .ProfilePhoto {

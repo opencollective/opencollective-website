@@ -104,6 +104,7 @@
     "loose-envify": "^1.1.0",
     "mocha": "^2.3.3",
     "nightwatch": "^0.8.15",
+    "nodemon": "^1.8.1",
     "react-addons-test-utils": "^0.14.0",
     "react-unit": "^1.0.8",
     "redux-devtools": "^2.1.5",

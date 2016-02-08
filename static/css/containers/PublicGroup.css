@@ -1,10 +1,21 @@
 .PublicGroup-video, .PublicGroup-image {
   width: 70%;
   float: left;
+  background-color: var(--light-gray);
+  display: inline-block;
 }
 
 .PublicGroup-image img {
   max-width: 100%;
+}
+
+.PublicGroup-image-placeholder {
+  background: url('/static/images/media-placeholder.svg') no-repeat;
+  background-position: center center;
+  width: 300px;
+  height: 300px;
+  max-width: 100%;
+  margin: auto;
 }
 
 .PublicGroup-summary {
@@ -16,6 +27,11 @@
 .PublicGroup-metricContainer {
   vertical-align: top;
   box-sizing: border-box;
+}
+
+.PublicGroup-share {
+  margin-top: 1rem;
+  font-size: 2rem;
 }
 
 .PublicGroup h2 {
@@ -78,7 +94,6 @@
 
 .PublicGroup .Button {
   display: inline-block;
-  margin-top: var(--spacing);
   font-weight: bold;
   padding: 1rem 1.5rem;
   font-size: 1.3rem;
@@ -96,13 +111,12 @@
   padding: 0 calc(var(--spacing) / 2);
 }
 
+.PublicGroupHeader {
+  text-align: center;
+}
+
 .PublicGroupHeader-logo {
-  width: 100px;
   height: 100px;
-  overflow: hidden;
-  border-radius: 50%;
-  text-align:center;
-  background-size: cover;
   margin: 0 auto 0.5rem;
 }
 

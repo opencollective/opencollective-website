@@ -38,16 +38,6 @@ describe('validator profile after public donation', () => {
     });
   });
 
-  it('should throw an error if only website is in payload', (done) => {
-    validate({
-      website: 'http://www.opencollective.com',
-    })
-    .catch(error => {
-      expect(error.name).toEqual('ValidationError');
-      done();
-    });
-  });
-
   it('should work if website is string with length 0', (done) => {
     const profile = {
       website: '',
