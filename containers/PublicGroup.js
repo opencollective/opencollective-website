@@ -30,7 +30,6 @@ import appendDonationForm from '../actions/form/append_donation';
 import fetchGroup from '../actions/groups/fetch_by_id';
 import fetchUsers from '../actions/users/fetch_by_group';
 import fetchTransactions from '../actions/transactions/fetch_by_group';
-import fetchGroup from '../actions/groups/fetch_by_id';
 import donate from '../actions/groups/donate';
 import notify from '../actions/notification/notify';
 import resetNotifications from '../actions/notification/reset';
@@ -87,10 +86,6 @@ export class PublicGroup extends Component {
       members,
       isAuthenticated
     } = this.props;
-
-    const logoStyle = group.logo ? {
-      backgroundImage: `url(${group.logo})`
-    } : {};
 
     var donationSection;
     if (this.state.showThankYouMessage || (isAuthenticated && this.state.showUserForm)) { // we don't handle userform from logged in users) {
@@ -302,8 +297,7 @@ export default connect(mapStateToProps, {
   updateUser,
   logout,
   validateDonationProfile,
-  decodeJWT,
-  fetchGroup
+  decodeJWT
 })(PublicGroup);
 
 function mapStateToProps({
