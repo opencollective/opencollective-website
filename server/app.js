@@ -1,15 +1,15 @@
-const express = require('express');
-const serverStatus = require('express-server-status');
-const favicon = require('serve-favicon');
-const request = require('request');
-const morgan = require('morgan');
-const path = require('path');
-const _ = require('lodash');
-const robots = require('robots.txt')
-const config = require('config');
+import express from 'express';
+import serverStatus from 'express-server-status';
+import favicon from 'serve-favicon';
+import request from 'request';
+import morgan from 'morgan';
+import path from 'path';
+import _ from 'lodash';
+import robots from 'robots.txt';
+import config from 'config';
 
-const apiUrl = require('./helpers/api_url');
-const renderClient = require('./helpers/render_client');
+import apiUrl from './helpers/api_url';
+import renderClient from './helpers/render_client';
 
 
 /**

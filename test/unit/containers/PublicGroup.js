@@ -180,6 +180,7 @@ describe('PublicGroup container', () => {
       fetchTransactions: noop,
       fetchUsers: noop,
       resetNotifications: noop,
+      decodeJWT: noop,
       groupid: 1,
       group: {},
       notification,

@@ -36,6 +36,7 @@ import appendProfileForm from '../actions/form/append_profile';
 import updateUser from '../actions/users/update_user';
 import validateDonationProfile from '../actions/form/validate_donation_profile';
 import logout from '../actions/session/logout';
+import decodeJWT from '../actions/session/decode_jwt';
 
 // Number of expenses and revenue items to show on the public page
 const NUM_TRANSACTIONS_TO_SHOW = 3;
@@ -94,7 +95,7 @@ export class PublicGroup extends Component {
     return (
       <div className='PublicGroup'>
 
-        <PublicTopBar session={this.props.session} logout={this.props.logout} />
+        <PublicTopBar session={this.props.session} logout={this.props.logout} slug={group.slug}/>
         <Notification {...this.props} />
 
         <div className='PublicContent'>
@@ -211,6 +212,11 @@ export class PublicGroup extends Component {
 
     fetchUsers(group.id);
   }
+
+  componentDidMount() {
+    // decode here because we don't handle auth on the server side yet
+    this.props.decodeJWT();
+  }
 }
 
 export function donateToGroup(amount, token) {
@@ -276,7 +282,8 @@ export default connect(mapStateToProps, {
   appendProfileForm,
   updateUser,
   logout,
-  validateDonationProfile
+  validateDonationProfile,
+  decodeJWT
 })(PublicGroup);
 
 function mapStateToProps({

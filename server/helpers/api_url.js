@@ -1,7 +1,7 @@
-const _ = require('lodash');
-const config = require('config');
+import _ from 'lodash';
+import config from 'config';
 
-module.exports = url => {
+export default url => {
   const withoutParams = config.apiUrl + (url.replace('/api/', ''));
   const hasParams = _.contains(url, '?');
 

@@ -1,13 +1,13 @@
 // For JSX
-const React = require('react');
+import React from 'react';
 
-const renderToString = require('react-dom/server').renderToString;
-const Provider = require('react-redux').Provider;
+import { renderToString } from 'react-dom/server';
+import { Provider } from 'react-redux';
 
-const createStore = require('../../store/create');
-const PublicGroup = require('../../containers/PublicGroup').default;
+import createStore from '../../store/create';
+import PublicGroup from '../../containers/PublicGroup';
 
-module.exports = (initialState) => {
+export default (initialState) => {
   const store = createStore(initialState);
 
   // Render the PublicGroup Container to a string
