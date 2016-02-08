@@ -5,7 +5,4 @@ deployment:
   staging:
     branch: staging
     heroku:
-      appname: opencollective-staging-app
-test:
-  pre:
-    - nohup bash -c "npm run testserver &"
+      appname: opencollective-staging-public
