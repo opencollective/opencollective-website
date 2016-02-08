@@ -4,11 +4,11 @@ env=$1
 if [ $env = "staging" ]
 then
   branch_name="staging"
-  remote="https://git.heroku.com/opencollective-staging-public.git"
+  remote="https://git.heroku.com/opencollective-staging-website.git"
 elif [ $env = "production" ]
 then
   branch_name="production"
-  remote="https://git.heroku.com/opencollective-prod-public.git"
+  remote="https://git.heroku.com/opencollective-prod-website.git"
 else
   echo "Unknown env: $env, only staging and production are valid"
   exit
