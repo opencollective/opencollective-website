@@ -7,8 +7,7 @@
   "browserify": {
     "transform": [
       "babelify",
-      "envify",
-      "cssnextify"
+      "envify"
     ]
   },
   "scripts": {
@@ -41,8 +40,6 @@
     "babel-preset-stage-0": "^6.3.13",
     "babel-register": "^6.4.3",
     "babelify": "7.2.0",
-    "basscss": "^7.0.4",
-    "body-parser": "^1.14.1",
     "browserify": "^10.2.6",
     "cache-bust": "0.0.2",
     "chai": "^3.4.1",
@@ -51,8 +48,6 @@
     "config": "^1.16.0",
     "cssmin": "^0.4.3",
     "cssnext": "^1.8.4",
-    "cssnextify": "^1.0.3",
-    "ecstatic": "~0.8.0",
     "ejs": "^2.3.4",
     "envify": "^3.4.0",
     "express": "^4.13.3",
@@ -72,17 +67,13 @@
     "numbro": "^1.6.2",
     "query-string": "^3.0.0",
     "react": "~0.14.0",
-    "react-body-classname": "^1.0.1",
-    "react-datepicker": "^0.15.2",
     "react-dom": "^0.14.0",
     "react-onclickoutside": "^4.5.0",
-    "react-radio-group": "^2.2.0",
     "react-redux": "^3.1.0",
     "react-router": "^1.0.2",
     "react-stripe-checkout": "^1.7.2",
     "redux": "^3.0.2",
     "redux-logger": "^2.0.0",
-    "redux-router": "^1.0.0-beta3",
     "redux-thunk": "^1.0.0",
     "request": "^2.65.0",
     "robots.txt": "^1.1.0",
@@ -99,7 +90,6 @@
     "chai-spies": "^0.7.1",
     "chromedriver": "^2.20.0",
     "eslint": "^1.9.0",
-    "eslint-config-rackt": "^1.1.1",
     "eslint-plugin-react": "^3.16.1",
     "expect": "^1.11.1",
     "jscs": "^2.1.1",
@@ -109,8 +99,6 @@
     "nightwatch": "^0.8.15",
     "nodemon": "^1.8.1",
     "react-addons-test-utils": "^0.14.0",
-    "react-unit": "^1.0.8",
-    "redux-devtools": "^2.1.5",
     "redux-mock-store": "0.0.6",
     "sinon": "^1.17.2"
   }
