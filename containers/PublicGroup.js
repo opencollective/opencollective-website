@@ -41,8 +41,8 @@ import decodeJWT from '../actions/session/decode_jwt';
 // Number of expenses and revenue items to show on the public page
 const NUM_TRANSACTIONS_TO_SHOW = 3;
 
-const Media = (group) => {
-  if(group.video) {
+const Media = ({group}) => {
+  if (group.video) {
       return (
         <div className='PublicGroup-video'>
           <YoutubeVideo video={group.video} />
