@@ -7,6 +7,7 @@ import path from 'path';
 import _ from 'lodash';
 import robots from 'robots.txt';
 import config from 'config';
+import compression from 'compression';
 
 import apiUrl from './helpers/api_url';
 import renderClient from './helpers/render_client';
@@ -31,6 +32,11 @@ app.use(favicon(__dirname + '/../static/images/favicon.ico.png'));
  * Log
  */
 app.use(morgan('dev'));
+
+/**
+ * Compress assets
+ */
+app.use(compression());
 
 /**
  * Static folder
