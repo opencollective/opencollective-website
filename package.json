@@ -28,7 +28,9 @@
     "watch:test": "NODE_ENV=test mocha test/unit/ --opts test/unit/mocha.opts --watch",
     "postinstall": "npm run build",
     "git:clean": "git branch --merged | grep -v \\* | grep -v master | grep -v dev | xargs -n 1 git branch -d",
-    "testserver": "NODE_ENV=test_server npm start"
+    "testserver": "NODE_ENV=test_server npm start",
+    "deploy:staging": "bash -x scripts/deploy.sh staging",
+    "deploy:production": "bash -x scripts/deploy.sh production"
   },
   "dependencies": {
     "babel-core": "^6.4.5",
