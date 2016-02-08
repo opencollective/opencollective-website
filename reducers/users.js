@@ -1,4 +1,4 @@
-import merge from 'lodash.merge';
+import merge from 'lodash/object/merge';
 
 import * as constants from '../constants/users';
 import {DONATE_GROUP_SUCCESS} from'../constants/groups';

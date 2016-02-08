@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import merge from 'lodash.merge';
-import omit from 'lodash.omit';
+import merge from 'lodash/object/merge';
+import omit from 'lodash/object/omit';
 
 import errorDetail from '../lib/error_detail';
 import * as constants from '../constants/form';

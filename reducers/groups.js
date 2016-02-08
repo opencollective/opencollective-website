@@ -1,4 +1,4 @@
-import merge from 'lodash.merge';
+import merge from 'lodash/object/merge';
 import * as constants from '../constants/groups';
 
 export default function groups(state={}, action={}) {
