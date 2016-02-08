@@ -4,8 +4,7 @@ class PublicTopBar extends React.Component {
 
   showSession() {
     const { session, logout } = this.props;
-    // const redirect = window.location.pathname; // need to implement poly-fill for server side
-    const redirect = '';
+    const redirect = window.location.pathname;
 
     if(session && session.isAuthenticated) {
       return (

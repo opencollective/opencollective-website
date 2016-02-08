@@ -316,7 +316,7 @@ function mapStateToProps({
     stripeAmount: convertToCents(form.donation.attributes.amount),
     stripeKey: group.stripeAccount && group.stripeAccount.stripePublishableKey,
     inProgress: groups.donateInProgress,
-    shareUrl: '', // need to implement without window
+    shareUrl: window.location.href,
     profileForm: form.profile,
     showUserForm: users.showUserForm || false,
     saveInProgress: users.updateInProgress
