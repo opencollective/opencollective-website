@@ -3,6 +3,9 @@
  * Base
  */
 
+/* Reset */
+@import './vendors/normalize.css';
+
 @import './fonts.css';
 @import './variables.css';
 @import './base.css';
