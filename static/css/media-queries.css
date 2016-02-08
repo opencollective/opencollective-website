@@ -60,14 +60,17 @@
     width: 100%;
     margin: 0 auto;
   }
-  .PublicGroup-members .UsersList {
-    display: inline-table;
-    width: 90%;
-    margin: 0 auto;
-    justify-content: space-between;
+  .UsersList-item {
+    width: 6rem;
+    padding-right: 0.25rem;
+    margin: 0 0 1rem 0;
   }
-  .PublicGroup-quoteText {
-    padding-left: 0px;
+  .UsersList .ProfilePhoto {
+    width: 4rem;
+    height: 4rem;
+  }
+  .UsersList-name {
+    font-size: 0.85rem;
   }
   .PublicContent .PublicGroup-expenses, .PublicContent .PublicGroup-donations {
     width: 100%;
