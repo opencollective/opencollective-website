@@ -24,7 +24,7 @@ npm run build
 
 ## Deployment
 
-Use the `scripts/deploy.sh [env]`
+Use the `npm run deploy:staging` or `npm run deploy:production`
 CircleCI will run the tests on this branch and push to Heroku if successful (to staging only)
 
 ### Manually
