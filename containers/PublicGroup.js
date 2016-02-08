@@ -88,6 +88,10 @@ export class PublicGroup extends Component {
       isAuthenticated
     } = this.props;
 
+    const logoStyle = group.logo ? {
+      backgroundImage: `url(${group.logo})`
+    } : {};
+
     var donationSection;
     if (this.state.showThankYouMessage || (isAuthenticated && this.state.showUserForm)) { // we don't handle userform from logged in users) {
       donationSection = <PublicGroupThanks />;

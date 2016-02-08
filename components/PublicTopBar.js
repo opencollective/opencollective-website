@@ -16,7 +16,7 @@ class PublicTopBar extends React.Component {
     } else {
       return (
         <div>
-          <a href={'/app/login?next='+redirect}>sign in</a>
+          <a href={`/app/login?next=${redirect}`}>sign in</a>
         </div>
       );
     }
