@@ -42,6 +42,7 @@
     "basscss": "^7.0.4",
     "body-parser": "^1.14.1",
     "browserify": "^10.2.6",
+    "cache-bust": "0.0.2",
     "chai": "^3.4.1",
     "classnames": "^2.2.0",
     "compression": "^1.6.1",
