@@ -4,7 +4,7 @@ import * as constants from '../../../constants/form';
 
 describe('form actions', () => {
 
-  describe('donation', function () {
+  describe('donation', () => {
     it('should set append a field to the donation form', () => {
       const attributes = { amount: 10 };
 

@@ -81,7 +81,7 @@ export class PublicGroup extends Component {
     } = this.props;
 
     const logoStyle = group.logo ? {
-      backgroundImage: 'url(' + group.logo + ')'
+      backgroundImage: `url(${group.logo})`
     } : {};
 
     var donationSection;

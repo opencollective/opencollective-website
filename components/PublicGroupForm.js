@@ -15,9 +15,7 @@ const PublicGroupForm = ({
   inProgress,
 }) => {
 
-
-  let stripeDescription =  `${formatCurrency(amount, group.currency, { compact: false })} per month`;
-
+  const stripeDescription =  `${formatCurrency(amount, group.currency, { compact: false })} per month`;
 
   return (
     <div className='PublicGroupForm'>

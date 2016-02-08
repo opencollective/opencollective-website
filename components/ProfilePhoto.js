@@ -2,11 +2,7 @@ import React, { PropTypes } from 'react';
 
 const ProfilePhoto = ({url, spinner, hasBorder=false}) => {
 
-  if (url) {
-    var backgroundImage = url;
-  } else {
-    var backgroundImage = '/static/images/default_avatar.svg';
-  }
+  const backgroundImage = url || '/static/images/default_avatar.svg';
 
   const border = hasBorder ? {
     border: '3px solid white',
@@ -22,7 +18,7 @@ const ProfilePhoto = ({url, spinner, hasBorder=false}) => {
 
   return (
     <div className='ProfilePhoto' style={divStyle}>
-      {spinner ? <div className='spinner-loader center-element'/> : null }
+      {spinner ? <div className='spinner-loader center-element' /> : null }
     </div>
   );
 }

@@ -4,9 +4,9 @@ import Icon from './Icon';
 
 export default ({type, url, name, description}) => {
 
-  const tweet = encodeURIComponent("I just backed the " + name + " collective.\nJoin me in supporting them! " + url);
-  const subject = encodeURIComponent("I just backed the " + name + " collective. Join me in supporting them!");
-  const body = encodeURIComponent("I just backed the " + name + " collective:\n" + description + "\n" + url + "\n\nJoin me in supporting them!\n");
+  const tweet = encodeURIComponent(`I just backed the ${name} collective.\nJoin me in supporting them! ${url}`);
+  const subject = encodeURIComponent(`I just backed the ${name} collective. Join me in supporting them!`);
+  const body = encodeURIComponent(`I just backed the ${name} collective:\n ${description}\n ${url}\n\nJoin me in supporting them!\n`);
   const url_encoded = encodeURIComponent(url);
 
   const link = {
