@@ -27,9 +27,9 @@ import PublicGroupSignup from '../components/PublicGroupSignup';
 import Markdown from '../components/Markdown';
 
 import appendDonationForm from '../actions/form/append_donation';
+import fetchGroup from '../actions/groups/fetch_by_id';
 import fetchUsers from '../actions/users/fetch_by_group';
 import fetchTransactions from '../actions/transactions/fetch_by_group';
-import fetchGroup from '../actions/groups/fetch_by_id';
 import donate from '../actions/groups/donate';
 import notify from '../actions/notification/notify';
 import resetNotifications from '../actions/notification/reset';

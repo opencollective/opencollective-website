@@ -111,7 +111,8 @@
   padding: 0 calc(var(--spacing) / 2);
 }
 
-.PublicGroupHeader {
+.PublicGroupHeader ,
+.PublicGroupForm-button {
   text-align: center;
 }
 
