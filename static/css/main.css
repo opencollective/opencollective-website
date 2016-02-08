@@ -1,83 +1,48 @@
-
 /**
- * Base
+ * Reset
  */
 
-/* Reset */
 @import './vendors/normalize.css';
 
-@import './fonts.css';
-@import './variables.css';
-@import './base.css';
-@import './utilities.css';
-
 /**
- * Vendors
+ * Base elements
  */
 
-@import './vendors/react-datepicker.css';
+@import './base/variables.css';
+@import './base/fonts.css';
+@import './base/body.css';
+@import './base/input.css';
 
 /**
  * Containers
  */
 
-@import './containers/App.css';
-@import './containers/AddFund.css';
-@import './containers/Content.css';
-@import './containers/ForgotPassword.css';
-@import './containers/Login.css';
-@import './containers/Profile.css';
-@import './containers/Public.css';
 @import './containers/PublicGroup.css';
-@import './containers/PublicTransaction.css';
-@import './containers/PublicTransactions.css';
-@import './containers/ResetPassword.css';
-@import './containers/TransactionDetail.css';
 
 /**
  * Components
  */
 
-@import './components/BackButton.css';
 @import './components/Button.css';
 @import './components/Currency.css';
 @import './components/DonationPicker.css';
-@import './components/EmptyList.css';
 @import './components/Field.css';
-@import './components/Footer.css';
-@import './components/GroupLink.css';
-@import './components/GroupSettings.css';
-@import './components/GroupSettingsButton.css';
-@import './components/GroupTransactions.css';
-@import './components/TopBar.css';
 @import './components/Icon.css';
-@import './components/ImageUpload.css';
 @import './components/Input.css';
 @import './components/Label.css';
 @import './components/Metric.css';
 @import './components/Notification.css';
-@import './components/PaypalReminder.css';
-@import './components/PopOverMenu.css';
-@import './components/ProfileForm.css';
 @import './components/ProfilePhoto.css';
-@import './components/ProfilePhotoUpload.css';
-@import './components/ProfilePreapproved.css';
 @import './components/PublicGroupThanks.css';
 @import './components/PublicFooter.css';
 @import './components/PublicTopBar.css';
-@import './components/Reminder.css';
-@import './components/Select.css';
 @import './components/ShareIcon.css';
-@import './components/TableHead.css';
-@import './components/TableRow.css';
-@import './components/TextArea.css';
-@import './components/Transaction.css';
-@import './components/TransactionForm.css';
 @import './components/TransactionStatus.css';
-@import './components/TransactionComment.css';
 @import './components/TransactionItem.css';
 @import './components/UsersList.css';
-@import './components/YoutubeVideo.css';
-@import './components/Well.css';
+
+/**
+ * Media queries
+ */
 
 @import './media-queries.css';

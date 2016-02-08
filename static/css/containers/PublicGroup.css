@@ -96,6 +96,10 @@
   padding: 0 calc(var(--spacing) / 2);
 }
 
+.PublicGroupForm-button {
+  text-align: center;
+}
+
 .PublicGroupHeader-logo {
   width: 100px;
   height: 100px;

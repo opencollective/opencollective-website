@@ -27,6 +27,7 @@ import PublicGroupSignup from '../components/PublicGroupSignup';
 import Markdown from '../components/Markdown';
 
 import appendDonationForm from '../actions/form/append_donation';
+import fetchGroup from '../actions/groups/fetch_by_id';
 import fetchUsers from '../actions/users/fetch_by_group';
 import fetchTransactions from '../actions/transactions/fetch_by_group';
 import donate from '../actions/groups/donate';
@@ -283,7 +284,8 @@ export default connect(mapStateToProps, {
   updateUser,
   logout,
   validateDonationProfile,
-  decodeJWT
+  decodeJWT,
+  fetchGroup
 })(PublicGroup);
 
 function mapStateToProps({

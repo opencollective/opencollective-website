@@ -15,7 +15,7 @@ const ProfilePhoto = ({url, spinner, hasBorder=false}) => {
 
   const divStyle = {
     ...border,
-    backgroundImage: 'url(' + backgroundImage + ')',
+    backgroundImage: `url(${backgroundImage})`,
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
   };

@@ -7,7 +7,7 @@ import Input from './Input';
 export default ({value, currency, onChange}) => {
   const presetAmounts = [1, 5, 10, 20, 50, 'custom'];
 
-  let isCustomMode = (presetAmounts.indexOf(value) === -1);
+  const isCustomMode = (presetAmounts.indexOf(value) === -1);
 
   function className(selectedPreset, value) {
     return classnames({
