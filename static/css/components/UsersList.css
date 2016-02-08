@@ -1,7 +1,3 @@
-.UsersList {
-  max-width: 16rem;
-}
-
 .UsersList-item {
   display: inline-block;
   padding-right: var(--spacing);

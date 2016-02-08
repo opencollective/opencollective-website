@@ -42,11 +42,6 @@
   margin-bottom: calc(var(--spacing) * 2);
 }
 
-.PublicGroup-members {
-  float: left;
-  margin-right: 20px;
-}
-
 .PublicGroup-backers {
   clear: both;
 }
@@ -74,9 +69,17 @@
 }
 
 .PublicGroup-quoteText {
-  padding-left: calc(var(--spacing) * 2);
+  clear: both;
   box-sizing: border-box;
   line-height: 24px;
+}
+
+PublicGroup-quoteText h1, .PublicGroup-quoteText h2 {
+  font-size: 1.2rem;
+}
+
+.PublicGroup-quoteText p:first-child, .PublicGroup-quoteText h1:first-child, .PublicGroup-quoteText h2:first-child {
+  margin-top: 0px;
 }
 
 .PublicGroup-transactions {
@@ -97,14 +100,6 @@
   font-weight: bold;
   padding: 1rem 1.5rem;
   font-size: 1.3rem;
-}
-
-.PublicGroup .UsersList {
-  padding-bottom: var(--spacing);
-}
-
-.PublicGroup-backers .UsersList {
-  text-align: left;
 }
 
 .PublicGroupForm-radioLabel {
