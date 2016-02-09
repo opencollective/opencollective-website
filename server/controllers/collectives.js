@@ -65,7 +65,12 @@ const widget = (req, res, next) => {
 
     const html = renderToString(<Widget {...props} />);
 
-    res.render('pages/widget', { html });
+    res.render('pages/widget', {
+      html,
+      options: {
+        showGA: config.showGA
+      }
+    });
   })
   .catch(next);
 
