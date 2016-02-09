@@ -7,11 +7,10 @@ const rawMarkup = (text) => {
 }
 
 const Markdown = ({value='', className=''}) => {
-
   return (
     <div className={className} dangerouslySetInnerHTML={rawMarkup(value)} />
   );
-  
+
 }
 
 Markdown.propTypes = {

@@ -6,6 +6,7 @@ import React from 'react';
 import config from 'config';
 import { renderToString } from 'react-dom/server';
 
+import { get } from '../../lib/api';
 import Widget from '../../components/Widget';
 import renderClient from '../utils/render_client';
 
@@ -49,9 +50,25 @@ const show = (req, res, next) => {
  */
 const widget = (req, res, next) => {
   const group = req.group;
-  const html = renderToString(<Widget group={group} />);
 
-  res.send(html);
+  Promise.all([
+    get(`groups/${group.slug}/transactions?per_page=3`),
+    get(`groups/${group.slug}/users`)
+  ])
+  .then(([transactions, users]) => {
+    const props = {
+      group,
+      transactions,
+      users,
+      href: `${config.host.app}/${group.slug}`
+    };
+
+    const html = renderToString(<Widget {...props} />);
+
+    res.render('pages/widget', { html });
+  })
+  .catch(next);
+
 };
 
 export default { show, widget };

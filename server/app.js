@@ -99,8 +99,8 @@ app.use((req, res, next) => {
 
 app.use((err, req, res, next) => {
 
-  console.log('err', err);
-  console.log('err', err.stack);
+  console.log('Error', err);
+  console.log('Error stack', err.stack);
 
   if (res.headersSent) {
     return next(err);
@@ -108,6 +108,7 @@ app.use((err, req, res, next) => {
 
   res.render('pages/error', {
     message: `Error ${err.code}: ${err.message}`,
+    stack: process.env.NODE_ENV === 'development' ? err.stack : '',
     options: {
       showGA: config.showGA
     }
