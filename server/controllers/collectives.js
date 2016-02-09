@@ -13,7 +13,7 @@ import renderClient from '../utils/render_client';
 /**
  * Show the collective page
  */
-const show = (req, res, next) => {
+const show = (req, res) => {
   const group = req.group;
 
   // Meta data for facebook and twitter links (opengraph)

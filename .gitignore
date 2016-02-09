@@ -34,6 +34,8 @@ node_modules
 static/bundle.js
 static/bundle-*.js
 static/build.css
+static/main.css
+static/widget.css
 
 # Test outputs
 test/e2e/output

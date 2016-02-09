@@ -13,7 +13,7 @@
   html {
     font-size: 14px; /* 1 rem = 14px; */
   }
-  
+
   .PublicGroup .PublicContent {
     padding: 1rem 1rem 5rem 1rem;
     max-width: calc(var(--public-topbar-height) + var(--spacing)) auto 0 auto;
@@ -28,7 +28,7 @@
     width: 100%;
     margin: 0.5rem 0;
   }
-  
+
   .PublicGroup-summary {
     padding-left: 0;
   }
@@ -76,7 +76,7 @@
     width: 100%;
     padding-right: 0;
     margin-bottom:1.5rem;
-  } 
+  }
   .PublicGroup .TransactionItem .ProfilePhoto {
     width: 3rem;
     height: 3rem;
@@ -97,7 +97,7 @@
   html {
     font-size: 12px; /* 1 rem = 14px; */
   }
-  
+
   .DonationPicker label {
     margin-right: 2rem;
   }

@@ -46,4 +46,4 @@
  * Media queries
  */
 
-@import './media-queries.css';
+@import './base/media-queries.css';

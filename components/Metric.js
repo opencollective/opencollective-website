@@ -8,3 +8,4 @@ export default ({label, value, children}) => (
     <div className='Metric-label'>{label}</div>
   </div>
 );
+

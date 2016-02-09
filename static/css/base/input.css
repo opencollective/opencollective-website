@@ -1,7 +1,7 @@
 /** forms **/
 input::-webkit-input-placeholder, input::-moz-placeholder, input:-ms-input-placeholder {
   font-style: italic;
-  color: --light-gray;
+  color: var(--light-gray);
   font-family: "Proxima Nova";
 }
 
