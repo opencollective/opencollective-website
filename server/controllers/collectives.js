@@ -6,7 +6,7 @@ import React from 'react';
 import config from 'config';
 import { renderToString } from 'react-dom/server';
 
-import { get } from '../../lib/api';
+import { get } from '../api';
 import Widget from '../../components/Widget';
 import renderClient from '../utils/render_client';
 

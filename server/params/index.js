@@ -1,11 +1,11 @@
-import { get } from '../../lib/api';
+import api from '../api';
 
 /**
  * Group slug
  */
 
 const slug = (req, res, next) => {
-  get(`groups/${req.params.slug.toLowerCase()}/`)
+  api.get(`groups/${req.params.slug.toLowerCase()}/`)
     .then(group => {
       req.group = group;
       next();
