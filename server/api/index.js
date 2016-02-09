@@ -1,17 +1,16 @@
 import config from 'config';
+import fetch from 'isomorphic-fetch';
 
-import { get as clientGet } from '../../lib/api';
+import { checkStatus } from '../../lib/api';
+import apiUrl from '../utils/api_url';
 
 /**
  * Get request
  * Extend client side get with the api key
  */
 const get = (endpoint) => {
-  return clientGet(endpoint, {
-    params: {
-      api_key: config.apiKey
-    }
-  });
+  return fetch(apiUrl(endpoint))
+    .then(checkStatus);
 };
 
 export default { get };
