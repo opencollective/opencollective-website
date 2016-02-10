@@ -40,9 +40,10 @@
 @import './components/TransactionStatus.css';
 @import './components/TransactionItem.css';
 @import './components/UsersList.css';
+@import './components/Widget.css';
 
 /**
  * Media queries
  */
 
-@import './media-queries.css';
+@import './base/media-queries.css';

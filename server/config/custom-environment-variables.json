@@ -1,6 +1,8 @@
 {
+  "host": {
+    "api": "API_URL",
+    "app": "CLIENT_URL"
+  },
   "apiKey": "API_KEY",
-  "apiUrl": "API_URL",
-  "clientUrl": "CLIENT_URL",
   "stripePublicKey": "STRIPE_PUBLIC_KEY"
 }

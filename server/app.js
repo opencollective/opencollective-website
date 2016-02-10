@@ -9,9 +9,10 @@ import robots from 'robots.txt';
 import config from 'config';
 import compression from 'compression';
 
+import collectives from './controllers/collectives';
+import params from './params';
 import apiUrl from './utils/api_url';
-import renderClient from './utils/render_client';
-import busted from './helpers/busted';
+import busted from './locals/busted';
 
 /**
  * Express app
@@ -73,55 +74,13 @@ app.set('view cache', config.viewCache);
 app.set('view engine', 'ejs');
 
 /**
- * Server public page
+ * Routes
  */
 
-app.get('/:slug([A-Za-z0-9-]+)', (req, res, next) => {
+app.param('slug', params.slug);
 
-  const slug = req.params.slug.toLowerCase();
-
-  request
-    .get({
-      url: apiUrl(`groups/${slug}/`),
-      json: true
-    }, (err, response, group) => {
-      if (err) {
-        return next(err);
-      }
-
-      if (response.statusCode !== 200) {
-        return next(response.body.error);
-      }
-
-      // Meta data for facebook and twitter links (opengraph)
-      const meta = {
-        url: group.publicUrl,
-        title: `Join ${group.name}'s open collective`,
-        description: `${group.name} is collecting funds to continue their activities. Chip in!`,
-        image: group.image || group.logo,
-        twitter: `@${group.twitterHandle}`,
-      };
-
-      // The initial state will contain the group
-      const initialState = {
-        groups: {
-          [group.id]: group
-        }
-      };
-
-      // Server side rendering of the client application
-      const html = renderClient(initialState);
-
-      res.render('index', {
-        meta,
-        html,
-        initialState,
-        options: {
-          showGA: process.env.NODE_ENV === 'production'
-        }
-      });
-    });
-});
+app.get('/:slug([A-Za-z0-9-]+)', collectives.show);
+app.get('/:slug([A-Za-z0-9-]+)/widget', collectives.widget);
 
 /**
  * 404 route
@@ -140,17 +99,18 @@ app.use((req, res, next) => {
 
 app.use((err, req, res, next) => {
 
-  console.log('err', err);
-  console.log('err', err.stack);
+  console.log('Error', err);
+  console.log('Error stack', err.stack);
 
   if (res.headersSent) {
     return next(err);
   }
 
-  res.render('error', {
+  res.render('pages/error', {
     message: `Error ${err.code}: ${err.message}`,
+    stack: process.env.NODE_ENV === 'development' ? err.stack : '',
     options: {
-      showGA: process.env.NODE_ENV === 'production'
+      showGA: config.showGA
     }
   });
 });

@@ -1,0 +1,33 @@
+.Widget {
+  background: white;
+  margin: 1rem;
+  padding: 1rem;
+  background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(255,255,255,1) 85%,rgba(255,255,255,0) 100%);
+  -webkit-box-shadow: 0 0 2px 0 rgba(0,0,0,.2);
+  box-shadow: 0 0 2px 0 rgba(0,0,0,.2);
+  border-top: 3px solid var(--gray);
+}
+
+.Widget-header {
+  text-align: center;
+}
+
+.Widget-header img {
+  max-width: 200px;
+}
+
+.Widget-balance .Currency{
+  color: var(--dark-gray);
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.Widget-label {
+  color: var(--light-blue);
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.Widget-button {
+  background: var(--green);
+}

@@ -1,4 +1,5 @@
 {
-  "apiKey": "0ac43519edcf4421d80342403fb5985d",
-  "apiUrl": "https://opencollective-test-api.herokuapp.com/"
+  "host": {
+    "api": "https://opencollective-test-api.herokuapp.com/",
+  }
 }

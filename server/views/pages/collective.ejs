@@ -15,18 +15,18 @@
     <meta name="twitter:description" content="<%= meta.description %>" />
     <meta name="twitter:image" content="<%= meta.image %>" />
     <link rel="shortcut icon" type="image/png" href="/static/images/favicon.ico.png"/>
-    <link rel="stylesheet" type="text/css" href="<%= busted("/static/build.css") %>">
+    <link rel="stylesheet" type="text/css" href="<%= busted("/static/dist/main.css") %>">
     <title><%= meta.title %></title>
   </head>
   <body>
     <div id="content"><%- html %></div>
 
     <script>
-        window.__INITIAL_STATE__ = <%- JSON.stringify(initialState) %>
+        window.__INITIAL_STATE__ = <%- JSON.stringify(initialState || {}) %>
     </script>
-    <script src="<%= busted("/static/bundle.js") %>"></script>
+    <script src="<%= busted("/static/dist/bundle.js") %>"></script>
 
-    <% include google_analytics.ejs %>
+    <% include ../partials/google_analytics.ejs %>
 
   </body>
 </html>
