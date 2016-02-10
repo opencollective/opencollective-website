@@ -2,7 +2,6 @@ const gulp = require('gulp');
 const postcss = require('gulp-postcss');
 const changed = require('gulp-changed');
 const autoprefixer = require('autoprefixer');
-const watch = require('gulp-watch');
 
 /**
  * Build css for main or widget
@@ -11,7 +10,7 @@ const watch = require('gulp-watch');
 gulp.task('build:css', () => {
 
   return gulp.src('./static/css/*.css')
-    .pipe(changed('./static'))
+    .pipe(changed('./static/dist'))
     .pipe(postcss([
       autoprefixer,
       require('postcss-import')(),
@@ -19,9 +18,9 @@ gulp.task('build:css', () => {
       require('postcss-discard-comments')(),
       require('cssnano')(),
     ]))
-    .pipe(gulp.dest('./static'));
+    .pipe(gulp.dest('./static/dist'));
 });
 
 gulp.task('watch:css', () => {
-  watch('./static/css/**/*.css', ['build:css']);
+  gulp.watch('./static/css/**/*.css', ['build:css']);
 });

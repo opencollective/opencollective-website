@@ -1,4 +1,3 @@
-import config from 'config';
 import fetch from 'isomorphic-fetch';
 
 import { checkStatus } from '../../lib/api';

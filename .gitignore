@@ -31,11 +31,8 @@ build/Release
 node_modules
 
 # Build
-static/bundle.js
-static/bundle-*.js
-static/build.css
-static/main.css
-static/widget.css
+static/dist/*.js
+static/dist/*.css
 
 # Test outputs
 test/e2e/output

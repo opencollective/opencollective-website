@@ -1,2 +1,2 @@
-static/*.js
+static/dist/*.js
 node_modules/
