@@ -9,8 +9,8 @@ const autoprefixer = require('autoprefixer');
 
 gulp.task('build:css', () => {
 
-  return gulp.src('./static/css/*.css')
-    .pipe(changed('./static/dist'))
+  return gulp.src('./frontend/src/css/*.css')
+    .pipe(changed('./frontend/dist/css'))
     .pipe(postcss([
       autoprefixer,
       require('postcss-import')(),
@@ -18,9 +18,9 @@ gulp.task('build:css', () => {
       require('postcss-discard-comments')(),
       require('cssnano')(),
     ]))
-    .pipe(gulp.dest('./static/dist'));
+    .pipe(gulp.dest('./frontend/dist/css'));
 });
 
 gulp.task('watch:css', () => {
-  gulp.watch('./static/css/**/*.css', ['build:css']);
+  gulp.watch('./frontend/src/css/**/*.css', ['build:css']);
 });

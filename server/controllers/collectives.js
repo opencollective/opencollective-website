@@ -7,7 +7,7 @@ import config from 'config';
 import { renderToString } from 'react-dom/server';
 
 import { get } from '../api';
-import Widget from '../../components/Widget';
+import Widget from '../../frontend/src/components/Widget';
 import renderClient from '../utils/render_client';
 
 /**

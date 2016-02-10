@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
 
-import { checkStatus } from '../../lib/api';
+import { checkStatus } from '../../frontend/src/lib/api';
 import apiUrl from '../utils/api_url';
 
 /**
