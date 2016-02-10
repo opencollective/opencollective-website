@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import errorDetail from '../../../lib/error_detail';
+import errorDetail from '../../../frontend/src/lib/error_detail';
 
 describe('errorDetail', () => {
 

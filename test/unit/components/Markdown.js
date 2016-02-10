@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import Markdown from '../../../components/Markdown';
+import Markdown from '../../../frontend/src/components/Markdown';
 
 describe('Markdown component', () => {
   it('should not break if empty', () => {

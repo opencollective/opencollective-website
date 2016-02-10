@@ -3,7 +3,7 @@ import React from 'react';
 class PublicTopBar extends React.Component {
 
   showSession() {
-    const { session, logout, slug } = this.props;
+    const { session, logout } = this.props;
     const redirect = `/`;
 
     if(session && session.isAuthenticated) {

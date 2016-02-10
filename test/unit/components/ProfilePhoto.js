@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import ProfilePhoto from '../../../components/ProfilePhoto';
+import ProfilePhoto from '../../../frontend/src/components/ProfilePhoto';
 
 
 describe('ProfilePhoto component', () => {

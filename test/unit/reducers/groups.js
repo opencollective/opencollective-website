@@ -1,8 +1,8 @@
 import expect from 'expect';
-import reducer from '../../../reducers/groups';
+import reducer from '../../../frontend/src/reducers/groups';
 import {
   GROUP_SUCCESS
-} from '../../../constants/groups';
+} from '../../../frontend/src/constants/groups';
 
 describe('groups reducer', () => {
 

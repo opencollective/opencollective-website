@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import {displayUrl} from '../../../components/DisplayUrl';
+import {displayUrl} from '../../../frontend/src/components/DisplayUrl';
 
 
 describe('DisplayUrl component', () => {

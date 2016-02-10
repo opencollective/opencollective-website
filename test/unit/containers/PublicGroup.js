@@ -8,7 +8,7 @@ import {
   PublicGroup,
   donateToGroup,
   saveNewUser
-} from '../../../containers/PublicGroup';
+} from '../../../frontend/src/containers/PublicGroup';
 
 const {expect} = chai;
 const {
