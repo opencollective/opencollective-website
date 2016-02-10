@@ -4,7 +4,7 @@ class PublicTopBar extends React.Component {
 
   showSession() {
     const { session, logout, slug } = this.props;
-    const redirect = `/${slug}`;
+    const redirect = `/`;
 
     if(session && session.isAuthenticated) {
       return (
@@ -16,7 +16,7 @@ class PublicTopBar extends React.Component {
     } else {
       return (
         <div>
-          <a href={`/app/login?next=${redirect}`}>sign in</a>
+          <a href={`https://app.opencollective.com/login?next=${redirect}`}>sign in</a>
         </div>
       );
     }
