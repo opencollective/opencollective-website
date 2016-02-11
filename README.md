@@ -86,5 +86,35 @@ npm test
   <a href="https://opencollective.com/opencollective/backers/9/website" target="_blank">
     <img src="https://opencollective.com/opencollective/backers/9/avatar" height="64">
   </a>
+<a href="https://opencollective.com/opencollective/backers/10/website" target="_blank">
+    <img src="https://opencollective.com/opencollective/backers/10/avatar" height="64">
+  </a>
+<a href="https://opencollective.com/opencollective/backers/11/website" target="_blank">
+    <img src="https://opencollective.com/opencollective/backers/11/avatar" height="64">
+  </a>
+<a href="https://opencollective.com/opencollective/backers/12/website" target="_blank">
+    <img src="https://opencollective.com/opencollective/backers/12/avatar" height="64">
+  </a>
+<a href="https://opencollective.com/opencollective/backers/13/website" target="_blank">
+    <img src="https://opencollective.com/opencollective/backers/13/avatar" height="64">
+  </a>
+<a href="https://opencollective.com/opencollective/backers/14/website" target="_blank">
+    <img src="https://opencollective.com/opencollective/backers/14/avatar" height="64">
+  </a>
+<a href="https://opencollective.com/opencollective/backers/15/website" target="_blank">
+    <img src="https://opencollective.com/opencollective/backers/15/avatar" height="64">
+  </a>
+<a href="https://opencollective.com/opencollective/backers/16/website" target="_blank">
+    <img src="https://opencollective.com/opencollective/backers/16/avatar" height="64">
+  </a>
+<a href="https://opencollective.com/opencollective/backers/17/website" target="_blank">
+    <img src="https://opencollective.com/opencollective/backers/17/avatar" height="64">
+  </a>
+<a href="https://opencollective.com/opencollective/backers/18/website" target="_blank">
+    <img src="https://opencollective.com/opencollective/backers/18/avatar" height="64">
+  </a>
+<a href="https://opencollective.com/opencollective/backers/19/website" target="_blank">
+    <img src="https://opencollective.com/opencollective/backers/19/avatar" height="64">
+  </a>
 
 [[Become a sponsor](https://opencollective.com/opencollective)]
