@@ -1,13 +1,13 @@
 {
-  "src_folders" : ["test/e2e/"],
-  "output_folder" : "test/e2e/output",
+  "src_folders" : ["test/frontend/"],
+  "output_folder" : "test/frontend/output",
   "custom_commands_path" : "",
   "custom_assertions_path" : "",
 
   "selenium" : {
     "start_process" : true,
     "server_path" : "./bin/selenium-server-standalone-2.44.0.jar",
-    "log_path" : "test/e2e/output",
+    "log_path" : "test/frontend/output",
     "host" : "127.0.0.1",
     "port" : 4444,
     "cli_args" : {
@@ -23,7 +23,7 @@
       "silent": true,
       "screenshots" : {
         "enabled" : true,
-        "path" : "test/e2e/output"
+        "path" : "test/frontend/output"
       },
       "desiredCapabilities": {
         "browserName": "chrome",

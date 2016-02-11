@@ -34,4 +34,4 @@ node_modules
 frontend/dist/
 
 # Test outputs
-test/e2e/output
+test/frontend/output

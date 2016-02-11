@@ -9,7 +9,7 @@ import * as constants from '../../constants/users';
 export default (groupid) => {
   return dispatch => {
     dispatch(request(groupid));
-    return get(`groups/${groupid}/users`, {
+    return get(`/groups/${groupid}/users`, {
       schema: Schemas.USER_ARRAY
     })
     .then(json => dispatch(success(groupid, json)))

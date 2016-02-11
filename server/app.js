@@ -1,18 +1,9 @@
 import express from 'express';
-import serverStatus from 'express-server-status';
-import favicon from 'serve-favicon';
-import request from 'request';
 import morgan from 'morgan';
-import path from 'path';
 import _ from 'lodash';
-import robots from 'robots.txt';
 import config from 'config';
 import compression from 'compression';
-
-import collectives from './controllers/collectives';
-import params from './params';
-import apiUrl from './utils/api_url';
-import busted from './locals/busted';
+import pkg from '../package.json';
 
 /**
  * Express app
@@ -22,17 +13,9 @@ const app = express();
 /**
  * Locals for the templates
  */
-app.locals.busted = busted;
+app.locals.version = pkg.version;
+app.locals.SHOW_GA = (process.env.NODE_ENV === 'production');
 
-/**
- * Server status
- */
-app.use('/status', serverStatus(app));
-
-/**
- * Favicon
- */
-app.use(favicon(path.join(__dirname, '/../frontend/static/images/favicon.ico.png')));
 
 /**
  * Log
@@ -45,44 +28,10 @@ app.use(morgan('dev'));
 app.use(compression());
 
 /**
- * Static folder
+ * Handlebars template engine
  */
-app.use('/static', express.static(path.join(__dirname, `../frontend/static`)));
-app.use('/static/js', express.static(path.join(__dirname, `../frontend/dist/js`)));
-app.use('/static/css', express.static(path.join(__dirname, `../frontend/dist/css`)));
-
-/**
- * GET /robots.txt
- */
-app.use(robots(path.join(__dirname, '../frontend/static/robots.txt')));
-
-/**
- * Pipe the requests before the middlewares, the piping will only work with raw
- * data
- * More infos: https://github.com/request/request/issues/1664#issuecomment-117721025
- */
-
-app.all('/api/*', (req, res) => {
-  req
-    .pipe(request(apiUrl(req.url)))
-    .pipe(res);
-});
-
-/**
- * Ejs template engine
- */
-app.set('views', path.join(__dirname, '/views'));
-app.set('view cache', config.viewCache);
-app.set('view engine', 'ejs');
-
-/**
- * Routes
- */
-
-app.param('slug', params.slug);
-
-app.get('/:slug([A-Za-z0-9-]+)', collectives.show);
-app.get('/:slug([A-Za-z0-9-]+)/widget', collectives.widget);
+require('./views')(app);
+require('./routes')(app);
 
 /**
  * 404 route
@@ -109,6 +58,7 @@ app.use((err, req, res, next) => {
   }
 
   res.render('pages/error', {
+    layout: false,
     message: `Error ${err.code}: ${err.message}`,
     stack: process.env.NODE_ENV === 'development' ? err.stack : '',
     options: {

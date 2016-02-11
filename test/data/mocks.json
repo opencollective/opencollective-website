@@ -1,0 +1,60 @@
+{
+  "users": [
+    {
+      "id": 24,
+      "avatar": "",
+      "name": "Sindre Sorhus",
+      "website": null,
+      "twitterHandle": null,
+      "role": "MEMBER"
+    },
+    {
+      "id": 40,
+      "avatar": "https://pbs.twimg.com/profile_images/684949208806260737/7LHCtqd6.png",
+      "name": "OpenCollective",
+      "website": "https://opencollective.com",
+      "twitterHandle": "opencollect",
+      "role": "HOST"
+    },
+    {
+      "id": 25,
+      "avatar": "https://pbs.twimg.com/profile_images/586079587626422272/80Q5wAFU.jpg",
+      "name": "Addy Osmani",
+      "website": null,
+      "twitterHandle": null,
+      "role": "MEMBER"
+    },
+    {
+      "id": 23,
+      "avatar": "https://pbs.twimg.com/profile_images/535488349339803648/1DhSH-6C.jpeg",
+      "name": "Simon Boudrias",
+      "website": null,
+      "twitterHandle": null,
+      "role": "MEMBER"
+    },
+    {
+      "id": 41,
+      "avatar": "https://pbs.twimg.com/profile_images/693913286555869186/jMoeGBOJ.jpg",
+      "name": "Aseem Sood",
+      "website": null,
+      "twitterHandle": "asood123",
+      "role": "BACKER"
+    },
+    {
+      "id": 42,
+      "avatar": "https://pbs.twimg.com/profile_images/627637122460053504/BIqckiVj.jpg",
+      "name": "Eddie Monge",
+      "website": "http://eddiemonge.com",
+      "twitterHandle": "eddiemonge",
+      "role": "MEMBER"
+    },
+    {
+      "id": 84,
+      "avatar": "https://d1ts43dypk8bqh.cloudfront.net/v1/avatars/e9a79f3f-9231-489e-b23e-7ad5935d0a0b",
+      "name": "Steven Phillips",
+      "website": "https://tryingtobeawesome.com",
+      "twitterHandle": "elimisteve",
+      "role": "BACKER"
+    }
+  ]
+}

@@ -1,3 +1,6 @@
 require('babel-register');
 require('./global');
-require('./app');
+
+const app = require('./app');
+
+module.exports = app;

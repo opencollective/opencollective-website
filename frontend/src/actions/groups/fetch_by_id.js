@@ -10,7 +10,7 @@ export default (id) => {
   return dispatch => {
     dispatch(request(id));
 
-    return get(`groups/${id}`, { schema: Schemas.GROUP })
+    return get(`/groups/${id}`, { schema: Schemas.GROUP })
     .then(json => dispatch(success(id, json)))
     .catch(error => dispatch(failure(id, error)));
   };

@@ -5,6 +5,7 @@ import UsersList from './UsersList';
 import Currency from './Currency';
 
 export default ({
+  options,
   group,
   transactions,
   users,
@@ -13,34 +14,45 @@ export default ({
 
   return (
     <div className='Widget'>
-      <div className='Widget-header'>
-        <img src={group.logo} />
-        <h1>{group.name}</h1>
-        <p>{group.description}</p>
+      {options.header && (
+        <div className='Widget-header'>
+          <img src={group.logo} />
+          <h1>{group.name}</h1>
+          <p>{group.description}</p>
 
-        <div className='Widget-balance'>
-          <Currency
-            value={group.balance}
-            currency={group.currency} />
+          <div className='Widget-balance'>
+            <Currency
+              value={group.balance}
+              currency={group.currency} />
+          </div>
+          <div className='Widget-label'>Available funds</div>
         </div>
-        <div className='Widget-label'>Available funds</div>
-      </div>
+      )}
 
-      <h2>Latest transactions</h2>
-      {transactions.map(t => (
+      {options.transactions && (
+        <h2>Latest transactions</h2>
+      )}
+      {options.transactions && transactions.map(t => (
         <TransactionItem
           key={t.id}
           transaction={t}
           user={users.find(({id}) => id === t.UserId)} />
       ))}
 
-      <h2>Meet our backers</h2>
-      <UsersList users={users} />
-      <a href={href}>
-        <div className='Button Widget-button'>
-          Donate
+      {options.backers && (
+        <div className='Widget-backers'>
+          <h2>Meet our backers</h2>
+          <UsersList users={users} />
         </div>
-      </a>
+      )}
+
+      {options.donate && (
+        <a href={href}>
+          <div className='Button Widget-button'>
+            Donate
+          </div>
+        </a>
+      )}
     </div>
   );
 }
