@@ -8,11 +8,11 @@ import _ from 'lodash';
 import robots from 'robots.txt';
 import config from 'config';
 import compression from 'compression';
+import pkg from '../package.json';
 
 import collectives from './controllers/collectives';
 import params from './params';
 import apiUrl from './utils/api_url';
-import busted from './locals/busted';
 
 /**
  * Express app
@@ -22,7 +22,7 @@ const app = express();
 /**
  * Locals for the templates
  */
-app.locals.busted = busted;
+app.locals.version = pkg.version;
 
 /**
  * Server status
