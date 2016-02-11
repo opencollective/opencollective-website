@@ -6,7 +6,7 @@ import React from 'react';
 import config from 'config';
 import { renderToString } from 'react-dom/server';
 
-import { get } from '../api';
+import { get } from '../lib/api';
 import Widget from '../../frontend/src/components/Widget';
 import renderClient from '../utils/render_client';
 
@@ -31,17 +31,15 @@ const show = (req, res) => {
       [group.id]: group
     }
   };
-
+  
   // Server side rendering of the client application
   const html = renderClient(initialState);
 
   res.render('pages/collective', {
+    layout: false,
     meta,
     html,
-    initialState,
-    options: {
-      showGA: config.showGA
-    }
+    initialState: JSON.stringify(initialState || {})
   });
 };
 
@@ -52,11 +50,17 @@ const widget = (req, res, next) => {
   const group = req.group;
 
   Promise.all([
-    get(`groups/${group.slug}/transactions?per_page=3`),
-    get(`groups/${group.slug}/users`)
+    get(`/groups/${group.slug}/transactions?per_page=3`),
+    get(`/groups/${group.slug}/users`)
   ])
   .then(([transactions, users]) => {
     const props = {
+      options: {
+        header: (req.query.header !== 'false'),
+        transactions: (req.query.transactions !== 'false'),
+        donate: (req.query.donate !== 'false'),
+        backers: (req.query.backers !== 'false')
+      },
       group,
       transactions,
       users,
@@ -66,10 +70,8 @@ const widget = (req, res, next) => {
     const html = renderToString(<Widget {...props} />);
 
     res.render('pages/widget', {
-      html,
-      options: {
-        showGA: config.showGA
-      }
+      layout: false,
+      html
     });
   })
   .catch(next);

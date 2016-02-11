@@ -9,7 +9,7 @@ import * as constants from '../../constants/transactions';
 export default (groupid, options={}) => {
   return dispatch => {
     dispatch(request(groupid));
-    return get(`groups/${groupid}/transactions`, {
+    return get(`/groups/${groupid}/transactions`, {
       schema: Schemas.TRANSACTION_ARRAY,
       params: options || {}
     })

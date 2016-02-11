@@ -10,7 +10,7 @@ export default (groupid, transactionid) => {
   return dispatch => {
     dispatch(request(groupid, transactionid));
 
-    return get(`groups/${groupid}/transactions/${transactionid}`, {
+    return get(`/groups/${groupid}/transactions/${transactionid}`, {
       schema: Schemas.TRANSACTION
     })
     .then(json => dispatch(success(groupid, transactionid, json)))
