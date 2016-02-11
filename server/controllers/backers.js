@@ -32,7 +32,7 @@ module.exports = {
         
     const user = (position < users.length) ?  users[position] : {};
     
-    var imageUrl = "/static/images/avatar_placeholder.jpg";
+    var imageUrl = "/static/images/user.svg";
     if(user.avatar) {
       imageUrl = `https://res.cloudinary.com/opencollective/image/fetch/h_64/${user.avatar}`;
     }

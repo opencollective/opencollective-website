@@ -21,7 +21,7 @@ describe("avatar", () => {
   it("redirects to the placeholder avatar url if no avatar for the backer", (done) => {
     request(app)
       .get('/yeoman/backers/0/avatar')
-      .expect('Location', '/static/images/avatar_placeholder.jpg')
+      .expect('Location', '/static/images/user.svg')
       .expect(302, done);
   });
 
