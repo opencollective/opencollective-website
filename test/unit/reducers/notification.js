@@ -1,6 +1,6 @@
 import expect from 'expect';
-import reducer from '../../../reducers/notification';
-import { NOTIFY } from '../../../constants/notification';
+import reducer from '../../../frontend/src/reducers/notification';
+import { NOTIFY } from '../../../frontend/src/constants/notification';
 
 
 describe('notification reducer', () => {

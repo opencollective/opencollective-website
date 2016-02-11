@@ -1,5 +1,5 @@
 import expect from 'expect';
-import reducer from '../../../reducers/users';
+import reducer from '../../../frontend/src/reducers/users';
 
 describe('users reducer', () => {
 

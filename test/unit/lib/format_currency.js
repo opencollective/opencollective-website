@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import formatCurrency from '../../../lib/format_currency';
+import formatCurrency from '../../../frontend/src/lib/format_currency';
 
 describe('formatCurrency', () => {
 

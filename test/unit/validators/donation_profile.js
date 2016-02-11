@@ -1,5 +1,5 @@
 import expect from 'expect';
-import validate from '../../../validators/donation_profile';
+import validate from '../../../frontend/src/validators/donation_profile';
 
 describe('validator profile after public donation', () => {
   // Check for data validity

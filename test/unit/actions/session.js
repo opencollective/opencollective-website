@@ -2,10 +2,10 @@ import expect from 'expect';
 import jwt from 'jwt-simple';
 import sinon from 'sinon';
 
-import * as constants from '../../../constants/session';
+import * as constants from '../../../frontend/src/constants/session';
 
-import logout from '../../../actions/session/logout';
-import decodeJWT from '../../../actions/session/decode_jwt';
+import logout from '../../../frontend/src/actions/session/logout';
+import decodeJWT from '../../../frontend/src/actions/session/decode_jwt';
 
 describe('session actions', () => {
   beforeEach(() => {

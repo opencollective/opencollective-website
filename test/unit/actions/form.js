@@ -1,6 +1,6 @@
 import expect from 'expect';
-import appendDonation from '../../../actions/form/append_donation';
-import * as constants from '../../../constants/form';
+import appendDonation from '../../../frontend/src/actions/form/append_donation';
+import * as constants from '../../../frontend/src/constants/form';
 
 describe('form actions', () => {
 

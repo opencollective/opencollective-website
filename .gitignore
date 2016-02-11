@@ -31,8 +31,7 @@ build/Release
 node_modules
 
 # Build
-static/dist/*.js
-static/dist/*.css
+frontend/dist/
 
 # Test outputs
 test/e2e/output
