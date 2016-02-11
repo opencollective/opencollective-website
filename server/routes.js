@@ -4,6 +4,7 @@ import serverStatus from 'express-server-status';
 import favicon from 'serve-favicon';
 import path from 'path';
 import express from 'express';
+import request from 'request';
 import robots from 'robots.txt';
 import collectives from './controllers/collectives';
 import apiUrl from './utils/api_url';

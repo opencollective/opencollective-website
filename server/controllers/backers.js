@@ -12,7 +12,7 @@ module.exports = {
   banner: (req, res) => {
     const slug = req.params.slug;
     const positions = [];
-    const spots = req.params.spots || 10;
+    const spots = req.params.spots || 30;
     
     for(var i=0; i<spots; i++) {
       positions[i] = { position: i };
