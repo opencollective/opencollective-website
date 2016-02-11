@@ -35,7 +35,10 @@ git fetch origin
 git merge origin/master
 
 # Increase version number
-npm version patch
+if [ $env = "staging" ]
+then
+  npm version patch
+fi
 
 # Update on github
 git push origin $branch_name
