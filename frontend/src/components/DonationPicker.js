@@ -6,7 +6,7 @@ import Input from './Input';
 import Select from './Select';
 
 export default ({value, currency, frequency, onChange}) => {
-  const presetAmounts = [5, 10, 20, 50, 'custom'];
+  const presetAmounts = [1, 5, 10, 20, 50, 'custom'];
 
   const isCustomMode = (presetAmounts.indexOf(value) === -1);
 
