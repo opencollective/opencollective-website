@@ -38,7 +38,7 @@ module.exports = {
     }
     
     if(position == users.length)
-      imageUrl = "/static/images/becomeASponsor.png";
+      imageUrl = "/static/images/becomeASponsor.svg";
     if(position > users.length)
       imageUrl = "/static/images/1px.png";
 
@@ -62,7 +62,7 @@ module.exports = {
     
     var redirectUrl = user.website || user.twitter || `https://opencollective.com/${slug}`;
     if(position === users.length) {
-      redirectUrl = `https://opencollective.com/${slug}/sponsor`;
+      redirectUrl = `https://opencollective.com/${slug}#support`;
     }
     
     res.redirect(redirectUrl);      
