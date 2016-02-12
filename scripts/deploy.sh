@@ -11,33 +11,37 @@ if [ $env = "staging" ]
 then
   branch_name="staging"
   remote="https://git.heroku.com/opencollective-staging-website.git"
+  from_branch="master"
 elif [ $env = "production" ]
 then
   branch_name="production"
   remote="https://git.heroku.com/opencollective-prod-website.git"
+  from_branch="staging"
 else
   echo "Unknown env: $env, only staging and production are valid"
   exit
 fi
 
+# Get latest changes from github
+git fetch origin
+
+git checkout $from_branch
+git merge origin/$from_branch
+
+# If it's staging, increase version patch on master
+if [ $env = "staging" ]
+then
+  npm version patch
+fi
+
+
 # Create branch for first time user or checkout existing one
 if [[ `git branch --list $branch_name ` ]]
 then
   git checkout $branch_name
+  git merge $from_branch
 else
-  git checkout -b $branch_name master
-fi
-
-# Get latest changes on github
-git fetch origin
-
-# Merge github master branch
-git merge origin/master
-
-# Increase version number
-if [ $env = "staging" ]
-then
-  npm version patch
+  git checkout -b $branch_name $from_branch
 fi
 
 # Update on github
@@ -45,6 +49,9 @@ git push origin $branch_name
 
 # Push to heroku
 git push $remote $branch_name:master
+
+# Update remote $from_branch
+git push origin $from_branch
 
 # Go back to the previous branch before deploying
 git checkout $current_branch_name
