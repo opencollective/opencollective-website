@@ -1,6 +1,6 @@
 {
   "name": "open-collective-mobile-app",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "engines": {
     "node": "5.1.0",
     "npm": "3.3.12"
