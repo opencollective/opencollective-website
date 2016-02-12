@@ -13,9 +13,12 @@ const PublicGroupForm = ({
   stripeKey,
   stripeAmount,
   inProgress,
+  frequency
 }) => {
 
-  const stripeDescription =  `${formatCurrency(amount, group.currency, { compact: false })} per month`;
+  const frequencyHuman = frequency === 'one-time' ? '' : `per ${frequency}`;
+
+  const stripeDescription =  `${formatCurrency(amount, group.currency, { compact: false })} ${frequencyHuman}`;
 
   return (
     <div className='PublicGroupForm'>
@@ -23,27 +26,29 @@ const PublicGroupForm = ({
       <DonationPicker
         value={amount}
         currency={group.currency}
-        onChange={({amount}) => appendDonationForm({amount})} />
+        frequency={frequency}
+        onChange={({amount, frequency}) => appendDonationForm({amount, frequency})} />
 
       <div className='PublicGroupForm-checkout'>
-      <StripeCheckout
-        token={onToken}
-        stripeKey={stripeKey}
-        name={group.name}
-        currency={group.currency}
-        amount={stripeAmount}
-        description={stripeDescription}>
-        <div className='PublicGroupForm-button'>
-          <AsyncButton
-            color='green'
-            inProgress={inProgress} >
-            Donate
-          </AsyncButton>
+      {stripeKey ?
+        (<StripeCheckout
+          token={onToken}
+          stripeKey={stripeKey}
+          name={group.name}
+          currency={group.currency}
+          amount={stripeAmount}
+          description={stripeDescription}>
+          <div className='PublicGroupForm-button'>
+            <AsyncButton
+              color='green'
+              inProgress={inProgress} >
+              Donate
+            </AsyncButton>
+          </div>
+        </StripeCheckout>) : (<AsyncButton disabled={true} > Donate </AsyncButton>)}
+        <div className='PublicGroupForm-disclaimer'>
+          By clicking above, you are pledging to support us monthly. We appreciate it! And you can cancel anytime. <a href='https://opencollective.com/faq'>Learn more</a>
         </div>
-      </StripeCheckout>
-      <div className='PublicGroupForm-disclaimer'>
-        By clicking above, you are pledging to support us monthly. We appreciate it! And you can cancel anytime. <a href='https://opencollective.com/faq'>Learn more</a>
-      </div>
       </div>
     </div>
   );

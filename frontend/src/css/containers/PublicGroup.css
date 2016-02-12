@@ -1,7 +1,6 @@
 .PublicGroup-video, .PublicGroup-image {
   width: 70%;
   float: left;
-  background-color: var(--light-gray);
   display: inline-block;
 }
 

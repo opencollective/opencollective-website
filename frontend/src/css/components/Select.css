@@ -1,0 +1,32 @@
+.Select {
+  background-color: var(--light-gray);
+  border: 1px solid transparent;
+  padding-left: var(--spacing);
+  width: 100%;
+  margin-bottom: 0.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem
+}
+
+.SelectContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.SelectContainer:after {
+  content: 'i';
+  font-family: "opencollective" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--light-blue);
+  position: absolute;
+  top: calc(50% - 12px);
+  right: 10px;
+  bottom: 0;
+}

@@ -3,9 +3,10 @@ import classnames from 'classnames';
 
 import Currency from './Currency';
 import Input from './Input';
+import Select from './Select';
 
-export default ({value, currency, onChange}) => {
-  const presetAmounts = [1, 5, 10, 20, 50, 'custom'];
+export default ({value, currency, frequency, onChange}) => {
+  const presetAmounts = [5, 10, 20, 50, 'custom'];
 
   const isCustomMode = (presetAmounts.indexOf(value) === -1);
 
@@ -44,18 +45,34 @@ export default ({value, currency, onChange}) => {
         {presetAmounts.map(presetListItem)}
       </ul>
       <div>
-        {isCustomMode && input({onChange, value, currency})}
+        {isCustomMode && customField({onChange, value, currency, frequency})}
       </div>
     </div>
   );
 };
 
-function input({onChange, value}) {
+function customField({onChange, value, frequency}) {
+  const frequencies = [{
+    label: 'Monthly',
+    value: 'month'
+  }, {
+    label: 'Yearly',
+    value: 'year'
+  }, {
+    label: 'One time',
+    value: 'one-time'
+  }];
   return (
-    <Input
-      value={value}
-      placeholder='Enter a custom amount'
-      customClass='DonationPicker-input'
-      handleChange={(amount) => onChange({amount})} />
+    <div className='DonationPicker-customfield'>
+      <Input
+        value={value}
+        placeholder='Enter a custom amount'
+        customClass='DonationPicker-input'
+        handleChange={(amount) => onChange({amount})} />
+      <Select
+        options={frequencies}
+        value={frequency}
+        handleChange={frequency => onChange({frequency})} />
+    </div>
   );
 }

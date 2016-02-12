@@ -2,12 +2,12 @@ import React, { PropTypes } from 'react';
 import formatCurrency from '../lib/format_currency';
 import classNames from 'classnames';
 
-const Currency = ({value = 0, currency = 'USD', precision=0, compact=true}) => {
+const Currency = ({value = 0, currency = 'USD', precision=0, compact=true, colorify=true}) => {
 
   const className = classNames({
     'Currency': true,
-    'Currency--green': (value >= 0),
-    'Currency--red': (value < 0),
+    'Currency--green': (colorify && value >= 0),
+    'Currency--red': (colorify && value < 0),
   });
 
   precision = parseInt(precision, 10);
