@@ -41,6 +41,7 @@
 
 .DonationPicker-customfield {
   max-width: 500px;
+  display:inline-block;
 }
 
 .DonationPicker-input.Input {
