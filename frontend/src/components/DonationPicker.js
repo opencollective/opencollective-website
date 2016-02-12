@@ -6,22 +6,22 @@ import Input from './Input';
 import Select from './Select';
 
 export default ({value, currency, frequency, onChange}) => {
-  const presetAmounts = [1, 5, 10, 20, 50, 'custom'];
+  const presetAmounts = [1, 5, 10, 20, 50, 'other'];
 
   const isCustomMode = (presetAmounts.indexOf(value) === -1);
 
   function className(selectedPreset, value) {
     return classnames({
       'DonationPicker-amount': true,
-      'DonationPicker-amount--selected': (selectedPreset === value) || (selectedPreset === 'custom' && isCustomMode)
+      'DonationPicker-amount--selected': (selectedPreset === value) || (selectedPreset === 'other' && isCustomMode)
     });
   }
 
   function presetListItem(presetLabel) {
     let amountLabel, amountValue;
-    if(presetLabel === 'custom') {
+    if(presetLabel === 'other') {
       amountValue = '100';
-      amountLabel = "Custom";
+      amountLabel = "Other";
     }
     else {
       amountValue = presetLabel;
@@ -66,7 +66,7 @@ function customField({onChange, value, frequency}) {
     <div className='DonationPicker-customfield'>
       <Input
         value={value}
-        placeholder='Enter a custom amount'
+        placeholder='Enter an amount'
         customClass='DonationPicker-input'
         handleChange={(amount) => onChange({amount})} />
       <Select
