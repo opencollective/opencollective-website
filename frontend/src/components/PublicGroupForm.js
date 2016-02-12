@@ -16,8 +16,6 @@ const PublicGroupForm = ({
   frequency
 }) => {
 
-  console.log("frequency ", frequency);
-
   const frequencyHuman = frequency === 'one-time' ? '' : `per ${frequency}`;
 
   const stripeDescription =  `${formatCurrency(amount, group.currency, { compact: false })} ${frequencyHuman}`;
@@ -47,7 +45,7 @@ const PublicGroupForm = ({
               Donate
             </AsyncButton>
           </div>
-        </StripeCheckout>) : (<AsyncButton color='gray' > Donate </AsyncButton>)}
+        </StripeCheckout>) : (<AsyncButton disabled={true} > Donate </AsyncButton>)}
         <div className='PublicGroupForm-disclaimer'>
           By clicking above, you are pledging to support us monthly. We appreciate it! And you can cancel anytime. <a href='https://opencollective.com/faq'>Learn more</a>
         </div>
