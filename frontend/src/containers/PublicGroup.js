@@ -122,15 +122,15 @@ export class PublicGroup extends Component {
               <Metric
                 label='Backers'
                 value={group.backersCount} />
-              <Metric label='Share'>
-                <ShareIcon type='twitter' url={shareUrl} name={group.name} description={group.description} />
-                <ShareIcon type='facebook' url={shareUrl} name={group.name} description={group.description} />
-                <ShareIcon type='mail' url={shareUrl} name={group.name} description={group.description} />
-              </Metric>
             </div>
             <a className='Button Button--green PublicGroup-support' href='#support'>
               Back us
             </a>
+            <div className='PublicGroup-share'>
+              <ShareIcon type='twitter' url={shareUrl} name={group.name} description={group.description} />
+              <ShareIcon type='facebook' url={shareUrl} name={group.name} description={group.description} />
+              <ShareIcon type='mail' url={shareUrl} name={group.name} description={group.description} />
+            </div>
           </div>
 
           <div className='PublicGroup-quote'>

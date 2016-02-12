@@ -18,7 +18,7 @@ const Input = (
     });
 
     return (
-      <span className={className}>
+      <div className={className}>
         <input
           className='Field'
           type={type}
@@ -26,7 +26,7 @@ const Input = (
           placeholder={placeholder}
           value={value}
           onChange={(e) => handleChange(e.target.value) } />
-      </span>
+      </div>
     );
 };
 

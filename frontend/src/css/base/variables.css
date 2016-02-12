@@ -2,7 +2,7 @@
   --light-gray: #F9FAFA;
   --gray: #DDE1E4;
   --dark-gray: #7A7B82;
-  --darkest-gray: #e7ecf1;
+  --darkest-gray: #444444;
   --light-blue: #7FADF2;
   --aqua: #34D6BF;
   --green: #80d823;
@@ -11,6 +11,7 @@
   --dark-red: #c60042;
   --orange: #F3C524;
   --yellow: #fffbe1;
+  --black: #303030;
   --gold: #cfa236;
   --spacing: 1rem;
   --topbar-height: 62px;
