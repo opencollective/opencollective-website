@@ -1,3 +1,4 @@
 {
-  "viewCache": true
+  "viewCache": true,
+  "cacheBust": true
 }
