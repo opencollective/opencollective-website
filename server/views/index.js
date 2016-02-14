@@ -2,6 +2,7 @@ const path = require('path');
 const hbs = require('express-hbs');
 const moment = require('moment');
 const config = require('config');
+const bustedHelper = require('./helpers/busted');
 
 process.title = 'node'; // Hack for numbro :-/
 const numbro = require('numbro');
@@ -19,6 +20,8 @@ module.exports = (app) => {
       console.log(optionalValue);
     }
   });
+
+  hbs.registerHelper("cachebust", bustedHelper);
 
   hbs.registerHelper("moment", (value) => {
     return moment(value).fromNow();

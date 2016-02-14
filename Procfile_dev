@@ -1,3 +1,4 @@
 web: npm run watch:server
 js: npm run watch:js
-css: npm run watch:css
+css: gulp watch:css
+assets: gulp watch:assets

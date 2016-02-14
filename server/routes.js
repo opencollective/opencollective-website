@@ -19,19 +19,17 @@ module.exports = (app) => {
   /**
    * Favicon
    */
-  app.use(favicon(path.join(__dirname, '/../frontend/static/images/favicon.ico.png')));
+  app.use(favicon(path.join(__dirname, '/../frontend/dist/images/favicon.ico.png')));
 
   /**
    * Static folder
    */
-  app.use('/static', express.static(path.join(__dirname, `../frontend/static`)));
-  app.use('/static/js', express.static(path.join(__dirname, `../frontend/dist/js`)));
-  app.use('/static/css', express.static(path.join(__dirname, `../frontend/dist/css`)));
+  app.use('/static', express.static(path.join(__dirname, `../frontend/dist`)));
 
   /**
    * GET /robots.txt
    */
-  app.use(robots(path.join(__dirname, '../frontend/static/robots.txt')));
+  app.use(robots(path.join(__dirname, '../frontend/dist/robots.txt')));
 
   /**
    * Pipe the requests before the middlewares, the piping will only work with raw
