@@ -28,7 +28,7 @@ describe("avatar", () => {
   it("redirects to 'become a sponsor' placeholder", (done) => {
     request(app)
       .get(`/yeoman/backers/${mocks.users.length}/avatar`)
-      .expect('Location', '/static/images/becomeASponsor.png')
+      .expect('Location', '/static/images/becomeASponsor.svg')
       .expect(302, done);
   });
 
