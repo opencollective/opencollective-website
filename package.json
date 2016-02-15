@@ -52,6 +52,7 @@
     "express": "^4.13.3",
     "express-hbs": "^0.8.4",
     "express-server-status": "*",
+    "express-session": "^1.13.0",
     "gulp": "^3.9.1",
     "gulp-changed": "^1.3.0",
     "gulp-postcss": "^6.1.0",
@@ -88,6 +89,7 @@
     "serve-favicon": "^2.3.0",
     "supertest": "^1.1.0",
     "uglify-js": "^2.4.24",
+    "universal-analytics": "^0.3.10",
     "watchify": "^3.2.3"
   },
   "devDependencies": {
