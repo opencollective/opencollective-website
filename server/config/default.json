@@ -8,5 +8,8 @@
   "apiKey": "0ac43519edcf4421d80342403fb5985d",
   "viewCache": false,
   "cacheBust": false,
-  "showGA": false
+  "GoogleAnalytics": {
+    "active": false,
+    "account": ""
+  } 
 }

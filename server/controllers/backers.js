@@ -31,6 +31,8 @@ module.exports = {
     const position = parseInt(req.params.position, 10);
         
     const user = (position < users.length) ?  users[position] : {};
+
+    req.ga.pageview(req.url);
     
     var imageUrl = "/static/images/user.svg";
     if(user.avatar) {
@@ -56,6 +58,8 @@ module.exports = {
     const users = req.users;
     const slug = req.params.slug;
     const position = parseInt(req.params.position, 10);
+
+    req.ga.event("Widget", "BackerAvatarClick", "position", position);
         
     const user = (position < users.length) ?  users[position] : {};
     user.twitter = (user.twitterHandle) ? `https://twitter.com/${user.twitterHandle}` : null;

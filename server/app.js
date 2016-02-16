@@ -62,7 +62,7 @@ app.use((err, req, res, next) => {
     message: `Error ${err.code}: ${err.message}`,
     stack: process.env.NODE_ENV === 'development' ? err.stack : '',
     options: {
-      showGA: config.showGA
+      showGA: config.GoogleAnalytics.active
     }
   });
 });

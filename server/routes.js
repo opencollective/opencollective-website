@@ -48,8 +48,8 @@ module.exports = (app) => {
    * Routes
    */
   app.get('/:slug/backers/banner.md', mw.fetchUsers, backers.banner);
-  app.get('/:slug/backers/:position/avatar', mw.fetchUsers, backers.avatar);
-  app.get('/:slug/backers/:position/website', mw.fetchUsers, backers.redirect);
+  app.get('/:slug/backers/:position/avatar', mw.ga, mw.fetchUsers, backers.avatar);
+  app.get('/:slug/backers/:position/website', mw.ga, mw.fetchUsers, backers.redirect);
   app.get('/:slug([A-Za-z0-9-]+)', mw.fetchGroupBySlug, collectives.show);
   app.get('/:slug([A-Za-z0-9-]+)/widget', mw.fetchGroupBySlug, collectives.widget);
 
