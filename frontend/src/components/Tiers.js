@@ -17,11 +17,12 @@ const Tiers = ({
   const tier = tiers[0];
   const frequency = tier.interval;
   const amount = tier.range[0];
+  const button = tier.button;
+  
   const frequencyHuman = frequency === 'one-time' ? '' : `per ${frequency.replace(/ly$/,'')}`;
   const amountHuman = formatCurrency(amount, group.currency, { precision: 0 });
   
   const stripeDescription =  `${formatCurrency(amount, group.currency, { compact: false })} ${frequencyHuman}`;
-  const buttonLabel = `Become a member for ${amountHuman} ${frequencyHuman}`;
   
   return (
     <div className='Tiers'>
@@ -40,10 +41,10 @@ const Tiers = ({
             <AsyncButton
               color='green'
               inProgress={inProgress} >
-              {buttonLabel}
+              {button}
             </AsyncButton>
           </div>
-        </StripeCheckout>) : (<AsyncButton disabled={true} > {buttonLabel} </AsyncButton>)}
+        </StripeCheckout>) : (<AsyncButton disabled={true} > {button} </AsyncButton>)}
         <div className='Tiers-disclaimer'>
 
         </div>
