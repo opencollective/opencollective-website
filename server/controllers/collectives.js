@@ -14,23 +14,23 @@ import Widget from '../../frontend/src/components/Widget';
  * Show the collective page
  */
 const show = (req, res) => {
-  const group = req.group;
+
 
   // Meta data for facebook and twitter links (opengraph)
   const meta = {
-    url: group.publicUrl,
-    title: `Join ${group.name}'s open collective`,
-    description: `${group.name} is collecting funds to continue their activities. Chip in!`,
-    image: group.image || group.logo,
-    twitter: `@${group.twitterHandle}`,
+    // url: group.publicUrl,
+    // title: `Join ${group.name}'s open collective`,
+    // description: `${group.name} is collecting funds to continue their activities. Chip in!`,
+    // image: group.image || group.logo,
+    // twitter: `@${group.twitterHandle}`,
   };
 
   // The initial state will contain the group
-  const initialState = {
-    groups: {
-      [group.id]: group
-    }
-  };
+  // const initialState = {
+  //   groups: {
+  //     [group.id]: group
+  //   }
+  // };
 
   // Server side rendering of the client application
   // const html = renderClient(initialState);
@@ -39,7 +39,7 @@ const show = (req, res) => {
     layout: false,
     meta,
     html: '',
-    initialState: JSON.stringify(initialState || {})
+    initialState: JSON.stringify({})
   });
 };
 

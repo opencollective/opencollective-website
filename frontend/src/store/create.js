@@ -4,15 +4,9 @@ import createLogger from 'redux-logger';
 import thunk from 'redux-thunk';
 
 import reducers from '../reducers';
+import routes from '../routes';
 import PublicGroup from '../containers/PublicGroup';
 import Subscriptions from '../containers/Subscriptions';
-
-const routes = {
-  childRoutes: [
-    { path: '/:slug', component: Login },
-    { path: '/subscriptions', component: Subscriptions },
-  ]
-};
 
 const logger = createLogger();
 

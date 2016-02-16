@@ -26,7 +26,6 @@ export class Subscriptions extends Component {
       <div className='PublicGroup'>
 
         <PublicTopBar session={this.props.session} logout={this.props.logout}/>
-        <Notification {...this.props} />
 
         <div className='PublicContent'>
           SHIT
