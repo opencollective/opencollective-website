@@ -8,7 +8,7 @@ import { renderToString } from 'react-dom/server';
 
 import { get } from '../lib/api';
 import Widget from '../../frontend/src/components/Widget';
-import renderClient from '../utils/render_client';
+// import renderClient from '../utils/render_client';
 
 /**
  * Show the collective page
@@ -31,14 +31,14 @@ const show = (req, res) => {
       [group.id]: group
     }
   };
-  
+
   // Server side rendering of the client application
-  const html = renderClient(initialState);
+  // const html = renderClient(initialState);
 
   res.render('pages/collective', {
     layout: false,
     meta,
-    html,
+    html: '',
     initialState: JSON.stringify(initialState || {})
   });
 };

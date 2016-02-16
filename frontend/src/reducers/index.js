@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { routerStateReducer as router } from 'redux-router';
 
 import form from './form';
 import groups from './groups';
@@ -13,5 +14,6 @@ export default combineReducers({
   notification,
   session,
   transactions,
-  users
+  users,
+  router
 });

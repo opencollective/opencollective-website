@@ -10,7 +10,7 @@ import collectives from './controllers/collectives';
 import apiUrl from './utils/api_url';
 
 module.exports = (app) => {
-    
+
   /**
    * Server status
    */
@@ -50,7 +50,6 @@ module.exports = (app) => {
   app.get('/:slug/backers/banner.md', mw.fetchUsers, backers.banner);
   app.get('/:slug/backers/:position/avatar(.png)?(.jpg)?', mw.ga, mw.fetchUsers, backers.avatar);
   app.get('/:slug/backers/:position/website', mw.ga, mw.fetchUsers, backers.redirect);
-  app.get('/:slug([A-Za-z0-9-]+)', mw.fetchGroupBySlug, collectives.show);
   app.get('/:slug([A-Za-z0-9-]+)/widget', mw.fetchGroupBySlug, collectives.widget);
-
+  app.get('/*', mw.fetchGroupBySlug, collectives.show);
 }
