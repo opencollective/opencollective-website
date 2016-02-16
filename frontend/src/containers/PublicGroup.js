@@ -24,6 +24,7 @@ import ShareIcon from '../components/ShareIcon';
 import Icon from '../components/Icon';
 import DisplayUrl from '../components/DisplayUrl';
 import PublicGroupSignup from '../components/PublicGroupSignup';
+import Tiers from '../components/Tiers';
 import Markdown from '../components/Markdown';
 
 import appendDonationForm from '../actions/form/append_donation';
@@ -92,6 +93,8 @@ export class PublicGroup extends Component {
       donationSection = <PublicGroupThanks />;
     } else if (this.state.showUserForm) {
       donationSection = <PublicGroupSignup {...this.props} save={saveNewUser.bind(this)} />
+    } else if (group.tiers && group.tiers.length > 0) {
+      donationSection = <Tiers tiers={group.tiers} {...this.props} />
     } else {
       donationSection = <PublicGroupForm {...this.props} onToken={donateToGroup.bind(this, amount)} />
     }

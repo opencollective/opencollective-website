@@ -47,7 +47,7 @@ export default ({
       )}
 
       {options.donate && (
-        <a href={href}>
+        <a href={href} target="_blank">
           <div className='Button Widget-button'>
             Donate
           </div>
