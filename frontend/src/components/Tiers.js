@@ -2,7 +2,6 @@ import React from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 import formatCurrency from '../lib/format_currency';
 
-import DonationPicker from './DonationPicker';
 import AsyncButton from './AsyncButton';
 
 const Tiers = ({
@@ -18,12 +17,11 @@ const Tiers = ({
   const frequency = tier.interval;
   const amount = tier.range[0];
   const button = tier.button;
-  
+
   const frequencyHuman = frequency === 'one-time' ? '' : `per ${frequency.replace(/ly$/,'')}`;
-  const amountHuman = formatCurrency(amount, group.currency, { precision: 0 });
-  
+
   const stripeDescription =  `${formatCurrency(amount, group.currency, { compact: false })} ${frequencyHuman}`;
-  
+
   return (
     <div className='Tiers'>
       <h2>{tier.name}</h2>

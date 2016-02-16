@@ -94,7 +94,7 @@ export class PublicGroup extends Component {
     } else if (this.state.showUserForm) {
       donationSection = <PublicGroupSignup {...this.props} save={saveNewUser.bind(this)} />
     } else if (group.tiers && group.tiers.length > 0) {
-      donationSection = <Tiers tiers={group.tiers} {...this.props} />
+      donationSection = <Tiers tiers={group.tiers} {...this.props} onToken={donateToGroup.bind(this, amount)} />
     } else {
       donationSection = <PublicGroupForm {...this.props} onToken={donateToGroup.bind(this, amount)} />
     }
