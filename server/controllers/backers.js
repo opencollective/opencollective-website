@@ -32,7 +32,7 @@ module.exports = {
         
     const user = (position < users.length) ?  users[position] : {};
 
-    req.ga.pageview(req.url);
+    req.ga.pageview();
     
     var imageUrl = "/static/images/user.svg";
     if(user.avatar) {

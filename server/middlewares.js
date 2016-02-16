@@ -49,7 +49,7 @@ const ga = (req, res, next) => {
   session(req, res, () => {
     mw(req, res, next);
     req.ga = {
-      pageview: req.visitor.pageview(req.url).send(),
+      pageview: () => req.visitor.pageview(req.url).send(),
       event: (EventCategory, EventName, EventLabel, EventValue) => req.visitor.event(EventCategory, EventName, EventLabel, EventValue, {p: req.url}).send()
     }
   });
