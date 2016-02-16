@@ -41,7 +41,7 @@ const ga = (req, res, next) => {
     httpOnly: true,
     secret: 'b4;jP(cUqPaf8TuG@U',
     cookie: {
-      secure: (process.env.NODE_ENV === 'production' || process.env.NODE_ENV == 'staging'),
+      secure: (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging'),
       maxAge: 60*60*24*30*1000 // 1 month
     }
   });
