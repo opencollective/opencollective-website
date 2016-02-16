@@ -8,7 +8,7 @@ current_branch_name=${current_branch_name##refs/heads/}
 
 # env vars
 remote_staging="https://git.heroku.com/opencollective-staging-website.git"
-remote_production = "https://git.heroku.com/opencollective-prod-website.git"
+remote_production="https://git.heroku.com/opencollective-prod-website.git"
 
 # Get latest changes from github
 # $1: name_of_branch

@@ -64,7 +64,7 @@ const widget = (req, res, next) => {
       group,
       transactions,
       users,
-      href: `${config.host.app}/${group.slug}`
+      href: `${config.host.website}/${group.slug}`
     };
 
     const html = renderToString(<Widget {...props} />);
