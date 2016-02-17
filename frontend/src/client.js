@@ -3,16 +3,13 @@ import ReactDOM from 'react-dom';
 import { createStore, compose, applyMiddleware } from 'redux';
 import createLogger from 'redux-logger';
 import thunk from 'redux-thunk';
-import {
-  ReduxRouter,
-  reduxReactRouter,
-} from 'redux-router';
-
+import { ReduxRouter, reduxReactRouter } from 'redux-router';
 import { Provider } from 'react-redux';
 import createHistory from 'history/lib/createBrowserHistory';
 
 import routes from './routes';
 import reducers from './reducers';
+
 const logger = createLogger();
 
 const store = compose(
@@ -28,11 +25,4 @@ const rootComponent = (
 
 const mountNode = document.getElementById('content');
 
-// First render to match markup from server
 ReactDOM.render(rootComponent, mountNode);
-// Optional second render with dev-tools
-ReactDOM.render((
-  <div>
-    {rootComponent}
-  </div>
-), mountNode);

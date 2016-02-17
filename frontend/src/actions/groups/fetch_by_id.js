@@ -23,7 +23,7 @@ function request(id) {
   };
 }
 
-function success(id, json) {
+export function success(id, json) {
   return {
     type: constants.GROUP_SUCCESS,
     id,
