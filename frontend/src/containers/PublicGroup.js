@@ -256,6 +256,7 @@ export function donateToGroup(amount, token) {
       }
     })
     .then(() => fetchGroup(group.id))
+    .then(() => fetchUsers(group.id))
     .then(() => {
       return fetchTransactions(group.id, {
         per_page: NUM_TRANSACTIONS_TO_SHOW,
