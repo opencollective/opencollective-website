@@ -69,14 +69,10 @@ function customField({onChange, value, frequency, currency, showCurrencyPicker})
   }, {
     label: 'EUR',
     value: 'EUR'
+  }, {
+    label: 'MXN',
+    value: 'MXN'
   }];
-
-  if (currency !== 'USD' && currency !== 'EUR'){
-    currencies.push({
-      label: currency,
-      value: currency
-    })
-  }
 
   return (
     <div className='DonationPicker-customfield'>
