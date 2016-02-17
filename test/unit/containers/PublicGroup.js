@@ -28,6 +28,7 @@ describe('PublicGroup container', () => {
   it('should donate to the group', (done) => {
     const notify = chai.spy(noop);
     const fetchGroup = chai.spy(noop);
+    const fetchUsers = chai.spy(noop);
     const setState = chai.spy(noop);
     const token = {
       id: 'tok_17BNlt2eZvKYlo2CVoTcWs9D',
@@ -51,6 +52,7 @@ describe('PublicGroup container', () => {
       },
       notify,
       fetchGroup,
+      fetchUsers,
       fetchTransactions: noop
     };
 
@@ -59,6 +61,7 @@ describe('PublicGroup container', () => {
       expect(donate).to.have.been.called();
       expect(setState).to.have.been.called();
       expect(fetchGroup).to.have.been.called();
+      expect(fetchUsers).to.have.been.called();
       expect(notify).to.not.have.been.called();
       done();
     })
@@ -92,6 +95,7 @@ describe('PublicGroup container', () => {
         currency: 'MXN'
       },
       fetchGroup: noop,
+      fetchUsers: noop,
       fetchTransactions: noop,
       frequency: 'month'
     };
