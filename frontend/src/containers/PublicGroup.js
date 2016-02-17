@@ -238,14 +238,15 @@ export function donateToGroup(amount, token) {
     fetchGroup,
     fetchUsers,
     fetchTransactions,
-    frequency
+    frequency,
+    currency
   } = this.props;
 
   const payment = {
     stripeToken: token.id,
     email: token.email,
     amount,
-    currency: group.currency
+    currency
   };
 
  if (contains(['month', 'year'], frequency)) {
@@ -343,6 +344,7 @@ function mapStateToProps({
     expenses: take(sortBy(expenses, exp => exp.createdAt).reverse(), NUM_TRANSACTIONS_TO_SHOW),
     amount: (form.donation.attributes.amount == null) ? 10 : form.donation.attributes.amount,
     frequency: form.donation.attributes.frequency || 'month',
+    currency: form.donation.attributes.currency || group.currency,
     stripeAmount: convertToCents(form.donation.attributes.amount),
     stripeKey: group.stripeAccount && group.stripeAccount.stripePublishableKey,
     inProgress: groups.donateInProgress,

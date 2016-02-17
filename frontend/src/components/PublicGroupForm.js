@@ -13,21 +13,24 @@ const PublicGroupForm = ({
   stripeKey,
   stripeAmount,
   inProgress,
-  frequency
+  frequency,
+  currency
 }) => {
 
   const frequencyHuman = frequency === 'one-time' ? '' : `per ${frequency}`;
 
-  const stripeDescription =  `${formatCurrency(amount, group.currency, { compact: false })} ${frequencyHuman}`;
+  const stripeDescription =  `${formatCurrency(amount, currency, { compact: false })} ${frequencyHuman}`;
 
   return (
     <div className='PublicGroupForm'>
       <h2>Support us with a monthly donation</h2>
       <DonationPicker
         value={amount}
-        currency={group.currency}
+        currency={currency}
         frequency={frequency}
-        onChange={({amount, frequency}) => appendDonationForm({amount, frequency})} />
+        onChange={({amount, frequency, currency}) => appendDonationForm({amount, frequency, currency})}
+        // MAJOR HACK to support a donation for this group.
+        showCurrencyPicker={group.id == 10}/>
 
       <div className='PublicGroupForm-checkout'>
       {stripeKey ?
@@ -35,7 +38,7 @@ const PublicGroupForm = ({
           token={onToken}
           stripeKey={stripeKey}
           name={group.name}
-          currency={group.currency}
+          currency={currency}
           amount={stripeAmount}
           description={stripeDescription}>
           <div className='PublicGroupForm-button'>
