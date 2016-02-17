@@ -55,4 +55,22 @@ const ga = (req, res, next) => {
   });
 };
 
-export default { fetchGroupBySlug, fetchUsers, ga}
+const addMeta = (req, res, next) => {
+  const group = req.group;
+
+  if (group) {
+    req.meta = {
+      url: group.publicUrl,
+      title: `Join ${group.name}'s open collective`,
+      description: `${group.name} is collecting funds to continue their activities. Chip in!`,
+      image: group.image || group.logo,
+      twitter: `@${group.twitterHandle}`,
+    };
+  } else {
+    req.meta = {};
+  }
+
+  next();
+};
+
+export default { fetchGroupBySlug, fetchUsers, ga, addMeta}
