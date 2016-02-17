@@ -5,6 +5,7 @@ import take from 'lodash/array/take';
 import uniq from 'lodash/array/uniq';
 import values from 'lodash/object/values';
 import sortBy from 'lodash/collection/sortBy'
+import contains from 'lodash/collection/contains';
 
 import convertToCents from '../lib/convert_to_cents';
 import filterCollection from '../lib/filter_collection';
@@ -236,7 +237,8 @@ export function donateToGroup(amount, token) {
     group,
     fetchGroup,
     fetchUsers,
-    fetchTransactions
+    fetchTransactions,
+    frequency
   } = this.props;
 
   const payment = {
@@ -246,7 +248,9 @@ export function donateToGroup(amount, token) {
     currency: group.currency
   };
 
-  payment.interval = 'month';
+ if (contains(['month', 'year'], frequency)) {
+    payment.interval = frequency;
+  }
 
   return donate(group.id, payment)
     .then(({json}) => {
