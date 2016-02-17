@@ -34,7 +34,7 @@ push_to_repo() {
   # get the latest from_branch
   get_latest_branch $from_branch
 
-  if [ $patch = "1"]
+  if [ $patch = "1" ]
   then
     npm version patch
   fi
