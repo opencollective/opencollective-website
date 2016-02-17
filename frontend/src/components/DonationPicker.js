@@ -5,7 +5,7 @@ import Currency from './Currency';
 import Input from './Input';
 import Select from './Select';
 
-export default ({value, currency, frequency, onChange}) => {
+export default ({value, currency, frequency, onChange, showCurrencyPicker}) => {
   const presetAmounts = [1, 5, 10, 20, 50, 'other'];
 
   const isCustomMode = (presetAmounts.indexOf(value) === -1);
@@ -18,7 +18,7 @@ export default ({value, currency, frequency, onChange}) => {
   }
 
   function presetListItem(presetLabel) {
-    let amountLabel, amountValue;
+    var amountLabel, amountValue;
     if(presetLabel === 'other') {
       amountValue = '100';
       amountLabel = "Other";
@@ -45,13 +45,13 @@ export default ({value, currency, frequency, onChange}) => {
         {presetAmounts.map(presetListItem)}
       </ul>
       <div>
-        {isCustomMode && customField({onChange, value, currency, frequency})}
+        {isCustomMode && customField({onChange, value, frequency, currency, showCurrencyPicker})}
       </div>
     </div>
   );
 };
 
-function customField({onChange, value, frequency}) {
+function customField({onChange, value, frequency, currency, showCurrencyPicker}) {
   const frequencies = [{
     label: 'Monthly',
     value: 'month'
@@ -62,6 +62,22 @@ function customField({onChange, value, frequency}) {
     label: 'One time',
     value: 'one-time'
   }];
+
+  var currencies = [{
+    label: 'USD',
+    value: 'USD'
+  }, {
+    label: 'EUR',
+    value: 'EUR'
+  }];
+
+  if (currency !== 'USD' && currency !== 'EUR'){
+    currencies.push({
+      label: currency,
+      value: currency
+    })
+  }
+
   return (
     <div className='DonationPicker-customfield'>
       <Input
@@ -73,6 +89,13 @@ function customField({onChange, value, frequency}) {
         options={frequencies}
         value={frequency}
         handleChange={frequency => onChange({frequency})} />
+      {showCurrencyPicker &&
+        (<Select
+          customClass='DonationPicker-currencyselector'
+          options={currencies}
+          value={currency}
+          handleChange={currency => onChange({currency})} />
+          )}
     </div>
   );
 }

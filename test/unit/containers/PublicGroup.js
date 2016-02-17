@@ -53,6 +53,7 @@ describe('PublicGroup container', () => {
       notify,
       fetchGroup,
       fetchUsers,
+      currency: 'MXN',
       fetchTransactions: noop
     };
 
@@ -96,6 +97,7 @@ describe('PublicGroup container', () => {
       },
       fetchGroup: noop,
       fetchUsers: noop,
+      currency: 'MXN',
       fetchTransactions: noop,
       frequency: 'month'
     };
