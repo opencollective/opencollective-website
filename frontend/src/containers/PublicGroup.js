@@ -235,6 +235,7 @@ export function donateToGroup(amount, token) {
     donate,
     group,
     fetchGroup,
+    fetchUsers,
     fetchTransactions
   } = this.props;
 
