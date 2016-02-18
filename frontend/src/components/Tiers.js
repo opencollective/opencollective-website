@@ -1,11 +1,17 @@
 import React from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 import formatCurrency from '../lib/format_currency';
-
+import UsersList from '../components/UsersList';
 import AsyncButton from './AsyncButton';
+import filterCollection from '../lib/filter_collection';
+
+const filterUsersByTier = (users, tiername) => {
+  return filterCollection(users, { tier: tiername });
+}
 
 const Tiers = ({
   group,
+  users,
   tiers,
   onToken,
   stripeKey,
@@ -24,6 +30,9 @@ const Tiers = ({
     return (
       <div className='Tier'>
         <h2>{tier.name}</h2>
+        
+        <UsersList users={filterUsersByTier(users, tier.name)} />
+
         <p>{tier.description}</p>
 
         <div className='Tiers-checkout'>

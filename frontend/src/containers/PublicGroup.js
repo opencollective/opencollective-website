@@ -144,11 +144,14 @@ export class PublicGroup extends Component {
             </div>
             <Markdown className='PublicGroup-quoteText' value={group.longDescription} />
           </div>
-
+          
           <div className='PublicGroup-backers'>
             <h2>Backers</h2>
             <UsersList users={backers} />
           </div>
+
+          <div id='support'></div>
+          {donationSection}
 
           <div className='PublicGroup-transactions'>
             <div className='PublicGroup-expenses'>
@@ -187,9 +190,6 @@ export class PublicGroup extends Component {
                                             user={users[donation.UserId]} />)}
             </div>
           </div>
-
-          <div id='support'></div>
-          {donationSection}
 
         </div>
         <PublicFooter />
