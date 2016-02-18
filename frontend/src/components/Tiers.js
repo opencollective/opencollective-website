@@ -13,40 +13,44 @@ const Tiers = ({
   inProgress
 }) => {
 
-  const tier = tiers[0];
-  const frequency = tier.interval;
-  const amount = tier.range[0];
-  const button = tier.button;
+  const showTier = (tier) => {
 
-  const frequencyHuman = frequency === 'one-time' ? '' : `per ${frequency.replace(/ly$/,'')}`;
+    const frequency = tier.interval;
+    const amount = tier.range[0];
+    const frequencyHuman = frequency === 'one-time' ? '' : `per ${frequency.replace(/ly$/,'')}`;
+    const stripeDescription =  `${formatCurrency(amount, group.currency, { compact: false })} ${frequencyHuman}`;
+    const button = tier.button;
 
-  const stripeDescription =  `${formatCurrency(amount, group.currency, { compact: false })} ${frequencyHuman}`;
+    return (
+      <div className='Tier'>
+        <h2>{tier.name}</h2>
+        <p>{tier.description}</p>
+
+        <div className='Tiers-checkout'>
+        {stripeKey ?
+          (<StripeCheckout
+            token={onToken}
+            stripeKey={stripeKey}
+            name={group.name}
+            currency={group.currency}
+            amount={stripeAmount}
+            description={stripeDescription}>
+            <div className='Tiers-button'>
+              <AsyncButton
+                color='green'
+                inProgress={inProgress} >
+                {button}
+              </AsyncButton>
+            </div>
+          </StripeCheckout>) : (<AsyncButton disabled={true} > {button} </AsyncButton>)}
+        </div>
+      </div>
+    )
+  };
 
   return (
     <div className='Tiers'>
-      <h2>{tier.name}</h2>
-      <p>{tier.description}</p>
-      <div className='Tiers-checkout'>
-      {stripeKey ?
-        (<StripeCheckout
-          token={onToken}
-          stripeKey={stripeKey}
-          name={group.name}
-          currency={group.currency}
-          amount={stripeAmount}
-          description={stripeDescription}>
-          <div className='Tiers-button'>
-            <AsyncButton
-              color='green'
-              inProgress={inProgress} >
-              {button}
-            </AsyncButton>
-          </div>
-        </StripeCheckout>) : (<AsyncButton disabled={true} > {button} </AsyncButton>)}
-        <div className='Tiers-disclaimer'>
-
-        </div>
-      </div>
+      { tiers.map(showTier) }
     </div>
   );
 }
