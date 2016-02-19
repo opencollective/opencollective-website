@@ -49,6 +49,9 @@ module.exports = {
     else {
       req
         .pipe(request(imageUrl))
+        .on('response', (res) => {
+          res.headers['Cache-Control'] = 'public, max-age=300';
+        })
         .pipe(res);
     }
 
