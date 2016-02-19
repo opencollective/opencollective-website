@@ -33,7 +33,7 @@ const fetchGroupBySlug = (req, res, next) => {
  */
 const cache = (maxAge = 60) => {
   return (req, res, next) => {
-    res.setHeader('Cache-Control', 'public, max-age=' + maxAge);
+    res.setHeader('Cache-Control', `public, max-age=${maxAge}`);
     next();
   }
 };
