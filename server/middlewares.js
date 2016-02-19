@@ -29,6 +29,16 @@ const fetchGroupBySlug = (req, res, next) => {
 };
 
 /**
+ *
+ */
+const cache = (maxAge = 60) => {
+  return (req, res, next) => {
+    res.setHeader('Cache-Control', `public, max-age=${maxAge}`);
+    next();
+  }
+};
+
+/**
  * Google Analytics middleware
  * This exposes the following methods to record events:
  * req.ga.pageview();
@@ -73,4 +83,4 @@ const addMeta = (req, res, next) => {
   next();
 };
 
-export default { fetchGroupBySlug, fetchUsers, ga, addMeta}
+export default { fetchGroupBySlug, fetchUsers, ga, addMeta, cache}
