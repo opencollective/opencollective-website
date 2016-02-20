@@ -15,7 +15,6 @@ import roles from '../constants/roles';
 import PublicTopBar from '../components/PublicTopBar';
 import Notification from '../components/Notification';
 import PublicFooter from '../components/PublicFooter';
-import PublicGroupForm from '../components/PublicGroupForm';
 import PublicGroupThanks from '../components/PublicGroupThanks';
 import TransactionItem from '../components/TransactionItem';
 import YoutubeVideo from '../components/YoutubeVideo';
@@ -94,12 +93,9 @@ export class PublicGroup extends Component {
       donationSection = <PublicGroupThanks />;
     } else if (this.state.showUserForm) {
       donationSection = <PublicGroupSignup {...this.props} save={saveNewUser.bind(this)} />
-    } else if (group.tiers && group.tiers.length > 0) {
-      donationSection = <Tiers tiers={group.tiers} {...this.props} onToken={donateToGroup.bind(this, amount)} />
     } else {
-      donationSection = <PublicGroupForm {...this.props} onToken={donateToGroup.bind(this, amount)} />
+      donationSection = <Tiers tiers={group.tiers} {...this.props} onToken={donateToGroup.bind(this, amount)} />
     }
-
     return (
       <div className='PublicGroup'>
 
@@ -111,6 +107,7 @@ export class PublicGroup extends Component {
           <div className='PublicGroupHeader'>
             <img className='PublicGroupHeader-logo' src={group.logo ? group.logo : '/static/images/media-placeholder.svg'} />
             <div className='PublicGroupHeader-website'><DisplayUrl url={group.website} /></div>
+            <div className='PublicGroupHeader-host'>Hosted by <a href={group.host.website}>{group.host.name}</a></div>
             <div className='PublicGroupHeader-description'>
               {group.description}
             </div>
@@ -121,7 +118,7 @@ export class PublicGroup extends Component {
           <div className='PublicGroup-summary'>
             <div className='PublicGroup-metricContainer'>
               <Metric
-                label='Funds Available'
+                label='Funds Raised'
                 value={formatCurrency(group.balance, group.currency, {precision: 0})} />
               <Metric
                 label='Backers'
@@ -143,11 +140,6 @@ export class PublicGroup extends Component {
               <UsersList users={members} />
             </div>
             <Markdown className='PublicGroup-quoteText' value={group.longDescription} />
-          </div>
-          
-          <div className='PublicGroup-backers'>
-            <h2>Backers</h2>
-            <UsersList users={backers} />
           </div>
 
           <div id='support'></div>
@@ -323,8 +315,9 @@ function mapStateToProps({
 
   const hosts = filterCollection(users, { role: roles.HOST });
   const members = filterCollection(users, { role: roles.MEMBER });
-  const membersAndHost = [...hosts, ...members];
   const backers = filterCollection(users, { role: roles.BACKER });
+
+  group.host = hosts[0] || {};
 
   const groupTransactions = filterCollection(transactions, { GroupId });
 
@@ -338,11 +331,10 @@ function mapStateToProps({
     users,
     session,
     backers: uniq(backers, 'id'),
-    host: hosts[0] || {},
-    members: membersAndHost,
+    members,
     donations: take(sortBy(donations, txn => txn.createdAt).reverse(), NUM_TRANSACTIONS_TO_SHOW),
     expenses: take(sortBy(expenses, exp => exp.createdAt).reverse(), NUM_TRANSACTIONS_TO_SHOW),
-    amount: (form.donation.attributes.amount == null) ? 10 : form.donation.attributes.amount,
+    amount: form.donation.attributes.amount,
     frequency: form.donation.attributes.frequency || 'month',
     currency: form.donation.attributes.currency || group.currency,
     stripeAmount: convertToCents(form.donation.attributes.amount),

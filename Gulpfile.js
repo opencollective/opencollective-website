@@ -28,7 +28,6 @@ gulp.task('watch:assets', () => {
 gulp.task('build:css', () => {
 
   return gulp.src(`${SRC_DIR}/css/*.css`)
-    .pipe(changed(`${DIST_DIR}/css`))
     .pipe(postcss([
       autoprefixer,
       require('postcss-import')(),

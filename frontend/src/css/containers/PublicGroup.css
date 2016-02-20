@@ -97,8 +97,8 @@ PublicGroup-quoteText h1, .PublicGroup-quoteText h2 {
 .PublicGroup .Button {
   display: inline-block;
   font-weight: bold;
-  padding: 1rem 1.5rem;
-  font-size: 1.3rem;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
 }
 
 .PublicGroupForm-radioLabel {
