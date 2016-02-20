@@ -7,7 +7,6 @@ import values from 'lodash/object/values';
 import sortBy from 'lodash/collection/sortBy'
 import contains from 'lodash/collection/contains';
 
-import convertToCents from '../lib/convert_to_cents';
 import filterCollection from '../lib/filter_collection';
 import formatCurrency from '../lib/format_currency';
 
@@ -336,8 +335,6 @@ function mapStateToProps({
     amount: form.donation.attributes.amount,
     frequency: form.donation.attributes.frequency || 'month',
     currency: form.donation.attributes.currency || group.currency,
-    stripeAmount: convertToCents(form.donation.attributes.amount),
-    stripeKey: group.stripeAccount && group.stripeAccount.stripePublishableKey,
     inProgress: groups.donateInProgress,
     shareUrl: window.location.href,
     profileForm: form.profile,

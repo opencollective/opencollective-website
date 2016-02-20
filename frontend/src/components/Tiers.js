@@ -5,6 +5,7 @@ import UsersList from '../components/UsersList';
 import AsyncButton from './AsyncButton';
 import filterCollection from '../lib/filter_collection';
 import DonationPicker from './DonationPicker';
+import convertToCents from '../lib/convert_to_cents';
 
 const filterUsersByTier = (users, tiername) => {
   return filterCollection(users, { tier: tiername });
@@ -18,12 +19,12 @@ const Tiers = ({
   currency,
   frequency,
   onToken,
-  stripeKey,
-  stripeAmount,
   appendDonationForm,
   inProgress
 }) => {
   
+  const stripeKey = group.stripeAccount && group.stripeAccount.stripePublishableKey;
+
   if(!tiers) {
     tiers = [{
       name: null,
@@ -72,7 +73,7 @@ const Tiers = ({
             stripeKey={stripeKey}
             name={group.name}
             currency={group.currency}
-            amount={stripeAmount}
+            amount={convertToCents(amount)}
             description={stripeDescription}>
             <div className='Tiers-button'>
               <AsyncButton
