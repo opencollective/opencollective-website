@@ -116,7 +116,7 @@ export class PublicGroup extends Component {
           <div className='PublicGroup-summary'>
             <div className='PublicGroup-metricContainer'>
               <Metric
-                label='Funds Raised'
+                label='Funds Available'
                 value={formatCurrency(group.balance, group.currency, {precision: 0})} />
               <Metric
                 label='Backers'
