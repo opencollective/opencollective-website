@@ -48,7 +48,8 @@ describe('PublicGroup container', () => {
       donate,
       group: {
         id: 1,
-        currency: 'MXN'
+        currency: 'MXN',
+        host: { name: 'WWCode', website: 'http://womenwhocode.com' }
       },
       notify,
       fetchGroup,
@@ -93,7 +94,8 @@ describe('PublicGroup container', () => {
       notify,
       group: {
         id: 1,
-        currency: 'MXN'
+        currency: 'MXN',
+        host: { name: 'WWCode', website: 'http://womenwhocode.com' }
       },
       fetchGroup: noop,
       fetchUsers: noop,
@@ -162,7 +164,8 @@ describe('PublicGroup container', () => {
       donate,
       notify,
       group: {
-        currency: 'MXN'
+        currency: 'MXN',
+        host: { name: 'WWCode', website: 'http://womenwhocode.com' }
       }
     };
     const token = {
@@ -190,7 +193,10 @@ describe('PublicGroup container', () => {
       resetNotifications: noop,
       decodeJWT: noop,
       groupid: 1,
-      group: {},
+      group: {
+        currency: 'MXN',
+        host: { name: 'WWCode', website: 'http://womenwhocode.com' }
+      },
       notification,
       admin: {},
       expenses: [],
