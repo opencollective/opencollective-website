@@ -105,7 +105,7 @@ const Tiers = ({
 
 export default Tiers;
 
-export default connect(mapStateToProps, {
+connect(mapStateToProps, {
   appendDonationForm
 })(Tiers);
 

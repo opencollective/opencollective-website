@@ -199,6 +199,7 @@ describe('PublicGroup container', () => {
       },
       notification,
       admin: {},
+      form: {},
       expenses: [],
       donations: []
     }, 'Notification');
