@@ -1,7 +1,6 @@
 import React from 'react';
 
 import ProfilePhoto from './ProfilePhoto';
-import { HOST } from '../constants/roles';
 import moment from 'moment';
 
 export default ({users=[]}) => {

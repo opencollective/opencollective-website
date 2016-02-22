@@ -76,7 +76,6 @@ export class PublicGroup extends Component {
   render() {
     const {
       group,
-      amount,
       donations,
       expenses,
       shareUrl,
