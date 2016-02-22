@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import StripeCheckout from 'react-stripe-checkout';
@@ -15,31 +15,20 @@ const filterUsersByTier = (users, tiername) => {
   return filterCollection(users, { tier: tiername });
 }
 
-const Tiers = ({
-  group,
-  backers,
-  tiers,
-  form,
-  onToken,
-  appendDonationForm,
-  inProgress
-}) => {
-  
-  const stripeKey = group.stripeAccount && group.stripeAccount.stripePublishableKey;
+export class Tiers extends Component {
 
-  if(!tiers) {
-    tiers = [{
-      name: 'backer',
-      title: "Backers",
-      description: "Support us with a monthly donation and help us continue our activities.",
-      presets: [1, 5, 10, 50, 100],
-      range: [1, 1000000],
-      interval: 'monthly',
-      button: "Become a backer"
-    }];
-  }
+  showTier(tier) {
+    const {
+      group,
+      backers,
+      form,
+      onToken,
+      appendDonationForm,
+      inProgress
+    } = this.props;
 
-  const showTier = (tier) => {
+    const stripeKey = group.stripeAccount && group.stripeAccount.stripePublishableKey;
+
     form[tier.name] = form[tier.name] || {};
     const amount = form[tier.name].amount || tier.range[0];
     const frequency = form[tier.name].frequency || tier.interval;
@@ -68,7 +57,7 @@ const Tiers = ({
               onChange={({amount, frequency, currency}) => appendDonationForm(tier.name, {amount, frequency, currency})}
               // MAJOR HACK to support a donation for this group.
               showCurrencyPicker={group.id == 10}/>
-         </div>
+        </div>
         )}
 
         <div className='Tiers-checkout'>
@@ -96,16 +85,27 @@ const Tiers = ({
     )
   };
 
-  return (
-    <div className='Tiers'>
-      { tiers.map(showTier) }
-    </div>
-  );
+  render() {
+
+    const tiers = this.props.tiers || [{
+        name: 'backer',
+        title: "Backers",
+        description: "Support us with a monthly donation and help us continue our activities.",
+        presets: [1, 5, 10, 50, 100],
+        range: [1, 1000000],
+        interval: 'monthly',
+        button: "Become a backer"
+      }];
+
+    return (
+      <div className='Tiers'>
+        { tiers.map(this.showTier.bind(this)) }
+      </div>
+    );
+  } 
 }
 
-export default Tiers;
-
-connect(mapStateToProps, {
+export default connect(mapStateToProps, {
   appendDonationForm
 })(Tiers);
 
