@@ -58,7 +58,7 @@ describe('PublicGroup container', () => {
       fetchTransactions: noop
     };
 
-    donateToGroup.call({props, setState}, 10, token)
+    donateToGroup.call({props, setState}, 10, 'month', 'MXN', token)
     .then(() => {
       expect(donate).to.have.been.called();
       expect(setState).to.have.been.called();
@@ -104,7 +104,7 @@ describe('PublicGroup container', () => {
       frequency: 'month'
     };
 
-    donateToGroup.call({props, setState}, 10, token)
+    donateToGroup.call({props, setState}, 10, 'month', 'MXN', token)
     .then(() => {
       expect(donate).to.have.been.called();
       expect(notify).to.not.have.been.called();
@@ -173,7 +173,7 @@ describe('PublicGroup container', () => {
       email: 'test@gmail.com'
     };
 
-    donateToGroup.call({props}, 10, token)
+    donateToGroup.call({props}, 10, 'month', 'MXN', token)
     .then(() => {
       expect(donate).to.have.been.called();
       expect(notify).to.have.been.called();
@@ -199,8 +199,8 @@ describe('PublicGroup container', () => {
       },
       notification,
       admin: {},
+      form: {},
       expenses: [],
-      frequency: 'one-time',
       donations: []
     }, 'Notification');
 

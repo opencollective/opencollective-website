@@ -8,7 +8,6 @@ import * as constants from '../constants/form';
 /**
  * Validate generic joi schema
  */
-
 function schema(state={
   error: {}
 }, action={}) {
@@ -35,7 +34,6 @@ function schema(state={
 /**
  * User profile form reducer
  */
-
 const profileInitialState = {
   attributes: {},
   error: {},
@@ -75,16 +73,18 @@ function profile(state=profileInitialState, action={}) {
 /**
  * Donation form
  */
-
 function donation(state={
-  attributes: {
+  backer: {
     amount: null,
-    frequency: null
+    frequency: null,
+    currency: null
   }
 }, action={}) {
   switch(action.type) {
     case constants.APPEND_DONATION_FORM:
-      return merge({}, state, { attributes: action.attributes });
+      const newState = {};
+      newState[action.tiername] = action.attributes;
+      return merge({}, state, newState);
     default:
       return state;
   }
