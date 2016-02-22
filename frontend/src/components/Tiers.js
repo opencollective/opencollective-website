@@ -75,7 +75,7 @@ export default class Tiers extends Component {
             </div>
           </StripeCheckout>) : (<AsyncButton disabled={true} > {button} </AsyncButton>)}
         <div className='PublicGroupForm-disclaimer'>
-          By clicking above, you are pledging to give {group.host.name} {stripeDescription} for {group.name}. {cancellationDisclaimer} <a href='https://opencollective.com/faq'>Learn more</a>
+          By clicking above, you are pledging to give {group.host.name} {stripeDescription} for {group.name}. {cancellationDisclaimer}
         </div>
         </div>
       </div>
