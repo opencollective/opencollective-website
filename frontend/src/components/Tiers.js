@@ -9,7 +9,6 @@ import DonationPicker from './DonationPicker';
 import convertToCents from '../lib/convert_to_cents';
 
 const filterUsersByTier = (users, tiername) => {
-  if(tiername === 'backer') tiername = null;
   return filterCollection(users, { tier: tiername });
 }
 
