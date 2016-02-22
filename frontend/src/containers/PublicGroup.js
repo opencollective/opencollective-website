@@ -26,7 +26,6 @@ import PublicGroupSignup from '../components/PublicGroupSignup';
 import Tiers from '../components/Tiers';
 import Markdown from '../components/Markdown';
 
-import appendDonationForm from '../actions/form/append_donation';
 import fetchGroup from '../actions/groups/fetch_by_id';
 import fetchUsers from '../actions/users/fetch_by_group';
 import fetchTransactions from '../actions/transactions/fetch_by_group';
@@ -92,7 +91,7 @@ export class PublicGroup extends Component {
     } else if (this.state.showUserForm) {
       donationSection = <PublicGroupSignup {...this.props} save={saveNewUser.bind(this)} />
     } else {
-      donationSection = <Tiers tiers={group.tiers} {...this.props} onToken={donateToGroup.bind(this, amount)} />
+      donationSection = <Tiers tiers={group.tiers} {...this.props} onToken={donateToGroup.bind(this)} />
     }
     return (
       <div className='PublicGroup'>
@@ -220,16 +219,14 @@ export class PublicGroup extends Component {
   }
 }
 
-export function donateToGroup(amount, token) {
+export function donateToGroup(amount, frequency, currency, token) {
   const {
     notify,
     donate,
     group,
     fetchGroup,
     fetchUsers,
-    fetchTransactions,
-    frequency,
-    currency
+    fetchTransactions
   } = this.props;
 
   const payment = {
@@ -286,7 +283,6 @@ export function saveNewUser() {
 }
 
 export default connect(mapStateToProps, {
-  appendDonationForm,
   donate,
   notify,
   resetNotifications,
@@ -332,9 +328,6 @@ function mapStateToProps({
     members,
     donations: take(sortBy(donations, txn => txn.createdAt).reverse(), NUM_TRANSACTIONS_TO_SHOW),
     expenses: take(sortBy(expenses, exp => exp.createdAt).reverse(), NUM_TRANSACTIONS_TO_SHOW),
-    amount: form.donation.attributes.amount,
-    frequency: form.donation.attributes.frequency || 'month',
-    currency: form.donation.attributes.currency || group.currency,
     inProgress: groups.donateInProgress,
     shareUrl: window.location.href,
     profileForm: form.profile,

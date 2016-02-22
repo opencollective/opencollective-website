@@ -37,8 +37,8 @@
   clear: left;
   font-size: 1.5rem;
   font-weight: 600;
-  margin-top: calc(var(--spacing) * 2);
-  margin-bottom: calc(var(--spacing) * 2);
+  margin-top: 3rem;
+  margin-bottom: 1rem;
 }
 
 .PublicGroup-backers {

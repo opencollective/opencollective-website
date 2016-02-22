@@ -3,7 +3,7 @@
   padding-right: var(--spacing);
   text-align: center;
   width: 7rem;
-  height: 7rem;
+  height: 9rem;
   vertical-align: top;
   margin: 0 0 1.5rem 0;
 }
@@ -19,6 +19,10 @@
   height: 1rem;
   overflow: hidden;
   margin: 0 auto;
+}
+
+.UsersList-tier {
+  font-size: 0.9rem;
 }
 
 .UsersList-amount {
