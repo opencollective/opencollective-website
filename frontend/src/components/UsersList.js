@@ -15,7 +15,7 @@ export default ({users=[]}) => {
   }
 
   const showUser = (user) => {
-    user.tier = user.tier || 'backer';
+    user.tier = user.tier;
     const twitterUrl = user.twitterHandle ? `https://twitter.com/${user.twitterHandle}` : null;
     const href = user.website || twitterUrl;
 
