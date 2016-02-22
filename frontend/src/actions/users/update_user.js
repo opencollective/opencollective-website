@@ -6,7 +6,7 @@ import * as constants from '../../constants/users';
  */
 
 export default (userid, attributes) => {
-  const url = `users/${userid}`;
+  const url = `/users/${userid}`;
 
   return dispatch => {
     dispatch(request(userid, attributes));
@@ -14,7 +14,7 @@ export default (userid, attributes) => {
       .then(json => dispatch(success(userid, attributes, json)))
       .catch(err => {
         dispatch(failure(err));
-        throw new Error(error.message);
+        throw new Error(err.message);
       });
   };
 };

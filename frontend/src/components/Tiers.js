@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 
 import StripeCheckout from 'react-stripe-checkout';
 import formatCurrency from '../lib/format_currency';
@@ -8,14 +7,13 @@ import AsyncButton from './AsyncButton';
 import filterCollection from '../lib/filter_collection';
 import DonationPicker from './DonationPicker';
 import convertToCents from '../lib/convert_to_cents';
-import appendDonationForm from '../actions/form/append_donation';
 
 const filterUsersByTier = (users, tiername) => {
   if(tiername === 'backer') tiername = null;
   return filterCollection(users, { tier: tiername });
 }
 
-export class Tiers extends Component {
+export default class Tiers extends Component {
 
   showTier(tier) {
     const {
@@ -24,7 +22,7 @@ export class Tiers extends Component {
       form,
       onToken,
       appendDonationForm,
-      inProgress
+      inProgress,
     } = this.props;
 
     const stripeKey = group.stripeAccount && group.stripeAccount.stripePublishableKey;
@@ -42,7 +40,7 @@ export class Tiers extends Component {
     return (
       <div className='Tier'>
         <h2>{tier.title || tier.name}</h2>
-        
+
         <UsersList users={filterUsersByTier(backers, tier.name)} />
 
         <p>{tier.description}</p>
@@ -102,15 +100,5 @@ export class Tiers extends Component {
         { tiers.map(this.showTier.bind(this)) }
       </div>
     );
-  } 
-}
-
-export default connect(mapStateToProps, {
-  appendDonationForm
-})(Tiers);
-
-function mapStateToProps({form}) {
-  return {
-    form: form.donation
   }
 }

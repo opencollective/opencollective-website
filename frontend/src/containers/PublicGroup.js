@@ -32,6 +32,7 @@ import fetchTransactions from '../actions/transactions/fetch_by_group';
 import donate from '../actions/groups/donate';
 import notify from '../actions/notification/notify';
 import resetNotifications from '../actions/notification/reset';
+import appendDonationForm from '../actions/form/append_donation';
 import appendProfileForm from '../actions/form/append_profile';
 import updateUser from '../actions/users/update_user';
 import validateDonationProfile from '../actions/form/validate_donation_profile';
@@ -81,7 +82,8 @@ export class PublicGroup extends Component {
       shareUrl,
       users,
       members,
-      isAuthenticated
+      isAuthenticated,
+      donationForm
     } = this.props;
 
     var donationSection;
@@ -90,7 +92,7 @@ export class PublicGroup extends Component {
     } else if (this.state.showUserForm) {
       donationSection = <PublicGroupSignup {...this.props} save={saveNewUser.bind(this)} />
     } else {
-      donationSection = <Tiers tiers={group.tiers} {...this.props} onToken={donateToGroup.bind(this)} />
+      donationSection = <Tiers tiers={group.tiers} {...this.props} form={donationForm} onToken={donateToGroup.bind(this)} />
     }
     return (
       <div className='PublicGroup'>
@@ -292,7 +294,8 @@ export default connect(mapStateToProps, {
   updateUser,
   logout,
   validateDonationProfile,
-  decodeJWT
+  decodeJWT,
+  appendDonationForm
 })(PublicGroup);
 
 function mapStateToProps({
@@ -330,6 +333,7 @@ function mapStateToProps({
     inProgress: groups.donateInProgress,
     shareUrl: window.location.href,
     profileForm: form.profile,
+    donationForm: form.donation,
     showUserForm: users.showUserForm || false,
     saveInProgress: users.updateInProgress,
     isAuthenticated: session.isAuthenticated
