@@ -46,7 +46,7 @@ const Tiers = ({
     const currency = form[tier.name].currency || group.currency;
 
     const frequencyHuman = frequency === 'one-time' ? '' : `per ${frequency.replace(/ly$/,'')}`;
-    const stripeDescription =  `${formatCurrency(amount, group.currency, { compact: false })} ${frequencyHuman}`;
+    const stripeDescription =  `${formatCurrency(amount, currency, { compact: false })} ${frequencyHuman}`;
     const button = tier.button;
     const cancellationDisclaimer = (frequency !== 'one-time') ? "You can cancel anytime." : "";
 
@@ -77,7 +77,7 @@ const Tiers = ({
             token={(token) => onToken(amount, frequency, currency, token)}
             stripeKey={stripeKey}
             name={group.name}
-            currency={group.currency}
+            currency={currency}
             amount={convertToCents(amount)}
             description={stripeDescription}>
             <div className='Tiers-button'>
