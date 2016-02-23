@@ -9,7 +9,6 @@ export default function groups(state={}, action={}) {
   switch (action.type) {
 
     case constants.GROUP_SUCCESS:
-    case constants.GROUPS_SUCCESS:
       return merge({}, state, action.groups);
 
     // 8: {

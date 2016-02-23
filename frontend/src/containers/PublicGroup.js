@@ -306,7 +306,7 @@ function mapStateToProps({
   users,
   session
 }) {
-  const group = values(groups)[0] || { stripeAccount: {} };
+  const group = values(groups)[0] || { stripeAccount: {} };  // to refactor to allow only one group
   const GroupId = Number(group.id);
   const usersByRole = group.usersByRole || {};
 
