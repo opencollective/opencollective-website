@@ -44,7 +44,6 @@ describe("badge", () => {
   it("generates a SVG with the number of backers", (done) => {
     request(app)
       .get('/yeoman/badge/backers.svg')
-      .expect('filename', 'backers-5-brightgreen.svg')
       .expect('content-type', 'image/svg+xml;charset=utf-8')
       .expect(200)
       .end(done);
