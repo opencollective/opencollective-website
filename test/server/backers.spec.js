@@ -13,14 +13,14 @@ sinon.stub(api, 'get', () => {
 describe("avatar", () => {
   it("redirects to the avatar url of the backer", (done) => {
     request(app)
-      .get('/yeoman/backers/1/avatar')
-      .expect('content-type', 'image/png')
+      .get('/yeoman/backers/0/avatar')
+      .expect('content-type', 'image/jpeg')
       .expect(200, done);
   });
 
   it("redirects to the placeholder avatar url if no avatar for the backer", (done) => {
     request(app)
-      .get('/yeoman/backers/0/avatar')
+      .get('/yeoman/backers/1/avatar')
       .expect('Location', '/static/images/user.svg')
       .expect(302, done);
   });
@@ -40,6 +40,17 @@ describe("avatar", () => {
   });
 });
 
+describe("badge", () => {
+  it("generates a SVG with the number of backers", (done) => {
+    request(app)
+      .get('/yeoman/badge/backers.svg')
+      .expect('filename', 'backers-5-brightgreen.svg')
+      .expect('content-type', 'image/svg+xml;charset=utf-8')
+      .expect(200)
+      .end(done);
+  });
+});
+
 describe("redirect", () => {
   
   it("redirects to opencollective.com/:slug if no backer at that position", (done) => {
@@ -56,17 +67,17 @@ describe("redirect", () => {
       .expect(302, done);
   });
 
-  it(`redirects to the website of the backer (${mocks.users[5].website})`, (done) => {
+  it(`redirects to the website of the backer (${mocks.users[3].website})`, (done) => {
     request(app)
-      .get('/yeoman/backers/5/website')
-      .expect('Location', mocks.users[5].website)
+      .get('/yeoman/backers/3/website')
+      .expect('Location', mocks.users[3].website)
       .expect(302, done);
   });
 
-  it(`redirects to the twitter of the backer (@${mocks.users[4].twitterHandle})`, (done) => {
+  it(`redirects to the twitter of the backer (@${mocks.users[5].twitterHandle})`, (done) => {
     request(app)
-      .get('/yeoman/backers/4/website')
-      .expect('Location', `https://twitter.com/${mocks.users[4].twitterHandle}`)
+      .get('/yeoman/backers/5/website')
+      .expect('Location', `https://twitter.com/${mocks.users[5].twitterHandle}`)
       .expect(302, done);
   });
 
