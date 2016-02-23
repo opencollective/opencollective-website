@@ -12,6 +12,7 @@ import reducers from '../../frontend/src/reducers';
 import routes from '../../frontend/src/routes';
 import reduxMiddleware from '../../frontend/src/redux_middleware';
 import { success as fetchedGroup } from '../../frontend/src/actions/groups/fetch_by_id';
+import { success as fetchedTransactions } from '../../frontend/src/actions/transactions/fetch_by_group';
 
 /**
  * Example taken from redux-router documentation
@@ -37,6 +38,11 @@ export default (req, res, next) => {
       if (group) {
         store.dispatch(fetchedGroup(group.id, {
           groups: { [group.id]: group }
+        }));
+      } else if (req.transactions) {
+        localStorage.setItem('accessToken', req.params.token);
+        store.dispatch(fetchedTransactions(0, {
+          transactions: req.transactions
         }));
       }
 

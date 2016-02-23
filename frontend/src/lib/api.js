@@ -110,6 +110,7 @@ export function checkStatus(response) {
 
 function headers(obj) {
   const accessToken = localStorage.getItem('accessToken');
+  if (!accessToken) return obj;
   return extend({
     Authorization: `Bearer ${accessToken}`,
   }, obj);

@@ -2,6 +2,7 @@ import config from 'config';
 import api from './lib/api';
 import expressSession from 'express-session';
 import ua from 'universal-analytics';
+import jwtDecode from 'jwt-decode';
 
 /**
  * Fetch users by slug
@@ -27,6 +28,25 @@ const fetchGroupBySlug = (req, res, next) => {
     })
     .catch(next);
 };
+
+/**
+ * Fetch the transactions server side
+ */
+const fetchSubscriptionsByUserWithToken = (req, res, next) => {
+
+  if (!req.params.token) {
+    next();
+  }
+
+  const headers = {Authorization: `Bearer ${req.params.token}`};
+  api
+    .get('/transactions/subscriptions', headers)
+    .then(transactions => {
+      req.transactions = transactions;
+      next();
+    })
+    .catch(next);
+}
 
 /**
  *
@@ -83,4 +103,4 @@ const addMeta = (req, res, next) => {
   next();
 };
 
-export default { fetchGroupBySlug, fetchUsers, ga, addMeta, cache}
+export default { fetchGroupBySlug, fetchSubscriptionsByUserWithToken, fetchUsers, ga, addMeta, cache}
