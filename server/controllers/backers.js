@@ -1,5 +1,10 @@
-const config = require('config');
-const request = require('request');
+import config from 'config';
+import request from 'request';
+import filterCollection from '../../frontend/src/lib/filter_collection';
+
+const filterUsersByTier = (users, tiername) => {
+  return filterCollection(users, { tier: tiername });
+}
 
 module.exports = {
   
@@ -57,6 +62,23 @@ module.exports = {
 
   },
   
+  badge: (req, res) => {
+    const tier = req.params.tier;
+    const users = filterUsersByTier(req.users, tier.replace(/s$/,''));
+    const count = users.length;
+    const filename = `${tier}-${count}-brightgreen.svg`;
+    const imageUrl = `https://img.shields.io/badge/${filename}`;
+    req
+        .pipe(request(imageUrl))
+        .on('response', (res) => {
+          res.headers['Cache-Control'] = 'public, max-age=300';
+          res.headers['filename'] = filename;
+          delete res.headers.expires;
+        })
+        .pipe(res);
+
+  },
+
   redirect: (req, res) => {
     const users = req.users;
     const slug = req.params.slug;
