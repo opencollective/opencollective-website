@@ -68,7 +68,6 @@ module.exports = {
     const count = users.length;
     const filename = `${tier}-${count}-brightgreen.svg`;
     const imageUrl = `https://img.shields.io/badge/${filename}`;
-    console.log("imageUrl: ", imageUrl);
     req
         .pipe(request(imageUrl))
         .on('response', (res) => {
