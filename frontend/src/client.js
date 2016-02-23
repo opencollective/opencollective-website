@@ -12,7 +12,7 @@ import reducers from './reducers';
 
 var options = {};
 if (process.env.NODE_ENV === 'production'){
-	options.level = error;
+	options.level = 'error';
 }
 const logger = createLogger(options);
 
