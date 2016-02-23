@@ -28,6 +28,7 @@ const store = compose(
 export default (req, res, next) => {
   const query = qs.stringify(req.query);
   const url = req.path + (query.length ? `?${query}` : '');
+  const group = req.group;
 
   store.dispatch(match(url, (error, redirectLocation, routerState) => {
     if (error) {
@@ -36,9 +37,9 @@ export default (req, res, next) => {
       next();
     } else {
 
-      if (req.group) {
-        store.dispatch(fetchedGroup(req.group.id, {
-          groups: [req.group]
+      if (group) {
+        store.dispatch(fetchedGroup(group.id, {
+          groups: { [group.id]: group }
         }));
       }
 
