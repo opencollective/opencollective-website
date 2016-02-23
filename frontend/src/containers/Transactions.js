@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
+import values from 'lodash/object/values';
 
 import PublicTopBar from '../components/PublicTopBar';
 import PublicFooter from '../components/PublicFooter';
+import Currency from '../components/Currency';
 
 import logout from '../actions/session/logout';
 
 export class Transactions extends Component {
   render() {
+    const {
+      group
+    } = this.props;
+
     return (
      <div className='Transactions'>
 
@@ -43,9 +49,13 @@ export default connect(mapStateToProps, {
 })(Transactions);
 
 function mapStateToProps({
-  session
+  session,
+  groups
 }) {
+  const group = values(groups)[0] || {}; // to refactor to allow only one group
+
   return {
-    session
+    session,
+    group
   };
 }
