@@ -4,8 +4,7 @@ import { connect } from 'react-redux';
 import take from 'lodash/array/take';
 import uniq from 'lodash/array/uniq';
 import values from 'lodash/object/values';
-import sortBy from 'lodash/collection/sortBy'
-import contains from 'lodash/collection/contains';
+import sortBy from 'lodash/collection/sortBy';
 
 import filterCollection from '../lib/filter_collection';
 import formatCurrency from '../lib/format_currency';
@@ -237,8 +236,10 @@ export function donateToGroup(amount, frequency, currency, token) {
     currency
   };
 
- if (contains(['month', 'year'], frequency)) {
-    payment.interval = frequency;
+  if (frequency === 'monthly') {
+    payment.interval = 'month';
+  } else if (frequency === 'yearly') {
+    payment.interval = 'year';
   }
 
   return donate(group.id, payment)
