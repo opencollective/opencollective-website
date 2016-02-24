@@ -278,7 +278,7 @@ export function saveNewUser() {
       showUserForm: false,
       showThankYouMessage: true
     }))
-    .then(() => fetchUsers(group))
+    .then(() => fetchUsers(group.id))
     .catch(({message}) => notify('error', message));
 }
 
