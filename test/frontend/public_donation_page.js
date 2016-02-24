@@ -9,8 +9,8 @@ module.exports = {
       .url('http://localhost:3000/testcollective')
       .waitForElementVisible('body', 1000)
       .assert.containsText('body', 'OpenCollective test group on the test server')
-      .waitForElementVisible('div[class=PublicGroupForm]', 1000)
-      .assert.containsText('div[class=PublicGroupForm]', 'Make your donation')
+      .waitForElementVisible('div[class=Tiers]', 1000)
+      .assert.containsText('div[class=Tiers]', 'Backers')
 
       // click on top green "Back us" button
       .click('a[href="#support"]')
@@ -18,9 +18,13 @@ module.exports = {
 
       // wait for bottom green button to show up
       .waitForElementVisible('div[class="Button Button--green"]', 1000)
-      .assert.containsText('div[class="Button Button--green"]', 'DONATE')
+      .assert.containsText('div[class="Button Button--green"]', 'BECOME A BACKER')
   },
 
+  // this test only exists so the above beforeEach runs
+  'sample test': (client) => {
+    client.end();
+  }
   /**
    * To implement when we fixed the stripe issue
    */
