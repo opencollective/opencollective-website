@@ -17,7 +17,6 @@ export default class Tiers extends Component {
   showTier(tier) {
     const {
       group,
-      backers,
       form,
       onToken,
       appendDonationForm,
@@ -40,7 +39,7 @@ export default class Tiers extends Component {
       <div className='Tier'>
         <h2>{tier.title || tier.name}</h2>
 
-        <UsersList users={filterUsersByTier(backers, tier.name)} />
+        <UsersList users={filterUsersByTier(group.backers, tier.name)} />
 
         <p>{tier.description}</p>
 

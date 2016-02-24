@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 import take from 'lodash/array/take';
-import uniq from 'lodash/array/uniq';
 import values from 'lodash/object/values';
 import sortBy from 'lodash/collection/sortBy';
 
@@ -80,7 +79,6 @@ export class PublicGroup extends Component {
       expenses,
       shareUrl,
       users,
-      members,
       isAuthenticated,
       donationForm
     } = this.props;
@@ -119,7 +117,7 @@ export class PublicGroup extends Component {
                 value={formatCurrency(group.balance, group.currency, {precision: 0})} />
               <Metric
                 label='Backers'
-                value={group.backersCount} />
+                value={group.backers.length} />
             </div>
             <a className='Button Button--green PublicGroup-support' href='#support'>
               Back us
@@ -134,7 +132,7 @@ export class PublicGroup extends Component {
           <div className='PublicGroup-quote'>
             <h2>Our collective</h2>
             <div className='PublicGroup-members'>
-              <UsersList users={members} />
+              <UsersList users={group.members} />
             </div>
             <Markdown className='PublicGroup-quoteText' value={group.longDescription} />
           </div>
@@ -311,8 +309,8 @@ function mapStateToProps({
   const GroupId = Number(group.id);
 
   const hosts = filterCollection(users, { role: roles.HOST });
-  const members = filterCollection(users, { role: roles.MEMBER });
-  const backers = filterCollection(users, { role: roles.BACKER });
+  group.members = filterCollection(users, { role: roles.MEMBER });
+  group.backers = filterCollection(users, { role: roles.BACKER });
 
   group.host = hosts[0] || {};
 
@@ -327,8 +325,6 @@ function mapStateToProps({
     notification,
     users,
     session,
-    backers: uniq(backers, 'id'),
-    members,
     donations: take(sortBy(donations, txn => txn.createdAt).reverse(), NUM_TRANSACTIONS_TO_SHOW),
     expenses: take(sortBy(expenses, exp => exp.createdAt).reverse(), NUM_TRANSACTIONS_TO_SHOW),
     inProgress: groups.donateInProgress,
