@@ -307,13 +307,12 @@ function mapStateToProps({
   users,
   session
 }) {
-  const group = values(groups)[0] || { stripeAccount: {} };  // to refactor to allow only one group
+  const group = values(groups)[0] || {stripeAccount: {}}; // to refactor to allow only one group
   const GroupId = Number(group.id);
-  const usersByRole = group.usersByRole || {};
 
-  const hosts = usersByRole[roles.HOST] || [];
-  const members = usersByRole[roles.MEMBER] || [];
-  const backers = usersByRole[roles.BACKER] || [];
+  const hosts = filterCollection(users, { role: roles.HOST });
+  const members = filterCollection(users, { role: roles.MEMBER });
+  const backers = filterCollection(users, { role: roles.BACKER });
 
   group.host = hosts[0] || {};
 
