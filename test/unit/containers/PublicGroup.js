@@ -135,9 +135,9 @@ describe('PublicGroup container', () => {
       updateUser,
       pushState,
       notify,
-      slug: 'groupslug',
       group: {
-        id: 1
+        id: 1,
+        slug: 'groupslug'
       },
       fetchUsers
     }
