@@ -49,10 +49,3 @@
   text-align: right;
   width: 15%;
 }
-
-.TransactionItem-tags {
-  clear: both;
-  float: left;
-  font-size: 0.8rem;
-  width: 50%;
-}

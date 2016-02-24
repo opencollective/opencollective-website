@@ -26,10 +26,6 @@ export default ({transaction, user}) => (
       <div className='TransactionItem-status'>
           <TransactionStatus {...transaction} />
       </div>
-
-      <div className='TransactionItem-tags'>
-        {transaction.tags}
-      </div>
     </div>
   </div>
 );
