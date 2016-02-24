@@ -1,8 +1,8 @@
 import expect from 'expect';
+
 import reducer from '../../../frontend/src/reducers/groups';
-import {
-  GROUP_SUCCESS
-} from '../../../frontend/src/constants/groups';
+import { GROUP_SUCCESS } from '../../../frontend/src/constants/groups';
+import { FETCH_USERS_BY_GROUP_SUCCESS } from '../../../frontend/src/constants/users';
 
 describe('groups reducer', () => {
 
@@ -21,5 +21,35 @@ describe('groups reducer', () => {
     });
 
     expect(state).toEqual(groups);
+  });
+
+  it('should add users inside a group with the role', () => {
+    const member = {
+      id: 1,
+      role: 'MEMBER'
+    };
+    const backer = {
+      id: 2,
+      role: 'BACKER'
+    };
+    const groupid = 9;
+
+    const state = reducer(undefined, {
+      type: FETCH_USERS_BY_GROUP_SUCCESS,
+      users: {
+        1: member,
+        2: backer
+      },
+      groupid
+    });
+
+    expect(state).toEqual({
+      [groupid]: {
+        usersByRole: {
+          MEMBER: [member],
+          BACKER: [backer]
+        }
+      }
+    });
   });
 });
