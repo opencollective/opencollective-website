@@ -17,9 +17,6 @@ import fetchTransactions from '../actions/transactions/fetch_by_group';
 import logout from '../actions/session/logout';
 import decodeJWT from '../actions/session/decode_jwt';
 
-// Number of expenses and revenue items to show on the transactions page
-const NUM_TRANSACTIONS_TO_SHOW = 4;
-
 export class Transactions extends Component {
   render() {
     const {
@@ -83,8 +80,7 @@ export class Transactions extends Component {
     } = this.props;
 
     fetchTransactions(group.id, {
-      per_page: NUM_TRANSACTIONS_TO_SHOW,
-      sort: 'updatedAt',
+      sort: 'createdAt',
       direction: 'desc'
     });
 
@@ -115,7 +111,7 @@ function mapStateToProps({
   return {
     session,
     group,
-    transactions: values(transactions),
+    transactions: values(transactions).reverse(),
     users
   };
 }
