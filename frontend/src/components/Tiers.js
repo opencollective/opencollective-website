@@ -58,22 +58,22 @@ export default class Tiers extends Component {
         )}
 
         <div className='Tiers-checkout'>
-        {stripeKey ?
-          (<StripeCheckout
-            token={(token) => onToken(amount, frequency, currency, token)}
-            stripeKey={stripeKey}
-            name={group.name}
-            currency={currency}
-            amount={convertToCents(amount)}
-            description={stripeDescription}>
-            <div className='Tiers-button'>
-              <AsyncButton
-                color='green'
-                inProgress={inProgress} >
-                {button}
-              </AsyncButton>
+          <div className='Tiers-button'>
+          {stripeKey ?
+            (<StripeCheckout
+              token={(token) => onToken(amount, frequency, currency, token)}
+              stripeKey={stripeKey}
+              name={group.name}
+              currency={currency}
+              amount={convertToCents(amount)}
+              description={stripeDescription}>
+                <AsyncButton
+                  color='green'
+                  inProgress={inProgress} >
+                  {button}
+                </AsyncButton>
+            </StripeCheckout>) : (<AsyncButton disabled={true} > {button} </AsyncButton>)}
             </div>
-          </StripeCheckout>) : (<AsyncButton disabled={true} > {button} </AsyncButton>)}
         <div className='PublicGroupForm-disclaimer'>
           By clicking above, you are pledging to give {group.host.name} {stripeDescription} for {group.name}. {cancellationDisclaimer}
         </div>
