@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import values from 'lodash/object/values';
 import sortBy from 'lodash/collection/sortBy';
 
-import filterCollection from '../lib/filter_collection';
-
 import Currency from '../components/Currency';
 import DisplayUrl from '../components/DisplayUrl';
 import Icon from '../components/Icon';
