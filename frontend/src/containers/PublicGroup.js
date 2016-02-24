@@ -117,7 +117,7 @@ export class PublicGroup extends Component {
                 value={formatCurrency(group.balance, group.currency, {precision: 0})} />
               <Metric
                 label='Backers'
-                value={group.backers.length} />
+                value={group.backersCount} />
             </div>
             <a className='Button Button--green PublicGroup-support' href='#support'>
               Back us
@@ -268,7 +268,7 @@ export function saveNewUser() {
     profileForm,
     validateDonationProfile,
     notify,
-    groupid,
+    group,
     fetchUsers
   } = this.props;
 
@@ -278,7 +278,7 @@ export function saveNewUser() {
       showUserForm: false,
       showThankYouMessage: true
     }))
-    .then(() => fetchUsers(groupid))
+    .then(() => fetchUsers(group))
     .catch(({message}) => notify('error', message));
 }
 
@@ -306,21 +306,22 @@ function mapStateToProps({
   session
 }) {
   const group = values(groups)[0] || {stripeAccount: {}}; // to refactor to allow only one group
-  const GroupId = Number(group.id);
 
-  const hosts = filterCollection(users, { role: roles.HOST });
-  group.members = filterCollection(users, { role: roles.MEMBER });
-  group.backers = filterCollection(users, { role: roles.BACKER });
+  /* @xdamman:
+   * We should refactor this. The /api/group route should directly return
+   * group.host, group.backers, group.members, group.donations, group.expenses
+   */
+  group.id = Number(group.id);
+  group.host = filterCollection(users, { role: roles.HOST })[0] || {};
+  group.members = filterCollection(users, { role: roles.MEMBER }) || [];
+  group.backers = filterCollection(users, { role: roles.BACKER }) || [];
+  group.backersCount = group.backers.length;
+  group.transactions = filterCollection(transactions, { GroupId: group.id });
 
-  group.host = hosts[0] || {};
-
-  const groupTransactions = filterCollection(transactions, { GroupId });
-
-  const donations = groupTransactions.filter(({amount}) => amount > 0);
-  const expenses = groupTransactions.filter(({amount}) => amount < 0);
+  const donations = group.transactions.filter(({amount}) => amount > 0);
+  const expenses = group.transactions.filter(({amount}) => amount < 0);
 
   return {
-    groupid: group.id,
     group,
     notification,
     users,
