@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 import take from 'lodash/array/take';
-import uniq from 'lodash/array/uniq';
 import values from 'lodash/object/values';
 import sortBy from 'lodash/collection/sortBy';
 
@@ -80,7 +79,6 @@ export class PublicGroup extends Component {
       expenses,
       shareUrl,
       users,
-      members,
       isAuthenticated,
       donationForm
     } = this.props;
@@ -134,7 +132,7 @@ export class PublicGroup extends Component {
           <div className='PublicGroup-quote'>
             <h2>Our collective</h2>
             <div className='PublicGroup-members'>
-              <UsersList users={members} />
+              <UsersList users={group.members} />
             </div>
             <Markdown className='PublicGroup-quoteText' value={group.longDescription} />
           </div>
@@ -270,7 +268,7 @@ export function saveNewUser() {
     profileForm,
     validateDonationProfile,
     notify,
-    groupid,
+    group,
     fetchUsers
   } = this.props;
 
@@ -280,7 +278,7 @@ export function saveNewUser() {
       showUserForm: false,
       showThankYouMessage: true
     }))
-    .then(() => fetchUsers(groupid))
+    .then(() => fetchUsers(group.id))
     .catch(({message}) => notify('error', message));
 }
 
@@ -308,27 +306,26 @@ function mapStateToProps({
   session
 }) {
   const group = values(groups)[0] || {stripeAccount: {}}; // to refactor to allow only one group
-  const GroupId = Number(group.id);
 
-  const hosts = filterCollection(users, { role: roles.HOST });
-  const members = filterCollection(users, { role: roles.MEMBER });
-  const backers = filterCollection(users, { role: roles.BACKER });
+  /* @xdamman:
+   * We should refactor this. The /api/group route should directly return
+   * group.host, group.backers, group.members, group.donations, group.expenses
+   */
+  group.id = Number(group.id);
+  group.host = filterCollection(users, { role: roles.HOST })[0] || {};
+  group.members = filterCollection(users, { role: roles.MEMBER }) || [];
+  group.backers = filterCollection(users, { role: roles.BACKER }) || [];
+  group.backersCount = group.backers.length;
+  group.transactions = filterCollection(transactions, { GroupId: group.id });
 
-  group.host = hosts[0] || {};
-
-  const groupTransactions = filterCollection(transactions, { GroupId });
-
-  const donations = groupTransactions.filter(({amount}) => amount > 0);
-  const expenses = groupTransactions.filter(({amount}) => amount < 0);
+  const donations = group.transactions.filter(({amount}) => amount > 0);
+  const expenses = group.transactions.filter(({amount}) => amount < 0);
 
   return {
-    groupid: group.id,
     group,
     notification,
     users,
     session,
-    backers: uniq(backers, 'id'),
-    members,
     donations: take(sortBy(donations, txn => txn.createdAt).reverse(), NUM_TRANSACTIONS_TO_SHOW),
     expenses: take(sortBy(expenses, exp => exp.createdAt).reverse(), NUM_TRANSACTIONS_TO_SHOW),
     inProgress: groups.donateInProgress,

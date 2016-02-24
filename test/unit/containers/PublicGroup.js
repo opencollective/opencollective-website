@@ -44,7 +44,6 @@ describe('PublicGroup container', () => {
     });
 
     const props = {
-      groupid: 1,
       donate,
       group: {
         id: 1,
@@ -89,7 +88,6 @@ describe('PublicGroup container', () => {
 
 
     const props = {
-      groupid: 1,
       donate,
       notify,
       group: {
@@ -132,13 +130,15 @@ describe('PublicGroup container', () => {
     }
     const props = {
       users: {newUser: {id: 1}},
-      groupid: 1,
       profileForm,
       validateDonationProfile,
       updateUser,
       pushState,
       notify,
-      slug: 'groupslug',
+      group: {
+        id: 1,
+        slug: 'groupslug'
+      },
       fetchUsers
     }
 
@@ -160,10 +160,10 @@ describe('PublicGroup container', () => {
       expect(type).to.be.equal('error');
     });
     const props = {
-      groupid: 1,
       donate,
       notify,
       group: {
+        id: 1,
         currency: 'MXN',
         host: { name: 'WWCode', website: 'http://womenwhocode.com' }
       }
@@ -192,8 +192,8 @@ describe('PublicGroup container', () => {
       fetchUsers: noop,
       resetNotifications: noop,
       decodeJWT: noop,
-      groupid: 1,
       group: {
+        id: 1,
         currency: 'MXN',
         host: { name: 'WWCode', website: 'http://womenwhocode.com' }
       },
