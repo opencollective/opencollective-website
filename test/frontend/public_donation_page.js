@@ -10,7 +10,7 @@ module.exports = {
       .waitForElementVisible('body', 1000)
       .assert.containsText('body', 'OpenCollective test group on the test server')
       .waitForElementVisible('div[class=PublicGroupForm]', 1000)
-      .assert.containsText('div[class=PublicGroupForm]', 'Make your donation')
+      .assert.containsText('div[class=PublicGroupForm]', 'Support us with a monthly donation')
 
       // click on top green "Back us" button
       .click('a[href="#support"]')
@@ -24,9 +24,9 @@ module.exports = {
   /**
    * To implement when we fixed the stripe issue
    */
-  // 'Donate money - default amount': (client) => {
+  'Donate money - default amount': (client) => {
 
-  //   client
+     client
 
   //     // Click Donate
   //     .click('div[class="Button Button--green"]')
@@ -61,8 +61,8 @@ module.exports = {
 
   //     // check that the amount updated
 
-  //     .end();
-  // },
+       .end();
+  },
 
   // test custom amounts
 
