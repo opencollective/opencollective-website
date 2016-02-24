@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 import values from 'lodash/object/values';
+import sortBy from 'lodash/collection/sortBy';
 
 import filterCollection from '../lib/filter_collection';
 
@@ -111,7 +112,7 @@ function mapStateToProps({
   return {
     session,
     group,
-    transactions: values(transactions).reverse(),
+    transactions: sortBy(transactions, txn => txn.createdAt).reverse(),
     users
   };
 }
