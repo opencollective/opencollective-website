@@ -1,30 +1,16 @@
 import merge from 'lodash/object/merge';
-import values from 'lodash/object/values';
-import groupBy from 'lodash/collection/groupBy';
-
 import * as constants from '../constants/groups';
-import { FETCH_USERS_BY_GROUP_SUCCESS } from '../constants/users';
 
 export default function groups(state={}, action={}) {
   switch (action.type) {
 
     case constants.GROUP_SUCCESS:
+    case constants.GROUPS_SUCCESS:
       return merge({}, state, action.groups);
 
-    // 8: {
-    //   usersByRoles: {
-    //    HOST: [{id:...}]
-    //
-    //  }
-    // }
-    case FETCH_USERS_BY_GROUP_SUCCESS:
-      const users = values(action.users)
-
-      return merge({}, state, {
-        [action.groupid]: {
-          usersByRole: groupBy(users, 'role')
-        }
-      });
+    case constants.GROUP_SUCCESS:
+    case constants.GROUPS_SUCCESS:
+      return merge({}, state, action.groups);
 
     case constants.DONATE_GROUP_REQUEST:
       return merge({}, state, { donateInProgress: true });
