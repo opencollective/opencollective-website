@@ -2,7 +2,10 @@
   "host": {
     "api": "http://localhost:3060",
     "app": "http://localhost:3000",
-    "website": "http://localhost:3000"
+    "website": "http://localhost:3000",
+    "testserver": {
+      "api": "http://localhost:3060"
+    }
   },
   "stripePublicKey": "pk_test_5olkhgG5FgJDHcGpJllmCj6z",
   "apiKey": "0ac43519edcf4421d80342403fb5985d",

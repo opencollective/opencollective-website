@@ -1,5 +1,5 @@
 {
   "host": {
-    "api": "https://opencollective-test-api.herokuapp.com"
+    "api": "http://localhost:3060"
   }
 }
