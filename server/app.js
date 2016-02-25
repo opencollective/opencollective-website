@@ -57,7 +57,9 @@ app.use((err, req, res, next) => {
     return next(err);
   }
 
-  res.render('pages/error', {
+  res
+  .status(err.code || 500)
+  .render('pages/error', {
     layout: false,
     message: `Error ${err.code}: ${err.message}`,
     stack: process.env.NODE_ENV === 'development' ? err.stack : '',
