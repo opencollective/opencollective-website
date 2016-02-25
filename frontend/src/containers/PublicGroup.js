@@ -2,12 +2,9 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 import take from 'lodash/array/take';
-import uniq from 'lodash/array/uniq';
 import values from 'lodash/object/values';
-import sortBy from 'lodash/collection/sortBy'
-import contains from 'lodash/collection/contains';
+import sortBy from 'lodash/collection/sortBy';
 
-import convertToCents from '../lib/convert_to_cents';
 import filterCollection from '../lib/filter_collection';
 import formatCurrency from '../lib/format_currency';
 
@@ -15,7 +12,6 @@ import roles from '../constants/roles';
 import PublicTopBar from '../components/PublicTopBar';
 import Notification from '../components/Notification';
 import PublicFooter from '../components/PublicFooter';
-import PublicGroupForm from '../components/PublicGroupForm';
 import PublicGroupThanks from '../components/PublicGroupThanks';
 import TransactionItem from '../components/TransactionItem';
 import YoutubeVideo from '../components/YoutubeVideo';
@@ -28,13 +24,13 @@ import PublicGroupSignup from '../components/PublicGroupSignup';
 import Tiers from '../components/Tiers';
 import Markdown from '../components/Markdown';
 
-import appendDonationForm from '../actions/form/append_donation';
 import fetchGroup from '../actions/groups/fetch_by_id';
 import fetchUsers from '../actions/users/fetch_by_group';
 import fetchTransactions from '../actions/transactions/fetch_by_group';
 import donate from '../actions/groups/donate';
 import notify from '../actions/notification/notify';
 import resetNotifications from '../actions/notification/reset';
+import appendDonationForm from '../actions/form/append_donation';
 import appendProfileForm from '../actions/form/append_profile';
 import updateUser from '../actions/users/update_user';
 import validateDonationProfile from '../actions/form/validate_donation_profile';
@@ -79,14 +75,12 @@ export class PublicGroup extends Component {
   render() {
     const {
       group,
-      amount,
-      backers,
       donations,
       expenses,
       shareUrl,
       users,
-      members,
-      isAuthenticated
+      isAuthenticated,
+      donationForm
     } = this.props;
 
     var donationSection;
@@ -94,12 +88,9 @@ export class PublicGroup extends Component {
       donationSection = <PublicGroupThanks />;
     } else if (this.state.showUserForm) {
       donationSection = <PublicGroupSignup {...this.props} save={saveNewUser.bind(this)} />
-    } else if (group.tiers && group.tiers.length > 0) {
-      donationSection = <Tiers tiers={group.tiers} {...this.props} onToken={donateToGroup.bind(this, amount)} />
     } else {
-      donationSection = <PublicGroupForm {...this.props} onToken={donateToGroup.bind(this, amount)} />
+      donationSection = <Tiers tiers={group.tiers} {...this.props} form={donationForm} onToken={donateToGroup.bind(this)} />
     }
-
     return (
       <div className='PublicGroup'>
 
@@ -111,6 +102,7 @@ export class PublicGroup extends Component {
           <div className='PublicGroupHeader'>
             <img className='PublicGroupHeader-logo' src={group.logo ? group.logo : '/static/images/media-placeholder.svg'} />
             <div className='PublicGroupHeader-website'><DisplayUrl url={group.website} /></div>
+            <div className='PublicGroupHeader-host'>Hosted by <a href={group.host.website}>{group.host.name}</a></div>
             <div className='PublicGroupHeader-description'>
               {group.description}
             </div>
@@ -140,15 +132,13 @@ export class PublicGroup extends Component {
           <div className='PublicGroup-quote'>
             <h2>Our collective</h2>
             <div className='PublicGroup-members'>
-              <UsersList users={members} />
+              <UsersList users={group.members} />
             </div>
             <Markdown className='PublicGroup-quoteText' value={group.longDescription} />
           </div>
 
-          <div className='PublicGroup-backers'>
-            <h2>Backers</h2>
-            <UsersList users={backers} />
-          </div>
+          <div id='support'></div>
+          {donationSection}
 
           <div className='PublicGroup-transactions'>
             <div className='PublicGroup-expenses'>
@@ -187,9 +177,6 @@ export class PublicGroup extends Component {
                                             user={users[donation.UserId]} />)}
             </div>
           </div>
-
-          <div id='support'></div>
-          {donationSection}
 
         </div>
         <PublicFooter />
@@ -230,16 +217,14 @@ export class PublicGroup extends Component {
   }
 }
 
-export function donateToGroup(amount, token) {
+export function donateToGroup(amount, frequency, currency, token) {
   const {
     notify,
     donate,
     group,
     fetchGroup,
     fetchUsers,
-    fetchTransactions,
-    frequency,
-    currency
+    fetchTransactions
   } = this.props;
 
   const payment = {
@@ -249,8 +234,10 @@ export function donateToGroup(amount, token) {
     currency
   };
 
- if (contains(['month', 'year'], frequency)) {
-    payment.interval = frequency;
+  if (frequency === 'monthly') {
+    payment.interval = 'month';
+  } else if (frequency === 'yearly') {
+    payment.interval = 'year';
   }
 
   return donate(group.id, payment)
@@ -281,7 +268,7 @@ export function saveNewUser() {
     profileForm,
     validateDonationProfile,
     notify,
-    groupid,
+    group,
     fetchUsers
   } = this.props;
 
@@ -291,12 +278,11 @@ export function saveNewUser() {
       showUserForm: false,
       showThankYouMessage: true
     }))
-    .then(() => fetchUsers(groupid))
+    .then(() => fetchUsers(group.id))
     .catch(({message}) => notify('error', message));
 }
 
 export default connect(mapStateToProps, {
-  appendDonationForm,
   donate,
   notify,
   resetNotifications,
@@ -307,7 +293,8 @@ export default connect(mapStateToProps, {
   updateUser,
   logout,
   validateDonationProfile,
-  decodeJWT
+  decodeJWT,
+  appendDonationForm
 })(PublicGroup);
 
 function mapStateToProps({
@@ -318,38 +305,34 @@ function mapStateToProps({
   users,
   session
 }) {
+
   const group = values(groups)[0] || {stripeAccount: {}}; // to refactor to allow only one group
-  const GroupId = Number(group.id);
 
-  const hosts = filterCollection(users, { role: roles.HOST });
-  const members = filterCollection(users, { role: roles.MEMBER });
-  const membersAndHost = [...hosts, ...members];
-  const backers = filterCollection(users, { role: roles.BACKER });
+  /* @xdamman:
+   * We should refactor this. The /api/group route should directly return
+   * group.host, group.backers, group.members, group.donations, group.expenses
+   */
+  group.id = Number(group.id);
+  group.host = filterCollection(users, { role: roles.HOST })[0] || {};
+  group.members = filterCollection(users, { role: roles.MEMBER }) || [];
+  group.backers = filterCollection(users, { role: roles.BACKER }) || [];
+  group.backersCount = group.backers.length;
+  group.transactions = filterCollection(transactions, { GroupId: group.id });
 
-  const groupTransactions = filterCollection(transactions, { GroupId });
-
-  const donations = groupTransactions.filter(({amount}) => amount > 0);
-  const expenses = groupTransactions.filter(({amount}) => amount < 0);
+  const donations = group.transactions.filter(({amount}) => amount > 0);
+  const expenses = group.transactions.filter(({amount}) => amount < 0);
 
   return {
-    groupid: group.id,
     group,
     notification,
     users,
     session,
-    backers: uniq(backers, 'id'),
-    host: hosts[0] || {},
-    members: membersAndHost,
     donations: take(sortBy(donations, txn => txn.createdAt).reverse(), NUM_TRANSACTIONS_TO_SHOW),
     expenses: take(sortBy(expenses, exp => exp.createdAt).reverse(), NUM_TRANSACTIONS_TO_SHOW),
-    amount: (form.donation.attributes.amount == null) ? 10 : form.donation.attributes.amount,
-    frequency: form.donation.attributes.frequency || 'month',
-    currency: form.donation.attributes.currency || group.currency,
-    stripeAmount: convertToCents(form.donation.attributes.amount),
-    stripeKey: group.stripeAccount && group.stripeAccount.stripePublishableKey,
     inProgress: groups.donateInProgress,
     shareUrl: window.location.href,
     profileForm: form.profile,
+    donationForm: form.donation,
     showUserForm: users.showUserForm || false,
     saveInProgress: users.updateInProgress,
     isAuthenticated: session.isAuthenticated

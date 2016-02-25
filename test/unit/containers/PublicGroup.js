@@ -44,11 +44,11 @@ describe('PublicGroup container', () => {
     });
 
     const props = {
-      groupid: 1,
       donate,
       group: {
         id: 1,
-        currency: 'MXN'
+        currency: 'MXN',
+        host: { name: 'WWCode', website: 'http://womenwhocode.com' }
       },
       notify,
       fetchGroup,
@@ -57,7 +57,7 @@ describe('PublicGroup container', () => {
       fetchTransactions: noop
     };
 
-    donateToGroup.call({props, setState}, 10, token)
+    donateToGroup.call({props, setState}, 10, 'monthly', 'MXN', token)
     .then(() => {
       expect(donate).to.have.been.called();
       expect(setState).to.have.been.called();
@@ -88,21 +88,21 @@ describe('PublicGroup container', () => {
 
 
     const props = {
-      groupid: 1,
       donate,
       notify,
       group: {
         id: 1,
-        currency: 'MXN'
+        currency: 'MXN',
+        host: { name: 'WWCode', website: 'http://womenwhocode.com' }
       },
       fetchGroup: noop,
       fetchUsers: noop,
       currency: 'MXN',
       fetchTransactions: noop,
-      frequency: 'month'
+      frequency: 'monthly'
     };
 
-    donateToGroup.call({props, setState}, 10, token)
+    donateToGroup.call({props, setState}, 10, 'monthly', 'MXN', token)
     .then(() => {
       expect(donate).to.have.been.called();
       expect(notify).to.not.have.been.called();
@@ -130,13 +130,15 @@ describe('PublicGroup container', () => {
     }
     const props = {
       users: {newUser: {id: 1}},
-      groupid: 1,
       profileForm,
       validateDonationProfile,
       updateUser,
       pushState,
       notify,
-      slug: 'groupslug',
+      group: {
+        id: 1,
+        slug: 'groupslug'
+      },
       fetchUsers
     }
 
@@ -158,11 +160,12 @@ describe('PublicGroup container', () => {
       expect(type).to.be.equal('error');
     });
     const props = {
-      groupid: 1,
       donate,
       notify,
       group: {
-        currency: 'MXN'
+        id: 1,
+        currency: 'MXN',
+        host: { name: 'WWCode', website: 'http://womenwhocode.com' }
       }
     };
     const token = {
@@ -170,7 +173,7 @@ describe('PublicGroup container', () => {
       email: 'test@gmail.com'
     };
 
-    donateToGroup.call({props}, 10, token)
+    donateToGroup.call({props}, 10, 'monthly', 'MXN', token)
     .then(() => {
       expect(donate).to.have.been.called();
       expect(notify).to.have.been.called();
@@ -189,12 +192,16 @@ describe('PublicGroup container', () => {
       fetchUsers: noop,
       resetNotifications: noop,
       decodeJWT: noop,
-      groupid: 1,
-      group: {},
+      group: {
+        id: 1,
+        currency: 'MXN',
+        host: { name: 'WWCode', website: 'http://womenwhocode.com' }
+      },
       notification,
       admin: {},
+      form: {},
+      donationForm: {},
       expenses: [],
-      frequency: 'one-time',
       donations: []
     }, 'Notification');
 

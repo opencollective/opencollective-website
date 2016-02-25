@@ -15,19 +15,20 @@ import routes from '../../frontend/src/routes';
 import { success as fetchedGroup } from '../../frontend/src/actions/groups/fetch_by_id';
 
 const logger = createLogger();
-const store = compose(
-  reduxReactRouter({ routes, createHistory: createMemoryHistory }),
-  applyMiddleware(thunk, logger)
-)(createStore)(reducers);
 
 /**
  * Example taken from redux-router documentation
  * https://github.com/acdlite/redux-router/tree/master/examples/server-rendering
  */
-
 export default (req, res, next) => {
+  const store = compose(
+    reduxReactRouter({ routes, createHistory: createMemoryHistory }),
+    applyMiddleware(thunk, logger)
+  )(createStore)(reducers);
+
   const query = qs.stringify(req.query);
   const url = req.path + (query.length ? `?${query}` : '');
+  const group = req.group;
 
   store.dispatch(match(url, (error, redirectLocation, routerState) => {
     if (error) {
@@ -36,9 +37,9 @@ export default (req, res, next) => {
       next();
     } else {
 
-      if (req.group) {
-        store.dispatch(fetchedGroup(req.group.id, {
-          groups: [req.group]
+      if (group) {
+        store.dispatch(fetchedGroup(group.id, {
+          groups: { [group.id]: group }
         }));
       }
 

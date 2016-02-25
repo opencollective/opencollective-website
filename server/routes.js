@@ -50,10 +50,11 @@ module.exports = (app) => {
   /**
    * Routes
    */
-  app.get('/:slug/backers/banner.md', mw.fetchUsers, backers.banner);
-  app.get('/:slug/backers/:position/avatar(.png)?(.jpg)?', mw.ga, mw.fetchUsers, backers.avatar);
-  app.get('/:slug/backers/:position/website', mw.ga, mw.fetchUsers, backers.redirect);
-  app.get('/:slug([A-Za-z0-9-]+)/widget', mw.fetchGroupBySlug, collectives.widget);
+  app.get('/:slug/:tier/banner.md', mw.cache(300), mw.fetchUsers, backers.banner);
+  app.get('/:slug/badge/:tier.svg', mw.cache(300), mw.fetchUsers, backers.badge);
+  app.get('/:slug/:tier/:position/avatar(.png)?(.jpg)?', mw.cache(300), mw.ga, mw.fetchUsers, backers.avatar);
+  app.get('/:slug/:tier/:position/website', mw.ga, mw.fetchUsers, backers.redirect);
+  app.get('/:slug([A-Za-z0-9-]+)/widget', mw.cache(300), mw.fetchGroupBySlug, collectives.widget);
 
   /**
    * Server side render the react app
