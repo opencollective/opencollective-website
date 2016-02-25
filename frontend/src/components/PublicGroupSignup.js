@@ -15,7 +15,7 @@ export class PublicGroupSignup extends Component {
 
     return (
       <div className='PublicGroupSignup'>
-        <h2>Thanks for the donation </h2>
+        <h2>Thanks for the support </h2>
         <p>How should we show you on the page? </p>
 
         <div className='Label'> Display Name: </div>

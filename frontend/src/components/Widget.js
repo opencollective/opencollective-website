@@ -25,7 +25,7 @@ export default ({
               value={group.balance}
               currency={group.currency} />
           </div>
-          <div className='Widget-label'>Available funds</div>
+          <div className='Widget-label'>Funds Raised</div>
         </div>
       )}
 
@@ -47,7 +47,7 @@ export default ({
       )}
 
       {options.donate && (
-        <a href={href}>
+        <a href={href} target="_blank">
           <div className='Button Widget-button'>
             Donate
           </div>

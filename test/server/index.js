@@ -18,7 +18,6 @@ describe('server', () => {
       .expect(200)
       .end((err, res) => {
         expect(res.text).to.contain('Error 404');
-        expect(res.text).to.contain("We can&#39;t find that page.");
         done();
       });
   });
@@ -54,7 +53,6 @@ describe('server', () => {
       .expect(200)
       .end((err, res) => {
         expect(res.text).to.contain('Error');
-        expect(res.text).to.contain(error.code);
         expect(res.text).to.contain(error.message);
         done();
       });

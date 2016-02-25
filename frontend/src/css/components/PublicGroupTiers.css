@@ -1,7 +1,8 @@
 .PublicGroupForm-checkout {
   margin: 3rem auto 0;
   text-align: center;
-  display: inline-block;
+  max-width: 500px;
+  display: block;
 }
 
 .PublicGroupForm .StripeCheckout {
@@ -12,5 +13,5 @@
 
 .PublicGroupForm-disclaimer {
   margin-top: 1rem;
-  font-size: 1rem;
+  font-size: 0.85rem;
 }

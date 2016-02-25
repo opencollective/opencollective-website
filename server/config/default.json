@@ -7,5 +7,9 @@
   "stripePublicKey": "pk_test_5olkhgG5FgJDHcGpJllmCj6z",
   "apiKey": "0ac43519edcf4421d80342403fb5985d",
   "viewCache": false,
-  "showGA": false
+  "cacheBust": false,
+  "GoogleAnalytics": {
+    "active": false,
+    "account": ""
+  } 
 }

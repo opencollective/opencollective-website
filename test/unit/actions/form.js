@@ -6,10 +6,12 @@ describe('form actions', () => {
 
   describe('donation', () => {
     it('should set append a field to the donation form', () => {
-      const attributes = { amount: 10 };
+      const tiername = 'backer';
+      const attributes = { amount: 10, frequency: 'month', currency: 'MXN' };
 
-      expect(appendDonation(attributes)).toEqual({
+      expect(appendDonation(tiername, attributes)).toEqual({
         type: constants.APPEND_DONATION_FORM,
+        tiername,
         attributes
       });
     });

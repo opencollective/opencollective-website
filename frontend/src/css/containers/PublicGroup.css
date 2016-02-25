@@ -37,8 +37,8 @@
   clear: left;
   font-size: 1.5rem;
   font-weight: 600;
-  margin-top: calc(var(--spacing) * 2);
-  margin-bottom: calc(var(--spacing) * 2);
+  margin-top: 3rem;
+  margin-bottom: 1rem;
 }
 
 .PublicGroup-backers {
@@ -97,8 +97,8 @@ PublicGroup-quoteText h1, .PublicGroup-quoteText h2 {
 .PublicGroup .Button {
   display: inline-block;
   font-weight: bold;
-  padding: 1rem 1.5rem;
-  font-size: 1.3rem;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
 }
 
 .PublicGroupForm-radioLabel {

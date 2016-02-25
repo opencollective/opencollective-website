@@ -5,23 +5,24 @@ import Currency from './Currency';
 import Input from './Input';
 import Select from './Select';
 
-export default ({value, currency, frequency, onChange}) => {
-  const presetAmounts = [1, 5, 10, 20, 50, 'custom'];
+export default ({value, currency, frequency, presets, onChange, showCurrencyPicker}) => {
+  const presetAmounts = presets;
+  presetAmounts.push('other');
 
   const isCustomMode = (presetAmounts.indexOf(value) === -1);
 
   function className(selectedPreset, value) {
     return classnames({
       'DonationPicker-amount': true,
-      'DonationPicker-amount--selected': (selectedPreset === value) || (selectedPreset === 'custom' && isCustomMode)
+      'DonationPicker-amount--selected': (selectedPreset === value) || (selectedPreset === 'other' && isCustomMode)
     });
   }
 
   function presetListItem(presetLabel) {
-    let amountLabel, amountValue;
-    if(presetLabel === 'custom') {
+    var amountLabel, amountValue;
+    if(presetLabel === 'other') {
       amountValue = '100';
-      amountLabel = "Custom";
+      amountLabel = "Other";
     }
     else {
       amountValue = presetLabel;
@@ -45,13 +46,13 @@ export default ({value, currency, frequency, onChange}) => {
         {presetAmounts.map(presetListItem)}
       </ul>
       <div>
-        {isCustomMode && customField({onChange, value, currency, frequency})}
+        {isCustomMode && customField({onChange, value, frequency, currency, showCurrencyPicker})}
       </div>
     </div>
   );
 };
 
-function customField({onChange, value, frequency}) {
+function customField({onChange, value, frequency, currency, showCurrencyPicker}) {
   const frequencies = [{
     label: 'Monthly',
     value: 'month'
@@ -62,17 +63,36 @@ function customField({onChange, value, frequency}) {
     label: 'One time',
     value: 'one-time'
   }];
+
+  var currencies = [{
+    label: 'USD',
+    value: 'USD'
+  }, {
+    label: 'EUR',
+    value: 'EUR'
+  }, {
+    label: 'MXN',
+    value: 'MXN'
+  }];
+
   return (
     <div className='DonationPicker-customfield'>
       <Input
         value={value}
-        placeholder='Enter a custom amount'
+        placeholder='Enter an amount'
         customClass='DonationPicker-input'
         handleChange={(amount) => onChange({amount})} />
       <Select
         options={frequencies}
         value={frequency}
         handleChange={frequency => onChange({frequency})} />
+      {showCurrencyPicker &&
+        (<Select
+          customClass='DonationPicker-currencyselector'
+          options={currencies}
+          value={currency}
+          handleChange={currency => onChange({currency})} />
+          )}
     </div>
   );
 }

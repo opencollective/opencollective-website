@@ -1,4 +1,8 @@
 {
   "viewCache": true,
-  "showGA": true
+  "cacheBust": true,
+  "GoogleAnalytics": {
+    "active": true,
+    "account": "UA-71870756-1"
+  } 
 }

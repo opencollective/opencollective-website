@@ -39,10 +39,16 @@
   height: 48px;
 }
 
+.DonationPicker-customfield {
+  max-width: 500px;
+  display:inline-block;
+}
+
 .DonationPicker-input.Input {
   float:left;
   margin-right: 1rem;
   min-width: 0px;
+  max-width: 40%;
 }
 
 .DonationPicker .SelectContainer {
@@ -50,8 +56,10 @@
   font-size: 1.2rem;
   float: left;
   margin-top: 0.5rem;
+  max-width: 40%;
 }
 
 .DonationPicker-input .Field {
-  width: 200px;
+  min-width: 0px;
+  max-width: 100%;
 }
