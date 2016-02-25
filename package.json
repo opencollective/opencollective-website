@@ -20,7 +20,6 @@
     "test": "npm run test:unit",
     "posttest": "npm run nightwatch",
     "nightwatch": "./node_modules/nightwatch/bin/nightwatch --config nightwatch.json",
-    "posttest": "npm run nightwatch",
     "build": "gulp build && npm run build:js",
     "build:js": "mkdir -p frontend/dist/js && NODE_ENV=production browserify frontend/src/client.js | uglifyjs -cm --screw-ie8 > frontend/dist/js/bundle.js ",
     "watch:js": "mkdir -p frontend/dist/js && NODE_ENV=development watchify frontend/src/client.js -o frontend/dist/js/bundle.js -dv",
