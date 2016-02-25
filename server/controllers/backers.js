@@ -38,7 +38,10 @@ module.exports = {
         
     const user = (position < users.length) ?  users[position] : {};
 
-    req.ga.pageview();
+    // We only record a page view when loading the first avatar
+    if(position==0) {
+      req.ga.pageview();
+    }
     
     var imageUrl = "/static/images/user.svg";
     if(user.avatar) {
