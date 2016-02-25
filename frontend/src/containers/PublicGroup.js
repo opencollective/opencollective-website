@@ -305,6 +305,7 @@ function mapStateToProps({
   users,
   session
 }) {
+
   const group = values(groups)[0] || {stripeAccount: {}}; // to refactor to allow only one group
 
   /* @xdamman:
