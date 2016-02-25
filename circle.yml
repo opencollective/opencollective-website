@@ -5,4 +5,8 @@ deployment:
   staging:
     branch: staging
     heroku:
-      appname: opencollective-staging-public
+      appname: opencollective-staging-website
+test:
+  pre:
+    - nohup bash -c "npm run testserver &"
+    - sudo apt-get update && sudo apt-get install --only-upgrade google-chrome-stable

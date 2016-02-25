@@ -1,6 +1,6 @@
 {
   "name": "opencollective-website",
-  "version": "0.1.26",
+  "version": "0.1.30",
   "engines": {
     "node": "5.1.0",
     "npm": "3.3.12"
@@ -18,6 +18,7 @@
     "test:unit": "NODE_CONFIG_DIR=./server/config NODE_ENV=test mocha test/unit/ --opts test/unit/mocha.opts",
     "pretest": "npm run hint",
     "test": "npm run test:unit",
+    "posttest": "npm run nightwatch",
     "nightwatch": "./node_modules/nightwatch/bin/nightwatch --config nightwatch.json",
     "build": "gulp build && npm run build:js",
     "build:js": "mkdir -p frontend/dist/js && NODE_ENV=production browserify frontend/src/client.js | uglifyjs -cm --screw-ie8 > frontend/dist/js/bundle.js ",
