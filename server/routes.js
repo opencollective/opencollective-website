@@ -65,5 +65,6 @@ module.exports = (app) => {
    */
   app.get('/subscriptions', mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-]+)', mw.fetchGroupBySlug, mw.addMeta, render);
+  app.get('/:slug([A-Za-z0-9-]+)/transactions', mw.fetchGroupBySlug, mw.addMeta, render);
 
 };
