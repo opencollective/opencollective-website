@@ -307,20 +307,15 @@ function mapStateToProps({
 }) {
 
   const group = values(groups)[0] || {stripeAccount: {}}; // to refactor to allow only one group
-  const usersByRole = group.usersByRole || {};
 
   /* @xdamman:
    * We should refactor this. The /api/group route should directly return
    * group.host, group.backers, group.members, group.donations, group.expenses
    */
   group.id = Number(group.id);
-
-  group.hosts = usersByRole[roles.HOST] || [];
-  group.members = usersByRole[roles.MEMBER] || [];
-  group.backers = usersByRole[roles.BACKER] || [];
-
-  group.host = group.hosts[0] || {};
-
+  group.host = filterCollection(users, { role: roles.HOST })[0] || {};
+  group.members = filterCollection(users, { role: roles.MEMBER }) || [];
+  group.backers = filterCollection(users, { role: roles.BACKER }) || [];
   group.backersCount = group.backers.length;
   group.transactions = filterCollection(transactions, { GroupId: group.id });
 
