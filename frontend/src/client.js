@@ -10,7 +10,11 @@ import createHistory from 'history/lib/createBrowserHistory';
 import routes from './routes';
 import reducers from './reducers';
 
-const logger = createLogger();
+var options = {};
+if (process.env.NODE_ENV === 'production'){
+	options.level = 'error';
+}
+const logger = createLogger(options);
 
 const store = compose(
   reduxReactRouter({ createHistory }),
