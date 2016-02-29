@@ -45,7 +45,8 @@ module.exports = {
     
     var imageUrl = "/static/images/user.svg";
     if(user.avatar) {
-      imageUrl = `https://res.cloudinary.com/opencollective/image/fetch/h_64/${user.avatar}`;
+      const avatarEncoded = encodeURIComponent(user.avatar);
+      imageUrl = `https://res.cloudinary.com/opencollective/image/fetch/h_64/${avatarEncoded}`;
     }
     
     if(position == users.length)
