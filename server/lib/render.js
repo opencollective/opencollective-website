@@ -11,8 +11,7 @@ import qs from 'query-string';
 import reducers from '../../frontend/src/reducers';
 import routes from '../../frontend/src/routes';
 import reduxMiddleware from '../../frontend/src/redux_middleware';
-import { success as fetchedGroup } from '../../frontend/src/actions/groups/fetch_by_id';
-import { success as fetchedTransactions } from '../../frontend/src/actions/transactions/fetch_by_group';
+import hydrate from '../../frontend/src/actions/session/hydrate';
 
 /**
  * Example taken from redux-router documentation
@@ -26,7 +25,6 @@ export default (req, res, next) => {
 
   const query = qs.stringify(req.query);
   const url = req.path + (query.length ? `?${query}` : '');
-  const group = req.group;
 
   store.dispatch(match(url, (error, redirectLocation, routerState) => {
     if (error) {
@@ -35,16 +33,11 @@ export default (req, res, next) => {
       next();
     } else {
 
-      if (group) {
-        store.dispatch(fetchedGroup(group.id, {
-          groups: { [group.id]: group }
-        }));
-      } else if (req.transactions) {
-        localStorage.setItem('accessToken', req.params.token);
-        store.dispatch(fetchedTransactions(0, {
-          transactions: req.transactions
-        }));
-      }
+      // Pushes the data to the reducers
+      store.dispatch(hydrate({
+        group: req.group,
+        subscriptions: req.subscriptions
+      }));
 
       const initialState = serialize(store.getState());
 

@@ -2,7 +2,6 @@ import config from 'config';
 import api from './lib/api';
 import expressSession from 'express-session';
 import ua from 'universal-analytics';
-import jwtDecode from 'jwt-decode';
 
 /**
  * Fetch users by slug
@@ -38,11 +37,11 @@ const fetchSubscriptionsByUserWithToken = (req, res, next) => {
     next();
   }
 
-  const headers = {Authorization: `Bearer ${req.params.token}`};
-  api
-    .get('/transactions/subscriptions', headers)
-    .then(transactions => {
-      req.transactions = transactions;
+  api.get('/transactions/subscriptions', {
+      Authorization: `Bearer ${req.params.token}`
+    })
+    .then(subscriptions => {
+      req.subscriptions = subscriptions;
       next();
     })
     .catch(next);
@@ -75,7 +74,9 @@ const ga = (req, res, next) => {
       maxAge: 60*60*24*30*1000 // 1 month
     }
   });
+
   const mw = ua.middleware(config.GoogleAnalytics.account, {cookieName: '_ga'});
+
   session(req, res, () => {
     mw(req, res, next);
     req.ga = {
