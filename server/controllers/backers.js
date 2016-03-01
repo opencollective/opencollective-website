@@ -38,11 +38,15 @@ module.exports = {
         
     const user = (position < users.length) ?  users[position] : {};
 
-    req.ga.pageview();
+    // We only record a page view when loading the first avatar
+    if(position==0) {
+      req.ga.pageview();
+    }
     
     var imageUrl = "/static/images/user.svg";
     if(user.avatar) {
-      imageUrl = `https://res.cloudinary.com/opencollective/image/fetch/h_64/${user.avatar}`;
+      const avatarEncoded = encodeURIComponent(user.avatar);
+      imageUrl = `https://res.cloudinary.com/opencollective/image/fetch/h_64/${avatarEncoded}`;
     }
     
     if(position == users.length)
@@ -77,7 +81,8 @@ module.exports = {
   },
 
   redirect: (req, res) => {
-    const users = req.users;
+    const tier = req.params.tier;
+    const users = filterUsersByTier(req.users, tier.replace(/s$/,''));
     const slug = req.params.slug;
     const position = parseInt(req.params.position, 10);
 

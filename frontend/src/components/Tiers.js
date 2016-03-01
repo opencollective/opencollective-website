@@ -26,7 +26,7 @@ export default class Tiers extends Component {
     const stripeKey = group.stripeAccount && group.stripeAccount.stripePublishableKey;
 
     form[tier.name] = form[tier.name] || {};
-    const amount = form[tier.name].amount || tier.range[0];
+    const amount = typeof(form[tier.name].amount) !== 'object' ? form[tier.name].amount : tier.range[0];
     const frequency = form[tier.name].frequency || tier.interval;
     const currency = form[tier.name].currency || group.currency;
 
@@ -58,7 +58,7 @@ export default class Tiers extends Component {
 
         <div className='Tiers-checkout'>
           <div className='Tiers-button'>
-          {stripeKey ?
+          {stripeKey && amount !== '' ?
             (<StripeCheckout
               token={(token) => onToken(amount, frequency, currency, token)}
               stripeKey={stripeKey}
