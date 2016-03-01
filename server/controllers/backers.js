@@ -81,7 +81,8 @@ module.exports = {
   },
 
   redirect: (req, res) => {
-    const users = req.users;
+    const tier = req.params.tier;
+    const users = filterUsersByTier(req.users, tier.replace(/s$/,''));
     const slug = req.params.slug;
     const position = parseInt(req.params.position, 10);
 
