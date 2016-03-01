@@ -178,7 +178,7 @@ export class PublicGroup extends Component {
                                             user={users[donation.UserId]} />)}
             </div>
           </div>
-          <Link className='PublicGroup-tx-link' to={group.slug + '/transactions'}>
+          <Link className='PublicGroup-tx-link' to={`${group.slug}/transactions`}>
             See all transactions
           </Link>
 
