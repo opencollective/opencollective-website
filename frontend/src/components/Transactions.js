@@ -21,7 +21,8 @@ export class Transactions extends Component {
     const {
       group,
       transactions,
-      users
+      users,
+      type
     } = this.props;
 
     return (
@@ -48,7 +49,7 @@ export class Transactions extends Component {
             <div className='Widget-label'>Available funds</div>
           </div>
 
-          <h2>All transactions</h2>
+          <h2>All {type}s</h2>
           <div className='PublicGroup-transactions'>
             {(transactions.length === 0) && (
               <div className='PublicGroup-emptyState'>
@@ -56,7 +57,7 @@ export class Transactions extends Component {
                   <Icon type='expense' />
                 </div>
                 <label>
-                  All transactions will show up here
+                  All {type}s will show up here
                 </label>
               </div>
             )}
@@ -75,13 +76,17 @@ export class Transactions extends Component {
     const {
       group,
       fetchTransactions,
-      fetchUsers
+      fetchUsers,
+      type
     } = this.props;
 
-    fetchTransactions(group.id, {
+    var options = {
       sort: 'createdAt',
       direction: 'desc'
-    });
+    };
+    options[type] = true;
+
+    fetchTransactions(group.id, options);
 
     fetchUsers(group.id);
   }
