@@ -48,8 +48,8 @@ export class Transactions extends Component {
             <div className='Widget-label'>Available funds</div>
           </div>
 
+          <h2>Latest transactions</h2>
           <div className='PublicGroup-transactions'>
-            <h2>Latest transactions</h2>
             {(transactions.length === 0) && (
               <div className='PublicGroup-emptyState'>
                 <div className='PublicGroup-expenseIcon'>

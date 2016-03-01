@@ -15,10 +15,11 @@ module.exports = {
       .assert.visible('div[class=PublicGroup-transactions]', 1000)
   },
 
-   'Empty transactions list': (client) => {
+  'Transactions list': (client) => {
 
-      client
-        .assert.containsText('div[class=PublicGroup-transactions]', 'All transactions will show up here')
-        .end();
+     client
+       .assert.containsText('div[class=TransactionItem]:first-child', 'Having a break')
+       .assert.containsText('div[class=TransactionItem]:last-child', 'Saving the world')
+       .end();
    }
 };
