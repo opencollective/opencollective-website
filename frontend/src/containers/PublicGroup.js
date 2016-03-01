@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import take from 'lodash/array/take';
 import values from 'lodash/object/values';
 import sortBy from 'lodash/collection/sortBy';
@@ -177,6 +178,9 @@ export class PublicGroup extends Component {
                                             user={users[donation.UserId]} />)}
             </div>
           </div>
+          <Link className='PublicGroup-tx-link' to={`${group.slug}/transactions`}>
+            See all transactions
+          </Link>
 
         </div>
         <PublicFooter />
