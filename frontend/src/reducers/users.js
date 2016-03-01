@@ -19,6 +19,7 @@ export default function users(state={
 
   switch (type) {
 
+    case constants.FETCH_USER_SUCCESS:
     case constants.FETCH_USERS_BY_GROUP_SUCCESS:
       /*
        * Note: the 'role' and 'createdAt' is stored in groups reducer.

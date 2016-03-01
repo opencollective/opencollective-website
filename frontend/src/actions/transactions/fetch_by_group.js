@@ -25,7 +25,7 @@ function request(groupid) {
   };
 }
 
-function success(groupid, json) {
+export function success(groupid, json) {
   return {
     type: constants.TRANSACTIONS_SUCCESS,
     groupid,

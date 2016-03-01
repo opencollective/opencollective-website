@@ -29,6 +29,34 @@ const fetchGroupBySlug = (req, res, next) => {
 };
 
 /**
+ * Fetch the transactions server side
+ */
+const fetchSubscriptionsByUserWithToken = (req, res, next) => {
+
+  if (!req.params.token) {
+    next();
+  }
+
+  api.get('/subscriptions', {
+      Authorization: `Bearer ${req.params.token}`
+    })
+    .then(subscriptions => {
+      req.subscriptions = subscriptions;
+      next();
+    })
+    .catch((response) => {
+      const error = response.json.error;
+
+      if (error.type === 'jwt_expired') {
+        req.jwtExpired = true; // we will display the input form to renew the jwt
+        return next();
+      }
+
+      next(err);
+    });
+}
+
+/**
  *
  */
 const cache = (maxAge = 60) => {
@@ -55,7 +83,9 @@ const ga = (req, res, next) => {
       maxAge: 60*60*24*30*1000 // 1 month
     }
   });
+
   const mw = ua.middleware(config.GoogleAnalytics.account, {cookieName: '_ga'});
+
   session(req, res, () => {
     mw(req, res, next);
     req.ga = {
@@ -83,4 +113,4 @@ const addMeta = (req, res, next) => {
   next();
 };
 
-export default { fetchGroupBySlug, fetchUsers, ga, addMeta, cache}
+export default { fetchGroupBySlug, fetchSubscriptionsByUserWithToken, fetchUsers, ga, addMeta, cache}
