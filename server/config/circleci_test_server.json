@@ -1,5 +1,8 @@
 {
   "host": {
-    "api": "https://opencollective-test-api.herokuapp.com"
+    "api": "https://opencollective-test-api.herokuapp.com",
+    "testserver": {
+      "api": "https://opencollective-test-api.herokuapp.com"
+    }
   }
 }
