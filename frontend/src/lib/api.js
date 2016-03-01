@@ -56,9 +56,9 @@ export function putJSON(endpoint, body) {
  * POST request
  */
 
-export function post(endpoint, body) {
+export function post(endpoint, body, options={}) {
   return fetch(url(endpoint), {
-    headers: headers(),
+    headers: headers(options.headers),
     method: 'post',
     body,
   })

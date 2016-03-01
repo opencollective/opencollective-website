@@ -37,14 +37,23 @@ const fetchSubscriptionsByUserWithToken = (req, res, next) => {
     next();
   }
 
-  api.get('/transactions/subscriptions', {
+  api.get('/subscriptions', {
       Authorization: `Bearer ${req.params.token}`
     })
     .then(subscriptions => {
       req.subscriptions = subscriptions;
       next();
     })
-    .catch(next);
+    .catch((response) => {
+      const error = response.json.error;
+
+      if (error.type === 'jwt_expired') {
+        req.jwtExpired = true; // we will display the input form to renew the jwt
+        return next();
+      }
+
+      next(err);
+    });
 }
 
 /**

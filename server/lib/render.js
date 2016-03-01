@@ -36,7 +36,8 @@ export default (req, res, next) => {
       // Pushes the data to the reducers
       store.dispatch(hydrate({
         group: req.group,
-        subscriptions: req.subscriptions
+        subscriptions: req.subscriptions,
+        jwtExpired: req.jwtExpired
       }));
 
       const initialState = serialize(store.getState());
