@@ -1,6 +1,6 @@
 {
   "name": "opencollective-website",
-  "version": "0.1.30",
+  "version": "0.1.39",
   "engines": {
     "node": "5.1.0",
     "npm": "3.3.12"
@@ -19,7 +19,7 @@
     "pretest": "npm run hint",
     "test": "npm run test:unit",
     "posttest": "npm run nightwatch",
-    "nightwatch": "./node_modules/nightwatch/bin/nightwatch --config nightwatch.json",
+    "nightwatch": "NODE_CONFIG_DIR=./server/config ./node_modules/nightwatch/bin/nightwatch --config nightwatch.json",
     "build": "gulp build && npm run build:js",
     "build:js": "mkdir -p frontend/dist/js && NODE_ENV=production browserify frontend/src/client.js | uglifyjs -cm --screw-ie8 > frontend/dist/js/bundle.js ",
     "watch:js": "mkdir -p frontend/dist/js && NODE_ENV=development watchify frontend/src/client.js -o frontend/dist/js/bundle.js -dv",
@@ -27,7 +27,7 @@
     "watch:test": "NODE_ENV=test mocha test/unit/ --opts test/unit/mocha.opts --watch",
     "postinstall": "npm run build",
     "git:clean": "git branch --merged | grep -v \\* | grep -v master | grep -v dev | xargs -n 1 git branch -d",
-    "testserver": "NODE_ENV=test_server npm start",
+    "testserver:ci": "NODE_ENV=circleci_test_server npm start",
     "deploy:staging": "bash -x scripts/deploy.sh staging",
     "deploy:production": "bash -x scripts/deploy.sh production"
   },

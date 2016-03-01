@@ -5,3 +5,5 @@ export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
 
 export const DECODE_JWT_EMPTY = 'DECODE_JWT_EMPTY';
+
+export const HYDRATE = 'HYDRATE';

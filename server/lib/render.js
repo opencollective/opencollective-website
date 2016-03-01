@@ -7,14 +7,11 @@ import { reduxReactRouter, match } from 'redux-router/server';
 import { createMemoryHistory } from 'history';
 import serialize from 'serialize-javascript';
 import qs from 'query-string';
-import createLogger from 'redux-logger';
-import thunk from 'redux-thunk';
 
 import reducers from '../../frontend/src/reducers';
 import routes from '../../frontend/src/routes';
-import { success as fetchedGroup } from '../../frontend/src/actions/groups/fetch_by_id';
-
-const logger = createLogger();
+import reduxMiddleware from '../../frontend/src/redux_middleware';
+import hydrate from '../../frontend/src/actions/session/hydrate';
 
 /**
  * Example taken from redux-router documentation
@@ -23,12 +20,11 @@ const logger = createLogger();
 export default (req, res, next) => {
   const store = compose(
     reduxReactRouter({ routes, createHistory: createMemoryHistory }),
-    applyMiddleware(thunk, logger)
+    applyMiddleware(...reduxMiddleware)
   )(createStore)(reducers);
 
   const query = qs.stringify(req.query);
   const url = req.path + (query.length ? `?${query}` : '');
-  const group = req.group;
 
   store.dispatch(match(url, (error, redirectLocation, routerState) => {
     if (error) {
@@ -37,11 +33,12 @@ export default (req, res, next) => {
       next();
     } else {
 
-      if (group) {
-        store.dispatch(fetchedGroup(group.id, {
-          groups: { [group.id]: group }
-        }));
-      }
+      // Pushes the data to the reducers
+      store.dispatch(hydrate({
+        group: req.group,
+        subscriptions: req.subscriptions,
+        jwtExpired: req.jwtExpired
+      }));
 
       const initialState = serialize(store.getState());
 

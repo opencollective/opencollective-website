@@ -56,9 +56,9 @@ export function putJSON(endpoint, body) {
  * POST request
  */
 
-export function post(endpoint, body) {
+export function post(endpoint, body, options={}) {
   return fetch(url(endpoint), {
-    headers: headers(),
+    headers: headers(options.headers),
     method: 'post',
     body,
   })
@@ -110,6 +110,7 @@ export function checkStatus(response) {
 
 function headers(obj) {
   const accessToken = localStorage.getItem('accessToken');
+  if (!accessToken) return obj;
   return extend({
     Authorization: `Bearer ${accessToken}`,
   }, obj);

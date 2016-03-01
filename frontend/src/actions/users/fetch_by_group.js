@@ -1,5 +1,4 @@
 import { get } from '../../lib/api';
-import Schemas from '../../lib/schemas';
 import * as constants from '../../constants/users';
 
 /**
@@ -9,9 +8,7 @@ import * as constants from '../../constants/users';
 export default (groupid) => {
   return dispatch => {
     dispatch(request(groupid));
-    return get(`/groups/${groupid}/users`, {
-      schema: Schemas.USER_ARRAY
-    })
+    return get(`/groups/${groupid}/users`)
     .then(json => dispatch(success(groupid, json)))
     .catch(error => dispatch(failure(error)));
   };
@@ -24,11 +21,11 @@ function request(groupid) {
   };
 }
 
-function success(groupid, {users}) {
+function success(groupid, json) {
   return {
     type: constants.FETCH_USERS_BY_GROUP_SUCCESS,
     groupid,
-    users
+    users: json
   };
 }
 

@@ -33,7 +33,8 @@ export default ({value, currency, frequency, presets, onChange, showCurrencyPick
       <li
         className={className(presetLabel, value)}
         key={presetLabel}
-        onClick={() => onChange({amount:amountValue}) }>
+        // need to set this back to 'monthly' if you flip back from 'Other' control
+        onClick={() => onChange({amount:amountValue, frequency: 'monthly'}) }>
         <label>{amountLabel}</label>
       </li>
     );

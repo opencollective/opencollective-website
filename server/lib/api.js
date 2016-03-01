@@ -7,8 +7,9 @@ import apiUrl from '../utils/api_url';
  * Get request
  * Extend client side get with the api key
  */
-const get = (endpoint) => {
-  return fetch(apiUrl(endpoint))
+const get = (endpoint, headers) => {
+  headers = headers || {};
+  return fetch(apiUrl(endpoint), {headers: headers})
     .then(checkStatus);
 };
 

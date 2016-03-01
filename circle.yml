@@ -8,5 +8,5 @@ deployment:
       appname: opencollective-staging-website
 test:
   pre:
-    - nohup bash -c "npm run testserver &"
+    - nohup bash -c "npm run testserver:ci &"
     - sudo apt-get update && sudo apt-get install --only-upgrade google-chrome-stable

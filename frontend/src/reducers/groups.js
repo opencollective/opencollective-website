@@ -4,9 +4,21 @@ import groupBy from 'lodash/collection/groupBy';
 
 import * as constants from '../constants/groups';
 import { FETCH_USERS_BY_GROUP_SUCCESS } from '../constants/users';
+import { HYDRATE } from '../constants/session';
 
 export default function groups(state={}, action={}) {
   switch (action.type) {
+
+    case HYDRATE:
+      if (!action.data.group) {
+        return state;
+      }
+
+      const group = action.data.group;
+
+      return merge({}, state, {
+        [group.id]: group
+      });
 
     case constants.GROUP_SUCCESS:
       return merge({}, state, action.groups);

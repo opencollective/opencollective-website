@@ -63,7 +63,8 @@ module.exports = (app) => {
    * When we refactor PublicGroup to fetch the group in the container, we can remove
    * the explicit routes and just do `app.use(render)`
    */
-  app.get('/subscriptions', mw.addMeta, render);
+  app.get('/subscriptions/:token', mw.fetchSubscriptionsByUserWithToken, render);
   app.get('/:slug([A-Za-z0-9-]+)', mw.fetchGroupBySlug, mw.addMeta, render);
+  app.get('/:slug([A-Za-z0-9-]+)/transactions', mw.fetchGroupBySlug, mw.addMeta, render);
 
 };

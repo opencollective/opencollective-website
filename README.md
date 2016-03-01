@@ -24,8 +24,10 @@ npm run build
 
 ## Deployment
 
-Use the `npm run deploy:staging` or `npm run deploy:production`
+Use the `npm run deploy:staging` or `npm run deploy:production`.
 CircleCI will run the tests on this branch and push to Heroku if successful (to staging only)
+
+For quick pushing of hotfixes, you can do `npm run deploy:hotfix`. It'll take `master` and push to remote `production`, then push to `staging` to keep everything in sync.
 
 ### Manually
 If you want to deploy the app on Heroku manually (only for production), you need to add the remotes:
@@ -43,8 +45,11 @@ git push heroku-production master
 ## Test
 
 ```
-// in a separate window
+// in a separate window, on API side
 npm run testserver
+// in a separate window, on website side
+npm run dev
+// in a separate window, on website side
 npm test
 ```
 

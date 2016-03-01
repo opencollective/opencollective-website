@@ -1,7 +1,11 @@
 import merge from 'lodash/object/merge';
 
+import Schemas from '../lib/schemas';
+import { normalize } from 'normalizr';
+
 import * as constants from '../constants/users';
 import {DONATE_GROUP_SUCCESS} from'../constants/groups';
+
 
 export default function users(state={
   updateInProgress: false,
@@ -15,8 +19,21 @@ export default function users(state={
 
   switch (type) {
 
+    case constants.FETCH_USER_SUCCESS:
     case constants.FETCH_USERS_BY_GROUP_SUCCESS:
-      return merge({}, state, users);
+      /*
+       * Note: the 'role' and 'createdAt' is stored in groups reducer.
+       * Removing them from here so we can merge user data (which comes
+       * appended with userGroup data) without conflicts
+       */
+      const options = {
+        assignEntity: function(obj, key, val){
+          if (key !== 'role' && key !== 'createdAt') {
+            obj[key] = val;
+          }
+        }
+      };
+      return merge({}, state, normalize(users, Schemas.USER_ARRAY, options).entities.users);
 
     case constants.UPDATE_USER_REQUEST:
       return merge({}, state, { updateInProgress: true });

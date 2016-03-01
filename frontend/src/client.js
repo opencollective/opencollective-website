@@ -1,24 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, compose, applyMiddleware } from 'redux';
-import createLogger from 'redux-logger';
-import thunk from 'redux-thunk';
 import { ReduxRouter, reduxReactRouter } from 'redux-router';
 import { Provider } from 'react-redux';
 import createHistory from 'history/lib/createBrowserHistory';
 
 import routes from './routes';
 import reducers from './reducers';
-
-var options = {};
-if (process.env.NODE_ENV === 'production'){
-	options.level = 'error';
-}
-const logger = createLogger(options);
+import reduxMiddleware from './redux_middleware';
 
 const store = compose(
   reduxReactRouter({ createHistory }),
-  applyMiddleware(thunk, logger)
+  applyMiddleware(...reduxMiddleware)
 )(createStore)(reducers, window.__INITIAL_STATE__);
 
 const rootComponent = (

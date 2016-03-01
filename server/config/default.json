@@ -8,6 +8,10 @@
   "apiKey": "0ac43519edcf4421d80342403fb5985d",
   "viewCache": false,
   "cacheBust": false,
+  "cloudflare": {
+    "email": "ops@opencollective.com",
+    "key": null
+  },
   "GoogleAnalytics": {
     "active": false,
     "account": ""
