@@ -45,8 +45,11 @@ git push heroku-production master
 ## Test
 
 ```
-// in a separate window
+// in a separate window, on API side
 npm run testserver
+// in a separate window, on website side
+npm run dev
+// in a separate window, on website side
 npm test
 ```
 
