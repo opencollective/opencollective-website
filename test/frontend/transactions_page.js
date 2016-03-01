@@ -7,7 +7,7 @@ module.exports = {
     client
 
       // reset test database
-      .url(`${config.host.testserver.api}/database/reset`)
+      .url(`${config.host.api}/database/reset`)
 
       .url(`${config.host.website}/testcollective/transactions`)
       .waitForElementVisible('body', 1000)
