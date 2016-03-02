@@ -158,9 +158,11 @@ export class PublicGroup extends Component {
                                           key={expense.id}
                                           transaction={expense}
                                           user={users[expense.UserId]} />)}
-              <Link className='PublicGroup-tx-link' to={`${group.slug}/expenses`}>
-                See all expenses
-              </Link>
+              {expenses.length >= 3 && (
+                <Link className='PublicGroup-tx-link' to={`${group.slug}/expenses`}>
+                  See all expenses
+                </Link>
+              )}
             </div>
 
             <div className='PublicGroup-donations'>
@@ -179,9 +181,11 @@ export class PublicGroup extends Component {
                                             key={donation.id}
                                             transaction={donation}
                                             user={users[donation.UserId]} />)}
-              <Link className='PublicGroup-tx-link' to={`${group.slug}/donations`}>
-                See all donations
-              </Link>
+              {donations.length >= 3 && (
+                <Link className='PublicGroup-tx-link' to={`${group.slug}/donations`}>
+                  See all donations
+                </Link>
+              )}
             </div>
           </div>
 
