@@ -17,7 +17,7 @@ export default class Tiers extends Component {
   showTier(tier) {
     const {
       group,
-      form,
+      donationForm,
       onToken,
       appendDonationForm,
       inProgress,
@@ -25,10 +25,10 @@ export default class Tiers extends Component {
 
     const stripeKey = group.stripeAccount && group.stripeAccount.stripePublishableKey;
 
-    form[tier.name] = form[tier.name] || {};
-    const amount = typeof(form[tier.name].amount) !== 'object' ? form[tier.name].amount : tier.range[0];
-    const frequency = form[tier.name].frequency || tier.interval;
-    const currency = form[tier.name].currency || group.currency;
+    donationForm[tier.name] = donationForm[tier.name] || {};
+    const amount = donationForm[tier.name].amount !== undefined ? donationForm[tier.name].amount : tier.range[0];
+    const frequency = donationForm[tier.name].frequency || tier.interval;
+    const currency = donationForm[tier.name].currency || group.currency;
 
     const frequencyHuman = frequency === 'one-time' ? '' : `per ${frequency.replace(/ly$/,'')}`;
     const stripeDescription =  `${formatCurrency(amount, currency, { compact: false })} ${frequencyHuman}`;

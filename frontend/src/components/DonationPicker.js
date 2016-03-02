@@ -7,7 +7,10 @@ import Select from './Select';
 
 export default ({value, currency, frequency, presets, onChange, showCurrencyPicker}) => {
   const presetAmounts = presets;
-  presetAmounts.push('other');
+
+  if (presets.indexOf('other') === -1){
+    presetAmounts.push('other');
+  }
 
   const isCustomMode = (presetAmounts.indexOf(value) === -1);
 
