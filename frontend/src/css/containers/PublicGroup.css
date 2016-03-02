@@ -94,6 +94,11 @@ PublicGroup-quoteText h1, .PublicGroup-quoteText h2 {
   box-sizing: border-box;
 }
 
+.PublicGroup-tx-link {
+  padding-right: calc(var(--spacing) * 2);
+  float: right
+}
+
 .PublicGroup .Button {
   display: inline-block;
   font-weight: bold;
