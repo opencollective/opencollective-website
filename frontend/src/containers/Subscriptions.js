@@ -69,26 +69,26 @@ export class Subscriptions extends Component {
 
 }
 
-function cancel(id) {
+export function cancel(id) {
   const {
     token,
     cancelSubscription,
     notify
   } = this.props;
 
-  cancelSubscription(id, token)
+  return cancelSubscription(id, token)
     .then(() => notify('success', 'Canceled'))
     .catch(({message}) => notify('error', message));
 }
 
-function sendToken() {
+export function sendToken() {
   const {
     token,
     sendSubscriptionsToken,
     notify
   } = this.props;
 
-  sendSubscriptionsToken(token)
+  return sendSubscriptionsToken(token)
     .then(() => notify('success', 'Email sent'))
     .catch(({message}) => notify('error', message));
 
@@ -103,7 +103,7 @@ export default connect(mapStateToProps, {
   cancelSubscription
 })(Subscriptions);
 
-function mapStateToProps({
+export function mapStateToProps({
   session,
   router,
   subscriptions,
