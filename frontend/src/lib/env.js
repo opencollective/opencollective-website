@@ -4,7 +4,7 @@
 
 const env = {
   NODE_ENV: process.env.NODE_ENV,
-  API_ROOT: '/api'
+  API_ROOT: `${process.env.WEBSITE_URL}/api`
 };
 
 if (env.NODE_ENV === 'test' || env.NODE_ENV === 'development') {
