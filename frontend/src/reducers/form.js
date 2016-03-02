@@ -73,13 +73,7 @@ function profile(state=profileInitialState, action={}) {
 /**
  * Donation form
  */
-function donation(state={
-  backer: {
-    amount: null,
-    frequency: null,
-    currency: null
-  }
-}, action={}) {
+function donation(state={}, action={}) {
   switch(action.type) {
     case constants.APPEND_DONATION_FORM:
       const newState = {};
