@@ -80,11 +80,11 @@ export class Transactions extends Component {
       type
     } = this.props;
 
-    var options = {
+    const options = {
       sort: 'createdAt',
-      direction: 'desc'
+      direction: 'desc',
+      [type]: true
     };
-    options[type] = true;
 
     fetchTransactions(group.id, options);
 
@@ -108,14 +108,18 @@ function mapStateToProps({
   session,
   groups,
   transactions,
-  users
+  users,
+  router
 }) {
+  const type = router.params.type.slice(0,-1); // remove trailing s for the API call
   const group = values(groups)[0] || {}; // to refactor to allow only one group
+  const list = (type === 'donation') ? transactions.isDonation : transactions.isExpense;
 
   return {
     session,
     group,
-    transactions: sortBy(transactions, txn => txn.createdAt).reverse(),
-    users
+    transactions: sortBy(list, txn => txn.createdAt).reverse(),
+    users,
+    type
   };
 }
