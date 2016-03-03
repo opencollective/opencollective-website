@@ -1,6 +1,10 @@
 {
     "compilerOptions": {
         "target": "ES6",
-        "module": "commonjs"
+        "module": "commonjs",
+        "files": [
+          "typings/node/node.d.ts",
+          "typings/mocha/mocha.d.ts"
+        ]
     }
 }
