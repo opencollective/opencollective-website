@@ -9,6 +9,6 @@ export default (
   <Route path="/">
     <Route path="/subscriptions/:token" component={Subscriptions} />
     <Route path="/:slug" component={PublicGroup} />
-    <Route path="/:slug/transactions" component={Transactions} />
+    <Route path="/:slug/:type" component={Transactions} />
   </Route>
 );

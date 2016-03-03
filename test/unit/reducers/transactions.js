@@ -18,7 +18,11 @@ describe('transactions reducer', () => {
       transactions
     });
 
-    expect(state).toEqual(transactions);
+    expect(state).toEqual({
+      ...transactions,
+      isDonation: [],
+      isExpense: []
+    });
   });
 
   it('should add multiple transactions', () => {
@@ -31,7 +35,11 @@ describe('transactions reducer', () => {
       transactions
     });
 
-    expect(state).toEqual(transactions);
+    expect(state).toEqual({
+      ...transactions,
+      isDonation: [],
+      isExpense: []
+    });
   });
 
 });
