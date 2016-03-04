@@ -1,13 +1,10 @@
 const config = require('config');
+const resetDb = require('../lib/reset_db.js');
 
 module.exports = {
-  '@tags': ['donation'],
+  '@tags': ['public_donation_page'],
   beforeEach: (client) => {
-    client
-
-      // reset test database
-      .url(`${config.host.api}/database/reset`)
-
+   resetDb(client)
       .url(`${config.host.website}/testcollective`)
       .waitForElementVisible('body', 1000)
       .assert.containsText('body', 'OpenCollective test group on the test server')
