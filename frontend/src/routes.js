@@ -8,6 +8,7 @@ import Transactions from './containers/Transactions';
 export default (
   <Route path="/">
     <Route path="/subscriptions/:token" component={Subscriptions} />
+    <Route path="/subscriptions" component={Subscriptions} />
     <Route path="/:slug" component={PublicGroup} />
     <Route path="/:slug/:type" component={Transactions} />
   </Route>

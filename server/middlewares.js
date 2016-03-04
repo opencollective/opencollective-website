@@ -34,7 +34,9 @@ const fetchGroupBySlug = (req, res, next) => {
 const fetchSubscriptionsByUserWithToken = (req, res, next) => {
 
   if (!req.params.token) {
-    next();
+    console.log("Token not found");
+    req.jwtInvalid = true;
+    return next();
   }
 
   api.get('/subscriptions', {
@@ -46,12 +48,13 @@ const fetchSubscriptionsByUserWithToken = (req, res, next) => {
     })
     .catch((response) => {
       const error = response.json.error;
-
       if (error.type === 'jwt_expired') {
         req.jwtExpired = true; // we will display the input form to renew the jwt
         return next();
+      } else if (error.type === 'unauthorized') {
+        req.jwtInvalid = true;
+        return next();
       }
-
       next(err);
     });
 }

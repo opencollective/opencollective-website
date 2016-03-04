@@ -32,12 +32,12 @@ export default (req, res, next) => {
     } else if (!routerState) { // 404
       next();
     } else {
-
       // Pushes the data to the reducers
       store.dispatch(hydrate({
         group: req.group,
         subscriptions: req.subscriptions,
-        jwtExpired: req.jwtExpired
+        jwtExpired: req.jwtExpired,
+        jwtInvalid: req.jwtInvalid
       }));
 
       const initialState = serialize(store.getState());
