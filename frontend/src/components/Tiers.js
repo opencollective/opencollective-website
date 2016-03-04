@@ -32,7 +32,7 @@ export default class Tiers extends Component {
 
     const frequencyHuman = frequency === 'one-time' ? '' : `per ${frequency.replace(/ly$/,'')}`;
     const stripeDescription =  `${formatCurrency(amount, currency, { compact: false })} ${frequencyHuman}`;
-    const button = tier.button;
+    const button = tier.button || `Donate ${stripeDescription}`;
     const cancellationDisclaimer = (frequency !== 'one-time') ? "You can cancel anytime." : "";
 
     return (
