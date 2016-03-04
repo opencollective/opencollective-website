@@ -25,7 +25,10 @@ export default function session(state={
       return merge({}, state, { hasPopOverMenuOpen: action.hasPopOverMenuOpen });
 
     case constants.HYDRATE:
-      return merge({}, state, { jwtExpired: action.data.jwtExpired });
+      return merge({}, state, {
+        jwtExpired: action.data.jwtExpired,
+        jwtInvalid: action.data.jwtInvalid
+      });
 
     default:
       return state;

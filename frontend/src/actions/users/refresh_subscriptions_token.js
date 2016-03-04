@@ -9,7 +9,7 @@ export default (token) => {
   return dispatch => {
     dispatch(request(token));
 
-    return post('/subscriptions/token', {}, {
+    return post('/subscriptions/refresh_token', { }, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -24,21 +24,21 @@ export default (token) => {
 
 function request(token) {
   return {
-    type: constants.SEND_SUBSCRIPTIONS_TOKEN_REQUEST,
+    type: constants.REFRESH_SUBSCRIPTIONS_TOKEN_REQUEST,
     token
   };
 }
 
 function success(token) {
   return {
-    type: constants.SEND_SUBSCRIPTIONS_TOKEN_SUCCESS,
+    type: constants.REFRESH_SUBSCRIPTIONS_TOKEN_SUCCESS,
     token
   };
 }
 
 function failure(error, token) {
   return {
-    type: constants.SEND_SUBSCRIPTIONS_TOKEN_FAILURE,
+    type: constants.REFRESH_SUBSCRIPTIONS_TOKEN_FAILURE,
     error,
     token
   };
