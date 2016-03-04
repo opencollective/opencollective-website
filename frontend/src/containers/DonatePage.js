@@ -1,22 +1,13 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 import values from 'lodash/object/values';
-import sortBy from 'lodash/collection/sortBy';
-
-import filterCollection from '../lib/filter_collection';
-import formatCurrency from '../lib/format_currency';
 
 import roles from '../constants/roles';
 import PublicTopBar from '../components/PublicTopBar';
 import Notification from '../components/Notification';
 import PublicFooter from '../components/PublicFooter';
 import PublicGroupThanks from '../components/PublicGroupThanks';
-import Metric from '../components/Metric';
-import UsersList from '../components/UsersList';
-import ShareIcon from '../components/ShareIcon';
-import Icon from '../components/Icon';
 import DisplayUrl from '../components/DisplayUrl';
 import PublicGroupSignup from '../components/PublicGroupSignup';
 import Tiers from '../components/Tiers';
@@ -36,28 +27,6 @@ import decodeJWT from '../actions/session/decode_jwt';
 // Number of expenses and revenue items to show on the public page
 const NUM_TRANSACTIONS_TO_SHOW = 3;
 
-const Media = ({group}) => {
-  if (group.video) {
-      return (
-        <div className='PublicGroup-video'>
-          <YoutubeVideo video={group.video} />
-        </div>
-      );
-  } else if (group.image) {
-    return (
-      <div className='PublicGroup-image'>
-        <img src={group.image} />
-      </div>
-    );
-  } else {
-    return (
-      <div className='PublicGroup-image'>
-        <div className='PublicGroup-image-placeholder'/>
-      </div>
-    );
-  }
-};
-
 export class DonatePage extends Component {
 
   constructor(props) {
@@ -73,8 +42,6 @@ export class DonatePage extends Component {
       amount,
       interval,
       group,
-      shareUrl,
-      users,
       isAuthenticated,
       donationForm
     } = this.props;
