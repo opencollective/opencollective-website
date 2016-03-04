@@ -18,6 +18,7 @@ module.exports = {
 
      client
        .assert.containsText('div[class=PublicContent] > h2', 'All donations')
+       .waitForElementVisible('div[class=TransactionItem]', 1000)
        .assert.containsText('div[class=TransactionItem]:first-child', 'Donation 2')
        .assert.containsText('div[class=TransactionItem]:last-child', 'Donation 1')
        .end();
