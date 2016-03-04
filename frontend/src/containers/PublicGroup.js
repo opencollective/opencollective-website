@@ -195,7 +195,7 @@ export class PublicGroup extends Component {
     );
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const {
       group,
       fetchTransactions,
@@ -222,7 +222,7 @@ export class PublicGroup extends Component {
     fetchUsers(group.id);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     // decode here because we don't handle auth on the server side yet
     this.props.decodeJWT();
   }
