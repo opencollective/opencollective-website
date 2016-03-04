@@ -18,6 +18,7 @@ import hydrate from '../../frontend/src/actions/session/hydrate';
  * https://github.com/acdlite/redux-router/tree/master/examples/server-rendering
  */
 export default (req, res, next) => {
+
   const store = compose(
     reduxReactRouter({ routes, createHistory: createMemoryHistory }),
     applyMiddleware(...reduxMiddleware)
@@ -30,6 +31,7 @@ export default (req, res, next) => {
     if (error) {
       next(err);
     } else if (!routerState) { // 404
+      console.error("No route defined in the frontend react");
       next();
     } else {
 
@@ -48,7 +50,7 @@ export default (req, res, next) => {
         </Provider>
       );
 
-      res.render('pages/app', {
+      return res.render('pages/app', {
         layout: false,
         meta: req.meta || {},
         html,

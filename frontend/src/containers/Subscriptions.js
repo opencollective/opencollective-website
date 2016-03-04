@@ -11,6 +11,7 @@ import Notification from '../components/Notification';
 import decodeJWT from '../actions/session/decode_jwt';
 import logout from '../actions/session/logout';
 import sendSubscriptionsToken from '../actions/users/send_subscriptions_token';
+import cancelSubscription from '../actions/subscriptions/cancel';
 import resetNotifications from '../actions/notification/reset';
 import notify from '../actions/notification/notify';
 
@@ -48,11 +49,12 @@ export class Subscriptions extends Component {
             return (
               <div key={subscription.id}>
                 <h3>
-                  Subscription #{subscription.id} (
+                  {subscription.isActive ? '[Active]' : '[Inactive]'} Subscription #{subscription.id} (
                     <Currency value={subscription.amount} currency={subscription.currency} colorify={false} />
                     /{subscription.interval}
                   )
                 </h3>
+                {subscription.isActive && <span className='Button Button--red' onClick={cancel.bind(this, subscription.id)}>Cancel</span>}
                 {subscription.Transactions.map(transaction => {
                   return <TransactionItem key={transaction.id} transaction={transaction}/>;
                 })}
@@ -67,14 +69,26 @@ export class Subscriptions extends Component {
 
 }
 
-function sendToken() {
+export function cancel(id) {
+  const {
+    token,
+    cancelSubscription,
+    notify
+  } = this.props;
+
+  return cancelSubscription(id, token)
+    .then(() => notify('success', 'Canceled'))
+    .catch(({message}) => notify('error', message));
+}
+
+export function sendToken() {
   const {
     token,
     sendSubscriptionsToken,
     notify
   } = this.props;
 
-  sendSubscriptionsToken(token)
+  return sendSubscriptionsToken(token)
     .then(() => notify('success', 'Email sent'))
     .catch(({message}) => notify('error', message));
 
@@ -85,10 +99,11 @@ export default connect(mapStateToProps, {
   decodeJWT,
   sendSubscriptionsToken,
   resetNotifications,
-  notify
+  notify,
+  cancelSubscription
 })(Subscriptions);
 
-function mapStateToProps({
+export function mapStateToProps({
   session,
   router,
   subscriptions,
