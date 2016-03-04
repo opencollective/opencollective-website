@@ -1,6 +1,9 @@
 .DS_Store
-.vscode
 .idea/
+
+# Visual Studio Code
+.vscode
+typings/
 
 # Logs
 logs

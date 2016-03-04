@@ -1,33 +1,19 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
-import take from 'lodash/array/take';
 import values from 'lodash/object/values';
-import sortBy from 'lodash/collection/sortBy';
-
-import filterCollection from '../lib/filter_collection';
-import formatCurrency from '../lib/format_currency';
 
 import roles from '../constants/roles';
 import PublicTopBar from '../components/PublicTopBar';
 import Notification from '../components/Notification';
 import PublicFooter from '../components/PublicFooter';
 import PublicGroupThanks from '../components/PublicGroupThanks';
-import TransactionItem from '../components/TransactionItem';
-import YoutubeVideo from '../components/YoutubeVideo';
-import Metric from '../components/Metric';
-import UsersList from '../components/UsersList';
-import ShareIcon from '../components/ShareIcon';
-import Icon from '../components/Icon';
 import DisplayUrl from '../components/DisplayUrl';
 import PublicGroupSignup from '../components/PublicGroupSignup';
 import Tiers from '../components/Tiers';
-import Markdown from '../components/Markdown';
 
 import fetchGroup from '../actions/groups/fetch_by_id';
 import fetchUsers from '../actions/users/fetch_by_group';
-import fetchTransactions from '../actions/transactions/fetch_by_group';
 import donate from '../actions/groups/donate';
 import notify from '../actions/notification/notify';
 import resetNotifications from '../actions/notification/reset';
@@ -41,29 +27,7 @@ import decodeJWT from '../actions/session/decode_jwt';
 // Number of expenses and revenue items to show on the public page
 const NUM_TRANSACTIONS_TO_SHOW = 3;
 
-const Media = ({group}) => {
-  if (group.video) {
-      return (
-        <div className='PublicGroup-video'>
-          <YoutubeVideo video={group.video} />
-        </div>
-      );
-  } else if (group.image) {
-    return (
-      <div className='PublicGroup-image'>
-        <img src={group.image} />
-      </div>
-    );
-  } else {
-    return (
-      <div className='PublicGroup-image'>
-        <div className='PublicGroup-image-placeholder'/>
-      </div>
-    );
-  }
-};
-
-export class PublicGroup extends Component {
+export class DonatePage extends Component {
 
   constructor(props) {
     super(props);
@@ -75,26 +39,33 @@ export class PublicGroup extends Component {
 
   render() {
     const {
+      amount,
+      interval,
       group,
-      donations,
-      expenses,
-      shareUrl,
-      users,
       isAuthenticated,
       donationForm
     } = this.props;
 
+    const tiers = [{
+      name: "custom",
+      title: " ",
+      description: "Your donation will help us continue our activities. Thank you for your support",
+      amount,
+      interval: interval || 'one-time',
+      range: [amount, 10000000]
+    }];
+    
     var donationSection;
     if (this.state.showThankYouMessage || (isAuthenticated && this.state.showUserForm)) { // we don't handle userform from logged in users) {
       donationSection = <PublicGroupThanks />;
     } else if (this.state.showUserForm) {
       donationSection = <PublicGroupSignup {...this.props} save={saveNewUser.bind(this)} />
     } else {
-      donationSection = <Tiers tiers={group.tiers} {...this.props} form={donationForm} onToken={donateToGroup.bind(this)} />
+      donationSection = <Tiers tiers={tiers} {...this.props} form={donationForm} onToken={donateToGroup.bind(this)} />
     }
+    
     return (
       <div className='PublicGroup'>
-
         <PublicTopBar session={this.props.session} logout={this.props.logout} slug={group.slug}/>
         <Notification {...this.props} />
 
@@ -109,120 +80,29 @@ export class PublicGroup extends Component {
             </div>
           </div>
 
-          <Media group={group} />
-
-          <div className='PublicGroup-summary'>
-            <div className='PublicGroup-metricContainer'>
-              <Metric
-                label='Funds Available'
-                value={formatCurrency(group.balance, group.currency, {precision: 0})} />
-              <Metric
-                label='Backers'
-                value={group.backersCount} />
-            </div>
-            <a className='Button Button--green PublicGroup-support' href='#support'>
-              Back us
-            </a>
-            <div className='PublicGroup-share'>
-              <ShareIcon type='twitter' url={shareUrl} name={group.name} description={group.description} />
-              <ShareIcon type='facebook' url={shareUrl} name={group.name} description={group.description} />
-              <ShareIcon type='mail' url={shareUrl} name={group.name} description={group.description} />
-            </div>
-          </div>
-
-          <div className='PublicGroup-quote'>
-            <h2>Our collective</h2>
-            <div className='PublicGroup-members'>
-              <UsersList users={group.members} />
-            </div>
-            <Markdown className='PublicGroup-quoteText' value={group.longDescription} />
-          </div>
-
-          <div id='support'></div>
-          {donationSection}
-
-          <div className='PublicGroup-transactions'>
-            <div className='PublicGroup-expenses'>
-              <h2>Expenses</h2>
-              {(expenses.length === 0) && (
-                <div className='PublicGroup-emptyState'>
-                  <div className='PublicGroup-expenseIcon'>
-                    <Icon type='expense' />
-                  </div>
-                  <label>
-                    All your approved expenses will show up here
-                  </label>
-                </div>
-              )}
-              {expenses.map(expense => <TransactionItem
-                                          key={expense.id}
-                                          transaction={expense}
-                                          user={users[expense.UserId]} />)}
-              {expenses.length >= 3 && (
-                <Link className='PublicGroup-tx-link' to={`/${group.slug}/expenses`}>
-                  See all expenses
-                </Link>
-              )}
-            </div>
-
-            <div className='PublicGroup-donations'>
-              <h2>Revenue</h2>
-              {(donations.length === 0) && (
-                <div className='PublicGroup-emptyState'>
-                  <div className='PublicGroup-donationIcon'>
-                    <Icon type='revenue' />
-                  </div>
-                  <label>
-                    All your latest donations will show up here
-                  </label>
-                </div>
-              )}
-              {donations.map(donation => <TransactionItem
-                                            key={donation.id}
-                                            transaction={donation}
-                                            user={users[donation.UserId]} />)}
-              {donations.length >= 3 && (
-                <Link className='PublicGroup-tx-link' to={`/${group.slug}/donations`}>
-                  See all donations
-                </Link>
-              )}
-            </div>
-          </div>
-
+          <center>
+            {donationSection}
+          </center>
+          
         </div>
         <PublicFooter />
       </div>
     );
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const {
       group,
-      fetchTransactions,
       fetchUsers,
       fetchGroup
     } = this.props;
 
     fetchGroup(group.id);
 
-    fetchTransactions(group.id, {
-      per_page: NUM_TRANSACTIONS_TO_SHOW,
-      sort: 'createdAt',
-      direction: 'desc',
-      donation: true
-    });
-
-    fetchTransactions(group.id, {
-      per_page: NUM_TRANSACTIONS_TO_SHOW,
-      sort: 'createdAt',
-      direction: 'desc',
-      expense: true
-    });
-
     fetchUsers(group.id);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     // decode here because we don't handle auth on the server side yet
     this.props.decodeJWT();
   }
@@ -234,8 +114,7 @@ export function donateToGroup(amount, frequency, currency, token) {
     donate,
     group,
     fetchGroup,
-    fetchUsers,
-    fetchTransactions
+    fetchUsers
   } = this.props;
 
   const payment = {
@@ -297,7 +176,6 @@ export default connect(mapStateToProps, {
   donate,
   notify,
   resetNotifications,
-  fetchTransactions,
   fetchUsers,
   fetchGroup,
   appendProfileForm,
@@ -306,13 +184,13 @@ export default connect(mapStateToProps, {
   validateDonationProfile,
   decodeJWT,
   appendDonationForm
-})(PublicGroup);
+})(DonatePage);
 
 function mapStateToProps({
+  router,
   groups,
   form,
   notification,
-  transactions,
   users,
   session
 }) {
@@ -333,18 +211,14 @@ function mapStateToProps({
   group.host = group.hosts[0] || {};
 
   group.backersCount = group.backers.length;
-  group.transactions = filterCollection(transactions, { GroupId: group.id });
-
-  const donations = group.transactions.filter(({amount}) => amount > 0);
-  const expenses = group.transactions.filter(({amount}) => amount < 0);
 
   return {
+    amount: router.params.amount,
+    interval: router.params.interval,
     group,
     notification,
     users,
     session,
-    donations: take(sortBy(donations, txn => txn.createdAt).reverse(), NUM_TRANSACTIONS_TO_SHOW),
-    expenses: take(sortBy(expenses, exp => exp.createdAt).reverse(), NUM_TRANSACTIONS_TO_SHOW),
     inProgress: groups.donateInProgress,
     shareUrl: window.location.href,
     profileForm: form.profile,

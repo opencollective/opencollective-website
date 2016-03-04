@@ -21,7 +21,8 @@ export class Transactions extends Component {
     const {
       group,
       transactions,
-      users
+      users,
+      type
     } = this.props;
 
     return (
@@ -48,7 +49,7 @@ export class Transactions extends Component {
             <div className='Widget-label'>Available funds</div>
           </div>
 
-          <h2>All transactions</h2>
+          <h2>All {type}s</h2>
           <div className='PublicGroup-transactions'>
             {(transactions.length === 0) && (
               <div className='PublicGroup-emptyState'>
@@ -56,7 +57,7 @@ export class Transactions extends Component {
                   <Icon type='expense' />
                 </div>
                 <label>
-                  All transactions will show up here
+                  All {type}s will show up here
                 </label>
               </div>
             )}
@@ -75,13 +76,17 @@ export class Transactions extends Component {
     const {
       group,
       fetchTransactions,
-      fetchUsers
+      fetchUsers,
+      type
     } = this.props;
 
-    fetchTransactions(group.id, {
+    const options = {
       sort: 'createdAt',
-      direction: 'desc'
-    });
+      direction: 'desc',
+      [type]: true
+    };
+
+    fetchTransactions(group.id, options);
 
     fetchUsers(group.id);
   }
@@ -103,14 +108,18 @@ function mapStateToProps({
   session,
   groups,
   transactions,
-  users
+  users,
+  router
 }) {
+  const type = router.params.type.slice(0,-1); // remove trailing s for the API call
   const group = values(groups)[0] || {}; // to refactor to allow only one group
+  const list = (type === 'donation') ? transactions.isDonation : transactions.isExpense;
 
   return {
     session,
     group,
-    transactions: sortBy(transactions, txn => txn.createdAt).reverse(),
-    users
+    transactions: sortBy(list, txn => txn.createdAt).reverse(),
+    users,
+    type
   };
 }
