@@ -18,7 +18,6 @@ class SubscriptionEmailForm extends Component {
   }
   render() {
     const {
-      onClick,
       inProgress
     } = this.props;
     return (
@@ -48,7 +47,7 @@ class SubscriptionEmailForm extends Component {
     this.setState({form: {email} });
   }
 
-  handleSubmit(event) {
+  handleSubmit() {
     const {
       notify,
       onClick,
