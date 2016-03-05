@@ -7,16 +7,19 @@ import PublicFooter from '../components/PublicFooter';
 import Currency from '../components/Currency';
 import TransactionItem from '../components/TransactionItem';
 import Notification from '../components/Notification';
+import SubscriptionEmailForm from '../components/SubscriptionEmailForm';
 
+import validate from '../actions/form/validate_schema';
 import decodeJWT from '../actions/session/decode_jwt';
 import logout from '../actions/session/logout';
-import sendSubscriptionsToken from '../actions/users/send_subscriptions_token';
 import cancelSubscription from '../actions/subscriptions/cancel';
+import refreshSubscriptionsToken from '../actions/users/refresh_subscriptions_token';
+import sendNewSubscriptionsToken from '../actions/users/send_new_subscriptions_token';
 import resetNotifications from '../actions/notification/reset';
 import notify from '../actions/notification/notify';
 
 // To put as standalone component when the design is final
-const SubscriptionTokenForm = ({sendToken}) => {
+const SubscriptionNewTokenForm = ({sendToken}) => {
   return (
     <div>
       <h2>Your link has expired</h2>
@@ -30,13 +33,13 @@ const SubscriptionTokenForm = ({sendToken}) => {
   );
 };
 
+
 export class Subscriptions extends Component {
   render() {
     const {
       subscriptions,
       session
     } = this.props
-
     return (
       <div className='PublicGroup'>
 
@@ -44,7 +47,8 @@ export class Subscriptions extends Component {
         <Notification {...this.props} />
         <div className='PublicContent'>
 
-          {session.jwtExpired && <SubscriptionTokenForm sendToken={sendToken.bind(this)}/>}
+          {session.jwtExpired && <SubscriptionNewTokenForm sendToken={refreshToken.bind(this)}/>}
+          {session.jwtInvalid && <SubscriptionEmailForm onClick={sendNewToken.bind(this)} {...this.props}/>}
           {subscriptions.map(subscription => {
             return (
               <div key={subscription.id}>
@@ -81,38 +85,53 @@ export function cancel(id) {
     .catch(({message}) => notify('error', message));
 }
 
-export function sendToken() {
+
+export function refreshToken() {
   const {
     token,
-    sendSubscriptionsToken,
+    refreshSubscriptionsToken,
     notify
   } = this.props;
 
-  return sendSubscriptionsToken(token)
-    .then(() => notify('success', 'Email sent'))
-    .catch(({message}) => notify('error', message));
+  return refreshSubscriptionsToken(token)
+  .then(() => notify('success', 'Email sent'))
+  .catch(({message}) => notify('error', message));
+}
 
+export function sendNewToken(email) {
+  const {
+    sendNewSubscriptionsToken,
+    notify
+  } = this.props;
+
+  return sendNewSubscriptionsToken(email)
+  .then(() => notify('success', 'Email sent'))
+  .catch(({message}) => notify('error', message));
 }
 
 export default connect(mapStateToProps, {
   logout,
   decodeJWT,
-  sendSubscriptionsToken,
+  refreshSubscriptionsToken,
+  sendNewSubscriptionsToken,
   resetNotifications,
   notify,
-  cancelSubscription
+  cancelSubscription,
+  validate
 })(Subscriptions);
 
 export function mapStateToProps({
   session,
   router,
   subscriptions,
-  notification
+  notification,
+  users
 }) {
   return {
     notification,
     session,
     subscriptions: subscriptions.list,
     token: router.params.token,
+    inProgress: users.sendingEmailInProgress
   };
 }
