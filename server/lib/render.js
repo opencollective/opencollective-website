@@ -34,12 +34,12 @@ export default (req, res, next) => {
       console.error("No route defined in the frontend react");
       next();
     } else {
-
       // Pushes the data to the reducers
       store.dispatch(hydrate({
         group: req.group,
         subscriptions: req.subscriptions,
-        jwtExpired: req.jwtExpired
+        jwtExpired: req.jwtExpired,
+        jwtInvalid: req.jwtInvalid
       }));
 
       const initialState = serialize(store.getState());

@@ -64,6 +64,7 @@ module.exports = (app) => {
    * the explicit routes and just do `app.use(render)`
    */
   app.get('/subscriptions/:token', mw.fetchSubscriptionsByUserWithToken, render);
+  app.get('/subscriptions', mw.fetchSubscriptionsByUserWithToken, render);
   app.get('/:slug([A-Za-z0-9-]+)', mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-]+)/:type', mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-]+)/donate/:amount', mw.fetchGroupBySlug, mw.addMeta, render);
