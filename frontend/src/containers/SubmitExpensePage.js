@@ -1,8 +1,22 @@
 import React, { Component } from 'react';
-
 import { connect } from 'react-redux';
+import { pushState } from 'redux-router';
+
+// import Content from './Content';
+
+
 import values from 'lodash/object/values';
 
+import createTransaction from '../actions/transactions/create';
+import uploadImage from '../actions/images/upload';
+
+import resetTransactionForm from '../actions/form/reset_transaction';
+import appendTransactionForm from '../actions/form/append_transaction';
+import validateTransaction from '../actions/form/validate_transaction';
+
+import tags from '../ui/tags';
+import vats from '../ui/vat';
+ 
 import roles from '../constants/roles';
 import PublicTopBar from '../components/PublicTopBar';
 import Notification from '../components/Notification';
@@ -13,7 +27,6 @@ import PublicGroupSignup from '../components/PublicGroupSignup';
 import Tiers from '../components/Tiers';
 
 import fetchGroup from '../actions/groups/fetch_by_id';
-import fetchUsers from '../actions/users/fetch_by_group';
 import donate from '../actions/groups/donate';
 import notify from '../actions/notification/notify';
 import resetNotifications from '../actions/notification/reset';
@@ -29,7 +42,7 @@ import ExpenseForm from '../components/ExpenseForm';
 // Number of expenses and revenue items to show on the public page
 const NUM_TRANSACTIONS_TO_SHOW = 3;
 
-export class DonatePage extends Component {
+export class SubmitExpensePage extends Component {
 
   constructor(props) {
     super(props);
@@ -73,13 +86,11 @@ export class DonatePage extends Component {
   componentWillMount() {
     const {
       group,
-      fetchUsers,
       fetchGroup
     } = this.props;
 
     fetchGroup(group.id);
 
-    fetchUsers(group.id);
   }
 
   componentDidMount() {
@@ -91,7 +102,6 @@ export class DonatePage extends Component {
 export function createExpense() {
   const {
     notify,
-    groupid,
     pushState,
     createTransaction,
     group,
@@ -110,7 +120,7 @@ export function createExpense() {
 
     return createTransaction(group.id, newTransaction);
   })
-  .then(() => pushState(null, `/groups/${groupid}/transactions`))
+  .then(() => pushState(null, `/groups/${group.id}/transactions`))
   .catch(error => notify('error', error.message));
 };
 
@@ -124,19 +134,32 @@ export default connect(mapStateToProps, {
   notify,
   fetchGroup,
   resetNotifications
-})(TransactionNew);
+})(SubmitExpensePage);
 
 function mapStateToProps({router, form, notification, images, groups}) {
   const transaction = form.transaction;
-  const groupid = router.params.groupid;
+  const group = values(groups)[0] || {stripeAccount: {}}; // to refactor to allow only one group
+  
+  const usersByRole = group.usersByRole || {};
 
+  /* @xdamman:
+   * We should refactor this. The /api/group route should directly return
+   * group.host, group.backers, group.members, group.donations, group.expenses
+   */
+  group.id = Number(group.id);
+
+  group.hosts = usersByRole[roles.HOST] || [];
+  group.members = usersByRole[roles.MEMBER] || [];
+  group.backers = usersByRole[roles.BACKER] || [];
+
+  group.host = group.hosts[0] || {};
+  
   return {
-    groupid,
-    group: groups[groupid] || {},
+    group,
     notification,
     transaction,
-    tags: tags(groupid),
-    enableVAT: vats(groupid),
+    tags: tags(group.id),
+    enableVAT: vats(group.id),
     isUploading: images.isUploading || false
   };
 }
