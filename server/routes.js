@@ -67,6 +67,7 @@ module.exports = (app) => {
   app.get('/subscriptions', mw.fetchSubscriptionsByUserWithToken, render);
   app.get('/:slug([A-Za-z0-9-]+)', mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-]+)/:type', mw.fetchGroupBySlug, mw.addMeta, render);
+  app.get('/:slug([A-Za-z0-9-]+)/expense', mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-]+)/donate/:amount', mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-]+)/donate/:amount/:interval', mw.fetchGroupBySlug, mw.addMeta, render);
 };
