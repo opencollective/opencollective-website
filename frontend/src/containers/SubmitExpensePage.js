@@ -51,12 +51,21 @@ export class SubmitExpensePage extends Component {
       showUserForm: false
     };
   }
-
+  
   render() {
     const {
       group,
       isAuthenticated
     } = this.props;
+
+    var body;
+    if (this.state.showThankYouMessage || (isAuthenticated && this.state.showUserForm)) { // we don't handle userform from logged in users) {
+      body = <PublicGroupThanks message="Expense sent" />;
+    } else if (this.state.showUserForm) {
+      body = <PublicGroupSignup {...this.props} save={saveNewUser.bind(this)} />
+    } else {
+      body = <ExpenseForm {...this.props} handleSubmit={createExpense.bind(this)} />
+    }
 
     return (
       <div className='PublicGroup'>
@@ -70,12 +79,10 @@ export class SubmitExpensePage extends Component {
             <div className='PublicGroupHeader-website'><DisplayUrl url={group.website} /></div>
             <div className='PublicGroupHeader-host'>Hosted by <a href={group.host.website}>{group.host.name}</a></div>
             <div className='PublicGroupHeader-description'>
-              {group.description}
+              Submit an expense to {group.name}
             </div>
           </div>
-          <ExpenseForm
-            {...this.props}
-            handleSubmit={createExpense.bind(this)} />
+          {body}
             
         </div>
         <PublicFooter />
@@ -120,7 +127,9 @@ export function createExpense() {
 
     return createTransaction(group.id, newTransaction);
   })
-  .then(() => pushState(null, `/groups/${group.id}/transactions`))
+  .then(() => {
+    this.setState({ showThankYouMessage: true })
+  })
   .catch(error => notify('error', error.message));
 };
 
@@ -132,12 +141,14 @@ export default connect(mapStateToProps, {
   validateTransaction,
   pushState,
   notify,
+  decodeJWT,
   fetchGroup,
   resetNotifications
 })(SubmitExpensePage);
 
 function mapStateToProps({router, form, notification, images, groups}) {
   const transaction = form.transaction;
+  
   const group = values(groups)[0] || {stripeAccount: {}}; // to refactor to allow only one group
   
   const usersByRole = group.usersByRole || {};

@@ -8,7 +8,7 @@ import * as constants from '../../constants/images';
 export default (data) => {
   return dispatch => {
     dispatch(request(data));
-    return post('images/', data)
+    return post('/images/', data)
       .then(json => dispatch(success(json)))
       .catch(error => dispatch(failure(error)));
   };

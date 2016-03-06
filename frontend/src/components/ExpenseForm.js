@@ -15,7 +15,7 @@ import Notification from './Notification';
 import SubmitButton from './SubmitButton';
 import DatePicker from './DatePicker';
 
-class TransactionForm extends Component {
+class ExpenseForm extends Component {
 
   vatInput() {
     const {
@@ -51,10 +51,10 @@ class TransactionForm extends Component {
     } = this.props;
 
     const attributes = transaction.attributes;
-
+    
     const className = classnames({
-      'TransactionForm': true,
-      'TransactionForm--isUploading': isUploading,
+      'ExpenseForm': true,
+      'ExpenseForm--isUploading': isUploading,
       'js-form': true, // for testing
     });
 
@@ -72,51 +72,62 @@ class TransactionForm extends Component {
           onFinished={({url: link}) => appendTransactionForm({link})} />
         <form
           name='transaction'
-          className='TransactionForm-form'
+          className='ExpenseForm-form'
           onSubmit={this.handleSubmit.bind(this)} >
-          <div>
-            <label className='inline'>Description: </label>
+          <div className='row'>
+            <label>Description: </label>
             <Input
               customClass='js-transaction-description'
               hasError={transaction.error.description}
-              value={transaction.attributes.description}
+              value={attributes.description}
               handleChange={description => appendTransactionForm({description})} />
           </div>
-          <div>
-            <label className='inline'>Amount: </label>
+          <div className='row'>
+            <label>Amount: </label>
             <Input
               customClass='js-transaction-amount'
               placeholder={amountPlaceholder}
               hasError={transaction.error.amount}
-              value={transaction.attributes.amount}
+              value={attributes.amount}
               handleChange={amount => appendTransactionForm({amount})} />
           </div>
           {this.vatInput()}
-          <div className='Input'>
-            <label className='inline'>Date:</label>
+          <div className='row'>
+            <label>Date:</label>
             <DatePicker
               selected={moment(attributes.createdAt)}
               maxDate={moment()}
               handleChange={createdAt => appendTransactionForm({createdAt})} />
           </div>
-          <div className='Input u-mb05'>
-            <label className='inline'>Category:</label>
+          <div className='row'>
+            <label>Category:</label>
             <SelectTag
               attributes={attributes}
               tags={tags}
               handleChange={tag => appendTransactionForm({tags: [tag]})} />
           </div>
 
-          <div className='Input'>
-            <label className='inline'>Method:</label>
+          <div className='row'>
+            <label>Payment method:</label>
             <Select
               options={paymentMethods}
               value={attributes.paymentMethod}
               handleChange={paymentMethod => appendTransactionForm({paymentMethod})} />
           </div>
 
-          <div className='Input textarea'>
-            <label className='inline'>Note:</label>
+          {attributes.paymentMethod === 'paypal' && (
+            <div className='row'>
+              <label>PayPal email:</label>
+              <Input
+                customClass='js-transaction-paypalEmail'
+                hasError={transaction.error.paypalEmail}
+                value={attributes.paypalEmail}
+                handleChange={paypalEmail => appendTransactionForm({paypalEmail})} />
+            </div>
+          )}
+
+          <div className='row textarea'>
+            <label>Note:</label>
             <TextArea
               placeholder='Optional'
               value={attributes.comment}
@@ -146,4 +157,4 @@ class TransactionForm extends Component {
   }
 }
 
-export default TransactionForm;
+export default ExpenseForm;

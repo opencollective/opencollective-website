@@ -10,5 +10,9 @@ export default [
   {
     label: 'Already reimbursed',
     value: 'manual'
+  },
+  {
+    label: 'Other (please provide instructions)',
+    value: 'other'
   }
 ];
