@@ -1,25 +1,13 @@
-import React from 'react';
-import TestUtils from 'react-addons-test-utils';
 import chai from 'chai';
 import spies from 'chai-spies';
 import noop from '../helpers/noop';
 
 import {
-  PublicGroup,
   donateToGroup,
   saveNewUser
 } from '../../../frontend/src/containers/PublicGroup';
 
-const {expect} = chai;
-const {
-  findRenderedDOMComponentWithClass,
-  renderIntoDocument
-} = TestUtils;
-
-const createElement = (props, className='PublicGroup') => {
-  const rendered = renderIntoDocument(<PublicGroup {...props} />);
-  return findRenderedDOMComponentWithClass(rendered, className);
-};
+const { expect } = chai;
 
 chai.use(spies);
 
@@ -181,31 +169,4 @@ describe('PublicGroup container', () => {
     });
   });
 
-  it('should render a notification', () => {
-    const notification = {
-      status: 'error',
-      message: 'Fail'
-    };
-    const element = createElement({
-      fetchGroup: noop,
-      fetchTransactions: noop,
-      fetchUsers: noop,
-      resetNotifications: noop,
-      decodeJWT: noop,
-      group: {
-        id: 1,
-        currency: 'MXN',
-        host: { name: 'WWCode', website: 'http://womenwhocode.com' }
-      },
-      notification,
-      admin: {},
-      form: {},
-      donationForm: {},
-      expenses: [],
-      donations: []
-    }, 'Notification');
-
-    expect(element.className).to.contain(notification.status);
-    expect(element.innerHTML).to.contain(notification.message);
-  });
 });
