@@ -50,7 +50,7 @@
         "id": 40,
         "name": "OpenCollective",
         "role": "HOST",
-        "tier": "backer",
+        "tier": "sponsor",
         "totalDonations": 100,
         "twitterHandle": "opencollect",
         "website": "https://opencollective.com"
@@ -67,15 +67,15 @@
         "website": null
     },
     {
-        "avatar": "https://d1ts43dypk8bqh.cloudfront.net/v1/avatars/d707f67b-150a-4c99-a258-b82f53cb880a",
+        "avatar": "",
         "createdAt": "2016-02-18T02:36:50.640Z",
         "id": 107,
         "name": "Chris Vasquez",
         "role": "BACKER",
         "tier": "backer",
         "totalDonations": 10,
-        "twitterHandle": "ClickPop",
-        "website": "http://www.aweber.com"
+        "twitterHandle": "",
+        "website": ""
     },
     {
         "avatar": "https://d1ts43dypk8bqh.cloudfront.net/v1/avatars/e9a79f3f-9231-489e-b23e-7ad5935d0a0b",
@@ -86,7 +86,7 @@
         "tier": "backer",
         "totalDonations": 1,
         "twitterHandle": "elimisteve",
-        "website": "https://tryingtobeawesome.com"
+        "website": ""
     },
     {
         "avatar": "https://d1ts43dypk8bqh.cloudfront.net/v1/avatars/6371417c-2d99-4753-9b1a-31c258b48f47",
