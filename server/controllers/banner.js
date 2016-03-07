@@ -58,8 +58,6 @@ module.exports = {
       imageUrl = `https://res.cloudinary.com/opencollective/image/fetch/h_64/${avatarEncoded}`;
     }
     
-    console.log("User: ", user);
-    
     if(position == users.length)
       imageUrl = `/static/images/become_${tierSingular}.svg`;
     if(position > users.length)

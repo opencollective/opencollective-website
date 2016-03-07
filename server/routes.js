@@ -50,12 +50,12 @@ module.exports = (app) => {
   /**
    * Routes
    */
-  app.get('/:slug/banner.md', mw.cache(300), mw.fetchGroupBySlug, mw.fetchUsers, banner.markdown);
-  app.get('/:slug/:tier/banner.md', mw.cache(300), mw.fetchGroupBySlug, mw.fetchUsers, banner.markdown);
-  app.get('/:slug/:tier/badge.svg', mw.cache(300), mw.fetchUsers, banner.badge);
-  app.get('/:slug/badge/:tier.svg', mw.cache(300), mw.fetchUsers, banner.badge);
-  app.get('/:slug/:tier/:position/avatar(.png)?(.jpg)?', mw.cache(300), mw.ga, mw.fetchUsers, banner.avatar);
-  app.get('/:slug/:tier/:position/website', mw.ga, mw.fetchUsers, banner.redirect);
+  app.get('/:slug/banner.md', mw.cache(300), mw.fetchGroupBySlug, mw.fetchUsers(), banner.markdown);
+  app.get('/:slug/:tier/banner.md', mw.cache(300), mw.fetchGroupBySlug, mw.fetchUsers(), banner.markdown);
+  app.get('/:slug/:tier/badge.svg', mw.cache(300), mw.fetchUsers(), banner.badge);
+  app.get('/:slug/badge/:tier.svg', mw.cache(300), mw.fetchUsers(), banner.badge);
+  app.get('/:slug/:tier/:position/avatar(.png)?(.jpg)?', mw.cache(300), mw.ga, mw.fetchUsers({cache: 300}), banner.avatar);
+  app.get('/:slug/:tier/:position/website', mw.ga, mw.fetchUsers(), banner.redirect);
   app.get('/:slug([A-Za-z0-9-]+)/widget', mw.cache(300), mw.fetchGroupBySlug, collectives.widget);
 
   /**
