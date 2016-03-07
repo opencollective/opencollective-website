@@ -10,6 +10,8 @@ sinon.stub(api, 'get', () => {
   return Promise.resolve(mocks.users);
 });
 
+mocks.backers = mocks.users.filter(u => u.tier == 'backer')
+
 describe("avatar", () => {
   it("redirects to the avatar url of the backer", (done) => {
     request(app)
@@ -25,16 +27,16 @@ describe("avatar", () => {
       .expect(302, done);
   });
 
-  it("redirects to 'become a sponsor' placeholder", (done) => {
+  it("redirects to 'become a backer' placeholder", (done) => {
     request(app)
-      .get(`/yeoman/backers/${mocks.users.length}/avatar`)
-      .expect('Location', '/static/images/becomeASponsor.svg')
+      .get(`/yeoman/backers/${mocks.backers.length}/avatar`)
+      .expect('Location', '/static/images/become_backer.svg')
       .expect(302, done);
   });
 
   it("redirects to the 1px transparent png if out of bound", (done) => {
     request(app)
-      .get(`/yeoman/backers/${(mocks.users.length+1)}/avatar`)
+      .get(`/yeoman/backers/${(mocks.backers.length+1)}/avatar`)
       .expect('Location', '/static/images/1px.png')
       .expect(302, done);
   });
@@ -44,7 +46,7 @@ describe("badge", () => {
   it("generates a SVG with the number of backers", (done) => {
     request(app)
       .get('/yeoman/badge/backers.svg')
-      .expect('content-type', 'image/svg+xml;charset=utf-8')
+      .expect('content-type', 'image/svg+xml; charset=utf-8')
       .expect(200)
       .end(done);
   });
@@ -61,22 +63,22 @@ describe("redirect", () => {
 
   it("redirects to opencollective.com/:slug if no website or twitter for the backer at that position", (done) => {
     request(app)
-      .get('/yeoman/backers/0/website')
+      .get('/yeoman/backers/1/website')
       .expect('Location', 'https://opencollective.com/yeoman')
       .expect(302, done);
   });
 
-  it(`redirects to the website of the backer (${mocks.users[3].website})`, (done) => {
+  it(`redirects to the website of the backer (${mocks.backers[3].website})`, (done) => {
     request(app)
       .get('/yeoman/backers/3/website')
-      .expect('Location', mocks.users[3].website)
+      .expect('Location', mocks.backers[3].website)
       .expect(302, done);
   });
 
-  it(`redirects to the twitter of the backer (@${mocks.users[5].twitterHandle})`, (done) => {
+  it(`redirects to the twitter of the backer (@${mocks.backers[2].twitterHandle})`, (done) => {
     request(app)
-      .get('/yeoman/backers/5/website')
-      .expect('Location', `https://twitter.com/${mocks.users[5].twitterHandle}`)
+      .get('/yeoman/backers/2/website')
+      .expect('Location', `https://twitter.com/${mocks.backers[2].twitterHandle}`)
       .expect(302, done);
   });
 

@@ -14,26 +14,35 @@ module.exports = {
     });
   },
   
-  banner: (req, res) => {
+  markdown: (req, res) => {
     const slug = req.params.slug;
     const positions = [];
     const spots = req.params.spots || 30;
-    
+    const tiername = req.params.tier || '';
+
     for(var i=0; i<spots; i++) {
       positions[i] = { position: i };
     }
-    
+
+    var tiers = req.group.tiers;
+    tiers.map(t => { t.positions = positions; });
+    if(tiername) {
+      tiers = tiers.filter(t => t.title.toLowerCase() == tiername );
+    }
+
     res.render('bannermd', {
       layout: false,
       base_url: config.host.website,
+      tiers,
       slug,
       positions
     })
   },
-  
+
   avatar: (req, res) => {
     const tier = req.params.tier || '';
-    const users = filterUsersByTier(req.users, tier.replace(/s$/,''));
+    const tierSingular = tier.replace(/s$/,'');
+    const users = filterUsersByTier(req.users, tierSingular);
     const position = parseInt(req.params.position, 10);
         
     const user = (position < users.length) ?  users[position] : {};
@@ -49,8 +58,10 @@ module.exports = {
       imageUrl = `https://res.cloudinary.com/opencollective/image/fetch/h_64/${avatarEncoded}`;
     }
     
+    console.log("User: ", user);
+    
     if(position == users.length)
-      imageUrl = "/static/images/becomeASponsor.svg";
+      imageUrl = `/static/images/become_${tierSingular}.svg`;
     if(position > users.length)
       imageUrl = "/static/images/1px.png";
 
