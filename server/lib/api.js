@@ -15,7 +15,7 @@ api.get = (endpoint, options) => {
 
   var cached = memory_cache[endpoint];
   if(options.cache && cached) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       switch(cached.status) {
         case 'finished':
           return resolve(cached.response);

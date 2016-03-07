@@ -2,13 +2,11 @@ const mocks = require('../data/mocks.json');
 mocks.backers = mocks.users.filter(u => u.tier === 'backer');
 
 const api = require('../../server/lib/api');
-const app = require('../../server/index');
-const request = require('supertest-as-promised');
 const expect = require('chai').expect;
 
 const sinon = require('sinon');
 
-const stub = sinon.stub(api, 'fetch', (endpoint, options) => {
+const stub = sinon.stub(api, 'fetch', () => {
   const response = {
     status: 200,
     json: () => mocks.backers
@@ -24,7 +22,7 @@ describe("api", () => {
     const p3 = api.get('/groups/yeoman/users', { cache: 5 });
         
     Promise.all([p1, p2, p3])
-      .then((res) => {
+      .then(() => {
         expect(stub.calledOnce).to.be.true;
         done();
       });
@@ -36,7 +34,7 @@ describe("api", () => {
     const p3 = api.get('/groups/yeoman/users');
         
     Promise.all([p1, p2, p3])
-      .then((res) => {
+      .then(() => {
         expect(stub.calledOnce).to.be.false;
         done();
       });
