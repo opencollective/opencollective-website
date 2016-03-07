@@ -36,7 +36,7 @@ export default class Tiers extends Component {
     const cancellationDisclaimer = (frequency !== 'one-time') ? "You can cancel anytime." : "";
 
     return (
-      <div className='Tier'>
+      <div className='Tier' id="{tier.name}">
         <h2>{tier.title || tier.name}</h2>
 
         <UsersList users={filterUsersByTier(group.backers, tier.name)} />

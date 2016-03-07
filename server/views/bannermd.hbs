@@ -1,10 +1,11 @@
-# Sponsors
+{{#each tiers}}
 
-Love our work and community? Help us keep it alive by donating funds to cover project expenses!<br />
-[[Become a sponsor]({{base_url}}/{{slug}})]
+# {{title}}
+
+{{description}} [[Become a {{{singular name}}}]({{../base_url}}/{{../slug}}#{{name}})]
 
 {{#each positions}}
-  <a href="{{../base_url}}/{{../slug}}/backers/{{position}}/website" target="_blank">
-    <img src="{{../base_url}}/{{../slug}}/backers/{{position}}/avatar">
-  </a>
+<a href="{{../../base_url}}/{{../../slug}}/{{../name}}/{{position}}/website" target="_blank"><img src="{{../../base_url}}/{{../../slug}}/{{../name}}/{{position}}/avatar"></a>
+{{/each}}
+
 {{/each}}

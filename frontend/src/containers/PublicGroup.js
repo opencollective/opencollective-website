@@ -49,6 +49,10 @@ const Media = ({group}) => {
         </div>
       );
   } else if (group.image) {
+
+    const encodedUrl = encodeURIComponent(group.image);
+    group.image = `https://res.cloudinary.com/opencollective/image/fetch/w_720/${encodedUrl}`;
+
     return (
       <div className='PublicGroup-image'>
         <img src={group.image} />

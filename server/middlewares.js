@@ -6,13 +6,17 @@ import ua from 'universal-analytics';
 /**
  * Fetch users by slug
  */
-const fetchUsers = (req, res, next) => {
-  api
-    .get(`/groups/${req.params.slug}/users`)
-    .then((users) => {
-      req.users = users;
-    })
-    .then(next);
+
+
+const fetchUsers = (options) => {
+  return (req, res, next) => {
+    api
+      .get(`/groups/${req.params.slug}/users`, options)
+      .then((users) => {
+        req.users = users;
+      })
+      .then(next);
+  }
 }
 
 /**
