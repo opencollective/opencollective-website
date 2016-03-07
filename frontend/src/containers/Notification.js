@@ -1,5 +1,8 @@
-import React, { Component, PropTypes} from 'react';
-import Icon from './Icon';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+
+import resetNotifications from '../actions/notification/reset';
+import Icon from '../components/Icon';
 
 class Notification extends Component {
   render() {
@@ -39,4 +42,10 @@ Notification.propTypes = {
 };
 
 
-export default Notification;
+export default connect(mapStateToProps, {
+  resetNotifications
+})(Notification);
+
+export function mapStateToProps({ notification }) {
+  return { notification };
+}
