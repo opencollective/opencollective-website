@@ -1,13 +1,9 @@
 const config = require('config');
+const resetDb = require('../lib/reset_db.js');
 
 module.exports = {
   '@tags': ['donate_page'],
-   beforeEach: (client) => {
-
-    client
-      // reset test database
-      .url(`${config.host.api}/database/reset`)
-  },
+   beforeEach: client => resetDb(client),
 
   'Donate button shows USD $100.00': (client) => {
     client
