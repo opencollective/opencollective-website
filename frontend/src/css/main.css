@@ -17,8 +17,10 @@
  * Containers
  */
 
+@import './containers/Leaderboard.css';
 @import './containers/PublicGroup.css';
 @import './containers/Subscriptions.css';
+
 
 /**
  * Components
