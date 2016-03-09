@@ -35,8 +35,10 @@
 
 .Subscription-logo {
   height: 100px;
+  width: 100px;
   margin: 0 auto 0.5rem;
   float: left;
+  cursor: pointer;
 }
 
 .Subscription-info {
