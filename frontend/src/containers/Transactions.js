@@ -43,7 +43,8 @@ export class Transactions extends Component {
             <div className='Widget-balance'>
               <Currency
                 value={group.balance}
-                currency={group.currency} />
+                currency={group.currency}
+                precision={2} />
             </div>
             <div className='Widget-label'>Available funds</div>
           </div>
@@ -63,7 +64,9 @@ export class Transactions extends Component {
             {transactions.map(tx => <TransactionItem
                                        key={tx.id}
                                        transaction={tx}
-                                       user={users[tx.UserId]} />)}
+                                       user={users[tx.UserId]}
+                                       precision={2}
+                                       />)}
           </div>
         </div>
         <PublicFooter />
