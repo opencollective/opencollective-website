@@ -53,7 +53,7 @@ export class Subscriptions extends Component {
             <div className='Subscription-page-title'>
               <h3> Your Subscriptions </h3>
             </div>
-            {jwtTokenValid &&
+            {jwtTokenValid && subscriptions.length > 0 &&
               <div className='Subscription-user'>
                  <ProfilePhoto
                     hasBorder={true}
