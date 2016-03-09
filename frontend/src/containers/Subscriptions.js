@@ -2,20 +2,18 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
-import PublicTopBar from '../components/PublicTopBar';
+import PublicTopBar from '../containers/PublicTopBar';
 import PublicFooter from '../components/PublicFooter';
 import Currency from '../components/Currency';
 import TransactionItem from '../components/TransactionItem';
-import Notification from '../components/Notification';
+import Notification from '../containers/Notification';
 import SubscriptionEmailForm from '../components/SubscriptionEmailForm';
 
 import validate from '../actions/form/validate_schema';
 import decodeJWT from '../actions/session/decode_jwt';
-import logout from '../actions/session/logout';
 import cancelSubscription from '../actions/subscriptions/cancel';
 import refreshSubscriptionsToken from '../actions/users/refresh_subscriptions_token';
 import sendNewSubscriptionsToken from '../actions/users/send_new_subscriptions_token';
-import resetNotifications from '../actions/notification/reset';
 import notify from '../actions/notification/notify';
 
 // To put as standalone component when the design is final
@@ -39,12 +37,13 @@ export class Subscriptions extends Component {
     const {
       subscriptions,
       session
-    } = this.props
+    } = this.props;
+
     return (
       <div className='PublicGroup'>
 
-        <PublicTopBar {...this.props} />
-        <Notification {...this.props} />
+        <PublicTopBar />
+        <Notification />
         <div className='PublicContent'>
 
           {session.jwtExpired && <SubscriptionNewTokenForm sendToken={refreshToken.bind(this)}/>}
@@ -110,11 +109,9 @@ export function sendNewToken(email) {
 }
 
 export default connect(mapStateToProps, {
-  logout,
   decodeJWT,
   refreshSubscriptionsToken,
   sendNewSubscriptionsToken,
-  resetNotifications,
   notify,
   cancelSubscription,
   validate
@@ -124,11 +121,9 @@ export function mapStateToProps({
   session,
   router,
   subscriptions,
-  notification,
   users
 }) {
   return {
-    notification,
     session,
     subscriptions: subscriptions.list,
     token: router.params.token,
