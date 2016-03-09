@@ -42,6 +42,7 @@
 @import './components/PublicTopBar.css';
 @import './components/Select.css';
 @import './components/ShareIcon.css';
+@import './components/SubscriptionEmailForm.css';
 @import './components/TransactionStatus.css';
 @import './components/TransactionItem.css';
 @import './components/UsersList.css';

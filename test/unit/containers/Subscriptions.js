@@ -23,6 +23,10 @@ describe('Subscriptions container', () => {
         subscriptions: {},
         users: {
           sendingEmailInProgress: false
+        },
+        session: {
+          jwtInvalid: false,
+          jwtExpired: false
         }
       });
 
