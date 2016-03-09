@@ -1,6 +1,5 @@
 import express from 'express';
 import morgan from 'morgan';
-import _ from 'lodash';
 import config from 'config';
 import compression from 'compression';
 import pkg from '../package.json';
