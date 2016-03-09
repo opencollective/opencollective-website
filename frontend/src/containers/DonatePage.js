@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import values from 'lodash/object/values';
 
 import roles from '../constants/roles';
-import PublicTopBar from '../components/PublicTopBar';
-import Notification from '../components/Notification';
+import PublicTopBar from '../containers/PublicTopBar';
+import Notification from '../containers/Notification';
 import PublicFooter from '../components/PublicFooter';
 import PublicGroupThanks from '../components/PublicGroupThanks';
 import DisplayUrl from '../components/DisplayUrl';
@@ -16,12 +16,10 @@ import fetchGroup from '../actions/groups/fetch_by_id';
 import fetchUsers from '../actions/users/fetch_by_group';
 import donate from '../actions/groups/donate';
 import notify from '../actions/notification/notify';
-import resetNotifications from '../actions/notification/reset';
 import appendDonationForm from '../actions/form/append_donation';
 import appendProfileForm from '../actions/form/append_profile';
 import updateUser from '../actions/users/update_user';
 import validateDonationProfile from '../actions/form/validate_donation_profile';
-import logout from '../actions/session/logout';
 import decodeJWT from '../actions/session/decode_jwt';
 
 // Number of expenses and revenue items to show on the public page
@@ -54,7 +52,7 @@ export class DonatePage extends Component {
       interval: interval || 'one-time',
       range: [amount, 10000000]
     }];
-    
+
     var donationSection;
     if (this.state.showThankYouMessage || (isAuthenticated && this.state.showUserForm)) { // we don't handle userform from logged in users) {
       donationSection = <PublicGroupThanks />;
@@ -63,11 +61,11 @@ export class DonatePage extends Component {
     } else {
       donationSection = <Tiers tiers={tiers} {...this.props} form={donationForm} onToken={donateToGroup.bind(this)} />
     }
-    
+
     return (
       <div className='PublicGroup'>
-        <PublicTopBar session={this.props.session} logout={this.props.logout} slug={group.slug}/>
-        <Notification {...this.props} />
+        <PublicTopBar />
+        <Notification />
 
         <div className='PublicContent'>
 
@@ -83,7 +81,7 @@ export class DonatePage extends Component {
           <center>
             {donationSection}
           </center>
-          
+
         </div>
         <PublicFooter />
       </div>
@@ -175,12 +173,10 @@ export function saveNewUser() {
 export default connect(mapStateToProps, {
   donate,
   notify,
-  resetNotifications,
   fetchUsers,
   fetchGroup,
   appendProfileForm,
   updateUser,
-  logout,
   validateDonationProfile,
   decodeJWT,
   appendDonationForm
@@ -190,7 +186,6 @@ function mapStateToProps({
   router,
   groups,
   form,
-  notification,
   users,
   session
 }) {
@@ -216,7 +211,6 @@ function mapStateToProps({
     amount: router.params.amount,
     interval: router.params.interval,
     group,
-    notification,
     users,
     session,
     inProgress: groups.donateInProgress,

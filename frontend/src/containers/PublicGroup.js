@@ -10,8 +10,8 @@ import filterCollection from '../lib/filter_collection';
 import formatCurrency from '../lib/format_currency';
 
 import roles from '../constants/roles';
-import PublicTopBar from '../components/PublicTopBar';
-import Notification from '../components/Notification';
+import PublicTopBar from '../containers/PublicTopBar';
+import Notification from '../containers/Notification';
 import PublicFooter from '../components/PublicFooter';
 import PublicGroupThanks from '../components/PublicGroupThanks';
 import TransactionItem from '../components/TransactionItem';
@@ -30,12 +30,10 @@ import fetchUsers from '../actions/users/fetch_by_group';
 import fetchTransactions from '../actions/transactions/fetch_by_group';
 import donate from '../actions/groups/donate';
 import notify from '../actions/notification/notify';
-import resetNotifications from '../actions/notification/reset';
 import appendDonationForm from '../actions/form/append_donation';
 import appendProfileForm from '../actions/form/append_profile';
 import updateUser from '../actions/users/update_user';
 import validateDonationProfile from '../actions/form/validate_donation_profile';
-import logout from '../actions/session/logout';
 import decodeJWT from '../actions/session/decode_jwt';
 
 // Number of expenses and revenue items to show on the public page
@@ -99,8 +97,8 @@ export class PublicGroup extends Component {
     return (
       <div className='PublicGroup'>
 
-        <PublicTopBar session={this.props.session} logout={this.props.logout} slug={group.slug}/>
-        <Notification {...this.props} />
+        <PublicTopBar />
+        <Notification />
 
         <div className='PublicContent'>
 
@@ -300,13 +298,11 @@ export function saveNewUser() {
 export default connect(mapStateToProps, {
   donate,
   notify,
-  resetNotifications,
   fetchTransactions,
   fetchUsers,
   fetchGroup,
   appendProfileForm,
   updateUser,
-  logout,
   validateDonationProfile,
   decodeJWT,
   appendDonationForm
@@ -315,7 +311,6 @@ export default connect(mapStateToProps, {
 function mapStateToProps({
   groups,
   form,
-  notification,
   transactions,
   users,
   session
@@ -344,7 +339,6 @@ function mapStateToProps({
 
   return {
     group,
-    notification,
     users,
     session,
     donations: take(sortBy(donations, txn => txn.createdAt).reverse(), NUM_TRANSACTIONS_TO_SHOW),
