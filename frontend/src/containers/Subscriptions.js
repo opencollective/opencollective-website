@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import { connect } from 'react-redux';
+import { pushState } from 'redux-router';
 
 import PublicTopBar from '../containers/PublicTopBar';
 import PublicFooter from '../components/PublicFooter';
@@ -41,8 +42,10 @@ export class Subscriptions extends Component {
     const {
       subscriptions,
       session,
-      jwtTokenValid
-    } = this.props
+      jwtTokenValid,
+      pushState
+    } = this.props;
+
     return (
       <div className='Subscription'>
 
@@ -68,11 +71,16 @@ export class Subscriptions extends Component {
           {session.jwtExpired && <SubscriptionNewTokenForm sendToken={refreshToken.bind(this)}/>}
           {session.jwtInvalid && <SubscriptionEmailForm onClick={sendNewToken.bind(this)} {...this.props}/>}
           {subscriptions.map(subscription => {
+              const divStyle = {
+                backgroundImage: `url(${subscription.Transactions[0].Group.logo})`,
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'contain',
+                backgroundPosition: 'center'
+              };
             return (
-                <div className='Subscription-group' key={subscription.id}>
-                    <a href={subscription.Transactions[0].Group.publicUrl} >
-                      <img className='Subscription-logo' src={subscription.Transactions[0].Group.logo} />
-                    </a>
+                <div className='Subscription-group' key={subscription.id} >
+                  <div className='Subscription-logo' style={divStyle} onClick={() => pushState(null, `/${subscription.Transactions[0].Group.slug}`)} >
+                  </div>
                   <div className='Subscription-info'>
                     <div className='Subscription-name'>
                         {subscription.Transactions[0].Group.name}
@@ -172,7 +180,8 @@ export default connect(mapStateToProps, {
   cancelSubscription,
   validate,
   getSubscriptions,
-  storeToken
+  storeToken,
+  pushState
 })(Subscriptions);
 
 export function mapStateToProps({
