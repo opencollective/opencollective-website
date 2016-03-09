@@ -5,8 +5,6 @@ module.exports = {
   '@tags': ['donations_page'],
   beforeEach: (client) => {
 
-    console.log("NODE_ENV:", process.env.NODE_ENV);
-
     resetDb(client)
       .url(`${config.host.website}/testcollective/donations`)
       .waitForElementVisible('body', 1000)
