@@ -40,7 +40,8 @@ export class Subscriptions extends Component {
   render() {
     const {
       subscriptions,
-      session
+      session,
+      jwtTokenValid
     } = this.props
     return (
       <div className='Subscription'>
@@ -52,7 +53,7 @@ export class Subscriptions extends Component {
             <div className='Subscription-page-title'>
               <h3> Your Subscriptions </h3>
             </div>
-            {subscriptions.length > 0 &&
+            {jwtTokenValid &&
               <div className='Subscription-user'>
                  <ProfilePhoto
                     hasBorder={true}
@@ -100,12 +101,12 @@ export class Subscriptions extends Component {
                 </div>
               );
           })}
-          {subscriptions.length > 0 &&
+          {jwtTokenValid && subscriptions.length > 0 &&
             <div className='Subscription-text Subscription-bottom-text'>
               <p> Find <a href='http://www.opencollective.com'>more collectives </a> to support! </p>
             </div>
           }
-          {subscriptions.length === 0 &&
+          {jwtTokenValid && subscriptions.length === 0 &&
             <div className='Subscription-text'>
             <p> Looks like you aren't contributing right now. Let's fix it!</p>
             <p> Find <a href='http://www.opencollective.com'>more collectives </a> to support. </p>
@@ -184,6 +185,7 @@ export function mapStateToProps({
     session,
     subscriptions: subscriptions.list,
     token: router.params.token,
-    inProgress: users.sendingEmailInProgress
+    inProgress: users.sendingEmailInProgress,
+    jwtTokenValid: !session.jwtInvalid && !session.jwtExpired
   };
 }
