@@ -5,7 +5,7 @@ import ProfilePhoto from './ProfilePhoto';
 import Currency from './Currency';
 import TransactionStatus from './TransactionStatus';
 
-export default ({transaction, user}) => (
+export default ({transaction, user, precision=0}) => (
   <div className='TransactionItem'>
     <ProfilePhoto
       hasBorder={true}
@@ -13,7 +13,7 @@ export default ({transaction, user}) => (
 
     <div className='TransactionItem-info'>
       <div className='TransactionItem-amount'>
-        <Currency value={transaction.amount} currency={transaction.currency} />
+        <Currency value={transaction.amount} currency={transaction.currency} precision={precision}/>
       </div>
       <div className='TransactionItem-description'>
         {transaction.description}
