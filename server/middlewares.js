@@ -42,9 +42,9 @@ const fetchSubscriptionsByUserWithToken = (req, res, next) => {
     return next();
   }
 
-  api.get('/subscriptions', {
+  api.get('/subscriptions', {headers: {
       Authorization: `Bearer ${req.params.token}`
-    })
+    }})
     .then(subscriptions => {
       req.subscriptions = subscriptions;
       next();
@@ -119,4 +119,12 @@ const addMeta = (req, res, next) => {
   next();
 };
 
-export default { fetchGroupBySlug, fetchSubscriptionsByUserWithToken, fetchUsers, ga, addMeta, cache}
+const addTitle = (title) => {
+  return (req, res, next) => {
+    req.meta = {
+      title: title
+    }
+    next();
+  }
+}
+export default { fetchGroupBySlug, fetchSubscriptionsByUserWithToken, fetchUsers, ga, addMeta, cache, addTitle}

@@ -18,6 +18,7 @@
  */
 
 @import './containers/PublicGroup.css';
+@import './containers/Subscriptions.css';
 
 /**
  * Components
@@ -28,6 +29,7 @@
 @import './components/DonationPicker.css';
 @import './components/Field.css';
 @import './components/Icon.css';
+@import './components/InlineToggle.css';
 @import './components/Input.css';
 @import './components/Label.css';
 @import './components/Metric.css';
