@@ -75,14 +75,11 @@ app.use((err, req, res, next) => {
 
 app.set('port', process.env.PORT || 3000);
 
-if (!_.contains(['test', 'circleci'], app.set('env'))) {
-  /**
-   * Start server
-   */
-  app.listen(app.get('port'), () => {
-    console.log(`Express server listening on port ${app.get('port')}`);
-  });
-
-}
+/**
+ * Start server
+ */
+app.listen(app.get('port'), () => {
+  console.log(`Express server listening on port ${app.get('port')} in ${app.get('env')} environment.`);
+});
 
 module.exports = app;
