@@ -1,0 +1,44 @@
+.Leaderboard-header {
+
+}
+
+.Leaderboard-table {
+  text-align: center;
+}
+
+td {
+  padding: 0.5rem 1rem 0rem 1rem;
+}
+
+.Leaderboard-data {
+  margin: 0px auto 1rem auto;
+}
+
+.Leaderboard-header-row {
+  font-weight: bold;
+  border-bottom: 1px solid gray;
+  text-align: center;
+}
+
+.Leaderboard-group-name {
+  text-align: left;
+  border-right: 1px solid gray;
+}
+
+.Leaderboard-donations {
+  border-right: 1px solid gray;
+  width: 75px;
+}
+
+.Leaderboard-amount {
+  border-right: 1px solid gray;
+  width: 75px;
+}
+
+.Leaderboard-last {
+  width: 105px;
+}
+
+.Leaderboard-info {
+  font-size: 0.9rem;
+}
