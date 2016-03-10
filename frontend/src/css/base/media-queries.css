@@ -91,6 +91,24 @@
   .PublicFooter img {
     max-height: 30px;
   }
+
+  /* For the subscription page */
+  .Subscription-logo {
+    height: 50px;
+  }
+
+  .Subscription-info {
+    padding-top: calc(var(--spacing)/2);
+  }
+
+  .Subscription-cancel {
+    display:block;
+    margin-left: 0px;
+  }
+
+  .Subscription-transactions {
+    margin-left: calc(50px + var(--spacing));
+  }
 }
 
 @media (--small-viewport) {
@@ -101,5 +119,16 @@
   .DonationPicker label {
     margin-right: 2rem;
   }
+
+  .Subscription-user {
+    display: none;
+  }
+
+  .Subscription-info {
+    max-width: 75%
+  }
+
+
+/* For the subscription page */
 
 }

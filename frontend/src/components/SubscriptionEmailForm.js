@@ -22,9 +22,9 @@ class SubscriptionEmailForm extends Component {
     } = this.props;
     return (
       <div className='Subscription-Email'>
-        <p className='u-py1'>
+        <div className='Subscription-Email-description'>
           We will send you an email with a link to access your subscriptions.
-        </p>
+        </div>
         <form
           className='Subscription-Email-form'>
           <Input

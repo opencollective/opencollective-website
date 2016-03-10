@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import logout from '../actions/session/logout';
 
 class PublicTopBar extends React.Component {
 
@@ -43,4 +46,10 @@ class PublicTopBar extends React.Component {
   }
 };
 
-export default PublicTopBar;
+export default connect(mapStateToProps, {
+  logout
+})(PublicTopBar);
+
+export function mapStateToProps({ session }) {
+  return { session };
+}

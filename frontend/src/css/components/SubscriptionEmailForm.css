@@ -1,0 +1,11 @@
+.Subscription-Email {
+  display: inline-block;
+}
+
+.Subscription-Email-description {
+  padding-bottom: 1rem;
+}
+
+.Subscription-Email .Button {
+	max-width: 167px;
+}
