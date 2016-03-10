@@ -10,15 +10,17 @@ export default function groups(state={}, action={}) {
   switch (action.type) {
 
     case HYDRATE:
-      if (!action.data.group) {
-        return state;
+      if (action.data.group) {
+        return merge({}, state, {
+          [action.data.group.id]: action.data.group
+        });
       }
-
-      const group = action.data.group;
-
-      return merge({}, state, {
-        [group.id]: group
-      });
+      else if (action.data.leaderboard) {
+        return merge({}, state, {
+          leaderboard: action.data.leaderboard
+        });
+      }
+      return state;
 
     case constants.GROUP_SUCCESS:
       return merge({}, state, action.groups);
