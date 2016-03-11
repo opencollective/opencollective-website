@@ -13,7 +13,7 @@ import validateTransaction from '../actions/form/validate_transaction';
 
 import tags from '../ui/tags';
 import vats from '../ui/vat';
- 
+
 import roles from '../constants/roles';
 import PublicGroupThanks from '../components/PublicGroupThanks';
 import PublicGroupSignup from '../components/PublicGroupSignup';
@@ -29,7 +29,7 @@ export class SubmitExpense extends Component {
 
   constructor(props) {
     super(props);
-    
+
     // We don't have `onCancel` here
     console.log("This.props: ", this.props);
     this.state = {
@@ -37,7 +37,7 @@ export class SubmitExpense extends Component {
       showUserForm: false
     };
   }
-  
+
   render() {
     const {
       group,
@@ -69,19 +69,6 @@ export class SubmitExpense extends Component {
     // decode here because we don't handle auth on the server side yet
     this.props.decodeJWT();
   }
-  
-  connect(mapStateToProps, {
-    createTransaction,
-    uploadImage,
-    resetTransactionForm,
-    appendTransactionForm,
-    validateTransaction,
-    pushState,
-    notify,
-    decodeJWT,
-    fetchGroup,
-    resetNotifications
-  })(SubmitExpense);
 
 }
 
@@ -112,11 +99,25 @@ export function createExpense() {
   .catch(error => notify('error', error.message));
 };
 
-function mapStateToProps({form, notification, images, groups, onCancel}) {
+export default connect(mapStateToProps, {
+  createTransaction,
+  uploadImage,
+  resetTransactionForm,
+  appendTransactionForm,
+  validateTransaction,
+  pushState,
+  notify,
+  decodeJWT,
+  fetchGroup,
+  resetNotifications
+})(SubmitExpense);
+
+
+function mapStateToProps({form, notification, images, groups}) {
   const transaction = form.transaction;
-  
+
   const group = values(groups)[0] || {stripeAccount: {}}; // to refactor to allow only one group
-  
+
   const usersByRole = group.usersByRole || {};
 
   /* @xdamman:
@@ -130,14 +131,13 @@ function mapStateToProps({form, notification, images, groups, onCancel}) {
   group.backers = usersByRole[roles.BACKER] || [];
 
   group.host = group.hosts[0] || {};
-  
+
   return {
     group,
     notification,
     transaction,
     tags: tags(group.id),
     enableVAT: vats(group.id),
-    onCancel,
     isUploading: images.isUploading || false
   };
 }
