@@ -18,6 +18,7 @@ describe('PublicGroup container', () => {
     const fetchGroup = chai.spy(noop);
     const fetchUsers = chai.spy(noop);
     const setState = chai.spy(noop);
+    const refreshData = chai.spy(noop);
     const token = {
       id: 'tok_17BNlt2eZvKYlo2CVoTcWs9D',
       email: 'test@gmail.com'
@@ -45,12 +46,16 @@ describe('PublicGroup container', () => {
       fetchTransactions: noop
     };
 
-    donateToGroup.call({props, setState}, 10, 'monthly', 'MXN', token)
+    donateToGroup.call({props, setState, refreshData}, {
+      amount: 10,
+      frequency: 'monthly',
+      currency: 'MXN',
+      token
+    })
     .then(() => {
       expect(donate).to.have.been.called();
       expect(setState).to.have.been.called();
-      expect(fetchGroup).to.have.been.called();
-      expect(fetchUsers).to.have.been.called();
+      expect(refreshData).to.have.been.called();
       expect(notify).to.not.have.been.called();
       done();
     })
@@ -59,6 +64,7 @@ describe('PublicGroup container', () => {
 
   it('should donate with subscription to the group', (done) => {
     const setState = chai.spy(noop);
+    const refreshData = chai.spy(noop);
     const token = {
       id: 'tok_17BNlt2eZvKYlo2CVoTcWs9D',
       email: 'test@gmail.com'
@@ -90,7 +96,12 @@ describe('PublicGroup container', () => {
       frequency: 'monthly'
     };
 
-    donateToGroup.call({props, setState}, 10, 'monthly', 'MXN', token)
+    donateToGroup.call({props, setState, refreshData}, {
+      amount: 10,
+      frequency: 'monthly',
+      currency: 'MXN',
+      token
+    })
     .then(() => {
       expect(donate).to.have.been.called();
       expect(notify).to.not.have.been.called();
@@ -117,7 +128,7 @@ describe('PublicGroup container', () => {
       }
     }
     const props = {
-      users: {newUser: {id: 1}},
+      newUser: {id: 1},
       profileForm,
       validateDonationProfile,
       updateUser,

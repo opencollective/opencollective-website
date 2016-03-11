@@ -228,7 +228,6 @@ export class PublicGroup extends Component {
 
   componentWillMount() {
     const {
-      newUser,
       decodeJWT,
       paypalIsDone,
       hasFullAccount
@@ -272,10 +271,7 @@ export function donateToGroup({amount, frequency, currency, token, options}) {
   const {
     notify,
     donate,
-    group,
-    fetchGroup,
-    fetchUsers,
-    fetchTransactions
+    group
   } = this.props;
 
   const payment = {
@@ -293,19 +289,18 @@ export function donateToGroup({amount, frequency, currency, token, options}) {
 
   return donate(group.id, payment, options)
     .then(() => {
-      if (!options.paypal) {
-        // stripe donation is immediate after the request
+      if (options && options.paypal) {
         // Paypal will redirect to this page and we will refresh at that moment
-        return this.refreshData()
-        .then(() => {
-          const hasFullAccount = this.props.hasFullAccount;
-
-          this.setState({
-            showUserForm: !hasFullAccount,
-            showThankYouMessage: hasFullAccount
-          });
-        });
+        return;
       }
+        // stripe donation is immediate after the request
+      return this.refreshData()
+      .then(() => {
+        this.setState({
+          showUserForm: !this.props.hasFullAccount,
+          showThankYouMessage: this.props.hasFullAccount
+        });
+      });
     })
     .catch((err) => notify('error', err.message));
 }

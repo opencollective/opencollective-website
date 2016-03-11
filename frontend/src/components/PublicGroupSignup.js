@@ -9,7 +9,6 @@ export class PublicGroupSignup extends Component {
     const {
       profileForm,
       saveInProgress,
-      users,
       save,
       appendProfileForm,
       newUser
