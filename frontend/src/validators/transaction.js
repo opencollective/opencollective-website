@@ -8,7 +8,6 @@ import paymentMethods from '../ui/payment_methods';
 /**
  * New transaction schema
  */
-
 const schema = Joi.object().keys({
   link: Joi.string().uri()
     .label('Photo')
@@ -30,7 +29,13 @@ const schema = Joi.object().keys({
     .label('Category'),
   approved: Joi.boolean(),
   paymentMethod: Joi.string().valid(pluck(paymentMethods, 'value'))
-    .label('Payment method'),
+    .label('Reimbursement method'),
+  email: Joi.string().email()
+    .label('Email')
+    .allow(null),
+  paypalEmail: Joi.string().email()
+    .label('PayPal email')
+    .allow(null),
   comment: Joi.string()
     .label('Comment')
     .allow(null),

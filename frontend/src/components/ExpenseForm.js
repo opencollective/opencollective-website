@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
 import moment from 'moment';
 
@@ -11,8 +11,9 @@ import Input from './Input';
 import SelectTag from './SelectTag';
 import Select from './Select';
 import TextArea from './TextArea';
-import Notification from './Notification';
+import Notification from '../containers/Notification';
 import SubmitButton from './SubmitButton';
+import Button from './Button';
 import DatePicker from './DatePicker';
 
 class ExpenseForm extends Component {
@@ -46,8 +47,7 @@ class ExpenseForm extends Component {
       group,
       appendTransactionForm,
       isUploading,
-      enableVAT,
-      children
+      enableVAT
     } = this.props;
 
     const attributes = transaction.attributes;
@@ -73,7 +73,7 @@ class ExpenseForm extends Component {
         <form
           name='transaction'
           className='ExpenseForm-form'
-          onSubmit={this.handleSubmit.bind(this)} >
+          onSubmit={this.onSubmit.bind(this)} >
           <div className='row'>
             <label>Description: </label>
             <Input
@@ -108,7 +108,7 @@ class ExpenseForm extends Component {
           </div>
 
           <div className='row'>
-            <label>Payment method:</label>
+            <label>Reimbursement method:</label>
             <Select
               options={paymentMethods}
               value={attributes.paymentMethod}
@@ -125,6 +125,16 @@ class ExpenseForm extends Component {
                 handleChange={paypalEmail => appendTransactionForm({paypalEmail})} />
             </div>
           )}
+          {attributes.paymentMethod !== 'paypal' && (
+            <div className='row'>
+              <label>Email:</label>
+              <Input
+                customClass='js-transaction-email'
+                hasError={transaction.error.email}
+                value={attributes.email}
+                handleChange={email => appendTransactionForm({email})} />
+            </div>
+          )}
 
           <div className='row textarea'>
             <label>Note:</label>
@@ -133,16 +143,24 @@ class ExpenseForm extends Component {
               value={attributes.comment}
               handleChange={comment => appendTransactionForm({comment})} />
           </div>
-          {children || <SubmitButton />}
+
+          <SubmitButton />
+          <Button color="red" label="Cancel" onClick={this.onCancel.bind(this)} />
+
         </form>
       </div>
     );
   }
 
-  handleSubmit(event) {
+  onCancel(event) {
     event.preventDefault();
-    this.props.handleSubmit(this.props.transaction);
-  }
+    this.props.onCancel();
+  };
+
+  onSubmit(event) {
+    event.preventDefault();
+    this.props.onSubmit(this.props.transaction);
+  };
 
   componentDidMount() {
     const {
@@ -156,5 +174,9 @@ class ExpenseForm extends Component {
 
   }
 }
+
+ExpenseForm.propTypes = {
+  onCancel: PropTypes.func.isRequired
+};
 
 export default ExpenseForm;
