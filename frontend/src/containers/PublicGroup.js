@@ -15,7 +15,7 @@ import Notification from '../containers/Notification';
 import PublicFooter from '../components/PublicFooter';
 import PublicGroupThanks from '../components/PublicGroupThanks';
 import TransactionItem from '../components/TransactionItem';
-import YoutubeVideo from '../components/YoutubeVideo';
+import Media from '../components/Media';
 import Metric from '../components/Metric';
 import UsersList from '../components/UsersList';
 import ShareIcon from '../components/ShareIcon';
@@ -39,32 +39,6 @@ import decodeJWT from '../actions/session/decode_jwt';
 // Number of expenses and revenue items to show on the public page
 const NUM_TRANSACTIONS_TO_SHOW = 3;
 
-const Media = ({group}) => {
-  if (group.video) {
-      return (
-        <div className='PublicGroup-video'>
-          <YoutubeVideo video={group.video} />
-        </div>
-      );
-  } else if (group.image) {
-
-    const encodedUrl = encodeURIComponent(group.image);
-    group.image = `https://res.cloudinary.com/opencollective/image/fetch/w_720/${encodedUrl}`;
-
-    return (
-      <div className='PublicGroup-image'>
-        <img src={group.image} />
-      </div>
-    );
-  } else {
-    return (
-      <div className='PublicGroup-image'>
-        <div className='PublicGroup-image-placeholder'/>
-      </div>
-    );
-  }
-};
-
 export class PublicGroup extends Component {
 
   constructor(props) {
@@ -75,25 +49,95 @@ export class PublicGroup extends Component {
     };
   }
 
-  render() {
+  donationSection() {
     const {
       group,
-      donations,
-      expenses,
-      shareUrl,
-      users,
       isAuthenticated,
       donationForm
     } = this.props;
 
-    var donationSection;
     if (this.state.showThankYouMessage || (isAuthenticated && this.state.showUserForm)) { // we don't handle userform from logged in users) {
-      donationSection = <PublicGroupThanks />;
+      return <PublicGroupThanks />;
     } else if (this.state.showUserForm) {
-      donationSection = <PublicGroupSignup {...this.props} save={saveNewUser.bind(this)} />
+      return <PublicGroupSignup {...this.props} save={saveNewUser.bind(this)} />
     } else {
-      donationSection = <Tiers tiers={group.tiers} {...this.props} form={donationForm} onToken={donateToGroup.bind(this)} />
+      return <Tiers tiers={group.tiers} {...this.props} form={donationForm} onToken={donateToGroup.bind(this)} />
     }
+  }
+
+  expenseList() {
+    const {
+      expenses,
+      users,
+      group
+    } = this.props;
+
+    const emptyState = (
+      <div className='PublicGroup-emptyState'>
+        <div className='PublicGroup-expenseIcon'>
+          <Icon type='expense' />
+        </div>
+        <label>
+          All your approved expenses will show up here
+        </label>
+      </div>
+    );
+
+    return (
+      <div className='PublicGroup-expenses'>
+        <h2>Expenses</h2>
+        {(expenses.length === 0) && emptyState}
+        {expenses.map(expense => <TransactionItem key={expense.id} transaction={expense} user={users[expense.UserId]} />)}
+        {expenses.length >= NUM_TRANSACTIONS_TO_SHOW && (
+          <Link className='PublicGroup-tx-link' to={`/${group.slug}/expenses`}>
+            See all expenses
+          </Link>
+        )}
+      </div>
+    );
+
+  }
+
+  donationList() {
+    const {
+      donations,
+      users,
+      group
+    } = this.props;
+
+    const emptyState = (
+      <div className='PublicGroup-emptyState'>
+        <div className='PublicGroup-donationIcon'>
+          <Icon type='revenue' />
+        </div>
+        <label>
+          All your latest donations will show up here
+        </label>
+      </div>
+    );
+
+    return (
+      <div className='PublicGroup-donations'>
+        <h2>Revenue</h2>
+        {(donations.length === 0) && emptyState}
+
+        {donations.map(donation => <TransactionItem key={donation.id} transaction={donation} user={users[donation.UserId]} />)}
+
+        {donations.length >= NUM_TRANSACTIONS_TO_SHOW && (
+          <Link className='PublicGroup-tx-link' to={`/${group.slug}/donations`}>
+            See all donations
+          </Link>
+        )}
+      </div>
+    );
+  }
+
+  render() {
+    const {
+      group,
+      shareUrl,
+    } = this.props;
+
     return (
       <div className='PublicGroup'>
 
@@ -141,54 +185,11 @@ export class PublicGroup extends Component {
           </div>
 
           <div id='support'></div>
-          {donationSection}
+          {this.donationSection()}
 
           <div className='PublicGroup-transactions'>
-            <div className='PublicGroup-expenses'>
-              <h2>Expenses</h2>
-              {(expenses.length === 0) && (
-                <div className='PublicGroup-emptyState'>
-                  <div className='PublicGroup-expenseIcon'>
-                    <Icon type='expense' />
-                  </div>
-                  <label>
-                    All your approved expenses will show up here
-                  </label>
-                </div>
-              )}
-              {expenses.map(expense => <TransactionItem
-                                          key={expense.id}
-                                          transaction={expense}
-                                          user={users[expense.UserId]} />)}
-              {expenses.length >= 3 && (
-                <Link className='PublicGroup-tx-link' to={`/${group.slug}/expenses`}>
-                  See all expenses
-                </Link>
-              )}
-            </div>
-
-            <div className='PublicGroup-donations'>
-              <h2>Revenue</h2>
-              {(donations.length === 0) && (
-                <div className='PublicGroup-emptyState'>
-                  <div className='PublicGroup-donationIcon'>
-                    <Icon type='revenue' />
-                  </div>
-                  <label>
-                    All your latest donations will show up here
-                  </label>
-                </div>
-              )}
-              {donations.map(donation => <TransactionItem
-                                            key={donation.id}
-                                            transaction={donation}
-                                            user={users[donation.UserId]} />)}
-              {donations.length >= 3 && (
-                <Link className='PublicGroup-tx-link' to={`/${group.slug}/donations`}>
-                  See all donations
-                </Link>
-              )}
-            </div>
+            {this.expenseList()}
+            {this.donationList()}
           </div>
 
         </div>
