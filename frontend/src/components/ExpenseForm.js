@@ -144,8 +144,10 @@ class ExpenseForm extends Component {
               handleChange={comment => appendTransactionForm({comment})} />
           </div>
 
-          <SubmitButton />
-          <Button color="red" label="Cancel" onClick={this.onCancel.bind(this)} />
+          <div className="buttonsRow">
+            <SubmitButton />
+            <Button color="red" label="Cancel" onClick={this.onCancel.bind(this)} />
+          </div>
 
         </form>
       </div>

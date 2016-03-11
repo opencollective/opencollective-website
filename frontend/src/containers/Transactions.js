@@ -66,8 +66,8 @@ export class Transactions extends Component {
 
           {showSubmitExpense && (<SubmitExpense onCancel={this.toggleAddExpense.bind(this)} />)}
 
+          {type === 'expense' && !showSubmitExpense && (<Button onClick={this.toggleAddExpense.bind(this)} label="Submit Expense" id="submitExpenseBtn" />)}
           <h2>All {type}s</h2>
-          {type === 'expense' && (<Button onClick={this.toggleAddExpense.bind(this)} label="Add Expense" />)}
 
           <div className='PublicGroup-transactions'>
             {(transactions.length === 0) && (

@@ -24,3 +24,19 @@
 .ExpenseForm label {
   display: block;
 }
+
+@media (--medium-viewport) {
+ .ExpenseForm {
+   .ImageUpload {
+     float: none;
+     margin: 0 auto;
+     margin-right: auto;
+   }
+   form {
+    clear: left;
+   }
+   .buttonsRow {
+     text-align: center;
+   }
+ }
+}

@@ -30,8 +30,6 @@ export class SubmitExpense extends Component {
   constructor(props) {
     super(props);
 
-    // We don't have `onCancel` here
-    console.log("This.props: ", this.props);
     this.state = {
       showThankYouMessage: false,
       showUserForm: false
@@ -40,7 +38,6 @@ export class SubmitExpense extends Component {
 
   render() {
     const {
-      group,
       onCancel,
       isAuthenticated
     } = this.props;
@@ -75,7 +72,6 @@ export class SubmitExpense extends Component {
 export function createExpense() {
   const {
     notify,
-    pushState,
     createTransaction,
     group,
     validateTransaction,
@@ -90,10 +86,10 @@ export function createExpense() {
       amount: -attributes.amount,
       currency: group.currency
     };
-
     return createTransaction(group.id, newTransaction);
   })
   .then(() => {
+    window.scrollTo(0, 0);
     this.setState({ showThankYouMessage: true })
   })
   .catch(error => notify('error', error.message));

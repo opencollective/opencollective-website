@@ -1,9 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import Icon from './Icon';
-
-export default ({children, label, color, inProgress, onClick}) => {
+export default ({id, label, color, inProgress, onClick}) => {
   const className = classNames({
     'Button': true,
     'Button--submit': true,
@@ -14,6 +12,7 @@ export default ({children, label, color, inProgress, onClick}) => {
   return (
     <span>
       <button
+        id={id}
         onClick={onClick}
         className={className}>
         {label}
