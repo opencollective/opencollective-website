@@ -53,10 +53,11 @@ export class PublicGroup extends Component {
     const {
       group,
       isAuthenticated,
-      donationForm
+      donationForm,
+      showPaypalThankYou
     } = this.props;
 
-    if (this.state.showThankYouMessage || (isAuthenticated && this.state.showUserForm)) { // we don't handle userform from logged in users) {
+    if (this.state.showThankYouMessage || (isAuthenticated && this.state.showUserForm) || showPaypalThankYou) { // we don't handle userform from logged in users) {
       return <PublicGroupThanks />;
     } else if (this.state.showUserForm) {
       return <PublicGroupSignup {...this.props} save={saveNewUser.bind(this)} />
@@ -226,12 +227,48 @@ export class PublicGroup extends Component {
   }
 
   componentWillMount() {
+    const {
+      newUser,
+      decodeJWT,
+      paypalIsDone,
+      hasFullAccount
+    } = this.props;
+
     // decode here because we don't handle auth on the server side yet
-    this.props.decodeJWT();
+    decodeJWT();
+
+    if (paypalIsDone) {
+      this.refreshData();
+      this.setState({
+        showUserForm: !hasFullAccount,
+        showThankYouMessage: hasFullAccount
+      });
+    }
+  }
+
+  // Used after a donation
+  refreshData() {
+    const {
+      group,
+      fetchGroup,
+      fetchUsers,
+      fetchTransactions
+    } = this.props;
+
+    return Promise.all([
+      fetchGroup(group.id),
+      fetchUsers(group.id),
+      fetchTransactions(group.id, {
+        per_page: NUM_TRANSACTIONS_TO_SHOW,
+        sort: 'createdAt',
+        direction: 'desc',
+        donation: true
+      })
+    ]);
   }
 }
 
-export function donateToGroup(amount, frequency, currency, token) {
+export function donateToGroup({amount, frequency, currency, token, options}) {
   const {
     notify,
     donate,
@@ -242,8 +279,8 @@ export function donateToGroup(amount, frequency, currency, token) {
   } = this.props;
 
   const payment = {
-    stripeToken: token.id,
-    email: token.email,
+    stripeToken: token && token.id,
+    email: token && token.email,
     amount,
     currency
   };
@@ -254,30 +291,28 @@ export function donateToGroup(amount, frequency, currency, token) {
     payment.interval = 'year';
   }
 
-  return donate(group.id, payment)
-    .then(({json}) => {
-      if (json && !json.hasFullAccount) {
-        this.setState({ showUserForm: true })
-      } else {
-        this.setState({ showThankYouMessage: true })
-      }
-    })
-    .then(() => fetchGroup(group.id))
-    .then(() => fetchUsers(group.id))
+  return donate(group.id, payment, options)
     .then(() => {
-      return fetchTransactions(group.id, {
-        per_page: NUM_TRANSACTIONS_TO_SHOW,
-        sort: 'createdAt',
-        direction: 'desc',
-        donation: true
-      });
+      if (!options.paypal) {
+        // stripe donation is immediate after the request
+        // Paypal will redirect to this page and we will refresh at that moment
+        return this.refreshData()
+        .then(() => {
+          const hasFullAccount = this.props.hasFullAccount;
+
+          this.setState({
+            showUserForm: !hasFullAccount,
+            showThankYouMessage: hasFullAccount
+          });
+        });
+      }
     })
     .catch((err) => notify('error', err.message));
 }
 
 export function saveNewUser() {
  const {
-    users,
+    newUser,
     updateUser,
     profileForm,
     validateDonationProfile,
@@ -287,7 +322,7 @@ export function saveNewUser() {
   } = this.props;
 
   return validateDonationProfile(profileForm.attributes)
-    .then(() => updateUser(users.newUser.id, profileForm.attributes))
+    .then(() => updateUser(newUser.id, profileForm.attributes))
     .then(() => this.setState({
       showUserForm: false,
       showThankYouMessage: true
@@ -314,8 +349,17 @@ function mapStateToProps({
   form,
   transactions,
   users,
-  session
+  session,
+  router
 }) {
+  const query = router.location.query;
+  const newUserId = query.userid;
+  const paypalUser = {
+    id: query.userid,
+    hasFullAccount: query.has_full_account === 'true'
+  };
+
+  const newUser = users.newUser || paypalUser;
 
   const group = values(groups)[0] || {stripeAccount: {}}; // to refactor to allow only one group
   const usersByRole = group.usersByRole || {};
@@ -335,8 +379,8 @@ function mapStateToProps({
   group.backersCount = group.backers.length;
   group.transactions = filterCollection(transactions, { GroupId: group.id });
 
-  const donations = group.transactions.filter(({amount}) => amount > 0);
-  const expenses = group.transactions.filter(({amount}) => amount < 0);
+  const donations = transactions.isDonation;
+  const expenses = transactions.isExpense;
 
   return {
     group,
@@ -350,6 +394,9 @@ function mapStateToProps({
     donationForm: form.donation,
     showUserForm: users.showUserForm || false,
     saveInProgress: users.updateInProgress,
-    isAuthenticated: session.isAuthenticated
+    isAuthenticated: session.isAuthenticated,
+    paypalIsDone: query.status === 'payment_success' && !!newUserId,
+    newUser,
+    hasFullAccount: newUser.hasFullAccount || false
   };
 }

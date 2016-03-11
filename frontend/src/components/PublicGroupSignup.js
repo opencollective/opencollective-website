@@ -10,7 +10,9 @@ export class PublicGroupSignup extends Component {
       profileForm,
       saveInProgress,
       users,
-      save
+      save,
+      appendProfileForm,
+      newUser
     } = this.props;
 
     return (
@@ -20,24 +22,24 @@ export class PublicGroupSignup extends Component {
 
         <div className='Label'> Display Name: </div>
         <Input
-          type = 'text'
-          placeholder = 'Name'
-          value={profileForm.attributes.name || users.newUser.name}
-          handleChange= {this.handleChange.bind(this, 'name')}/>
+          type='text'
+          placeholder='Name'
+          value={profileForm.attributes.name || newUser.name}
+          handleChange={name => appendProfileForm({name})}/>
 
         <div className='Label'> URL: </div>
         <Input
-          type = 'text'
-          placeholder = 'Website'
-          value={profileForm.attributes.website || users.newUser.website}
-          handleChange= {this.handleChange.bind(this, 'website')}/>
+          type='text'
+          placeholder='Website'
+          value={profileForm.attributes.website || newUser.website}
+          handleChange={website => appendProfileForm({website})}/>
 
         <div className='Label'> Twitter: </div>
         <Input
-          type = 'text'
-          placeholder = 'twitterUser'
-          value={profileForm.attributes.twitterHandle || users.newUser.twitterHandle}
-          handleChange= {this.handleChange.bind(this, 'twitterHandle')}/>
+          type='text'
+          placeholder='twitterUser'
+          value={profileForm.attributes.twitterHandle || newUser.twitterHandle}
+          handleChange={twitterHandle => appendProfileForm({twitterHandle})}/>
         <div>
           <SaveButton
             save={save.bind(this)}
@@ -46,13 +48,6 @@ export class PublicGroupSignup extends Component {
 
       </div>
     );
-  }
-
-  handleChange(field, value){
-      const attribute = {
-        [field]: value
-      };
-      this.props.appendProfileForm(attribute);
   }
 }
 
