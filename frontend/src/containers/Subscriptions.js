@@ -111,13 +111,13 @@ export class Subscriptions extends Component {
           })}
           {jwtTokenValid && subscriptions.length > 0 &&
             <div className='Subscription-text Subscription-bottom-text'>
-              <p> Find <a href='http://www.opencollective.com'>more collectives </a> to support! </p>
+              <p> Visit our <a href='https://www.opencollective.com/leaderboard'>leaderboard</a> to find more collectives to support! </p>
             </div>
           }
           {jwtTokenValid && subscriptions.length === 0 &&
             <div className='Subscription-text'>
             <p> Looks like you aren't contributing right now. Let's fix it!</p>
-            <p> Find <a href='http://www.opencollective.com'>more collectives </a> to support. </p>
+            <p> Visit our <a href='https://www.opencollective.com/leaderboard'>leaderboard</a> to find more collectives to support. </p>
             </div>
           }
         </div>
