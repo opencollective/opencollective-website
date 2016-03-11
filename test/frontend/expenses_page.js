@@ -19,5 +19,19 @@ module.exports = {
        .assert.containsText('div[class=TransactionItem]:first-child', 'Expense 2')
        .assert.containsText('div[class=TransactionItem]:last-child', 'Expense 1')
        .end();
+   },
+
+   'Submit expense': (client) => {
+     client
+      .click('#submitExpenseBtn')
+      .setValue('.js-transaction-description input', 'drinks')
+      .setValue('.js-transaction-amount input', 10)
+      .setValue('.js-transaction-paymentMethod', 'other')
+      .setValue('.js-transaction-email input', 'test@gmail.com')
+      .setValue('.js-transaction-note', 'test note')
+      .click('button[type=submit]')
+      .waitForElementVisible('.PublicGroupThanks', 1000)
+      .assert.containsText('.PublicGroupThanks', 'Expense sent')
+      .end();
    }
 };

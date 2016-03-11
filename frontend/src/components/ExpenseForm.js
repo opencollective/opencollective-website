@@ -95,6 +95,7 @@ class ExpenseForm extends Component {
           <div className='row'>
             <label>Date:</label>
             <DatePicker
+              customClass='js-transaction-createdAt'
               selected={moment(attributes.createdAt)}
               maxDate={moment()}
               handleChange={createdAt => appendTransactionForm({createdAt})} />
@@ -102,6 +103,7 @@ class ExpenseForm extends Component {
           <div className='row'>
             <label>Category:</label>
             <SelectTag
+              customClass='js-transaction-category'
               attributes={attributes}
               tags={tags}
               handleChange={tag => appendTransactionForm({tags: [tag]})} />
@@ -110,6 +112,7 @@ class ExpenseForm extends Component {
           <div className='row'>
             <label>Reimbursement method:</label>
             <Select
+              customClass='js-transaction-paymentMethod'
               options={paymentMethods}
               value={attributes.paymentMethod}
               handleChange={paymentMethod => appendTransactionForm({paymentMethod})} />
@@ -139,6 +142,7 @@ class ExpenseForm extends Component {
           <div className='row textarea'>
             <label>Note:</label>
             <TextArea
+              customClass='js-transaction-note'
               placeholder='Optional'
               value={attributes.comment}
               handleChange={comment => appendTransactionForm({comment})} />
