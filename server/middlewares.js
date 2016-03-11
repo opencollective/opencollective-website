@@ -6,13 +6,17 @@ import ua from 'universal-analytics';
 /**
  * Fetch users by slug
  */
-const fetchUsers = (req, res, next) => {
-  api
-    .get(`/groups/${req.params.slug}/users`)
-    .then((users) => {
-      req.users = users;
-    })
-    .then(next);
+
+
+const fetchUsers = (options) => {
+  return (req, res, next) => {
+    api
+      .get(`/groups/${req.params.slug}/users`, options)
+      .then((users) => {
+        req.users = users;
+      })
+      .then(next);
+  }
 }
 
 /**
@@ -38,9 +42,9 @@ const fetchSubscriptionsByUserWithToken = (req, res, next) => {
     return next();
   }
 
-  api.get('/subscriptions', {
+  api.get('/subscriptions', {headers: {
       Authorization: `Bearer ${req.params.token}`
-    })
+    }})
     .then(subscriptions => {
       req.subscriptions = subscriptions;
       next();
@@ -115,4 +119,12 @@ const addMeta = (req, res, next) => {
   next();
 };
 
-export default { fetchGroupBySlug, fetchSubscriptionsByUserWithToken, fetchUsers, ga, addMeta, cache}
+const addTitle = (title) => {
+  return (req, res, next) => {
+    req.meta = {
+      title: title
+    }
+    next();
+  }
+}
+export default { fetchGroupBySlug, fetchSubscriptionsByUserWithToken, fetchUsers, ga, addMeta, cache, addTitle}

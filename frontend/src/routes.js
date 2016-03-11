@@ -6,11 +6,13 @@ import Subscriptions from './containers/Subscriptions';
 import Transactions from './containers/Transactions';
 import DonatePage from './containers/DonatePage';
 import SubmitExpensePage from './containers/SubmitExpensePage';
+import Leaderboard from './containers/Leaderboard';
 
 export default (
   <Route path="/">
     <Route path="/subscriptions/:token" component={Subscriptions} />
     <Route path="/subscriptions" component={Subscriptions} />
+    <Route path="/leaderboard" component={Leaderboard} />
     <Route path="/:slug" component={PublicGroup} />
     <Route path="/:slug/expense" component={SubmitExpensePage} />
     <Route path="/:slug/:type" component={Transactions} />

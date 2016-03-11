@@ -53,6 +53,11 @@ export default function groups(state={}, action={}) {
         error: action.error
       });
 
+    case constants.GET_LEADERBOARD_SUCCESS:
+      return merge({}, state, {
+        leaderboard: action.json
+      });
+
     default:
       return state;
   }

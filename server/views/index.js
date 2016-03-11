@@ -27,6 +27,14 @@ module.exports = (app) => {
     return moment(value).fromNow();
   });
   
+  hbs.registerHelper("titleCase", (value) => {
+    return value.substr(0,1).toUpperCase() + value.substr(1);
+  });
+
+  hbs.registerHelper("singular", (value) => {
+    return value.replace(/s$/,'');
+  });
+  
   hbs.registerHelper("currency", (value, props) => {
     const options = props.hash;
     options.precision = options.precision || 0;

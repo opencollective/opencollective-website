@@ -8,12 +8,11 @@ import Currency from '../components/Currency';
 import DisplayUrl from '../components/DisplayUrl';
 import Icon from '../components/Icon';
 import PublicFooter from '../components/PublicFooter';
-import PublicTopBar from '../components/PublicTopBar';
+import PublicTopBar from '../containers/PublicTopBar';
 import TransactionItem from '../components/TransactionItem';
 
 import fetchUsers from '../actions/users/fetch_by_group';
 import fetchTransactions from '../actions/transactions/fetch_by_group';
-import logout from '../actions/session/logout';
 import decodeJWT from '../actions/session/decode_jwt';
 
 export class Transactions extends Component {
@@ -28,7 +27,7 @@ export class Transactions extends Component {
     return (
      <div className='Transactions'>
 
-        <PublicTopBar session={this.props.session} logout={this.props.logout}/>
+        <PublicTopBar />
 
         <div className='PublicContent'>
           <div className='Widget-header'>
@@ -44,7 +43,8 @@ export class Transactions extends Component {
             <div className='Widget-balance'>
               <Currency
                 value={group.balance}
-                currency={group.currency} />
+                currency={group.currency}
+                precision={2} />
             </div>
             <div className='Widget-label'>Available funds</div>
           </div>
@@ -64,7 +64,9 @@ export class Transactions extends Component {
             {transactions.map(tx => <TransactionItem
                                        key={tx.id}
                                        transaction={tx}
-                                       user={users[tx.UserId]} />)}
+                                       user={users[tx.UserId]}
+                                       precision={2}
+                                       />)}
           </div>
         </div>
         <PublicFooter />
@@ -100,7 +102,6 @@ export class Transactions extends Component {
 export default connect(mapStateToProps, {
   fetchTransactions,
   fetchUsers,
-  logout,
   decodeJWT
 })(Transactions);
 

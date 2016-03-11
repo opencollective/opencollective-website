@@ -1,0 +1,7 @@
+.InlineToggle {
+  cursor: pointer;
+}
+
+.InlineToggle-text {
+  margin-bottom: var(--spacing);
+}
