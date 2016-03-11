@@ -6,9 +6,6 @@ import PublicFooter from '../components/PublicFooter';
 
 import Currency from '../components/Currency';
 
-import getLeaderboard from '../actions/groups/get_leaderboard';
-
-
 export class Leaderboard extends Component {
   render() {
     return (
@@ -26,20 +23,27 @@ export class Leaderboard extends Component {
             <table className='Leaderboard-table'>
               <thead>
               <tr className='Leaderboard-header-row'>
-              <td className='Leaderboard-group-name'> Group </td>
-              <td className='Leaderboard-donations'> Donations </td>
-              <td className='Leaderboard-amount'> Amount raised </td>
-              <td className='Leaderboard-last'> Last Donation Date </td>
+                <th className='Leaderboard-group-name' colSpan="2"> Collective </th>
+                <th className='Leaderboard-donations'> Donations </th>
+                <th className='Leaderboard-amount'> Amount raised </th>
+                <th className='Leaderboard-last'> Last Donation Date </th>
               </tr>
               </thead>
               <tbody>
               {this.props.leaderboard.map(group => {
+                const divStyle = {
+                  backgroundImage: `url(${group.logo})`,
+                  backgroundRepeat: 'no-repeat',
+                  backgroundSize: 'contain',
+                  backgroundPosition: 'center'
+                };
                 return (
                   <tr>
-                  <td className='Leaderboard-group-name'> {group.name} </td>
-                  <td className='Leaderboard-donations'> {group.donationsCount} </td>
-                  <td className='Leaderboard-amount'> <Currency value={group.totalAmount} currency={group.currency} /> </td>
-                  <td className='Leaderboard-last'> {group.latestDonation} </td>
+                    <td className='Leaderboard-group-logo' style={divStyle} />
+                    <td className='Leaderboard-group-name'> <a href={`/${group.slug}`}>{group.name} </a></td>
+                    <td className='Leaderboard-donations'> {group.donationsCount} </td>
+                    <td className='Leaderboard-amount'> <Currency value={group.totalAmount} currency={group.currency} /> </td>
+                    <td className='Leaderboard-last'> {group.latestDonation} </td>
                   </tr>
                 )}
               )}
@@ -47,7 +51,12 @@ export class Leaderboard extends Component {
             </table>
           </div>
           <div className='Leaderboard-info'>
-            *This page tracks trailing 30-day stats.
+            Notes:
+            <ol>
+              <li>All stats are trailing 30-days.</li>
+              <li>Our sorting doesn't account for currencies yet. WIP! </li>
+            </ol>
+
           </div>
         </div>
         <PublicFooter />
@@ -55,13 +64,9 @@ export class Leaderboard extends Component {
     );
   }
 
-  componentDidMount() {
-    this.props.getLeaderboard();
-  }
 }
 
 export default connect(mapStateToProps, {
-  getLeaderboard
 })(Leaderboard);
 
 function mapStateToProps({

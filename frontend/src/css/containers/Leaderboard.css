@@ -23,6 +23,16 @@ td {
 .Leaderboard-group-name {
   text-align: left;
   border-right: 1px solid gray;
+  min-width: 100px;
+}
+
+.Leaderboard-header-row .Leaderboard-group-name {
+  text-align: center;
+}
+
+.Leaderboard-group-logo {
+  height: 40px;
+  width: 40px;
 }
 
 .Leaderboard-donations {
