@@ -6,8 +6,6 @@ import ua from 'universal-analytics';
 /**
  * Fetch users by slug
  */
-
-
 const fetchUsers = (options) => {
   return (req, res, next) => {
     api
@@ -17,7 +15,7 @@ const fetchUsers = (options) => {
       })
       .then(next);
   }
-}
+};
 
 /**
  * Fetch group by slug
@@ -60,7 +58,19 @@ const fetchSubscriptionsByUserWithToken = (req, res, next) => {
       }
       next(err);
     });
-}
+};
+
+/**
+ * Fetch leaderboard
+ */
+const fetchLeaderboard = (req, res, next) => {
+    api
+      .get(`/leaderboard`)
+      .then((groups) => {
+        req.leaderboard = groups;
+      })
+      .then(next);
+};
 
 /**
  *
@@ -127,4 +137,13 @@ const addTitle = (title) => {
     next();
   }
 }
-export default { fetchGroupBySlug, fetchSubscriptionsByUserWithToken, fetchUsers, ga, addMeta, cache, addTitle}
+export default {
+  addMeta,
+  addTitle,
+  cache,
+  fetchGroupBySlug,
+  fetchSubscriptionsByUserWithToken,
+  fetchUsers,
+  fetchLeaderboard,
+  ga
+}

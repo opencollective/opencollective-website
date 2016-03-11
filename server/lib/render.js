@@ -39,7 +39,8 @@ export default (req, res, next) => {
         group: req.group,
         subscriptions: req.subscriptions,
         jwtExpired: req.jwtExpired,
-        jwtInvalid: req.jwtInvalid
+        jwtInvalid: req.jwtInvalid,
+        leaderboard: req.leaderboard
       }));
 
       const initialState = serialize(store.getState());
