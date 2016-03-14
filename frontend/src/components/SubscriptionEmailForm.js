@@ -26,7 +26,8 @@ class SubscriptionEmailForm extends Component {
           We will send you an email with a link to access your subscriptions.
         </div>
         <form
-          className='Subscription-Email-form'>
+          className='Subscription-Email-form'
+          onSubmit={this.handleSubmit.bind(this)}>
           <Input
             type='email'
             placeholder='email@example.com'
@@ -47,12 +48,14 @@ class SubscriptionEmailForm extends Component {
     this.setState({form: {email} });
   }
 
-  handleSubmit() {
+  handleSubmit(event) {
     const {
       notify,
       onClick,
       validate
     } = this.props;
+
+    event.preventDefault();
 
     validate(this.state.form, this.schema)
     .then(() => onClick(this.state.form.email))
