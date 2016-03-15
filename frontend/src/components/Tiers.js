@@ -24,6 +24,8 @@ export default class Tiers extends Component {
     } = this.props;
 
     const stripeKey = group.stripeAccount && group.stripeAccount.stripePublishableKey;
+    const hasPaypal = group.hasPaypal;
+    const hasStripe = stripeKey && amount !== '';
 
     donationForm[tier.name] = donationForm[tier.name] || {};
     const amount = donationForm[tier.name].amount !== undefined ? donationForm[tier.name].amount : tier.range[0];
@@ -58,9 +60,26 @@ export default class Tiers extends Component {
 
         <div className='Tiers-checkout'>
           <div className='Tiers-button'>
-          {stripeKey && amount !== '' ?
-            (<StripeCheckout
-              token={(token) => onToken(amount, frequency, currency, token)}
+
+          {hasPaypal && (
+            <AsyncButton
+              color='green'
+              inProgress={inProgress}
+              onClick={() => onToken({
+                amount,
+                frequency,
+                currency,
+                options: {
+                  paypal: true
+                }
+              })} >
+              {button}
+            </AsyncButton>
+          )}
+
+          {hasStripe && !hasPaypal && ( // paypal has priority -> to refactor after prototyping phase
+            <StripeCheckout
+              token={(token) => onToken({amount, frequency, currency, token})}
               stripeKey={stripeKey}
               name={group.name}
               currency={currency}
@@ -71,8 +90,9 @@ export default class Tiers extends Component {
                   inProgress={inProgress} >
                   {button}
                 </AsyncButton>
-            </StripeCheckout>) : (<AsyncButton disabled={true} > {button} </AsyncButton>)}
-            </div>
+            </StripeCheckout>
+          )}
+          </div>
         <div className='PublicGroupForm-disclaimer'>
           By clicking above, you are pledging to give {group.host.name} {stripeDescription} for {group.name}. {cancellationDisclaimer}
         </div>

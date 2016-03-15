@@ -18,9 +18,11 @@ import donate from '../actions/groups/donate';
 import notify from '../actions/notification/notify';
 import appendDonationForm from '../actions/form/append_donation';
 import appendProfileForm from '../actions/form/append_profile';
-import updateUser from '../actions/users/update_user';
-import validateDonationProfile from '../actions/form/validate_donation_profile';
+import updateUser from '../actions/users/update';
+import validateSchema from '../actions/form/validate_schema';
 import decodeJWT from '../actions/session/decode_jwt';
+
+import profileSchema from '../joi_schemas/profile';
 
 // Number of expenses and revenue items to show on the public page
 const NUM_TRANSACTIONS_TO_SHOW = 3;
@@ -154,13 +156,13 @@ export function saveNewUser() {
     users,
     updateUser,
     profileForm,
-    validateDonationProfile,
+    validateSchema,
     notify,
     group,
     fetchUsers
   } = this.props;
 
-  return validateDonationProfile(profileForm.attributes)
+  return validateSchema(profileForm.attributes, profileSchema)
     .then(() => updateUser(users.newUser.id, profileForm.attributes))
     .then(() => this.setState({
       showUserForm: false,
@@ -177,7 +179,7 @@ export default connect(mapStateToProps, {
   fetchGroup,
   appendProfileForm,
   updateUser,
-  validateDonationProfile,
+  validateSchema,
   decodeJWT,
   appendDonationForm
 })(DonatePage);

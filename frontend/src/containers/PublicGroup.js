@@ -15,7 +15,7 @@ import Notification from '../containers/Notification';
 import PublicFooter from '../components/PublicFooter';
 import PublicGroupThanks from '../components/PublicGroupThanks';
 import TransactionItem from '../components/TransactionItem';
-import YoutubeVideo from '../components/YoutubeVideo';
+import Media from '../components/Media';
 import Metric from '../components/Metric';
 import UsersList from '../components/UsersList';
 import ShareIcon from '../components/ShareIcon';
@@ -32,38 +32,14 @@ import donate from '../actions/groups/donate';
 import notify from '../actions/notification/notify';
 import appendDonationForm from '../actions/form/append_donation';
 import appendProfileForm from '../actions/form/append_profile';
-import updateUser from '../actions/users/update_user';
-import validateDonationProfile from '../actions/form/validate_donation_profile';
+import updateUser from '../actions/users/update';
+import validateSchema from '../actions/form/validate_schema';
 import decodeJWT from '../actions/session/decode_jwt';
+
+import profileSchema from '../joi_schemas/profile';
 
 // Number of expenses and revenue items to show on the public page
 const NUM_TRANSACTIONS_TO_SHOW = 3;
-
-const Media = ({group}) => {
-  if (group.video) {
-      return (
-        <div className='PublicGroup-video'>
-          <YoutubeVideo video={group.video} />
-        </div>
-      );
-  } else if (group.image) {
-
-    const encodedUrl = encodeURIComponent(group.image);
-    group.image = `https://res.cloudinary.com/opencollective/image/fetch/w_720/${encodedUrl}`;
-
-    return (
-      <div className='PublicGroup-image'>
-        <img src={group.image} />
-      </div>
-    );
-  } else {
-    return (
-      <div className='PublicGroup-image'>
-        <div className='PublicGroup-image-placeholder'/>
-      </div>
-    );
-  }
-};
 
 export class PublicGroup extends Component {
 
@@ -75,25 +51,96 @@ export class PublicGroup extends Component {
     };
   }
 
+  donationSection() {
+    const {
+      group,
+      isAuthenticated,
+      donationForm,
+      showPaypalThankYou
+    } = this.props;
+
+    if (this.state.showThankYouMessage || (isAuthenticated && this.state.showUserForm) || showPaypalThankYou) { // we don't handle userform from logged in users) {
+      return <PublicGroupThanks />;
+    } else if (this.state.showUserForm) {
+      return <PublicGroupSignup {...this.props} save={saveNewUser.bind(this)} />
+    } else {
+      return <Tiers tiers={group.tiers} {...this.props} form={donationForm} onToken={donateToGroup.bind(this)} />
+    }
+  }
+
+  expenseList() {
+    const {
+      expenses,
+      users,
+      group
+    } = this.props;
+
+    const emptyState = (
+      <div className='PublicGroup-emptyState'>
+        <div className='PublicGroup-expenseIcon'>
+          <Icon type='expense' />
+        </div>
+        <label>
+          All your approved expenses will show up here
+        </label>
+      </div>
+    );
+
+    return (
+      <div className='PublicGroup-expenses'>
+        <h2>Expenses</h2>
+        {(expenses.length === 0) && emptyState}
+        {expenses.map(expense => <TransactionItem key={expense.id} transaction={expense} user={users[expense.UserId]} />)}
+        {expenses.length >= NUM_TRANSACTIONS_TO_SHOW && (
+          <Link className='PublicGroup-tx-link' to={`/${group.slug}/expenses`}>
+            See all expenses
+          </Link>
+        )}
+      </div>
+    );
+
+  }
+
+  donationList() {
+    const {
+      donations,
+      users,
+      group
+    } = this.props;
+
+    const emptyState = (
+      <div className='PublicGroup-emptyState'>
+        <div className='PublicGroup-donationIcon'>
+          <Icon type='revenue' />
+        </div>
+        <label>
+          All your latest donations will show up here
+        </label>
+      </div>
+    );
+
+    return (
+      <div className='PublicGroup-donations'>
+        <h2>Revenue</h2>
+        {(donations.length === 0) && emptyState}
+
+        {donations.map(donation => <TransactionItem key={donation.id} transaction={donation} user={users[donation.UserId]} />)}
+
+        {donations.length >= NUM_TRANSACTIONS_TO_SHOW && (
+          <Link className='PublicGroup-tx-link' to={`/${group.slug}/donations`}>
+            See all donations
+          </Link>
+        )}
+      </div>
+    );
+  }
+
   render() {
     const {
       group,
-      donations,
-      expenses,
       shareUrl,
-      users,
-      isAuthenticated,
-      donationForm
     } = this.props;
 
-    var donationSection;
-    if (this.state.showThankYouMessage || (isAuthenticated && this.state.showUserForm)) { // we don't handle userform from logged in users) {
-      donationSection = <PublicGroupThanks />;
-    } else if (this.state.showUserForm) {
-      donationSection = <PublicGroupSignup {...this.props} save={saveNewUser.bind(this)} />
-    } else {
-      donationSection = <Tiers tiers={group.tiers} {...this.props} form={donationForm} onToken={donateToGroup.bind(this)} />
-    }
     return (
       <div className='PublicGroup'>
 
@@ -141,54 +188,11 @@ export class PublicGroup extends Component {
           </div>
 
           <div id='support'></div>
-          {donationSection}
+          {this.donationSection()}
 
           <div className='PublicGroup-transactions'>
-            <div className='PublicGroup-expenses'>
-              <h2>Expenses</h2>
-              {(expenses.length === 0) && (
-                <div className='PublicGroup-emptyState'>
-                  <div className='PublicGroup-expenseIcon'>
-                    <Icon type='expense' />
-                  </div>
-                  <label>
-                    All your approved expenses will show up here
-                  </label>
-                </div>
-              )}
-              {expenses.map(expense => <TransactionItem
-                                          key={expense.id}
-                                          transaction={expense}
-                                          user={users[expense.UserId]} />)}
-              {expenses.length >= 3 && (
-                <Link className='PublicGroup-tx-link' to={`/${group.slug}/expenses`}>
-                  See all expenses
-                </Link>
-              )}
-            </div>
-
-            <div className='PublicGroup-donations'>
-              <h2>Revenue</h2>
-              {(donations.length === 0) && (
-                <div className='PublicGroup-emptyState'>
-                  <div className='PublicGroup-donationIcon'>
-                    <Icon type='revenue' />
-                  </div>
-                  <label>
-                    All your latest donations will show up here
-                  </label>
-                </div>
-              )}
-              {donations.map(donation => <TransactionItem
-                                            key={donation.id}
-                                            transaction={donation}
-                                            user={users[donation.UserId]} />)}
-              {donations.length >= 3 && (
-                <Link className='PublicGroup-tx-link' to={`/${group.slug}/donations`}>
-                  See all donations
-                </Link>
-              )}
-            </div>
+            {this.expenseList()}
+            {this.donationList()}
           </div>
 
         </div>
@@ -225,24 +229,56 @@ export class PublicGroup extends Component {
   }
 
   componentWillMount() {
+    const {
+      decodeJWT,
+      paypalIsDone,
+      hasFullAccount
+    } = this.props;
+
     // decode here because we don't handle auth on the server side yet
-    this.props.decodeJWT();
+    decodeJWT();
+
+    if (paypalIsDone) {
+      this.refreshData();
+      this.setState({
+        showUserForm: !hasFullAccount,
+        showThankYouMessage: hasFullAccount
+      });
+    }
+  }
+
+  // Used after a donation
+  refreshData() {
+    const {
+      group,
+      fetchGroup,
+      fetchUsers,
+      fetchTransactions
+    } = this.props;
+
+    return Promise.all([
+      fetchGroup(group.id),
+      fetchUsers(group.id),
+      fetchTransactions(group.id, {
+        per_page: NUM_TRANSACTIONS_TO_SHOW,
+        sort: 'createdAt',
+        direction: 'desc',
+        donation: true
+      })
+    ]);
   }
 }
 
-export function donateToGroup(amount, frequency, currency, token) {
+export function donateToGroup({amount, frequency, currency, token, options}) {
   const {
     notify,
     donate,
-    group,
-    fetchGroup,
-    fetchUsers,
-    fetchTransactions
+    group
   } = this.props;
 
   const payment = {
-    stripeToken: token.id,
-    email: token.email,
+    stripeToken: token && token.id,
+    email: token && token.email,
     amount,
     currency
   };
@@ -253,22 +289,19 @@ export function donateToGroup(amount, frequency, currency, token) {
     payment.interval = 'year';
   }
 
-  return donate(group.id, payment)
-    .then(({json}) => {
-      if (json && !json.hasFullAccount) {
-        this.setState({ showUserForm: true })
-      } else {
-        this.setState({ showThankYouMessage: true })
-      }
-    })
-    .then(() => fetchGroup(group.id))
-    .then(() => fetchUsers(group.id))
+  return donate(group.id, payment, options)
     .then(() => {
-      return fetchTransactions(group.id, {
-        per_page: NUM_TRANSACTIONS_TO_SHOW,
-        sort: 'createdAt',
-        direction: 'desc',
-        donation: true
+      if (options && options.paypal) {
+        // Paypal will redirect to this page and we will refresh at that moment
+        return;
+      }
+        // stripe donation is immediate after the request
+      return this.refreshData()
+      .then(() => {
+        this.setState({
+          showUserForm: !this.props.hasFullAccount,
+          showThankYouMessage: this.props.hasFullAccount
+        });
       });
     })
     .catch((err) => notify('error', err.message));
@@ -276,17 +309,17 @@ export function donateToGroup(amount, frequency, currency, token) {
 
 export function saveNewUser() {
  const {
-    users,
+    newUser,
     updateUser,
     profileForm,
-    validateDonationProfile,
+    validateSchema,
     notify,
     group,
     fetchUsers
   } = this.props;
 
-  return validateDonationProfile(profileForm.attributes)
-    .then(() => updateUser(users.newUser.id, profileForm.attributes))
+  return validateSchema(profileForm.attributes, profileSchema)
+    .then(() => updateUser(newUser.id, profileForm.attributes))
     .then(() => this.setState({
       showUserForm: false,
       showThankYouMessage: true
@@ -303,7 +336,7 @@ export default connect(mapStateToProps, {
   fetchGroup,
   appendProfileForm,
   updateUser,
-  validateDonationProfile,
+  validateSchema,
   decodeJWT,
   appendDonationForm
 })(PublicGroup);
@@ -313,8 +346,17 @@ function mapStateToProps({
   form,
   transactions,
   users,
-  session
+  session,
+  router
 }) {
+  const query = router.location.query;
+  const newUserId = query.userid;
+  const paypalUser = {
+    id: query.userid,
+    hasFullAccount: query.has_full_account === 'true'
+  };
+
+  const newUser = users.newUser || paypalUser;
 
   const group = values(groups)[0] || {stripeAccount: {}}; // to refactor to allow only one group
   const usersByRole = group.usersByRole || {};
@@ -334,8 +376,8 @@ function mapStateToProps({
   group.backersCount = group.backers.length;
   group.transactions = filterCollection(transactions, { GroupId: group.id });
 
-  const donations = group.transactions.filter(({amount}) => amount > 0);
-  const expenses = group.transactions.filter(({amount}) => amount < 0);
+  const donations = transactions.isDonation;
+  const expenses = transactions.isExpense;
 
   return {
     group,
@@ -349,6 +391,9 @@ function mapStateToProps({
     donationForm: form.donation,
     showUserForm: users.showUserForm || false,
     saveInProgress: users.updateInProgress,
-    isAuthenticated: session.isAuthenticated
+    isAuthenticated: session.isAuthenticated,
+    paypalIsDone: query.status === 'payment_success' && !!newUserId,
+    newUser,
+    hasFullAccount: newUser.hasFullAccount || false
   };
 }

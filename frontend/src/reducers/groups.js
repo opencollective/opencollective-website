@@ -46,7 +46,8 @@ export default function groups(state={}, action={}) {
     case constants.DONATE_GROUP_SUCCESS:
       return merge({}, state, {
         donateInProgress: false,
-        payment: action.json.payment
+        payment: action.json.payment,
+        donationIsDone: true
       });
 
     case constants.DONATE_GROUP_FAILURE:
