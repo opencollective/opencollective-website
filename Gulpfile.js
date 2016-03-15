@@ -61,6 +61,7 @@ gulp.task('build:css', () => {
     .pipe(postcss([
       autoprefixer,
       require('postcss-import')(),
+      require('postcss-nested'),
       require('postcss-cssnext')(),
       require('postcss-discard-comments')(),
       require('cssnano')(),

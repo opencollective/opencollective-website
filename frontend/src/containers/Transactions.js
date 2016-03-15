@@ -9,13 +9,26 @@ import DisplayUrl from '../components/DisplayUrl';
 import Icon from '../components/Icon';
 import PublicFooter from '../components/PublicFooter';
 import PublicTopBar from '../containers/PublicTopBar';
+import SubmitExpense from '../containers/SubmitExpense';
+
 import TransactionItem from '../components/TransactionItem';
 
 import fetchUsers from '../actions/users/fetch_by_group';
 import fetchTransactions from '../actions/transactions/fetch_by_group';
 import decodeJWT from '../actions/session/decode_jwt';
+import Button from '../components/Button';
 
 export class Transactions extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {showSubmitExpense: false };
+  };
+
+  toggleAddExpense() {
+    this.setState({ showSubmitExpense: !this.state.showSubmitExpense });
+  };
+
   render() {
     const {
       group,
@@ -23,6 +36,8 @@ export class Transactions extends Component {
       users,
       type
     } = this.props;
+
+    const showSubmitExpense = this.state.showSubmitExpense;
 
     return (
      <div className='Transactions'>
@@ -49,7 +64,11 @@ export class Transactions extends Component {
             <div className='Widget-label'>Available funds</div>
           </div>
 
+          {showSubmitExpense && (<SubmitExpense onCancel={this.toggleAddExpense.bind(this)} />)}
+
+          {type === 'expense' && !showSubmitExpense && (<Button onClick={this.toggleAddExpense.bind(this)} label="Submit Expense" id="submitExpenseBtn" />)}
           <h2>All {type}s</h2>
+
           <div className='PublicGroup-transactions'>
             {(transactions.length === 0) && (
               <div className='PublicGroup-emptyState'>

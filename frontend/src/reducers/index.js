@@ -8,11 +8,13 @@ import notification from './notification';
 import transactions from './transactions';
 import session from './session';
 import subscriptions from './subscriptions';
+import images from './images';
 
 export default combineReducers({
   form,
   groups,
   notification,
+  images,
   session,
   subscriptions,
   transactions,
