@@ -5,7 +5,8 @@ import localStorage from 'localmockage';
 // if we need more, we will need jsdom
 
 global.window = {
-  location: {}
+  location: {},
+  addEventListener: () => {}
 };
 
 // In memory localstorage
