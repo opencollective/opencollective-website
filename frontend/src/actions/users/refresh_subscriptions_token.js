@@ -9,7 +9,7 @@ export default (token) => {
   return dispatch => {
     dispatch(request(token));
 
-    return post('/subscriptions/refresh_token', { }, {
+    return post('/subscriptions/refresh_token', {}, {
       headers: {
         Authorization: `Bearer ${token}`
       }

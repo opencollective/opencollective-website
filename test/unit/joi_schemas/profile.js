@@ -1,13 +1,13 @@
 import expect from 'expect';
-import validate from '../../../frontend/src/validators/donation_profile';
+
+import validate from '../../../frontend/src/lib/validate';
+import schema from '../../../frontend/src/joi_schemas/profile';
 
 describe('validator profile after public donation', () => {
   // Check for data validity
 
   it('should throw an error if the website format is not valid', (done) => {
-    validate({
-      website: 'opencollective',
-    })
+    validate({ website: 'opencollective' }, schema)
     .catch(error => {
       expect(error.name).toEqual('ValidationError');
       done();
@@ -20,7 +20,8 @@ describe('validator profile after public donation', () => {
     const profile = {
       name: 'my name',
     };
-    validate(profile)
+
+    validate(profile, schema)
     .then(value => {
       expect(value).toEqual(profile);
       done();
@@ -31,7 +32,8 @@ describe('validator profile after public donation', () => {
     const profile = {
       twitterHandle: 'asood123',
     }
-    validate(profile)
+
+    validate(profile, schema)
     .then(value => {
       expect(value).toEqual(profile);
       done();
@@ -42,8 +44,9 @@ describe('validator profile after public donation', () => {
     const profile = {
       website: '',
       twitterHandle: 'asood123',
-    }
-    validate(profile)
+    };
+
+    validate(profile, schema)
     .then(value => {
       expect(value).toEqual(profile);
       done();
@@ -54,8 +57,9 @@ describe('validator profile after public donation', () => {
     const profile = {
       name: '',
       twitterHandle: 'asood123',
-    }
-    validate(profile)
+    };
+
+    validate(profile, schema)
     .then(value => {
       expect(value).toEqual(profile);
       done();
@@ -66,8 +70,9 @@ describe('validator profile after public donation', () => {
     const profile = {
       name: 'john doe',
       twitterHandle: '',
-    }
-    validate(profile)
+    };
+
+    validate(profile, schema)
     .then(value => {
       expect(value).toEqual(profile);
       done();
@@ -81,7 +86,8 @@ describe('validator profile after public donation', () => {
       website: 'http://www.opencollective.com',
       twitterHandle: 'asood123'
     };
-    validate(profile)
+
+    validate(profile, schema)
     .then(value => {
       expect(value).toEqual(profile);
       done();

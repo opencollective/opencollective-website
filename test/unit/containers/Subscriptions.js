@@ -11,7 +11,7 @@ import {
 
 chai.use(spies);
 
-describe('Subscriptions container', () => {
+describe('constainers/Subscriptions', () => {
 
   describe('mapStateToProps', () => {
     it('maps the token from the router', () => {
