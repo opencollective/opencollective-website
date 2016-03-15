@@ -18,7 +18,7 @@ import cancelSubscription from '../actions/subscriptions/cancel';
 import refreshSubscriptionsToken from '../actions/users/refresh_subscriptions_token';
 import sendNewSubscriptionsToken from '../actions/users/send_new_subscriptions_token';
 import notify from '../actions/notification/notify';
-import getSubscriptions from '../actions/subscriptions/get_subscriptions';
+import getSubscriptions from '../actions/subscriptions/get';
 import storeToken from '../actions/session/store_token';
 
 // To put as standalone component when the design is final
