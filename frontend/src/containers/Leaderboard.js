@@ -42,7 +42,7 @@ export class Leaderboard extends Component {
                     <td className='Leaderboard-group-logo' style={divStyle} />
                     <td className='Leaderboard-group-name'> <a href={`/${group.slug}`}>{group.name} </a></td>
                     <td className='Leaderboard-donations'> {group.donationsCount} </td>
-                    <td className='Leaderboard-amount'> <Currency value={group.totalAmount} currency={group.currency} /> </td>
+                    <td className='Leaderboard-amount' title={`USD $${group.amountInUSD}`}> <Currency value={group.totalAmount} currency={group.currency} compact={false}/> </td>
                     <td className='Leaderboard-last'> {group.latestDonation} </td>
                   </tr>
                 )}
@@ -54,7 +54,7 @@ export class Leaderboard extends Component {
             Notes:
             <ol>
               <li>All stats are trailing 30-days.</li>
-              <li>Our sorting doesn't account for currencies yet. WIP! </li>
+              <li>To sort based on amount raised across different currencies, we use foreign exchange rates as of March 11, 2016 </li>
             </ol>
 
           </div>

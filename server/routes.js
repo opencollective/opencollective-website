@@ -65,12 +65,12 @@ module.exports = (app) => {
    * When we refactor PublicGroup to fetch the group in the container, we can remove
    * the explicit routes and just do `app.use(render)`
    */
-  app.get('/leaderboard', mw.fetchLeaderboard, mw.addTitle('Open Collective Leaderboard'), render);
-  app.get('/subscriptions/:token', mw.fetchSubscriptionsByUserWithToken, mw.addTitle('My Subscriptions'), render);
-  app.get('/subscriptions', mw.fetchSubscriptionsByUserWithToken, mw.addTitle('My Subscriptions'), render);
-  app.get('/:slug([A-Za-z0-9-]+)', mw.fetchGroupBySlug, mw.addMeta, render);
-  app.get('/:slug([A-Za-z0-9-]+)/:type', mw.fetchGroupBySlug, mw.addMeta, render);
-  app.get('/:slug([A-Za-z0-9-]+)/expense', mw.fetchGroupBySlug, mw.addMeta, render);
-  app.get('/:slug([A-Za-z0-9-]+)/donate/:amount', mw.fetchGroupBySlug, mw.addMeta, render);
-  app.get('/:slug([A-Za-z0-9-]+)/donate/:amount/:interval', mw.fetchGroupBySlug, mw.addMeta, render);
+  app.get('/leaderboard', mw.ga, mw.fetchLeaderboard, mw.addTitle('Open Collective Leaderboard'), render);
+  app.get('/subscriptions/:token', mw.ga, mw.fetchSubscriptionsByUserWithToken, mw.addTitle('My Subscriptions'), render);
+  app.get('/subscriptions', mw.ga, mw.fetchSubscriptionsByUserWithToken, mw.addTitle('My Subscriptions'), render);
+  app.get('/:slug([A-Za-z0-9-]+)', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
+  app.get('/:slug([A-Za-z0-9-]+)/:type', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
+  app.get('/:slug([A-Za-z0-9-]+)/expense', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
+  app.get('/:slug([A-Za-z0-9-]+)/donate/:amount', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
+  app.get('/:slug([A-Za-z0-9-]+)/donate/:amount/:interval', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
 };

@@ -20,52 +20,35 @@ module.exports = {
       .assert.containsText('div[class="Button Button--green"]', 'BECOME A BACKER')
   },
 
-  // this test only exists so the above beforeEach runs
-  'sample test': (client) => {
-    client.end();
-  }
-  /**
-   * To implement when we fixed the stripe issue
-   */
-  // 'Donate money - default amount': (client) => {
+  'Redirects to paypal after clicking donate': (client) => {
 
-  //   client
+    client
+      // Click Donate
+      .click('div[class="Button Button--green"]')
+      .pause(5000)
+      .assert.urlContains('https://www.sandbox.paypal.com/') // redirected to paypal
+      .end();
+  },
 
-  //     // Click Donate
-  //     .click('div[class="Button Button--green"]')
-  //     .pause(1000)
-  //     .frame(0) // this can range from 0 to 4
+  'Shows thank you page after a paypal donation if user is full account': (client) => {
 
-  //     // Enter info in the fields and hit submit
-  //     .setValue('input[id=email]', 'test12323@34.com')
-  //     .keys('\t4242') // Stripe CC field isn't taking a setValue
-  //     .keys('4242')
-  //     .keys('4242')
-  //     .keys('4242')
-  //     .setValue('input[id=card_number]', '4242 4242 4242 4242')
-  //     .setValue('input[id=cc-exp]', '1/19')
-  //     .setValue('input[id=cc-csc]', '123')
-  //     .click('button[type=submit]')
+    client
+      // callback after filling paypal
+      .url(`${config.host.website}/testcollective?status=payment_success&userid=1&has_full_account=true`)
+      .waitForElementVisible('div[class=PublicGroupThanks]', 2000)
+      .assert.containsText('body', 'Thank you for your support')
+      .end();
+  },
 
-  //     // Switch back to the original page
-  //     .pause(1000)
-  //     .frame(null)
+  'Shows the user form after a paypal donation if user does not have a full account': (client) => {
 
-  //     // verify that follow up form showed up
-  //     .waitForElementVisible('div[class=PublicGroupSignup]', 1000)
-  //     .assert.containsText('div[class=PublicGroupSignup', 'Thanks for the donation. How should we show you on the page?')
-
-  //     .setValue('input[class=Field]:nth-child(1)', 'John Doe')
-  //     .setValue('input[class=Field]:nth-child(2)', 'http://www.google.com')
-  //     .setValue('input[class=Field]:nth-child(3)', 'opencollect')
-  //     .assert.urlContains('Testcollective?status=thankyou')
-
-  //     // check that new backer shows up
-
-  //     // check that the amount updated
-
-  //     .end();
-  // },
+    client
+      // callback after filling paypal
+      .url(`${config.host.website}/testcollective?status=payment_success&userid=1&has_full_account=false`)
+      .waitForElementVisible('div[class=PublicGroupSignup]', 3000)
+      .assert.containsText('body', 'How should we show you on the page?')
+      .end();
+  },
 
   // test custom amounts
 
