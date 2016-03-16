@@ -29,7 +29,9 @@ function request(id, payment) {
 
 function success(id, json, options) {
   if (options.paypal) {
-    window.location = json.links[0].href; // approval_url
+    const link = json.links.find(({rel}) => rel === 'approval_url');
+
+    window.location = link.href; // approval_url
   }
 
   return {
