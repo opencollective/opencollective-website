@@ -5,7 +5,6 @@
     "website": "WEBSITE_URL"
   },
   "apiKey": "API_KEY",
-  "stripePublicKey": "STRIPE_PUBLIC_KEY",
   "cloudflare": {
     "email": "CLOUDFLARE_EMAIL",
     "key": "CLOUDFLARE_KEY"
