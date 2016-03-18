@@ -13,6 +13,7 @@ export default (
     <Route path="/subscriptions" component={Subscriptions} />
     <Route path="/leaderboard" component={Leaderboard} />
     <Route path="/:slug" component={PublicGroup} />
+    <Route path="/:slug/expenses/new" component={Transactions} />
     <Route path="/:slug/:type" component={Transactions} />
     <Route path="/:slug/donate/:amount" component={DonatePage} />
     <Route path="/:slug/donate/:amount/:interval" component={DonatePage} />

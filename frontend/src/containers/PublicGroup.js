@@ -91,6 +91,9 @@ export class PublicGroup extends Component {
         <h2>Expenses</h2>
         {(expenses.length === 0) && emptyState}
         {expenses.map(expense => <TransactionItem key={expense.id} transaction={expense} user={users[expense.UserId]} />)}
+        <Link className='PublicGroup-tx-link' to={`/${group.slug}/expenses/new`}>
+          Submit an expense
+        </Link>
         {expenses.length >= NUM_TRANSACTIONS_TO_SHOW && (
           <Link className='PublicGroup-tx-link' to={`/${group.slug}/expenses`}>
             See all expenses
