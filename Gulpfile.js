@@ -3,6 +3,7 @@ const gutil = require("gulp-util");
 const postcss = require('gulp-postcss');
 const changed = require('gulp-changed');
 const autoprefixer = require('autoprefixer');
+const svgSprite = require('gulp-svg-sprite');
 
 const SRC_DIR = 'frontend/src';
 const DIST_DIR = 'frontend/dist';
@@ -71,4 +72,28 @@ gulp.task('build:css', () => {
 
 gulp.task('watch:css', () => {
   gulp.watch(`${SRC_DIR}/css/**/*.css`, ['build:css']);
+});
+
+gulp.task('build:svg', () => {
+  return gulp.src(`${SRC_DIR}/assets/svg/*.svg`)
+    .pipe(svgSprite({
+      mode: {
+        symbol: {
+          sprite: 'sprite.svg',
+          inline: true,
+          example: true,
+          dest: 'partials'
+        }
+      },
+      shape: {
+        id: {
+          generator: 'svg-%s'
+        }
+      }
+    }))
+    .pipe(gulp.dest('server/views'));
+});
+
+gulp.task('watch:svg', () => {
+  gulp.watch(`${SRC_DIR}/assets/svg/*.svg`, ['build:svg']);
 });

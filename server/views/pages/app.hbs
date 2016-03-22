@@ -19,6 +19,8 @@
     <title>{{meta.title}}</title>
   </head>
   <body>
+    {{> sprite}}
+
     <div id="content">{{{html}}}</div>
 
     <script>
@@ -27,6 +29,5 @@
     <script src="{{{ cachebust '/js/bundle.js' }}}"></script>
 
     {{> google_analytics}}
-
   </body>
 </html>
