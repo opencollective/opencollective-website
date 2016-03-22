@@ -1,0 +1,52 @@
+.ExpenseItem {
+  border-color: rgba(48, 50, 51, .2);
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+
+.ExpenseItem-category {
+  min-width: 100px;
+}
+
+.ExpenseItem-category-icon-wrapper {
+  width: 56px;
+  height: 56px;
+  background-color: rgba(0,0,0,0.1);
+}
+
+.ExpenseStatus {
+  font-size: 9px;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.category-communications,
+.category-design {
+  background-color: #A5E720;
+  background-image: linear-gradient(135deg, #A5E720, #6CCA0E);
+}
+
+.category-donation,
+.category-engineering,
+.category-food-and-beverage {
+  background-color: #F5CD10;
+  background-image: linear-gradient(135deg, #F5CD10, #E7A817);
+}
+
+.category-food-and-fund,
+.category-legal {
+  background-color: #7CD8F7;
+  background-image: linear-gradient(135deg, #7CD8F7, #46B0ED);
+}
+
+.category-marketing,
+.category-office,
+.category-other,
+.category-supplies-and-materials,
+.category-team,
+.category-web-services,
+.category-travel {
+  background-color: #FF87E5;
+  background-image: linear-gradient(135deg, #FF87E5, #DF3EAB);
+}
+
