@@ -15,7 +15,7 @@
     "start": "NODE_CONFIG_DIR=./server/config node server",
     "dev": "gulp build && PORT=3000 nf start -j Procfile_dev",
     "hint": "eslint '**/*.js' --quiet",
-    "test:unit": "NODE_CONFIG_DIR=./server/config NODE_ENV=test mocha test/unit/ --opts test/unit/mocha.opts",
+    "test:unit": "NODE_CONFIG_DIR=./server/config NODE_ENV=test mocha test/unit/ --opts test/unit/mocha.opts --reporter-options mochaFile=$CIRCLE_TEST_REPORTS/junit/junit.xml",
     "pretest": "npm run hint",
     "test": "npm run test:unit",
     "posttest": "npm run nightwatch",
