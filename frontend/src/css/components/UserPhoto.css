@@ -1,0 +1,7 @@
+.UserPhoto {
+  width: 4rem;
+  height: 4rem;
+  border: 3px solid white;
+  box-shadow: 0 0 0 2px #75CC1F;
+  background-image: url('/static/images/loading.gif');
+}
