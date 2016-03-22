@@ -1,17 +1,8 @@
 .Metric {
-  text-align: left;
-  margin-bottom: calc(var(--spacing));
 }
 
 .Metric-value {
-  font-size: 2rem;
-  font-weight: bold;
-  color: var(--darkest-gray);
 }
 
 .Metric-label {
-  color: var(--dark-gray);
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 1.25rem;
 }
