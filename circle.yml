@@ -4,6 +4,8 @@ general:
       - staging
       - production
 machine:
+  post:
+    - npm install mocha@2.4.5 -g
   node:
     version: 5.1.0
 deployment:
@@ -18,3 +20,5 @@ test:
     - sudo apt-get update
     - sudo apt-get install google-chrome-stable
     - nohup bash -c "npm start &"
+  override:
+    - npm run test -- --reporter mocha-circleci-reporter --reporter-options mochaFile=$CIRCLE_TEST_REPORTS/junit/junit.xml
