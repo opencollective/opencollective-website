@@ -10,17 +10,16 @@ import filterCollection from '../lib/filter_collection';
 import formatCurrency from '../lib/format_currency';
 
 import roles from '../constants/roles';
-import PublicTopBar from '../containers/PublicTopBar';
+import PublicTopBarV2 from '../containers/PublicTopBarV2';
 import Notification from '../containers/Notification';
 import PublicFooter from '../components/PublicFooter';
 import PublicGroupThanks from '../components/PublicGroupThanks';
-import TransactionItem from '../components/TransactionItem';
 import Media from '../components/Media';
 import Metric from '../components/Metric';
-import UsersList from '../components/UsersList';
-import ShareIcon from '../components/ShareIcon';
-import Icon from '../components/Icon';
-import DisplayUrl from '../components/DisplayUrl';
+import UserCard from '../components/UserCard';
+import ExpenseItem from '../components/ExpenseItem';
+import ActivityItem from '../components/ActivityItem';
+import {displayUrl} from '../components/DisplayUrl';
 import PublicGroupSignup from '../components/PublicGroupSignup';
 import Tiers from '../components/Tiers';
 import Markdown from '../components/Markdown';
@@ -76,32 +75,39 @@ export class PublicGroup extends Component {
     } = this.props;
 
     const emptyState = (
-      <div className='PublicGroup-emptyState'>
-        <div className='PublicGroup-expenseIcon'>
-          <Icon type='expense' />
+      <div className='center'>
+        <div className='PublicGroup-emptyState-image flex items-center justify-center'>
+          <img width='112' height='151'
+            src='/static/images/collectives/expenses-empty-state-image.jpg'
+            srcSet='/static/images/collectives/expenses-empty-state-image.jpg@2x 2x'/>
         </div>
-        <label>
-          All your approved expenses will show up here
-        </label>
+        <p className='h3 -fw-bold'>Transparency is a great quality.</p>
+        <p className='h5 muted mb3'>Submit an expense, get reimbursed and show how funds are being spent!</p>
+        <Link className='-btn -btn-medium -btn-outline -border-green -ff-sec -fw-bold -ttu' to={`/${group.slug}/expenses/new`}>Submit expense</Link>
       </div>
     );
 
     return (
-      <div className='PublicGroup-expenses'>
-        <h2>Expenses</h2>
+      <div className='PublicGroup-expenses col md-col-6 col-12 px2 mb3'>
+        <div className='clearfix border-bottom border-gray pb2 mb3'>
+          <h2 className='left m0 -ff-sec'>Out Latest Expenses</h2>
+          {expenses.length ? (
+            <Link className='right -btn -btn-small -btn-outline -border-green -ff-sec -fw-bold -ttu' to={`/${group.slug}/expenses/new`}>Submit expense</Link>
+          ) : null}
+        </div>
         {(expenses.length === 0) && emptyState}
-        {expenses.map(expense => <TransactionItem key={expense.id} transaction={expense} user={users[expense.UserId]} />)}
-        <Link className='PublicGroup-tx-link' to={`/${group.slug}/expenses/new`}>
-          Submit an expense
-        </Link>
+        <div className='PublicGroup-transactions-list'>
+          {expenses.map(expense => <ExpenseItem key={`pge_${expense.id}`} expense={expense} user={users[expense.UserId]} className='mb2' />)}
+        </div>
         {expenses.length >= NUM_TRANSACTIONS_TO_SHOW && (
-          <Link className='PublicGroup-tx-link' to={`/${group.slug}/expenses`}>
-            See all expenses
-          </Link>
+          <div className='center pt2'>
+            <Link className='-btn -btn-medium -btn-outline -border-green -ttu -ff-sec -fw-bold' to={`/${group.slug}/expenses`}>
+              Full expense history
+            </Link>
+          </div>
         )}
       </div>
     );
-
   }
 
   donationList() {
@@ -112,25 +118,26 @@ export class PublicGroup extends Component {
     } = this.props;
 
     const emptyState = (
-      <div className='PublicGroup-emptyState'>
-        <div className='PublicGroup-donationIcon'>
-          <Icon type='revenue' />
+      <div className='center'>
+        <div className='PublicGroup-emptyState-image flex items-center justify-center'>
+          <img width='134' height='120'
+            src='/static/images/collectives/activities-empty-state-image.jpg'
+            srcSet='/static/images/collectives/activities-empty-state-image.jpg@2x 2x'/>
         </div>
-        <label>
-          All your latest donations will show up here
-        </label>
+        <p className='h3 -fw-bold'>What you do proves your beliefs.</p>
+        <p className='h5 muted'>People should know what stuff is being done for the community!</p>
       </div>
     );
 
     return (
-      <div className='PublicGroup-donations'>
-        <h2>Revenue</h2>
+      <div className='PublicGroup-donations col md-col-6 col-12 px2 mb3'>
+        <h2 className='m0 border-bottom border-gray pb2 mb3 -ff-sec'>Recent Activity</h2>
         {(donations.length === 0) && emptyState}
-
-        {donations.map(donation => <TransactionItem key={donation.id} transaction={donation} user={users[donation.UserId]} />)}
-
+        <div className='PublicGroup-transactions-list'>
+          {donations.map(donation => <ActivityItem key={`pgd_${donation.id}`} donation={donation} user={users[donation.UserId]} className='mb2' />)}
+        </div>
         {donations.length >= NUM_TRANSACTIONS_TO_SHOW && (
-          <Link className='PublicGroup-tx-link' to={`/${group.slug}/donations`}>
+          <Link className='PublicGroup-tx-link -ttu' to={`/${group.slug}/donations`}>
             See all donations
           </Link>
         )}
@@ -141,64 +148,157 @@ export class PublicGroup extends Component {
   render() {
     const {
       group,
-      shareUrl,
+      // shareUrl,
     } = this.props;
+
+    const collectiveBg = '/static/images/collectives/default-header-bg.jpg';
 
     return (
       <div className='PublicGroup'>
 
-        <PublicTopBar />
         <Notification />
 
-        <div className='PublicContent'>
-
-          <div className='PublicGroupHeader'>
-            <img className='PublicGroupHeader-logo' src={group.logo ? group.logo : '/static/images/media-placeholder.svg'} />
-            <div className='PublicGroupHeader-website'><DisplayUrl url={group.website} /></div>
-            <div className='PublicGroupHeader-host'>Hosted by <a href={group.host.website}>{group.host.name}</a></div>
-            <div className='PublicGroupHeader-description'>
-              {group.description}
+        <section className='PublicGroupHero relative px2 bg-black bg-cover white' style={{backgroundImage: `url(${collectiveBg})`}}>
+          <div className='container relative center'>
+            <PublicTopBarV2 className='pt3 absolute top-0 left-0 right-0' />
+            <div className='PublicGroupHero-content'>
+              <p className='h4 mt0 mb3 -ff-sec'>Hi! This is an <span className='-fw-bold'>OpenCollective</span> by <a href={group.website} className='underline white'>{group.name}</a> and we’re on a mission to&hellip;</p>
+              <h1 className='PublicGroupHero-mission max-width-3 mx-auto mt0 mb4 white -ff-sec'>{group.description}</h1>
+              <a className='mb3 -btn -btn-big -bg-green -ttu -ff-sec -fw-bold'>Be part of it!</a>
+              <p className='h6'>Scroll down to find out more.</p>
+              <svg width='14' height='9'>
+                <use xlinkHref='#svg-arrow-down' stroke='#fff'/>
+              </svg>
             </div>
           </div>
 
-          <Media group={group} />
+          <div className='PublicGroupHero-menu absolute left-0 right-0 bottom-0 xs-hide'>
+            <nav>
+              <ul className='list-reset m0 -ttu center'>
+                <li className='inline-block'>
+                  <a href="#who-we-are" className='block px2 py3 white -ff-sec -fw-bold'>Who we are</a>
+                </li>
+                <li className='inline-block'>
+                  <a href="#why-join" className='block px2 py3 white -ff-sec -fw-bold'>Why join?</a>
+                </li>
+                <li className='inline-block'>
+                  <a href="#expenses-and-activity" className='block px2 py3 white -ff-sec -fw-bold'>Expenses and Activity</a>
+                </li>
+                <li className='inline-block'>
+                  <a href="#members-wall" className='block px2 py3 white -ff-sec -fw-bold'>Members Wall</a>
+                </li>
+                <li className='inline-block'>
+                  <a href="#" className='block px2 py3 white -ff-sec -fw-bold'>Share</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </section>
 
-          <div className='PublicGroup-summary'>
-            <div className='PublicGroup-metricContainer'>
-              <Metric
-                label='Funds Available'
-                value={formatCurrency(group.balance, group.currency, {precision: 0})} />
-              <Metric
-                label='Backers'
-                value={group.backersCount} />
+        <section id='who-we-are' className='PublicGroupHeader px2 bg-light-gray'>
+          <div className='PublicGroupHeader-container container center'>
+            <img className='PublicGroupHeader-logo rounded' src={group.logo ? group.logo : '/static/images/media-placeholder.svg'} />
+            <h2 className='PublicGroupHeader-title m0 -ff-sec -fw-bold'>We are {group.name}</h2>
+            <h3 className='mt0 mb2 -ff-sec -fw-light'>{group.description}</h3>
+            <div className='PublicGroup-quote max-width-3 mx-auto'>
+              <Markdown className='PublicGroup-quoteText' value={group.longDescription} />
             </div>
-            <a className='Button Button--green PublicGroup-support' href='#support'>
-              Back us
-            </a>
-            <div className='PublicGroup-share'>
-              <ShareIcon type='twitter' url={shareUrl} name={group.name} description={group.description} />
-              <ShareIcon type='facebook' url={shareUrl} name={group.name} description={group.description} />
-              <ShareIcon type='mail' url={shareUrl} name={group.name} description={group.description} />
+
+            {group.website ? (
+              <div className='PublicGroupHeader-website pt3'>
+                <a href={group.website} className='-btn -green -btn-outline -btn-small -ttu -ff-sec -fw-bold'>{displayUrl(group.website)}</a>
+              </div>
+            ) : null}
+
+            {group.members.length ? (
+              <div className='PublicGroup-members pt4'>
+                <h3 className='mt0 mb2 -ff-sec -fw-light'>Core Contributors</h3>
+                <div className='flex flex-wrap justify-center'>
+                  {group.members.map((user, index) => <UserCard user={user} key={index} className='p3 m1' />)}
+                </div>
+              </div>
+            ) : null}
+          </div>
+        </section>
+
+        <section id='why-join' className='bg-black white'>
+          <div className='PublicGroupWhyJoin container clearfix md-flex'>
+            <div className='col md-col-6 col-12 relative'>
+              <Media group={group} />
+            </div>
+            <div className='PublicGroup-summary col md-col-6 col-12 px4 flex flex-column justify-between'>
+              <div>
+                <h2 className='white mt3 -ff-sec'>Why become a member?</h2>
+                <p>With your membership plan, you’ll help us cover all expenses the collective makes in order to keep going. All the funds will be managed responsibly with your help, and everyone can see how and where the funds are being spent!</p>
+              </div>
+              <div className='PublicGroup-metricContainer flex py3'>
+                <Metric label='Total Funds Available'
+                  value={formatCurrency(group.balance, group.currency, {precision: 0})}
+                  className='flex-auto pr2' />
+
+                {(this.props.expenses.length) ? (
+                  <div className='pt1 pl2'>
+                    <a href='#' className='-btn -btn-outline -border-green -btn-small -ff-sec -fw-bold -ttu'>See how we’ve spent it</a>
+                  </div>
+                ) : null}
+              </div>
+              {/*
+              <a className='Button Button--green PublicGroup-support' href='#support'>
+                Back us
+              </a>
+              <div className='PublicGroup-share'>
+                <ShareIcon type='twitter' url={shareUrl} name={group.name} description={group.description} />
+                <ShareIcon type='facebook' url={shareUrl} name={group.name} description={group.description} />
+                <ShareIcon type='mail' url={shareUrl} name={group.name} description={group.description} />
+              </div>
+              */}
             </div>
           </div>
+        </section>
 
-          <div className='PublicGroup-quote'>
-            <h2>Our collective</h2>
-            <div className='PublicGroup-members'>
-              <UsersList users={group.members} />
+        <section className='bg-light-gray px2'>
+          <div className='PublicGroupJoin-container container center'>
+            <h2 className='m0 pb2 -ff-sec'>Join us and help fulfill our mission, month after month!</h2>
+            <p className='m0 pb2'>With your membership plan, you’ll help us cover all the expenses the collective needs to keep going!</p>
+            <div className='clearfix max-width-3 mx-auto pt3'>
+              <div className='col md-col-6 col-12 px3 mb3'>
+                <img width='125' height='98'
+                  src='/static/images/collectives/join-supporter.png'
+                  srcSet='/static/images/collectives/join-supporter@2x.png 2x'/>
+                <h4>Become a member</h4>
+                <p className='h5 m0'>Get your membership starting as low as of $1 a month! Help us continue our activities and you’ll get recognized on our <a href='#'>members wall</a>!</p>
+              </div>
+              <div className='col md-col-6 col-12 px3 mb3'>
+                <img width='131' height='86'
+                  src='/static/images/collectives/join-sponsor.png'
+                  srcSet='/static/images/collectives/join-sponsor@2x.png 2x'/>
+                <h4>Become a Sponsoring Member</h4>
+                <p className='h5 m0'>Starting from $100 per month, you’ll become an oficial sponsor! We’ll proudly display your logo here and on our README on Github with a link to your site.</p>
+              </div>
             </div>
-            <Markdown className='PublicGroup-quoteText' value={group.longDescription} />
           </div>
+        </section>
 
-          <div id='support'></div>
-          {this.donationSection()}
-
-          <div className='PublicGroup-transactions'>
-            {this.expenseList()}
-            {this.donationList()}
+        <section id='members-wall' className='bg-light-gray px2'>
+          <div className='PublicGroupBackers container center'>
+            <div className='container'>
+              <div id='support'></div>
+              <h2 className='m0 -ff-sec'>This is possible thanks to you.</h2>
+              <p className='max-width-3 mx-auto'>Proud members and sponsors support this collective and allow us to keep going towards our mission. We would not be here if it weren’t for these amazing people. Thank you so much.</p>
+              {this.donationSection()}
+            </div>
           </div>
+        </section>
 
-        </div>
+        <section id='expenses-and-activity' className='px2'>
+          <div className='container'>
+            <div className='PublicGroup-transactions clearfix md-flex'>
+              {this.expenseList()}
+              {this.donationList()}
+            </div>
+          </div>
+        </section>
+
         <PublicFooter />
       </div>
     );
@@ -389,7 +489,7 @@ function mapStateToProps({
     donations: take(sortBy(donations, txn => txn.createdAt).reverse(), NUM_TRANSACTIONS_TO_SHOW),
     expenses: take(sortBy(expenses, exp => exp.createdAt).reverse(), NUM_TRANSACTIONS_TO_SHOW),
     inProgress: groups.donateInProgress,
-    shareUrl: window.location.href,
+    // shareUrl: window.location.href,
     profileForm: form.profile,
     donationForm: form.donation,
     showUserForm: users.showUserForm || false,

@@ -1,11 +1,32 @@
-.PublicGroup-video, .PublicGroup-image {
-  width: 70%;
-  float: left;
-  display: inline-block;
+.PublicGroupHero-content {
+  padding: 11rem 0 9rem;
 }
 
-.PublicGroup-image img {
-  max-width: 100%;
+.PublicGroupHero-mission {
+  font-size: 2.75rem;
+  line-height: 3.5rem;
+}
+
+.PublicGroupHero-menu {
+  font-size: 13px;
+  background-color: rgba(0,0,0,.75);
+}
+
+.PublicGroupHeader-container {
+  padding: 6.25rem 0;
+}
+
+.PublicGroupHeader-logo {
+  height: 100px;
+}
+
+.PublicGroupHeader-title {
+  font-size: 2.25rem;
+}
+
+.PublicGroupHeader-website {
+  color: var(--light-blue);
+  font-size: 1rem;
 }
 
 .PublicGroup-image-placeholder {
@@ -17,15 +38,25 @@
   margin: auto;
 }
 
-.PublicGroup-summary {
-  display: inline-block;
-  width: 25%;
-  padding-left: calc(var(--spacing) * 1.25);
+.PublicGroupWhyJoin {
+  min-height: 400px;
+}
+
+.PublicGroupJoin-container {
+  padding-top: 6.25rem;
+}
+
+.PublicGroupBackers {
+  padding: 6.25rem 0 9rem;
+}
+
+.PublicGroup-transactions {
+  padding: 6.25rem 0;
 }
 
 .PublicGroup-metricContainer {
-  vertical-align: top;
-  box-sizing: border-box;
+  /* vertical-align: top; */
+  /* box-sizing: border-box; */
 }
 
 .PublicGroup-share {
@@ -33,20 +64,7 @@
   font-size: 2rem;
 }
 
-.PublicGroup h2 {
-  clear: left;
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-top: 3rem;
-  margin-bottom: 1rem;
-}
-
 .PublicGroup-backers {
-  clear: both;
-}
-
-.PublicGroup-quote {
-  overflow: hidden;
   clear: both;
 }
 
@@ -67,32 +85,27 @@
   font-size: 1.25rem;
 }
 
-.PublicGroup-quoteText {
-  clear: both;
-  box-sizing: border-box;
-  line-height: 24px;
-}
+/* PublicGroup-quoteText h1, .PublicGroup-quoteText h2 { */
+/*   font-size: 1.2rem; */
+/* } */
 
-PublicGroup-quoteText h1, .PublicGroup-quoteText h2 {
-  font-size: 1.2rem;
-}
+/* .PublicGroup-quoteText p:first-child, .PublicGroup-quoteText h1:first-child, .PublicGroup-quoteText h2:first-child { */
+/*   margin-top: 0px; */
+/* } */
 
-.PublicGroup-quoteText p:first-child, .PublicGroup-quoteText h1:first-child, .PublicGroup-quoteText h2:first-child {
-  margin-top: 0px;
-}
+/* .PublicGroup-transactions-list { */
+/*   position: relative; */
+/* } */
 
-.PublicGroup-transactions {
-  clear: both;
-}
-
-.PublicGroup-expenses,
-.PublicGroup-donations {
-  width: 50%;
-  padding-right: calc(var(--spacing) * 2);
-  display: inline-block;
-  vertical-align: top;
-  box-sizing: border-box;
-}
+/* .PublicGroup-transactions-list::after { */
+/*   content: ''; */
+/*   position: absolute; */
+/*   left: 0; */
+/*   right: 0; */
+/*   bottom: 0; */
+/*   height: 50%; */
+/*   background-image: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,1)); */
+/* } */
 
 .PublicGroup-tx-link {
   padding-right: calc(var(--spacing) * 2);
@@ -110,26 +123,8 @@ PublicGroup-quoteText h1, .PublicGroup-quoteText h2 {
   padding: 0 calc(var(--spacing) / 2);
 }
 
-.PublicGroupHeader ,
 .PublicGroupForm-button {
   text-align: center;
-}
-
-.PublicGroupHeader-logo {
-  height: 100px;
-  margin: 0 auto 0.5rem;
-}
-
-.PublicGroupHeader-website {
-  color: var(--light-blue);
-  font-size: 1rem;
-  text-align: center;
-}
-
-.PublicGroupHeader-description {
-  font-size: 1.5rem;
-  text-align: center;
-  margin: 2rem 0;
 }
 
 .PublicGroup .Transaction {
@@ -157,6 +152,10 @@ PublicGroup-quoteText h1, .PublicGroup-quoteText h2 {
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+.PublicGroup-emptyState-image {
+  height: 151px;
 }
 
 @media(--small-viewport) {

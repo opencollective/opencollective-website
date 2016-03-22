@@ -20,7 +20,7 @@ class PublicTopBarV2 extends Component {
       );
     }
 
-    return (<a className='ml1 -btn -btn-medium -ttu -ff-sec -fw-bold' href={`https://app.opencollective.com/login?next=/`}>Log in</a>);
+    return (<a className='ml1 -btn -btn-medium -ttu -ff-sec -fw-bold' href={`https://app.opencollective.com/login?next=${redirect}`}>Log in</a>);
   }
 
   render() {
