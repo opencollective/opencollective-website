@@ -5,7 +5,7 @@ general:
       - production
 machine:
   post:
-    - npm install mocha@2.4.5 -g
+    - npm install mocha@2.4.5 mocha-circleci-reporter -g
   node:
     version: 5.1.0
 deployment:
