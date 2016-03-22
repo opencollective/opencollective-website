@@ -1,0 +1,72 @@
+/* typography */
+.-ff-sec {font-family: 'Montserrat', sans-serif;}
+
+.-fw-thin {font-weight: 100}
+.-fw-extra-light {font-weight: 200}
+.-fw-light {font-weight: 300}
+.-fw-normal {font-weight: 400}
+.-fw-semi-bold {font-weight: 600}
+.-fw-bold {font-weight: 700}
+.-fw-ultra-bold {font-weight: 900}
+
+.-ttu {text-transform: uppercase}
+
+h1, h2, h3, h4, h5, h6 {color: #494B4D}
+
+
+
+/* layout */
+.width-100 {width: 100%}
+.height-100 {height: 100%}
+
+
+
+/* buttons */
+.-btn {
+  font-family: inherit;
+  font-size: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1.125rem;
+  padding: .5rem 1rem;
+  /* margin: 0; */
+  height: auto;
+  /* border: 1px solid transparent; */
+  vertical-align: middle;
+  -webkit-appearance: none;
+  color: inherit;
+  background-color: transparent;
+}
+.-btn-outline {
+  border: 2px solid currentColor;
+}
+.-btn-small {
+  font-size: 0.625rem;
+  padding: .3rem 1rem;
+  border-radius: 16px;
+}
+.-btn-medium {
+  font-size: 0.7rem;
+  padding: .45rem 1rem;
+  border-radius: 18px;
+}
+.-btn-big {
+  font-size: 1rem;
+  padding: 1.2rem 4rem;
+  border-radius: 28px;
+}
+
+
+
+/* colors */
+.white {color: #fff}
+.-green {color: #75CC1F}
+
+.bg-white {background-color: #fff}
+.bg-black {background-color: #1B2226}
+.-bg-green {background-color: #75CC1F}
+.bg-light-gray {background-color: var(--light-gray)}
+.border-gray {border-color: var(--gray)}
+.-border-green {border-color: #75CC1F}
+.muted {opacity: .5}
