@@ -70,7 +70,7 @@
     "morgan": "^1.6.1",
     "nock": "^2.15.0",
     "normalizr": "^1.0.0",
-    "numbro": "^1.6.2",
+    "numbro": "1.6.2",
     "postcss-cssnext": "^2.4.0",
     "postcss-discard-comments": "^2.0.3",
     "postcss-import": "^8.0.2",
