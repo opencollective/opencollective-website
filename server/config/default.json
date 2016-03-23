@@ -4,16 +4,15 @@
     "app": "http://localhost:3000",
     "website": "http://localhost:3000"
   },
-  "stripePublicKey": "pk_test_5olkhgG5FgJDHcGpJllmCj6z",
   "apiKey": "0ac43519edcf4421d80342403fb5985d",
   "viewCache": false,
   "cacheBust": false,
   "cloudflare": {
-    "email": "ops@opencollective.com",
+    "email": null,
     "key": null
   },
   "GoogleAnalytics": {
     "active": false,
     "account": ""
-  } 
+  }
 }

@@ -22,7 +22,7 @@ export class Transactions extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {showSubmitExpense: false };
+    this.state = {showSubmitExpense: props.router.location.pathname.match(/new$/) };
   };
 
   toggleAddExpense() {
@@ -131,7 +131,7 @@ function mapStateToProps({
   users,
   router
 }) {
-  const type = router.params.type.slice(0,-1); // remove trailing s for the API call
+  const type = (router.params.type) ? router.params.type.slice(0,-1) : "expense"; // remove trailing s for the API call
   const group = values(groups)[0] || {}; // to refactor to allow only one group
   const list = (type === 'donation') ? transactions.isDonation : transactions.isExpense;
 
@@ -139,6 +139,7 @@ function mapStateToProps({
     session,
     group,
     transactions: sortBy(list, txn => txn.createdAt).reverse(),
+    router,
     users,
     type
   };
