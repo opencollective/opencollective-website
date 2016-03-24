@@ -2,3 +2,4 @@
 --timeout 5000
 --require babel-core/register
 --require ./test/unit/setup.js
+--reporter mocha-circleci-reporter
