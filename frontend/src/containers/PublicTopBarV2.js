@@ -4,9 +4,8 @@ import logout from '../actions/session/logout';
 
 class PublicTopBarV2 extends Component {
   showSession() {
-    const {session, logout} = this.props;
-    const redirect = `/`;
-
+    const { session, logout } = this.props;
+    const redirect = '/';
 
     if (session && session.isAuthenticated) {
       return (
@@ -24,7 +23,7 @@ class PublicTopBarV2 extends Component {
   }
 
   render() {
-    const {className = ''} = this.props;
+    const { className = '' } = this.props;
 
     return (
       <div className={`clearfix ${className}`}>

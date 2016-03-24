@@ -7,7 +7,7 @@ export default class ActivityItem extends Component {
   static propTypes = {
     donation: PropTypes.object.isRequired,
     user: PropTypes.object
-  }
+  };
 
   static defaultProps = {
     donation: {},
@@ -15,10 +15,10 @@ export default class ActivityItem extends Component {
       name: 'Anonymous',
       avatar: '/static/images/default_avatar.svg'
     }
-  }
+  };
 
   render() {
-    const {className = '', donation, user,  ...other} = this.props;
+    const { className = '', donation, user } = this.props;
     return (
       <div className={`ActivityItem flex ${className}`}>
         <UserPhoto url={user && user.avatar} className='mt1' />

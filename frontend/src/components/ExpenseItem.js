@@ -6,7 +6,7 @@ export default class ExpenseItem extends Component {
   static propTypes = {
     expense: PropTypes.object.isRequired,
     user: PropTypes.object
-  }
+  };
 
   static defaultProps = {
     expense: {},
@@ -14,7 +14,7 @@ export default class ExpenseItem extends Component {
       name: 'Anonymous',
       avatar: '/static/images/default_avatar.svg'
     }
-  }
+  };
 
   _getStatus(expense) {
     if (!!expense.reimbursedAt) {
@@ -33,7 +33,7 @@ export default class ExpenseItem extends Component {
   }
 
   render() {
-    const {className = '', expense, user,  ...other} = this.props;
+    const { className = '', expense, user } = this.props;
     const categoryName = expense.tags[0].toLowerCase().replace(/\W/g, '-');
     const iconName = `category-${categoryName}`;
 

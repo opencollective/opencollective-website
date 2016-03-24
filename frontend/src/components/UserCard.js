@@ -21,15 +21,17 @@ export default class UserCard extends Component {
     if (href) {
       return (<a href={href} className='inline-block align-top'>{children}</a>);
     }
+
     return children;
   }
 
   render() {
-    const {className = '', user} = this.props;
+    const { className = '', user } = this.props;
     let twitterUrl;
     if (user.twitterHandle) {
       twitterUrl = `https://twitter.com/${user.twitterHandle}`;
     }
+
     const href = (user.website || twitterUrl);
 
     return (
