@@ -189,9 +189,9 @@ export class PublicGroup extends Component {
                 <li className='inline-block'>
                   <a href="#members-wall" className='block px2 py3 white -ff-sec -fw-bold'>Members Wall</a>
                 </li>
-                <li className='inline-block'>
+                {/*<li className='inline-block'>
                   <a href="#" className='block px2 py3 white -ff-sec -fw-bold'>Share</a>
-                </li>
+                </li>*/}
               </ul>
             </nav>
           </div>
