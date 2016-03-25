@@ -62,6 +62,7 @@ h1, h2, h3, h4, h5, h6 {color: #494B4D}
 /* colors */
 .white {color: #fff}
 .-green {color: #75CC1F}
+.-light-blue {color: var(--light-blue)}
 
 .bg-white {background-color: #fff}
 .bg-black {background-color: #1B2226}

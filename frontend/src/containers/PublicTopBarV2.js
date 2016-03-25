@@ -28,7 +28,12 @@ class PublicTopBarV2 extends Component {
     return (
       <div className={`clearfix ${className}`}>
         <div className='left'>
-          <img src='/static/svg/logo.svg'/>
+          <svg width='17' height='18' className='-light-blue align-middle mr1'>
+            <use xlinkHref='#svg-isotype'/>
+          </svg>
+          <svg width='172' height='25' className='align-middle xs-hide'>
+            <use xlinkHref='#svg-logotype' fill='#fff'/>
+          </svg>
         </div>
         <div className='right'>
           <a className='mx1 -btn -btn-outline -btn-small px2 -ttu -ff-sec -fw-bold' href="https://opencollective.com#apply">Start a Collective!</a>
