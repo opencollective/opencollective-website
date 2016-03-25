@@ -166,7 +166,7 @@ export class PublicGroup extends Component {
             <div className='PublicGroupHero-content'>
               <p className='h4 mt0 mb3 -ff-sec'>Hi! This is an <span className='-fw-bold'>OpenCollective</span> by <a href={group.website} className='underline white'>{group.name}</a> and we’re on a mission to&hellip;</p>
               <h1 className='PublicGroupHero-mission max-width-3 mx-auto mt0 mb4 white -ff-sec'>{group.description}</h1>
-              <a className='mb3 -btn -btn-big -bg-green -ttu -ff-sec -fw-bold'>Be part of it!</a>
+              <a href='#support' className='mb3 -btn -btn-big -bg-green -ttu -ff-sec -fw-bold'>Be part of it!</a>
               <p className='h6'>Scroll down to find out more.</p>
               <svg width='14' height='9'>
                 <use xlinkHref='#svg-arrow-down' stroke='#fff'/>
@@ -241,8 +241,8 @@ export class PublicGroup extends Component {
                   className='flex-auto pr2' />
 
                 {(this.props.expenses.length) ? (
-                  <div className='pt1 pl2'>
-                    <a href='#' className='-btn -btn-outline -border-green -btn-small -ff-sec -fw-bold -ttu'>See how we’ve spent it</a>
+                  <div className='pt1 pl1'>
+                    <a href='#expenses-and-activity' className='-btn -btn-outline -border-green -btn-small -ff-sec -fw-bold -ttu -wsnw'>See how we’ve spent it</a>
                   </div>
                 ) : null}
               </div>

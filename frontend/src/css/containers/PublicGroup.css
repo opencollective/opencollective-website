@@ -11,6 +11,9 @@
   font-size: 13px;
   background-color: rgba(0,0,0,.75);
 }
+.PublicGroupHero-menu a:hover {
+  opacity: .8;
+}
 
 .PublicGroupHeader-container {
   padding: 6.25rem 0;
