@@ -1,7 +1,5 @@
 .YoutubeVideo {
   position: relative;
-  /* padding-bottom: 56.25%; /1* 16:9 *1/ */
-  /* height: 0; */
 }
 
 .YoutubeVideo iframe {

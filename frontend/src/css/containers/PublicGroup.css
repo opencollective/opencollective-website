@@ -42,6 +42,10 @@
   min-height: 400px;
 }
 
+.PublicGroup-Media-container {
+  padding-bottom: 56.25%; /* 16:9 */
+}
+
 .PublicGroupJoin-container {
   padding-top: 6.25rem;
 }

@@ -24,13 +24,10 @@
   .PublicTopBar-tagLine .Tagline, .PublicTopBar-signup {
     font-size: .8rem;
   }
-  /* .PublicGroup-video, .PublicGroup-image, .PublicGroup-summary { */
-  /*   width: 100%; */
-  /*   margin: 0.5rem 0; */
-  /* } */
 
   .PublicGroup-summary {
-    padding-left: 0;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   .PublicGroup-metricContainer {

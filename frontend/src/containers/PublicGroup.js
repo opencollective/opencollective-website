@@ -224,7 +224,9 @@ export class PublicGroup extends Component {
         <section id='why-join' className='bg-black white'>
           <div className='PublicGroupWhyJoin container clearfix md-flex'>
             <div className='col md-col-6 col-12 relative'>
-              <Media group={group} />
+              <div className='PublicGroup-Media-container'>
+                <Media group={group} />
+              </div>
             </div>
             <div className='PublicGroup-summary col md-col-6 col-12 px4 flex flex-column justify-between'>
               <div>
