@@ -79,7 +79,7 @@ export class PublicGroup extends Component {
         <div className='PublicGroup-emptyState-image flex items-center justify-center'>
           <img width='112' height='151'
             src='/static/images/collectives/expenses-empty-state-image.jpg'
-            srcSet='/static/images/collectives/expenses-empty-state-image.jpg@2x 2x'/>
+            srcSet='/static/images/collectives/expenses-empty-state-image@2x.jpg 2x'/>
         </div>
         <p className='h3 -fw-bold'>Transparency is a great quality.</p>
         <p className='h5 muted mb3'>Submit an expense, get reimbursed and show how funds are being spent!</p>
@@ -122,7 +122,7 @@ export class PublicGroup extends Component {
         <div className='PublicGroup-emptyState-image flex items-center justify-center'>
           <img width='134' height='120'
             src='/static/images/collectives/activities-empty-state-image.jpg'
-            srcSet='/static/images/collectives/activities-empty-state-image.jpg@2x 2x'/>
+            srcSet='/static/images/collectives/activities-empty-state-image@2x.jpg 2x'/>
         </div>
         <p className='h3 -fw-bold'>What you do proves your beliefs.</p>
         <p className='h5 muted'>People should know what stuff is being done for the community!</p>
