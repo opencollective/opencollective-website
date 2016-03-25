@@ -41,7 +41,7 @@ export default class ExpenseItem extends Component {
       <div className={`ExpenseItem flex overflow-hidden border ${className}`}>
         <div className={`ExpenseItem-category category-${categoryName} flex flex-column items-center justify-between px1 py2 border-box`}>
           <div className='ExpenseItem-category-icon-wrapper circle flex justify-center'>
-            <svg width='30' className='white'>
+            <svg width='1.875rem' className='white'>
               <use xlinkHref={`#svg-${iconName}`}/>
             </svg>
           </div>
