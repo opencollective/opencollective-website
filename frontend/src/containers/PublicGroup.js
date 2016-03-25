@@ -92,7 +92,7 @@ export class PublicGroup extends Component {
         <div className='clearfix border-bottom border-gray pb2 mb3'>
           <h2 className='left m0 -ff-sec'>Out Latest Expenses</h2>
           {expenses.length ? (
-            <Link className='right -btn -btn-small -btn-outline -border-green -ff-sec -fw-bold -ttu' to={`/${group.slug}/expenses/new`}>Submit expense</Link>
+            <Link className='right mt1 -btn -btn-micro -btn-outline -border-green -ff-sec -fw-bold -ttu' to={`/${group.slug}/expenses/new`}>Submit expense</Link>
           ) : null}
         </div>
         {(expenses.length === 0) && emptyState}
@@ -137,9 +137,11 @@ export class PublicGroup extends Component {
           {donations.map(donation => <ActivityItem key={`pgd_${donation.id}`} donation={donation} user={users[donation.UserId]} className='mb2' />)}
         </div>
         {donations.length >= NUM_TRANSACTIONS_TO_SHOW && (
-          <Link className='PublicGroup-tx-link -ttu' to={`/${group.slug}/donations`}>
-            See all donations
-          </Link>
+          <div className='center pt2'>
+            <Link className='-btn -btn-medium -btn-outline -border-green -ttu -ff-sec -fw-bold' to={`/${group.slug}/donations`}>
+              See all donations
+            </Link>
+          </div>
         )}
       </div>
     );

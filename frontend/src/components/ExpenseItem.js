@@ -54,7 +54,7 @@ export default class ExpenseItem extends Component {
             <span className='h3 -ff-sec -fw-bold'>
               -<Currency value={expense.amount} currency={expense.currency} colorify={false} />
             </span>
-            <span className='ExpenseStatus border align-middle ml1 -ttu'>{this._getStatus(expense)}</span>
+            <span className='ExpenseStatus border align-middle ml1 muted -fw-bold -ttu'>{this._getStatus(expense)}</span>
           </div>
         </div>
       </div>

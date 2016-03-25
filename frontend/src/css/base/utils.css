@@ -41,6 +41,12 @@ h1, h2, h3, h4, h5, h6 {color: #494B4D}
 .-btn-outline {
   border: 2px solid currentColor;
 }
+.-btn-micro {
+  font-size: .5625rem;
+  padding: 0 .8rem;
+  border-width: 1px;
+  border-radius: 11px;
+}
 .-btn-small {
   font-size: 0.625rem;
   padding: .3rem 1rem;

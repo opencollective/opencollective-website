@@ -38,7 +38,7 @@ export default class Tiers extends Component {
     const cancellationDisclaimer = (frequency !== 'one-time') ? "You can cancel anytime." : "";
 
     return (
-      <div className='Tier' id={tier.name} >
+      <div className='Tier' id={tier.name} key={`tier-${tier.name}`}>
         <div className='flex flex-wrap justify-center'>
           {filterUsersByTier(group.backers, tier.name).map((user, index) => <UserCard user={user} key={index} className='p3 m1' />)}
         </div>
