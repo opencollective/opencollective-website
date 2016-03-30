@@ -53,8 +53,18 @@
   padding-top: 6.25rem;
 }
 
+.PublicGroup-MembersWall::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 15rem;
+  background-image: linear-gradient(var(--light-gray), #fff);
+}
+
 .PublicGroupBackers {
-  padding: 6.25rem 0 9rem;
+  padding: 6.25rem 0 3rem;
 }
 
 .PublicGroup-transactions {

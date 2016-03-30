@@ -283,8 +283,8 @@ export class PublicGroup extends Component {
           </div>
         </section>
 
-        <section id='members-wall' className='bg-light-gray px2'>
-          <div className='PublicGroupBackers container center'>
+        <section id='members-wall' className='PublicGroup-MembersWall relative bg-light-gray px2'>
+          <div className='PublicGroupBackers container center relative'>
             <div className='container'>
               <div id='support'></div>
               <h2 className='m0 -ff-sec'>This is possible thanks to you.</h2>
