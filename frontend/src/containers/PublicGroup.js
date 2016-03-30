@@ -216,7 +216,7 @@ export class PublicGroup extends Component {
               <div className='PublicGroup-members pt4'>
                 <h3 className='mt0 mb2 -ff-sec -fw-light'>Core Contributors</h3>
                 <div className='flex flex-wrap justify-center'>
-                  {group.members.map((user, index) => <UserCard user={user} key={index} className='p3 m1' />)}
+                  {group.members.map((user, index) => <UserCard user={user} key={index} className='m1' />)}
                 </div>
               </div>
             ) : null}

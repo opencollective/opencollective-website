@@ -27,18 +27,25 @@ export default class UserCard extends Component {
 
   render() {
     const { className = '', user } = this.props;
-    let twitterUrl;
-    if (user.twitterHandle) {
-      twitterUrl = `https://twitter.com/${user.twitterHandle}`;
+    const twitterUrl = (user.twitterHandle) ? `https://twitter.com/${user.twitterHandle}` : '';
+    const href = (user.website || twitterUrl);
+    let roleLabel = (user.tier || user.role).toLowerCase();
+    let addBadge = false;
+
+    if (roleLabel === 'sponsor') {
+      roleLabel = 'Official Sponsor';
+    } else if (roleLabel !== 'member') {
+      addBadge = true;
     }
 
-    const href = (user.website || twitterUrl);
-
     return (
-      <article className={`UserCard bg-white ${className}`}>
-        {this._link(href, <UserPhoto url={user.avatar} className='mx-auto' />)}
-        <p className='h5 mt2 mb1 -ff-sec'>{this._link(href, user.name)}</p>
-        <p className='h6 muted m0'>since {moment(user.createdAt).format('MMMM YYYY')}</p>
+      <article className={`UserCard bg-white pt3 ${className} ${user.tier}`}>
+        {this._link(href, <UserPhoto url={user.avatar} addBadge={addBadge} className='mx-auto' />)}
+        <p className='UserCard-name h5 mt2 mb1 px2 -ff-sec'>{this._link(href, user.name)}</p>
+        <div className='border-top border-gray px3 py1'>
+          <p className='UserCard-role m0 -green -fw-bold -ttu'>{roleLabel}</p>
+          <p className='h6 muted m0'>since {moment(user.createdAt).format('MMMM YYYY')}</p>
+        </div>
       </article>
     );
   }
