@@ -199,7 +199,9 @@ export class PublicGroup extends Component {
 
         <section id='who-we-are' className='PublicGroupHeader px2 bg-light-gray'>
           <div className='PublicGroupHeader-container container center'>
-            <img className='PublicGroupHeader-logo rounded' src={group.logo ? group.logo : '/static/images/media-placeholder.svg'} />
+            {group.logo && (
+              <img className='PublicGroupHeader-logo rounded' src={group.logo} />
+            )}
             <h2 className='PublicGroupHeader-title m0 -ff-sec -fw-bold'>We are {group.name}</h2>
             <h3 className='mt0 mb2 -ff-sec -fw-light'>{group.description}</h3>
             <div className='PublicGroup-quote max-width-3 mx-auto'>
