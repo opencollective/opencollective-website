@@ -197,8 +197,8 @@ export class PublicGroup extends Component {
           </div>
         </section>
 
-        <section id='who-we-are' className='PublicGroupHeader px2 bg-light-gray'>
-          <div className='PublicGroupHeader-container container center'>
+        <section id='who-we-are' className='PublicGroupHeader px2 bg-light-gray relative'>
+          <div className='PublicGroupHeader-container container center relative'>
             {group.logo && (
               <img className='PublicGroupHeader-logo rounded' src={group.logo} />
             )}

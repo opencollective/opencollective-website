@@ -15,6 +15,16 @@
   opacity: .8;
 }
 
+.PublicGroupHeader::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 100%;
+  background-image: linear-gradient(#fff, var(--light-gray));
+}
+
 .PublicGroupHeader-container {
   padding: 6.25rem 0;
 }
