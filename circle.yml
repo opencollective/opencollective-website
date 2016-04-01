@@ -18,3 +18,7 @@ test:
     - sudo apt-get update
     - sudo apt-get install google-chrome-stable
     - nohup bash -c "npm start &"
+  override:
+    - npm run hint
+    - npm run test:unit
+    - npm run nightwatch
