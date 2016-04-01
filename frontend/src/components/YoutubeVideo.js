@@ -5,15 +5,15 @@ export default ({
   width='560',
   height='315'
 }) => {
-  
+
   if(!video || !video.match(/watch\?v=/)) {
     return;
   }
-  
+
   const id = video.match(/watch\?v=([^&]*)/)[1];
-  
+
   return (
-    <div className='YoutubeVideo'>
+    <div className='YoutubeVideo height-100'>
       <iframe
         width={width}
         height={height}

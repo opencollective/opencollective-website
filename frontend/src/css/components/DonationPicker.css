@@ -12,7 +12,8 @@
 }
 
 .DonationPicker li, .DonationPicker label {
-  float: left;
+  display: inline-block;
+  vertical-align: top;
   cursor: pointer;
 }
 

@@ -11,6 +11,7 @@
 @import './base/variables.css';
 @import './base/fonts.css';
 @import './base/body.css';
+@import './base/utils.css';
 @import './base/input.css';
 
 /**
@@ -18,6 +19,8 @@
  */
 
 @import './vendors/react-datepicker.css';
+@import 'basscss'; /* http://www.basscss.com/ */
+@import 'basscss-background-images';
 
 /**
  * Containers
@@ -55,6 +58,10 @@
 @import './components/TransactionStatus.css';
 @import './components/TransactionItem.css';
 @import './components/UsersList.css';
+@import './components/UserCard.css';
+@import './components/UserPhoto.css';
+@import './components/ExpenseItem.css';
+@import './components/ActivityItem.css';
 @import './components/Widget.css';
 
 /**
