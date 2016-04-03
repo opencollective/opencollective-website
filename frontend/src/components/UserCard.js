@@ -41,8 +41,8 @@ export default class UserCard extends Component {
     return (
       <article className={`UserCard bg-white pt3 ${className} ${user.tier}`}>
         {this._link(href, <UserPhoto url={user.avatar} addBadge={addBadge} className='mx-auto' />)}
-        <p className='UserCard-name h5 mt2 mb1 px2 -ff-sec'>{this._link(href, user.name)}</p>
-        <div className='border-top border-gray px3 py1'>
+        <p className='UserCard-name PublicGroup-font-15 h5 my2 px2 -ff-sec'>{this._link(href, user.name)}</p>
+        <div className='border-top border-gray px3 py2'>
           <p className='UserCard-role m0 -green -fw-bold -ttu'>{roleLabel}</p>
           <p className='h6 muted m0'>since {moment(user.createdAt).format('MMMM YYYY')}</p>
         </div>
