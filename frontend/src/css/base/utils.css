@@ -1,5 +1,6 @@
 /* typography */
 .-ff-sec {font-family: 'Montserrat', sans-serif;}
+.-ff-sec.-fw-light {font-family: 'montserratlight';}
 
 .-fw-thin {font-weight: 100}
 .-fw-extra-light {font-weight: 200}
