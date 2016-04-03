@@ -15,7 +15,7 @@ export class PublicGroupSignup extends Component {
     } = this.props;
 
     return (
-      <div className='PublicGroupSignup'>
+      <div className='PublicGroupSignup clearfix'>
         <h2>Thanks for the support </h2>
         <p>How should we show you on the page? </p>
 

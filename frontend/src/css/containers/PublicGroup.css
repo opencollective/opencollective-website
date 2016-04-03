@@ -1,3 +1,25 @@
+/* GENERAL */
+.PublicGroup-title {
+  font-size: 1.75rem;
+}
+
+.PublicGroup-subtitle {
+  font-size: 1.375rem;
+}
+
+.PublicGroup-font-15 {
+  font-size: .9375rem;
+  line-height: 1.688rem;
+}
+
+.PublicGroup-font-17 {
+  font-size: 1.0625rem;
+  line-height: 1.688rem;
+}
+
+
+
+/* HERO */
 .PublicGroupHero-content {
   padding: 11rem 0 9rem;
 }
@@ -5,17 +27,22 @@
 .PublicGroupHero-mission {
   font-size: 2.75rem;
   line-height: 3.5rem;
+  letter-spacing: -.5px;
 }
 
 .PublicGroupHero-menu {
   font-size: 13px;
   background-color: rgba(0,0,0,.75);
 }
+
 .PublicGroupHero-menu a:hover {
   opacity: .8;
 }
 
-.PublicGroupHeader::before {
+
+
+/* INTRO / WHO WE ARE */
+.PublicGroupIntro::before {
   content: '';
   position: absolute;
   left: 0;
@@ -25,23 +52,26 @@
   background-image: linear-gradient(#fff, var(--light-gray));
 }
 
-.PublicGroupHeader-container {
+.PublicGroupIntro-container {
   padding: 6.25rem 0;
 }
 
-.PublicGroupHeader-logo {
+.PublicGroupIntro-logo {
   height: 100px;
 }
 
-.PublicGroupHeader-title {
+.PublicGroupIntro-title {
   font-size: 2.25rem;
 }
 
-.PublicGroupHeader-website {
+.PublicGroupIntro-website {
   color: var(--light-blue);
   font-size: 1rem;
 }
 
+
+
+/* WHY JOIN */
 .PublicGroup-image-placeholder {
   background: url('/static/images/media-placeholder.svg') no-repeat;
   background-position: center center;
@@ -63,6 +93,14 @@
   padding-top: 6.25rem;
 }
 
+.PublicGroup-metricContainer {
+  /* vertical-align: top; */
+  /* box-sizing: border-box; */
+}
+
+
+
+/* MEMBERS WALL */
 .PublicGroup-MembersWall::before {
   content: '';
   position: absolute;
@@ -77,99 +115,11 @@
   padding: 6.25rem 0 3rem;
 }
 
+
+
+/* EXPENSES AND DONATIONS */
 .PublicGroup-transactions {
   padding: 6.25rem 0;
-}
-
-.PublicGroup-metricContainer {
-  /* vertical-align: top; */
-  /* box-sizing: border-box; */
-}
-
-.PublicGroup-share {
-  margin-top: 1rem;
-  font-size: 2rem;
-}
-
-.PublicGroup-backers {
-  clear: both;
-}
-
-.PublicGroup-quoteUser .ProfilePhoto,
-.PublicGroup-quoteName {
-  display: inline-block;
-}
-
-.PublicGroup-quoteUser {
-  width: 30%;
-  display: inline-block;
-  vertical-align: top;
-}
-
-.PublicGroup-quoteName {
-  padding-left: var(--spacing);
-  vertical-align: top;
-  font-size: 1.25rem;
-}
-
-/* PublicGroup-quoteText h1, .PublicGroup-quoteText h2 { */
-/*   font-size: 1.2rem; */
-/* } */
-
-/* .PublicGroup-quoteText p:first-child, .PublicGroup-quoteText h1:first-child, .PublicGroup-quoteText h2:first-child { */
-/*   margin-top: 0px; */
-/* } */
-
-/* .PublicGroup-transactions-list { */
-/*   position: relative; */
-/* } */
-
-/* .PublicGroup-transactions-list::after { */
-/*   content: ''; */
-/*   position: absolute; */
-/*   left: 0; */
-/*   right: 0; */
-/*   bottom: 0; */
-/*   height: 50%; */
-/*   background-image: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,1)); */
-/* } */
-
-.PublicGroup-tx-link {
-  padding-right: calc(var(--spacing) * 2);
-  float: right
-}
-
-.PublicGroup .Button {
-  display: inline-block;
-  font-weight: bold;
-  padding: 0.75rem 1rem;
-  font-size: 1rem;
-}
-
-.PublicGroupForm-radioLabel {
-  padding: 0 calc(var(--spacing) / 2);
-}
-
-.PublicGroupForm-button {
-  text-align: center;
-}
-
-.PublicGroup .Transaction {
-  border-bottom: none;
-}
-
-.PublicGroup .ShareIcon {
-  padding-right: calc(var(--spacing) / 2);
-}
-
-.PublicGroup-donationIcon,
-.PublicGroup-expenseIcon {
-  float: left;
-  font-size: 3rem;
-  width: 3rem;
-  height: 3rem;
-  margin-right: 1rem;
-  padding: 0.2rem;
 }
 
 .PublicGroup-emptyState {
@@ -185,8 +135,24 @@
   height: 151px;
 }
 
-@media(--small-viewport) {
-  .PublicGroup .DonationPicker label {
-    margin-right: 1.4rem;
-  }
+/* .PublicGroup-transactions-list { */
+/*   position: relative; */
+/* } */
+
+/* .PublicGroup-transactions-list::after { */
+/*   content: ''; */
+/*   position: absolute; */
+/*   left: 0; */
+/*   right: 0; */
+/*   bottom: 0; */
+/*   height: 50%; */
+/*   background-image: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,1)); */
+/* } */
+
+.PublicGroup .Button {
+  display: inline-block;
+  margin: 0;
+  /* font-weight: bold; */
+  /* padding: 0.75rem 1rem; */
+  /* font-size: 1rem; */
 }
