@@ -27,6 +27,8 @@ import profileSchema from '../joi_schemas/profile';
 // Number of expenses and revenue items to show on the public page
 const NUM_TRANSACTIONS_TO_SHOW = 3;
 
+import strings from '../ui/strings.json';
+
 export class DonatePage extends Component {
 
   constructor(props) {
@@ -35,6 +37,10 @@ export class DonatePage extends Component {
       showThankYouMessage: false,
       showUserForm: false
     };
+  }
+
+  getString(strid) {
+    return strings[this.props.group.settings.lang][strid]; // TODO: We should add a `lang` column in the `Groups` table and use that instead of `currency`
   }
 
   render() {
@@ -49,7 +55,7 @@ export class DonatePage extends Component {
     const tiers = [{
       name: "custom",
       title: " ",
-      description: "Your donation will help us continue our activities. Thank you for your support",
+      description: this.getString('defaultTierDescription'),
       amount,
       interval: interval || 'one-time',
       range: [amount, 10000000]
@@ -66,7 +72,6 @@ export class DonatePage extends Component {
 
     return (
       <div className='PublicGroup'>
-        <PublicTopBar />
         <Notification />
 
         <div className='PublicContent'>
@@ -74,7 +79,7 @@ export class DonatePage extends Component {
           <div className='PublicGroupHeader'>
             <img className='PublicGroupHeader-logo' src={group.logo ? group.logo : '/static/images/media-placeholder.svg'} />
             <div className='PublicGroupHeader-website'><DisplayUrl url={group.website} /></div>
-            <div className='PublicGroupHeader-host'>Hosted by <a href={group.host.website}>{group.host.name}</a></div>
+            <div className='PublicGroupHeader-host'>{this.getString('hostedBy')} <a href={group.host.website}>{group.host.name}</a></div>
             <div className='PublicGroupHeader-description'>
               {group.description}
             </div>
@@ -208,6 +213,24 @@ function mapStateToProps({
   group.host = group.hosts[0] || {};
 
   group.backersCount = group.backers.length;
+
+  group.settings = {
+    lang: 'en',
+    formatCurrency: {
+      compact: false,
+      precision: 2
+    }
+  };
+
+  if(group.slug === 'laprimaire') {
+    group.settings = {
+      lang: 'fr',
+      formatCurrency: {
+        compact: true,
+        precision: 0
+      }
+    };
+  }
 
   return {
     amount: router.params.amount,

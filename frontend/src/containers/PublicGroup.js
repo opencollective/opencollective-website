@@ -379,6 +379,24 @@ function mapStateToProps({
   group.backersCount = group.backers.length;
   group.transactions = filterCollection(transactions, { GroupId: group.id });
 
+  group.settings = {
+    lang: 'en',
+    formatCurrency: {
+      compact: false,
+      precision: 2
+    }
+  };
+
+  if(group.slug === 'laprimaire') {
+    group.settings = {
+      lang: 'fr',
+      formatCurrency: {
+        compact: true,
+        precision: 0
+      }
+    };
+  }
+
   const donations = transactions.isDonation;
   const expenses = transactions.isExpense;
 

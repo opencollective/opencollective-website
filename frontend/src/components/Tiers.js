@@ -12,7 +12,13 @@ const filterUsersByTier = (users, tiername) => {
   return filterCollection(users, { tier: tiername });
 }
 
+import strings from '../ui/strings.json'
+
 export default class Tiers extends Component {
+
+  getString(strid) {
+    return strings[this.props.group.settings.lang][strid];
+  }
 
   showTier(tier) {
     const {
@@ -32,10 +38,10 @@ export default class Tiers extends Component {
     const frequency = donationForm[tier.name].frequency || tier.interval;
     const currency = donationForm[tier.name].currency || group.currency;
 
-    const frequencyHuman = frequency === 'one-time' ? '' : `per ${frequency.replace(/ly$/,'')}`;
-    const stripeDescription =  `${formatCurrency(amount, currency, { compact: false })} ${frequencyHuman}`;
-    const button = tier.button || `Donate ${stripeDescription}`;
-    const cancellationDisclaimer = (frequency !== 'one-time') ? "You can cancel anytime." : "";
+    const frequencyHuman = frequency === 'one-time' ? '' : `${this.getString('per')} ${this.getString(frequency.replace(/ly$/,''))}`;
+    const stripeDescription =  `${formatCurrency(amount, currency, group.settings.formatCurrency)} ${frequencyHuman}`;
+    const button = tier.button || `${this.getString('donate')} ${stripeDescription}`;
+    const cancellationDisclaimer = (frequency !== 'one-time') ? this.getString('cancelAnytime') : "";
 
     return (
       <div className='Tier' id={tier.name} >
@@ -94,7 +100,7 @@ export default class Tiers extends Component {
           )}
           </div>
         <div className='PublicGroupForm-disclaimer'>
-          By clicking above, you are pledging to give {group.host.name} {stripeDescription} for {group.name}. {cancellationDisclaimer}
+          {this.getString('disclaimer')} {group.host.name} {stripeDescription} {this.getString('for')} {group.name}. {cancellationDisclaimer}
         </div>
         </div>
       </div>
@@ -106,11 +112,11 @@ export default class Tiers extends Component {
     const tiers = this.props.tiers || [{
         name: 'backer',
         title: "Backers",
-        description: "Support us with a monthly donation and help us continue our activities.",
+        description: this.getString('defaultTierDescription'),
         presets: [1, 5, 10, 50, 100],
         range: [1, 1000000],
         interval: 'monthly',
-        button: "Become a backer"
+        button: this.getString("defaultTierButton")
       }];
 
     return (

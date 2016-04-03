@@ -29,6 +29,7 @@ export default (req, res, next) => {
 
   store.dispatch(match(url, (error, redirectLocation, routerState) => {
     if (error) {
+      console.error("error in store.dispatch: ", error);
       next(err);
     } else if (!routerState) { // 404
       console.error("No route defined in the frontend react");
