@@ -16,8 +16,8 @@ export default ({value, currency, frequency, presets, onChange, showCurrencyPick
 
   function className(selectedPreset, value) {
     return classnames({
-      'DonationPicker-amount': true,
-      'DonationPicker-amount--selected': (selectedPreset === value) || (selectedPreset === 'other' && isCustomMode)
+      'DonationPicker-amount flex items-center justify-center mr1 circle -ff-sec': true,
+      'DonationPicker-amount--selected -fw-bold': (selectedPreset === value) || (selectedPreset === 'other' && isCustomMode)
     });
   }
 
@@ -38,18 +38,18 @@ export default ({value, currency, frequency, presets, onChange, showCurrencyPick
         key={presetLabel}
         // need to set this back to 'monthly' if you flip back from 'Other' control
         onClick={() => onChange({amount:amountValue, frequency: 'monthly'}) }>
-        <label>{amountLabel}</label>
+        {amountLabel}
       </li>
     );
 
   }
 
   return (
-    <div className='DonationPicker'>
-      <ul className='DonationPicker-presets'>
+    <div className='DonationPicker mb3'>
+      <ul className='DonationPicker-presets list-reset m0 flex flex-wrap justify-center px1'>
         {presetAmounts.map(presetListItem)}
       </ul>
-      <div>
+      <div className='px3'>
         {isCustomMode && customField({onChange, value, frequency, currency, showCurrencyPicker})}
       </div>
     </div>
@@ -80,23 +80,29 @@ function customField({onChange, value, frequency, currency, showCurrencyPicker})
   }];
 
   return (
-    <div className='DonationPicker-customfield'>
-      <Input
-        value={value}
-        placeholder='Enter an amount'
-        customClass='DonationPicker-input'
-        handleChange={(amount) => onChange({amount})} />
-      <Select
-        options={frequencies}
-        value={frequency}
-        handleChange={frequency => onChange({frequency})} />
-      {showCurrencyPicker &&
-        (<Select
-          customClass='DonationPicker-currencyselector'
-          options={currencies}
-          value={currency}
-          handleChange={currency => onChange({currency})} />
-          )}
+    <div className='DonationPicker-customfield width-100 pt3 clearfix'>
+      <div className='col col-6 pr2 relative'>
+        <label className='h6 block mb1 left-align'>Tweak the amount</label>
+        <Input
+          value={value}
+          placeholder='Enter an amount'
+          customClass='DonationPicker-input'
+          handleChange={(amount) => onChange({amount})} />
+      </div>
+      <div className='col col-6 pl2'>
+        <label className='mb1 h6 block left-align'>Frequency</label>
+        <Select
+          options={frequencies}
+          value={frequency}
+          handleChange={frequency => onChange({frequency})} />
+        {showCurrencyPicker &&
+          (<Select
+            customClass='DonationPicker-currencyselector'
+            options={currencies}
+            value={currency}
+            handleChange={currency => onChange({currency})} />
+            )}
+      </div>
     </div>
   );
 }
