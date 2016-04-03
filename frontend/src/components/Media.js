@@ -14,7 +14,7 @@ export default ({group}) => {
     const styles = {
       backgroundImage: `url(${image})`,
     }
-    return (<div className='PublicGroup-image absolute top-0 left-0 bg-contain bg-center bg-no-repeat height-100 width-100' style={styles}></div>);
+    return (<div className='PublicGroup-image absolute top-0 left-0 bg-cover bg-center bg-no-repeat height-100 width-100' style={styles}></div>);
   } else {
     return (
       <div className='PublicGroup-image'>
