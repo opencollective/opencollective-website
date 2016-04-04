@@ -1,0 +1,38 @@
+{
+  "en": {
+    "hostedBy": "Hosted by",
+    "donate": "Donate",
+    "defaultTierDescription": "Your donation will help us continue our activities. Thank you for your support.",
+    "defaultTierButton": "Become a backer",
+    "cancelAnytime": "You can cancel anytime.",
+    "per": "per",
+    "month": "month",
+    "year": "year",
+    "disclaimer": "By clicking above, you are pledging to give",
+    "for": "for",
+    "thankyou": "Thank you for your support",
+    "howDoYouWantToBeShown": "How should we show you on the page? (Leave empty to remain anonymous)",
+    "displayName": "Display name",
+    "website": "Website",
+    "twitter": "Twitter",
+    "save": "Save"
+  },
+  "fr": {
+    "hostedBy": "Hébergé par",
+    "donate": "Faire un don de",
+    "defaultTierDescription": "Votre donation nous aidera à continuer nos activités. Merci pour votre soutien!",
+    "defaultTierButton": "Devenez un supporter",
+    "cancelAnytime": "Vous pouvez annuler à n'importe quel moment.",
+    "per": "par",
+    "month": "mois",
+    "year": "an",
+    "disclaimer": "En cliquant ci-dessus, vous vous engagez à donner",
+    "for": "pour",
+    "thankyou": "Merci pour votre soutien",
+    "howDoYouWantToBeShown": "Comment voulez-vous être publiquement listé sur notre page? (laissez vide pour rester anonyme)",
+    "displayName": "Nom",
+    "website": "Site Internet",
+    "twitter": "Compte Twitter",
+    "save": "Sauvegarder"
+  }  
+}

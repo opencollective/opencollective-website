@@ -1,0 +1,27 @@
+form {
+  overflow: hidden;
+  max-width: 600px;
+  
+  input[type=text], select, textarea, .SelectContainer {
+    width: 100%;
+  }
+}
+
+.row {
+  margin: 1rem 0;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  text-align: left;
+}
+
+@media (--medium-viewport) {
+  form {
+  clear: left;
+  }
+  .buttonsRow {
+    text-align: center;
+  }
+}

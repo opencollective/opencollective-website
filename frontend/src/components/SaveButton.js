@@ -3,16 +3,15 @@ import React, { PropTypes } from 'react';
 import Icon from './Icon';
 import AsyncButton from './AsyncButton';
 
-const SaveButton = ({save, inProgress}) => {
+const SaveButton = ({save, label, inProgress}) => {
+  label = label || "Save";
   return (
-    <div>
-      <AsyncButton
-        customClass='Button--save'
-        inProgress={inProgress}
-        onClick={save.bind(this)}>
-        <Icon type='approved' /> Save
-      </AsyncButton>
-    </div>
+    <AsyncButton
+      customClass='Button--save'
+      inProgress={inProgress}
+      onClick={save.bind(this)}>
+      <Icon type='approved' /> {label}
+    </AsyncButton>
   );
 }
 
