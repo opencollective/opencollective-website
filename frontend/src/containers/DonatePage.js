@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import values from 'lodash/object/values';
 
 import roles from '../constants/roles';
-import PublicTopBar from '../containers/PublicTopBar';
 import Notification from '../containers/Notification';
 import PublicFooter from '../components/PublicFooter';
 import PublicGroupThanks from '../components/PublicGroupThanks';
@@ -24,8 +23,7 @@ import decodeJWT from '../actions/session/decode_jwt';
 
 import profileSchema from '../joi_schemas/profile';
 
-// Number of expenses and revenue items to show on the public page
-const NUM_TRANSACTIONS_TO_SHOW = 3;
+import strings from '../ui/strings.json';
 
 export class DonatePage extends Component {
 
@@ -43,13 +41,14 @@ export class DonatePage extends Component {
       interval,
       group,
       isAuthenticated,
-      donationForm
+      donationForm,
+      i18n
     } = this.props;
 
     const tiers = [{
       name: "custom",
       title: " ",
-      description: "Your donation will help us continue our activities. Thank you for your support",
+      description: i18n.getString('defaultTierDescription'),
       amount,
       interval: interval || 'one-time',
       range: [amount, 10000000]
@@ -57,7 +56,7 @@ export class DonatePage extends Component {
 
     var donationSection;
     if (this.state.showThankYouMessage || (isAuthenticated && this.state.showUserForm)) { // we don't handle userform from logged in users) {
-      donationSection = <PublicGroupThanks />;
+      donationSection = <PublicGroupThanks message={i18n.getString('thankyou')} />;
     } else if (this.state.showUserForm) {
       donationSection = <PublicGroupSignup {...this.props} save={saveNewUser.bind(this)} />
     } else {
@@ -65,8 +64,7 @@ export class DonatePage extends Component {
     }
 
     return (
-      <div className='PublicGroup'>
-        <PublicTopBar />
+      <div className='DonatePage'>
         <Notification />
 
         <div className='PublicContent'>
@@ -74,7 +72,7 @@ export class DonatePage extends Component {
           <div className='PublicGroupHeader'>
             <img className='PublicGroupHeader-logo' src={group.logo ? group.logo : '/static/images/media-placeholder.svg'} />
             <div className='PublicGroupHeader-website'><DisplayUrl url={group.website} /></div>
-            <div className='PublicGroupHeader-host'>Hosted by <a href={group.host.website}>{group.host.name}</a></div>
+            <div className='PublicGroupHeader-host'>{i18n.getString('hostedBy')} <a href={group.host.website}>{group.host.name}</a></div>
             <div className='PublicGroupHeader-description'>
               {group.description}
             </div>
@@ -108,7 +106,7 @@ export class DonatePage extends Component {
   }
 }
 
-export function donateToGroup(amount, frequency, currency, token) {
+export function donateToGroup({amount, frequency, currency, token}) {
   const {
     notify,
     donate,
@@ -118,8 +116,8 @@ export function donateToGroup(amount, frequency, currency, token) {
   } = this.props;
 
   const payment = {
-    stripeToken: token.id,
-    email: token.email,
+    stripeToken: token && token.id,
+    email: token && token.email,
     amount,
     currency
   };
@@ -140,14 +138,6 @@ export function donateToGroup(amount, frequency, currency, token) {
     })
     .then(() => fetchGroup(group.id))
     .then(() => fetchUsers(group.id))
-    .then(() => {
-      return fetchTransactions(group.id, {
-        per_page: NUM_TRANSACTIONS_TO_SHOW,
-        sort: 'createdAt',
-        direction: 'desc',
-        donation: true
-      });
-    })
     .catch((err) => notify('error', err.message));
 }
 
@@ -161,7 +151,6 @@ export function saveNewUser() {
     group,
     fetchUsers
   } = this.props;
-
   return validateSchema(profileForm.attributes, profileSchema)
     .then(() => updateUser(users.newUser.id, profileForm.attributes))
     .then(() => this.setState({
@@ -194,6 +183,7 @@ function mapStateToProps({
 
   const group = values(groups)[0] || {stripeAccount: {}}; // to refactor to allow only one group
   const usersByRole = group.usersByRole || {};
+  const newUser = users.newUser || {};
 
   /* @xdamman:
    * We should refactor this. The /api/group route should directly return
@@ -209,6 +199,30 @@ function mapStateToProps({
 
   group.backersCount = group.backers.length;
 
+  group.settings = {
+    lang: 'en',
+    formatCurrency: {
+      compact: false,
+      precision: 2
+    }
+  };
+
+  if(group.slug === 'laprimaire') {
+    group.settings = {
+      lang: 'fr',
+      formatCurrency: {
+        compact: true,
+        precision: 0
+      }
+    };
+  }
+
+  const i18n = {
+    getString: (strid) => {
+      return strings[group.settings.lang][strid]; // TODO: We should add a `lang` column in the `Groups` table and use that instead of `currency`
+    }
+  };
+
   return {
     amount: router.params.amount,
     interval: router.params.interval,
@@ -221,6 +235,8 @@ function mapStateToProps({
     donationForm: form.donation,
     showUserForm: users.showUserForm || false,
     saveInProgress: users.updateInProgress,
-    isAuthenticated: session.isAuthenticated
+    isAuthenticated: session.isAuthenticated,
+    newUser,
+    i18n
   };
 }
