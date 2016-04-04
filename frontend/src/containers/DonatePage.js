@@ -23,9 +23,6 @@ import decodeJWT from '../actions/session/decode_jwt';
 
 import profileSchema from '../joi_schemas/profile';
 
-// Number of expenses and revenue items to show on the public page
-const NUM_TRANSACTIONS_TO_SHOW = 3;
-
 import strings from '../ui/strings.json';
 
 export class DonatePage extends Component {
