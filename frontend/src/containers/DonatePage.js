@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import values from 'lodash/object/values';
 
 import roles from '../constants/roles';
-import PublicTopBar from '../containers/PublicTopBar';
 import Notification from '../containers/Notification';
 import PublicFooter from '../components/PublicFooter';
 import PublicGroupThanks from '../components/PublicGroupThanks';
@@ -110,7 +109,7 @@ export class DonatePage extends Component {
   }
 }
 
-export function donateToGroup(amount, frequency, currency, token) {
+export function donateToGroup({amount, frequency, currency, token}) {
   const {
     notify,
     donate,
@@ -120,8 +119,8 @@ export function donateToGroup(amount, frequency, currency, token) {
   } = this.props;
 
   const payment = {
-    stripeToken: token.id,
-    email: token.email,
+    stripeToken: token && token.id,
+    email: token && token.email,
     amount,
     currency
   };
