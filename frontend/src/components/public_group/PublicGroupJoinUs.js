@@ -2,11 +2,11 @@ import React from 'react';
 import AmountPicker from '../../components/public_group/AmountPicker';
 
 export default class PublicGroupJoinUs extends React.Component {
-  _showTier(tier) {
+  _showTier(tier, index) {
     const { donateToGroup } = this.props;
 
     return (
-      <div className='md-col-6 col-12 px3 pb4 mb4 border-box col'>
+      <div className='md-col-6 col-12 px3 pb4 mb4 border-box col' key={`${tier.name}_${index}`}>
         <div className='-border-green border mt3' style={{borderWidth: 2, borderRadius: 6}}>
           <h3 className='h3 mt0' style={{marginTop: '-1em'}}>
             <span className='bg-light-gray px2 -fw-ultra-bold'>Become a {tier.name}</span>
