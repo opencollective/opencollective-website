@@ -10,8 +10,6 @@ import filterCollection from '../lib/filter_collection';
 import roles from '../constants/roles';
 import Notification from '../containers/Notification';
 import PublicFooter from '../components/PublicFooter';
-import PublicGroupThanks from '../components/PublicGroupThanks';
-import PublicGroupSignup from '../components/PublicGroupSignup';
 
 import PublicGroupHero from '../components/public_group/PublicGroupHero';
 import PublicGroupWhoWeAre from '../components/public_group/PublicGroupWhoWeAre';
@@ -20,6 +18,8 @@ import PublicGroupJoinUs from '../components/public_group/PublicGroupJoinUs';
 import PublicGroupMembersWall from '../components/public_group/PublicGroupMembersWall';
 import PublicGroupExpenses from '../components/public_group/PublicGroupExpenses';
 import PublicGroupDonations from '../components/public_group/PublicGroupDonations';
+import PublicGroupSignupV2 from '../components/public_group/PublicGroupSignupV2';
+import PublicGroupThanksV2 from '../components/public_group/PublicGroupThanksV2';
 
 import fetchGroup from '../actions/groups/fetch_by_id';
 import fetchUsers from '../actions/users/fetch_by_group';
@@ -55,12 +55,29 @@ export class PublicGroup extends Component {
     } = this.props;
 
     if (this.state.showThankYouMessage || (isAuthenticated && this.state.showUserForm) || showPaypalThankYou) {
-      return <PublicGroupThanks/>
+      return (
+        <div className='PublicGroupDonationFlowWrapper px2 py3 border-box fixed top-0 left-0 right-0 bottom-0 bg-white'>
+          <PublicGroupThanksV2
+            message='You are now in our backers wall!'
+            closeDonationModal={::this._closeDonationFlow} />
+        </div>
+      );
     } else if (this.state.showUserForm) {
-      return <PublicGroupSignup {...this.props} save={saveNewUser.bind(this)} />
+      return (
+        <div className='PublicGroupDonationFlowWrapper px2 py3 border-box fixed top-0 left-0 right-0 bottom-0 bg-white'>
+          <PublicGroupSignupV2 {...this.props} save={saveNewUser.bind(this)} />
+        </div>
+      );
     }
 
     return null;
+  }
+
+  _closeDonationFlow() {
+    this.setState({
+      showThankYouMessage: false,
+      showUserForm: false
+    });
   }
 
   render() {
@@ -75,8 +92,6 @@ export class PublicGroup extends Component {
     return (
       <div className='PublicGroup'>
         <Notification />
-
-        {this._donationFlow()}
 
         <PublicGroupHero group={group} />
         <PublicGroupWhoWeAre group={group} />
@@ -97,6 +112,8 @@ export class PublicGroup extends Component {
         </section>
 
         <PublicFooter />
+
+        {this._donationFlow()}
       </div>
     );
   }

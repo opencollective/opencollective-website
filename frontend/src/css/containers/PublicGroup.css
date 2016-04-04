@@ -112,7 +112,7 @@
 }
 
 .PublicGroupBackers {
-  padding: 6.25rem 0 3rem;
+  padding: 4rem 0 3rem;
 }
 
 
@@ -149,6 +149,51 @@
 /*   background-image: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,1)); */
 /* } */
 
+
+
+/* DONATION FLOW */
+.PublicGroupDonationFlowWrapper {
+  height: 100vh;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.PublicGroupSignupV2-title {
+  font-size: 2.25rem;
+}
+
+.PublicGroupSignupV2 .Field {
+  width: 100%;
+  font-size: 15px;
+  height: 40px;
+  margin: 0;
+  padding: 0 .5rem;
+  border: 1px solid rgba(48, 50, 51, .15);
+  background: white;
+  box-shadow: inset 0 3px 0 rgba(0,0,0,.05);
+}
+.PublicGroupSignupV2 .Field {
+  color: var(--darkest-gray);
+}
+.PublicGroupSignupV2 .Field:hover,
+.PublicGroupSignupV2 .Field:hover::-webkit-input-placeholder {
+  border-color: #75CC1F;
+  color: currentColor;
+}
+.PublicGroupSignupV2 .Field:focus {
+  border-color: #75CC1F;
+  box-shadow: 0 0 0 1px #75CC1F;
+  color: currentColor;
+}
+
+.PublicGroupThanksV2-icon {
+  fill: #5CAAE2;
+  color: #75CC1F;
+}
+
+
+
+/* */
 .PublicGroup .Button {
   display: inline-block;
   margin: 0;
