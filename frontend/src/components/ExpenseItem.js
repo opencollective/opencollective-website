@@ -34,7 +34,7 @@ export default class ExpenseItem extends Component {
 
   render() {
     const { className = '', expense, user } = this.props;
-    const categoryName = expense.tags[0].toLowerCase().replace(/\W/g, '-');
+    const categoryName = (expense.tags && expense.tags.length) ? expense.tags[0].toLowerCase().replace(/\W/g, '-') : '';
     const iconName = `category-${categoryName}`;
 
     return (

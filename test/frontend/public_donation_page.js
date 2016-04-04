@@ -8,23 +8,22 @@ module.exports = {
       .url(`${config.host.website}/testcollective`)
       .waitForElementVisible('body', 1000)
       .assert.containsText('body', 'OpenCollective test group on the test server')
-      .waitForElementVisible('div[class=Tiers]', 1000)
-      .assert.containsText('div[class=Tiers]', 'Backers')
+      .assert.containsText('.PublicGroupBackers', 'This is possible thanks to you.')
 
       // click on top green "Back us" button
       .click('a[href="#support"]')
       .assert.urlContains('#support')
 
       // wait for bottom green button to show up
-      .waitForElementVisible('div[class="Button Button--green"]', 1000)
-      .assert.containsText('div[class="Button Button--green"]', 'BECOME A BACKER')
+      .waitForElementVisible('.Button.Button--green', 1000)
+      .assert.containsText('.Button.Button--green', 'BECOME A BACKER')
   },
 
   'Redirects to paypal after clicking donate': (client) => {
 
     client
       // Click Donate
-      .click('div[class="Button Button--green"]')
+      .click('.Button.Button--green')
       .pause(5000)
       .assert.urlContains('https://www.sandbox.paypal.com/') // redirected to paypal
       .end();
@@ -35,8 +34,8 @@ module.exports = {
     client
       // callback after filling paypal
       .url(`${config.host.website}/testcollective?status=payment_success&userid=1&has_full_account=true`)
-      .waitForElementVisible('div[class=PublicGroupThanks]', 2000)
-      .assert.containsText('body', 'Thank you for your support')
+      .waitForElementVisible('.PublicGroupThanksV2', 2000)
+      .assert.containsText('body', 'You are now in our backers wall!')
       .end();
   },
 
@@ -45,7 +44,7 @@ module.exports = {
     client
       // callback after filling paypal
       .url(`${config.host.website}/testcollective?status=payment_success&userid=1&has_full_account=false`)
-      .waitForElementVisible('div[class=PublicGroupSignup]', 3000)
+      .waitForElementVisible('.PublicGroupSignupV2', 3000)
       .assert.containsText('body', 'How should we show you on the page?')
       .end();
   },
