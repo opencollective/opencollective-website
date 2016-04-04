@@ -26,7 +26,7 @@ export default class PublicGroupWhyJoin extends React.Component {
 
           <div className={`PublicGroup-summary col md-col-6 col-12 px4 flex flex-column justify-between ${summaryNoMediaClassNames}`}>
             <div>
-              <h2 className='PublicGroup-title white mt3 -ff-sec -fw-bold'>Why become a member?</h2>
+              <h2 className='PublicGroup-title white mt3 -ff-sec -fw-bold'>Why Become a Member?</h2>
               <p className='PublicGroup-font-15'>With your membership plan, you’ll help us cover all expenses the collective makes in order to keep going. All the funds will be managed responsibly with your help, and everyone can see how and where the funds are being spent!</p>
             </div>
             <div className='PublicGroup-metricContainer flex py3'>

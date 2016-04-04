@@ -12,7 +12,7 @@ export default class PublicGroupWhoWeAre extends React.Component {
       <section id='who-we-are' className='PublicGroupIntro px2 bg-light-gray relative'>
         <div className='PublicGroupIntro-container container center relative'>
           {group.logo && (
-            <img className='PublicGroupIntro-logo rounded' src={group.logo} />
+            <img className='PublicGroupIntro-logo mb2 rounded' src={group.logo} />
           )}
           <h2 className='PublicGroupIntro-title m0 -ff-sec -fw-bold'>We are {group.name}</h2>
           <h3 className='PublicGroup-subtitle mt0 mb2 -ff-sec -fw-light'>{group.description}</h3>
@@ -22,7 +22,7 @@ export default class PublicGroupWhoWeAre extends React.Component {
 
           {group.website ? (
             <div className='PublicGroupIntro-website pt3'>
-              <a href={group.website} className='-btn -green -btn-outline -btn-small -ttu -ff-sec -fw-bold'>{displayUrl(group.website)}</a>
+              <a href={group.website} className='px3 -btn -green -btn-outline -btn-small -ttu -ff-sec -fw-bold'>{displayUrl(group.website)}</a>
             </div>
           ) : null}
 
