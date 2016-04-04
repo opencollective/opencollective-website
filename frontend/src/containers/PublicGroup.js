@@ -37,6 +37,7 @@ import validateSchema from '../actions/form/validate_schema';
 import decodeJWT from '../actions/session/decode_jwt';
 
 import profileSchema from '../joi_schemas/profile';
+import strings from '../ui/strings.json';
 
 // Number of expenses and revenue items to show on the public page
 const NUM_TRANSACTIONS_TO_SHOW = 3;
@@ -397,6 +398,12 @@ function mapStateToProps({
     };
   }
 
+  const i18n = {
+    getString: (strid) => {
+      return strings[group.settings.lang][strid]; // TODO: We should add a `lang` column in the `Groups` table and use that instead of `currency`
+    }
+  };
+
   const donations = transactions.isDonation;
   const expenses = transactions.isExpense;
 
@@ -415,6 +422,7 @@ function mapStateToProps({
     isAuthenticated: session.isAuthenticated,
     paypalIsDone: query.status === 'payment_success' && !!newUserId,
     newUser,
-    hasFullAccount: newUser.hasFullAccount || false
+    hasFullAccount: newUser.hasFullAccount || false,
+    i18n
   };
 }
