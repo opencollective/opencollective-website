@@ -24,7 +24,7 @@ module.exports = {
     client
       // Click Donate
       .click('.Button.Button--green')
-      .pause(5000)
+      .pause(10000)
       .assert.urlContains('https://www.sandbox.paypal.com/') // redirected to paypal
       .end();
   },
