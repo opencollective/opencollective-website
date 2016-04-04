@@ -39,23 +39,20 @@ export class DonatePage extends Component {
     };
   }
 
-  getString(strid) {
-    return strings[this.props.group.settings.lang][strid]; // TODO: We should add a `lang` column in the `Groups` table and use that instead of `currency`
-  }
-
   render() {
     const {
       amount,
       interval,
       group,
       isAuthenticated,
-      donationForm
+      donationForm,
+      i18n
     } = this.props;
 
     const tiers = [{
       name: "custom",
       title: " ",
-      description: this.getString('defaultTierDescription'),
+      description: i18n.getString('defaultTierDescription'),
       amount,
       interval: interval || 'one-time',
       range: [amount, 10000000]
@@ -63,7 +60,7 @@ export class DonatePage extends Component {
 
     var donationSection;
     if (this.state.showThankYouMessage || (isAuthenticated && this.state.showUserForm)) { // we don't handle userform from logged in users) {
-      donationSection = <PublicGroupThanks />;
+      donationSection = <PublicGroupThanks message={i18n.getString('thankyou')} />;
     } else if (this.state.showUserForm) {
       donationSection = <PublicGroupSignup {...this.props} save={saveNewUser.bind(this)} />
     } else {
@@ -71,7 +68,7 @@ export class DonatePage extends Component {
     }
 
     return (
-      <div className='PublicGroup'>
+      <div className='DonatePage'>
         <Notification />
 
         <div className='PublicContent'>
@@ -79,7 +76,7 @@ export class DonatePage extends Component {
           <div className='PublicGroupHeader'>
             <img className='PublicGroupHeader-logo' src={group.logo ? group.logo : '/static/images/media-placeholder.svg'} />
             <div className='PublicGroupHeader-website'><DisplayUrl url={group.website} /></div>
-            <div className='PublicGroupHeader-host'>{this.getString('hostedBy')} <a href={group.host.website}>{group.host.name}</a></div>
+            <div className='PublicGroupHeader-host'>{i18n.getString('hostedBy')} <a href={group.host.website}>{group.host.name}</a></div>
             <div className='PublicGroupHeader-description'>
               {group.description}
             </div>
@@ -166,7 +163,6 @@ export function saveNewUser() {
     group,
     fetchUsers
   } = this.props;
-
   return validateSchema(profileForm.attributes, profileSchema)
     .then(() => updateUser(users.newUser.id, profileForm.attributes))
     .then(() => this.setState({
@@ -199,6 +195,7 @@ function mapStateToProps({
 
   const group = values(groups)[0] || {stripeAccount: {}}; // to refactor to allow only one group
   const usersByRole = group.usersByRole || {};
+  const newUser = users.newUser || {};
 
   /* @xdamman:
    * We should refactor this. The /api/group route should directly return
@@ -232,6 +229,12 @@ function mapStateToProps({
     };
   }
 
+  const i18n = {
+    getString: (strid) => {
+      return strings[group.settings.lang][strid]; // TODO: We should add a `lang` column in the `Groups` table and use that instead of `currency`
+    }
+  };
+
   return {
     amount: router.params.amount,
     interval: router.params.interval,
@@ -244,6 +247,8 @@ function mapStateToProps({
     donationForm: form.donation,
     showUserForm: users.showUserForm || false,
     saveInProgress: users.updateInProgress,
-    isAuthenticated: session.isAuthenticated
+    isAuthenticated: session.isAuthenticated,
+    newUser,
+    i18n
   };
 }

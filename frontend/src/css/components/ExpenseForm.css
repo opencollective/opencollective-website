@@ -9,34 +9,12 @@
   }
 }
 
-.ExpenseForm form {
-  overflow: hidden;
-  
-  input[type=text], select, textarea, .SelectContainer {
-    width: 100%;
-  }
-}
-
-.ExpenseForm .row {
-  margin: 1rem 0;
-}
-
-.ExpenseForm label {
-  display: block;
-}
-
 @media (--medium-viewport) {
  .ExpenseForm {
    .ImageUpload {
      float: none;
      margin: 0 auto;
      margin-right: auto;
-   }
-   form {
-    clear: left;
-   }
-   .buttonsRow {
-     text-align: center;
    }
  }
 }

@@ -11,40 +11,43 @@ export class PublicGroupSignup extends Component {
       saveInProgress,
       save,
       appendProfileForm,
-      newUser
+      newUser,
+      i18n
     } = this.props;
 
     return (
       <div className='PublicGroupSignup'>
-        <h2>Thanks for the support </h2>
-        <p>How should we show you on the page? </p>
-
-        <div className='Label'> Display Name: </div>
-        <Input
-          type='text'
-          placeholder='Name'
-          value={profileForm.attributes.name || newUser.name}
-          handleChange={name => appendProfileForm({name})}/>
-
-        <div className='Label'> URL: </div>
-        <Input
-          type='text'
-          placeholder='Website'
-          value={profileForm.attributes.website || newUser.website}
-          handleChange={website => appendProfileForm({website})}/>
-
-        <div className='Label'> Twitter: </div>
-        <Input
-          type='text'
-          placeholder='twitterUser'
-          value={profileForm.attributes.twitterHandle || newUser.twitterHandle}
-          handleChange={twitterHandle => appendProfileForm({twitterHandle})}/>
-        <div>
-          <SaveButton
-            save={save.bind(this)}
-            inProgress={saveInProgress} />
-        </div>
-
+        <h2>{i18n.getString('thankyou')}</h2>
+        <p>{i18n.getString('howDoYouWantToBeShown')}</p>
+        <form>
+          <div className='row'><label>{i18n.getString('displayName')}:</label>
+          <Input
+            type='text'
+            placeholder='John Appleseed'
+            value={profileForm.attributes.name || newUser.name}
+            handleChange={name => appendProfileForm({name})}/>
+          </div>
+          <div className='row'><label>{i18n.getString('website')}: </label>
+          <Input
+            type='text'
+            placeholder='http://'
+            value={profileForm.attributes.website || newUser.website}
+            handleChange={website => appendProfileForm({website})}/>
+          </div>
+          <div className='row'><label>{i18n.getString('twitter')}: </label>
+          <Input
+            type='text'
+            placeholder='@username'
+            value={profileForm.attributes.twitterHandle || newUser.twitterHandle}
+            handleChange={twitterHandle => appendProfileForm({twitterHandle})}/>
+          </div>
+          <div className="buttonsRow">
+            <SaveButton
+              save={save.bind(this)}
+              label={i18n.getString('save')}
+              inProgress={saveInProgress} />
+          </div>
+        </form>
       </div>
     );
   }
