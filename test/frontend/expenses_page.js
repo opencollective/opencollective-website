@@ -9,7 +9,7 @@ module.exports = {
       .url(`${config.host.website}/testcollective/expenses`)
       .waitForElementVisible('body', 1000)
       .assert.containsText('body', 'OpenCollective test group on the test server')
-      .assert.visible('div[class=PublicGroup-transactions]', 3000)
+      .assert.visible('div[class=PublicGroup-transactions]', 5000)
   },
 
   'Expenses list': (client) => {
