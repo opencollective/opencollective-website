@@ -21,7 +21,7 @@
     "posttest": "npm run nightwatch",
     "nightwatch": "NODE_CONFIG_DIR=./server/config ./node_modules/nightwatch/bin/nightwatch --config nightwatch.json",
     "build": "gulp build && npm run build:js",
-    "build:js": "mkdir -p frontend/dist/js && NODE_ENV=production browserify frontend/src/client.js | uglifyjs -cm --screw-ie8 > frontend/dist/js/bundle.js ",
+    "build:js": "mkdir -p frontend/dist/js && browserify frontend/src/client.js | uglifyjs -cm --screw-ie8 > frontend/dist/js/bundle.js ",
     "watch:js": "mkdir -p frontend/dist/js && NODE_ENV=development watchify frontend/src/client.js -o frontend/dist/js/bundle.js -dv",
     "watch:server": "NODE_ENV=development NODE_CONFIG_DIR=./server/config nodemon -e js,hbs -w server server/index.js -w frontend/src",
     "watch:test": "NODE_ENV=test mocha test/unit/ --opts test/unit/mocha.opts --watch",
