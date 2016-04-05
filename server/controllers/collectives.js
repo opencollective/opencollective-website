@@ -35,7 +35,7 @@ const widget = (req, res, next) => {
 
     const html = renderToString(<Widget {...props} />);
 
-    res.render('index', {
+    res.render('pages/widget', {
       layout: false,
       html
     });
