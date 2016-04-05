@@ -226,6 +226,7 @@ export class PublicGroup extends Component {
       per_page: NUM_TRANSACTIONS_TO_SHOW,
       sort: 'createdAt',
       direction: 'desc',
+      exclude: 'fees',
       expense: true
     });
 
