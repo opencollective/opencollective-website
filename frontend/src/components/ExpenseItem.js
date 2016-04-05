@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import moment from 'moment';
+import EXPENSE_ICONS from '../constants/expense_icons';
 import Currency from './Currency';
 
 export default class ExpenseItem extends Component {
@@ -34,14 +35,19 @@ export default class ExpenseItem extends Component {
 
   render() {
     const { className = '', expense, user } = this.props;
-    const categoryName = (expense.tags && expense.tags.length) ? expense.tags[0].toLowerCase().replace(/\W/g, '-') : '';
+    let categoryName = (expense.tags && expense.tags.length) ? expense.tags[0].toLowerCase().replace(/\W/g, '-') : '';
+
+    if (EXPENSE_ICONS.indexOf(categoryName) < 0) {
+      categoryName = 'default';
+    }
+
     const iconName = `category-${categoryName}`;
 
     return (
       <div className={`ExpenseItem flex overflow-hidden border ${className}`}>
         <div className={`ExpenseItem-category category-${categoryName} flex flex-column items-center justify-between px1 py2 border-box`}>
-          <div className='ExpenseItem-category-icon-wrapper circle flex justify-center'>
-            <svg width='1.875rem' className='white'>
+          <div className='ExpenseItem-category-icon-wrapper circle flex justify-center items-center'>
+            <svg width='1.875rem' height='1.875rem' className='white'>
               <use xlinkHref={`#svg-${iconName}`}/>
             </svg>
           </div>
