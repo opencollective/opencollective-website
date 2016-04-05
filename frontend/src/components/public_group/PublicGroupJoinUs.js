@@ -24,7 +24,7 @@ export default class PublicGroupJoinUs extends React.Component {
     const { group } = this.props;
 
     return (
-      <section>
+      <section id='join-us'>
         <div className='PublicGroupJoin-container container center'>
           <h2 className='PublicGroup-title m0 pb2 -ff-sec -fw-bold'>Join us and help fulfill our mission!</h2>
           <p className='PublicGroup-font-17 m0 pb2'>With your membership plan, you’ll help us cover all the expenses the collective needs to keep going!</p>
