@@ -4,6 +4,8 @@ general:
       - staging
       - production
 machine:
+  environment:
+    NODE_ENV: test
   node:
     version: 5.1.0
 deployment:
