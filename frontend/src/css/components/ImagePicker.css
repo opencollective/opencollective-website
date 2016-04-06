@@ -1,0 +1,64 @@
+.ImagePicker-container
+{
+	position: relative;
+	width: 170px;
+	height: 160px;
+	background-color: white;
+	border-radius: 5px;
+	box-shadow: 0px 1px 3px 0px rgba(45,77,97,0.30);
+	margin: 5px auto;
+}
+
+.ImagePicker-preview
+{
+	box-sizing: border-box;
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 20px;
+	width: 64px; height: 64px;
+	width: 80px; height: 80px;
+	background-color: #fafafa;
+	margin: auto;
+	border-radius: 100%;
+	border: 2px solid rgba(45,77,97,0.30);
+}
+
+.ImagePicker-dot-list
+{
+	position: absolute;
+	padding: 0;
+	bottom: 15px;
+	left: 0;
+	right: 0;
+	width: 80px;
+	margin: 0 auto;
+	text-align: center;
+	list-style: none;
+	list-style-type: none;	
+}
+
+.ImagePicker-dot-list li
+{
+	position: relative;
+	display: inline-block;
+	margin: 0 5px;
+	white-space: nowrap;
+	width: 8px;
+	height: 5px;
+	cursor: pointer;
+}
+
+.ImagePicker-dot-list li:after
+{
+	position: absolute;
+	left: 0;
+	top: 0;
+	content: '';
+	width: 6px;
+	height: 6px;
+	background-color: white;
+	border-radius: 100%;
+	border: 1px solid #333;
+}
