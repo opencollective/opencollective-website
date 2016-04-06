@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Input from '../components/Input';
 import SaveButton from '../components/SaveButton';
-
+import ImagePicker from '../components/ImagePicker';
 
 export class PublicGroupSignup extends Component {
   render() {
@@ -20,6 +20,7 @@ export class PublicGroupSignup extends Component {
         <h2>{i18n.getString('thankyou')}</h2>
         <p>{i18n.getString('howDoYouWantToBeShown')}</p>
         <form>
+          <ImagePicker />
           <div className='row'><label>{i18n.getString('displayName')}:</label>
           <Input
             type='text'
