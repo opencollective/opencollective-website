@@ -22,11 +22,11 @@ export default class PublicGroupWhoWeAre extends React.Component {
             )}
           </div>
 
-          {group.website ? (
+          {group.website && (
             <div className='PublicGroupIntro-website pt3'>
               <a href={group.website} className='px3 -btn -green -btn-outline -btn-small -ttu -ff-sec -fw-bold'>{displayUrl(group.website)}</a>
             </div>
-          ) : null}
+          )}
 
           {group.members.length ? (
             <div className='PublicGroup-members pt4'>
