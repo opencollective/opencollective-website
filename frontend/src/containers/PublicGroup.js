@@ -98,7 +98,7 @@ export class PublicGroup extends Component {
         <PublicGroupWhyJoin group={group} expenses={expenses} />
 
         <div className='bg-light-gray px2'>
-          <PublicGroupJoinUs {...this.props} donateToGroup={donateToGroup} />
+          <PublicGroupJoinUs {...this.props} donateToGroup={donateToGroup.bind(this)} />
           <PublicGroupMembersWall group={group} />
         </div>
 
