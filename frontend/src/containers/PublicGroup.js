@@ -35,6 +35,7 @@ import appendProfileForm from '../actions/form/append_profile';
 import updateUser from '../actions/users/update';
 import validateSchema from '../actions/form/validate_schema';
 import decodeJWT from '../actions/session/decode_jwt';
+import uploadImage from '../actions/images/upload';
 
 import profileSchema from '../joi_schemas/profile';
 import strings from '../ui/strings.json';
@@ -335,6 +336,7 @@ export function saveNewUser() {
 
 export default connect(mapStateToProps, {
   donate,
+  uploadImage,
   notify,
   fetchTransactions,
   fetchUsers,

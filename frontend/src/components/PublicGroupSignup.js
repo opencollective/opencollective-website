@@ -20,7 +20,14 @@ export class PublicGroupSignup extends Component {
         <h2>{i18n.getString('thankyou')}</h2>
         <p>{i18n.getString('howDoYouWantToBeShown')}</p>
         <form>
-          <ImagePicker />
+          <ImagePicker
+            twitter={profileForm.attributes.twitterHandle || newUser.twitterHandle}
+            email={profileForm.attributes.email || newUser.email}
+            website={profileForm.attributes.website || newUser.website}
+            src={newUser.avatar} // TODO pass user avatar, if they already have one. 
+            className="avatar"
+            {...this.props} // Pass uploadImage Action from `PublicGroup` container
+          />
           <div className='row'><label>{i18n.getString('displayName')}:</label>
           <Input
             type='text'
