@@ -28,7 +28,8 @@
     "postinstall": "npm run build",
     "git:clean": "git branch --merged | grep -v \\* | grep -v master | grep -v dev | xargs -n 1 git branch -d",
     "deploy:staging": "bash -x scripts/deploy.sh staging",
-    "deploy:production": "bash -x scripts/deploy.sh production"
+    "deploy:production": "bash -x scripts/deploy.sh production",
+    "install:debs": "bash -x scripts/install_apt_get_debs.sh"
   },
   "dependencies": {
     "autoprefixer": "^6.3.1",

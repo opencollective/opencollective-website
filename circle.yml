@@ -8,18 +8,17 @@ machine:
     NODE_ENV: test
   node:
     version: 5.1.0
+dependencies:
+  cache_directories:
+    - "~/cache"
+  pre:
+    - npm run install:debs
 deployment:
   staging:
     branch: staging
     heroku:
       appname: opencollective-staging-website
 test:
-  pre:
-    - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-    - sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-    - sudo apt-get update
-    - sudo apt-get install google-chrome-stable
-    - nohup bash -c "npm start &"
   override:
     - npm run hint
     - npm run test:unit
