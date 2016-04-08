@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import ImageUpload from './ImageUpload';
 
 const REG_VALID_URL = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
@@ -36,23 +36,23 @@ export default class ImagePicker extends Component {
       currentIndex: 0,
       twitter: '',
       website: '',
-      className: props.className || 'avatar'
     };
   }
 
   render() {
-    const {isLoading, currentIndex, website, twitter, className} = this.state;
+    const {className='avatar'} = this.props;
+    const {isLoading, currentIndex} = this.state;
     const options = this.options;
     const currentOption = options[currentIndex];
 
     return (
-      <div className={'ImagePicker-container ' + className}>
+      <div className={`ImagePicker-container ${className}`}>
         <div className="ImagePicker-loader" style={{display : (isLoading ? 'block' : 'none')}}>
           <div className="loader"></div>
         </div>
         <div className="ImagePicker-label">Choose a Profile Image</div>
         <div className={this.prevIsPossible() ? 'ImagePicker-prev active' : 'ImagePicker-prev'} onClick={this.prev.bind(this)}></div>
-        <div className='ImagePicker-preview' onClick={event => this.avatarClick.call(this, currentOption)}>
+        <div className='ImagePicker-preview' onClick={() => this.avatarClick.call(this, currentOption)}>
           <img src={currentOption.src} width="64px" height="64px"/>
         </div>
         <div className='ImagePicker-source-badge' style={{display : (KNOWN_SOURCES[currentOption.source] ? 'block' : 'none')}}>
@@ -62,7 +62,7 @@ export default class ImagePicker extends Component {
         <ul className='ImagePicker-dot-list'>
           {options.map(
             option => {
-              return <li key={option.source + option.src} onClick={event => this.select.call(this, option, event.target)} className={option === options[currentIndex] ? 'selected' : ''}></li>;
+              return <li key={option.source + option.src} onClick={() => this.select.call(this, option)} className={option === options[currentIndex] ? 'selected' : ''}></li>;
             }
           )}
         </ul>
@@ -74,7 +74,7 @@ export default class ImagePicker extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    let {website, twitter} = nextProps;
+    const {website, twitter} = nextProps;
     this.state.twitter = REG_VALID_TWITTER_USERNAME.test(twitter) ? twitter : '';
     this.state.website = REG_VALID_URL.test(website) ? website : '';
 
@@ -84,7 +84,7 @@ export default class ImagePicker extends Component {
       this.getSocialMediaAvatars(this.state.website, this.state.twitter)
       .then(results => {
         results.forEach(result => {
-          let existingOption = this.options.filter((option) => {return option.source === result.source})[0];
+          const existingOption = this.options.filter((option) => {return option.source === result.source})[0];
           if (existingOption)
           {
             existingOption.src = result.src;
@@ -109,7 +109,7 @@ export default class ImagePicker extends Component {
       })
       .catch(reason => {
         this.setState({isLoading: true});
-        console.error('api error:' + reason);
+        console.error(reason);
       });
     }
   }
@@ -124,7 +124,7 @@ export default class ImagePicker extends Component {
     return this.state.currentIndex > 0;
   }
 
-  select(option, element)
+  select(option)
   {
     if (this.state.isLoading) return;
     this.setState({currentIndex: this.options.indexOf(option)});
@@ -173,12 +173,12 @@ export default class ImagePicker extends Component {
 
   getSocialMediaAvatars(website, twitter)
   {
-    let SAMPLE_API_RETURN = []; // TODO - server side
+    const SAMPLE_API_RETURN = []; // TODO - server side
     if (twitter) SAMPLE_API_RETURN.push({source: 'twitter', src: 'https://avatars2.githubusercontent.com/u/2263170?v=3&s=64'});
     if (website) SAMPLE_API_RETURN.push({source: 'facebook', src: 'https://avatars2.githubusercontent.com/u/2263170?v=3&s=64'});
     
     return new Promise(
-      (resolve, reject) => {
+      (resolve) => {
         setTimeout(() => resolve(SAMPLE_API_RETURN), ~~(Math.random() * 1000));
       }
     );
