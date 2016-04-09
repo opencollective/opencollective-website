@@ -25,7 +25,7 @@ module.exports = {
     client
       // Click Donate
       .click('div[class="Button Button--green"]')
-      .pause(5000)
+      .pause(10000)
       .assert.urlContains('https://www.sandbox.paypal.com/') // redirected to paypal
       .end();
   },
@@ -35,7 +35,7 @@ module.exports = {
     client
       // callback after filling paypal
       .url(`${config.host.website}/testcollective?status=payment_success&userid=1&has_full_account=true`)
-      .waitForElementVisible('div[class=PublicGroupThanks]', 2000)
+      .waitForElementVisible('div[class=PublicGroupThanks]', 10000)
       .assert.containsText('body', 'Thank you for your support')
       .end();
   },
@@ -45,7 +45,7 @@ module.exports = {
     client
       // callback after filling paypal
       .url(`${config.host.website}/testcollective?status=payment_success&userid=1&has_full_account=false`)
-      .waitForElementVisible('div[class=PublicGroupSignup]', 3000)
+      .waitForElementVisible('div[class=PublicGroupSignup]', 10000)
       .assert.containsText('body', 'How should we show you on the page?')
       .end();
   },
