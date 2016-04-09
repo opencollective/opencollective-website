@@ -19,6 +19,8 @@ deployment:
     heroku:
       appname: opencollective-staging-website
 test:
+  pre:
+    - nohup bash -c "npm start &"
   override:
     - npm run hint
     - npm run test:unit
