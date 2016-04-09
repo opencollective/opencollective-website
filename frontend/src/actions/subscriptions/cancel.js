@@ -14,10 +14,7 @@ export default (id, token) => {
       }
     })
     .then(() => dispatch(success(id, token)))
-    .catch(error => {
-      dispatch(failure(id, token, error));
-      throw new Error(error.message);
-    });
+    .catch(error => dispatch(failure(id, token, error)));
   };
 };
 
