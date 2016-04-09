@@ -33,6 +33,7 @@ describe('groups/fetch_by_id', () => {
   });
 
   it('creates GROUP_ERROR when fetching a group fails', (done) => {
+    const id = 1;
     nock(env.API_ROOT)
       .get('/groups/1')
       .replyWithError('');
@@ -42,8 +43,10 @@ describe('groups/fetch_by_id', () => {
     store.dispatch(fetchById(1))
     .then(() => {
       const [request, failure] = store.getActions();
-      expect(request).toEqual({ type: constants.GROUP_REQUEST, id: 1 });
-      expect(failure).toEqual({ type: constants.GROUP_FAILURE, id: 1, error: new Error('request to http://localhost:3000/api/groups/1 failed') });
+      expect(request).toEqual({ type: constants.GROUP_REQUEST, id });
+      expect(failure.type).toEqual(constants.GROUP_FAILURE);
+      expect(failure.id).toEqual(id);
+      expect(failure.error.message).toEqual('request to http://localhost:3000/api/groups/1 failed, reason: ');
       done();
     })
     .catch(done)

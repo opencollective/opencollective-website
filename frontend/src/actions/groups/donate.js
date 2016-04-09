@@ -12,10 +12,7 @@ export default (id, payment, options={}) => {
     dispatch(request(id, payment));
     return postJSON(url, {payment})
       .then(json => dispatch(success(id, json, options)))
-      .catch(error => {
-        dispatch(failure(error));
-        throw new Error(error.message);
-      });
+      .catch(error => dispatch(failure(error)));
   };
 };
 
