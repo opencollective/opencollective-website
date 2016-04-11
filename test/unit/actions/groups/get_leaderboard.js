@@ -43,8 +43,7 @@ describe('groups/get_leaderboard', () => {
     .then(() => {
       const [request, failure] = store.getActions();
       expect(request).toEqual({ type: constants.GET_LEADERBOARD_REQUEST});
-      expect(failure.type).toEqual(constants.GET_LEADERBOARD_FAILURE);
-      expect(failure.error.message).toEqual('request to http://localhost:3000/api/leaderboard failed, reason: ');
+      expect(failure).toEqual({ type: constants.GET_LEADERBOARD_FAILURE, error: new Error('request to http://localhost:3000/api/leaderboard failed') });
       done();
     })
     .catch(done)

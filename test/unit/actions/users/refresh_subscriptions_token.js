@@ -41,10 +41,9 @@ describe('users/refresh_subscriptions_token', () => {
 
     store.dispatch(refreshSubscriptionsToken(token))
     .catch(() => {
-      const [request, failure] = store.getActions();
-      expect(request).toEqual({ type: constants.REFRESH_SUBSCRIPTIONS_TOKEN_REQUEST, token });
-      expect(failure.type).toEqual(constants.REFRESH_SUBSCRIPTIONS_TOKEN_FAILURE);
-      expect(failure.error.message).toEqual('request to http://localhost:3000/api/subscriptions/refresh_token failed, reason: ');
+      const [request, success] = store.getActions();
+      expect(request).toEqual({ type: constants.REFRESH_SUBSCRIPTIONS_TOKEN_REQUEST, token })
+      expect(success).toEqual({ type: constants.REFRESH_SUBSCRIPTIONS_TOKEN_FAILURE, token, error: new Error('request to http://localhost:3000/api/subscriptions/refresh_token failed') })
       done();
     })
     .catch(done);

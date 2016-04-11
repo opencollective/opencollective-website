@@ -46,8 +46,7 @@ describe('users/fetch_by_group', () => {
     .then(() => {
       const [request, failure] = store.getActions();
       expect(request).toEqual({ type: constants.FETCH_USERS_BY_GROUP_REQUEST, groupid });
-      expect(failure.type).toEqual(constants.FETCH_USERS_BY_GROUP_FAILURE);
-      expect(failure.error.message).toEqual('request to http://localhost:3000/api/groups/1/users failed, reason: ');
+      expect(failure).toEqual({ type: constants.FETCH_USERS_BY_GROUP_FAILURE, error: new Error('request to http://localhost:3000/api/groups/1/users failed') });
       done();
     })
     .catch(done)
