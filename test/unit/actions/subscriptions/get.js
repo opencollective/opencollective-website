@@ -46,7 +46,7 @@ describe('subscriptions/get', () => {
 
         expect(request).toEqual({ type: constants.GET_SUBSCRIPTIONS_REQUEST, token });
         expect(failure.type).toEqual(constants.GET_SUBSCRIPTIONS_FAILURE);
-        expect(failure.error.message).toEqual(`request to http://localhost:3000/api/subscriptions failed, reason: `);
+        expect(failure.error.message).toContain('request to http://localhost:3000/api/subscriptions failed');
         done();
       })
       .catch(done);

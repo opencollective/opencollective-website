@@ -42,17 +42,16 @@ describe('subscriptions/cancel', () => {
     const store = mockStore({});
 
     store.dispatch(cancelSubscription(id, token))
-    .then(() => {
+    .catch(() => {
       const [request, failure] = store.getActions();
 
       expect(request).toEqual({ type: constants.CANCEL_SUBSCRIPTION_REQUEST, id, token });
       expect(failure.type).toEqual(constants.CANCEL_SUBSCRIPTION_FAILURE);
       expect(failure.id).toEqual(id);
       expect(failure.token).toEqual(token);
-      expect(failure.error.message).toEqual(`request to http://localhost:3000/api/subscriptions/${id}/cancel failed, reason: `);
+      expect(failure.error.message).toContain(`request to http://localhost:3000/api/subscriptions/${id}/cancel failed`);
       done();
-    })
-    .catch(done);
+    });
   });
 
 });

@@ -46,7 +46,7 @@ describe('transactions/fetch_by_group actions', () => {
       const [request, failure] = store.getActions();
       expect(request).toEqual({ type: constants.TRANSACTIONS_REQUEST, groupid });
       expect(failure.type).toEqual(constants.TRANSACTIONS_FAILURE);
-      expect(failure.error.message).toEqual('request to http://localhost:3000/api/groups/1/transactions failed, reason: ');
+      expect(failure.error.message).toContain('request to http://localhost:3000/api/groups/1/transactions failed');
       done();
     })
     .catch(done)

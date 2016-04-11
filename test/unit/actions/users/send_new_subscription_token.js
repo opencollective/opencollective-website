@@ -39,9 +39,10 @@ describe('users/send_new_subscriptions_token', () => {
     store.dispatch(sendNewSubscriptionToken(email))
     .catch(() => {
       const [request, failure] = store.getActions();
-      expect(request).toEqual({ type: constants.SEND_NEW_SUBSCRIPTIONS_TOKEN_REQUEST, email });
+      expect(request).toEqual({ type: constants.SEND_NEW_SUBSCRIPTIONS_TOKEN_REQUEST, email })
       expect(failure.type).toEqual(constants.SEND_NEW_SUBSCRIPTIONS_TOKEN_FAILURE);
-      expect(failure.error.message).toEqual('request to http://localhost:3000/api/subscriptions/new_token failed, reason: ');
+      expect(failure.email).toEqual(email);
+      expect(failure.error.message).toContain('request to http://localhost:3000/api/subscriptions/new_token failed');
       done();
     })
     .catch(done);
