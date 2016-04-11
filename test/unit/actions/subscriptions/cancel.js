@@ -46,7 +46,10 @@ describe('subscriptions/cancel', () => {
       const [request, failure] = store.getActions();
 
       expect(request).toEqual({ type: constants.CANCEL_SUBSCRIPTION_REQUEST, id, token });
-      expect(failure).toEqual({ type: constants.CANCEL_SUBSCRIPTION_FAILURE, id, token, error: new Error(`request to http://localhost:3000/api/subscriptions/${id}/cancel failed`) });
+      expect(failure.type).toEqual(constants.CANCEL_SUBSCRIPTION_FAILURE);
+      expect(failure.id).toEqual(id);
+      expect(failure.token).toEqual(token);
+      expect(failure.error.message).toContain(`request to http://localhost:3000/api/subscriptions/${id}/cancel failed`);
       done();
     });
   });

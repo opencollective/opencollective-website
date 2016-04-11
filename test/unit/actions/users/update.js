@@ -39,9 +39,10 @@ describe('users/update', () => {
 
     store.dispatch(updateUser(userid, attributes))
     .catch(() => {
-      const [request, success] = store.getActions();
+      const [request, failure] = store.getActions();
       expect(request).toEqual({ type: constants.UPDATE_USER_REQUEST, userid, attributes })
-      expect(success).toEqual({ type: constants.UPDATE_USER_FAILURE, error: new Error('request to http://localhost:3000/api/users/1 failed') })
+      expect(failure.type).toEqual(constants.UPDATE_USER_FAILURE)
+      expect(failure.error.message).toContain('request to http://localhost:3000/api/users/1 failed');
       done();
     })
     .catch(done);
