@@ -17,14 +17,6 @@ dependencies:
     - "~/cache"
   pre:
     - npm run install:debs
-test:
-  pre:
-    - nohup bash -c "npm start &"
-  override:
-    - npm run hint
-    - npm run test:unit
-  post:
-    - npm run test:e2e api:run website:testE2E
 deployment:
   staging:
     branch: staging
