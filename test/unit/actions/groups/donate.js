@@ -48,7 +48,8 @@ describe('groups/donate', () => {
     .catch(() => {
       const [request, failure] = store.getActions();
       expect(request).toEqual({ type: constants.DONATE_GROUP_REQUEST, id: 1, payment });
-      expect(failure).toEqual({ type: constants.DONATE_GROUP_FAILURE, error: new Error('request to http://localhost:3000/api/groups/1/payments/ failed')});
+      expect(failure.type).toEqual(constants.DONATE_GROUP_FAILURE);
+      expect(failure.error.message).toContain('request to http://localhost:3000/api/groups/1/payments/ failed, reason:');
       done();
     });
   });

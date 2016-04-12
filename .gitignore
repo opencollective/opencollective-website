@@ -1,3 +1,5 @@
+.env
+
 .DS_Store
 .idea/
 
@@ -8,6 +10,7 @@ typings/
 # Logs
 logs
 *.log
+*.log.*
 
 # Runtime data
 pids

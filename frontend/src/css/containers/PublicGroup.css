@@ -1,13 +1,77 @@
-.PublicGroup-video, .PublicGroup-image {
-  width: 70%;
-  float: left;
-  display: inline-block;
+/* GENERAL */
+.PublicGroup-title {
+  font-size: 1.75rem;
 }
 
-.PublicGroup-image img {
-  max-width: 100%;
+.PublicGroup-subtitle {
+  font-size: 1.375rem;
 }
 
+.PublicGroup-font-15 {
+  font-size: .9375rem;
+  line-height: 1.688rem;
+}
+
+.PublicGroup-font-17 {
+  font-size: 1.0625rem;
+  line-height: 1.688rem;
+}
+
+
+
+/* HERO */
+.PublicGroupHero-content {
+  padding: 11rem 0 9rem;
+}
+
+.PublicGroupHero-mission {
+  font-size: 2.75rem;
+  line-height: 3.5rem;
+  letter-spacing: -.5px;
+}
+
+.PublicGroupHero-menu {
+  font-size: 13px;
+  background-color: rgba(0,0,0,.75);
+}
+
+.PublicGroupHero-menu a:hover {
+  opacity: .8;
+}
+
+
+
+/* INTRO / WHO WE ARE */
+.PublicGroupIntro::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 100%;
+  background-image: linear-gradient(#fff, var(--light-gray));
+}
+
+.PublicGroupIntro-container {
+  padding: 6.25rem 0;
+}
+
+.PublicGroupIntro-logo {
+  height: 100px;
+}
+
+.PublicGroupIntro-title {
+  font-size: 2.25rem;
+}
+
+.PublicGroupIntro-website {
+  color: var(--light-blue);
+  font-size: 1rem;
+}
+
+
+
+/* WHY JOIN */
 .PublicGroup-image-placeholder {
   background: url('/static/images/media-placeholder.svg') no-repeat;
   background-position: center center;
@@ -17,137 +81,45 @@
   margin: auto;
 }
 
-.PublicGroup-summary {
-  display: inline-block;
-  width: 25%;
-  padding-left: calc(var(--spacing) * 1.25);
+.PublicGroupWhyJoin {
+  min-height: 400px;
+}
+
+.PublicGroup-Media-container {
+  padding-bottom: 56.25%; /* 16:9 */
+}
+
+.PublicGroupJoin-container {
+  padding-top: 6.25rem;
 }
 
 .PublicGroup-metricContainer {
-  vertical-align: top;
-  box-sizing: border-box;
+  /* vertical-align: top; */
+  /* box-sizing: border-box; */
 }
 
-.PublicGroup-share {
-  margin-top: 1rem;
-  font-size: 2rem;
+
+
+/* MEMBERS WALL */
+.PublicGroup-MembersWall::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 15rem;
+  background-image: linear-gradient(var(--light-gray), #fff);
 }
 
-.PublicGroup h2 {
-  clear: left;
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-top: 3rem;
-  margin-bottom: 1rem;
+.PublicGroupBackers {
+  padding: 4rem 0 3rem;
 }
 
-.PublicGroup-backers {
-  clear: both;
-}
 
-.PublicGroup-quote {
-  overflow: hidden;
-  clear: both;
-}
 
-.PublicGroup-quoteUser .ProfilePhoto,
-.PublicGroup-quoteName {
-  display: inline-block;
-}
-
-.PublicGroup-quoteUser {
-  width: 30%;
-  display: inline-block;
-  vertical-align: top;
-}
-
-.PublicGroup-quoteName {
-  padding-left: var(--spacing);
-  vertical-align: top;
-  font-size: 1.25rem;
-}
-
-.PublicGroup-quoteText {
-  clear: both;
-  box-sizing: border-box;
-  line-height: 24px;
-}
-
-PublicGroup-quoteText h1, .PublicGroup-quoteText h2 {
-  font-size: 1.2rem;
-}
-
-.PublicGroup-quoteText p:first-child, .PublicGroup-quoteText h1:first-child, .PublicGroup-quoteText h2:first-child {
-  margin-top: 0px;
-}
-
+/* EXPENSES AND DONATIONS */
 .PublicGroup-transactions {
-  clear: both;
-}
-
-.PublicGroup-expenses,
-.PublicGroup-donations {
-  width: 50%;
-  padding-right: calc(var(--spacing) * 2);
-  display: inline-block;
-  vertical-align: top;
-  box-sizing: border-box;
-}
-
-.PublicGroup-tx-link {
-  padding-right: calc(var(--spacing) * 2);
-  float: right
-}
-
-.PublicGroup .Button {
-  display: inline-block;
-  font-weight: bold;
-  padding: 0.75rem 1rem;
-  font-size: 1rem;
-}
-
-.PublicGroupForm-radioLabel {
-  padding: 0 calc(var(--spacing) / 2);
-}
-
-.PublicGroupHeader ,
-.PublicGroupForm-button {
-  text-align: center;
-}
-
-.PublicGroupHeader-logo {
-  height: 100px;
-  margin: 0 auto 0.5rem;
-}
-
-.PublicGroupHeader-website {
-  color: var(--light-blue);
-  font-size: 1rem;
-  text-align: center;
-}
-
-.PublicGroupHeader-description {
-  font-size: 1.5rem;
-  text-align: center;
-  margin: 2rem 0;
-}
-
-.PublicGroup .Transaction {
-  border-bottom: none;
-}
-
-.PublicGroup .ShareIcon {
-  padding-right: calc(var(--spacing) / 2);
-}
-
-.PublicGroup-donationIcon,
-.PublicGroup-expenseIcon {
-  float: left;
-  font-size: 3rem;
-  width: 3rem;
-  height: 3rem;
-  margin-right: 1rem;
-  padding: 0.2rem;
+  padding: 6.25rem 0;
 }
 
 .PublicGroup-emptyState {
@@ -159,8 +131,73 @@ PublicGroup-quoteText h1, .PublicGroup-quoteText h2 {
   align-items: center;
 }
 
-@media(--small-viewport) {
-  .PublicGroup .DonationPicker label {
-    margin-right: 1.4rem;
-  }
+.PublicGroup-emptyState-image {
+  height: 151px;
+}
+
+/* .PublicGroup-transactions-list { */
+/*   position: relative; */
+/* } */
+
+/* .PublicGroup-transactions-list::after { */
+/*   content: ''; */
+/*   position: absolute; */
+/*   left: 0; */
+/*   right: 0; */
+/*   bottom: 0; */
+/*   height: 50%; */
+/*   background-image: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,1)); */
+/* } */
+
+
+
+/* DONATION FLOW */
+.PublicGroupDonationFlowWrapper {
+  height: 100vh;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.PublicGroupSignupV2-title {
+  font-size: 2.25rem;
+}
+
+.PublicGroupSignupV2 .Field {
+  width: 100%;
+  font-size: 15px;
+  height: 40px;
+  margin: 0;
+  padding: 0 .5rem;
+  border: 1px solid rgba(48, 50, 51, .15);
+  background: white;
+  box-shadow: inset 0 3px 0 rgba(0,0,0,.05);
+}
+.PublicGroupSignupV2 .Field {
+  color: var(--darkest-gray);
+}
+.PublicGroupSignupV2 .Field:hover,
+.PublicGroupSignupV2 .Field:hover::-webkit-input-placeholder {
+  border-color: #75CC1F;
+  color: currentColor;
+}
+.PublicGroupSignupV2 .Field:focus {
+  border-color: #75CC1F;
+  box-shadow: 0 0 0 1px #75CC1F;
+  color: currentColor;
+}
+
+.PublicGroupThanksV2-icon {
+  fill: #5CAAE2;
+  color: #75CC1F;
+}
+
+
+
+/* */
+.PublicGroup .Button {
+  display: inline-block;
+  margin: 0;
+  /* font-weight: bold; */
+  /* padding: 0.75rem 1rem; */
+  /* font-size: 1rem; */
 }
