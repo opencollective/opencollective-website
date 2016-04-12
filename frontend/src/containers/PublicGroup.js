@@ -59,7 +59,7 @@ export class PublicGroup extends Component {
         <div className='PublicGroupDonationFlowWrapper px2 py3 border-box fixed top-0 left-0 right-0 bottom-0 bg-white'>
           <PublicGroupThanksV2
             message='You are now in our backers wall!'
-            closeDonationModal={::this._closeDonationFlow} />
+            closeDonationModal={this._closeDonationFlow.bind(this)} />
         </div>
       );
     } else if (this.state.showUserForm) {
@@ -98,7 +98,7 @@ export class PublicGroup extends Component {
         <PublicGroupWhyJoin group={group} expenses={expenses} />
 
         <div className='bg-light-gray px2'>
-          <PublicGroupJoinUs {...this.props} donateToGroup={donateToGroup} />
+          <PublicGroupJoinUs {...this.props} donateToGroup={donateToGroup.bind(this)} />
           <PublicGroupMembersWall group={group} />
         </div>
 

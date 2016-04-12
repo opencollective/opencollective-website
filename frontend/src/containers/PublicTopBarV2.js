@@ -12,7 +12,7 @@ class PublicTopBarV2 extends Component {
         <div className='inline-block ml1'>
           <span className="h6">
             <span>Logged in as </span>
-            <span className='-fw-bold'>{session.user.username}</span>
+            <span className='-fw-bold'>{session.user.username || session.user.email.substr(0, session.user.email.indexOf('@'))}</span>
           </span>
           <button onClick={logout} className='border-none -btn -btn-medium -ttu -ff-sec -fw-bold'>logout</button>
         </div>
