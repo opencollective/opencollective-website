@@ -15,7 +15,7 @@ module.exports = {
       .assert.urlContains('#support')
 
       // wait for bottom green button to show up
-      .waitForElementVisible('.Button.Button--green', 1000)
+      .waitForElementVisible('.Button.Button--green', 10000)
       .assert.containsText('.Button.Button--green', 'BECOME A BACKER')
   },
 
@@ -23,7 +23,7 @@ module.exports = {
 
     client
       // Click Donate
-      .click('div[class="Button Button--green"]')
+      .click('.Button.Button--green')
       .pause(10000)
       .assert.urlContains('https://www.sandbox.paypal.com/') // redirected to paypal
       .end();
@@ -34,8 +34,8 @@ module.exports = {
     client
       // callback after filling paypal
       .url(`${config.host.website}/testcollective?status=payment_success&userid=1&has_full_account=true`)
-      .waitForElementVisible('div[class=PublicGroupThanks]', 10000)
-      .assert.containsText('body', 'Thank you for your support')
+      .waitForElementVisible('.PublicGroupThanksV2', 10000)
+      .assert.containsText('.PublicGroupThanksV2', 'You are now in our backers wall!')
       .end();
   },
 
@@ -44,8 +44,8 @@ module.exports = {
     client
       // callback after filling paypal
       .url(`${config.host.website}/testcollective?status=payment_success&userid=1&has_full_account=false`)
-      .waitForElementVisible('div[class=PublicGroupSignup]', 10000)
-      .assert.containsText('body', 'How should we show you on the page?')
+      .waitForElementVisible('.PublicGroupSignupV2', 10000)
+      .assert.containsText('.PublicGroupSignupV2', 'How should we show you on the page?')
       .end();
   },
 
