@@ -16,7 +16,7 @@ export class PublicGroupSignup extends Component {
     } = this.props;
 
     return (
-      <div className='PublicGroupSignup'>
+      <div className='PublicGroupSignup clearfix'>
         <h2>{i18n.getString('thankyou')}</h2>
         <p>{i18n.getString('howDoYouWantToBeShown')}</p>
         <form>

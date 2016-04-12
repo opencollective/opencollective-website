@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import StripeCheckout from 'react-stripe-checkout';
 import formatCurrency from '../lib/format_currency';
-import UsersList from '../components/UsersList';
+import UserCard from '../components/UserCard';
 import AsyncButton from './AsyncButton';
 import filterCollection from '../lib/filter_collection';
 import DonationPicker from './DonationPicker';
@@ -44,10 +44,10 @@ export default class Tiers extends Component {
     const cancellationDisclaimer = (frequency !== 'one-time') ? this.getString('cancelAnytime') : "";
 
     return (
-      <div className='Tier' id={tier.name} >
-        <h2>{tier.title || tier.name}</h2>
-
-        <UsersList users={filterUsersByTier(group.backers, tier.name)} />
+      <div className='Tier' id={tier.name} key={`tier-${tier.name}`}>
+        <div className='flex flex-wrap justify-center'>
+          {filterUsersByTier(group.backers, tier.name).map((user, index) => <UserCard user={user} key={index} className='m1' />)}
+        </div>
 
         <p>{tier.description}</p>
 

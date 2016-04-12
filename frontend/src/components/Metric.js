@@ -1,11 +1,11 @@
 import React from 'react';
 
-export default ({label, value, children}) => (
-  <div className='Metric'>
-    <div className='Metric-value'>
+export default ({ className = '', label, value, children }) => (
+  <div className={`Metric ${className}`}>
+    <div className='Metric-value h3 -ff-sec -fw-bold'>
       {children || value}
     </div>
-    <div className='Metric-label'>{label}</div>
+    <div className='Metric-label h6 muted'>{label}</div>
   </div>
 );
 

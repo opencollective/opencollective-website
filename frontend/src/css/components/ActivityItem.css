@@ -1,0 +1,31 @@
+.ActivityItem > .UserPhoto {
+  width: 2rem;
+  height: 2rem;
+  box-shadow: 0 0 0 1px var(--gray);
+}
+
+.ActivityItem-bubble {
+  border-color: rgba(48,50,51,.2);
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+
+.ActivityItem-bubble::before,
+.ActivityItem-bubble::after {
+  content: '';
+  position: absolute;
+  top: 1rem;
+  border-width: 7px;
+  border-style: solid;
+  border-color: transparent;
+}
+
+.ActivityItem-bubble::before {
+  left: -15px;
+  border-right-color: rgba(48,50,51,.2);
+}
+
+.ActivityItem-bubble::after {
+  left: -14px;
+  border-right-color: #FFFFFF;
+}
