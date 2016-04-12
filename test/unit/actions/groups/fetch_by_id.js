@@ -43,7 +43,9 @@ describe('groups/fetch_by_id', () => {
     .then(() => {
       const [request, failure] = store.getActions();
       expect(request).toEqual({ type: constants.GROUP_REQUEST, id: 1 });
-      expect(failure).toEqual({ type: constants.GROUP_FAILURE, id: 1, error: new Error('request to http://localhost:3000/api/groups/1 failed') });
+      expect(failure.type).toEqual(constants.GROUP_FAILURE);
+      expect(failure.id).toEqual(1);
+      expect(failure.error.message).toContain('request to http://localhost:3000/api/groups/1 failed');
       done();
     })
     .catch(done)

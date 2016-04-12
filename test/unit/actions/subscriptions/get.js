@@ -42,10 +42,11 @@ describe('subscriptions/get', () => {
 
     store.dispatch(getSubscriptions(token))
       .then(() => {
-        const [request, success] = store.getActions();
+        const [request, failure] = store.getActions();
 
         expect(request).toEqual({ type: constants.GET_SUBSCRIPTIONS_REQUEST, token });
-        expect(success).toEqual({ type: constants.GET_SUBSCRIPTIONS_FAILURE, error: new Error(`request to http://localhost:3000/api/subscriptions failed`) });
+        expect(failure.type).toEqual(constants.GET_SUBSCRIPTIONS_FAILURE);
+        expect(failure.error.message).toContain('request to http://localhost:3000/api/subscriptions failed');
         done();
       })
       .catch(done);
