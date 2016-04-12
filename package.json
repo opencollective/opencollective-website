@@ -1,6 +1,6 @@
 {
   "name": "opencollective-website",
-  "version": "0.1.66",
+  "version": "0.1.67",
   "engines": {
     "node": "5.1.0",
     "npm": "3.3.12"
@@ -62,6 +62,7 @@
     "gulp-postcss": "^6.1.0",
     "gulp-util": "^3.0.7",
     "gulp-watch": "^4.3.5",
+    "gulp-svg-sprite": "^1.2.19",
     "history": "^1.17.0",
     "isomorphic-fetch": "^2.1.1",
     "joi": "^6.9.1",
@@ -111,7 +112,6 @@
     "eslint-config-opencollective": "^1.1.0",
     "eslint-plugin-react": "^3.16.1",
     "expect": "^1.11.1",
-    "gulp-svg-sprite": "^1.2.19",
     "jscs": "^2.1.1",
     "jsdom": "3.1.2",
     "loose-envify": "^1.1.0",
