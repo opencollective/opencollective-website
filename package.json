@@ -1,6 +1,6 @@
 {
   "name": "opencollective-website",
-  "version": "0.1.64",
+  "version": "0.1.65",
   "engines": {
     "node": "5.1.0",
     "npm": "3.3.12"
@@ -15,14 +15,12 @@
     "start": "NODE_CONFIG_DIR=./server/config node server",
     "dev": "npm run build && PORT=3000 nf start -j Procfile_dev",
     "hint": "eslint '**/*.js' --quiet",
-
     "pretest": "npm run hint",
     "test": "npm run test:unit",
     "test:unit": "NODE_CONFIG_DIR=./server/config mocha test/unit/ --opts test/unit/mocha.opts --reporter-options mochaFile=$CIRCLE_TEST_REPORTS/junit/junit.xml",
     "posttest": "npm run test:e2e api:run website:run website:testE2E",
     "test:e2e": "curl -s https://raw.githubusercontent.com/OpenCollective/api/master/scripts/test_e2e.sh | bash -s --",
     "nightwatch": "NODE_CONFIG_DIR=./server/config ./node_modules/nightwatch/bin/nightwatch --config nightwatch.json",
-
     "build": "gulp build && npm run build:js",
     "build:js": "mkdir -p frontend/dist/js && browserify frontend/src/client.js | uglifyjs -cm --screw-ie8 > frontend/dist/js/bundle.js ",
     "watch:js": "mkdir -p frontend/dist/js && watchify frontend/src/client.js -o frontend/dist/js/bundle.js -dv",
