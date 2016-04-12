@@ -5,23 +5,28 @@ general:
       - production
 machine:
   environment:
-    NODE_ENV: test
+    NODE_ENV: circleci
+  post:
+    - cd website && npm run test:e2e api:install
   node:
     version: 5.1.0
+  services:
+    - postgresql
 dependencies:
   cache_directories:
     - "~/cache"
   pre:
     - npm run install:debs
-deployment:
-  staging:
-    branch: staging
-    heroku:
-      appname: opencollective-staging-website
 test:
   pre:
     - nohup bash -c "npm start &"
   override:
     - npm run hint
     - npm run test:unit
-    - npm run nightwatch
+  post:
+    - npm run test:e2e api:run website:testE2E
+deployment:
+  staging:
+    branch: staging
+    heroku:
+      appname: opencollective-staging-website
