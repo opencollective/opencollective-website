@@ -9,7 +9,7 @@ export default class PublicGroupHero extends React.Component {
     return (
       <section className='PublicGroupHero relative px2 bg-black bg-cover white' style={{backgroundImage: `url(${collectiveBg})`}}>
         <div className='container relative center'>
-          <PublicTopBarV2 className='pt3 absolute top-0 left-0 right-0' />
+          <PublicTopBarV2 loginRedirectTo={`/${group.slug}`} className='pt3 absolute top-0 left-0 right-0' />
           <div className='PublicGroupHero-content'>
             <p className='PublicGroup-font-17 mt0 mb2'>Hi! This is an <span className='-fw-bold'>OpenCollective</span> by <a href={group.website} className='underline white'>{group.name}</a> and we’re on a mission to&hellip;</p>
             <h1 className='PublicGroupHero-mission max-width-3 mx-auto mt0 mb3 white -ff-sec'>{group.mission}</h1>

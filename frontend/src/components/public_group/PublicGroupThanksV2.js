@@ -5,8 +5,11 @@ export default class PublicGroupThanksV2 extends React.Component {
     document.body.style.overflow = 'hidden';
   }
 
-  close() {
+  componentWillUnmount() {
     document.body.style.overflow = '';
+  }
+
+  close() {
     this.props.closeDonationModal();
   }
 

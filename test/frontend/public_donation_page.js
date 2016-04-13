@@ -10,10 +10,6 @@ module.exports = {
       .assert.containsText('body', 'OpenCollective test group on the test server')
       .assert.containsText('.PublicGroupBackers', 'This is possible thanks to you.')
 
-      // click on top green "Back us" button
-      .click('a[href="#support"]')
-      .assert.urlContains('#support')
-
       // wait for bottom green button to show up
       .waitForElementVisible('.Button.Button--green', 10000)
       .assert.containsText('.Button.Button--green', 'BECOME A BACKER')
