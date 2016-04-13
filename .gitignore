@@ -38,6 +38,7 @@ node_modules
 
 # Build
 frontend/dist/
+server/views/partials/sprite.symbol.html
 
 # Test outputs
 test/frontend/output

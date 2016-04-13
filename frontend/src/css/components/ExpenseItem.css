@@ -20,6 +20,11 @@
   border-radius: 4px;
 }
 
+.category-default {
+  background-color: #DDDDDD;
+  background-image: linear-gradient(135deg, #DDDDDD, #BBBBBB);
+}
+
 .category-communications,
 .category-design {
   background-color: #A5E720;
@@ -28,12 +33,13 @@
 
 .category-donation,
 .category-engineering,
-.category-food-and-beverage {
+.category-food-and-beverage,
+.category-food---beverage {
   background-color: #F5CD10;
   background-image: linear-gradient(135deg, #F5CD10, #E7A817);
 }
 
-.category-food-and-fund,
+.category-fund,
 .category-legal {
   background-color: #7CD8F7;
   background-image: linear-gradient(135deg, #7CD8F7, #46B0ED);
@@ -43,6 +49,7 @@
 .category-office,
 .category-other,
 .category-supplies-and-materials,
+.category-supplies---materials,
 .category-team,
 .category-web-services,
 .category-travel {
