@@ -4,8 +4,13 @@ import logout from '../actions/session/logout';
 
 class PublicTopBarV2 extends Component {
   showSession() {
-    const { session, logout } = this.props;
-    const redirect = '/';
+    const {
+      session,
+      logout,
+      loginRedirectTo = '/'
+    } = this.props;
+
+    const redirect = loginRedirectTo;
 
     if (session && session.isAuthenticated) {
       return (

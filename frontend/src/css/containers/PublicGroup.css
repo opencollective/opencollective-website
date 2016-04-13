@@ -89,15 +89,25 @@
   padding-bottom: 56.25%; /* 16:9 */
 }
 
+
+
+/* JOIN US */
 .PublicGroupJoin-container {
   padding-top: 6.25rem;
 }
 
-.PublicGroup-metricContainer {
-  /* vertical-align: top; */
-  /* box-sizing: border-box; */
+.PublicGroupJoinUs-tier-box-inner {
+  border-width: 2px;
+  border-radius: 6px;
 }
 
+.PublicGroupJoinUs-tier-box-title {
+  margin-top: -1em;
+}
+
+.PublicGroupJoinUs-tier-box-description {
+  min-height: calc(1.38rem * 3);
+}
 
 
 /* MEMBERS WALL */
