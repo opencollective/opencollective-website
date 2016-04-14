@@ -17,16 +17,20 @@
   line-height: 1.688rem;
 }
 
+.PublicGroup-font-20 {
+  font-size: 1.25rem;
+  line-height: 1.875rem;
+}
+
 
 
 /* HERO */
 .PublicGroupHero-content {
-  padding: 11rem 0 9rem;
+  padding: 8rem 0 6rem;
 }
 
 .PublicGroupHero-mission {
-  font-size: 2.75rem;
-  line-height: 3.5rem;
+  line-height: 2.5rem;
   letter-spacing: -.5px;
 }
 
