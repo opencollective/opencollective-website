@@ -1,20 +1,20 @@
 import React from 'react';
-import randomAvatar from '../lib/random_avatar';
+import avatarByString from '../lib/avatar_by_string';
 
 export default class UserPhoto extends React.Component {
   static propTypes = {
-    url: React.PropTypes.string,
+    user: React.PropTypes.object,
     addBadge: React.PropTypes.bool
   };
 
   static defaultProps = {
-    url: '',
     addBadge: false
   };
 
   render() {
-    const { className = '', url, addBadge } = this.props;
-    const avatar = (url || randomAvatar());
+    const { className = '', user, addBadge } = this.props;
+    const userId = (user.id || 0).toString();
+    const avatar = (user.avatar || avatarByString(userId));
     const styles = {
       backgroundImage: `url(${avatar})`
     };
