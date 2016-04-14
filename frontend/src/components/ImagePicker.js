@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ImageUpload from './ImageUpload';
+import _ from 'underscore';
 
 const REG_VALID_URL = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
 const REG_VALID_TWITTER_USERNAME = /^[a-zA-Z0-9_]{1,15}$/;
@@ -37,6 +38,8 @@ export default class ImagePicker extends Component {
       twitter: '',
       website: '',
     };
+
+    this.lazyLookupSocialMediaAvatars = _.debounce(this.lookupSocialMediaAvatars.bind(this), 600);
   }
 
   render() {
@@ -66,7 +69,7 @@ export default class ImagePicker extends Component {
             }
           )}
         </ul>
-        <div className="ImageUpload-container hidden">
+        <div className="ImageUpload-container">
           <ImageUpload ref="ImageUpload" isUploading={false} onFinished={this.onUploadFinished.bind(this)} {...this.props} />
         </div>
       </div>
@@ -75,43 +78,22 @@ export default class ImagePicker extends Component {
 
   componentWillReceiveProps(nextProps) {
     const {website, twitter} = nextProps;
-    this.state.twitter = REG_VALID_TWITTER_USERNAME.test(twitter) ? twitter : '';
-    this.state.website = REG_VALID_URL.test(website) ? website : '';
-
-    if (this.state.twitter || this.state.website)
+    if (website !== this.state.website || twitter !== this.state.twitter)
     {
-      this.setState({isLoading: true});
-      this.getSocialMediaAvatars(this.state.website, this.state.twitter)
-      .then(results => {
-        results.forEach(result => {
-          const existingOption = this.options.filter((option) => {return option.source === result.source})[0];
-          if (existingOption)
-          {
-            existingOption.src = result.src;
-          }
-          else
-          {
-            if (this.options[0].source === 'preset')
-            {
-              this.options[0].source = result.source;
-              this.options[0].src = result.src;
-              this.setState({currentIndex: 0});
-            }
-            else
-            {
-              this.options.splice(1, 0, result)
-              this.setState({currentIndex: 1});
-            }
-          }
-        });
-
-        this.setState({isLoading: false});
-      })
-      .catch(reason => {
-        this.setState({isLoading: true});
-        console.error(reason);
-      });
+      this.state.twitter = REG_VALID_TWITTER_USERNAME.test(twitter) ? twitter : '';
+      this.state.website = REG_VALID_URL.test(website) ? website : '';
+      
+      if (this.state.twitter || this.state.website)
+      {
+        console.log('RELOOKUP')
+        this.lazyLookupSocialMediaAvatars(this.state.website, this.state.twitter);
+      }
     }
+  }
+
+  thereWasAChange()
+  {
+    this.props.handleChange(this.options[this.state.currentIndex].src);
   }
 
   nextIsPossible()
@@ -128,6 +110,7 @@ export default class ImagePicker extends Component {
   {
     if (this.state.isLoading) return;
     this.setState({currentIndex: this.options.indexOf(option)});
+    this.thereWasAChange();
   }
 
   next()
@@ -136,6 +119,7 @@ export default class ImagePicker extends Component {
     if (this.nextIsPossible())
     {
       this.setState({currentIndex: this.state.currentIndex + 1});
+      this.thereWasAChange();
     }
   }
 
@@ -145,6 +129,7 @@ export default class ImagePicker extends Component {
     if (this.prevIsPossible())
     {
       this.setState({currentIndex: this.state.currentIndex - 1});
+      this.thereWasAChange();
     }
   }
 
@@ -156,31 +141,56 @@ export default class ImagePicker extends Component {
     }
   }
 
-  onUploadFinished(url)
+  onUploadFinished(result)
   {
-    if (url)
+    if (result)
     {
-      const uploadItem = this.options.reduce((prev, curr) => prev.source === 'upload' ? prev : curr);
-      uploadItem.src = url;
-    }
-    else
-    {
-      // 401, could be 500, even the user canceling or closing file dialog..
-      // As of now  ImageUpload component does not signal why there was no url after
-      // the upload finished - TODO
+      const uploadOption = this.options.reduce((prev, curr) => prev.source === 'upload' ? prev : curr);
+      uploadOption.src = result.url;
+      this.setState({currentIndex: this.options.indexOf(uploadOption)});
+      this.thereWasAChange();
     }
   }
 
-  getSocialMediaAvatars(website, twitter)
+  lookupSocialMediaAvatars(website, twitter)
   {
-    const SAMPLE_API_RETURN = []; // TODO - server side
-    if (twitter) SAMPLE_API_RETURN.push({source: 'twitter', src: 'https://avatars2.githubusercontent.com/u/2263170?v=3&s=64'});
-    if (website) SAMPLE_API_RETURN.push({source: 'facebook', src: 'https://avatars2.githubusercontent.com/u/2263170?v=3&s=64'});
-    
-    return new Promise(
-      (resolve) => {
-        setTimeout(() => resolve(SAMPLE_API_RETURN), ~~(Math.random() * 1000));
-      }
-    );
+    const { profileForm, newUser, getSocialMediaAvatars } = this.props;
+
+    if (!this.state.isLoading)
+    {
+      this.setState({isLoading: true});
+    }
+
+    getSocialMediaAvatars(newUser.id, {website: website, twitterHandle: twitter, name: profileForm.name})
+    .then((result) => {
+      result.json.forEach(result => {
+        const existingOption = this.options.filter((option) => {return option.source === result.source})[0];
+        if (existingOption)
+        {
+          existingOption.src = result.src;
+        }
+        else
+        {
+          if (this.options[0].source === 'preset')
+          {
+            this.options[0].source = result.source;
+            this.options[0].src = result.src;
+            this.setState({currentIndex: 0});
+          }
+          else
+          {
+            this.options.splice(0, 0, result);
+            this.setState({currentIndex: 0});
+          }
+        }
+        this.thereWasAChange();
+      });
+
+      this.setState({isLoading: false});
+    })
+    .catch((error) => {
+      console.error(error);
+      this.setState({isLoading: false});
+    })
   }
 }
