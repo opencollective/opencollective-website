@@ -4,14 +4,15 @@ general:
       - staging
       - production
 machine:
-  environment:
-    NODE_ENV: circleci
-  post:
-    - cd website && npm run test:e2e api:install
   node:
     version: 5.1.0
+  environment:
+    NODE_ENV: circleci
   services:
     - postgresql
+  post:
+    # pre-install API to attempt to get its node_modules cached by circleci
+    - cd website && npm run test:e2e api:install
 dependencies:
   cache_directories:
     - "~/cache"
