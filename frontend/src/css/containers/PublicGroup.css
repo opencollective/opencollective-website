@@ -219,3 +219,9 @@
   /* padding: 0.75rem 1rem; */
   /* font-size: 1rem; */
 }
+
+
+.PublicGroup .PublicGroup-quoteText ul {
+  list-style: none;
+  padding: 0;
+}

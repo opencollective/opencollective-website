@@ -1,0 +1,11 @@
+.DonatePage .PublicGroupHeader {
+  text-align: center;
+}
+
+.DonatePage .PublicGroupHeader-description {
+  margin: 20px auto;
+}
+
+.DonatePage .PublicGroupForm-disclaimer {
+  font-size: 1rem;
+}
