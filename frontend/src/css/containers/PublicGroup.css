@@ -57,7 +57,15 @@
 }
 
 .PublicGroupIntro-container {
-  padding: 6.25rem 0;
+  padding-top: 6.25rem;
+  padding-bottom: 6.25rem;
+}
+
+.PublicGroupIntro--no-logo {
+  padding-top: 13.5rem;
+  background-image: url('/static/images/collectives/logo-placeholder@2x.png');
+  background-size: 41.3125rem 26.1875rem; /* 661 x 419 */
+  background-position: 50% 0;
 }
 
 .PublicGroupIntro-logo {
@@ -214,4 +222,10 @@
   /* font-weight: bold; */
   /* padding: 0.75rem 1rem; */
   /* font-size: 1rem; */
+}
+
+
+.PublicGroup .PublicGroup-quoteText ul {
+  list-style: none;
+  padding: 0;
 }
