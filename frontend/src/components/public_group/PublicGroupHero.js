@@ -11,8 +11,8 @@ export default class PublicGroupHero extends React.Component {
         <div className='container relative center'>
           <PublicTopBarV2 loginRedirectTo={`/${group.slug}`} className='pt3 absolute top-0 left-0 right-0' />
           <div className='PublicGroupHero-content'>
-            <p className='PublicGroup-font-17 mt0 mb2'>Hi! This is the <a href={group.website} className='underline white'>{group.name}</a> open collective and we’re on a mission to&hellip;</p>
-            <h1 className='PublicGroupHero-mission max-width-4 mx-auto mt0 mb3 white -ff-sec'>&hellip;{group.mission}</h1>
+            <p className='PublicGroup-font-20 mt0 mb2'>Hi! This is the <a href={group.website}>{group.name}</a> open collective.</p>
+            <h1 className='PublicGroupHero-mission max-width-3 mx-auto mt0 mb3 white -ff-sec'>We are on a mission to {group.mission}</h1>
             <a href='#support' className='mb3 -btn -btn-big -bg-green -ttu -ff-sec -fw-bold'>Be part of it!</a>
             <p className='h6'>Scroll down to find out more.</p>
             <svg width='14' height='9'>

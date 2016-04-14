@@ -9,7 +9,7 @@ export default class PublicGroupJoinUs extends React.Component {
       <div className='md-col-6 col-12 px3 pb4 mb4 border-box flex' key={`${tier.name}_${index}`}>
         <div className='PublicGroupJoinUs-tier-box-inner -border-green border mt3 relative col-12'>
           <h3 className='PublicGroupJoinUs-tier-box-title h3 mt0'>
-            <span className='bg-light-gray px2 -fw-ultra-bold'>Become a {tier.name}</span>
+            <span className='bg-light-gray px2 -fw-ultra-bold'>Become a {tier.title}</span>
           </h3>
           <p className='PublicGroupJoinUs-tier-box-description h5 mt0 mb3 px3 flex justify-center items-center'>
             {tier.description}
