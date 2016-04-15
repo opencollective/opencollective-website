@@ -3,7 +3,7 @@ import PublicTopBarV2 from '../../containers/PublicTopBarV2';
 
 export default class PublicGroupHero extends React.Component {
   render() {
-    const { group } = this.props;
+    const { group, i18n } = this.props;
     const collectiveBg = '/static/images/collectives/default-header-bg.jpg';
 
     return (
@@ -11,10 +11,10 @@ export default class PublicGroupHero extends React.Component {
         <div className='container relative center'>
           <PublicTopBarV2 loginRedirectTo={`/${group.slug}`} className='pt3 absolute top-0 left-0 right-0' />
           <div className='PublicGroupHero-content'>
-            <p className='PublicGroup-font-20 mt0 mb2'>Hi! This is the <a href={group.website}>{group.name}</a> open collective.</p>
-            <h1 className='PublicGroupHero-mission max-width-3 mx-auto mt0 mb3 white -ff-sec'>We are on a mission to {group.mission}</h1>
-            <a href='#support' className='mb3 -btn -btn-big -bg-green -ttu -ff-sec -fw-bold'>Be part of it!</a>
-            <p className='h6'>Scroll down to find out more.</p>
+            <p className='PublicGroup-font-20 mt0 mb2'>{i18n.getString('hiThisIs')} <a href={group.website}>{group.name}</a> {i18n.getString('openCollective')}.</p>
+            <h1 className='PublicGroupHero-mission max-width-3 mx-auto mt0 mb3 white -ff-sec'>{i18n.getString('missionTo')} {group.mission}</h1>
+            <a href='#support' className='mb3 -btn -btn-big -bg-green -ttu -ff-sec -fw-bold'>{i18n.getString('bePart')}</a>
+            <p className='h6'>{i18n.getString('scrollDown')}</p>
             <svg width='14' height='9'>
               <use xlinkHref='#svg-arrow-down' stroke='#fff'/>
             </svg>
@@ -25,16 +25,16 @@ export default class PublicGroupHero extends React.Component {
           <nav>
             <ul className='list-reset m0 -ttu center'>
               <li className='inline-block'>
-                <a href="#who-we-are" className='block px2 py3 white -ff-sec -fw-bold'>Who we are</a>
+                <a href="#who-we-are" className='block px2 py3 white -ff-sec -fw-bold'>{i18n.getString('menuWho')}</a>
               </li>
               <li className='inline-block'>
-                <a href="#why-join" className='block px2 py3 white -ff-sec -fw-bold'>Why join?</a>
+                <a href="#why-join" className='block px2 py3 white -ff-sec -fw-bold'>{i18n.getString('menuWhy')}</a>
               </li>
               <li className='inline-block'>
-                <a href="#expenses-and-activity" className='block px2 py3 white -ff-sec -fw-bold'>Expenses and Activity</a>
+                <a href="#expenses-and-activity" className='block px2 py3 white -ff-sec -fw-bold'>{i18n.getString('menuExpensesAndActivities')}</a>
               </li>
               <li className='inline-block'>
-                <a href="#members-wall" className='block px2 py3 white -ff-sec -fw-bold'>Members Wall</a>
+                <a href="#members-wall" className='block px2 py3 white -ff-sec -fw-bold'>{i18n.getString('menuMembersWall')}</a>
               </li>
               {/*<li className='inline-block'>
                 <a href="#" className='block px2 py3 white -ff-sec -fw-bold'>Share</a>

@@ -8,6 +8,7 @@ export default class PublicGroupExpenses extends React.Component {
       expenses,
       users,
       group,
+      i18n,
       itemsToShow = 3
     } = this.props;
 
@@ -18,18 +19,18 @@ export default class PublicGroupExpenses extends React.Component {
             src='/static/images/collectives/expenses-empty-state-image.jpg'
             srcSet='/static/images/collectives/expenses-empty-state-image@2x.jpg 2x'/>
         </div>
-        <p className='h3 -fw-bold'>Transparency is a great quality.</p>
-        <p className='h5 muted mb3'>Submit an expense, get reimbursed and show how funds are being spent!</p>
-        <Link className='-btn -btn-medium -btn-outline -border-green -ff-sec -fw-bold -ttu' to={`/${group.slug}/expenses/new`}>Submit expense</Link>
+        <p className='h3 -fw-bold'>{i18n.getString('expensesPlaceholderTitle')}</p>
+        <p className='h5 muted mb3'>{i18n.getString('expensesPlaceholderText')}</p>
+        <Link className='-btn -btn-medium -btn-outline -border-green -ff-sec -fw-bold -ttu' to={`/${group.slug}/expenses/new`}>{i18n.getString('submitExpense')}</Link>
       </div>
     );
 
     return (
       <div className='PublicGroup-expenses col md-col-6 col-12 px2 mb3'>
         <div className='clearfix border-bottom border-gray pb2 mb3'>
-          <h2 className='PublicGroup-title left m0 -ff-sec -fw-bold'>Out Latest Expenses</h2>
+          <h2 className='PublicGroup-title left m0 -ff-sec -fw-bold'>{i18n.getString('latestExpenses')}</h2>
           {(expenses.length > 0) && (
-            <Link className='right mt1 -btn -btn-micro -btn-outline -border-green -ff-sec -fw-bold -ttu' to={`/${group.slug}/expenses/new`}>Submit expense</Link>
+            <Link className='right mt1 -btn -btn-micro -btn-outline -border-green -ff-sec -fw-bold -ttu' to={`/${group.slug}/expenses/new`}>{i18n.getString('submitExpense')}</Link>
           )}
         </div>
         {(expenses.length === 0) && emptyState}
@@ -39,7 +40,7 @@ export default class PublicGroupExpenses extends React.Component {
         {expenses.length >= itemsToShow && (
           <div className='center pt2'>
             <Link className='-btn -btn-medium -btn-outline -border-green -ttu -ff-sec -fw-bold' to={`/${group.slug}/expenses`}>
-              Full expense history
+              {i18n.getString('expensesHistory')}
             </Link>
           </div>
         )}

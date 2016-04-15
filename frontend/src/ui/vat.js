@@ -9,6 +9,7 @@ export default function(groupid) {
   let vat = false;
   switch (groupid) {
     case 6: // LaPrimaire.org
+    case 73: // nuitdebout
       vat = true;
       break;
 

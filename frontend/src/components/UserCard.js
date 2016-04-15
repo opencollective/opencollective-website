@@ -40,7 +40,7 @@ export default class UserCard extends Component {
 
     return (
       <article className={`UserCard bg-white pt3 ${className} ${user.tier}`}>
-        {this._link(href, <UserPhoto url={user.avatar} addBadge={addBadge} className='mx-auto' />)}
+        {this._link(href, <UserPhoto user={user} addBadge={addBadge} className='mx-auto' />)}
         <p className='UserCard-name PublicGroup-font-15 h5 my2 px2 -ff-sec'>{this._link(href, user.name)}</p>
         <div className='border-top border-gray px3 py2'>
           <p className='UserCard-role m0 -green -fw-bold -ttu'>{roleLabel}</p>
