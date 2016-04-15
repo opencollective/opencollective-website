@@ -1,5 +1,5 @@
 import React from 'react';
-import avatarByString from '../lib/avatar_by_string';
+import getAvatarByNumber from '../lib/avatar_by_number';
 
 export default class UserPhoto extends React.Component {
   static propTypes = {
@@ -13,8 +13,7 @@ export default class UserPhoto extends React.Component {
 
   render() {
     const { className = '', user, addBadge } = this.props;
-    const userId = (user.id || 0).toString();
-    const avatar = (user.avatar || avatarByString(userId));
+    const avatar = (user.avatar || getAvatarByNumber(user.id));
     const styles = {
       backgroundImage: `url(${avatar})`
     };
