@@ -1,6 +1,6 @@
 {
   "name": "opencollective-website",
-  "version": "0.1.69",
+  "version": "0.1.70",
   "engines": {
     "node": "5.1.0",
     "npm": "3.3.12"
@@ -17,9 +17,9 @@
     "hint": "eslint '**/*.js' --quiet",
     "pretest": "npm run hint",
     "test": "npm run test:unit",
-    "test:unit": "NODE_CONFIG_DIR=./server/config mocha test/unit/ --opts test/unit/mocha.opts --reporter-options mochaFile=$CIRCLE_TEST_REPORTS/junit/junit.xml",
-    "posttest": "npm run test:e2e api:run website:run website:testE2E",
-    "test:e2e": "curl -s https://raw.githubusercontent.com/OpenCollective/api/master/scripts/test_e2e.sh | bash -s --",
+    "test:unit": "NODE_CONFIG_DIR=./server/config mocha test/unit/ --opts test/unit/mocha.opts --reporter-options mochaFile=$(sh scripts/test_output_dir.sh junit)/junit.xml",
+    "posttest": "npm run test:e2e cleanup api:run website:run website:testE2E",
+    "test:e2e": "npm run rexec:api test_e2e.sh",
     "nightwatch": "NODE_CONFIG_DIR=./server/config ./node_modules/nightwatch/bin/nightwatch --config nightwatch.json",
     "build": "gulp build && npm run build:js",
     "build:js": "mkdir -p frontend/dist/js && browserify frontend/src/client.js | uglifyjs -cm --screw-ie8 > frontend/dist/js/bundle.js ",
@@ -30,6 +30,7 @@
     "git:clean": "git branch --merged | grep -v \\* | grep -v master | grep -v dev | xargs -n 1 git branch -d",
     "deploy:staging": "bash -x scripts/deploy.sh staging",
     "deploy:production": "bash -x scripts/deploy.sh production",
+    "rexec:api": "bash scripts/remote_exec_api.sh",
     "install:debs": "bash -x scripts/install_apt_get_debs.sh"
   },
   "dependencies": {
