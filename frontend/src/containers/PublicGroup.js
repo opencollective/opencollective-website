@@ -51,7 +51,8 @@ export class PublicGroup extends Component {
   _donationFlow() {
     const {
       isAuthenticated,
-      showPaypalThankYou
+      showPaypalThankYou,
+      i18n
     } = this.props;
 
     if (this.state.showThankYouMessage || (isAuthenticated && this.state.showUserForm) || showPaypalThankYou) {
