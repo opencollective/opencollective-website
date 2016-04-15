@@ -41,7 +41,7 @@ export default class AmountPicker extends React.Component {
             showCurrencyPicker={group.id == 10}/>
         )}
 
-        <div className='max-width-1 mx-auto' style={{position: 'absolute', bottom: '-80px', left: '0', right: '0', margin: '0 auto'}}>
+        <div className='max-width-1 mx-auto' style={{position: 'absolute', left: '0', right: '0', margin: '-25px auto'}}>
           {hasPaypal && (
             <AsyncButton
               color='green'
