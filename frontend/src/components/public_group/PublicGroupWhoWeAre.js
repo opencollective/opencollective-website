@@ -21,7 +21,7 @@ export default class PublicGroupWhoWeAre extends React.Component {
         <div className={`PublicGroupIntro-container container center relative ${noLogoClassName}`}>
           {logoElement}
           <h2 className='PublicGroupIntro-title m0 -ff-sec -fw-bold'>We are {group.name}</h2>
-          <h3 className='PublicGroup-subtitle mt0 mb2 -ff-sec -fw-light'>{group.description}</h3>
+          <h3 className='PublicGroup-subtitle mt0 mb2 -ff-sec -fw-light max-width-3 mx-auto'>{group.description}</h3>
           <div className='PublicGroup-font-15 PublicGroup-quote max-width-3 mx-auto'>
             {group.longDescription && (
               <Markdown className='PublicGroup-quoteText left-align' value={group.longDescription} />
