@@ -22,7 +22,8 @@ export default function(groupid) {
         'Other Program Expense'
       ];
       break;
-    case 6:
+    case 6: // laprimaire
+    case 73: // nuitdebout
       tags = [
         'Admin',
         'Autre',
