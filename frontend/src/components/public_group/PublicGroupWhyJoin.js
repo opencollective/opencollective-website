@@ -7,6 +7,7 @@ export default class PublicGroupWhyJoin extends React.Component {
   render() {
     const {
       group,
+      i18n,
       expenses
     } = this.props;
 
@@ -26,17 +27,17 @@ export default class PublicGroupWhyJoin extends React.Component {
 
           <div className={`PublicGroup-summary col md-col-6 col-12 px4 flex flex-column justify-between ${summaryNoMediaClassNames}`}>
             <div>
-              <h2 className='PublicGroup-title white mt3 -ff-sec -fw-bold'>Why Become a Member?</h2>
-              <p className='PublicGroup-font-15'>With your membership plan, you’ll help us cover all expenses the collective makes in order to keep going. All the funds will be managed responsibly with your help, and everyone can see how and where the funds are being spent!</p>
+              <h2 className='PublicGroup-title white mt3 -ff-sec -fw-bold'>{i18n.getString('becomeMemberTitle')}</h2>
+              <p className='PublicGroup-font-15'>{i18n.getString('becomeMemberText')}</p>
             </div>
             <div className='PublicGroup-metricContainer flex py3'>
-              <Metric label='Total Funds Available'
+              <Metric label={i18n.getString('fundsAvailable')}
                 value={ formatCurrency(group.balance, group.currency, { precision: 0 }) }
                 className='flex-auto pr2' />
 
               {(expenses.length > 0) && (
                 <div className='pt1 pl1'>
-                  <a href='#expenses-and-activity' className='-btn -btn-outline -border-green -btn-small -ff-sec -fw-bold -ttu -wsnw'>See how we’ve spent it</a>
+                  <a href='#expenses-and-activity' className='-btn -btn-outline -border-green -btn-small -ff-sec -fw-bold -ttu -wsnw'>{i18n.getString('howWeSpend')}</a>
                 </div>
               )}
             </div>

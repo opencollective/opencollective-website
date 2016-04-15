@@ -6,7 +6,7 @@ import { displayUrl } from '../../components/DisplayUrl';
 
 export default class PublicGroupWhoWeAre extends React.Component {
   render() {
-    const { group } = this.props;
+    const { group, i18n } = this.props;
     let logoElement = null;
     let noLogoClassName = '';
 
@@ -20,7 +20,7 @@ export default class PublicGroupWhoWeAre extends React.Component {
       <section id='who-we-are' className='PublicGroupIntro px2 bg-light-gray relative'>
         <div className={`PublicGroupIntro-container container center relative ${noLogoClassName}`}>
           {logoElement}
-          <h2 className='PublicGroupIntro-title m0 -ff-sec -fw-bold'>We are {group.name}</h2>
+          <h2 className='PublicGroupIntro-title m0 -ff-sec -fw-bold'>{i18n.getString('weAre')} {group.name}</h2>
           <h3 className='PublicGroup-subtitle mt0 mb2 -ff-sec -fw-light max-width-3 mx-auto'>{group.description}</h3>
           <div className='PublicGroup-font-15 PublicGroup-quote max-width-3 mx-auto'>
             {group.longDescription && (
@@ -36,7 +36,7 @@ export default class PublicGroupWhoWeAre extends React.Component {
 
           {group.members.length ? (
             <div className='PublicGroup-members pt4'>
-              <h3 className='PublicGroup-subtitle mt0 mb2 -ff-sec -fw-light'>Core Contributors</h3>
+              <h3 className='PublicGroup-subtitle mt0 mb2 -ff-sec -fw-light'>{i18n.getString('coreContributors')}</h3>
               <div className='flex flex-wrap justify-center'>
                 {group.members.map((user, index) => <UserCard user={user} key={index} className='m1' />)}
               </div>

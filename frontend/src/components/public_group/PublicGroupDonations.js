@@ -8,6 +8,7 @@ export default class PublicGroupDonations extends React.Component {
       donations,
       users,
       group,
+      i18n,
       itemsToShow = 3
     } = this.props;
 
@@ -18,15 +19,15 @@ export default class PublicGroupDonations extends React.Component {
             src='/static/images/collectives/activities-empty-state-image.jpg'
             srcSet='/static/images/collectives/activities-empty-state-image@2x.jpg 2x'/>
         </div>
-        <p className='h3 -fw-bold'>What you do proves your beliefs.</p>
-        <p className='h5 muted'>People should know what stuff is being done for the community!</p>
+        <p className='h3 -fw-bold'>{i18n.getString('activitiesPlaceholderTitle')}</p>
+        <p className='h5 muted'>{i18n.getString('activitiesPlaceholderText')}</p>
       </div>
     );
 
     return (
       <div className='PublicGroup-donations col md-col-6 col-12 px2 mb3'>
         <div className='border-bottom border-gray pb2 mb3'>
-          <h2 className='PublicGroup-title m0 -ff-sec -fw-bold'>Recent Activity</h2>
+          <h2 className='PublicGroup-title m0 -ff-sec -fw-bold'>{i18n.getString('latestActivities')}</h2>
         </div>
         {(donations.length === 0) && emptyState}
         <div className='PublicGroup-transactions-list'>
@@ -35,7 +36,7 @@ export default class PublicGroupDonations extends React.Component {
         {(donations.length >= itemsToShow) && (
           <div className='center pt2'>
             <Link className='-btn -btn-medium -btn-outline -border-green -ttu -ff-sec -fw-bold' to={`/${group.slug}/donations`}>
-              See all donations
+              {i18n.getString('allActivities')}
             </Link>
           </div>
         )}

@@ -207,7 +207,7 @@ function mapStateToProps({
     }
   };
 
-  if(group.slug === 'laprimaire') {
+  if(group.slug === 'laprimaire' || group.slug == 'nuitdebout') {
     group.settings = {
       lang: 'fr',
       formatCurrency: {
