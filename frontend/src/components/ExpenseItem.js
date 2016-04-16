@@ -54,7 +54,7 @@ export default class ExpenseItem extends Component {
           <div className='h6 white -fw-bold'>{expense.createdAt && moment(expense.createdAt).fromNow()}</div>
         </div>
         <div className='p2 flex-auto bg-white'>
-          <p className='h5 mt0 mb1'>{expense.description}</p>
+          <p className='h5 mt0 mb1'>{expense.tags || expense.description}</p>
           <p className='h6 m0 muted'>Submitted by {user && user.name}</p>
           <div className='mt2'>
             <span className='h3 -ff-sec -fw-bold'>
