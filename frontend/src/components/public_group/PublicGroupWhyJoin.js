@@ -25,18 +25,18 @@ export default class PublicGroupWhyJoin extends React.Component {
             </div>
           )}
 
-          <div className={`PublicGroup-summary col md-col-6 col-12 px4 flex flex-column justify-between ${summaryNoMediaClassNames}`}>
+          <div className={`PublicGroup-summary col md-col-6 col-12 flex flex-column justify-between ${summaryNoMediaClassNames}`}>
             <div>
-              <h2 className='PublicGroup-title white mt3 -ff-sec -fw-bold'>{i18n.getString('becomeMemberTitle')}</h2>
-              <p className='PublicGroup-font-15'>{i18n.getString('becomeMemberText')}</p>
+              <span className='PublicGroup-title white -ff-sec -fw-bold'>{i18n.getString('becomeMemberTitle')}</span>
+              <p className='PublicGroup-font-17 mt3'>{i18n.getString('becomeMemberText')}</p>
             </div>
-            <div className='PublicGroup-metricContainer flex py3'>
+            <div className='PublicGroup-metricContainer flex pt4'>
               <Metric label={i18n.getString('fundsAvailable')}
                 value={ formatCurrency(group.balance, group.currency, { precision: 0 }) }
                 className='flex-auto pr2' />
 
               {(expenses.length > 0) && (
-                <div className='pt1 pl1'>
+                <div className='pt1 mt3 mb2'>
                   <a href='#expenses-and-activity' className='-btn -btn-outline -border-green -btn-small -ff-sec -fw-bold -ttu -wsnw'>{i18n.getString('howWeSpend')}</a>
                 </div>
               )}
