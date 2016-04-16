@@ -95,8 +95,8 @@ module.exports = {
     const slug = req.params.slug;
     const position = parseInt(req.params.position, 10);
 
-    req.ga.event("Widget", "BackerAvatarClick", "position", position);
-        
+    req.ga.event("GithubWidget", `${tier}-click`, "slug", slug);
+
     const user = (position < users.length) ?  users[position] : {};
     user.twitter = (user.twitterHandle) ? `https://twitter.com/${user.twitterHandle}` : null;
     

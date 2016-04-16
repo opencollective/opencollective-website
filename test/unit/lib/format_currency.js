@@ -28,7 +28,7 @@ describe('formatCurrency', () => {
   });
 
   it('should return -€12.34', () => {
-    expect(formatCurrency(-12.34,'EUR')).to.equal('€12,34');
+    expect(formatCurrency(-12.34,'EUR')).to.equal('-€12,34');
   });
 
   it('should return MXN$10', () => {
