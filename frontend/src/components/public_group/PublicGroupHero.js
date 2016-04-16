@@ -11,6 +11,9 @@ export default class PublicGroupHero extends React.Component {
         <div className='container relative center'>
           <PublicTopBarV2 loginRedirectTo={`/${group.slug}`} className='pt3 absolute top-0 left-0 right-0' />
           <div className='PublicGroupHero-content'>
+            {group.logo && (
+              <div className="PublicGroupHero-logo mb3 bg-contain" style={{backgroundImage: `url(${group.logo})`}}></div>
+            )}
             <p className='PublicGroup-font-20 mt0 mb2'>{i18n.getString('hiThisIs')} <a href={group.website}>{group.name}</a> {i18n.getString('openCollective')}.</p>
             <h1 className='PublicGroupHero-mission max-width-3 mx-auto mt0 mb3 white -ff-sec'>{i18n.getString('missionTo')} {group.mission}</h1>
             <a href='#support' className='mb3 -btn -btn-big -bg-green -ttu -ff-sec -fw-bold'>{i18n.getString('bePart')}</a>
