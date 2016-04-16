@@ -4,7 +4,7 @@ import PublicTopBarV2 from '../../containers/PublicTopBarV2';
 export default class PublicGroupHero extends React.Component {
   render() {
     const { group, i18n } = this.props;
-    const collectiveBg = '/static/images/collectives/default-header-bg.jpg';
+    const collectiveBg = group.backgroundImage || '/static/images/collectives/default-header-bg.jpg';
 
     return (
       <section className='PublicGroupHero relative px2 bg-black bg-cover white' style={{backgroundImage: `url(${collectiveBg})`}}>
