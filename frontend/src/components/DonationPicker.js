@@ -1,6 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 
+import {currencySymbolLookup} from '../lib/format_currency';
 import Currency from './Currency';
 import Input from './Input';
 import Select from './Select';
@@ -70,26 +71,21 @@ function customField({onChange, value, frequency, currency, showCurrencyPicker, 
 
   var currencies = [{
     label: 'USD',
-    value: 'USD',
-    symbol: '$'
+    value: 'USD'
   }, {
     label: 'EUR',
-    value: 'EUR',
-    symbol: '€'
+    value: 'EUR'
   }, {
     label: 'MXN',
-    value: 'MXN',
-    symbol: '$'
+    value: 'MXN'
   }];
-
-  var currentCurrency = currencies.reduce((prev, curr) => {return prev.value === currency ? prev : curr});
 
   return (
     <div className='DonationPicker-customfield width-100 pt3 clearfix'>
       <div className='col col-6 pr2 relative'>
         <label className='h6 block mb1 left-align'>{i18n.getString('customAmount')}</label>
         <Input
-          prefix={currentCurrency.symbol}
+          prefix={currencySymbolLookup[currency]}
           value={value}
           placeholder='Enter an amount'
           customClass='DonationPicker-input'
