@@ -65,6 +65,7 @@
 @import './components/ExpenseItem.css';
 @import './components/ActivityItem.css';
 @import './components/Widget.css';
+@import './components/ImagePicker.css';
 
 /**
  * Media queries

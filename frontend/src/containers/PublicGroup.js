@@ -29,8 +29,10 @@ import notify from '../actions/notification/notify';
 import appendDonationForm from '../actions/form/append_donation';
 import appendProfileForm from '../actions/form/append_profile';
 import updateUser from '../actions/users/update';
+import getSocialMediaAvatars from '../actions/users/get_social_media_avatars';
 import validateSchema from '../actions/form/validate_schema';
 import decodeJWT from '../actions/session/decode_jwt';
+import uploadImage from '../actions/images/upload';
 
 import profileSchema from '../joi_schemas/profile';
 import strings from '../ui/strings.json';
@@ -58,7 +60,7 @@ export class PublicGroup extends Component {
 
     if (this.state.showThankYouMessage || (isAuthenticated && this.state.showUserForm) || showPaypalThankYou) {
       return (
-        <div className='PublicGroupDonationFlowWrapper px2 py4 border-box fixed top-0 left-0 right-0 bottom-0 bg-white'>
+        <div className='PublicGroupDonationFlowWrapper px2 py4 border-box fixed top-0 left-0 right-0 bottom-0'>
           <PublicGroupThanksV2
             message={i18n.getString('NowOnBackersWall')}
             i18n={i18n}
@@ -252,12 +254,14 @@ export function saveNewUser() {
 
 export default connect(mapStateToProps, {
   donate,
+  uploadImage,
   notify,
   fetchTransactions,
   fetchUsers,
   fetchGroup,
   appendProfileForm,
   updateUser,
+  getSocialMediaAvatars,
   validateSchema,
   decodeJWT,
   appendDonationForm
