@@ -21,7 +21,7 @@ export default class ActivityItem extends Component {
     const { className = '', donation, user } = this.props;
     return (
       <div className={`ActivityItem flex ${className}`}>
-        <UserPhoto url={user && user.avatar} className='mt1' />
+        <UserPhoto user={user} className='mt1' />
         <div className='ActivityItem-bubble relative flex-auto border bg-white ml2 p2'>
           <div className='flex'>
             <p className='h5 flex-auto m0'>{donation.description}</p>

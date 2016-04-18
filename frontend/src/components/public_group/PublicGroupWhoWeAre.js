@@ -6,31 +6,29 @@ import { displayUrl } from '../../components/DisplayUrl';
 
 export default class PublicGroupWhoWeAre extends React.Component {
   render() {
-    const { group } = this.props;
+    const { group, i18n } = this.props;
 
     return (
       <section id='who-we-are' className='PublicGroupIntro px2 bg-light-gray relative'>
-        <div className='PublicGroupIntro-container container center relative'>
-          {group.logo && (
-            <img className='PublicGroupIntro-logo mb2 rounded' src={group.logo} />
+        <div className='PublicGroupIntro-container container center relative PublicGroupIntro--no-logo bg-no-repeat'>
+          <h2 className='PublicGroupIntro-title m0 -ff-sec -fw-bold'>{i18n.getString('weAre')} {group.name}</h2>
+          <h3 className='PublicGroup-subtitle mt0 mb2 -ff-sec -fw-light max-width-3 mx-auto'>{group.description}</h3>
+          
+          {group.website && (
+            <div className='PublicGroupIntro-website pt1'>
+              <a href={group.website} className='px3 -btn -green -btn-outline -btn-small -ttu -ff-sec -fw-bold'>{displayUrl(group.website)}</a>
+            </div>
           )}
-          <h2 className='PublicGroupIntro-title m0 -ff-sec -fw-bold'>We are {group.name}</h2>
-          <h3 className='PublicGroup-subtitle mt0 mb2 -ff-sec -fw-light'>{group.description}</h3>
+
           <div className='PublicGroup-font-15 PublicGroup-quote max-width-3 mx-auto'>
             {group.longDescription && (
-              <Markdown className='PublicGroup-quoteText' value={group.longDescription} />
+              <Markdown className='PublicGroup-quoteText left-align' value={group.longDescription} />
             )}
           </div>
 
-          {group.website ? (
-            <div className='PublicGroupIntro-website pt3'>
-              <a href={group.website} className='px3 -btn -green -btn-outline -btn-small -ttu -ff-sec -fw-bold'>{displayUrl(group.website)}</a>
-            </div>
-          ) : null}
-
           {group.members.length ? (
             <div className='PublicGroup-members pt4'>
-              <h3 className='PublicGroup-subtitle mt0 mb2 -ff-sec -fw-light'>Core Contributors</h3>
+              <h3 className='PublicGroup-subtitle mt0 mb2 -ff-sec -fw-light'>{i18n.getString('coreContributors')}</h3>
               <div className='flex flex-wrap justify-center'>
                 {group.members.map((user, index) => <UserCard user={user} key={index} className='m1' />)}
               </div>

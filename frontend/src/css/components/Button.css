@@ -65,7 +65,7 @@
 .Button--reject,
 .Button--cancel {
   box-sizing: border-box;
-  width: calc(50% - calc(var(--spacing)/2));
+  max-width: 300px;
 }
 
 .Button--paypal,

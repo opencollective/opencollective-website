@@ -29,6 +29,7 @@
 
 @import './containers/Leaderboard.css';
 @import './containers/PublicGroup.css';
+@import './containers/DonatePage.css';
 @import './containers/SubmitExpense.css';
 @import './containers/Subscriptions.css';
 

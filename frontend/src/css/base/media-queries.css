@@ -14,6 +14,11 @@
     font-size: 14px; /* 1 rem = 14px; */
   }
 
+
+  h1 {
+    font-size: 24px;
+  }
+
   .PublicGroup .PublicContent {
     padding: 1rem 1rem 5rem 1rem;
     max-width: calc(var(--public-topbar-height) + var(--spacing)) auto 0 auto;
@@ -78,6 +83,16 @@
   }
   .PublicFooter img {
     max-height: 30px;
+  }
+
+  .PublicGroupHero-content {
+    /* line-height: 2.5rem; */
+    padding: 8rem 0 3rem;
+  }
+
+  .PublicGroupHero-mission {
+    line-height: 2.5rem;
+    letter-spacing: -.5px;
   }
 
   /* For the subscription page */

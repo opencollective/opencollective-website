@@ -1,0 +1,23 @@
+.DonatePage .PublicGroupHeader-logo {
+  max-height: 140px;
+}
+
+.DonatePage .PublicGroupHeader {
+  text-align: center;
+}
+
+.DonatePage .PublicGroupHeader-description {
+  margin: 20px auto;
+}
+
+.DonatePage .Tiers-button {
+  margin: 50px 0 10px 0px;
+}
+
+.DonatePage .PublicGroupHeader-host {
+  font-size: 0.8rem;
+}
+
+.DonatePage .PublicGroupForm-disclaimer {
+  font-size: 0.8rem;
+}

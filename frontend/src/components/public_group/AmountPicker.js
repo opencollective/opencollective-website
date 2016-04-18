@@ -13,6 +13,7 @@ export default class AmountPicker extends React.Component {
       onToken,
       appendDonationForm,
       tier,
+      i18n,
       inProgress
     } = this.props;
 
@@ -23,10 +24,10 @@ export default class AmountPicker extends React.Component {
     const currency = donationForm[tier.name].currency || group.currency;
     const hasPaypal = group.hasPaypal;
     const hasStripe = stripeKey && amount !== '';
-    const frequencyHuman = frequency === 'one-time' ? '' : `per ${frequency.replace(/ly$/,'')}`;
+    const frequencyHuman = frequency === 'one-time' ? '' : `${i18n.getString('per')} ${i18n.getString(frequency.replace(/ly$/,''))}`;
     const stripeDescription =  `${formatCurrency(amount, currency, { compact: false })} ${frequencyHuman}`;
     const button = tier.button || `Donate ${stripeDescription}`;
-    const cancellationDisclaimer = (frequency !== 'one-time') ? "You can cancel anytime." : "";
+    const cancellationDisclaimer = (frequency !== 'one-time') ? i18n.getString('cancelAnytime') : "";
 
     return (
       <div>
@@ -36,12 +37,13 @@ export default class AmountPicker extends React.Component {
             currency={currency}
             frequency={frequency}
             presets={tier.presets}
+            i18n={i18n}
             onChange={({amount, frequency, currency}) => appendDonationForm(tier.name, {amount, frequency, currency})}
             // MAJOR HACK to support a donation for this group.
             showCurrencyPicker={group.id == 10}/>
         )}
 
-        <div className='max-width-1 mx-auto' style={{marginBottom: '-80px'}}>
+        <div className='max-width-1 mx-auto' style={{position: 'absolute', left: '0', right: '0', margin: '-25px auto'}}>
           {hasPaypal && (
             <AsyncButton
               color='green'
@@ -77,7 +79,7 @@ export default class AmountPicker extends React.Component {
           )}
 
           <div className='PublicGroupForm-disclaimer h6 mt2' style={{minHeight: 38}}>
-            By clicking above, you are pledging to give {group.host.name} {stripeDescription} for {group.name}. {cancellationDisclaimer}
+            {i18n.getString('disclaimer')} {group.host.name} {stripeDescription} {i18n.getString('for')} {group.name}. {cancellationDisclaimer}
           </div>
         </div>
       </div>

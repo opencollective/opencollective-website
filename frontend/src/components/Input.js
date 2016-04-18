@@ -9,7 +9,8 @@ const Input = (
     maxLength,
     handleChange,
     value,
-    customClass
+    customClass,
+    prefix
   }) => {
     const className = classnames({
       Input: true,
@@ -18,7 +19,7 @@ const Input = (
     });
 
     return (
-      <div className={className}>
+      <div className={className} data-prefix={prefix}>
         <input
           className='Field'
           type={type}

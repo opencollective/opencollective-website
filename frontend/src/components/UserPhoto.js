@@ -1,17 +1,19 @@
-import React, {Component, PropTypes} from 'react';
+import React from 'react';
+import getAvatarByNumber from '../lib/avatar_by_number';
 
-export default class UserPhoto extends Component {
-  static propTypes = { url: PropTypes.string };
+export default class UserPhoto extends React.Component {
+  static propTypes = {
+    user: React.PropTypes.object,
+    addBadge: React.PropTypes.bool
+  };
 
   static defaultProps = {
-    url: '/static/images/default_avatar.svg',
     addBadge: false
   };
 
   render() {
-    const { className = '', url, addBadge } = this.props;
-    const avatar = (url || '/static/images/default_avatar.svg');
-
+    const { className = '', user, addBadge } = this.props;
+    const avatar = (user.avatar || getAvatarByNumber(user.id));
     const styles = {
       backgroundImage: `url(${avatar})`
     };

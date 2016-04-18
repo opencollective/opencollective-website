@@ -53,20 +53,24 @@ export class PublicGroup extends Component {
   _donationFlow() {
     const {
       isAuthenticated,
-      showPaypalThankYou
+      showPaypalThankYou,
+      i18n,
+      group
     } = this.props;
 
     if (this.state.showThankYouMessage || (isAuthenticated && this.state.showUserForm) || showPaypalThankYou) {
       return (
         <div className='PublicGroupDonationFlowWrapper px2 py3 border-box fixed top-0 left-0 right-0 bottom-0'>
           <PublicGroupThanksV2
-            message='You are now in our backers wall!'
+            message={i18n.getString('NowOnBackersWall')}
+            i18n={i18n}
+            group={group}
             closeDonationModal={this._closeDonationFlow.bind(this)} />
         </div>
       );
     } else if (this.state.showUserForm) {
       return (
-        <div className='PublicGroupDonationFlowWrapper px2 py3 border-box fixed top-0 left-0 right-0 bottom-0 bg-white'>
+        <div className='PublicGroupDonationFlowWrapper px2 py4 border-box fixed top-0 left-0 right-0 bottom-0 bg-white'>
           <PublicGroupSignupV2 {...this.props} save={saveNewUser.bind(this)} />
         </div>
       );
@@ -95,20 +99,20 @@ export class PublicGroup extends Component {
       <div className='PublicGroup'>
         <Notification />
 
-        <PublicGroupHero group={group} />
-        <PublicGroupWhoWeAre group={group} />
-        <PublicGroupWhyJoin group={group} expenses={expenses} />
+        <PublicGroupHero group={group} {...this.props} />
+        <PublicGroupWhoWeAre group={group} {...this.props} />
+        <PublicGroupWhyJoin group={group} expenses={expenses} {...this.props} />
 
         <div className='bg-light-gray px2'>
-          <PublicGroupJoinUs {...this.props} donateToGroup={donateToGroup.bind(this)} />
-          <PublicGroupMembersWall group={group} />
+          <PublicGroupJoinUs {...this.props} donateToGroup={donateToGroup.bind(this)} {...this.props} />
+          <PublicGroupMembersWall group={group} {...this.props} />
         </div>
 
         <section id='expenses-and-activity' className='px2'>
           <div className='container'>
             <div className='PublicGroup-transactions clearfix md-flex'>
-              <PublicGroupExpenses group={group} expenses={expenses} users={users} itemsToShow={NUM_TRANSACTIONS_TO_SHOW} />
-              <PublicGroupDonations group={group} donations={donations} users={users} itemsToShow={NUM_TRANSACTIONS_TO_SHOW} />
+              <PublicGroupExpenses group={group} expenses={expenses} users={users} itemsToShow={NUM_TRANSACTIONS_TO_SHOW} {...this.props} />
+              <PublicGroupDonations group={group} donations={donations} users={users} itemsToShow={NUM_TRANSACTIONS_TO_SHOW} {...this.props} />
             </div>
           </div>
         </section>
@@ -315,7 +319,7 @@ function mapStateToProps({
     }
   };
 
-  if(group.slug === 'laprimaire') {
+  if(group.slug === 'laprimaire' || group.slug == 'nuitdebout') {
     group.settings = {
       lang: 'fr',
       formatCurrency: {

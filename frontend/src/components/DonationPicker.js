@@ -1,11 +1,12 @@
 import React from 'react';
 import classnames from 'classnames';
 
+import {currencySymbolLookup} from '../lib/format_currency';
 import Currency from './Currency';
 import Input from './Input';
 import Select from './Select';
 
-export default ({value, currency, frequency, presets, onChange, showCurrencyPicker}) => {
+export default ({value, currency, frequency, presets, onChange, showCurrencyPicker, i18n}) => {
   const presetAmounts = presets;
 
   if (presets.indexOf('other') === -1){
@@ -25,7 +26,7 @@ export default ({value, currency, frequency, presets, onChange, showCurrencyPick
     var amountLabel, amountValue;
     if(presetLabel === 'other') {
       amountValue = '100';
-      amountLabel = "Other";
+      amountLabel = i18n.getString('other');
     }
     else {
       amountValue = presetLabel;
@@ -50,21 +51,21 @@ export default ({value, currency, frequency, presets, onChange, showCurrencyPick
         {presetAmounts.map(presetListItem)}
       </ul>
       <div className='px3'>
-        {isCustomMode && customField({onChange, value, frequency, currency, showCurrencyPicker})}
+        {isCustomMode && customField({onChange, value, frequency, currency, showCurrencyPicker, i18n})}
       </div>
     </div>
   );
 };
 
-function customField({onChange, value, frequency, currency, showCurrencyPicker}) {
+function customField({onChange, value, frequency, currency, showCurrencyPicker, i18n}) {
   const frequencies = [{
-    label: 'Monthly',
+    label: i18n.getString('monthly'),
     value: 'month'
   }, {
-    label: 'Yearly',
+    label: i18n.getString('yearly'),
     value: 'year'
   }, {
-    label: 'One time',
+    label: i18n.getString('one-time'),
     value: 'one-time'
   }];
 
@@ -82,15 +83,16 @@ function customField({onChange, value, frequency, currency, showCurrencyPicker})
   return (
     <div className='DonationPicker-customfield width-100 pt3 clearfix'>
       <div className='col col-6 pr2 relative'>
-        <label className='h6 block mb1 left-align'>Tweak the amount</label>
+        <label className='h6 block mb1 left-align'>{i18n.getString('customAmount')}</label>
         <Input
+          prefix={currencySymbolLookup[currency]}
           value={value}
           placeholder='Enter an amount'
           customClass='DonationPicker-input'
           handleChange={(amount) => onChange({amount})} />
       </div>
       <div className='col col-6 pl2'>
-        <label className='mb1 h6 block left-align'>Frequency</label>
+        <label className='mb1 h6 block left-align'>{i18n.getString('frequency')}</label>
         <Select
           options={frequencies}
           value={frequency}
