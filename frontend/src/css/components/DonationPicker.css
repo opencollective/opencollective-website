@@ -10,7 +10,6 @@
 }
 
 .DonationPicker-input.Input::before {
-  content: '$';
   position: absolute;
   left: 10px;
   bottom: 8px;
