@@ -30,7 +30,7 @@ module.exports = {
       .setValue('.js-transaction-email input', 'test@gmail.com')
       .setValue('.js-transaction-note', 'test note')
       .click('button[type=submit]')
-      .waitForElementVisible('.PublicGroupThanks', 5000)
+      .waitForElementVisible('.PublicGroupThanks', 10000)
       .assert.containsText('.PublicGroupThanks', 'Expense sent')
       .end();
    }
