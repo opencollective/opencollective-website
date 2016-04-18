@@ -35,3 +35,9 @@ export default (
   }
   return formatted;
 };
+
+export const currencySymbolLookup = {
+  'EUR': '€',
+  'MXN': '$',
+  'USD': '$'
+};

@@ -10,6 +10,7 @@
 }
 
 .DonationPicker-input.Input::before {
+  content: attr(data-prefix);
   position: absolute;
   left: 10px;
   bottom: 8px;
