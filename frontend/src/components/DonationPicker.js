@@ -70,20 +70,26 @@ function customField({onChange, value, frequency, currency, showCurrencyPicker, 
 
   var currencies = [{
     label: 'USD',
-    value: 'USD'
+    value: 'USD',
+    symbol: '$'
   }, {
     label: 'EUR',
-    value: 'EUR'
+    value: 'EUR',
+    symbol: '€'
   }, {
     label: 'MXN',
-    value: 'MXN'
+    value: 'MXN',
+    symbol: '$'
   }];
+
+  var currentCurrency = currencies.reduce((prev, curr) => {return prev.value === currency ? prev : curr});
 
   return (
     <div className='DonationPicker-customfield width-100 pt3 clearfix'>
       <div className='col col-6 pr2 relative'>
         <label className='h6 block mb1 left-align'>{i18n.getString('customAmount')}</label>
         <Input
+          prefix={currentCurrency.symbol}
           value={value}
           placeholder='Enter an amount'
           customClass='DonationPicker-input'

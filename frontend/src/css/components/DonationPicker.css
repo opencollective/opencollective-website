@@ -10,6 +10,10 @@
 }
 
 .DonationPicker-input.Input::before {
+<<<<<<< Updated upstream
+=======
+  content: attr(data-prefix);
+>>>>>>> Stashed changes
   position: absolute;
   left: 10px;
   bottom: 8px;
