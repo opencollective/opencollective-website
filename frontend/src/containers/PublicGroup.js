@@ -60,7 +60,7 @@ export class PublicGroup extends Component {
 
     if (this.state.showThankYouMessage || (isAuthenticated && this.state.showUserForm) || showPaypalThankYou) {
       return (
-        <div className='PublicGroupDonationFlowWrapper px2 py3 border-box fixed top-0 left-0 right-0 bottom-0'>
+        <div className='PublicGroupDonationFlowWrapper px2 py4 border-box fixed top-0 left-0 right-0 bottom-0'>
           <PublicGroupThanksV2
             message={i18n.getString('NowOnBackersWall')}
             i18n={i18n}
