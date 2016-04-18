@@ -53,7 +53,8 @@ export class PublicGroup extends Component {
       isAuthenticated,
       showPaypalThankYou,
       i18n,
-      group
+      group,
+      newUser
     } = this.props;
 
     if (this.state.showThankYouMessage || (isAuthenticated && this.state.showUserForm) || showPaypalThankYou) {
@@ -63,6 +64,7 @@ export class PublicGroup extends Component {
             message={i18n.getString('NowOnBackersWall')}
             i18n={i18n}
             group={group}
+            newUserId={newUser.id}
             closeDonationModal={this._closeDonationFlow.bind(this)} />
         </div>
       );
