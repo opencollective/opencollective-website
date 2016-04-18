@@ -2,7 +2,7 @@
   padding: 1rem;
   color: white;
   position: fixed;
-  top: var(--topbar-height);
+  top: 0;
   left: 0;
   right: 0;
   text-align: left;
