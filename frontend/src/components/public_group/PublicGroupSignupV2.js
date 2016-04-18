@@ -87,7 +87,7 @@ export default class PublicGroupSignupV2 extends React.Component {
           <div className="buttonsRow pt3">
             <SaveButton
               save={save.bind(this)}
-              label="SHOW MY SUPPORT!" //  {/*i18n.getString('save')*/}
+              label={i18n.getString('save')}
               inProgress={saveInProgress} />
           </div>
         </div>
