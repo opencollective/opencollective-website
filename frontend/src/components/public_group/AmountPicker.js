@@ -44,7 +44,7 @@ export default class AmountPicker extends React.Component {
         )}
 
         <div className='max-width-1 mx-auto' style={{position: 'absolute', left: '0', right: '0', margin: '-25px auto'}}>
-          {!hasStripe && (
+          {(!hasStripe || (hasPaypal && hasStripe)) && (
             <AsyncButton
               disabled={hasPaypal ? false : true}
               color={hasPaypal ? 'green' : ''}
