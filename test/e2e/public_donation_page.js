@@ -12,7 +12,7 @@ module.exports = {
 
       // wait for bottom green button to show up
       .waitForElementVisible('.Button.Button--green', 10000)
-      .assert.containsText('.Button.Button--green', 'BECOME A BACKER')
+      .assert.containsText('.Button.Button--green', 'DONATE WITH PAYPAL')
   },
 
   'Redirects to paypal after clicking donate': (client) => {
