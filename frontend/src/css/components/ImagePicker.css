@@ -129,8 +129,9 @@
   bottom: 18px;
   left: 0;
   right: 0;
-  width: 80px;
+  width: 100%;
   margin: 0 auto;
+  line-height: .9;
   text-align: center;
   list-style: none;
   list-style-type: none;  

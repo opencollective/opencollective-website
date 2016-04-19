@@ -36,7 +36,7 @@ export default class PublicGroupSignupV2 extends React.Component {
                   twitter={profileForm.attributes.twitterHandle || newUser.twitterHandle}
                   email={profileForm.attributes.email || newUser.email}
                   website={profileForm.attributes.website || newUser.website}
-                  src={newUser.avatar} // TODO pass user avatar, if they already have one. 
+                  src={profileForm.attributes.avatar || newUser.avatar}
                   className="avatar"
                   handleChange={avatar => appendProfileForm({avatar})}
                   {...this.props} // Pass uploadImage Action from `PublicGroup` container
@@ -108,7 +108,7 @@ export default class PublicGroupSignupV2 extends React.Component {
   fixURI(weburl)
   {
     weburl = weburl.trim();
-    if (weburl && weburl.length > 4)
+    if (weburl && weburl.length > 4 && weburl.indexOf('.') !== -1)
     {
       if (weburl.indexOf('http') !== 0)
       {
