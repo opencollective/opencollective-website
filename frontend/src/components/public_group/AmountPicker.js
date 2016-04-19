@@ -44,9 +44,10 @@ export default class AmountPicker extends React.Component {
         )}
 
         <div className='max-width-1 mx-auto' style={{position: 'absolute', left: '0', right: '0', margin: '-25px auto'}}>
-          {hasPaypal && (
+          {!hasStripe && (
             <AsyncButton
-              color='green'
+              disabled={hasPaypal ? 'true' : 'false'}
+              color={hasPaypal ? 'green' : ''}
               inProgress={inProgress}
               customClass='btn -btn-big -bg-green -ttu -ff-sec -fw-bold'
               onClick={() => onToken({
