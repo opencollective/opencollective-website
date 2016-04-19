@@ -1,7 +1,8 @@
 const config = require('config');
 
 module.exports = client => {
+  const resetUrl = `${config.host.api}/database/reset`;
   return client
-    .url(`${config.host.api}/database/reset`)
-    .assert.title("", `checking ${config.host.api}/database/reset didn't return error`);
+    .url(resetUrl)
+    .assert.containsText('body', '\"success\":true', `checking ${resetUrl} call succeeded`);
 };
