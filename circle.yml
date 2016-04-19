@@ -10,9 +10,6 @@ machine:
     NODE_ENV: circleci
   services:
     - postgresql
-  post:
-    # pre-install API to attempt to get its node_modules cached by circleci
-    - cd website && npm run test:e2e:exec api:install
 dependencies:
   cache_directories:
     - "~/cache"
