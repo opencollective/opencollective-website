@@ -232,21 +232,6 @@
   color: #75CC1F;
 }
 
-
-
-/* */
-.PublicGroup .Button {  
-    // display: inline-block;
-    // margin: auto;
-    // width: 320px;
-    // height: 56px;
-    // border-radius: 50px;
-    // background-color: #75cc1f;
-  /* font-weight: bold; */
-  /* padding: 0.75rem 1rem; */
-  /* font-size: 1rem; */  
-}
-
 .PublicGroup .Notification {  
   top: 0;
 }
@@ -261,12 +246,6 @@
   /* font-weight: bold; */
   /* padding: 0.75rem 1rem; */
   /* font-size: 1rem; */  
-}
-
-@media (max-width:600px) {
-  .PublicGroup .Button { 
-    width: 100%;
-  }
 }
 
 .PublicGroup .Button .Icon

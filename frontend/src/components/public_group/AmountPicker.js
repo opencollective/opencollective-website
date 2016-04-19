@@ -57,7 +57,7 @@ export default class AmountPicker extends React.Component {
                   paypal: true
                 }
               })}>
-              {button}
+              {i18n.getString('donateWithPayPal')}
             </AsyncButton>
           )}
 
