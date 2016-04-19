@@ -3,12 +3,13 @@ import ImageUpload from './ImageUpload';
 import _ from 'underscore';
 
 const REG_VALID_URL = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
-const REG_VALID_TWITTER_USERNAME = /^[a-zA-Z0-9_]{1,15}$/;
+const REG_VALID_TWITTER_USERNAME = /^@?([a-zA-Z0-9_]{1,15})$/;
 const PRESET_AVATARS = [
   '/static/images/users/icon-avatar-placeholder.svg',
   '/static/images/users/avatar-02.svg',
   '/static/images/users/avatar-03.svg',
 ];
+const UPLOAD_AVATAR = '/static/images/users/upload-default.svg';
 const KNOWN_SOURCES = {
   'facebook': '/static/images/users/facebook-badge.svg',
   'twitter': '/static/images/users/twitter-badge.svg',
@@ -19,6 +20,7 @@ export default class ImagePicker extends Component {
 
   constructor(props) {
     super(props);
+    this.blacklist = [];
     this.options = PRESET_AVATARS.map(src => {return {source: 'preset', src: src}});
 
     if (props.src)
@@ -29,14 +31,14 @@ export default class ImagePicker extends Component {
 
     this.options.push({
       source: 'upload',
-      src: '/static/images/users/upload-default.svg'
+      src: UPLOAD_AVATAR
     });
 
     this.state = {
       isLoading: false,
       currentIndex: 0,
       twitter: '',
-      website: '',
+      website: ''
     };
 
     this.lazyLookupSocialMediaAvatars = _.debounce(this.lookupSocialMediaAvatars.bind(this), 600);
@@ -56,7 +58,7 @@ export default class ImagePicker extends Component {
         <div className="ImagePicker-label">Choose a Profile Image</div>
         <div className={this.prevIsPossible() ? 'ImagePicker-prev active' : 'ImagePicker-prev'} onClick={this.prev.bind(this)}></div>
         <div className='ImagePicker-preview' onClick={() => this.avatarClick.call(this, currentOption)}>
-          <img src={currentOption.src} width="64px" height="64px"/>
+          <img src={currentOption.src} width="64px" height="64px" onError={this.onImageError.bind(this)} />
         </div>
         <div className='ImagePicker-source-badge' style={{display : (KNOWN_SOURCES[currentOption.source] ? 'block' : 'none')}}>
           <img src={KNOWN_SOURCES[currentOption.source]}/>
@@ -78,22 +80,49 @@ export default class ImagePicker extends Component {
 
   componentWillReceiveProps(nextProps) {
     const {website, twitter} = nextProps;
+
     if (website !== this.state.website || twitter !== this.state.twitter)
     {
-      this.state.twitter = REG_VALID_TWITTER_USERNAME.test(twitter) ? twitter : '';
-      this.state.website = REG_VALID_URL.test(website) ? website : '';
-      
-      if (this.state.twitter || this.state.website)
+      const nextStateWebsite = REG_VALID_URL.test(website) ? website : '';
+      const nextStateTwitter = REG_VALID_TWITTER_USERNAME.test(twitter) ? REG_VALID_TWITTER_USERNAME.exec(twitter)[1] : '';
+
+      if (nextStateWebsite !== this.state.website || nextStateTwitter !== this.state.twitter)
       {
-        console.log('RELOOKUP')
-        this.lazyLookupSocialMediaAvatars(this.state.website, this.state.twitter);
+        this.state.twitter = nextStateTwitter;
+        this.state.website = nextStateWebsite;
+        
+        if (this.state.twitter || this.state.website)
+        {
+          this.lazyLookupSocialMediaAvatars(this.state.website, this.state.twitter);
+        }
       }
+    }
+  }
+
+  onImageError()
+  {
+    const currentOption = this.options[this.state.currentIndex];
+    if (this.blacklist.indexOf(currentOption.src) === -1)
+    {
+      this.blacklist.push(currentOption.src);
+    }
+    
+    this.options.splice(this.state.currentIndex, 1);
+
+    if (!this.options[this.state.currentIndex])
+    {
+      this.setState({currentIndex: 0}, this.thereWasAChange);
+    }
+    else
+    {
+      this.forceUpdate(this.thereWasAChange);
     }
   }
 
   thereWasAChange()
   {
-    this.props.handleChange(this.options[this.state.currentIndex].src);
+    const currentOption = this.options[this.state.currentIndex];
+    this.props.handleChange(currentOption.src !== UPLOAD_AVATAR ? currentOption.src : PRESET_AVATARS[0]);
   }
 
   nextIsPossible()
@@ -109,8 +138,7 @@ export default class ImagePicker extends Component {
   select(option)
   {
     if (this.state.isLoading) return;
-    this.setState({currentIndex: this.options.indexOf(option)});
-    this.thereWasAChange();
+    this.setState({currentIndex: this.options.indexOf(option)}, this.thereWasAChange);
   }
 
   next()
@@ -118,8 +146,7 @@ export default class ImagePicker extends Component {
     if (this.state.isLoading) return;
     if (this.nextIsPossible())
     {
-      this.setState({currentIndex: this.state.currentIndex + 1});
-      this.thereWasAChange();
+      this.setState({currentIndex: this.state.currentIndex + 1}, this.thereWasAChange);
     }
   }
 
@@ -128,8 +155,7 @@ export default class ImagePicker extends Component {
     if (this.state.isLoading) return;
     if (this.prevIsPossible())
     {
-      this.setState({currentIndex: this.state.currentIndex - 1});
-      this.thereWasAChange();
+      this.setState({currentIndex: this.state.currentIndex - 1}, this.thereWasAChange);
     }
   }
 
@@ -162,8 +188,12 @@ export default class ImagePicker extends Component {
     }
 
     getSocialMediaAvatars(newUser.id, {website: website, twitterHandle: twitter, name: profileForm.name})
-    .then((result) => {
-      result.json.forEach(result => {
+    .then((response) => {
+      const currentOption = this.options[this.state.currentIndex];
+      const results = response.json.filter((option) => this.blacklist.indexOf(option.src) === -1 );
+      let isFirstTime = false;
+
+      results.forEach(result => {
         const existingOption = this.options.filter((option) => {return option.source === result.source})[0];
         if (existingOption)
         {
@@ -175,18 +205,16 @@ export default class ImagePicker extends Component {
           {
             this.options[0].source = result.source;
             this.options[0].src = result.src;
-            this.setState({currentIndex: 0});
+            isFirstTime = true;
           }
           else
           {
             this.options.splice(0, 0, result);
-            this.setState({currentIndex: 0});
           }
         }
-        this.thereWasAChange();
       });
 
-      this.setState({isLoading: false});
+      this.setState({currentIndex: isFirstTime ? 0 : this.options.indexOf(currentOption), isLoading: false}, this.thereWasAChange);
     })
     .catch((error) => {
       console.error(error);
