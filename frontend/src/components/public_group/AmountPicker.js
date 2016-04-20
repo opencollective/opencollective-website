@@ -42,11 +42,9 @@ export default class AmountPicker extends React.Component {
             // MAJOR HACK to support a donation for this group.
             showCurrencyPicker={group.id == 10}/>
         )}
-
         <div className='max-width-1 mx-auto' style={{position: 'absolute', left: '0', right: '0', margin: '-25px auto'}}>
-          {!hasStripe && (
+          {hasPaypal && (
             <AsyncButton
-              disabled={hasPaypal ? false : true}
               color={hasPaypal ? 'green' : ''}
               inProgress={inProgress}
               customClass='btn -btn-big -bg-green -ttu -ff-sec -fw-bold'
