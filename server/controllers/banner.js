@@ -94,17 +94,17 @@ module.exports = {
     const users = filterUsersByTier(req.users, tier.replace(/s$/,''));
     const slug = req.params.slug;
     const position = parseInt(req.params.position, 10);
-
-    req.ga.event("GithubWidget", `${tier}-click`, "slug", slug);
-
     const user = (position < users.length) ?  users[position] : {};
     user.twitter = (user.twitterHandle) ? `https://twitter.com/${user.twitterHandle}` : null;
-    
+
     var redirectUrl = user.website || user.twitter || `https://opencollective.com/${slug}`;
     if(position === users.length) {
       redirectUrl = `https://opencollective.com/${slug}#support`;
     }
-    
+
+    req.ga.pageview();
+    req.ga.event("GithubWidget", `${tier}-click`, "target", redirectUrl);
+
     res.redirect(redirectUrl);      
   }
 };

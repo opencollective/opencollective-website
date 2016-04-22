@@ -1,5 +1,5 @@
 {
-  "viewCache": false,
+  "viewCache": true,
   "cacheBust": true,
   "GoogleAnalytics": {
     "active": true,

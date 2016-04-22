@@ -4,6 +4,19 @@
   border: 3px solid white;
   box-shadow: 0 0 0 2px #75CC1F;
   background-image: url('/static/images/loading.gif');
+  border-radius: 50%;
+}
+
+.UserPhoto div {
+  border-radius: 50%;
+}
+
+.UserPhoto.sponsor, .UserPhoto.sponsor div {
+    border-radius: 0;
+    width: 140px;
+    height: 64px;
+    border: none;
+    box-shadow: none;
 }
 
 .UserPhoto-badge {
