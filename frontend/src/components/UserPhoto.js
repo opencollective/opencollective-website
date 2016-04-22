@@ -12,17 +12,17 @@ export default class UserPhoto extends React.Component {
   };
 
   render() {
-    const { className = '', user, addBadge } = this.props;
+    const { className, user, addBadge } = this.props;
     const avatar = (user.avatar || getAvatarByNumber(user.id));
     const styles = {
       backgroundImage: `url(${avatar})`
     };
 
     return (
-      <div className={`UserPhoto circle bg-light-gray bg-no-repeat bg-center relative ${className}`}>
-        <div className='width-100 height-100 circle bg-cover bg-center' style={styles}></div>
+      <div className={`UserPhoto bg-light-gray bg-no-repeat bg-center relative ${user.tier} ${className}`}>
+        <div className='width-100 height-100 bg-cover bg-center' style={styles}></div>
         {addBadge ? (
-          <div className='UserPhoto-badge absolute bg-white circle'>
+          <div className='UserPhoto-badge absolute bg-white'>
             <svg className='block -green' width='14' height='14'>
               <use xlinkHref='#svg-isotype'/>
             </svg>
