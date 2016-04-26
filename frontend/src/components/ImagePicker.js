@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ImageUpload from './ImageUpload';
-import _ from 'underscore';
+import debounce from 'lodash/function/debounce';
 
 const REG_VALID_URL = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
 const REG_VALID_TWITTER_USERNAME = /^@?([a-zA-Z0-9_]{1,15})$/;
@@ -41,7 +41,7 @@ export default class ImagePicker extends Component {
       website: ''
     };
 
-    this.lazyLookupSocialMediaAvatars = _.debounce(this.lookupSocialMediaAvatars.bind(this), 600);
+    this.lazyLookupSocialMediaAvatars = debounce(this.lookupSocialMediaAvatars.bind(this), 600);
   }
 
   render() {
