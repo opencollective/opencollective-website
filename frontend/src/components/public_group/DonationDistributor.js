@@ -24,20 +24,10 @@ export default class DonationDistributor extends Component {
 
   constructor(props) {
     super(props);
-    const {group, method, collectives, amount} = this.props;
+    const {group, method, amount} = this.props;
     this.stripeKey = group.stripeAccount && group.stripeAccount.stripePublishableKey ? group.stripeAccount.stripePublishableKey : '';
     const hasPaypal = group.hasPaypal;
     const hasStripe = this.stripeKey && amount;
-
-    this.options = this.props.collectives.map((collective) => {
-      return {
-        label: collective.name, 
-        icon: collective.logo, 
-        editable: Boolean(props.editable),
-        value: 1 / collectives.length
-      }
-    });
-
     this.state = {
       disabled: !hasPaypal && !hasStripe,
       paymentMethod: method,
@@ -45,6 +35,7 @@ export default class DonationDistributor extends Component {
       includeComission: false,
       optionalPaymentMethod: hasStripe && hasPaypal
     };
+    this.resetOptions()
   }
 
   renderDonateButton()
@@ -71,7 +62,7 @@ export default class DonationDistributor extends Component {
             key={index} 
             label={option.label} 
             icon={option.icon} 
-            editable={option.editable} 
+            editable={options.length > 1 && option.editable} 
             value={option.value * 100} 
             amount={this.getDistributableAmount()}
             onChange={(percent, prev) => {
@@ -357,6 +348,19 @@ export default class DonationDistributor extends Component {
     return `${formatCurrency(amount, currency, { compact: false })} ${frequencyHuman} ${feeDescription}`;
   }
 
+  resetOptions()
+  {
+    const {collectives, editable} = this.props;
+    this.options = collectives.map((collective) => {
+      return {
+        label: collective.name, 
+        icon: collective.logo, 
+        editable: editable,
+        value: 1 / collectives.length
+      }
+    });
+  }
+
   redistribute(action, activeOption, delta)
   {
     const candidates = this.options.filter((option) => {
@@ -438,5 +442,6 @@ export default class DonationDistributor extends Component {
   {
     document.body.style.overflow = 'auto';
     this.setState({opened: false});
+    this.resetOptions();
   }
 }
