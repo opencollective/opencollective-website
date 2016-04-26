@@ -76,15 +76,11 @@ module.exports = {
       request({url: imageUrl, encoding: null}, (e, r, data) => {
         const contentType = r.headers['content-type'];
 
-        var imageWidth, imageHeight;
-        if(tier === 'sponsor') {
+        let imageWidth = 64;
+        let imageHeight = 64;
+        if (tier === 'sponsor') {
           const dimensions = sizeOf(data);
-          imageHeight = 64;
           imageWidth = Math.round(dimensions.width / dimensions.height * imageHeight);
-        } 
-        else {
-          imageHeight = 64;
-          imageWidth = 64;
         }
 
         const base64data = new Buffer(data).toString('base64');
