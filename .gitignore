@@ -42,7 +42,7 @@ server/views/partials/sprite.symbol.html
 
 # test artifacts
 output/
-test-result.xml
+test-results.xml
 
 # extra binaries
 bin
