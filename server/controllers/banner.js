@@ -76,19 +76,15 @@ module.exports = {
       request({url: imageUrl, encoding: null}, (e, r, data) => {
         const contentType = r.headers['content-type'];
 
-        var imageWidth, imageHeight;
-        if(tier === 'sponsor') {
+        const imageHeight = 64;
+        let imageWidth = 64;
+        if (tier === 'sponsor') {
           const dimensions = sizeOf(data);
-          imageHeight = 64;
           imageWidth = Math.round(dimensions.width / dimensions.height * imageHeight);
-        } 
-        else {
-          imageHeight = 64;
-          imageWidth = 64;
         }
 
         const base64data = new Buffer(data).toString('base64');
-        const svg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${imageWidth}" height="64">
+        const svg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${imageWidth}" height="${imageHeight}">
           <image width="${imageWidth}" height="${imageHeight}" xlink:href="data:${contentType};base64,${base64data}"/>
         </svg>`;
         res.setHeader('Cache-Control', 'public, max-age=300');
