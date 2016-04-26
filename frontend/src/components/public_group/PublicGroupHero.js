@@ -1,7 +1,33 @@
 import React from 'react';
 import PublicTopBarV2 from '../../containers/PublicTopBarV2';
+import formatCurrency from '../../lib/format_currency';
 
 export default class PublicGroupHero extends React.Component {
+
+  renderHeroStatistics()
+  {
+    const { group } = this.props;
+    if (!group.backers.length) return;
+    const backerCount = group.backers.reduce((prev, curr) => prev + (curr.role === 'BACKER'), 0);
+    const sponsorCount = group.backers.reduce((prev, curr) => prev + (curr.role === 'SPONSOR'), 0);
+    const yearlyIncome = 0; // TODO pass the yearly income provided by backers, will display amount counter.
+    const formattedYearlyIncome = yearlyIncome && formatCurrency(yearlyIncome, group.currency, { compact: true, precision: 0 });
+    return (
+      <div className='PublicGroupHero-backer-statistics'>
+        <div className='PublicGroupHero-backer-count-text'>
+          We have <b>{backerCount}</b> backer{backerCount === 1 ? '': 's'} and <b>{sponsorCount}</b> sponsor{sponsorCount === 1 ? '': 's'}
+          {yearlyIncome > 0 && 'that provide us with a yearly budget of'}
+        </div>
+        {yearlyIncome > 0 && (
+            <div className='PublicGroupHero-backer-yearly-budget'>
+              {formattedYearlyIncome.split('').map((character) => <span className={isNaN(character) ? '-character' : '-digit'}>{character}</span>)}
+            </div>
+          )
+        }
+      </div>
+    )
+  }
+
   render() {
     const { group, i18n } = this.props;
     const collectiveBg = group.backgroundImage || '/static/images/collectives/default-header-bg.jpg';
@@ -17,6 +43,7 @@ export default class PublicGroupHero extends React.Component {
             <p className='PublicGroup-font-20 mt0 mb2'>{i18n.getString('hiThisIs')} <a href={group.website}>{group.name}</a> {i18n.getString('openCollective')}.</p>
             <h1 className='PublicGroupHero-mission max-width-3 mx-auto mt0 mb3 white -ff-sec'>{i18n.getString('missionTo')} {group.mission}</h1>
             <a href='#support' className='mb3 -btn -btn-big -bg-green -ttu -ff-sec -fw-bold'>{i18n.getString('bePart')}</a>
+            {this.renderHeroStatistics()}
             <p className='h6'>{i18n.getString('scrollDown')}</p>
             <svg width='14' height='9'>
               <use xlinkHref='#svg-arrow-down' stroke='#fff'/>
