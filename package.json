@@ -17,6 +17,7 @@
     "hint": "eslint '**/*.js' --quiet",
     "pretest": "npm run hint",
     "test": "npm run test:unit",
+    "test:server": "NODE_CONFIG_DIR=./server/config mocha --opts test/unit/mocha.opts test/server",
     "test:unit": "NODE_CONFIG_DIR=./server/config mocha test/unit/ --opts test/unit/mocha.opts --reporter-options mochaFile=$(bash scripts/test_output_dir.sh junit)/junit.xml",
     "posttest": "npm run test:e2e",
     "test:e2e": "npm run test:e2e:exec api:run website:run website:testE2E",

@@ -63,13 +63,16 @@ module.exports = {
     
     if(position == users.length) {
       imageUrl = `/static/images/become_${tierSingular}.svg`;
-      return res.redirect(imageUrl);
     }
     else if(position > users.length) {
       imageUrl = "/static/images/1px.png";
+    }
+
+    if(imageUrl.substr(0,1) == '/') {
       return res.redirect(imageUrl);
     }
-    else if(format === 'svg') {
+
+    if(format === 'svg') {
       request({url: imageUrl, encoding: null}, (e, r, data) => {
         const contentType = r.headers['content-type'];
 
