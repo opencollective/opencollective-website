@@ -2,7 +2,6 @@ const gulp = require('gulp');
 const gutil = require("gulp-util");
 const postcss = require('gulp-postcss');
 const changed = require('gulp-changed');
-const autoprefixer = require('autoprefixer');
 const svgSprite = require('gulp-svg-sprite');
 
 const SRC_DIR = 'frontend/src';
@@ -60,7 +59,6 @@ gulp.task('build:css', () => {
 
   return gulp.src(`${SRC_DIR}/css/*.css`)
     .pipe(postcss([
-      autoprefixer,
       require('postcss-import')(),
       require('postcss-nested'),
       require('postcss-cssnext')(),

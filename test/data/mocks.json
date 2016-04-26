@@ -45,11 +45,11 @@
         "website": "http://eddiemonge.com"
     },
     {
-        "avatar": "https://pbs.twimg.com/profile_images/684949208806260737/7LHCtqd6.png",
+        "avatar": "https://opencollective.com/public/images/opencollectivelogo.png",
         "createdAt": null,
         "id": 40,
         "name": "OpenCollective",
-        "role": "HOST",
+        "role": "BACKER",
         "tier": "sponsor",
         "totalDonations": 100,
         "twitterHandle": "opencollect",
