@@ -10,7 +10,7 @@ describe('server', () => {
     name: 'Women who code Austin'
   };
 
-  afterEach(() => nock.cleanAll())
+  afterEach(() => nock.cleanAll());
 
   it('`wwcode-austin123@` should not match the regex route', done => {
     request(app)
@@ -23,7 +23,7 @@ describe('server', () => {
   });
 
   it('`wwcode-austin` should match the regex route', done => {
-    nock('http://localhost:3060')
+    const apiCall = nock('http://localhost:3060')
       .get(`/groups/wwcode-austin/?api_key=${config.apiKey}`)
       .reply(200, group);
 
@@ -31,6 +31,7 @@ describe('server', () => {
       .get('/wwcode-austin')
       .expect(200)
       .end((err, res) => {
+        apiCall.done(); // make sure the API get called
         expect(res.text).to.contain(group.name);
         expect(res.text).to.not.contain('Error');
         done();
@@ -44,7 +45,7 @@ describe('server', () => {
       type: 'forbidden'
     };
 
-    nock('http://localhost:3060')
+    const apiCall = nock('http://localhost:3060')
       .get(`/groups/wwcode/?api_key=${config.apiKey}`)
       .reply(403, { error });
 
@@ -52,6 +53,7 @@ describe('server', () => {
       .get('/wwcode')
       .expect(200)
       .end((err, res) => {
+        apiCall.done();
         expect(res.text).to.contain('Error');
         expect(res.text).to.contain(error.message);
         done();
