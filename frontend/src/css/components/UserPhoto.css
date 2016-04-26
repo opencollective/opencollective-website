@@ -7,6 +7,11 @@
   border-radius: 50%;
 }
 
+.UserPhoto--loaded
+{
+  background-image: none;
+}
+
 .UserPhoto div {
   border-radius: 50%;
 }

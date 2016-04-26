@@ -36,8 +36,8 @@ export default class UserPhoto extends React.Component {
     };
 
     return (
-      <div className={`UserPhoto bg-light-gray bg-no-repeat bg-center relative ${user.tier} ${className}`}>
-        <div className='width-100 height-100 bg-cover bg-center' style={styles}></div>
+      <div className={`UserPhoto bg-light-gray bg-no-repeat bg-center relative ${user.tier} ${className} ${avatar ? 'UserPhoto--loaded' : ''} `}>
+        <div className='width-100 height-100 bg-contain bg-no-repeat bg-center' style={styles}></div>
         {addBadge ? (
           <div className='UserPhoto-badge absolute bg-white'>
             <svg className='block -green' width='14' height='14'>
