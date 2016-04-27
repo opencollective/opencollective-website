@@ -100,7 +100,7 @@ const ga = (req, res, next) => {
     }
   });
 
-  const mw = ua.middleware(config.GoogleAnalytics.account, {cookieName: '_ga'});
+  const mw = ua.middleware(config.GoogleAnalytics.account, {cookieName: '_ga', debug: true});
 
   session(req, res, () => {
     mw(req, res, next);
