@@ -207,7 +207,7 @@ export function donateToGroup({amount, frequency, currency, token, options}) {
     email: token && token.email,
     amount,
     currency,
-    distribution: options.distribution
+    distribution: options && options.distribution
   };
 
   if (frequency === 'monthly') {
