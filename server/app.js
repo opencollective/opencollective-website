@@ -15,6 +15,7 @@ const app = express();
 app.locals.version = pkg.version;
 app.locals.SHOW_GA = (process.env.NODE_ENV === 'production');
 
+app.set('trust proxy', 1) // trust first proxy for https cookies
 
 /**
  * Log
