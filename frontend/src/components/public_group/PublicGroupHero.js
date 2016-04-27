@@ -1,6 +1,7 @@
 import React from 'react';
 import PublicTopBarV2 from '../../containers/PublicTopBarV2';
 import formatCurrency from '../../lib/format_currency';
+import filterCollection from '../../lib/filter_collection';
 
 export default class PublicGroupHero extends React.Component {
 
@@ -8,8 +9,8 @@ export default class PublicGroupHero extends React.Component {
   {
     const { group } = this.props;
     if (!group.backers.length) return;
-    const backerCount = group.backers.reduce((prev, curr) => prev + (curr.role === 'BACKER'), 0);
-    const sponsorCount = group.backers.reduce((prev, curr) => prev + (curr.role === 'SPONSOR'), 0);
+    const backerCount = filterCollection(group.backers, {tier: 'backer'}).length;
+    const sponsorCount = filterCollection(group.backers, {tier: 'sponsor'}).length;
     const yearlyIncome = 0; // TODO pass the yearly income provided by backers, will display amount counter.
     const formattedYearlyIncome = yearlyIncome && formatCurrency(yearlyIncome, group.currency, { compact: true, precision: 0 });
     return (
