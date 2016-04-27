@@ -215,8 +215,9 @@ export default class DonationDistributor extends Component {
   {
     const {group, inProgress, currency, frequency, onToken} = this.props;
     const stripeKey = this.stripeKey;
-    const amount = this.getTotal()
-    const formattedAmount = formatCurrency(amount, currency, {compact: true})
+    const amount = this.getTotal();
+    const formattedAmount = formatCurrency(amount, currency, {compact: true});
+    const distribution = this.options.map((opt) => { return {id: opt.id, value: opt.value} });
 
     if (this.state.paymentMethod === 'paypal')
     {
@@ -230,8 +231,9 @@ export default class DonationDistributor extends Component {
             frequency,
             currency,
             options: {
-              paypal: true
-            }            
+              paypal: true,
+              distribution
+            },
           })}
           >
           {`Donate ${formattedAmount}`}
@@ -353,6 +355,7 @@ export default class DonationDistributor extends Component {
     const {collectives, editable} = this.props;
     this.options = collectives.map((collective) => {
       return {
+        id: collective.id,
         label: collective.name, 
         icon: collective.logo, 
         editable: editable,
