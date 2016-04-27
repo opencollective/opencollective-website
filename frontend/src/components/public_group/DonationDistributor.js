@@ -356,7 +356,7 @@ export default class DonationDistributor extends Component {
         label: collective.name, 
         icon: collective.logo, 
         editable: editable,
-        value: 1 / collectives.length
+        value: !isNaN(collective.value) ? collective.value : 1 / collectives.length
       }
     });
   }

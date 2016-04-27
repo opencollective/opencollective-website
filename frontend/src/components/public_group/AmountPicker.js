@@ -21,11 +21,13 @@ export default class AmountPicker extends React.Component {
     const hasStripe = stripeKey && amount !== '';
     const collectives = [
       {name: group.name, logo: group.logo},
-      // A single collective disables sliders, to see sliders
-      // in action, uncomment the lines below:
-    //   {name: 'Donation to Hackers & Founders'},
-    //   {name: 'Donation to H/F UX'},
-    //   {name: 'Donation to Hackers Garage'}
+      // A single collective disables sliders, to see sliders in action, uncomment the lines below:
+      // NOTE: Use `value` property to specify initial percentage, the value should be a number 
+      // between 0 and 1, all collectives value must sum up to 1.
+      //
+      // {name: 'Donation to Hackers & Founders', value: .25}, 
+      // {name: 'Donation to H/F UX', value: .25},
+      // {name: 'Donation to Hackers Garage', value: .25}
     ];
 
     return (
