@@ -130,7 +130,7 @@ module.exports = {
     }
 
     req.ga.pageview();
-    req.ga.event("GithubWidget", `${tier}-click`, "target", redirectUrl);
+    req.ga.event(`GithubWidget-${tier}`, `Click`, user.name, position);
 
     res.redirect(redirectUrl);      
   }
