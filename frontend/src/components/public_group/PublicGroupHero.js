@@ -11,13 +11,14 @@ export default class PublicGroupHero extends React.Component {
     if (!group.backers.length) return;
     const backerCount = filterCollection(group.backers, {tier: 'backer'}).length;
     const sponsorCount = filterCollection(group.backers, {tier: 'sponsor'}).length;
-    const yearlyIncome = 0; // TODO pass the yearly income provided by backers, will display amount counter.
+    const yearlyIncome = group.yearlyIncome / 100;
     const formattedYearlyIncome = yearlyIncome && formatCurrency(yearlyIncome, group.currency, { compact: true, precision: 0 });
     return (
       <div className='PublicGroupHero-backer-statistics'>
         <div className='PublicGroupHero-backer-count-text'>
-          We have <b>{backerCount}</b> backer{backerCount === 1 ? '': 's'} and <b>{sponsorCount}</b> sponsor{sponsorCount === 1 ? '': 's'}
-          {yearlyIncome > 0 && 'that provide us with a yearly budget of'}
+          We have <b>{backerCount}</b> backer{backerCount === 1 ? '': 's'}
+          {sponsorCount > 0 && (<span> and <b>{sponsorCount}</b> sponsor{(sponsorCount === 1) ? '': 's'}</span>) }
+          {yearlyIncome > 0 && ' that provide us with a yearly budget of'}
         </div>
         {yearlyIncome > 0 && (
             <div className='PublicGroupHero-backer-yearly-budget'>
