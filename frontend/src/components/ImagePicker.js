@@ -8,12 +8,17 @@ const PRESET_AVATARS = [
   '/static/images/users/icon-avatar-placeholder.svg',
   '/static/images/users/avatar-02.svg',
   '/static/images/users/avatar-03.svg',
+  '/static/images/users/avatar-04.svg',
 ];
 const UPLOAD_AVATAR = '/static/images/users/upload-default.svg';
 const KNOWN_SOURCES = {
   'facebook': '/static/images/users/facebook-badge.svg',
   'twitter': '/static/images/users/twitter-badge.svg',
   'google': '/static/images/users/google-badge.svg',
+  'github': '/static/images/users/github-badge.svg',
+  'gravatar': '/static/images/users/gravatar-badge.svg',
+  'angelist': '/static/images/users/angelist-badge.svg',
+  'aboutme': '/static/images/users/aboutme-badge.svg',
 }
 
 export default class ImagePicker extends Component {
