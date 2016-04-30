@@ -2,8 +2,8 @@
   "name": "opencollective-website",
   "version": "0.1.87",
   "engines": {
-    "node": "5.1.0",
-    "npm": "3.3.12"
+    "node": "5.11.0",
+    "npm": "3.8.6"
   },
   "browserify": {
     "transform": [
@@ -33,7 +33,7 @@
     "deploy:staging": "bash -x scripts/deploy.sh staging",
     "deploy:production": "bash -x scripts/deploy.sh production",
     "rexec:api": "bash scripts/remote_exec_api.sh",
-    "install:debs": "bash -x scripts/install_apt_get_debs.sh"
+    "install:debs": "npm run rexec:api install_apt_get_debs.sh"
   },
   "dependencies": {
     "babel": "^5.8.23",
