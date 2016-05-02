@@ -91,7 +91,7 @@ const transactionInitialState = {
   attributes: {
     tags: [],
     description: '',
-    paymentMethod: 'paypal',
+    payoutMethod: 'paypal',
     vat: null,
     createdAt: new Date()
   },
