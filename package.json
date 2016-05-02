@@ -79,7 +79,6 @@
     "marked": "^0.3.5",
     "moment": "^2.11.2",
     "morgan": "^1.6.1",
-    "nock": "^2.15.0",
     "normalizr": "^1.0.0",
     "numbro": "1.6.2",
     "postcss-cssnext": "^2.4.0",
@@ -102,9 +101,7 @@
     "robots.txt": "^1.1.0",
     "serialize-javascript": "^1.1.2",
     "serve-favicon": "^2.3.0",
-    "supertest": "^1.1.0",
     "uglify-js": "^2.4.24",
-    "underscore": "^1.8.3",
     "universal-analytics": "^0.3.11",
     "watchify": "^3.2.3"
   },
@@ -122,9 +119,11 @@
     "mocha": "^2.4.5",
     "mocha-circleci-reporter": "0.0.1",
     "nightwatch": "^0.8.15",
+    "nock": "^2.15.0",
     "nodemon": "^1.8.1",
     "react-addons-test-utils": "^0.14.0",
     "redux-mock-store": "1.0.2",
-    "sinon": "^1.17.2"
+    "sinon": "^1.17.2",
+    "supertest": "^1.1.0"
   }
 }
