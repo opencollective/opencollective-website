@@ -15,6 +15,7 @@ const app = express();
 app.locals.version = pkg.version;
 app.locals.SHOW_GA = (process.env.NODE_ENV === 'production');
 
+app.set('trust proxy', 1) // trust first proxy for https cookies
 
 /**
  * Log
@@ -60,8 +61,8 @@ app.use((err, req, res, next) => {
   .status(err.code || 500)
   .render('pages/error', {
     layout: false,
-    message: process.env.NODE_ENV === 'development' ? `Error ${err.code}: ${err.message}` : 'We couldn\'t find that page :(',
-    stack: process.env.NODE_ENV === 'development' ? err.stack : '',
+    message: process.env.NODE_ENV === 'production' ? 'We couldn\'t find that page :(' : `Error ${err.code}: ${err.message}`,
+    stack: process.env.NODE_ENV === 'production' ? '' : err.stack,
     options: {
       showGA: config.GoogleAnalytics.active
     }
@@ -77,8 +78,14 @@ app.set('port', process.env.PORT || 3000);
 /**
  * Start server
  */
-app.listen(app.get('port'), () => {
-  console.log(`Express server listening on port ${app.get('port')} in ${app.get('env')} environment.`);
-});
+console.log(`Starting OpenCollective Website Server on port ${app.get('port')} in ${app.get('env')} environment.`);
+app
+  .listen(app.get('port'))
+  .on('error', (err) => {
+    if (err.errno === 'EADDRINUSE')
+      console.error('Error: Port busy');
+    else
+      console.log(err);
+  });
 
 module.exports = app;

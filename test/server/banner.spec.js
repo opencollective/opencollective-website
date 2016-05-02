@@ -3,19 +3,49 @@ const mocks = require('../data/mocks.json');
 const api = require('../../server/lib/api');
 const app = require('../../server/index');
 const request = require('supertest');
+const sizeOf = require('image-size');
 
 const sinon = require('sinon');
 
-sinon.stub(api, 'get', () => {
-  return Promise.resolve(mocks.users);
-});
-
+var sandbox;
 mocks.backers = mocks.users.filter(u => u.tier == 'backer')
 
 describe("avatar", () => {
+  before(() => {
+    sandbox = sinon.sandbox.create();
+    sandbox.stub(api, 'get', () => {
+      return Promise.resolve(mocks.users);
+    });
+  });
+
+  after(() => {
+    sandbox.restore();
+  });
+
+  it("wraps the avatar of a backer in a 64x64 SVG", (done) => {
+    request(app)
+      .get('/yeoman/backers/0/avatar.svg')
+      .expect('content-type', 'image/svg+xml; charset=utf-8')
+      .expect((res) => {
+        res.body = sizeOf(res.body);
+      })
+      .expect(200, { width: 64, height: 64, type: 'svg' }, done);
+  });
+
+  it("wraps the logo of a sponsor in a SVG with maxHeight 64", (done) => {
+    request(app)
+      .get('/yeoman/sponsor/0/avatar.svg')
+      .expect('content-type', 'image/svg+xml; charset=utf-8')
+      .expect((res) => {
+        console.log("dimensions: ", sizeOf(res.body));
+        res.body = sizeOf(res.body);
+      })
+      .expect(200, { width: 387, height: 64, type: 'svg' }, done);
+  });
+
   it("redirects to the avatar url of the backer", (done) => {
     request(app)
-      .get('/yeoman/backers/0/avatar')
+      .get('/yeoman/backers/0/avatar.jpg')
       .expect('content-type', 'image/jpeg')
       .expect(200, done);
   });
@@ -43,6 +73,17 @@ describe("avatar", () => {
 });
 
 describe("badge", () => {
+  before(() => {
+    sandbox = sinon.sandbox.create();
+    sandbox.stub(api, 'get', () => {
+      return Promise.resolve(mocks.users);
+    });
+  });
+
+  after(() => {
+    sandbox.restore();
+  });
+
   it("generates a SVG with the number of backers", (done) => {
     request(app)
       .get('/yeoman/badge/backers.svg')
@@ -53,7 +94,18 @@ describe("badge", () => {
 });
 
 describe("redirect", () => {
-  
+
+  before(() => {
+    sandbox = sinon.sandbox.create();
+    sandbox.stub(api, 'get', () => {
+      return Promise.resolve(mocks.users);
+    });
+  });
+
+  after(() => {
+    sandbox.restore();
+  });
+
   it("redirects to opencollective.com/:slug if no backer at that position", (done) => {
     request(app)
       .get('/yeoman/backers/999/website')

@@ -27,7 +27,7 @@ module.exports = (app) => {
   /**
    * Static folder
    */
-  app.use('/static', express.static(path.join(__dirname, `../frontend/dist`)));
+  app.use('/static', express.static(path.join(__dirname, `../frontend/dist`), { maxAge: '1d' }));
 
   /**
    * GET /robots.txt
@@ -54,7 +54,7 @@ module.exports = (app) => {
   app.get('/:slug/:tier/banner.md', mw.cache(300), mw.fetchGroupBySlug, mw.fetchUsers(), banner.markdown);
   app.get('/:slug/:tier/badge.svg', mw.cache(300), mw.fetchUsers(), banner.badge);
   app.get('/:slug/badge/:tier.svg', mw.cache(300), mw.fetchUsers(), banner.badge);
-  app.get('/:slug/:tier/:position/avatar(.png)?(.jpg)?', mw.cache(300), mw.ga, mw.fetchUsers({cache: 300}), banner.avatar);
+  app.get('/:slug/:tier/:position/avatar(.:format(png|jpg|svg))?', mw.cache(300), mw.ga, mw.fetchUsers({cache: 300}), banner.avatar);
   app.get('/:slug/:tier/:position/website', mw.ga, mw.fetchUsers(), banner.redirect);
   app.get('/:slug([A-Za-z0-9-]+)/widget', mw.cache(300), mw.fetchGroupBySlug, collectives.widget);
 

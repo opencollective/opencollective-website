@@ -4,7 +4,7 @@ import moment from 'moment';
 
 import formatCurrency from '../lib/format_currency';
 
-import paymentMethods from '../ui/payment_methods';
+import payoutMethods from '../ui/payout_methods';
 
 import ImageUpload from './ImageUpload';
 import Input from './Input';
@@ -112,13 +112,13 @@ class ExpenseForm extends Component {
           <div className='row'>
             <label>Reimbursement method:</label>
             <Select
-              customClass='js-transaction-paymentMethod'
-              options={paymentMethods}
-              value={attributes.paymentMethod}
-              handleChange={paymentMethod => appendTransactionForm({paymentMethod})} />
+              customClass='js-transaction-payoutMethod'
+              options={payoutMethods}
+              value={attributes.payoutMethod}
+              handleChange={payoutMethod => appendTransactionForm({payoutMethod})} />
           </div>
 
-          {attributes.paymentMethod === 'paypal' && (
+          {attributes.payoutMethod === 'paypal' && (
             <div className='row'>
               <label>PayPal email:</label>
               <Input
@@ -128,7 +128,7 @@ class ExpenseForm extends Component {
                 handleChange={paypalEmail => appendTransactionForm({paypalEmail})} />
             </div>
           )}
-          {attributes.paymentMethod !== 'paypal' && (
+          {attributes.payoutMethod !== 'paypal' && (
             <div className='row'>
               <label>Email:</label>
               <Input

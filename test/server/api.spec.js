@@ -6,16 +6,23 @@ const expect = require('chai').expect;
 
 const sinon = require('sinon');
 
-const stub = sinon.stub(api, 'fetch', () => {
-  const response = {
-    status: 200,
-    json: () => mocks.backers
-  };
-  return Promise.resolve(response);
-});
-
-
 describe("api", () => {
+  var sandbox, stub;
+  before(() => {
+    sandbox = sinon.sandbox.create();
+    stub = sandbox.stub(api, 'fetch', () => {
+      const response = {
+        status: 200,
+        json: () => mocks.backers
+      };
+      return Promise.resolve(response);
+    });
+  });
+
+  after(() => {
+    sandbox.restore();
+  });
+
   it("calls the api only once if cache on", (done) => {
     const p1 = api.get('/groups/yeoman/users', { cache: 5 });
     const p2 = api.get('/groups/yeoman/users', { cache: 5 });

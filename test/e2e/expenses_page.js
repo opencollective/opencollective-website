@@ -26,7 +26,7 @@ module.exports = {
       .click('#submitExpenseBtn')
       .setValue('.js-transaction-description input', 'drinks')
       .setValue('.js-transaction-amount input', 10)
-      .setValue('.js-transaction-paymentMethod', 'other')
+      .setValue('.js-transaction-payoutMethod', 'other')
       .setValue('.js-transaction-email input', 'test@gmail.com')
       .setValue('.js-transaction-note', 'test note')
       .click('button[type=submit]')
