@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ImageUpload from './ImageUpload';
-import _ from 'underscore';
+import _ from 'lodash';
 
 const REG_VALID_URL = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
 const REG_VALID_TWITTER_USERNAME = /^@?([a-zA-Z0-9_]{1,15})$/;
@@ -90,7 +90,7 @@ export default class ImagePicker extends Component {
       {
         this.state.twitter = nextStateTwitter;
         this.state.website = nextStateWebsite;
-        
+
         if (this.state.twitter || this.state.website)
         {
           this.lazyLookupSocialMediaAvatars(this.state.website, this.state.twitter);
@@ -106,7 +106,7 @@ export default class ImagePicker extends Component {
     {
       this.blacklist.push(currentOption.src);
     }
-    
+
     this.options.splice(this.state.currentIndex, 1);
 
     if (!this.options[this.state.currentIndex])
