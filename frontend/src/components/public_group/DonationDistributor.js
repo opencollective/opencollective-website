@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import DonationDistributorItem from './DonationDistributorItem';
 import StripeCheckout from 'react-stripe-checkout';
 import AsyncButton from '../AsyncButton';
-import formatCurrency from '../../lib/format_currency';
+import formatCurrency, {currencySymbolLookup} from '../../lib/format_currency';
 import convertToCents from '../../lib/convert_to_cents';
 
 const RADIO_ON = '/static/images/radio-btn-on.svg';
@@ -54,11 +54,13 @@ export default class DonationDistributor extends Component {
 
   renderCollectives()
   {
+    const {currency} = this.props;
     const options = this.options;
     return options.map(
       (option, index) => {
         return (
           <DonationDistributorItem 
+            currency={currency}
             key={index} 
             label={option.label} 
             icon={option.icon} 
@@ -139,9 +141,10 @@ export default class DonationDistributor extends Component {
 
   renderMethodPicker()
   {
+    const {currency} = this.props;
     const {paymentMethod, optionalPaymentMethod} = this.state;
     const proccesingFee = this.getCreditCardProcessingFee();
-    const formattedProccesingFee = formatCurrency(proccesingFee, this.props.currency, {compact: true});
+    const formattedProccesingFee = formatCurrency(proccesingFee, currency, {compact: true});
     const usingPayPal = paymentMethod === 'paypal';
     const usingStripe = paymentMethod === 'stripe';
 
@@ -149,7 +152,7 @@ export default class DonationDistributor extends Component {
       <div>
         <div className='DonationDistributor-method-label'>Donation Method</div>
         {(optionalPaymentMethod || usingPayPal) && (
-          <div className='DonationDistributorItem-container' style={{marginTop: 0}} onClick={() => this.setState({paymentMethod: 'paypal'})}>
+          <div className='DonationDistributorItem-container --paypal' style={{marginTop: 0}} onClick={() => this.setState({paymentMethod: 'paypal'})}>
             <div className='flex'>
               <div className='flex-auto'>
                 <div className='flex flex-column'>
@@ -172,7 +175,7 @@ export default class DonationDistributor extends Component {
           </div>
         )}
         {(optionalPaymentMethod || usingStripe) && (
-          <div className='DonationDistributorItem-container' onClick={() => this.setState({paymentMethod: 'stripe'})}>
+          <div className='DonationDistributorItem-container --stripe' onClick={() => this.setState({paymentMethod: 'stripe'})}>
             <div className='flex'>
               <div className='flex-auto'>
                 <div className='flex flex-column'>
@@ -284,7 +287,7 @@ export default class DonationDistributor extends Component {
         <div className='DonationDistributor-container'>
           <div className='DonationDistributor-header'>
             <h2>You decide how to distribute your</h2>
-            <h1>{`$${this.props.amount} ${this.props.frequency}`} donation.</h1>
+            <h1>{`${currencySymbolLookup[this.props.currency]}${this.props.amount} ${this.props.frequency}`} donation.</h1>
             <small onClick={this.close.bind(this)}>Edit Donation</small>
           </div>
           <div className='DonationDistributor-body'>
@@ -311,7 +314,7 @@ export default class DonationDistributor extends Component {
 
   getTotal()
   {
-    return this.getSubTotal() + this.getCreditCardProcessingFee() + this.getCommissionAmount()
+    return this.getSubTotal() + this.getCreditCardProcessingFee() + this.getCommissionAmount();
   }
 
   getSubTotal()
@@ -323,7 +326,7 @@ export default class DonationDistributor extends Component {
   {
     const {amount} = this.props;
     const {paymentMethod} = this.state;
-    return paymentMethod === 'paypal' ? 0 : (0.30 + 0.029 * amount)
+    return paymentMethod === 'paypal' ? 0 : (0.30 + 0.029 * amount);
   }
 
   getDistributableAmount()
@@ -340,14 +343,13 @@ export default class DonationDistributor extends Component {
 
   getStripeDesciption()
   {
-    const {group, i18n, donationForm, tier, amount} = this.props;
-    const frequency = donationForm[tier.name].frequency || tier.interval;
-    const currency = donationForm[tier.name].currency || group.currency;
+    const {i18n, amount, currency, frequency} = this.props;
     const frequencyHuman = frequency === 'one-time' ? '' : `${i18n.getString('per')} ${i18n.getString(frequency.replace(/ly$/,''))}`;
     const proccesingFee = this.getCreditCardProcessingFee() + this.getCommissionAmount()
-    const formattedProccesingFee = formatCurrency(proccesingFee, currency, {compact: true});
-    const feeDescription = `(+ ${formattedProccesingFee} fees)`;
-    return `${formatCurrency(amount, currency, { compact: false })} ${frequencyHuman} ${feeDescription}`;
+    const formattedProccesingFee = formatCurrency(proccesingFee, currency, {compact: true}); 
+    const formattedAmount = formatCurrency(amount, currency, { compact: false });
+    const feeDescription = `(+${formattedProccesingFee} fees)`;
+    return `${formattedAmount} ${frequencyHuman} ${feeDescription}`;
   }
 
   resetOptions()

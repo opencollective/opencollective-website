@@ -46,6 +46,7 @@ export default class AmountPicker extends React.Component {
         <DonationDistributor 
           amount={amount}
           method={(hasPaypal) ? 'paypal' : (hasStripe) ? 'stripe' : 'paypal'}
+          currency={currency}
           frequency={frequency}
           editable={true}
           feesOnTop={true}
