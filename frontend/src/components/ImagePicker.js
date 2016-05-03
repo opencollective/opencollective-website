@@ -11,6 +11,8 @@ const PRESET_AVATARS = [
   '/static/images/users/avatar-04.svg',
 ];
 const UPLOAD_AVATAR = '/static/images/users/upload-default.svg';
+const UPLOAD_AVATAR_HOVER = '/static/images/users/upload-hover.svg';
+const UPLOAD_AVATAR_ACTIVE = '/static/images/users/upload-pressed.svg';
 const KNOWN_SOURCES = {
   'facebook': '/static/images/users/facebook-badge.svg',
   'twitter': '/static/images/users/twitter-badge.svg',
@@ -51,9 +53,16 @@ export default class ImagePicker extends Component {
 
   render() {
     const {className='avatar'} = this.props;
-    const {isLoading, currentIndex} = this.state;
+    const {isLoading, currentIndex, hover, pressed} = this.state;
     const options = this.options;
     const currentOption = options[currentIndex];
+    let currentSrc =  currentOption.src;
+
+    // Update Hover/Press images for upload option
+    if (hover && currentOption.source === 'upload' && currentOption.src.indexOf('/static') === 0)
+    {
+      currentSrc = (pressed) ? UPLOAD_AVATAR_ACTIVE : UPLOAD_AVATAR_HOVER;
+    }
 
     return (
       <div className={`ImagePicker-container ${className}`}>
@@ -62,8 +71,8 @@ export default class ImagePicker extends Component {
         </div>
         <div className="ImagePicker-label">Choose a Profile Image</div>
         <div className={this.prevIsPossible() ? 'ImagePicker-prev active' : 'ImagePicker-prev'} onClick={this.prev.bind(this)}></div>
-        <div className='ImagePicker-preview' onClick={() => this.avatarClick.call(this, currentOption)}>
-          <img src={currentOption.src} width="64px" height="64px" onError={this.onImageError.bind(this)} />
+        <div className='ImagePicker-preview' onClick={() => this.avatarClick.call(this, currentOption)} onMouseOver={() => this.setState({'hover': true})} onMouseOut={() => this.setState({'hover': false, pressed: false})} onMouseDown={() => this.setState({'pressed': true})} onMouseUp={()=>this.setState({'pressed': false})}>
+          <img src={currentSrc} width="64px" height="64px" onError={this.onImageError.bind(this)} />
         </div>
         <div className='ImagePicker-source-badge' style={{display : (KNOWN_SOURCES[currentOption.source] ? 'block' : 'none')}}>
           <img src={KNOWN_SOURCES[currentOption.source]}/>
