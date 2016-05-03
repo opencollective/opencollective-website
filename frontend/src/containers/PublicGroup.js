@@ -206,8 +206,7 @@ export function donateToGroup({amount, frequency, currency, token, options}) {
     stripeToken: token && token.id,
     email: token && token.email,
     amount,
-    currency,
-    distribution: options && options.distribution
+    currency
   };
 
   if (frequency === 'monthly') {
