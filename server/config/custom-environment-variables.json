@@ -8,5 +8,9 @@
   "cloudflare": {
     "email": "CLOUDFLARE_EMAIL",
     "key": "CLOUDFLARE_KEY"
+  },
+  "github": {
+    "clientId": "GITHUB_CLIENT_ID",
+    "clientSecret": "GITHUB_CLIENT_SECRET"
   }
 }

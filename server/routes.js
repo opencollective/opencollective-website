@@ -1,5 +1,6 @@
 import banner from './controllers/banner';
 import mw from './middlewares';
+import aN from './middleware/security/authentication';
 import serverStatus from 'express-server-status';
 import favicon from 'serve-favicon';
 import path from 'path';
@@ -33,6 +34,12 @@ module.exports = (app) => {
    * GET /robots.txt
    */
   app.use(robots(path.join(__dirname, '../frontend/dist/robots.txt')));
+
+  /**
+   * Authentication
+   */
+  app.get('/auth/:service(github)/:slug', aN.authenticateService);
+  app.get('/auth/:service(github)/callback/:slug', aN.authenticateServiceCallback);
 
   /**
    * Pipe the requests before the middlewares, the piping will only work with raw
@@ -73,4 +80,9 @@ module.exports = (app) => {
   app.get('/:slug([A-Za-z0-9-]+)/expenses/new', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-]+)/donate/:amount', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-]+)/donate/:amount/:interval', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
+  app.get('/:slug([A-Za-z0-9-]+)/connect/:service(github)', mw.ga,
+    // TODO get auth redirection working through react then use 'render' middleware
+    // read this issue: https://github.com/erikras/react-redux-universal-hot-example/issues/155#issuecomment-203227812
+    (req, res, next) => res.send(`<a class="connectAccountBtn" href="/auth/${req.params.service}/${req.params.slug}">Connect to ${req.params.service}</a>`)
+  );
 };
