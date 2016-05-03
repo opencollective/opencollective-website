@@ -8,21 +8,27 @@ export default class PublicGroupHero extends React.Component {
   renderHeroStatistics()
   {
     const { group } = this.props;
-    if (!group.backers.length) return;
-    const backerCount = filterCollection(group.backers, {tier: 'backer'}).length;
-    const sponsorCount = filterCollection(group.backers, {tier: 'sponsor'}).length;
     const yearlyIncome = group.yearlyIncome / 100;
     const formattedYearlyIncome = yearlyIncome && formatCurrency(yearlyIncome, group.currency, { compact: true, precision: 0 });
-    return (
+
+    const tierCountString = group.tiers.slice()
+    .sort((tierA, tierB) => tierA.range[0] - tierB.range[0])
+    .map(tier => {
+      const count = filterCollection(group.backers, {tier: tier.name}).length;
+      return (count) ? `${count} ${count === 1 ? tier.name : `${tier.name}s`}` : '';
+    })
+    .filter(x => x)
+    .join(', ');
+
+    return (tierCountString &&
       <div className='PublicGroupHero-backer-statistics'>
         <div className='PublicGroupHero-backer-count-text'>
-          We have <b>{backerCount}</b> backer{backerCount === 1 ? '': 's'}
-          {sponsorCount > 0 && (<span> and <b>{sponsorCount}</b> sponsor{(sponsorCount === 1) ? '': 's'}</span>) }
+          We have {tierCountString}
           {yearlyIncome > 0 && ' that provide us with a yearly budget of'}
         </div>
         {yearlyIncome > 0 && (
             <div className='PublicGroupHero-backer-yearly-budget'>
-              {formattedYearlyIncome.split('').map((character) => <span className={isNaN(character) ? '-character' : '-digit'}>{character}</span>)}
+              {formattedYearlyIncome.split('').map((character) => <span className={/[^0-9]/.test(character) ? '-character' : '-digit'}>{character}</span>)}
             </div>
           )
         }
