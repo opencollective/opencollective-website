@@ -52,7 +52,10 @@
     "becomeMemberTitle": "Why Become a Member?",
     "becomeMemberText": "With your membership plan, you’ll help us cover all expenses the collective makes in order to keep going. All the funds will be managed responsibly with your help, and everyone can see how and where the funds are being spent!",
     "howWeSpend": "See how we spend it",
-    "donateWithPayPal": "Donate with PayPal"
+    "donateWithPayPal": "Donate with PayPal",
+    "and": "and",
+    "weHave": "We have",
+    "thatProvideYearlyBudget": "that provide us with a yearly budget of"
   },
   "fr": {
     "hostedBy": "Hébergé par",
@@ -107,6 +110,9 @@
     "becomeMemberTitle": "Pourquoi devenir un supporter?",
     "becomeMemberText": "Avec votre contribution, vous nous aidez à couvrir nos dépenses. Tous les fonds sont gérés de manière responsable et en toute transparence. Tout le monde peut voir comment on dépense l'argent récolté.",
     "howWeSpend": "Voir comment on utilise l'argent",
-    "donateWithPayPal": "Payer avec PayPal"
+    "donateWithPayPal": "Payer avec PayPal",
+    "and": "et",
+    "weHave": "Nous avons",
+    "thatProvideYearlyBudget": "qui nous fournissent avec un budget annuel de"
   }
 }

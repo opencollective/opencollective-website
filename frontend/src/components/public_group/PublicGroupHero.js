@@ -7,24 +7,41 @@ export default class PublicGroupHero extends React.Component {
 
   renderHeroStatistics()
   {
-    const { group } = this.props;
+    const { group, i18n } = this.props;
     const yearlyIncome = group.yearlyIncome / 100;
     const formattedYearlyIncome = yearlyIncome && formatCurrency(yearlyIncome, group.currency, { compact: true, precision: 0 });
 
-    const tierCountString = group.tiers.slice()
-    .sort((tierA, tierB) => tierA.range[0] - tierB.range[0])
+    let tierCountString;
+    const tierCountStringArray = group.tiers.slice()
+    .sort((tierA, tierB) => tierB.range[0] - tierA.range[0])
     .map(tier => {
       const count = filterCollection(group.backers, {tier: tier.name}).length;
       return (count) ? `${count} ${count === 1 ? tier.name : `${tier.name}s`}` : '';
     })
-    .filter(x => x)
-    .join(', ');
+    .filter(x => x);
+
+    if (tierCountStringArray.length > 1)
+    {
+      if (tierCountStringArray.length > 2)
+      {
+        const lastCountString = tierCountStringArray.pop();
+        tierCountString = `${tierCountStringArray.join(', ')} ${i18n.getString('and')} ${lastCountString}`
+      }
+      else
+      {
+        tierCountString = tierCountStringArray.join(` ${i18n.getString('and')} `);
+      }
+    }
+    else
+    {
+      tierCountString = tierCountStringArray[0];
+    }
 
     return (tierCountString &&
       <div className='PublicGroupHero-backer-statistics'>
         <div className='PublicGroupHero-backer-count-text'>
-          We have {tierCountString}
-          {yearlyIncome > 0 && ' that provide us with a yearly budget of'}
+          {i18n.getString('weHave')} {tierCountString}
+          {yearlyIncome > 0 && ` ${i18n.getString('thatProvideYearlyBudget')}`}
         </div>
         {yearlyIncome > 0 && (
             <div className='PublicGroupHero-backer-yearly-budget'>
