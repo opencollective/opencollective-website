@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import take from 'lodash/array/take';
 import values from 'lodash/object/values';
 import sortBy from 'lodash/collection/sortBy';
+import contains from 'lodash/collection/contains';
 
 import filterCollection from '../lib/filter_collection';
 
@@ -321,7 +322,7 @@ function mapStateToProps({
     }
   };
 
-  if(group.slug === 'laprimaire' || group.slug == 'nuitdebout') {
+  if(contains(['laprimaire','nuitdebout','lesbarbares'], group.slug)) {
     group.settings = {
       lang: 'fr',
       formatCurrency: {

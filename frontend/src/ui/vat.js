@@ -8,8 +8,9 @@ export default function(groupid) {
 
   let vat = false;
   switch (groupid) {
-    case 6: // LaPrimaire.org
+    case 6: // laprimaire
     case 73: // nuitdebout
+    case 24: // lesbarbares
       vat = true;
       break;
 
