@@ -24,6 +24,7 @@ export default function(groupid) {
       break;
     case 6: // laprimaire
     case 73: // nuitdebout
+    case 24: // lesbarbares
       tags = [
         'Admin',
         'Autre',
