@@ -45,6 +45,7 @@ export default class AmountPicker extends React.Component {
           optionalComission={false}
           feesOnTop={true}
           collectives={collectives}
+          buttonLabel={tier.button}
           {...this.props}
         />
       </div>

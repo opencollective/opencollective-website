@@ -19,7 +19,8 @@ export default class DonationDistributor extends Component {
     editable: PropTypes.bool,
     currency: PropTypes.string.isRequired,
     feesOnTop: PropTypes.bool,
-    frequency: PropTypes.string.isRequired
+    frequency: PropTypes.string.isRequired,
+    buttonLabel: PropTypes.string
   }
 
   constructor(props) {
@@ -39,14 +40,14 @@ export default class DonationDistributor extends Component {
 
   renderDonateButton()
   {
-    const {i18n} = this.props;
+    const {i18n, buttonLabel} = this.props;
     return (
       <div className='DonationDistributor-donate-button max-width-1 mx-auto'>
         <div 
           className={`Button ${this.state.disabled ? 'Button--disabled': 'Button--green'}`} 
           onClick={this.state.disabled ? Function.prototype : this.open.bind(this)}
         >
-          {i18n.getString('donate')}
+          {buttonLabel || i18n.getString('donate')}
         </div>
       </div>
     )
@@ -285,7 +286,7 @@ export default class DonationDistributor extends Component {
         <div className='DonationDistributor-container'>
           <div className='DonationDistributor-header'>
             <h2>{this.options.length > 1 && this.props.editable ? i18n.getString('youDeciceDistributeYour') : i18n.getString('plzConfirmYour')}</h2>
-            <h1>{`${currencySymbolLookup[this.props.currency]}${this.props.amount} ${this.props.frequency}`} ${i18n.getString('donation')}.</h1>
+            <h1>{`${currencySymbolLookup[this.props.currency]}${this.props.amount} ${this.props.frequency} ${i18n.getString('donation')}.`}</h1>
             <small onClick={this.close.bind(this)}>{`${i18n.getString('edit')} ${i18n.getString('donation')}`}</small>
           </div>
           <div className='DonationDistributor-body'>
