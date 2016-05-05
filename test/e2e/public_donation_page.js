@@ -12,17 +12,7 @@ module.exports = {
 
       // wait for bottom green button to show up
       .waitForElementVisible('.Button.Button--green', 40000)
-      .assert.containsText('.Button.Button--green', 'DONATE WITH PAYPAL')
-  },
-
-  'Redirects to paypal after clicking donate': (client) => {
-
-    client
-      // Click Donate
-      .click('.Button.Button--green')
-      .pause(10000)
-      .assert.urlContains('https://www.sandbox.paypal.com/') // redirected to paypal
-      .end();
+      .assert.containsText('.Button.Button--green', 'DONATE')
   },
 
   'Shows thank you page after a paypal donation if user is full account': (client) => {

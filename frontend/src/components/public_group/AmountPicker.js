@@ -42,7 +42,7 @@ export default class AmountPicker extends React.Component {
           currency={currency}
           frequency={frequency}
           editable={true}
-          optionalComission={true}
+          optionalComission={false}
           feesOnTop={true}
           collectives={collectives}
           {...this.props}

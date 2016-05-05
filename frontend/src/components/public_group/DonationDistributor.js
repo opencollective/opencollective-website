@@ -89,7 +89,7 @@ export default class DonationDistributor extends Component {
   {
     return (
       <DonationDistributorItem 
-        className='-no-dashed-bg'
+        className='-no-dashed-bg --subtotal'
         currency={this.props.currency}
         label='Sub-total'
         editable={false}
@@ -187,7 +187,7 @@ export default class DonationDistributor extends Component {
     const totalAmount = this.getSubTotal() + this.getCommissionAmount() + this.getCreditCardProcessingFee();
     return (
       <DonationDistributorItem 
-        className='-no-dashed-bg'
+        className='-no-dashed-bg --total'
         currency={currency}
         label='Total'
         editable={false} 
