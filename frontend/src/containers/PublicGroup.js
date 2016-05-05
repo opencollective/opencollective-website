@@ -98,8 +98,10 @@ export class PublicGroup extends Component {
       // shareUrl,
     } = this.props;
 
+    const publicGroupClassName = `PublicGroup ${group.slug}`;
+
     return (
-      <div className='PublicGroup'>
+      <div className={publicGroupClassName}>
         <Notification />
 
         <PublicGroupHero group={group} {...this.props} />
