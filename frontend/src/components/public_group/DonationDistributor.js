@@ -39,13 +39,14 @@ export default class DonationDistributor extends Component {
 
   renderDonateButton()
   {
+    const {i18n} = this.props;
     return (
       <div className='DonationDistributor-donate-button max-width-1 mx-auto'>
         <div 
           className={`Button ${this.state.disabled ? 'Button--disabled': 'Button--green'}`} 
           onClick={this.state.disabled ? Function.prototype : this.open.bind(this)}
         >
-          Donate
+          {i18n.getString('donate')}
         </div>
       </div>
     )
@@ -87,11 +88,12 @@ export default class DonationDistributor extends Component {
 
   renderSubtotal()
   {
+    const {i18n} = this.props;
     return (
       <DonationDistributorItem 
         className='-no-dashed-bg --subtotal'
         currency={this.props.currency}
-        label='Sub-total'
+        label={i18n.getString('subtotal')}
         editable={false}
         amount={this.getSubTotal()}
         onChange={Function.prototype}
@@ -101,27 +103,30 @@ export default class DonationDistributor extends Component {
 
   renderCommision()
   {
-    const {currency} = this.props;
+    const {currency, i18n} = this.props;
     const {optionalComission} = this.state;
     return (
-      <DonationDistributorItem 
-        className='-no-dashed-bg'
-        currency={currency}
-        label='OpenCollective Comission 5%'
-        editable={optionalComission}
-        editableAmount={optionalComission}
-        amount={this.props.amount * OC_COMMISSION}
-        value={this.state.commisionPercentage}
-        onChange={(percent) => {
-          this.setState({commisionPercentage: percent});
-        }}
-      />
+      <div>
+        <div className='DonationDistributor-method-label'>{i18n.getString('comission')}</div>
+        <DonationDistributorItem 
+          className='-no-dashed-bg'
+          currency={currency}
+          label={i18n.getString('ocComission5')}
+          editable={optionalComission}
+          editableAmount={optionalComission}
+          amount={this.props.amount * OC_COMMISSION}
+          value={this.state.commisionPercentage}
+          onChange={(percent) => {
+            this.setState({commisionPercentage: percent});
+          }}
+        />
+      </div>
     )
   }
 
   renderMethodPicker()
   {
-    const {currency} = this.props;
+    const {currency, i18n} = this.props;
     const {paymentMethod, optionalPaymentMethod} = this.state;
     const proccesingFee = this.getCreditCardProcessingFee();
     const formattedProccesingFee = formatCurrency(proccesingFee, currency, {compact: true});
@@ -130,7 +135,7 @@ export default class DonationDistributor extends Component {
 
     return (
       <div>
-        <div className='DonationDistributor-method-label'>Donation Method</div>
+        <div className='DonationDistributor-method-label'>{i18n.getString('donationMethod')}</div>
         {(optionalPaymentMethod || usingPayPal) && (
           <div className='DonationDistributorItem-container --paypal' style={{marginTop: 0}} onClick={() => this.setState({paymentMethod: 'paypal'})}>
             <div className='flex'>
@@ -165,7 +170,7 @@ export default class DonationDistributor extends Component {
                     </div>
                     <div className={`flex-auto left-align ${paymentMethod === 'stripe' ? '-dashed-bg' : ''}`}>
                       <div className='DonationDistributorItem-label' style={{color: paymentMethod === 'stripe' ? '#131313' : '#ccc'}}>
-                        Credit Card <i>(proccesing fee)</i>
+                        {i18n.getString('creditCard')} <i>({i18n.getString('proccesingFee')})</i>
                       </div>
                     </div>
                   </div>
@@ -183,13 +188,13 @@ export default class DonationDistributor extends Component {
 
   renderTotal()
   {
-    const {currency} = this.props;
+    const {currency, i18n} = this.props;
     const totalAmount = this.getSubTotal() + this.getCommissionAmount() + this.getCreditCardProcessingFee();
     return (
       <DonationDistributorItem 
         className='-no-dashed-bg --total'
         currency={currency}
-        label='Total'
+        label={i18n.getString('total')}
         editable={false} 
         amount={totalAmount}
       />
@@ -198,7 +203,7 @@ export default class DonationDistributor extends Component {
 
   renderPaymentButton()
   {
-    const {group, inProgress, currency, frequency, onToken} = this.props;
+    const {group, inProgress, currency, frequency, onToken, i18n} = this.props;
     const stripeKey = this.stripeKey;
     const amount = (this.getSubTotal() + this.getCommissionAmount()).toFixed(2);
     const formattedAmount = formatCurrency(amount, currency, {compact: true});
@@ -221,7 +226,7 @@ export default class DonationDistributor extends Component {
             },
           })}
           >
-          {`Donate ${formattedAmount}`}
+          {`${i18n.getString('donate')} ${formattedAmount}`}
         </AsyncButton>
       )
     }
@@ -248,7 +253,7 @@ export default class DonationDistributor extends Component {
               color='green'
               inProgress={inProgress}
               customClass='btn -btn-big -bg-green -ttu -ff-sec -fw-bold'>
-              {`Donate ${formattedAmount}`}
+              {`${i18n.getString('donate')} ${formattedAmount}`}
             </AsyncButton>
         </StripeCheckout>
       )
@@ -273,13 +278,15 @@ export default class DonationDistributor extends Component {
       return this.renderDonateButton();
     }
 
+    const {i18n} = this.props;
+
     return (
       <div className='DonationDistributor-mask' onClick={this.onMaskClick.bind(this)}>
         <div className='DonationDistributor-container'>
           <div className='DonationDistributor-header'>
-            <h2>{this.options.length > 1 && this.props.editable ? 'You decide how to distribute your' : 'Please confirm your'}</h2>
-            <h1>{`${currencySymbolLookup[this.props.currency]}${this.props.amount} ${this.props.frequency}`} donation.</h1>
-            <small onClick={this.close.bind(this)}>Edit Donation</small>
+            <h2>{this.options.length > 1 && this.props.editable ? i18n.getString('youDeciceDistributeYour') : i18n.getString('plzConfirmYour')}</h2>
+            <h1>{`${currencySymbolLookup[this.props.currency]}${this.props.amount} ${this.props.frequency}`} ${i18n.getString('donation')}.</h1>
+            <small onClick={this.close.bind(this)}>{`${i18n.getString('edit')} ${i18n.getString('donation')}`}</small>
           </div>
           <div className='DonationDistributor-body'>
             <div className='DonationDistributor-section'>
