@@ -66,6 +66,9 @@
 @import './components/ActivityItem.css';
 @import './components/Widget.css';
 @import './components/ImagePicker.css';
+@import './components/DonationDistributor.css';
+@import './components/DonationDistributorItem.css';
+@import './components/Slider.css';
 
 /**
  * Media queries
