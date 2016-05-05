@@ -1,0 +1,17 @@
+.gulpjs .PublicGroupHero-mission {
+  max-width: 44rem;
+}
+
+.gulpjs a[href="http://gulpjs.com/"] {
+  color: #fff;
+  border-bottom: 1px solid #fff;
+}
+
+.gulpjs a[href="#support"] {
+  background-color: #000;
+}
+
+.gulpjs a[href="#support"]:hover {
+  color: #000;
+  background-color: #fff;
+}

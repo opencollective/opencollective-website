@@ -72,3 +72,8 @@
  */
 
 @import './base/media-queries.css';
+
+/**
+ * PublicGroup Customizations
+ */
+@import './customization.css';
