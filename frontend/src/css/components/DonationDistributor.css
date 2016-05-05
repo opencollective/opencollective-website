@@ -1,0 +1,269 @@
+.DonationDistributor-mask
+{
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(45, 45, 45, 0.8);
+  z-index: 999;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.DonationDistributor-container
+{
+  font-family: 'Montserrat', sans-serif;
+  position: absolute;
+  z-index: 999;
+  top: 30px;
+  bottom: 30px;
+  left: 0;
+  right: 0;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: auto;
+  width: 540px;
+}
+
+.DonationDistributor-header
+{
+  list-style-image: 100%;
+  background-color: #393939;
+  padding: 30px 0;
+  text-align: center;
+  line-height: 1.5;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 100px;
+}
+
+.DonationDistributor-header h1, h2, small
+{
+  color: white;
+}
+
+.DonationDistributor-header h1
+{
+  margin: 0;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.DonationDistributor-header small
+{
+  cursor: pointer;
+}
+
+.DonationDistributor-header h2
+{
+  margin: 0;
+  font-size: 24px;
+  font-weight: 200;
+  font-family: montserratlight;
+}
+
+.DonationDistributor-header small
+{
+  font-size: 12px;
+  color: #999;
+}
+
+.DonationDistributor-body
+{
+  background-color: white;
+  min-height: 200px;
+  padding: 30px 60px;
+  margin-bottom: -.5px;
+  padding-top: 10px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  padding-bottom: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 160px;
+  bottom: 130px;
+  height: auto;
+  padding: 0 15px;
+}
+
+.DonationDistributor-section
+{
+  padding: 0 30px;
+}
+
+.DonationDistributor-footer
+{
+  background-color: #f2f2f2;
+  text-align: center;
+  padding: 20px 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 90px;
+}
+
+.DonationDistributor-footer .Button
+{
+  border-radius: 30px;
+  width: 260px;
+  padding: 6px 8px;
+  margin: auto;
+}
+
+.DonationDistributor-footer h6
+{
+  font-family: Lato;
+  max-width: 370px;
+  margin: auto;
+  color: #9c9da2;
+  margin-top: 10px;
+}
+
+.DonationDistributor-method-label
+{
+    font-size: 9px;
+    font-family: Lato;
+    color: #7a7b82;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.DonationDistributor-subtotal
+{
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.DonationDistributor-subtotal-label
+{
+  font-family: Lato;
+  font-size: 14px;
+  color: #131313;
+}
+
+.DonationDistributor-subtotal-amount
+{
+  font-family: Lato;
+  font-size: 14px;
+  color: #131313;
+  font-weight: bold;
+}
+
+.DonationDistributor-total
+{
+  padding-top: 20px;
+}
+
+.DonationDistributor-total-label
+{
+  font-family: Lato;
+  font-size: 14px;
+  color: #131313;
+  font-weight: bold;
+}
+
+.DonationDistributor-total-amount
+{
+  font-family: Lato;
+  font-size: 14px;
+  color: #131313;
+  font-weight: bold;
+}
+
+.DonationDistributorToggle-container
+{
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.DonationDistributorToggle-container div
+{
+  font-family: Lato;
+  font-size: 15px;
+  color: #636363;
+  box-sizing: border-box;
+  display: inline-block;
+  height: 35px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  box-shadow: inset 0 -2px 0 0 rgba(0, 0, 0, 0.1);
+  border: solid 1px #e6e6e6;
+  line-height: 2;
+}
+
+.DonationDistributorToggle-container div:first-child
+{
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.DonationDistributorToggle-container div:not(:first-child)
+{
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.DonationDistributorToggle-container div.pressed,
+.DonationDistributorToggle-container div:active {
+  background-color: #f2f2f2;
+  box-shadow: inset 0 2px 0 0 rgba(0, 0, 0, 0.1);
+  border: solid 1px #e6e6e6;
+}
+
+.DonationDistributorToggle-container div:not(.pressed):hover
+{
+  background-color: #fcfcfc;
+}
+
+.DonationDistributorToggle-container div:not(.pressed)
+{
+  cursor: pointer;
+}
+
+.DonationDistributor-hr 
+{
+  height: 1px;
+  background-color: #e6e6e6;
+  width: 100%;
+}
+
+.DonationDistributor-donate-button 
+{
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: -25px auto;
+  bottom: 0;
+}
+
+.-no-dashed-bg .-dashed-bg
+{
+  background: none;
+}
+
+@media (--medium-viewport)
+{
+  .DonationDistributor-container
+  {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 0;
+  }
+}
+
+@media(min-height: 800px)
+{
+  .DonationDistributor-container
+  {
+    height: 700px;
+  }
+}

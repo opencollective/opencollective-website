@@ -1,0 +1,76 @@
+.DonationDistributorItem-container
+{
+  margin: 20px 0;
+}
+
+.DonationDistributorItem-container img 
+{
+  border-radius: 100%;
+  margin-top: 5px;
+  margin-bottom: 1px;
+  overflow: hidden;
+}
+
+.DonationDistributorItem-label
+{
+  display: inline-block;
+  padding-left: 4px;
+}
+
+.DonationDistributorItem-amount{
+  color: #131313;
+  font-size: 14px;
+}
+
+.DonationDistributorItem-label{
+  font-family: Lato;
+  font-size: 14px;
+  color: #131313;
+  background-color: white;
+  padding-right: 6px;
+  text-align: left;
+  max-width: 80%;
+}
+
+.DonationDistributorItem--editable .DonationDistributorItem-amount span 
+{
+  position: relative;
+  top: 22px;
+}
+
+.DonationDistributorItem-amount
+{
+  width: 42px;
+  text-align: left;
+  padding-left: 15px;
+}
+
+.-dashed-bg
+{
+  background-image: url(data:image/gif;base64,R0lGODlhAwABAKEAANLS0v///9LS0tLS0iH5BAEKAAIALAAAAAADAAEAAAICDFIAOw==);
+  background-repeat: repeat-x;
+  background-position: 0 13px;
+  background-size: 5px; 
+  text-align: left;
+}
+
+/* So we dont highlight while dragging slider */
+.-not-selectable
+{
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  -ms-user-select: none;
+  cursor: default;
+}
+
+.DonationDistributorItem-amount .DonationDistributorItem--input
+{
+    width: 50px;
+    height: 16px;
+    margin-top: 16px;
+    font-size: 14px;
+    line-height: 1;
+    padding: 8px 8px;
+}
