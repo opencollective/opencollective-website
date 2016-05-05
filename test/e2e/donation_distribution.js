@@ -12,7 +12,7 @@ module.exports = {
       .waitForElementVisible('body', 1000)
       .assert.containsText('body', TEST_COLLECTIVE_NAME)
       .waitForElementVisible('.Button.Button--green', 200)
-      .assert.containsText('.Button.Button--green', 'DONATE')
+      .assert.containsText('.Button.Button--green', 'BECOME A BACKER')
   },
 
   'Shows distribution modal after clicking donate button': (client) => {
