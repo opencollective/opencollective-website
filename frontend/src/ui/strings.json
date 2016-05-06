@@ -57,7 +57,7 @@
     "weHave": "We have",
     "thatProvideYearlyBudget": "that provide us with a yearly budget of",
     "subtotal": "Subtotal",
-    "ocComission5": "OpenCollective Comission 5%",
+    "ocComission": "OpenCollective Comission",
     "creditCard": "Credit Card",
     "proccesingFee": "proccesing fee",
     "total": "Total",
@@ -66,7 +66,9 @@
     "edit": "Edit",
     "donation": "donation",
     "donationMethod": "Donation Method",
-    "comission": "Comission"
+    "comission": "Comission",
+    "pay": "Pay",
+    "resetDefaultDistribution": "Réinitialiser la distribution par défaut"
   },
   "fr": {
     "hostedBy": "Hébergé par",
@@ -126,7 +128,7 @@
     "weHave": "Nous avons",
     "thatProvideYearlyBudget": "qui nous fournissent un budget annuel de",
     "subtotal": "Sous-Total",
-    "ocComission5": "OpenCollective Comission 5%",
+    "ocComission": "OpenCollective Comission",
     "creditCard": "Carte de crédit",
     "proccesingFee": "frais de proccesing",
     "total": "Total",
@@ -135,6 +137,8 @@
     "edit": "Edit",
     "donation": "don",
     "donationMethod": "Méthode don",
-    "comission": "Comission"
+    "comission": "Comission",
+    "pay": "Payer",
+    "resetDefaultDistribution": "Réinitialiser la distribution par défaut"
   }
 }

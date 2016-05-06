@@ -38,7 +38,7 @@ export default class DonationDistributorItem extends Component {
             <div className='flex flex-column'>
               <div className='flex -not-selectable'>
                 <div>
-                  <img src={icon} width='16px' height='16px' style={{display: icon ? 'inline-block' : 'none'}}/>
+                  <img ref='icon' src={icon} onError={() => this.refs.icon.style.display = 'none'} width='16px' height='16px' style={{display: icon ? 'inline-block' : 'none'}}/>
                 </div>
                 <div className={`flex-auto left-align ${editable ? '' : '-dashed-bg'}`}>
                   <div className='DonationDistributorItem-label -not-selectable'>{label}</div>
@@ -49,12 +49,11 @@ export default class DonationDistributorItem extends Component {
               </div>  
             </div>
           </div>
-          <div className="DonationDistributorItem-amount -not-selectable">
+          <div className='DonationDistributorItem-amount -not-selectable'>
             {!editableAmount && (<span>{formattedItemAmount}</span>)}
             {editableAmount && !editingAmount &&  
               (<input
-                type="text"
-                value={itemAmount.toFixed(2)}
+                value={formatCurrency(itemAmount, currency, {compact: true})}
                 className='DonationDistributorItem--input'
                 onFocus={() => {
                   this.setState({editingAmount: true}, () => {
@@ -68,7 +67,6 @@ export default class DonationDistributorItem extends Component {
             }
             {editableAmount && editingAmount &&  
               (<input ref='amountInput'
-                type="text"
                 className='DonationDistributorItem--input'
                 onFocus={() => {
                   this.setState({editingAmount: true});
@@ -81,6 +79,9 @@ export default class DonationDistributorItem extends Component {
                   if (newPercentage < 0) newPercentage = 0;
                   this.props.onChange(newPercentage * 100);
                   this.setState({editingAmount: false});
+                }}
+                onKeyDown={(e) => {
+                  if (e.keyCode === 13) this.refs.amountInput.blur();
                 }}
               ></input>)
             }

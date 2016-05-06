@@ -20,7 +20,20 @@
 .DonationDistributorItem-amount{
   position: relative;
   color: #131313;
+  color: rgba(53, 53, 53, 0.8);
   font-size: 14px;
+}
+
+.-bold-label .DonationDistributorItem-label
+{
+  font-weight: bold;
+  color: rgba(53, 53, 53, 0.9);  
+}
+
+.-bold-amount .DonationDistributorItem-amount
+{
+  font-weight: bold;
+  color: rgba(53, 53, 53, 0.9);
 }
 
 .DonationDistributorItem-label{
@@ -30,7 +43,13 @@
   background-color: white;
   padding-right: 6px;
   text-align: left;
-  max-width: 80%;
+  max-width: 90%;
+}
+
+.DonationDistributorItem-label i
+{
+  font-size: 13px;
+  color: #313131;
 }
 
 .DonationDistributorItem--editable .DonationDistributorItem-amount span 
@@ -43,7 +62,7 @@
 {
   width: 42px;
   text-align: left;
-  padding-left: 15px;
+  padding-left: 20px;
 }
 
 .-dashed-bg
@@ -68,12 +87,13 @@
 
 .DonationDistributorItem-amount .DonationDistributorItem--input
 {
-    width: 50px;
-    height: 16px;
-    margin-top: 16px;
-    font-size: 14px;
-    line-height: 1;
-    padding: 8px 8px;
-    position: absolute;
-    bottom: -8px;
+  width: 50px;
+  height: 16px;
+  margin-top: 16px;
+  font-size: 14px;
+  line-height: 1;
+  padding: 8px 8px;
+  position: absolute;
+  bottom: -8px;
+  margin-left: -8px;
 }

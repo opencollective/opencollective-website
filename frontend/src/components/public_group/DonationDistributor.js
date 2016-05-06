@@ -7,7 +7,6 @@ import convertToCents from '../../lib/convert_to_cents';
 
 const RADIO_ON = '/static/images/radio-btn-on.svg';
 const RADIO_OFF = '/static/images/radio-btn-off.svg';
-const OC_COMMISSION = 0.05;
 
 export default class DonationDistributor extends Component {
 
@@ -33,8 +32,10 @@ export default class DonationDistributor extends Component {
       disabled: !hasPaypal && !hasStripe,
       paymentMethod: method,
       optionalComission: optionalComission,
-      commisionPercentage: 100,
-      optionalPaymentMethod: hasStripe && hasPaypal
+      commissionPercentage: optionalComission ? 50 : 100,
+      ocCommission: optionalComission ? 0.20 : 0.05,
+      optionalPaymentMethod: hasStripe && hasPaypal,
+      distributionAltered: false
     };
   }
 
@@ -80,6 +81,7 @@ export default class DonationDistributor extends Component {
                 option.value -= delta;
                 this.redistribute('add', option, delta);
               }
+              this.setState({distributionAltered: true});
             }}
           />
         )
@@ -89,10 +91,11 @@ export default class DonationDistributor extends Component {
 
   renderSubtotal()
   {
+  	if (this.options.length < 2) return;
     const {i18n} = this.props;
     return (
       <DonationDistributorItem 
-        className='-no-dashed-bg --subtotal'
+        className='-no-dashed-bg -bold-amount -bold-label --subtotal'
         currency={this.props.currency}
         label={i18n.getString('subtotal')}
         editable={false}
@@ -102,23 +105,23 @@ export default class DonationDistributor extends Component {
     )
   }
 
-  renderCommision()
+  renderCommission()
   {
     const {currency, i18n} = this.props;
-    const {optionalComission} = this.state;
+    const {optionalComission, ocCommission, commissionPercentage} = this.state;
+    const customCommissionPercentage = (commissionPercentage * ocCommission).toFixed(1).replace('.0', '');
     return (
       <div>
-        <div className='DonationDistributor-method-label'>{i18n.getString('comission')}</div>
         <DonationDistributorItem 
           className='-no-dashed-bg'
           currency={currency}
-          label={i18n.getString('ocComission5')}
+          label={`${i18n.getString('ocComission')} ${customCommissionPercentage}%`}
           editable={optionalComission}
           editableAmount={optionalComission}
-          amount={this.props.amount * OC_COMMISSION}
-          value={this.state.commisionPercentage}
+          amount={this.props.amount * ocCommission}
+          value={commissionPercentage}
           onChange={(percent) => {
-            this.setState({commisionPercentage: percent});
+            this.setState({commissionPercentage: percent});
           }}
         />
       </div>
@@ -133,22 +136,21 @@ export default class DonationDistributor extends Component {
     const formattedProccesingFee = formatCurrency(proccesingFee, currency, {compact: true});
     const usingPayPal = paymentMethod === 'paypal';
     const usingStripe = paymentMethod === 'stripe';
-
+    const formattedFixedFee = formatCurrency(0.30, currency, {compact: true});
     return (
       <div>
-        <div className='DonationDistributor-method-label'>{i18n.getString('donationMethod')}</div>
         {(optionalPaymentMethod || usingPayPal) && (
           <div className='DonationDistributorItem-container --paypal' style={{marginTop: 0}} onClick={() => this.setState({paymentMethod: 'paypal'})}>
             <div className='flex'>
               <div className='flex-auto'>
                 <div className='flex flex-column'>
                   <div className='flex'>
-                    <div>
+                    <div style={{display: optionalPaymentMethod ? 'block' : 'none'}}> 
                       <img src={paymentMethod === 'paypal' ? RADIO_ON : RADIO_OFF} width='16px' height='16px'/>
                     </div>
                     <div className={`flex-auto left-align ${paymentMethod === 'paypal' ? '-dashed-bg' : ''}`}>
                       <div className='DonationDistributorItem-label' style={{color: paymentMethod === 'paypal' ? '#131313' : '#ccc'}}>
-                        PayPal
+                        PayPal <i>(2.9% + {formattedFixedFee} {i18n.getString('proccesingFee')})</i>
                       </div>
                     </div>
                   </div>
@@ -166,12 +168,12 @@ export default class DonationDistributor extends Component {
               <div className='flex-auto'>
                 <div className='flex flex-column'>
                   <div className='flex'>
-                    <div>
+                    <div style={{display: optionalPaymentMethod ? 'block' : 'none'}}> 
                       <img src={paymentMethod === 'stripe' ? RADIO_ON : RADIO_OFF} width='16px' height='16px'/>
                     </div>
                     <div className={`flex-auto left-align ${paymentMethod === 'stripe' ? '-dashed-bg' : ''}`}>
                       <div className='DonationDistributorItem-label' style={{color: paymentMethod === 'stripe' ? '#131313' : '#ccc'}}>
-                        {i18n.getString('creditCard')} <i>({i18n.getString('proccesingFee')})</i>
+                        {i18n.getString('creditCard')} <i>(2.9% + {formattedFixedFee} {i18n.getString('proccesingFee')})</i>
                       </div>
                     </div>
                   </div>
@@ -193,7 +195,7 @@ export default class DonationDistributor extends Component {
     const totalAmount = this.getSubTotal() + this.getCommissionAmount() + this.getCreditCardProcessingFee();
     return (
       <DonationDistributorItem 
-        className='-no-dashed-bg --total'
+        className='-no-dashed-bg -bold-amount -bold-label --total'
         currency={currency}
         label={i18n.getString('total')}
         editable={false} 
@@ -206,7 +208,7 @@ export default class DonationDistributor extends Component {
   {
     const {group, inProgress, currency, frequency, onToken, i18n} = this.props;
     const stripeKey = this.stripeKey;
-    const amount = (this.getSubTotal() + this.getCommissionAmount()).toFixed(2);
+    const amount = (this.getSubTotal() + this.getCommissionAmount() + this.getCreditCardProcessingFee()).toFixed(2);
     const formattedAmount = formatCurrency(amount, currency, {compact: true});
     const distribution = this.options.map((opt) => { return {id: opt.id, value: opt.value} });
 
@@ -227,7 +229,7 @@ export default class DonationDistributor extends Component {
             },
           })}
           >
-          {`${i18n.getString('donate')} ${formattedAmount}`}
+          {`${i18n.getString('pay')} ${formattedAmount}`}
         </AsyncButton>
       )
     }
@@ -254,7 +256,7 @@ export default class DonationDistributor extends Component {
               color='green'
               inProgress={inProgress}
               customClass='btn -btn-big -bg-green -ttu -ff-sec -fw-bold'>
-              {`${i18n.getString('donate')} ${formattedAmount}`}
+              {`${i18n.getString('pay')} ${formattedAmount}`}
             </AsyncButton>
         </StripeCheckout>
       )
@@ -280,14 +282,17 @@ export default class DonationDistributor extends Component {
     }
 
     const {i18n} = this.props;
+    const {distributionAltered} = this.state;
 
     return (
       <div className='DonationDistributor-mask' onClick={this.onMaskClick.bind(this)}>
-        <div className='DonationDistributor-container'>
+        <div className='DonationDistributor-container' style={{height: this.options.length > 1 ? undefined : '605px'}}>
           <div className='DonationDistributor-header'>
             <h2>{this.options.length > 1 && this.props.editable ? i18n.getString('youDeciceDistributeYour') : i18n.getString('plzConfirmYour')}</h2>
             <h1>{`${currencySymbolLookup[this.props.currency]}${this.props.amount} ${this.props.frequency} ${i18n.getString('donation')}.`}</h1>
-            <small onClick={this.close.bind(this)}>{`${i18n.getString('edit')} ${i18n.getString('donation')}`}</small>
+            <small onClick={distributionAltered ? this.resetDistribution.bind(this) : this.close.bind(this)}>
+            {distributionAltered ?  i18n.getString('resetDefaultDistribution') : `${i18n.getString('edit')} ${i18n.getString('donation')}`}
+            </small>
           </div>
           <div className='DonationDistributor-body'>
             <div className='DonationDistributor-section'>
@@ -296,7 +301,7 @@ export default class DonationDistributor extends Component {
             <div className='DonationDistributor-hr' style={{marginTop: '30px'}}></div>
             <div className='DonationDistributor-section'>
               {this.renderSubtotal()}
-              {this.renderCommision()}
+              {this.renderCommission()}
               {this.renderMethodPicker()}
             </div>
             <div className='DonationDistributor-hr'></div>
@@ -324,8 +329,7 @@ export default class DonationDistributor extends Component {
   getCreditCardProcessingFee()
   {
     const {amount} = this.props;
-    const {paymentMethod} = this.state;
-    return paymentMethod === 'paypal' ? 0 : (0.30 + 0.029 * amount);
+    return 0.30 + 0.029 * amount;
   }
 
   getDistributableAmount()
@@ -336,8 +340,8 @@ export default class DonationDistributor extends Component {
 
   getCommissionAmount()
   {
-    const {commisionPercentage} = this.state;
-    return (this.props.amount * OC_COMMISSION) * (commisionPercentage/100);
+    const {commissionPercentage, ocCommission} = this.state;
+    return (this.props.amount * ocCommission) * (commissionPercentage/100);
   }
 
   getStripeDesciption()
@@ -347,23 +351,15 @@ export default class DonationDistributor extends Component {
     const proccesingFee = this.getCreditCardProcessingFee();
     const formattedProccesingFee = formatCurrency(proccesingFee, currency, {compact: true}); 
     const formattedAmount = formatCurrency(this.getSubTotal() + this.getCommissionAmount(), currency, { compact: false });
-    const feeDescription = proccesingFee ? `(+\u00A0${formattedProccesingFee}\u00A0fees)` : ''; 
+    const feeDescription = proccesingFee ? `(+\u00A0${formattedProccesingFee}\u00A0payment\u00A0processing\u00A0fees)` : ''; 
     return `${formattedAmount} ${frequencyHuman} ${feeDescription}`;
   }
 
   resetOptions()
   {
-    const {collectives, editable} = this.props;
-    this.options = collectives.map((collective) => {
-      return {
-        id: collective.id,
-        label: collective.name, 
-        icon: collective.logo, 
-        editable: editable,
-        value: !isNaN(collective.value) ? collective.value : 1 / collectives.length
-      }
-    });
-    this.setState({commisionPercentage: 100});
+    const {optionalComission} = this.props;
+    this.resetDistribution();
+    this.setState({commissionPercentage: optionalComission ? 50 : 100});
   }
 
   redistribute(action, activeOption, delta)
@@ -429,6 +425,21 @@ export default class DonationDistributor extends Component {
     {
       this.close();
     }
+  }
+
+  resetDistribution()
+  {
+  	const {collectives, editable} = this.props;
+    this.options = collectives.map((collective) => {
+      return {
+        id: collective.id,
+        label: collective.name, 
+        icon: collective.logo, 
+        editable: editable,
+        value: !isNaN(collective.value) ? collective.value : 1 / collectives.length
+      }
+    });
+    this.setState({distributionAltered: false});
   }
 
   open()

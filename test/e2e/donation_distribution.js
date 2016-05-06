@@ -34,17 +34,17 @@ module.exports = {
       .assert.containsText('.DonationDistributor-header', 'monthly')
       .assert.containsText('.DonationDistributorItem-label', TEST_COLLECTIVE_NAME)
       .assert.containsText('.DonationDistributorItem-amount', '€1,00')
-      .assert.containsText('.DonationDistributorItem-container.--subtotal .DonationDistributorItem-amount', '€1,00')
-      .assert.containsText('.DonationDistributorItem-container.--total .DonationDistributorItem-amount', '€1,05') // + commision
-      .assert.containsText('.Button', '€1,05')
+      .assert.elementNotPresent('.DonationDistributorItem-container.--subtotal')
+      .assert.containsText('.DonationDistributorItem-container.--total .DonationDistributorItem-amount', '€1,38') // + commision
+      .assert.containsText('.Button', '€1,38')
       .assert.elementPresent('.DonationDistributorItem-container.--paypal')
       .assert.elementPresent('.DonationDistributorItem-container.--stripe')
       .click('.DonationDistributorItem-container.--stripe') 
       .assert.containsText('.DonationDistributorItem-container.--stripe', '€0,33') // .30 + 3%
       .assert.containsText('.DonationDistributorItem-container.--paypal', '')
       .click('.DonationDistributorItem-container.--paypal') 
-      .assert.containsText('.DonationDistributorItem-container.--total .DonationDistributorItem-amount', '€1,05')
-      .assert.containsText('.Button', '€1,05')
+      .assert.containsText('.DonationDistributorItem-container.--total .DonationDistributorItem-amount', '€1,38')
+      .assert.containsText('.Button', '€1,38')
       .end();
   },
 };
