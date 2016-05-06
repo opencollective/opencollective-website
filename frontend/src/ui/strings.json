@@ -48,6 +48,10 @@
     "membersWallText": "Proud members and sponsors support this collective and allow us to keep going towards our mission. We would not be here if it weren’t for these amazing people. Thank you so much.",
     "weAre": "We are",
     "coreContributors": "Core Contributors",
+    "contributor": "contributor",
+    "member": "member",
+    "backer": "backer",
+    "sponsor": "Official Sponsor",
     "fundsAvailable": "Total Funds Available",
     "becomeMemberTitle": "Why Become a Member?",
     "becomeMemberText": "With your membership plan, you’ll help us cover all expenses the collective makes in order to keep going. All the funds will be managed responsibly with your help, and everyone can see how and where the funds are being spent!",
@@ -55,7 +59,8 @@
     "donateWithPayPal": "Donate with PayPal",
     "and": "and",
     "weHave": "We have",
-    "thatProvideYearlyBudget": "that provide us with a yearly budget of"
+    "thatProvideYearlyBudget": "that provide us with a yearly budget of",
+    "since": "since"
   },
   "fr": {
     "hostedBy": "Hébergé par",
@@ -66,7 +71,7 @@
     "per": "par",
     "month": "mois",
     "year": "an",
-    "disclaimer": "En cliquant ci-dessus, vous vous engagez à donner",
+    "disclaimer": "En cliquant ci-dessus, vous vous engagez à donner à",
     "for": "pour",
     "other": "Autre",
     "frequency": "Fréquence",
@@ -81,7 +86,7 @@
     "twitter": "Compte Twitter",
     "save": "Sauvegarder",
     "NowOnBackersWall": "Vous êtes maintenant sur notre mur de supporters!",
-    "latestExpenses": "Nos dernières dépenses",
+    "latestExpenses": "Dernières dépenses",
     "expensesHistory": "Historique de nos dépenses",
     "submitExpense": "Soumettre une dépense",
     "expensesPlaceholderTitle": "Transparence = confiance",
@@ -93,7 +98,7 @@
     "scrollDown": "Descendez pour en savoir plus.",
     "missionTo": "Notre mission est de",
     "bePart": "Faites en partie!",
-    "hiThisIs": "Hey! Ceci est le collectif ouvert de ",
+    "hiThisIs": "Bienvenue sur la page du collectif ouvert de ",
     "openCollective": "",
     "menuWho": "Qui sommes-nous?",
     "menuWhy": "Pourquoi nous rejoindre?",
@@ -101,11 +106,15 @@
     "menuMembersWall": "Mur des supporters",
     "becomeA": "Devenez un",
     "joinAndFulfil": "Rejoignez-nous et aidez-nous à poursuivre notre mission",
-    "helpUsContinueOurActivities": "Avec votre contribution, vous nous aiderez à couvrir les frais de notre collectif pour qu'on puisse continuer à fonctionner!",
+    "helpUsContinueOurActivities": "Votre contribution nous permet de financer les activités de notre collectif.",
     "membersWallTitle": "Ceci est possible grâce à vous.",
     "membersWallText": "Vos contributions financières nous permettent de continuer à poursuivre notre mission. Merci!",
     "weAre": "Nous sommes",
     "coreContributors": "Administrateurs",
+    "contributor": "contributeur",
+    "member": "membre",
+    "backer": "supporter",
+    "sponsor": "Sponsor officiel",
     "fundsAvailable": "Total des fonds disponibles",
     "becomeMemberTitle": "Pourquoi devenir un supporter?",
     "becomeMemberText": "Avec votre contribution, vous nous aidez à couvrir nos dépenses. Tous les fonds sont gérés de manière responsable et en toute transparence. Tout le monde peut voir comment on dépense l'argent récolté.",
@@ -113,6 +122,7 @@
     "donateWithPayPal": "Payer avec PayPal",
     "and": "et",
     "weHave": "Nous avons",
-    "thatProvideYearlyBudget": "qui nous fournissent un budget annuel de"
+    "thatProvideYearlyBudget": "qui nous fournissent un budget annuel de",
+    "since": "depuis"
   }
 }

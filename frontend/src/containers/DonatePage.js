@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import values from 'lodash/object/values';
 import contains from 'lodash/collection/contains';
+import i18n from '../lib/i18n';
 
 import roles from '../constants/roles';
 import Notification from '../containers/Notification';
@@ -23,8 +24,6 @@ import validateSchema from '../actions/form/validate_schema';
 import decodeJWT from '../actions/session/decode_jwt';
 
 import profileSchema from '../joi_schemas/profile';
-
-import strings from '../ui/strings.json';
 
 export class DonatePage extends Component {
 
@@ -218,12 +217,6 @@ function mapStateToProps({
     };
   }
 
-  const i18n = {
-    getString: (strid) => {
-      return strings[group.settings.lang][strid]; // TODO: We should add a `lang` column in the `Groups` table and use that instead of `currency`
-    }
-  };
-
   return {
     amount: router.params.amount,
     interval: router.params.interval,
@@ -238,6 +231,6 @@ function mapStateToProps({
     saveInProgress: users.updateInProgress,
     isAuthenticated: session.isAuthenticated,
     newUser,
-    i18n
+    i18n: i18n(group.settings.lang)
   };
 }

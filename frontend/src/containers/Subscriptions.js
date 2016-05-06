@@ -43,6 +43,7 @@ export class Subscriptions extends Component {
       subscriptions,
       session,
       jwtTokenValid,
+      i18n,
       pushState
     } = this.props;
 
@@ -90,7 +91,7 @@ export class Subscriptions extends Component {
                         {subscription.isActive &&
                         subscription.createdAt ?
                           <span className='Subscription-status'>
-                            &nbsp;(since {moment(subscription.createdAt).format('MMM YYYY')})
+                            &nbsp;({i18n.getString('since')} {moment(subscription.createdAt).format('MMM YYYY')})
                             {subscription.isActive &&
                               <span className='Subscription-cancel' onClick={cancel.bind(this, subscription.id)}>CANCEL</span>}
                           </span> :
