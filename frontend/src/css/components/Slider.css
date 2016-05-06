@@ -1,0 +1,54 @@
+.Slider-container
+{
+  --handle-diameter: 16px;
+  position: relative;
+  width: 100%;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  height: 8px;
+  margin: 5px 0;
+  cursor: pointer;
+}
+
+.Slider-bar
+{
+  position: relative;
+  width: 0%;
+  height: 100%;
+	background-color: var(--green);
+  border-radius: 10px;
+}
+
+.Slider-handle
+{
+  position: absolute;
+  right: calc(-2px - (var(--handle-diameter)/2));
+  top: calc(1px - (var(--handle-diameter)/2));
+  width: var(--handle-diameter);
+  height: var(--handle-diameter);
+  background-color: #ffffff;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+  border: solid 1px #ededed;
+  border-radius: 100%;
+  cursor: grab;
+}
+
+.Slider-handle:active
+{
+  cursor: grabbing;
+}
+
+.Slider--green .Slider-bar
+{
+  background-color: var(--green);
+}
+
+.Slider--orange .Slider-bar
+{
+  background-color: var(--orange);
+}
+
+.Slider--red .Slider-bar
+{
+  background-color: var(--red);
+}
