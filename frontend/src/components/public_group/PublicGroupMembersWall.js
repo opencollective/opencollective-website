@@ -4,11 +4,11 @@ import UserCard from '../../components/UserCard';
 
 export default class PublicGroupMembersWall extends React.Component {
   _printTiersList() {
-    const { group } = this.props;
+    const { group, i18n } = this.props;
 
     return ((group.tiers || []).map((tier, i) => (
       <div className='flex flex-wrap justify-center pb3' key={i}>
-        {filterCollection(group.backers, {tier: tier.name}).map((user, j) => <UserCard user={user} key={j} className='m1' />)}
+        {filterCollection(group.backers, {tier: tier.name}).map((user, j) => <UserCard user={user} key={j} className='m1' i18n={i18n} />)}
       </div>)
     ));
   }

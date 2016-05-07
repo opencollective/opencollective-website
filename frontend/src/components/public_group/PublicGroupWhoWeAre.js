@@ -30,7 +30,7 @@ export default class PublicGroupWhoWeAre extends React.Component {
             <div className='PublicGroup-members pt4'>
               <h3 className='PublicGroup-subtitle mt0 mb2 -ff-sec -fw-light'>{i18n.getString('coreContributors')}</h3>
               <div className='flex flex-wrap justify-center'>
-                {group.members.map((user, index) => <UserCard user={user} key={index} className='m1' />)}
+                {group.members.map((user, index) => <UserCard user={user} key={index} className='m1' i18n={i18n} />)}
               </div>
             </div>
           ) : null}

@@ -3,7 +3,7 @@ import React from 'react';
 import ProfilePhoto from './ProfilePhoto';
 import moment from 'moment';
 
-export default ({users=[]}) => {
+export default ({users=[], i18n}) => {
 
   const link = (href, title, component) => {
     if(href) {
@@ -21,13 +21,13 @@ export default ({users=[]}) => {
 
     user.since = moment(user.createdAt).format('MMMM YYYY');
 
-    const title = `${user.name} is a ${user.tier} since ${user.since}`;
+    const title = `${user.name} {i18n.getString('isA')} ${user.tier} {i18n.getString('since')} ${user.since}`;
 
     return (
       <div className='UsersList-item' key={user.id}>
         {link(href, title, <ProfilePhoto url={user.avatar} hasBorder={true} />)}
         <div className='UsersList-name'>{link(href, title, user.name)}</div>
-        <div className='UsersList-tier'>{user.tier} since {user.since}</div>
+        <div className='UsersList-tier'>{user.tier} {i18n.getString('since')} {user.since}</div>
       </div>
     );
   };

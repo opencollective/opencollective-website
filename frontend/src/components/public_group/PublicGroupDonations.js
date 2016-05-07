@@ -31,7 +31,7 @@ export default class PublicGroupDonations extends React.Component {
         </div>
         {(donations.length === 0) && emptyState}
         <div className='PublicGroup-transactions-list'>
-          {donations.map(donation => <ActivityItem key={`pgd_${donation.id}`} donation={donation} user={users[donation.UserId]} className='mb2' />)}
+          {donations.map(donation => <ActivityItem key={`pgd_${donation.id}`} donation={donation} user={users[donation.UserId]} className='mb2' i18n={i18n} />)}
         </div>
         {(donations.length >= itemsToShow) && (
           <div className='center pt2'>

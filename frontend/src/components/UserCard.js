@@ -1,6 +1,5 @@
 import React, {Component, PropTypes} from 'react';
 import UserPhoto from './UserPhoto';
-import moment from 'moment';
 
 export default class UserCard extends Component {
   static propTypes = { user: PropTypes.object };
@@ -26,25 +25,21 @@ export default class UserCard extends Component {
   }
 
   render() {
-    const { className = '', user } = this.props;
+    const { className = '', user, i18n } = this.props;
+    
     const twitterUrl = (user.twitterHandle) ? `https://twitter.com/${user.twitterHandle}` : '';
     const href = (user.website || twitterUrl);
-    let roleLabel = (user.tier || user.role).toLowerCase();
-    let addBadge = false;
 
-    if (roleLabel === 'sponsor') {
-      roleLabel = 'Official Sponsor';
-    } else if (roleLabel !== 'member') {
-      addBadge = true;
-    }
+    const roleLabel = (user.tier || user.role).toLowerCase();
+    const addBadge = (roleLabel !== 'sponsor' && roleLabel !== 'member');
 
     return (
       <article className={`UserCard bg-white pt3 ${className} ${user.tier}`}>
         {this._link(href, <UserPhoto user={user} addBadge={addBadge} className='mx-auto' />)}
         <p className='UserCard-name PublicGroup-font-15 h5 my2 px2 -ff-sec'>{this._link(href, user.name)}</p>
         <div className='border-top border-gray px3 py2'>
-          <p className='UserCard-role m0 -green -fw-bold -ttu'>{roleLabel}</p>
-          <p className='h6 muted m0'>since {moment(user.createdAt).format('MMMM YYYY')}</p>
+          <p className='UserCard-role m0 -green -fw-bold -ttu'>{i18n.getString(roleLabel)}</p>
+          <p className='h6 muted m0'>{i18n.getString('since')} {i18n.moment(user.createdAt).format('MMMM YYYY')}</p>
         </div>
       </article>
     );

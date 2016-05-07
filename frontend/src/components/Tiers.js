@@ -12,13 +12,7 @@ const filterUsersByTier = (users, tiername) => {
   return filterCollection(users, { tier: tiername });
 }
 
-import strings from '../ui/strings.json'
-
 export default class Tiers extends Component {
-
-  getString(strid) {
-    return strings[this.props.group.settings.lang][strid];
-  }
 
   showTier(tier) {
     const {
@@ -26,6 +20,7 @@ export default class Tiers extends Component {
       donationForm,
       onToken,
       appendDonationForm,
+      i18n,
       inProgress,
     } = this.props;
 
@@ -38,15 +33,15 @@ export default class Tiers extends Component {
     const frequency = donationForm[tier.name].frequency || tier.interval;
     const currency = donationForm[tier.name].currency || group.currency;
 
-    const frequencyHuman = frequency === 'one-time' ? '' : `${this.getString('per')} ${this.getString(frequency.replace(/ly$/,''))}`;
+    const frequencyHuman = frequency === 'one-time' ? '' : `${i18n.getString('per')} ${i18n.getString(frequency.replace(/ly$/,''))}`;
     const stripeDescription =  `${formatCurrency(amount, currency, group.settings.formatCurrency)} ${frequencyHuman}`;
-    const button = tier.button || `${this.getString('donate')} ${stripeDescription}`;
-    const cancellationDisclaimer = (frequency !== 'one-time') ? this.getString('cancelAnytime') : "";
+    const button = tier.button || `${i18n.getString('donate')} ${stripeDescription}`;
+    const cancellationDisclaimer = (frequency !== 'one-time') ? i18n.getString('cancelAnytime') : "";
 
     return (
       <div className='Tier' id={tier.name} key={`tier-${tier.name}`}>
         <div className='flex flex-wrap justify-center'>
-          {filterUsersByTier(group.backers, tier.name).map((user, index) => <UserCard user={user} key={index} className='m1' />)}
+          {filterUsersByTier(group.backers, tier.name).map((user, index) => <UserCard user={user} key={index} className='m1' i18n={i18n} />)}
         </div>
 
         <p>{tier.description}</p>
@@ -100,7 +95,7 @@ export default class Tiers extends Component {
           )}
           </div>
         <div className='PublicGroupForm-disclaimer'>
-          {this.getString('disclaimer')} {group.host.name} {stripeDescription} {this.getString('for')} {group.name}. {cancellationDisclaimer}
+          {i18n.getString('disclaimer')} {group.host.name} {stripeDescription} {i18n.getString('for')} {group.name}. {cancellationDisclaimer}
         </div>
         </div>
       </div>
@@ -112,11 +107,11 @@ export default class Tiers extends Component {
     const tiers = this.props.tiers || [{
         name: 'backer',
         title: "Backers",
-        description: this.getString('defaultTierDescription'),
+        description: i18n.getString('defaultTierDescription'),
         presets: [1, 5, 10, 50, 100],
         range: [1, 1000000],
         interval: 'monthly',
-        button: this.getString("defaultTierButton")
+        button: i18n.getString("defaultTierButton")
       }];
 
     return (

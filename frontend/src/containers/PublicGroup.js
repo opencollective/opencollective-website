@@ -5,7 +5,7 @@ import take from 'lodash/array/take';
 import values from 'lodash/object/values';
 import sortBy from 'lodash/collection/sortBy';
 import contains from 'lodash/collection/contains';
-
+import i18n from '../lib/i18n';
 import filterCollection from '../lib/filter_collection';
 
 import roles from '../constants/roles';
@@ -36,7 +36,6 @@ import decodeJWT from '../actions/session/decode_jwt';
 import uploadImage from '../actions/images/upload';
 
 import profileSchema from '../joi_schemas/profile';
-import strings from '../ui/strings.json';
 
 // Number of expenses and revenue items to show on the public page
 const NUM_TRANSACTIONS_TO_SHOW = 3;
@@ -334,12 +333,6 @@ function mapStateToProps({
     };
   }
 
-  const i18n = {
-    getString: (strid) => {
-      return strings[group.settings.lang][strid]; // TODO: We should add a `lang` column in the `Groups` table and use that instead of `currency`
-    }
-  };
-
   const donations = transactions.isDonation;
   const expenses = transactions.isExpense;
 
@@ -359,6 +352,6 @@ function mapStateToProps({
     paypalIsDone: query.status === 'payment_success' && !!newUserId,
     newUser,
     hasFullAccount: newUser.hasFullAccount || false,
-    i18n
+    i18n: i18n(group.settings.lang)
   };
 }

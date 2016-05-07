@@ -8,6 +8,7 @@ import { renderToString } from 'react-dom/server';
 
 import { get } from '../lib/api';
 import Widget from '../../frontend/src/components/Widget';
+import i18n from '../../frontend/src/lib/i18n';
 
 /**
  * Show the widget of a collective
@@ -28,6 +29,7 @@ const widget = (req, res, next) => {
         backers: (req.query.backers !== 'false')
       },
       group,
+      i18n: i18n('en'),
       transactions,
       users,
       href: `${config.host.website}/${group.slug}`
