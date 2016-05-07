@@ -10,7 +10,8 @@ export default ({group}) => {
       </div>
     );
   } else if (group.image) {
-    const image = `https://res.cloudinary.com/opencollective/image/fetch/w_720/${encodeURIComponent(group.image)}`;
+    const extension = group.image.split('.').pop().toLowerCase();
+    const image = (extension === 'svg') ? group.image : `https://res.cloudinary.com/opencollective/image/fetch/w_720/${encodeURIComponent(group.image)}`;
     const styles = {
       backgroundImage: `url(${image})`,
     }
