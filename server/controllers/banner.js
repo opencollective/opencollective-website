@@ -105,10 +105,13 @@ module.exports = {
   
   badge: (req, res) => {
     const tier = req.params.tier;
+    const color = req.query.color || 'brightgreen';
+    const style = req.query.style;
+
     const users = filterUsersByTier(req.users, tier.replace(/s$/,''));
     const count = users.length;
-    const filename = `${tier}-${count}-brightgreen.svg`;
-    const imageUrl = `https://img.shields.io/badge/${filename}`;
+    const filename = `${tier}-${count}-${color}.svg`;
+    const imageUrl = `https://img.shields.io/badge/${filename}?style=${style}`;
 
     request(imageUrl, (err, response, body) => {
       res.setHeader('content-type','image/svg+xml;charset=utf-8');
