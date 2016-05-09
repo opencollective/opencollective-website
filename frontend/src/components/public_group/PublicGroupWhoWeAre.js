@@ -8,6 +8,8 @@ export default class PublicGroupWhoWeAre extends React.Component {
   render() {
     const { group, i18n } = this.props;
 
+    const title = (group.slug === 'opensource') ? '' : i18n.getString('coreContributors');
+
     return (
       <section id='who-we-are' className='PublicGroupIntro px2 bg-light-gray relative'>
         <div className='PublicGroupIntro-container container center relative PublicGroupIntro--no-logo bg-no-repeat'>
@@ -28,9 +30,13 @@ export default class PublicGroupWhoWeAre extends React.Component {
 
           {group.members.length ? (
             <div className='PublicGroup-members pt4'>
-              <h3 className='PublicGroup-subtitle mt0 mb2 -ff-sec -fw-light'>{i18n.getString('coreContributors')}</h3>
+              <h3 className='PublicGroup-subtitle mt0 mb2 -ff-sec -fw-light'>{title}</h3>
               <div className='flex flex-wrap justify-center'>
-                {group.members.map((user, index) => <UserCard user={user} key={index} className='m1' i18n={i18n} />)}
+                {group.members.map((user, index) => {
+                  if(group.slug === 'opensource') user.tier = 'collective';
+                  return <UserCard user={user} key={index} className='m1' i18n={i18n} />
+                  })
+                }
               </div>
             </div>
           ) : null}
