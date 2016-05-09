@@ -105,15 +105,14 @@ export class PublicGroup extends Component {
 
         <PublicGroupHero group={group} {...this.props} />
         <PublicGroupWhoWeAre group={group} {...this.props} />
-        {group.slug !== 'opensource' &&
-        <div>
-          <PublicGroupWhyJoin group={group} expenses={expenses} {...this.props} />
+        {group.slug !== 'opensource' && <PublicGroupWhyJoin group={group} expenses={expenses} {...this.props} />}
 
           <div className='bg-light-gray px2'>
-            <PublicGroupJoinUs {...this.props} donateToGroup={donateToGroup.bind(this)} {...this.props} />
+            {group.slug !== 'opensource' && <PublicGroupJoinUs {...this.props} donateToGroup={donateToGroup.bind(this)} {...this.props} /> }
             <PublicGroupMembersWall group={group} {...this.props} />
           </div>
 
+          {group.slug !== 'opensource' &&
           <section id='expenses-and-activity' className='px2'>
             <div className='container'>
               <div className='PublicGroup-transactions clearfix md-flex'>
@@ -122,7 +121,7 @@ export class PublicGroup extends Component {
               </div>
             </div>
           </section>
-        </div>
+          }
         }
 
         <PublicFooter />
