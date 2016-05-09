@@ -1,4 +1,3 @@
-// TODO set up GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET circleci env vars
 require('dotenv').load();
 const config = require('config');
 const resetDb = require('../lib/reset_db.js');

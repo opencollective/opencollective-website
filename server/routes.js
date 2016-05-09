@@ -38,7 +38,7 @@ module.exports = (app) => {
   /**
    * Authentication
    */
-  app.get('/auth/:service(github)/:slug', aN.authenticateService);
+  app.get('/api/auth/:service(github)/:slug', aN.authenticateService);
   app.get('/auth/:service(github)/callback/:slug', aN.authenticateServiceCallback);
 
   /**
@@ -80,9 +80,5 @@ module.exports = (app) => {
   app.get('/:slug([A-Za-z0-9-]+)/expenses/new', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-]+)/donate/:amount', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-]+)/donate/:amount/:interval', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
-  app.get('/:slug([A-Za-z0-9-]+)/connect/:service(github)', mw.ga,
-    // TODO get auth redirection working through react then use 'render' middleware
-    // read this issue: https://github.com/erikras/react-redux-universal-hot-example/issues/155#issuecomment-203227812
-    (req, res, next) => res.send(`<a class="connectAccountBtn" href="/auth/${req.params.service}/${req.params.slug}">Connect to ${req.params.service}</a>`)
-  );
+  app.get('/:slug([A-Za-z0-9-]+)/connect/:service(github)', mw.ga, render);
 };

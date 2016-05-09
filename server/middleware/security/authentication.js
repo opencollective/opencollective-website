@@ -23,12 +23,10 @@ export default {
         return next(err);
       }
       if (!accessToken) {
-        // TODO add a nice error message for the user
         return res.redirect(`${slug}/connect/${service}`);
       }
       api.post(`/groups/${slug}/connected-accounts/${service}`, JSON.stringify({ accessToken }))
-        // TODO add a nice confirmation message for the user
-        .then(apiRes => res.redirect(`/${slug}`))
+        .then(() => res.redirect(`/${slug}`))
         .catch(apiErr => next(apiErr));
     })(req, res, next);
   }

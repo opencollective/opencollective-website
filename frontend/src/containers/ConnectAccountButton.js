@@ -1,11 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import connectAccount from '../actions/connectedAccounts/connect_account';
+import env from '../lib/env';
 
-const mapDispatchToProps = { connectAccount };
-
-export default connect(null, mapDispatchToProps)(({ params, connectAccount }) => (
-  <button class="connectAccountBtn" onClick={() => connectAccount(params.service)}>
+export default ({ params }) => (
+  <a className="connectAccountBtn" href={`${env.API_ROOT}/auth/github/${params.slug}`}>
     Connect to {params.service}
-  </button>
-));
+  </a>
+);
