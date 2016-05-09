@@ -32,6 +32,7 @@
 @import './containers/DonatePage.css';
 @import './containers/SubmitExpense.css';
 @import './containers/Subscriptions.css';
+@import './containers/OnBoarding.css';
 
 /**
  * Components

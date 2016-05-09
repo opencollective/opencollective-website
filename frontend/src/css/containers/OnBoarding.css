@@ -1,0 +1,178 @@
+/* So .OnBoarding can have 100% height */
+#content
+{
+  height: 100%; 
+}
+
+/**
+* Container
+*/
+
+.OnBoarding
+{
+  font-family: Montserrat-Bold, sans-serif;
+  background-image: url(../images/onboarding-bg.svg);
+  background-repeat: no-repeat;
+  background-position: center 30px;
+  background-size: 840px 600px;
+  min-height: 100%;
+
+  &.-registering
+  {
+    background-image: none;
+    background-color: #f5f6f7;
+  }
+}
+
+/**
+* Components
+*/
+
+.OnBoardingHeader
+{
+  padding: 30px;
+
+  .-brand
+  {
+    display: inline-block;
+  }
+
+  .-nav
+  {
+    float: right;
+
+    a 
+    {
+      padding: 8px 20px;
+      font-size: 11px;
+      text-transform: uppercase;
+      color: #aab0b3;
+      letter-spacing: 1px;
+      font-weight: bold;
+    }
+
+    a:first-child
+    {
+      border: 2px solid #aab0b3;
+      border-radius: 100px;
+    }
+
+    a:nth-child(2)
+    {
+      color: #919699;
+      font-size: 12px;
+    }
+  }
+}
+
+.OnBoardingStepHeading
+{
+  font-size: 28px;
+  font-weight: bold;
+  color: #494b4d;
+  width: 100%;
+  text-align: center;
+  line-height: 1.2;
+  font-weight: bold;  
+  strong
+  {
+    color: #919699;
+    letter-spacing: 1px;
+  }
+  div:nth-child(2)
+  {
+    margin: 0 auto;
+    margin-top: 20px;
+    text-align: center;
+    width: 600px;
+    font-size: 17px;
+    color: #616466;
+    font-family: Montserratlight, sans-serif;
+    font-weight: lighter;
+  }
+}
+
+.OnBoardingStepButton
+{
+  color: white;
+}
+
+/**
+* Step components
+*/
+
+.OnBoardingHero
+{
+  margin-top: 160px;
+
+  .-title
+  {
+    font-size: 46px;
+    font-weight: bold;
+    color: #494b4d;
+    width: 768px;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 1.2;
+    letter-spacing: -1px;
+
+    strong
+    {
+      color: #46b0ed;
+    }
+  }
+
+  .-subtitle
+  {
+    margin: 0 auto;
+    margin-top: 25px;
+    text-align: center;
+    width: 768px;
+    font-size: 21px;
+    color: #616466;
+    font-family: Montserratlight, sans-serif;
+    font-weight: lighter;
+  }
+
+  .-button-container
+  {
+    width: 310px;
+    height: 56px;
+    border-radius: 100px;
+    /*background-color: #75cc1f;*/
+    color: white;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 80px;
+  }
+
+  .-requirements
+  {
+    font-family: Lato;
+    color: #797d80;
+    font-size: 14px;
+    width: 310px;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+}
+
+.OnBoardingStepConnectGithub
+{
+  margin: 0 auto;
+  margin-top: 220px;
+  width: 768px;
+}
+
+.OnBoardingStepPickRepository
+{
+  margin: 0 auto;
+  width: 768px; 
+}
+
+.OnBoardingStepPickCoreContributors
+{
+  margin: 0 auto;
+  width: 768px; 
+}
