@@ -44,4 +44,17 @@ api.get = (endpoint, options) => {
   }
 };
 
+api.post = (endpoint, body) => {
+  const options = {
+    body,
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+
+  return fetch(apiUrl(endpoint), options)
+    .then(checkStatus);
+};
+
 export default api;
