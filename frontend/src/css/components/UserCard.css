@@ -8,6 +8,7 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  min-height: 27px;
 }
 
 .UserCard-name > a {
@@ -24,6 +25,9 @@
 /* sponsor card */
 .UserCard.sponsor {
   width: 17.5rem;
+  .UserPhoto {
+    background: none;
+  }
 }
 
 .UserCard.sponsor > .UserCard-name > a {
