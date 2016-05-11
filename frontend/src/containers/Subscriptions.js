@@ -21,6 +21,8 @@ import notify from '../actions/notification/notify';
 import getSubscriptions from '../actions/subscriptions/get';
 import storeToken from '../actions/session/store_token';
 
+import i18n from '../lib/i18n';
+
 // To put as standalone component when the design is final
 const SubscriptionNewTokenForm = ({sendToken}) => {
   return (
@@ -191,11 +193,13 @@ export function mapStateToProps({
   subscriptions,
   users
 }) {
+
   return {
     session,
     subscriptions: subscriptions.list,
     token: router.params.token,
     inProgress: users.sendingEmailInProgress,
-    jwtTokenValid: !session.jwtInvalid && !session.jwtExpired
+    jwtTokenValid: !session.jwtInvalid && !session.jwtExpired,
+    i18n: i18n('en')
   };
 }
