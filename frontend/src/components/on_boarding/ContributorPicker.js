@@ -11,11 +11,10 @@ export default class ContributorPicker extends React.Component {
   
   render()
   {
-    const { onNextStep } = this.props;
+    const {  } = this.props;
     return (
       <div className="ContributorPicker">
       	<ContributorPickerItem />
-
 
         <div className="ContributorPickerItemSearch">
           <input placeholder="filter repository contributors" />

@@ -9,7 +9,7 @@ export default class ContributorPickerItem extends React.Component {
   
   render()
   {
-    const { active } = this.props;
+    const { } = this.props;
     return (
       <div className="ContributorPickerItem">
       	<img src="/static/images/add-contributor.svg" width="32px" height="32px" />
