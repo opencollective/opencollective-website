@@ -27,3 +27,5 @@ function propagateToGlobal (window) {
     global[key] = window[key]
   }
 }
+
+require('dotenv').load();
