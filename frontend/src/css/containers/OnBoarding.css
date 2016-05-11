@@ -62,6 +62,25 @@
       color: #919699;
       font-size: 12px;
     }
+
+    img
+    {
+      width: 24px;
+      height: 24px;
+      vertical-align: middle;
+      margin-right: 10px;
+      border-radius: 100%;
+      overflow: hidden;
+    }
+
+    span
+    {
+      color: white;
+      font-family: Lato;
+      font-weight: bold;
+      letter-spacing: .5px;
+      vertical-align: middle;
+    }
   }
 }
 
@@ -84,10 +103,11 @@
     margin: 0 auto;
     margin-top: 20px;
     text-align: center;
-    width: 600px;
-    font-size: 17px;
+    width: 605px;
+    font-size: 15px;
+    line-height: 1.8;
     color: #616466;
-    font-family: Montserratlight, sans-serif;
+    font-family: Lato, sans-serif;
     font-weight: lighter;
   }
 }

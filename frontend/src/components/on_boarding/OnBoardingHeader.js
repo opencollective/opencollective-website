@@ -9,20 +9,31 @@ export default class OnBoardingHeader extends React.Component {
   
   render()
   {
+    const { active, avatar, name } = this.props;
+    const headerStyles = active ? {background: '#3d3d3d', padding: '20px 30px', marginBottom: '20px'} : {};
+
     return (
-      <div className='OnBoardingHeader'>
+      <div className='OnBoardingHeader' style={headerStyles}>
         <div className='-brand'>
           <svg width='18px' height='18px' className='-light-blue align-middle mr1'>
             <use xlinkHref='#svg-isotype'/>
           </svg>
           <svg width='172px' height='30px' className='align-middle xs-hide'>
-            <use xlinkHref='#svg-logotype' fill='#6388bf'/>
+            <use xlinkHref='#svg-logotype' fill={active ? '#fff': '#6388bf'}/>
           </svg>
         </div>
-        <div className='-nav'>
-          <a href="#">start a colletive!</a>
-          <a href="#">login</a>
-        </div>
+        {!active && 
+          <div className='-nav'>
+            <a href="https://opencollective.com/#apply">start a colletive!</a>
+            <a href="https://app.opencollective.com/github/apply?next=/opencollective">login</a>
+          </div>
+        }
+        {active &&
+          <div className='-nav'>
+            {avatar && <img src={avatar} height="24px" width="24px" />}
+            <span>{name}</span>
+          </div>
+        }
       </div>
     )
   }

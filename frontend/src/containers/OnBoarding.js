@@ -24,7 +24,7 @@ export class OnBoarding extends Component {
     return (
       <div className={`OnBoarding ${step ? '-registering' : ''}`}>
         <Notification />
-        <OnBoardingHeader />
+        <OnBoardingHeader active={Boolean(step)} />
         {step === 0 && <OnBoardingHero onClickStart={() => this.setState({step: 1})} />}
         {step === 1 && <OnBoardingStepConnectGithub onNextStep={() => this.setState({step: 2})} />}
         {step === 2 && <OnBoardingStepPickRepository onNextStep={() => this.setState({step: 3})} />}

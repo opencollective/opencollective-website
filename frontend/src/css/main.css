@@ -67,6 +67,9 @@
 @import './components/ActivityItem.css';
 @import './components/Widget.css';
 @import './components/ImagePicker.css';
+@import './components/RepositoryPicker.css';
+@import './components/RepositoryPickerItem.css';
+@import './components/ContributorPicker.css';
 
 /**
  * Media queries
