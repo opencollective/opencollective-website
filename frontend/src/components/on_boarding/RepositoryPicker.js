@@ -11,7 +11,7 @@ export default class RepositoryPicker extends React.Component {
   
   render()
   {
-    const { onNextStep } = this.props;
+    const { } = this.props;
     return (
       <div className="RepositoryPicker">
         <RepositoryPickerItem title="Cohesive-colors" description="Tool to create cohesive color schemes." stars="1200"/>

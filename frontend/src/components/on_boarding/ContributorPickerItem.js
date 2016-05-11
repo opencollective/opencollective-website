@@ -9,7 +9,7 @@ export default class ContributorPickerItem extends React.Component {
   
   render()
   {
-    const { active } = this.props;
+    const { } = this.props;
     return (
       <div>
         <div className="ContributorPickerItem">
