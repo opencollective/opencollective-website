@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 import values from 'lodash/object/values';
-import contains from 'lodash/collection/contains';
 import i18n from '../lib/i18n';
 
 import roles from '../constants/roles';

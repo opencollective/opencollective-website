@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import take from 'lodash/array/take';
 import values from 'lodash/object/values';
 import sortBy from 'lodash/collection/sortBy';
-import contains from 'lodash/collection/contains';
 import i18n from '../lib/i18n';
 import filterCollection from '../lib/filter_collection';
 
