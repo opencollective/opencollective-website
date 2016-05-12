@@ -199,23 +199,13 @@ function mapStateToProps({
 
   group.backersCount = group.backers.length;
 
-  group.settings = {
+  group.settings = group.settings || {
     lang: 'en',
     formatCurrency: {
       compact: false,
       precision: 2
     }
   };
-
-  if(contains(['laprimaire','nuitdebout','lesbarbares'], group.slug)) {
-    group.settings = {
-      lang: 'fr',
-      formatCurrency: {
-        compact: true,
-        precision: 0
-      }
-    };
-  }
 
   return {
     amount: router.params.amount,

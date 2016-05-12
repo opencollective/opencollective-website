@@ -318,23 +318,13 @@ function mapStateToProps({
     button: "Become a backer"
   }];
 
-  group.settings = {
+  group.settings = group.settings || {
     lang: 'en',
     formatCurrency: {
       compact: false,
       precision: 2
     }
   };
-
-  if(contains(['laprimaire','nuitdebout','lesbarbares'], group.slug)) {
-    group.settings = {
-      lang: 'fr',
-      formatCurrency: {
-        compact: true,
-        precision: 0
-      }
-    };
-  }
 
   const donations = transactions.isDonation;
   const expenses = transactions.isExpense;
