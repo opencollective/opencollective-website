@@ -13,6 +13,7 @@ export default class PublicGroupWhyJoin extends React.Component {
 
     const hasMedia = (group.video || group.image);
     const summaryNoMediaClassNames = !hasMedia ? ' mx-auto' : '';
+    const whyJoinText = group.whyJoin || i18n.getString('becomeMemberText');
 
     return (
       <section id='why-join' className='bg-black white'>
@@ -28,7 +29,7 @@ export default class PublicGroupWhyJoin extends React.Component {
           <div className={`PublicGroup-summary col md-col-6 col-12 flex flex-column justify-between ${summaryNoMediaClassNames}`}>
             <div>
               <span className='PublicGroup-title white -ff-sec -fw-bold'>{i18n.getString('becomeMemberTitle')}</span>
-              <p className='PublicGroup-font-17 mt3'>{i18n.getString('becomeMemberText')}</p>
+              <p className='PublicGroup-font-17 mt3'>{whyJoinText}</p>
             </div>
             <div className='PublicGroup-metricContainer flex pt4'>
               <Metric label={i18n.getString('fundsAvailable')}
