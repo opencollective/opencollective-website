@@ -1,0 +1,39 @@
+.Checkbox
+{
+  position: relative;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 2px;
+  background-color: #ffffff;
+  box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+  border: solid 1px #d9d9d9;
+  cursor: pointer;
+  user-select: none;
+  -o-user-select: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+
+  &:not(.Checkbox--disabled):active
+  {
+    background-color: #f0f0f0;
+  }
+
+  &.Checkbox--disabled
+  {
+    cursor: default;
+    opacity: .6;
+  }
+
+  .Checkbox-checkmark
+  {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    text-align: center;
+    line-height: 1.5;
+  }
+}

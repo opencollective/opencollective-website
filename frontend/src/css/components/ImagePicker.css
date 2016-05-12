@@ -62,6 +62,17 @@
   text-align: center;
 }
 
+.ImagePicker-preview img
+{
+  width: 64px;
+  height: 64px;
+}
+
+.ImagePicker-preview img[src^="/static/"]
+{
+  cursor: pointer;
+}
+
 .avatar .ImagePicker-preview
 {
   border-radius: 100%;
@@ -98,6 +109,7 @@
   height: 16px;
   color: #75cc1f;
   cursor: pointer;
+  background-repeat: no-repeat;
 }
 
 .ImagePicker-prev

@@ -1,0 +1,56 @@
+.CustomTextArea
+{
+  position: relative;
+  display: inline-block;
+
+  .CustomTextArea-textarea
+  {
+    margin: 0;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    background-color: #ffffff;
+    box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+    overflow: auto;
+    font-family: Lato;
+    font-size: 16px;
+    color: #667985;
+    border: none;
+    letter-spacing: .5px;
+  }
+
+  .CustomTextArea-placeholder
+  {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    font-size: 19.2px;
+    font-size: 1.2rem;
+    padding: 16px;
+    padding: 1rem;
+    font-family: Lato;
+    font-style: italic;
+    font-size: 16px;
+    color: #ced5d9;
+    cursor: text;
+  }
+
+  .CustomTextArea-counter
+  {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    color: #bbc1c4;
+    font-family: Lato;
+    font-size: 12px;
+    padding: 10px 8px;
+  }
+
+  .CustomTextArea-has-scrollbar .CustomTextArea-counter
+  {
+    right: 16px;
+  }
+}

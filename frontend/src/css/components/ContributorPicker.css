@@ -19,6 +19,11 @@
 	padding: 18px 20px;
 	box-sizing: border-box;
 	letter-spacing: .5px;
+	
+	&:not(.ContributorPickerItem--active)
+	{
+		cursor: pointer;
+	}
 
 	img
 	{
@@ -48,6 +53,8 @@
 .ContributorPickerItem--active
 {
 	border: solid 1px #75cc1f;
+	margin-bottom: 20px;
+
 	img
 	{
 		border-radius: 100%;
@@ -66,7 +73,7 @@
 
 .ContributorPickerItemSearch
 {
-
+	margin: 0 auto;
 	width: 540px;
 	height: 277px;
 	border-radius: 5px;
@@ -119,6 +126,7 @@
 			vertical-align: middle;
 			overflow: hidden;
 			border-radius: 100%;
+			margin-right: 15px;
 		}
 
 		span
@@ -127,4 +135,11 @@
 			color: #797d80;
 		}
 	}
+}
+
+.ContributorPickerItemSearch-list-container
+{
+	height: 228px;
+	overflow: hidden;
+	overflow-y: auto;
 }
