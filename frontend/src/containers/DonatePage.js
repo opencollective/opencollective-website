@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 import values from 'lodash/object/values';
-import contains from 'lodash/collection/contains';
 import i18n from '../lib/i18n';
 
 import roles from '../constants/roles';
@@ -199,23 +198,13 @@ function mapStateToProps({
 
   group.backersCount = group.backers.length;
 
-  group.settings = {
+  group.settings = group.settings || {
     lang: 'en',
     formatCurrency: {
       compact: false,
       precision: 2
     }
   };
-
-  if(contains(['laprimaire','nuitdebout','lesbarbares'], group.slug)) {
-    group.settings = {
-      lang: 'fr',
-      formatCurrency: {
-        compact: true,
-        precision: 0
-      }
-    };
-  }
 
   return {
     amount: router.params.amount,

@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import take from 'lodash/array/take';
 import values from 'lodash/object/values';
 import sortBy from 'lodash/collection/sortBy';
-import contains from 'lodash/collection/contains';
 import i18n from '../lib/i18n';
 import filterCollection from '../lib/filter_collection';
 
@@ -318,23 +317,13 @@ function mapStateToProps({
     button: "Become a backer"
   }];
 
-  group.settings = {
+  group.settings = group.settings || {
     lang: 'en',
     formatCurrency: {
       compact: false,
       precision: 2
     }
   };
-
-  if(contains(['laprimaire','nuitdebout','lesbarbares'], group.slug)) {
-    group.settings = {
-      lang: 'fr',
-      formatCurrency: {
-        compact: true,
-        precision: 0
-      }
-    };
-  }
 
   const donations = transactions.isDonation;
   const expenses = transactions.isExpense;
