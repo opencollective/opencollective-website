@@ -25,6 +25,10 @@
 
 
 /* HERO */
+.PublicGroupHero.bg-cover {
+  background-position: 50% 50%;
+}
+
 .PublicGroupHero-content {
   padding: 8rem 0 6rem;
 }
