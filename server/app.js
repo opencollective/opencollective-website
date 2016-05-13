@@ -91,7 +91,7 @@ app.use((err, req, res, next) => {
  * Port config
  */
 
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.WEBSITE_PORT || 3000);
 
 /**
  * Start server
