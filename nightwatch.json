@@ -9,7 +9,7 @@
     "server_path" : "./bin/selenium-server-standalone-2.44.0.jar",
     "log_path" : "test/output/e2e",
     "host" : "127.0.0.1",
-    "port" : 4444,
+    "port" : 4445,
     "cli_args" : {
       "webdriver.chrome.driver" : "node_modules/chromedriver/bin/chromedriver"
     }
@@ -18,7 +18,7 @@
   "test_settings" : {
     "default" : {
       "launch_url" : "http://localhost:3000",
-      "selenium_port"  : 4444,
+      "selenium_port"  : 4445,
       "selenium_host"  : "localhost",
       "silent": true,
       "screenshots" : {
