@@ -10,7 +10,7 @@ export default class OnBoardingHeader extends React.Component {
   render()
   {
     const { active, avatar, name } = this.props;
-    const headerStyles = active ? {background: '#3d3d3d', padding: '20px 30px', marginBottom: '20px'} : {};
+    const headerStyles = active ? {background: '#3d3d3d', padding: '20px 30px', marginBottom: '50px'} : {};
 
     return (
       <div className='OnBoardingHeader' style={headerStyles}>

@@ -52,7 +52,7 @@ export default class ImagePicker extends Component {
   }
 
   render() {
-    const {className='avatar'} = this.props;
+    const {className='avatar', label='Choose a Profile Image'} = this.props;
     const {isLoading, currentIndex, hover, pressed} = this.state;
     const options = this.options;
     const currentOption = options[currentIndex];
@@ -69,10 +69,10 @@ export default class ImagePicker extends Component {
         <div className="ImagePicker-loader" style={{display : (isLoading ? 'block' : 'none')}}>
           <div className="loader"></div>
         </div>
-        <div className="ImagePicker-label">Choose a Profile Image</div>
+        <div className="ImagePicker-label">{label}</div>
         <div className={this.prevIsPossible() ? 'ImagePicker-prev active' : 'ImagePicker-prev'} onClick={this.prev.bind(this)}></div>
         <div className='ImagePicker-preview' onClick={() => this.avatarClick.call(this, currentOption)} onMouseOver={() => this.setState({'hover': true})} onMouseOut={() => this.setState({'hover': false, pressed: false})} onMouseDown={() => this.setState({'pressed': true})} onMouseUp={() => this.setState({'pressed': false})}>
-          <img src={currentSrc} width="64px" height="64px" onError={this.onImageError.bind(this)} />
+          <img src={currentSrc} onError={this.onImageError.bind(this)} />
         </div>
         <div className='ImagePicker-source-badge' style={{display : (KNOWN_SOURCES[currentOption.source] ? 'block' : 'none')}}>
           <img src={KNOWN_SOURCES[currentOption.source]}/>
@@ -94,6 +94,8 @@ export default class ImagePicker extends Component {
 
   componentWillReceiveProps(nextProps) {
     const {website, twitter} = nextProps;
+
+    if (this.props.dontLookupSocialMediaAvatars) return;
 
     if (website !== this.state.website || twitter !== this.state.twitter)
     {

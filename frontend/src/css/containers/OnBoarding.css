@@ -101,7 +101,7 @@
   div:nth-child(2)
   {
     margin: 0 auto;
-    margin-top: 20px;
+    margin-top: 15px;
     text-align: center;
     width: 605px;
     font-size: 15px;
@@ -195,4 +195,131 @@
 {
   margin: 0 auto;
   width: 768px; 
+}
+
+.OnBoardingStepCreate
+{
+  .OnBoardingStepCreate-form-container
+  {
+    width: 660px;
+    margin: 0 auto;
+    margin-top: 60px;
+
+    .flex-column
+    {
+      margin-right: 20px;
+    }
+
+    .OnBoardingStepCreate-label
+    {
+      font-family: Lato;
+      font-weight: bold;
+      font-size: 15px;
+      color: #797d80;
+      padding-bottom: 10px;
+    }
+
+    .OnBoardingStepCreate-tos
+    {
+      margin-top: 10px;
+      font-family: Lato;
+      font-size: 15px;
+      font-weight: bold;
+
+      .Checkbox, span
+      {
+        vertical-align: middle;
+      }
+
+      span
+      {
+        margin-left: 5px;
+        color: #aab0b3;
+      }
+    }
+  }
+}
+
+.OnBoarding
+{
+  .ImagePicker-container
+  {
+    width: 250px;
+    height: 230px;
+
+    .ImagePicker-label
+    {
+      font-weight: bold;
+      font-family: Lato;
+      font-size: 16px;
+      line-height: 1.3;
+      color: #797d80;
+      width: 200px;
+    }
+    
+    .ImagePicker-dot-list
+    {
+      bottom: 30px;
+
+      li:after
+      {
+        width: 12px;
+        height: 12px;
+      }
+    }
+
+    .ImagePicker-loader > div
+    {
+      margin: 105px auto;
+      font-size: 20px;
+    }
+
+    .ImagePicker-preview
+    {
+      width: 100px;
+      height: 100px;
+      background: none;
+      
+      img
+      {
+        width: 100px;
+        height: 100px;
+      }
+    }
+    
+    .ImagePicker-next, 
+    .ImagePicker-prev 
+    {
+      height: 18px;
+    }
+  }
+}
+
+.OnBoardingButton
+{
+  font-family: Montserrat;
+  outline: 0;
+  background-color: #75cc1f;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 18px;
+  padding: 8px 16px;
+  height: auto;
+  vertical-align: middle;
+  -webkit-appearance: none;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 19.2px 64px;
+  border-radius: 28px;
+  text-transform: uppercase;
+  min-width: 280px;
+  box-sizing: border-box; 
+  letter-spacing: 1px;
+
+  &:hover
+  {
+    opacity: .8;
+  }
 }

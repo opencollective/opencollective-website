@@ -70,6 +70,8 @@
 @import './components/RepositoryPicker.css';
 @import './components/RepositoryPickerItem.css';
 @import './components/ContributorPicker.css';
+@import './components/Checkbox.css';
+@import './components/CustomTextArea.css';
 
 /**
  * Media queries
