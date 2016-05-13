@@ -124,7 +124,12 @@ module.exports = {
     const users = filterUsersByTier(req.users, tier.replace(/s$/,''));
     const slug = req.params.slug;
     const position = parseInt(req.params.position, 10);
-    const user = (position < users.length) ?  users[position] : {};
+
+    if (position >= users.length) {
+      return res.sendStatus(404);
+    }
+
+    const user = users[position];
     user.twitter = (user.twitterHandle) ? `https://twitter.com/${user.twitterHandle}` : null;
 
     var redirectUrl = user.website || user.twitter || `https://opencollective.com/${slug}`;
@@ -132,7 +137,6 @@ module.exports = {
       redirectUrl = `https://opencollective.com/${slug}#support`;
     }
 
-    req.ga.pageview();
     req.ga.event(`GithubWidget-${tier}`, `Click`, user.name, position);
 
     res.redirect(redirectUrl);      
