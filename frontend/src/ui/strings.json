@@ -43,7 +43,7 @@
     "menuMembersWall": "Members Wall",
     "becomeA": "Become a",
     "joinAndFulfil": "Join us and help us fulfill our mission",
-    "helpUsContinueOurActivities": "With your membership plan, you’ll help us cover all the expenses the collective needs to keep going!",
+    "helpUsContinueOurActivities": "With your support, you’ll help us cover all the expenses the collective needs to keep going!",
     "membersWallTitle": "This is possible thanks to you.",
     "membersWallText": "Proud members and sponsors support this collective and allow us to keep going towards our mission. We would not be here if it weren’t for these amazing people. Thank you so much.",
     "weAre": "We are",
@@ -54,7 +54,7 @@
     "sponsor": "Official Sponsor",
     "fundsAvailable": "Total Funds Available",
     "becomeMemberTitle": "Why Become a Member?",
-    "becomeMemberText": "With your membership plan, you’ll help us cover all expenses the collective makes in order to keep going. All the funds will be managed responsibly with your help, and everyone can see how and where the funds are being spent!",
+    "becomeMemberText": "With your support, you’ll help us cover all expenses the collective makes in order to keep going. All the funds will be managed responsibly with your help, and everyone can see how and where the funds are being spent!",
     "howWeSpend": "See how we spend it",
     "donateWithPayPal": "Donate with PayPal",
     "and": "and",
@@ -124,5 +124,15 @@
     "weHave": "Nous avons",
     "thatProvideYearlyBudget": "qui nous fournissent un budget annuel de",
     "since": "depuis"
+  },
+  "wwcode": {
+    "coreContributors": "WWCode leaders",
+    "contributor": "director",
+    "member": "director",
+    "backer": "supporter",
+    "becomeMemberTitle": "Why Support WWCode?",
+    "menuMembersWall": "Supporters",
+    "membersWallTitle": "This is possible thanks to you.",
+    "membersWallText": "The donations from supporters of this network allow us to keep going towards our mission. We would not be here if it weren’t for these amazing people. Thank you so much."
   }
 }

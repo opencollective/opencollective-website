@@ -5,7 +5,7 @@ module.exports = (lang) => {
   moment.locale(lang);
   return {
     getString: (strid) => {
-      return strings[lang][strid]; // TODO: We should add a `lang` column in the `Groups` table and use that instead of `currency`
+      return strings[lang][strid] || strings['en'][strid];
     },
     moment
   };  
