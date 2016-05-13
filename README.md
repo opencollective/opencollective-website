@@ -1,4 +1,10 @@
-# OpenCollective Website [![Circle CI](https://circleci.com/gh/OpenCollective/website/tree/master.svg?style=svg&circle-token=529943730e6598363053a54a31969aa0278f0f33)](https://circleci.com/gh/OpenCollective/website/tree/master)
+# OpenCollective Website 
+
+[![Circle CI](https://circleci.com/gh/OpenCollective/website/tree/master.svg?style=shield&circle-token=529943730e6598363053a54a31969aa0278f0f33)](https://circleci.com/gh/OpenCollective/website/tree/master)
+[![Slack Status](https://slack.opencollective.com/badge.svg)](https://slack.opencollective.com)
+[![Gitter chat](https://badges.gitter.im/OpenCollective/OpenCollective.svg)](https://gitter.im/OpenCollective/OpenCollective)
+[![Dependency Status](https://david-dm.org/opencollective/website.svg)](https://david-dm.org/opencollective/website)
+[![Known Vulnerabilities](https://snyk.io/test/github/opencollective/website/badge.svg)](https://snyk.io/test/github/opencollective/website)
 
 Note: Currently, this is only serving the `/:slug` and `/:slug/widget` pages.
 The static pages `/`, `/faq`, `/about` are served from the [website-static](https://github.com/opencollective/website-static) server. Eventually we move over those static pages to this repo.
