@@ -51,6 +51,9 @@
 @import './components/ProfilePhoto.css';
 @import './components/PublicGroupTiers.css';
 @import './components/PublicGroupThanks.css';
+@import './components/DonationDistributor.css';
+@import './components/DonationDistributorItem.css';
+@import './components/Slider.css';
 @import './components/ExpenseForm.css';
 @import './components/YoutubeVideo.css';
 @import './components/PublicFooter.css';
