@@ -106,11 +106,10 @@ describe("redirect", () => {
     sandbox.restore();
   });
 
-  it("redirects to opencollective.com/:slug if no backer at that position", (done) => {
+  it("494 if no backer at that position", (done) => {
     request(app)
       .get('/yeoman/backers/999/website')
-      .expect('Location', 'https://opencollective.com/yeoman')
-      .expect(302, done);
+      .expect(404, done);
   });
 
   it("redirects to opencollective.com/:slug if no website or twitter for the backer at that position", (done) => {
