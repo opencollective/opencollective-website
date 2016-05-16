@@ -82,4 +82,6 @@ module.exports = (app) => {
   app.get('/:slug([A-Za-z0-9-]+)/donate/:amount', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-]+)/donate/:amount/:interval', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-]+)/connect/:service(github)', mw.ga, render);
+
+  app.use(mw.handleUncaughtError)
 };

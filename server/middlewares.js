@@ -137,6 +137,23 @@ const addTitle = (title) => {
     next();
   }
 }
+
+const handleUncaughtError = (error, req, res, next) => {
+    if (error.name === 'FetchError')
+    {
+      if (error.code === 'ECONNREFUSED')
+      {
+        console.error('API Server is down')
+      }
+      else
+      {
+        console.error('There was an error fetching from api')
+      }
+    }
+    console.log(error)
+    next()
+};
+
 export default {
   addMeta,
   addTitle,
@@ -145,5 +162,6 @@ export default {
   fetchSubscriptionsByUserWithToken,
   fetchUsers,
   fetchLeaderboard,
-  ga
+  ga,
+  handleUncaughtError
 }
