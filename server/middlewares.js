@@ -149,9 +149,24 @@ const handleUncaughtError = (error, req, res, next) => {
       {
         console.error('There was an error fetching from api')
       }
+      console.log('Error', error);
+      console.log('Error stack', error.stack);
+      
+      res
+      .status(500)
+      .render('pages/error', {
+        layout: false,
+        message: process.env.NODE_ENV === 'production' ? 'We couldn\'t find that page :(' : `Error ${error.code}: ${error.message}`,
+        stack: process.env.NODE_ENV === 'production' ? '' : error.stack,
+        options: {
+          showGA: config.GoogleAnalytics.active
+        }
+      }); 
     }
-    console.log(error)
-    next()
+    else
+    {
+      next(error)
+    }
 };
 
 export default {
