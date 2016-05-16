@@ -139,14 +139,10 @@ const addTitle = (title) => {
 }
 
 const handleUncaughtError = (error, req, res, next) => {
-    if (error.name === 'FetchError')
-    {
-      if (error.code === 'ECONNREFUSED')
-      {
+    if (error.name === 'FetchError') {
+      if (error.code === 'ECONNREFUSED') {
         console.error('API Server is down')
-      }
-      else
-      {
+      } else {
         console.error('There was an error fetching from api')
       }
       console.log('Error', error);
@@ -162,9 +158,7 @@ const handleUncaughtError = (error, req, res, next) => {
           showGA: config.GoogleAnalytics.active
         }
       }); 
-    }
-    else
-    {
+    } else {
       next(error)
     }
 };
