@@ -15,8 +15,8 @@ import fetchReposFromGitHub from '../actions/github/fetch_repos';
 import fetchContributorsFromGitHub from '../actions/github/fetch_contributors';
 import uploadImage from '../actions/images/upload';
 
-const MIN_STARS = 3;//100;
-const MIN_CONTRIBUTORS = 2;
+const MIN_STARS = 100;
+// const MIN_CONTRIBUTORS = 2;
 
 export class OnBoarding extends Component {
 
