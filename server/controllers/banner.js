@@ -9,13 +9,13 @@ const filterUsersByTier = (users, tiername) => {
 }
 
 module.exports = {
-  
+
   index: (req, res) => {
     res.render('backers', {
       users: req.users
     });
   },
-  
+
   markdown: (req, res) => {
     const slug = req.params.slug;
     const positions = [];
@@ -60,7 +60,7 @@ module.exports = {
       const maxHeight = (format === 'svg' ) ? 128 : 64;
       imageUrl = `https://res.cloudinary.com/opencollective/image/fetch/h_${maxHeight}/${avatarEncoded}`;
     }
-    
+
     if(position == users.length) {
       imageUrl = `/static/images/become_${tierSingular}.svg`;
     }
@@ -102,7 +102,7 @@ module.exports = {
     }
 
   },
-  
+
   badge: (req, res) => {
     const tier = req.params.tier;
     const color = req.query.color || 'brightgreen';
@@ -125,7 +125,7 @@ module.exports = {
     const slug = req.params.slug;
     const position = parseInt(req.params.position, 10);
 
-    if (position >= users.length) {
+    if (position > users.length) {
       return res.sendStatus(404);
     }
 
@@ -139,6 +139,6 @@ module.exports = {
 
     req.ga.event(`GithubWidget-${tier}`, `Click`, user.name, position);
 
-    res.redirect(redirectUrl);      
+    res.redirect(redirectUrl);
   }
 };
