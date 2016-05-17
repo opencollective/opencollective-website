@@ -29,7 +29,7 @@ module.exports = {
       // .assert.urlContains(`https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${callbackUrl}&response_type=code&scope=${githubScope}`)
       // .click('button[name=authorize]') // click 'Authorize application'
 
-      .waitForElementVisible('body', 2000)
+      .waitForElementVisible('body', 4000)
       .assert.urlContains('http://localhost:3000/testcollective')
       .end();
    }
