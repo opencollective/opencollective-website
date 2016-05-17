@@ -9,23 +9,15 @@ export default class OnBoardingStepPickCoreContributors extends React.Component 
   {
     super(props);
     this.chosenContributors = [];
-    this.availableContributors = [
-      {name: 'Don Gill'},
-      {name: 'Landon Roberts'},
-      {name: 'Jayden Collier'},
-      {name: 'Curtis Fisher'},
-      {name: 'Lesse Palmer'},
-    ];
   }
-  
+
   render()
   {
-    const { onNextStep } = this.props;
-    const availableContributors = this.availableContributors;
+    const { onNextStep, contributors: availableContributors } = this.props;
     const chosenContributors = this.chosenContributors;
     return (
       <div className="OnBoardingStepPickCoreContributors">
-        <OnBoardingStepHeading step="3/4" title="Select your core contributors." subtitle="Add at least 2 members from the repository contributors, they will have acces to the funds. All other repository contributors will be listed as regular contributors in your collective page."/>
+        <OnBoardingStepHeading step="3/4" title="Select your core contributors." subtitle="Add at least 2 members from the repository contributors, they will have access to the funds. All other repository contributors will be listed as regular contributors in your collective page."/>
         <ContributorPicker
           available={availableContributors}
           chosen={chosenContributors}

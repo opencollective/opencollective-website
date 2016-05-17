@@ -20,6 +20,15 @@ export function get(endpoint, options={}) {
     });
 }
 
+export function getThirdParty(endpoint, options={}) {
+  const { params } = options;
+  return fetch(urlThirdParty(endpoint, params), {headers: headers()})
+    .then(checkStatus)
+    .then((json={}) => {
+      return json;
+    });
+}
+
 /**
  * POST json request
  */
@@ -85,6 +94,15 @@ function url(endpoint, params) {
   const query = queryString.stringify(params);
 
   return `${API_ROOT + endpoint}${query.length > 0 ? `?${query}` : '' }`;
+}
+
+/**
+ * Build a url to a third party
+ */
+function urlThirdParty(endpoint, params) {
+  const query = queryString.stringify(params);
+
+  return `${endpoint}${query.length > 0 ? `?${query}` : '' }`;
 }
 
 /**

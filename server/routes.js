@@ -38,8 +38,8 @@ module.exports = (app) => {
   /**
    * Authentication
    */
-  app.get('/api/auth/:service(github)/:slug', aN.authenticateService);
-  app.get('/auth/:service(github)/callback/:slug', aN.authenticateServiceCallback);
+  app.get('/api/auth/:service(github)', aN.authenticateService);
+  app.get('/auth/:service(github)/callback', aN.authenticateServiceCallback);
 
   /**
    * Pipe the requests before the middlewares, the piping will only work with raw
@@ -73,7 +73,8 @@ module.exports = (app) => {
    * the explicit routes and just do `app.use(render)`
    */
   app.get('/leaderboard', mw.ga, mw.fetchLeaderboard, mw.addTitle('Open Collective Leaderboard'), render);
-  app.get('/github/apply', mw.ga, mw.addTitle('Open Source Collective'), render);
+  app.get('/github/apply/:token', mw.ga, mw.extractGithubUsernameFromToken, mw.addTitle('Sign up your Github repository'), render);
+  app.get('/github/apply', mw.ga, mw.addTitle('Sign up your Github repository'), render);
   app.get('/subscriptions/:token', mw.ga, mw.fetchSubscriptionsByUserWithToken, mw.addTitle('My Subscriptions'), render);
   app.get('/subscriptions', mw.ga, mw.fetchSubscriptionsByUserWithToken, mw.addTitle('My Subscriptions'), render);
   app.get('/:slug([A-Za-z0-9-]+)', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);

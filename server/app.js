@@ -34,7 +34,7 @@ app.use(compression());
  */
 passport.serializeUser((user, done) => done(null, user));
 passport.deserializeUser((obj, done) => done(null, obj));
-const serviceCallback = (accessToken, refreshToken, profile, done) => done(null, accessToken);
+const serviceCallback = (accessToken, refreshToken, profile, done) => done(null, accessToken, profile);
 
 passport.use(new GitHubStrategy({
   clientID: config.github.clientId,

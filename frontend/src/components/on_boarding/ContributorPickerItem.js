@@ -6,11 +6,11 @@ export default class ContributorPickerItem extends React.Component {
   {
     super(props);
     this.state = {
-      showContributorList: false,
+      showContributorList: true,
       filterValue: ''
     };
   }
-  
+
   renderAvailableContributorsList()
   {
     const { available, onChoose } = this.props;
@@ -18,7 +18,7 @@ export default class ContributorPickerItem extends React.Component {
     return available.filter((contributor) => {return !filterValue || contributor.name.indexOf(filterValue) !== -1 }).map((contributor, index) => {
       return (
         <li key={index} onClick={() => {
-          this.setState({showContributorList: false});
+          this.setState({showContributorList: true});
           onChoose(contributor);
           }}
         >
@@ -41,11 +41,11 @@ export default class ContributorPickerItem extends React.Component {
         	{name && <i onClick={onRemove}>Remove</i>}
         </div>
 
-        {!name && showContributorList && 
+        {!name && showContributorList &&
           <div className="ContributorPickerItemSearch">
-            <input 
+            <input
               ref='input'
-              placeholder="filter repository contributors" 
+              placeholder="filter repository contributors"
               onInput={() => {
                 this.setState({filterValue: this.refs.input.value});
               }}
