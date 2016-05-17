@@ -18,7 +18,7 @@ export default class UserCard extends Component {
 
   _link(href, children) {
     if (href) {
-      return (<a href={href} className='inline-block align-top'>{children}</a>);
+      return (<a href={href} target='_blank' className='inline-block align-top'>{children}</a>);
     }
 
     return children;
@@ -26,7 +26,7 @@ export default class UserCard extends Component {
 
   render() {
     const { className = '', user, i18n } = this.props;
-    
+
     const twitterUrl = (user.twitterHandle) ? `https://twitter.com/${user.twitterHandle}` : '';
     const href = (user.website || twitterUrl);
 
