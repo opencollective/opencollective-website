@@ -129,10 +129,10 @@ module.exports = {
       return res.sendStatus(404);
     }
 
-    const user = users[position];
-    user.twitter = (user && user.twitterHandle) ? `https://twitter.com/${user.twitterHandle}` : null;
+    const user = users[position] || {};
+    user.twitter = user.twitterHandle ? `https://twitter.com/${user.twitterHandle}` : null;
 
-    var redirectUrl = (user && user.website) || (user && user.twitter) || `https://opencollective.com/${slug}`;
+    var redirectUrl =  user.website || user.twitter || `https://opencollective.com/${slug}`;
     if(position === users.length) {
       redirectUrl = `https://opencollective.com/${slug}#support`;
     }
