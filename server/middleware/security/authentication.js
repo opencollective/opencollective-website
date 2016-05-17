@@ -25,7 +25,7 @@ export default {
       if (!accessToken) {
         return res.redirect(`${slug}/connect/${service}`);
       }
-      api.post(`/groups/${slug}/connected-accounts/${service}`, JSON.stringify({ accessToken }))
+      api.post(`/connected-accounts/${service}`, JSON.stringify({ accessToken }))
         .then(() => res.redirect(`/${slug}`))
         .catch(apiErr => next(apiErr));
     })(req, res, next);
