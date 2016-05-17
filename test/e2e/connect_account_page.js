@@ -10,6 +10,8 @@ module.exports = {
       .waitForElementVisible('body', 1000)
       .assert.containsText('body', 'Connect to github'),
 
+  /*
+  TODO: redo this when we have github flow finalized
   'Redirects to Github after clicking connect': (client) => {
 
     // const clientId = config.github.clientId;
@@ -33,4 +35,5 @@ module.exports = {
       .assert.urlContains('http://localhost:3000/testcollective')
       .end();
    }
+   */
 };
