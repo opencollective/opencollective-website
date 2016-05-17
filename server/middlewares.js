@@ -137,6 +137,32 @@ const addTitle = (title) => {
     next();
   }
 }
+
+const handleUncaughtError = (error, req, res, next) => {
+    if (error.name === 'FetchError') {
+      if (error.code === 'ECONNREFUSED') {
+        console.error('API Server is down')
+      } else {
+        console.error('There was an error fetching from api')
+      }
+      console.log('Error', error);
+      console.log('Error stack', error.stack);
+      
+      res
+      .status(500)
+      .render('pages/error', {
+        layout: false,
+        message: process.env.NODE_ENV === 'production' ? 'We couldn\'t find that page :(' : `Error ${error.code}: ${error.message}`,
+        stack: process.env.NODE_ENV === 'production' ? '' : error.stack,
+        options: {
+          showGA: config.GoogleAnalytics.active
+        }
+      }); 
+    } else {
+      next(error)
+    }
+};
+
 export default {
   addMeta,
   addTitle,
@@ -145,5 +171,6 @@ export default {
   fetchSubscriptionsByUserWithToken,
   fetchUsers,
   fetchLeaderboard,
-  ga
+  ga,
+  handleUncaughtError
 }
