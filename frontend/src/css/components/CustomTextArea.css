@@ -48,9 +48,9 @@
     font-size: 12px;
     padding: 10px 8px;
   }
+}
 
-  .CustomTextArea-has-scrollbar .CustomTextArea-counter
-  {
-    right: 16px;
-  }
+.CustomTextArea-has-scrollbar .CustomTextArea-counter
+{
+  right: 16px;
 }

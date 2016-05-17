@@ -21,6 +21,7 @@ export default class OnBoardingStepCreate extends React.Component {
   {
     const { onCreate } = this.props;
     const { agreedTOS, expenseDescription, missionDescription } = this.state;
+    const canCreate = expenseDescription && missionDescription && agreedTOS;
     return (
       <div className="OnBoardingStepCreate">
         <OnBoardingStepHeading step="4/4" title="Why do you want to create a collective?" subtitle="The answers will be public and help you motivate people to back your project."/>
@@ -44,7 +45,7 @@ export default class OnBoardingStepCreate extends React.Component {
           </div>
         </div>
         <div style={{margin: '0 auto', marginTop: '40px', width: '300px', textAlign: 'center'}}>
-          <div className='OnBoardingButton' onClick={onCreate}>create!</div>
+          <div className={`OnBoardingButton ${canCreate ? '' : 'disabled'}`} onClick={canCreate && onCreate}>create!</div>
         </div>
       </div>
     )

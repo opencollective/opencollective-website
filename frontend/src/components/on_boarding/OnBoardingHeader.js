@@ -14,17 +14,17 @@ export default class OnBoardingHeader extends React.Component {
 
     return (
       <div className='OnBoardingHeader' style={headerStyles}>
-        <div className='-brand'>
+        <a className='-brand' href="/">
           <svg width='18px' height='18px' className='-light-blue align-middle mr1'>
             <use xlinkHref='#svg-isotype'/>
           </svg>
           <svg width='172px' height='30px' className='align-middle xs-hide'>
             <use xlinkHref='#svg-logotype' fill={active ? '#fff': '#6388bf'}/>
           </svg>
-        </div>
+        </a>
         {!active && 
           <div className='-nav'>
-            <a href="https://opencollective.com/#apply">start a colletive!</a>
+            <a href="https://opencollective.com/#apply">start a colletive</a>
             <a href="https://app.opencollective.com/github/apply?next=/opencollective">login</a>
           </div>
         }
