@@ -19,7 +19,7 @@ export default class OnBoardingStepCreate extends React.Component {
   
   render()
   {
-    const { onCreate } = this.props;
+    const { onCreate, uploadImage } = this.props;
     const { agreedTOS, expenseDescription, missionDescription } = this.state;
     const canCreate = expenseDescription && missionDescription && agreedTOS;
     return (
@@ -36,7 +36,7 @@ export default class OnBoardingStepCreate extends React.Component {
               </div>
             </div>
             <div>
-              <ImagePicker className="logo" label="Select Collective Image" dontLookupSocialMediaAvatars handleChange={Function.prototype}/>
+              <ImagePicker uploadImage={uploadImage} className="logo" label="Select Collective Image" dontLookupSocialMediaAvatars handleChange={Function.prototype}/>
             </div>
           </div>
           <div className="OnBoardingStepCreate-tos">

@@ -59,5 +59,8 @@
 		font-size: 16px;
 		color: #797d80;
 		margin-top: 5px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 }

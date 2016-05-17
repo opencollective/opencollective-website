@@ -30,13 +30,7 @@ export default class ContributorPicker extends React.Component {
     return (
       <div className="ContributorPicker">
         {this.renderChosenContributors()}
-        {
-          available.length &&
-          <ContributorPickerItem
-            available={available}
-            onChoose={onChoose}
-          />
-        }
+        {available.length ? <ContributorPickerItem available={available} onChoose={onChoose} /> : null}
       </div>
     )
   }

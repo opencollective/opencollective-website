@@ -13,7 +13,10 @@ import OnBoardingStepThankYou from '../components/on_boarding/OnBoardingStepThan
 
 import fetchReposFromGitHub from '../actions/github/fetch_repos';
 import fetchContributorsFromGitHub from '../actions/github/fetch_contributors';
+import uploadImage from '../actions/images/upload';
 
+const MIN_STARS = 3;//100;
+const MIN_CONTRIBUTORS = 2;
 
 export class OnBoarding extends Component {
 
@@ -45,7 +48,13 @@ export class OnBoarding extends Component {
 
   render(){
     const { step } = this.state;
-    const { repositories, contributors } = this.props;
+    const { contributors } = this.props;
+    let { repositories } = this.props;
+
+    // TODO filter by contributor count
+    repositories = repositories.filter((repo) => repo.stars >= MIN_STARS);
+    repositories.sort((A, B) => B.stars - A.stars);
+
     return (
       <div className={`OnBoarding ${step ? '-registering' : ''}`}>
         <Notification />
@@ -54,7 +63,7 @@ export class OnBoarding extends Component {
         {step === 1 && <OnBoardingStepConnectGithub onNextStep={() => this.setState({step: 2})} />}
         {step === 2 && <OnBoardingStepPickRepository repositories={repositories} onNextStep={(selectedRepo) => this.getContributors.bind(this, selectedRepo)} />}
         {step === 3 && <OnBoardingStepPickCoreContributors contributors={contributors} onNextStep={() => this.setState({step: 4})} />}
-        {step === 4 && <OnBoardingStepCreate onCreate={() => this.setState({step: 5})}/>}
+        {step === 4 && <OnBoardingStepCreate onCreate={() => this.setState({step: 5})} {...this.props} />}
         {step === 5 && <OnBoardingStepThankYou onContinue={() => this.setState({step: 0})}/>}
       </div>
     )
@@ -72,7 +81,8 @@ export class OnBoarding extends Component {
 
 export default connect(mapStateToProps, {
   fetchReposFromGitHub,
-  fetchContributorsFromGitHub
+  fetchContributorsFromGitHub,
+  uploadImage
 })(OnBoarding);
 
 function mapStateToProps({github}) {

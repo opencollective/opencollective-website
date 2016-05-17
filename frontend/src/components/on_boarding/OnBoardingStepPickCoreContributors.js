@@ -35,7 +35,7 @@ export default class OnBoardingStepPickCoreContributors extends React.Component 
           }}
         />
         <div style={{margin: '0 auto', marginTop: '40px', width: '300px', textAlign: 'center'}}>
-          <div className={`OnBoardingButton ${chosenContributors.length > 1 ? '' : 'disabled'}`} onClick={chosenContributors.length > 1 && onNextStep}>continue</div>
+          <div className={`OnBoardingButton ${chosenContributors.length > 1 ? '' : 'disabled'}`} onClick={chosenContributors.length > 0 && onNextStep}>continue</div>
         </div>
       </div>
     )

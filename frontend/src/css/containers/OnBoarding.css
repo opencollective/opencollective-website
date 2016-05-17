@@ -196,16 +196,20 @@
 {
   margin: 0 auto;
   width: 768px; 
+  padding-bottom: 40px;
 }
 
 .OnBoardingStepPickCoreContributors
 {
   margin: 0 auto;
-  width: 768px; 
+  width: 768px;
+  padding-bottom: 40px;
 }
 
 .OnBoardingStepCreate
 {
+  padding-bottom: 40px;
+
   .OnBoardingStepCreate-form-container
   {
     width: 660px;
@@ -233,7 +237,7 @@
       font-size: 15px;
       font-weight: bold;
 
-      .Checkbox, span
+      .Checkbox, span a, span span
       {
         vertical-align: middle;
       }
