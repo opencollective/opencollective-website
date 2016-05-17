@@ -55,7 +55,7 @@ module.exports = {
     }
 
     var imageUrl = "/static/images/user.svg";
-    if(user.avatar) {
+    if(user.avatar && user.avatar.substr(0,1) !== '/') {
       const avatarEncoded = encodeURIComponent(user.avatar);
       const maxHeight = (format === 'svg' ) ? 128 : 64;
       imageUrl = `https://res.cloudinary.com/opencollective/image/fetch/h_${maxHeight}/${avatarEncoded}`;
@@ -68,7 +68,7 @@ module.exports = {
       imageUrl = "/static/images/1px.png";
     }
 
-    if(imageUrl.substr(0,1) == '/') {
+    if(imageUrl.substr(0,1) === '/') {
       return res.redirect(imageUrl);
     }
 
