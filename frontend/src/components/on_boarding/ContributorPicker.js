@@ -11,19 +11,32 @@ export default class ContributorPicker extends React.Component {
  
   renderChosenContributors()
   {
-    const { chosen } = this.props;
+    const { chosen, onRemove } = this.props;
     return chosen.map((contributor, index) => {
-      return <ContributorPickerItem key={index} name={contributor.name} avatar={contributor.avatar} />
+      return (
+        <ContributorPickerItem 
+          key={index}
+          name={contributor.name}
+          avatar={contributor.avatar}
+          onRemove={() => onRemove(contributor)}
+        />
+      )
     });
   }
 
   render()
   {
-    const { available } = this.props;
+    const { available, onChoose } = this.props;
     return (
       <div className="ContributorPicker">
         {this.renderChosenContributors()}
-      	<ContributorPickerItem available={available} />
+        {
+          available.length &&
+          <ContributorPickerItem 
+            available={available} 
+            onChoose={onChoose}
+          />
+        }
       </div>
     )
   }

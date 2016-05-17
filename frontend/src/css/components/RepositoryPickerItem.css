@@ -11,6 +11,24 @@
 	padding-bottom: 0;
 	box-sizing: border-box;
 	font-family: Lato;
+	border: solid 2px white;
+	cursor: pointer;
+
+	&:first-child
+	{
+		margin-top: 0;
+	}
+
+	&:last-child
+	{
+		margin-bottom: 20px;
+	}
+
+	&.RepositoryPickerItem--selected
+	{
+		box-shadow: 0 1px 3px 0 rgba(45, 77, 97, 0.3);
+		border: solid 2px #75cc1f;
+	}
 
 	.-title
 	{
@@ -24,7 +42,16 @@
 		float: right;
 		color: #bbc1c4;
 		font-size: 14px;
-		padding-top: 2px;
+		
+		img, span
+		{
+			vertical-align: middle;
+		}
+
+		img
+		{
+			margin-right: 6px;
+		}
 	}
 
 	.-description
