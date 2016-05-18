@@ -12,7 +12,7 @@ export default class OnBoardingStepCreate extends React.Component {
     super(props);
     this.state = {
       agreedTOS: false,
-      avatar: '',
+      logo: '',
       expenseDescription: '',
       missionDescription: ''
     }
@@ -40,7 +40,7 @@ export default class OnBoardingStepCreate extends React.Component {
               <ImagePicker 
                 className="logo"
                 dontLookupSocialMediaAvatars
-                handleChange={avatar => this.setState({'avatar': avatar})}
+                handleChange={logo => this.setState({'logo': logo})}
                 label="Select Collective Image"
                 uploadImage={uploadImage}
               />
@@ -61,7 +61,7 @@ export default class OnBoardingStepCreate extends React.Component {
   onCreateClick()
   {
     const { onCreate } = this.props;
-    const { missionDescription, expenseDescription } = this.state;
-    onCreate(missionDescription, expenseDescription, avatar);
+    const { missionDescription, expenseDescription, logo } = this.state;
+    onCreate(missionDescription, expenseDescription, logo);
   }
 }

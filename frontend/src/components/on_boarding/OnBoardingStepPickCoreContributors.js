@@ -3,6 +3,8 @@ import React from 'react';
 import OnBoardingStepHeading from './OnBoardingStepHeading';
 import ContributorPicker from './ContributorPicker';
 
+const MIN_CONTRIBUTORS = 2;
+
 export default class OnBoardingStepPickCoreContributors extends React.Component {
 
   constructor(props)
@@ -35,7 +37,7 @@ export default class OnBoardingStepPickCoreContributors extends React.Component 
           }}
         />
         <div style={{margin: '0 auto', marginTop: '40px', width: '300px', textAlign: 'center'}}>
-          <div className={`OnBoardingButton ${chosenContributors.length > 1 ? '' : 'disabled'}`} onClick={chosenContributors.length > 0 && onNextStep}>continue</div>
+          <div className={`OnBoardingButton ${chosenContributors.length >= MIN_CONTRIBUTORS ? '' : 'disabled'}`} onClick={chosenContributors.length >= MIN_CONTRIBUTORS ? onNextStep(chosenContributors.map((contributor) => contributor.name)) : null }>continue</div>
         </div>
       </div>
     )

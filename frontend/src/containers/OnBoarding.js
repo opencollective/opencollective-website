@@ -16,7 +16,6 @@ import fetchContributorsFromGitHub from '../actions/github/fetch_contributors';
 import uploadImage from '../actions/images/upload';
 
 const MIN_STARS = 100;
-// const MIN_CONTRIBUTORS = 2;
 
 export class OnBoarding extends Component {
 
@@ -24,7 +23,8 @@ export class OnBoarding extends Component {
     super(props);
     this.state = {
       step: 0,
-      selectedRepo: ''
+      selectedRepo: '',
+      chosenContributors: []
     };
   }
 
@@ -46,12 +46,11 @@ export class OnBoarding extends Component {
     }
   }
 
-  render(){
+  render() {
     const { step } = this.state;
     const { contributors, githubUsername } = this.props;
     let { repositories } = this.props;
 
-    // TODO filter by contributor count
     repositories = repositories.filter((repo) => repo.stars >= MIN_STARS);
     repositories.sort((A, B) => B.stars - A.stars);
 
@@ -60,13 +59,28 @@ export class OnBoarding extends Component {
         <Notification />
         {step !== 5 && <OnBoardingHeader active={Boolean(step)} username={githubUsername} />}
         {step === 0 && <OnBoardingHero onClickStart={() => this.setState({step: 1})} />}
-        {step === 1 && <OnBoardingStepConnectGithub onNextStep={() => this.setState({step: 2})} />}
+        {step === 1 && <OnBoardingStepConnectGithub />}
         {step === 2 && <OnBoardingStepPickRepository repositories={repositories} onNextStep={(selectedRepo) => this.getContributors.bind(this, selectedRepo)} />}
-        {step === 3 && <OnBoardingStepPickCoreContributors contributors={contributors} onNextStep={() => this.setState({step: 4})} />}
-        {step === 4 && <OnBoardingStepCreate onCreate={() => this.setState({step: 5})} {...this.props} />}
+        {step === 3 && <OnBoardingStepPickCoreContributors contributors={contributors} onNextStep={(chosenContributors) => this.setState({step: 4, chosenContributors})} />}
+        {step === 4 && <OnBoardingStepCreate onCreate={this.create.bind(this)} {...this.props} />}
         {step === 5 && <OnBoardingStepThankYou onContinue={() => this.setState({step: 0})}/>}
       </div>
     )
+  }
+
+  create(missionDescription, expenseDescription, logo) {
+    const { githubUsername } = this.props;
+    const { selectedRepo, chosenContributors } = this.state;
+    console.log(
+      'CREATE',
+      githubUsername,
+      selectedRepo,
+      chosenContributors,
+      missionDescription,
+      expenseDescription,
+      logo
+    )
+    this.setState({step: 5});
   }
 
   getContributors(selectedRepo) {
