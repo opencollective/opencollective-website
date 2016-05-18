@@ -178,6 +178,7 @@
 .PublicGroupJoinUs-tier-box-inner {
   border-width: 2px;
   border-radius: 6px;
+  padding-bottom: 30px;
 }
 
 .PublicGroupJoinUs-tier-box-title {
@@ -188,6 +189,12 @@
   min-height: calc(1.38rem * 3);
 }
 
+.PublicGroupJoin-container .Button {
+  margin: auto;
+  font-weight: normal;
+  border-radius: 100px;
+  min-width: 70%;
+}
 
 /* MEMBERS WALL */
 .PublicGroup-MembersWall::before {

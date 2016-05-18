@@ -216,11 +216,13 @@ export default class DonationDistributor extends Component {
     const formattedAmount = formatCurrency(amount, currency, {compact: true});
     const distribution = this.options.map((opt) => { return {id: opt.id, value: opt.value} });
     const label = skipModal ? (buttonLabel || i18n.getString('donate')) : `${i18n.getString('pay')} ${formattedAmount}`;
+    const customButtonStyle = label.length > 30 ? {fontSize: '14px', padding: '14px 16px'} : {};
 
     if (this.state.paymentMethod === 'paypal')
     {
       return (
         <AsyncButton
+          style={customButtonStyle}
           color='green'
           inProgress={inProgress}
           customClass='btn -btn-big -bg-green -ttu -ff-sec -fw-bold'
@@ -257,6 +259,7 @@ export default class DonationDistributor extends Component {
           amount={convertToCents(amount)}
           description={this.getStripeDesciption()}>
             <AsyncButton
+              style={customButtonStyle}
               onClick={this.close.bind(this)}
               color='green'
               inProgress={inProgress}
