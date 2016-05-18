@@ -12,6 +12,7 @@ export default class OnBoardingStepCreate extends React.Component {
     super(props);
     this.state = {
       agreedTOS: false,
+      avatar: '',
       expenseDescription: '',
       missionDescription: ''
     }
@@ -19,7 +20,7 @@ export default class OnBoardingStepCreate extends React.Component {
   
   render()
   {
-    const { onCreate, uploadImage } = this.props;
+    const { uploadImage } = this.props;
     const { agreedTOS, expenseDescription, missionDescription } = this.state;
     const canCreate = expenseDescription && missionDescription && agreedTOS;
     return (
@@ -36,7 +37,13 @@ export default class OnBoardingStepCreate extends React.Component {
               </div>
             </div>
             <div>
-              <ImagePicker uploadImage={uploadImage} className="logo" label="Select Collective Image" dontLookupSocialMediaAvatars handleChange={Function.prototype}/>
+              <ImagePicker 
+                className="logo"
+                dontLookupSocialMediaAvatars
+                handleChange={avatar => this.setState({'avatar': avatar})}
+                label="Select Collective Image"
+                uploadImage={uploadImage}
+              />
             </div>
           </div>
           <div className="OnBoardingStepCreate-tos">
@@ -45,9 +52,16 @@ export default class OnBoardingStepCreate extends React.Component {
           </div>
         </div>
         <div style={{margin: '0 auto', marginTop: '40px', width: '300px', textAlign: 'center'}}>
-          <div className={`OnBoardingButton ${canCreate ? '' : 'disabled'}`} onClick={canCreate && onCreate}>create!</div>
+          <div className={`OnBoardingButton ${canCreate ? '' : 'disabled'}`} onClick={canCreate && this.onCreateClick.bind(this)}>create!</div>
         </div>
       </div>
     )
+  }
+
+  onCreateClick()
+  {
+    const { onCreate } = this.props;
+    const { missionDescription, expenseDescription } = this.state;
+    onCreate(missionDescription, expenseDescription, avatar);
   }
 }

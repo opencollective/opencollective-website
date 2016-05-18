@@ -9,7 +9,7 @@ export default class OnBoardingHeader extends React.Component {
   
   render()
   {
-    const { active, avatar, name } = this.props;
+    const { active, username } = this.props;
     const headerStyles = active ? {background: '#3d3d3d', padding: '20px 30px', marginBottom: '50px'} : {};
 
     return (
@@ -30,8 +30,8 @@ export default class OnBoardingHeader extends React.Component {
         }
         {active &&
           <div className='-nav'>
-            {avatar && <img src={avatar} height="24px" width="24px" />}
-            <span>{name}</span>
+            {username && <img src={`//avatars.githubusercontent.com/${username}?s=24`} height="24px" width="24px" />}
+            <span>{username}</span>
           </div>
         }
       </div>

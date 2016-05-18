@@ -48,7 +48,7 @@ export class OnBoarding extends Component {
 
   render(){
     const { step } = this.state;
-    const { contributors } = this.props;
+    const { contributors, githubUsername } = this.props;
     let { repositories } = this.props;
 
     // TODO filter by contributor count
@@ -58,7 +58,7 @@ export class OnBoarding extends Component {
     return (
       <div className={`OnBoarding ${step ? '-registering' : ''}`}>
         <Notification />
-        {step !== 5 && <OnBoardingHeader active={Boolean(step)} />}
+        {step !== 5 && <OnBoardingHeader active={Boolean(step)} username={githubUsername} />}
         {step === 0 && <OnBoardingHero onClickStart={() => this.setState({step: 1})} />}
         {step === 1 && <OnBoardingStepConnectGithub onNextStep={() => this.setState({step: 2})} />}
         {step === 2 && <OnBoardingStepPickRepository repositories={repositories} onNextStep={(selectedRepo) => this.getContributors.bind(this, selectedRepo)} />}
