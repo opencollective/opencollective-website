@@ -7,7 +7,8 @@ export default ({
   customClass,
   children,
   color,
-  disabled
+  disabled,
+  style
 }) => {
   const noop = () => {};
   const btnClass = classNames({
@@ -20,6 +21,7 @@ export default ({
 
   return (
     <div
+      style={style}
       className={btnClass}
       onClick={disabled || inProgress ? noop : onClick} >
       {inProgress ? 'Loading' : children}
