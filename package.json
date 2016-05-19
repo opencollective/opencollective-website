@@ -1,6 +1,6 @@
 {
   "name": "opencollective-website",
-  "version": "0.1.101",
+  "version": "0.1.104",
   "engines": {
     "node": "5.11.0",
     "npm": "3.8.6"
@@ -81,8 +81,6 @@
     "morgan": "1.7.0",
     "normalizr": "1.4.1",
     "numbro": "1.6.2",
-    "passport": "0.3.2",
-    "passport-github2": "0.1.10",
     "postcss-cssnext": "2.5.2",
     "postcss-discard-comments": "2.0.4",
     "postcss-import": "8.1.0",

@@ -2,8 +2,6 @@ import express from 'express';
 import morgan from 'morgan';
 import config from 'config';
 import compression from 'compression';
-import passport from 'passport';
-import { Strategy as GitHubStrategy } from 'passport-github2';
 import pkg from '../package.json';
 
 /**
@@ -30,22 +28,6 @@ app.use(morgan('dev'));
 app.use(compression());
 
 /**
- * Authentication
- */
-passport.serializeUser((user, done) => done(null, user));
-passport.deserializeUser((obj, done) => done(null, obj));
-const serviceCallback = (accessToken, refreshToken, profile, done) => done(null, accessToken, profile);
-
-passport.use(new GitHubStrategy({
-  clientID: config.github.clientId,
-  clientSecret: config.github.clientSecret
-}, serviceCallback));
-
-// TODO add twitter etc strategies
-
-app.use(passport.initialize());
-
-/**
  * Handlebars template engine
  */
 require('./views')(app);
@@ -56,6 +38,7 @@ require('./routes')(app);
  */
 
 app.use((req, res, next) => {
+  // TODO this should redirect to a 404 page so that window location is changed
   return next({
     code: 404,
     message: 'We can\'t find that page.'

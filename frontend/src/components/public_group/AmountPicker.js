@@ -36,14 +36,14 @@ export default class AmountPicker extends React.Component {
             // MAJOR HACK to support a donation for this group.
             showCurrencyPicker={group.id == 10}/>
         )}
-        <DonationDistributor 
+        <DonationDistributor
           amount={Number(amount)}
           method={(hasPaypal) ? 'paypal' : (hasStripe) ? 'stripe' : 'paypal'}
           currency={currency}
           frequency={frequency}
           editable={true}
           optionalComission={false}
-          feesOnTop={true}
+          feesOnTop={false}
           collectives={collectives}
           buttonLabel={tier.button}
           skipModal={!(group.settings && group.settings.DonationDistributor)}

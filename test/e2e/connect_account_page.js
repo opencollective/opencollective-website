@@ -6,21 +6,21 @@ module.exports = {
   '@tags': ['connect_account_page'],
 
   beforeEach: (client) => resetDb(client)
-      .url(`${config.host.website}/testcollective/connect/github`)
+      .url(`${config.host.website}/connect/github`)
       .waitForElementVisible('body', 1000)
       .assert.containsText('body', 'Connect to github'),
 
-  /*
-  TODO: redo this when we have github flow finalized
+
   'Redirects to Github after clicking connect': (client) => {
 
     // const clientId = config.github.clientId;
-    // const callbackUrl = encodeURIComponent(`${config.host.website}/auth/github/callback/testcollective`);
+    // const apiKeyEnc = how to have the key reliably?
+    // const callbackUrl = encodeURIComponent(`${config.host.website}/connected-accounts/github/callback${apiKeyEnc}`);
     // const githubScope = encodeURIComponent('user:email');
 
     client
       .click('.connectAccountBtn')
-      .waitForElementVisible('body', 2000)
+      .waitForElementVisible('body', 4000)
       .assert.urlContains('https://github.com/login?return_to=%2Flogin%2Foauth%2Fauthorize')
       .setValue('input[name=login]', config.github.testUsername)
       .setValue('input[name=password]', config.github.testPassword)
@@ -32,8 +32,8 @@ module.exports = {
       // .click('button[name=authorize]') // click 'Authorize application'
 
       .waitForElementVisible('body', 4000)
-      .assert.urlContains('http://localhost:3000/testcollective')
+      // TODO this returns OK even if it's a 404 page: 404s should change window location
+      .assert.urlContains('http://localhost:3000/github/apply')
       .end();
    }
-   */
 };
