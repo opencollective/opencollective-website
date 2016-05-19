@@ -7,8 +7,10 @@ export const GET_CONTRIBUTORS_FROM_GITHUB_SUCCESS = 'GET_CONTRIBUTORS_FROM_GITHU
 export const GET_CONTRIBUTORS_FROM_GITHUB_FAILURE = 'GET_CONTRIBUTORS_FROM_GITHUB_FAILURE';
 
 export var MIN_STARS_FOR_ONBOARDING = 100;
+export var MIN_CONTRIBUTORS_FOR_ONBOARDING = 2;
 
 // Setting to 0 for development testing purposes
 if (!(process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging')) {
 	MIN_STARS_FOR_ONBOARDING = 0;
+	MIN_CONTRIBUTORS_FOR_ONBOARDING = 0;
 }

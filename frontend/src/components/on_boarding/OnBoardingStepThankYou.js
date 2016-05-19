@@ -5,18 +5,13 @@ import OnBoardingStepHeading from './OnBoardingStepHeading';
 
 export default class OnBoardingStepThankYou extends React.Component {
 
-  constructor(props)
-  {
+  constructor(props) {
     super(props);
-    this.state = {
-      agreedTOS: false,
-      expenseDescription: '',
-      missionDescription: ''
-    }
   }
 
-  render()
-  {
+  render() {
+    const buttonContainerStyle = {margin: '0 auto'};
+    const shareButtonsContainerStyle = {margin: '20px auto'};
     const { onContinue } = this.props;
     const group = {};
     const newUserId = 0;
@@ -26,12 +21,12 @@ export default class OnBoardingStepThankYou extends React.Component {
       <div className="OnBoardingStepThankYou">
         <img src="/static/images/ghost.svg" width="170px" height="230px"/>
         <OnBoardingStepHeading step="" title="Thank you for submitting your repository" subtitle="Your collective is in the queue - we'll be in touch soon."/>
-        <div style={{margin: '20px auto', width: '300px', textAlign: 'center'}}>
+        <div style={shareButtonsContainerStyle}>
           <ShareIcon type='twitter' url={shareUrl} name={group.name} description={group.description} />
           <ShareIcon type='facebook' url={shareUrl} name={group.name} description={group.description} />
           <ShareIcon type='mail' url={shareUrl} name={group.name} description={group.description} />
         </div>
-        <div style={{margin: '0 auto', width: '300px', textAlign: 'center'}}>
+        <div style={buttonContainerStyle}>
           <div className='OnBoardingButton' onClick={onContinue}>Explore existing collectives</div>
         </div>
       </div>
