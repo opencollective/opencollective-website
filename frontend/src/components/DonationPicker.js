@@ -7,8 +7,6 @@ import Input from './Input';
 import Select from './Select';
 
 export default ({value, currency, frequency, presets, onChange, showCurrencyPicker, i18n}) => {
-
-  console.log( "REACHED inside donationPicker");
   const presetAmounts = presets;
 
   if (presets.indexOf('other') === -1){
