@@ -1,6 +1,5 @@
 import banner from './controllers/banner';
 import mw from './middlewares';
-import aN from './middleware/security/authentication';
 import serverStatus from 'express-server-status';
 import favicon from 'serve-favicon';
 import path from 'path';
@@ -35,11 +34,12 @@ module.exports = (app) => {
    */
   app.use(robots(path.join(__dirname, '../frontend/dist/robots.txt')));
 
-  /**
-   * Authentication
-   */
-  app.get('/api/auth/:service(github)/:slug', aN.authenticateService);
-  app.get('/auth/:service(github)/callback/:slug', aN.authenticateServiceCallback);
+  // For some reason during OAuth, the redirect through piping automatically changes 
+  // the body, but not the window location -> instead redirect manually
+  app.all('/api/connected-accounts/github', (req, res) => {
+    req.pipe(request(apiUrl(req.url))
+      .on('response', () => res.redirect(req._readableState.pipes.uri.href)));
+  });
 
   /**
    * Pipe the requests before the middlewares, the piping will only work with raw
@@ -74,6 +74,7 @@ module.exports = (app) => {
    */
   app.get('/leaderboard', mw.ga, mw.fetchLeaderboard, mw.addTitle('Open Collective Leaderboard'), render);
   app.get('/github/apply', mw.ga, mw.addTitle('Open Source Collective'), render);
+  app.get('/connect/:service(github)', mw.ga, render);
   app.get('/subscriptions/:token', mw.ga, mw.fetchSubscriptionsByUserWithToken, mw.addTitle('My Subscriptions'), render);
   app.get('/subscriptions', mw.ga, mw.fetchSubscriptionsByUserWithToken, mw.addTitle('My Subscriptions'), render);
   app.get('/:slug([A-Za-z0-9-]+)', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
@@ -81,7 +82,6 @@ module.exports = (app) => {
   app.get('/:slug([A-Za-z0-9-]+)/expenses/new', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-]+)/donate/:amount', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-]+)/donate/:amount/:interval', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
-  app.get('/:slug([A-Za-z0-9-]+)/connect/:service(github)', mw.ga, render);
 
   app.use(mw.handleUncaughtError)
 };
