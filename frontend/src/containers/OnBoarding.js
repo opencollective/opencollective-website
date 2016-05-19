@@ -14,6 +14,10 @@ import OnBoardingStepThankYou from '../components/on_boarding/OnBoardingStepThan
 import fetchReposFromGitHub from '../actions/github/fetch_repos';
 import fetchContributorsFromGitHub from '../actions/github/fetch_contributors';
 import uploadImage from '../actions/images/upload';
+import appendGithubForm from '../actions/form/append_github';
+// import validateSchema from '../actions/form/validate_schema';
+
+// import githubSchema from '../joi_schemas/github';
 
 const MIN_STARS = 100;
 
@@ -38,17 +42,19 @@ export class OnBoarding extends Component {
   componentDidMount() {
     const {
       githubUsername,
-      fetchReposFromGitHub
+      fetchReposFromGitHub,
+      appendGithubForm
     } = this.props;
 
     if (githubUsername && this.state.step === 2) {
+      appendGithubForm({username: githubUsername});
       fetchReposFromGitHub(githubUsername);
     }
   }
 
   render() {
     const { step } = this.state;
-    const { contributors, githubUsername } = this.props;
+    const { contributors, githubForm } = this.props;
     let { repositories } = this.props;
 
     repositories = repositories.filter((repo) => repo.stars >= MIN_STARS);
@@ -57,7 +63,7 @@ export class OnBoarding extends Component {
     return (
       <div className={`OnBoarding ${step ? '-registering' : ''}`}>
         <Notification />
-        {step !== 5 && <OnBoardingHeader active={Boolean(step)} username={githubUsername} />}
+        {step !== 5 && <OnBoardingHeader active={Boolean(step)} username={githubForm.attributes.username} />}
         {step === 0 && <OnBoardingHero onClickStart={() => this.setState({step: 1})} />}
         {step === 1 && <OnBoardingStepConnectGithub />}
         {step === 2 && <OnBoardingStepPickRepository repositories={repositories} onNextStep={(selectedRepo) => this.getContributors.bind(this, selectedRepo)} />}
@@ -69,7 +75,7 @@ export class OnBoarding extends Component {
   }
 
   create(missionDescription, expenseDescription, logo) {
-    const { githubUsername } = this.props;
+    const { githubUsername, params, githubForm } = this.props;
     const { selectedRepo, chosenContributors } = this.state;
     console.log(
       'CREATE',
@@ -78,7 +84,9 @@ export class OnBoarding extends Component {
       chosenContributors,
       missionDescription,
       expenseDescription,
-      logo
+      logo,
+      params.token,
+      githubForm
     )
     this.setState({step: 5});
   }
@@ -96,10 +104,11 @@ export class OnBoarding extends Component {
 export default connect(mapStateToProps, {
   fetchReposFromGitHub,
   fetchContributorsFromGitHub,
-  uploadImage
+  uploadImage,
+  appendGithubForm
 })(OnBoarding);
 
-function mapStateToProps({github}) {
+function mapStateToProps({github, form}) {
 
   var githubUsername = '';
   if (github.connectedAccount) {
@@ -109,6 +118,7 @@ function mapStateToProps({github}) {
   return {
     githubUsername,
     repositories: github.repositories || [],
-    contributors: github.contributors || []
+    contributors: github.contributors || [],
+    githubForm: form.github
   };
 }
