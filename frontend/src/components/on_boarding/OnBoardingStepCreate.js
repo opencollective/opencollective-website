@@ -48,7 +48,7 @@ export default class OnBoardingStepCreate extends React.Component {
           </div>
           <div className="OnBoardingStepCreate-tos">
             <Checkbox checked={agreedTOS} onChange={(checked) => this.setState({agreedTOS: checked})} />
-            <span>Agree to <a href="#TOS">Terms &amp; Conditions</a></span>
+            <span>Agree to <a href="https://docs.google.com/document/d/1-hajYd7coL05z2LTCOKXTYzXqNp40kPuw0z66kEIY5Y/pub" target='_blank'>Terms &amp; Conditions</a></span>
           </div>
         </div>
         <div style={{margin: '0 auto', marginTop: '40px', width: '300px', textAlign: 'center'}}>
