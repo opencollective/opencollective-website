@@ -15,11 +15,8 @@ import fetchReposFromGitHub from '../actions/github/fetch_repos';
 import fetchContributorsFromGitHub from '../actions/github/fetch_contributors';
 import uploadImage from '../actions/images/upload';
 import appendGithubForm from '../actions/form/append_github';
-// import validateSchema from '../actions/form/validate_schema';
 
-// import githubSchema from '../joi_schemas/github';
-
-const MIN_STARS = 100;
+import { MIN_STARS_FOR_ONBOARDING } from '../constants/github';
 
 export class OnBoarding extends Component {
 
@@ -57,7 +54,7 @@ export class OnBoarding extends Component {
     const { contributors, githubForm } = this.props;
     let { repositories } = this.props;
 
-    repositories = repositories.filter((repo) => repo.stars >= MIN_STARS);
+    repositories = repositories.filter((repo) => repo.stars >= MIN_STARS_FOR_ONBOARDING);
     repositories.sort((A, B) => B.stars - A.stars);
 
     return (
@@ -69,7 +66,7 @@ export class OnBoarding extends Component {
         {step === 2 && <OnBoardingStepPickRepository repositories={repositories} onNextStep={(selectedRepo) => this.getContributors.bind(this, selectedRepo)} />}
         {step === 3 && <OnBoardingStepPickCoreContributors contributors={contributors} onNextStep={(chosenContributors) => this.setState({step: 4, chosenContributors})} />}
         {step === 4 && <OnBoardingStepCreate onCreate={this.create.bind(this)} {...this.props} />}
-        {step === 5 && <OnBoardingStepThankYou onContinue={() => this.setState({step: 0})}/>}
+        {step === 5 && <OnBoardingStepThankYou onContinue={() => window.location = '/opensource' }/>}
       </div>
     )
   }

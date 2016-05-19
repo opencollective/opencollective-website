@@ -18,17 +18,14 @@ export default function github(state={}, action={}) {
       return state;
 
     case GET_REPOS_FROM_GITHUB_SUCCESS:
-      const highStarCount = action.json.map(repo => {
-        // TODO: change to 100 before pushing to production
-        if (repo.stargazers_count >= 0) {
-          return {
-            title: repo.name,
-            description: repo.description,
-            stars: repo.stargazers_count
-          };
-        }
+      const repositories = action.json.map(repo => {
+        return {
+          title: repo.name,
+          description: repo.description,
+          stars: repo.stargazers_count
+        };
       });
-      return merge({}, state, { repositories: highStarCount });
+      return merge({}, state, { repositories });
 
     case GET_CONTRIBUTORS_FROM_GITHUB_SUCCESS:
       const contributors = action.json.map(contributor => {
