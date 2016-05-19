@@ -15,6 +15,8 @@ import fetchReposFromGitHub from '../actions/github/fetch_repos';
 import fetchContributorsFromGitHub from '../actions/github/fetch_contributors';
 import uploadImage from '../actions/images/upload';
 import appendGithubForm from '../actions/form/append_github';
+import createGroupFromGithubRepo from '../actions/groups/create_group_from_github_repo';
+import notify from '../actions/notification/notify';
 
 import { MIN_STARS_FOR_ONBOARDING } from '../constants/github';
 
@@ -72,20 +74,26 @@ export class OnBoarding extends Component {
   }
 
   create(missionDescription, expenseDescription, logo) {
-    const { githubUsername, params, githubForm } = this.props;
-    const { selectedRepo, chosenContributors } = this.state;
-    console.log(
-      'CREATE',
+    const {
       githubUsername,
-      selectedRepo,
-      chosenContributors,
-      missionDescription,
-      expenseDescription,
-      logo,
-      params.token,
-      githubForm
-    )
+      params,
+      createGroupFromGithubRepo } = this.props;
+    const { selectedRepo, chosenContributors } = this.state;
+
+    const payload = {
+      group: {
+        name: selectedRepo,
+        slug: selectedRepo,
+        mission: missionDescription,
+        expensePolicy: expenseDescription,
+        logo
+      },
+      users: chosenContributors,
+      github_username: githubUsername,
+    }
     this.setState({step: 5});
+    return createGroupFromGithubRepo(payload, params.token)
+      .catch(err => notify('error', err.message));
   }
 
   getContributors(selectedRepo) {
@@ -94,7 +102,8 @@ export class OnBoarding extends Component {
       fetchContributorsFromGitHub } = this.props;
 
     this.setState({step: 3, selectedRepo})
-    fetchContributorsFromGitHub(githubUsername, selectedRepo);
+    fetchContributorsFromGitHub(githubUsername, selectedRepo)
+    .catch(err => notify('error', err.message));
   }
 }
 
@@ -102,7 +111,8 @@ export default connect(mapStateToProps, {
   fetchReposFromGitHub,
   fetchContributorsFromGitHub,
   uploadImage,
-  appendGithubForm
+  appendGithubForm,
+  createGroupFromGithubRepo
 })(OnBoarding);
 
 function mapStateToProps({github, form}) {
