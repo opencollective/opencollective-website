@@ -126,10 +126,27 @@ function transaction(state=transactionInitialState, action={}) {
   }
 }
 
+/**
+ * Github form reducer
+ */
+
+const githubInitialState = {
+  attributes: {}
+};
+
+function github(state=githubInitialState, action={}) {
+  switch(action.type) {
+    case constants.APPEND_GITHUB_FORM:
+      return merge({}, state, { attributes: action.attributes });
+    default:
+      return state;
+  }
+}
 
 export default combineReducers({
   profile,
   donation,
   transaction,
-  schema
+  schema,
+  github
 });
