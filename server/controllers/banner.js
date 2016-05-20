@@ -78,7 +78,7 @@ module.exports = {
 
         const imageHeight = 64;
         let imageWidth = 64;
-        if (tier === 'sponsor') {
+        if (tierSingular === 'sponsor') {
           const dimensions = sizeOf(data);
           imageWidth = Math.round(dimensions.width / dimensions.height * imageHeight);
         }
