@@ -40,7 +40,7 @@ export default class OnBoardingStepPickCoreContributors extends React.Component 
           }}
         />
         <div style={buttonContainerStyle}>
-          <div className={`OnBoardingButton ${contributors.length >= MIN_CONTRIBUTORS_FOR_ONBOARDING-1 ? '' : 'disabled'}`} onClick={contributors.length >= MIN_CONTRIBUTORS_FOR_ONBOARDING-1 ? () => onNextStep(contributors) : null }>continue</div>
+          <div className={`OnBoardingButton ${contributors.length >= MIN_CONTRIBUTORS_FOR_ONBOARDING ? '' : 'disabled'}`} onClick={contributors.length >= MIN_CONTRIBUTORS_FOR_ONBOARDING ? () => onNextStep(contributors) : null }>continue</div>
         </div>
       </div>
     )

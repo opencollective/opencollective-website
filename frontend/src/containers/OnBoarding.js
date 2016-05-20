@@ -84,13 +84,11 @@ export class OnBoarding extends Component {
 
   create() {
     const { githubForm, validateSchema, createGroupFromGithubRepo } = this.props;
-
-    console.log(githubForm.attributes)
     const attr = githubForm.attributes;
     const payload = {
       group: {
         name: attr.repository,
-        slug: attr.selectedRepo,
+        slug: attr.repository,
         mission: attr.missionDescription,
         expensePolicy: attr.expenseDescription,
         logo: attr.logo || ''
