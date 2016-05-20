@@ -1,6 +1,7 @@
 .RepositoryPickerItem
 {
 	width: 540px;
+	width: 90%;
 	height: 90px;
 	border-radius: 5px;
 	background-color: #ffffff;

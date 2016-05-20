@@ -10,7 +10,7 @@ export default class OnBoardingHeader extends React.Component {
   render()
   {
     const { active, username } = this.props;
-    const headerStyles = active ? {background: '#3d3d3d', padding: '20px 30px', marginBottom: '50px'} : {};
+    const headerStyles = active ? {background: '#3d3d3d', padding: '20px 30px'} : {};
 
     return (
       <div className='OnBoardingHeader' style={headerStyles}>
@@ -18,7 +18,7 @@ export default class OnBoardingHeader extends React.Component {
           <svg width='18px' height='18px' className='-light-blue align-middle mr1'>
             <use xlinkHref='#svg-isotype'/>
           </svg>
-          <svg width='172px' height='30px' className='align-middle xs-hide'>
+          <svg width='172px' height='30px' className='align-middle'>
             <use xlinkHref='#svg-logotype' fill={active ? '#fff': '#6388bf'}/>
           </svg>
         </a>

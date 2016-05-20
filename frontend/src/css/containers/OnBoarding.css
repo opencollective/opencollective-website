@@ -14,7 +14,7 @@
   background-image: url(../images/onboarding-bg.svg);
   background-repeat: no-repeat;
   background-position: center 30px;
-  background-size: 860px 630px;
+  background-size: 840px 600px;
   min-height: 100%;
 
   &.-registering
@@ -31,6 +31,7 @@
 .OnBoardingHeader
 {
   padding: 30px;
+  margin-bottom: 40px;
 
   .-brand
   {
@@ -43,7 +44,7 @@
 
     a 
     {
-      padding: 8px 20px;
+      padding: 7px 20px 6px 20px;
       font-size: 10px;
       text-transform: uppercase;
       color: #aab0b3;
@@ -66,7 +67,7 @@
     a:nth-child(2)
     {
       color: #919699;
-      font-size: 12px;
+      font-size: 11px;
     }
 
     img
@@ -99,6 +100,8 @@
   text-align: center;
   line-height: 1.2;
   font-weight: bold;  
+  padding: 0 20px;
+  box-sizing: border-box;
   strong
   {
     color: #919699;
@@ -133,11 +136,10 @@
 
   .-title
   {
-    font-size: 50px;
+    font-size: 33px;
     font-weight: bold;
     color: #494b4d;
-    width: 768px;
-    width: 840px;
+    width: 600px;
     margin: 0 auto;
     text-align: center;
     line-height: 1.3;
@@ -154,7 +156,6 @@
     margin: 0 auto;
     margin-top: 25px;
     text-align: center;
-    width: 768px;
     font-size: 21px;
     color: #616466;
     font-family: Montserratlight, sans-serif;
@@ -163,7 +164,7 @@
 
   .-button-container
   {
-    width: 310px;
+    
     height: 56px;
     border-radius: 100px;
     /*background-color: #75cc1f;*/
@@ -177,8 +178,8 @@
   {
     font-family: Lato;
     color: #797d80;
-    font-size: 14px;
-    width: 310px;
+    font-size: 12px;
+    width: 280px;
     text-align: center;
     margin: 0 auto;
     margin-top: 20px;
@@ -189,20 +190,21 @@
 {
   margin: 0 auto;
   margin-top: 220px;
-  width: 768px;
+  max-width: 768px;
 }
 
 .OnBoardingStepPickRepository
 {
   margin: 0 auto;
-  width: 768px; 
+  max-width: 768px;
+  max-width: 600px; 
   padding-bottom: 40px;
 }
 
 .OnBoardingStepPickCoreContributors
 {
   margin: 0 auto;
-  width: 768px;
+  max-width: 768px;
   padding-bottom: 40px;
 }
 
@@ -212,13 +214,21 @@
 
   .OnBoardingStepCreate-form-container
   {
-    width: 660px;
+    max-width: 660px;
     margin: 0 auto;
     margin-top: 60px;
 
     .flex-column
     {
-      margin-right: 20px;
+      /*margin-right: 20px;*/
+      padding: 0 20px;
+    }
+
+    .OnBoardingStepCreate-imagepicker-cont {
+      padding-top: 32px;
+      padding-top: 2rem;
+      padding-bottom: 24px;
+      padding-bottom: 1.75rem;
     }
 
     .OnBoardingStepCreate-label
@@ -232,10 +242,10 @@
 
     .OnBoardingStepCreate-tos
     {
-      margin-top: 10px;
       font-family: Lato;
       font-size: 15px;
       font-weight: bold;
+      padding: 0 20px;
 
       .Checkbox, span a, span span
       {
@@ -254,7 +264,7 @@
 .OnBoardingStepThankYou
 {
   margin: 0 auto;
-  width: 768px;
+  max-width: 768px;
   text-align: center;
 
   img 
@@ -357,5 +367,89 @@
   {
     background: #dde1e4;
     cursor: default;
+  }
+}
+
+/**
+* Responsiveness
+*/
+
+@media (--large-viewport) {
+  .OnBoardingHero {
+    .-title {
+      font-size: 44px;
+      width: 840px;
+    }
+  }
+}
+
+@media (--medium-viewport) {
+  .OnBoardingHeader {
+    .-brand svg:nth-child(2) {
+      display: none;
+    }
+  }
+  .OnBoardingHero {
+    margin-top: 140px;
+    .-title {
+      font-size: 22px;
+      width: 380px;
+    }
+    .-subtitle {
+      font-size: 16px;
+    }
+  }
+  .OnBoardingStepHeading {
+    font-size: 24px;
+    div:nth-child(2) {
+      width: auto;
+    }
+  }
+  .OnBoardingStepCreate {
+    .OnBoardingStepCreate-tos {
+      margin-top: 10px;
+    }
+    .OnBoardingStepCreate-form-container {
+      margin-top: 0;
+    }
+  }
+}
+
+@media (--small-viewport) {
+  .-brand {
+    svg:nth-child(2) {
+      display: none;
+    }
+  }
+  .OnBoardingHeader {
+    .-nav {
+      a {
+        padding: 6px 14px 5px 14px;
+      }
+      a:nth-child(1) {
+        margin-right: 5px;
+        font-size: 7px;
+      }
+      a:nth-child(2) {
+        font-size: 8px;
+      }
+    }
+  }
+  .OnBoardingHero {
+    margin-top: 100px;
+    .-title {
+      font-size: 20px;
+      width: auto;
+    }
+    .-subtitle {
+      font-size: 14px;
+      width: auto;
+    }
+    .-requirements {
+      width: auto;
+    }
+  }
+  .ContributorPickerItem input {
+    font-size: 13px;
   }
 }
