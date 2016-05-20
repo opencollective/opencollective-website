@@ -16,6 +16,7 @@ import fetchContributorsFromGitHub from '../actions/github/fetch_contributors';
 import uploadImage from '../actions/images/upload';
 import notify from '../actions/notification/notify';
 import appendGithubForm from '../actions/form/append_github';
+import createGroupFromGithubRepo from '../actions/groups/create_group_from_github_repo';
 import validateSchema from '../actions/form/validate_schema';
 
 import githubSchema from '../joi_schemas/github';
@@ -82,11 +83,24 @@ export class OnBoarding extends Component {
   }
 
   create() {
-    const { githubForm, validateSchema } = this.props;
+    const { githubForm, validateSchema, createGroupFromGithubRepo } = this.props;
 
-    console.log('CREATE', githubForm.attributes)
+    console.log(githubForm.attributes)
+    const attr = githubForm.attributes;
+    const payload = {
+      group: {
+        name: attr.repository,
+        slug: attr.selectedRepo,
+        mission: attr.missionDescription,
+        expensePolicy: attr.expenseDescription,
+        logo: attr.logo || ''
+      },
+      users: attr.contributors,
+      github_username: attr.username,
+    };
 
     return validateSchema(githubForm.attributes, githubSchema)
+      .then(() => createGroupFromGithubRepo(payload, attr.token))
       .then(() => this.setState({step: 5}))
       .catch(({message}) => notify('error', message));
   }
@@ -96,8 +110,9 @@ export class OnBoarding extends Component {
       githubUsername,
       fetchContributorsFromGitHub } = this.props;
 
-    this.setState({step: 3})
-    fetchContributorsFromGitHub(githubUsername, selectedRepo);
+    this.setState({step: 3, selectedRepo})
+    fetchContributorsFromGitHub(githubUsername, selectedRepo)
+    .catch(err => notify('error', err.message));
   }
 }
 
@@ -106,6 +121,7 @@ export default connect(mapStateToProps, {
   fetchContributorsFromGitHub,
   uploadImage,
   appendGithubForm,
+  createGroupFromGithubRepo,
   validateSchema
 })(OnBoarding);
 

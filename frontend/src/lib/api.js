@@ -33,13 +33,19 @@ export function getThirdParty(endpoint, options={}) {
  * POST json request
  */
 
-export function postJSON(endpoint, body) {
-  return fetch(url(endpoint), {
-    method: 'post',
-    headers: headers({
+export function postJSON(endpoint, body, options={}) {
+  var headers = {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-    }),
+    };
+
+  if (options.headers) {
+    headers = extend(options.headers, headers);
+  }
+
+  return fetch(url(endpoint), {
+    method: 'post',
+    headers: headers,
     body: JSON.stringify(body),
   })
   .then(checkStatus);
