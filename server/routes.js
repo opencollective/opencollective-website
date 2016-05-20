@@ -34,13 +34,6 @@ module.exports = (app) => {
    */
   app.use(robots(path.join(__dirname, '../frontend/dist/robots.txt')));
 
-  // For some reason during OAuth, the redirect through piping automatically changes
-  // the body, but not the window location -> instead redirect manually
-  app.all('/api/connected-accounts/github', (req, res) => {
-    req.pipe(request(apiUrl(req.url))
-      .on('response', () => res.redirect(req._readableState.pipes.uri.href)));
-  });
-
   /**
    * Pipe the requests before the middlewares, the piping will only work with raw
    * data
@@ -49,7 +42,7 @@ module.exports = (app) => {
 
   app.all('/api/*', (req, res) => {
     req
-      .pipe(request(apiUrl(req.url)))
+      .pipe(request(apiUrl(req.url), { followRedirect: false }))
       .pipe(res);
   });
 
