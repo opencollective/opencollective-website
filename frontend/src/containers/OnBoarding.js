@@ -16,7 +16,7 @@ import fetchContributorsFromGitHub from '../actions/github/fetch_contributors';
 import uploadImage from '../actions/images/upload';
 import notify from '../actions/notification/notify';
 import appendGithubForm from '../actions/form/append_github';
-import createGroupFromGithubRepo from '../actions/groups/create_group_from_github_repo';
+import createGroupFromGithubRepo from '../actions/groups/create_from_github_repo';
 import validateSchema from '../actions/form/validate_schema';
 
 import githubSchema from '../joi_schemas/github';

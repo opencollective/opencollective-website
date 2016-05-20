@@ -6,11 +6,12 @@ import * as constants from '../../constants/groups';
  */
 
 export default (payload, token) => {
-  const url = `/groups/create_from_github_repo`;
+  const url = `/groups`;
   return dispatch => {
     dispatch(request(payload));
     return postJSON(url, { payload }, {headers: {
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
+      flow: 'github'
     }})
       .then(json => dispatch(success(payload, json)))
       .catch(err => {
