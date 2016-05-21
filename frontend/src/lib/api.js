@@ -22,7 +22,7 @@ export function get(endpoint, options={}) {
 
 export function getThirdParty(endpoint, options={}) {
   const { params } = options;
-  return fetch(urlThirdParty(endpoint, params), {headers: headers()})
+  return fetch(urlThirdParty(endpoint, params))
     .then(checkStatus)
     .then((json={}) => {
       return json;
