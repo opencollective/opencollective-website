@@ -6,7 +6,6 @@ import Subscriptions from './containers/Subscriptions';
 import Transactions from './containers/Transactions';
 import DonatePage from './containers/DonatePage';
 import Leaderboard from './containers/Leaderboard';
-import ConnectAccountButton from './containers/ConnectAccountButton';
 import OnBoarding from './containers/OnBoarding';
 
 export default (
@@ -14,8 +13,8 @@ export default (
     <Route path="/subscriptions/:token" component={Subscriptions} />
     <Route path="/subscriptions" component={Subscriptions} />
     <Route path="/leaderboard" component={Leaderboard} />
+    <Route path="/github/apply/:token" component={OnBoarding} />
     <Route path="/github/apply" component={OnBoarding} />
-    <Route path="/connect/:service(github)" component={ConnectAccountButton} />
     <Route path="/:slug" component={PublicGroup} />
     <Route path="/:slug/expenses/new" component={Transactions} />
     <Route path="/:slug/:type(donations|expenses)" component={Transactions} />

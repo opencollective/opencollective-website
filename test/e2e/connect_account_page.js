@@ -6,9 +6,9 @@ module.exports = {
   '@tags': ['connect_account_page'],
 
   beforeEach: (client) => resetDb(client)
-      .url(`${config.host.website}/connect/github`)
+      .url(`${config.host.api}/connected-accounts/github?api_key=${config.apiKey}`)
       .waitForElementVisible('body', 1000)
-      .assert.containsText('body', 'Connect to github'),
+      .assert.containsText('body', 'Sign in to GitHub'),
 
 
   'Redirects to Github after clicking connect': (client) => {
@@ -19,9 +19,6 @@ module.exports = {
     // const githubScope = encodeURIComponent('user:email');
 
     client
-      .click('.connectAccountBtn')
-      .waitForElementVisible('body', 4000)
-      .assert.urlContains('https://github.com/login?return_to=%2Flogin%2Foauth%2Fauthorize')
       .setValue('input[name=login]', config.github.testUsername)
       .setValue('input[name=password]', config.github.testPassword)
       .click('input.btn-primary') // click 'Sign In'

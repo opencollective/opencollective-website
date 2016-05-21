@@ -56,7 +56,32 @@ const fetchSubscriptionsByUserWithToken = (req, res, next) => {
         req.jwtInvalid = true;
         return next();
       }
-      next(err);
+      next(error);
+    });
+};
+
+/*
+ * Extract github username from token
+ */
+const extractGithubUsernameFromToken = (req, res, next) => {
+  if (!req.params.token) {
+    return next();
+  }
+
+  api.get('/connected-accounts/github/verify', {headers: {
+      Authorization: `Bearer ${req.params.token}`
+    }})
+    .then(res => {
+      req.connectedAccount = {
+        username: res.username,
+        id: res.connectedAccountId,
+        provider: res.provider
+      };
+      next();
+    })
+    .catch((response) => {
+      const error = response.json.error;
+      next(error);
     });
 };
 
@@ -169,6 +194,7 @@ export default {
   cache,
   fetchGroupBySlug,
   fetchSubscriptionsByUserWithToken,
+  extractGithubUsernameFromToken,
   fetchUsers,
   fetchLeaderboard,
   ga,

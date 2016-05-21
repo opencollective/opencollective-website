@@ -20,17 +20,32 @@ export function get(endpoint, options={}) {
     });
 }
 
+export function getThirdParty(endpoint, options={}) {
+  const { params } = options;
+  return fetch(urlThirdParty(endpoint, params), {headers: headers()})
+    .then(checkStatus)
+    .then((json={}) => {
+      return json;
+    });
+}
+
 /**
  * POST json request
  */
 
-export function postJSON(endpoint, body) {
-  return fetch(url(endpoint), {
-    method: 'post',
-    headers: headers({
+export function postJSON(endpoint, body, options={}) {
+  var headers = {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-    }),
+    };
+
+  if (options.headers) {
+    headers = extend(options.headers, headers);
+  }
+
+  return fetch(url(endpoint), {
+    method: 'post',
+    headers: headers,
     body: JSON.stringify(body),
   })
   .then(checkStatus);
@@ -85,6 +100,15 @@ function url(endpoint, params) {
   const query = queryString.stringify(params);
 
   return `${API_ROOT + endpoint}${query.length > 0 ? `?${query}` : '' }`;
+}
+
+/**
+ * Build a url to a third party
+ */
+function urlThirdParty(endpoint, params) {
+  const query = queryString.stringify(params);
+
+  return `${endpoint}${query.length > 0 ? `?${query}` : '' }`;
 }
 
 /**

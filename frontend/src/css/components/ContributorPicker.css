@@ -1,8 +1,11 @@
 .ContributorPicker
 {
 	width: 600px;
+	width: auto;
+	max-width: 600px;
 	margin: 0 auto;
 	margin-top: 30px;
+	padding: 0 20px;
 }
 
 .ContributorPickerItem
@@ -10,6 +13,8 @@
 	position: relative;
 	font-family: Lato;
 	width: 540px;
+	width: auto;
+	max-width: 540px;
 	height: 65px;
 	border-radius: 5px;
 	background-color: #ffffff;
@@ -75,6 +80,8 @@
 {
 	margin: 0 auto;
 	width: 540px;
+	width: auto;
+	max-width: 540px;
 	border-radius: 5px;
 	background-color: #ffffff;
 	box-shadow: 0 1px 3px 0 rgba(45, 77, 97, 0.3);
