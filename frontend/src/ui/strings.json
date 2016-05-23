@@ -161,5 +161,13 @@
     "menuMembersWall": "Supporters",
     "membersWallTitle": "This is possible thanks to you.",
     "membersWallText": "The donations from supporters of this network allow us to keep going towards our mission. We would not be here if it weren’t for these amazing people. Thank you so much."
+  },
+
+    "openfoodnetwork": {
+    "becomeMemberTitle": "Why support us?",
+    "menuMembersWall": "Supporters",
+    "membersWallTitle": "This is possible thanks to you.",
+    "membersWallText": "Proud backers and sponsors support this collective and allow us to keep going towards our mission. We would not be here if it weren’t for these amazing people. Thank you so much.",
+    "joinAndFulfil": "Support us and help us fulfill our mission"
   }
 }
