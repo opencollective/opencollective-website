@@ -126,5 +126,6 @@
     "sinon": "1.17.3",
     "supertest": "1.2.0",
     "watchify": "3.7.0"
-  }
+  },
+  "License": "MIT"
 }
