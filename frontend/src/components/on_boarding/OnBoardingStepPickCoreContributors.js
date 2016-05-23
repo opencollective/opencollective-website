@@ -20,7 +20,7 @@ export default class OnBoardingStepPickCoreContributors extends React.Component 
 
     return (
       <div className="OnBoardingStepPickCoreContributors">
-        <OnBoardingStepHeading step="3/4" title="Select your core contributors" subtitle="Add at least 2 members who have contributd to this repository. They will have access to the funds. All other repository contributors will be listed as regular contributors in your collective page."/>
+        <OnBoardingStepHeading step="2/3" title="Select your core contributors" subtitle="Add at least 2 members who have contributed to this repository. They will have access to the funds.\nAll other repository contributors will be listed as regular contributors in your collective page."/>
         <ContributorPicker
           available={availableContributors}
           chosen={chosenContributors}

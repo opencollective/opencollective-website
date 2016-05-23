@@ -15,7 +15,10 @@ export default class ContributorPickerItem extends React.Component {
   {
     const { available, onChoose } = this.props;
     const { filterValue } = this.state;
-    return available.filter((contributor) => {return !filterValue || contributor.name.indexOf(filterValue) !== -1 }).map((contributor, index) => {
+    return available
+      .filter((contributor) => {return !filterValue || contributor.name.indexOf(filterValue) !== -1 })
+      .sort((A, B) => B.contributions - A.contributions)
+      .map((contributor, index) => {
       return (
         <li key={index} onClick={() => {
           this.setState({showContributorList: true});
@@ -24,6 +27,7 @@ export default class ContributorPickerItem extends React.Component {
         >
           <img src={contributor.avatar} width="32px" height="32px" />
           <span>{contributor.name}</span>
+          <div>{contributor.contributions} contributions</div>
         </li>
       )
     });

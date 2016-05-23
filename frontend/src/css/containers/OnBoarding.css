@@ -31,7 +31,6 @@
 .OnBoardingHeader
 {
   padding: 30px;
-  margin-bottom: 40px;
 
   .-brand
   {
@@ -102,6 +101,7 @@
   font-weight: bold;  
   padding: 0 20px;
   box-sizing: border-box;
+  margin-top: 40px;
   strong
   {
     color: #919699;
@@ -112,7 +112,7 @@
     margin: 0 auto;
     margin-top: 15px;
     text-align: center;
-    width: 610px;
+    
     font-size: 15px;
     line-height: 1.8;
     color: #616466;
@@ -280,6 +280,45 @@
   }
 }
 
+
+.OnBoardingButton
+{
+  font-family: Montserrat;
+  outline: 0;
+  background-color: #75cc1f;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 18px;
+  height: auto;
+  vertical-align: middle;
+  -webkit-appearance: none;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 19.2px 32px;
+  border-radius: 28px;
+  text-transform: uppercase;
+  min-width: 280px;
+  box-sizing: border-box; 
+  letter-spacing: 1px;
+
+  &:not(.disabled):hover
+  {
+    opacity: .8;
+  }
+
+  &.disabled
+  {
+    background: #dde1e4;
+    cursor: default;
+  }
+}
+
+/**
+* Tweaks for general purpose components
+*/
+
 .OnBoarding
 {
   .ImagePicker-container
@@ -334,39 +373,9 @@
       height: 18px;
     }
   }
-}
 
-.OnBoardingButton
-{
-  font-family: Montserrat;
-  outline: 0;
-  background-color: #75cc1f;
-  text-decoration: none;
-  cursor: pointer;
-  display: inline-block;
-  line-height: 18px;
-  height: auto;
-  vertical-align: middle;
-  -webkit-appearance: none;
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-  padding: 19.2px 32px;
-  border-radius: 28px;
-  text-transform: uppercase;
-  min-width: 280px;
-  box-sizing: border-box; 
-  letter-spacing: 1px;
-
-  &:not(.disabled):hover
-  {
-    opacity: .8;
-  }
-
-  &.disabled
-  {
-    background: #dde1e4;
-    cursor: default;
+  .Notification {
+    position: relative;
   }
 }
 

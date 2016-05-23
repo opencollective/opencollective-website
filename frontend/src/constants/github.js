@@ -12,5 +12,5 @@ export var MIN_CONTRIBUTORS_FOR_ONBOARDING = 2;
 // Setting to 0 for development testing purposes
 if (!(process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging')) {
 	MIN_STARS_FOR_ONBOARDING = 0;
-	MIN_CONTRIBUTORS_FOR_ONBOARDING = 0;
+	MIN_CONTRIBUTORS_FOR_ONBOARDING = 2;
 }

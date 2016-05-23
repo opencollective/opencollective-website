@@ -31,7 +31,8 @@ export default function github(state={}, action={}) {
       const contributors = action.json.map(contributor => {
         return {
           name: contributor.login,
-          avatar: contributor.avatar_url
+          avatar: contributor.avatar_url,
+          contributions: contributor.contributions,
         };
       });
       return merge({}, state, { contributors });

@@ -11,8 +11,18 @@ export default (username) => {
     dispatch(request(username));
 
     return getThirdParty(`https://api.github.com/users/${username}/repos`, {params: {type: 'owner'}})
-    .then(json => dispatch(success(username, json)))
-    .catch(error => dispatch(failure(username, error)));
+    .then(json => {
+      json = json.filter((repo) => repo.stargazers_count >= constants.MIN_STARS_FOR_ONBOARDING);
+      if (json.length) {
+        dispatch(success(username, json));
+      } else {
+        throw new Error("We couldn't find any repositories with over 100 stars that you own");
+      }
+    })
+    .catch((error) => {
+      dispatch(failure(username, error));
+      throw error;
+    });
   }
 };
 

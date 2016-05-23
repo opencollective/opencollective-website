@@ -11,8 +11,17 @@ export default (owner, repo) => {
     dispatch(request(owner, repo));
 
     return getThirdParty(`https://api.github.com/repos/${owner}/${repo}/contributors`)
-    .then(json => dispatch(success(owner, repo, json)))
-    .catch(error => dispatch(failure(owner, repo, error)));
+    .then(json => {
+      if (json.length >= constants.MIN_CONTRIBUTORS_FOR_ONBOARDING) {
+        dispatch(success(owner, repo, json));
+      } else {
+        throw new Error(`The repository ${repo}, does not have ${constants.MIN_CONTRIBUTORS_FOR_ONBOARDING} or more contributors`);
+      }
+    })
+    .catch((error) => {
+      dispatch(failure(owner, repo, error));
+      throw error;
+    });
   }
 };
 
