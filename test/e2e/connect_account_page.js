@@ -19,6 +19,7 @@ module.exports = {
     // const githubScope = encodeURIComponent('user:email');
 
     client
+      .assert.urlContains('https://github.com/login?return_to=%2Flogin%2Foauth%2Fauthorize')
       .setValue('input[name=login]', config.github.testUsername)
       .setValue('input[name=password]', config.github.testPassword)
       .click('input.btn-primary') // click 'Sign In'
