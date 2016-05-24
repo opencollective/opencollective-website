@@ -28,7 +28,8 @@ export default class ImagePicker extends Component {
   constructor(props) {
     super(props);
     this.blacklist = [];
-    this.options = PRESET_AVATARS.map(src => {return {source: 'preset', src: src}});
+    this.presets = this.props.presets || PRESET_AVATARS;
+    this.options = this.presets.map(src => {return {source: 'preset', src: src}});
 
     if (props.src)
     {
@@ -138,7 +139,7 @@ export default class ImagePicker extends Component {
   thereWasAChange()
   {
     const currentOption = this.options[this.state.currentIndex];
-    this.props.handleChange(currentOption.src !== UPLOAD_AVATAR ? currentOption.src : PRESET_AVATARS[0]);
+    this.props.handleChange(currentOption.src !== UPLOAD_AVATAR ? currentOption.src : this.presets[0]);
   }
 
   nextIsPossible()

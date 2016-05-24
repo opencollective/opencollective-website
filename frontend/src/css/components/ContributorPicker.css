@@ -140,6 +140,18 @@
 			vertical-align: middle;
 			color: #797d80;
 		}
+
+		div
+		{
+			float: right;
+			margin-top: 4px;
+
+			span
+			{
+				font-size: 10px;
+				color: #bbc1c4;
+			}
+		}
 	}
 }
 

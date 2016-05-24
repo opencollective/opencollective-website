@@ -14,13 +14,13 @@ export default class OnBoardingStepPickCoreContributors extends React.Component 
 
   render() {
     const buttonContainerStyle = {margin: '0 auto', marginTop: '40px', width: '300px', textAlign: 'center'};
-    const { onNextStep, contributors: availableContributors, appendGithubForm, githubForm } = this.props;
+    const { onNextStep, contributors: availableContributors, appendGithubForm } = this.props;
     const chosenContributors = this.chosenContributors;
-    const contributors = githubForm.attributes.contributors || [];
+    const canContinue = chosenContributors.length >= MIN_CONTRIBUTORS_FOR_ONBOARDING;
 
     return (
       <div className="OnBoardingStepPickCoreContributors">
-        <OnBoardingStepHeading step="3/4" title="Select your core contributors" subtitle="Add at least 2 members who have contributd to this repository. They will have access to the funds. All other repository contributors will be listed as regular contributors in your collective page."/>
+        <OnBoardingStepHeading step="2/3" title="Select your core contributors" subtitle=""/>
         <ContributorPicker
           available={availableContributors}
           chosen={chosenContributors}
@@ -40,7 +40,8 @@ export default class OnBoardingStepPickCoreContributors extends React.Component 
           }}
         />
         <div style={buttonContainerStyle}>
-          <div className={`OnBoardingButton ${contributors.length >= MIN_CONTRIBUTORS_FOR_ONBOARDING ? '' : 'disabled'}`} onClick={contributors.length >= MIN_CONTRIBUTORS_FOR_ONBOARDING ? () => onNextStep(contributors) : null }>continue</div>
+          <div className={`OnBoardingButton ${canContinue ? '' : 'disabled'}`} onClick={canContinue ? () => onNextStep(chosenContributors) : null }>continue</div>
+          {!canContinue ? <span style={{marginTop: '10px', display: 'block', fontSize: '12px'}}>You need to select at least two contributors</span> : null}
         </div>
       </div>
     )

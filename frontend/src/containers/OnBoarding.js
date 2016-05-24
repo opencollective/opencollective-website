@@ -5,7 +5,6 @@ import Notification from '../containers/Notification';
 
 import OnBoardingHeader from '../components/on_boarding/OnBoardingHeader';
 import OnBoardingHero from '../components/on_boarding/OnBoardingHero';
-import OnBoardingStepConnectGithub from '../components/on_boarding/OnBoardingStepConnectGithub';
 import OnBoardingStepPickRepository from '../components/on_boarding/OnBoardingStepPickRepository';
 import OnBoardingStepPickCoreContributors from '../components/on_boarding/OnBoardingStepPickCoreContributors';
 import OnBoardingStepCreate from '../components/on_boarding/OnBoardingStepCreate';
@@ -46,7 +45,7 @@ export class OnBoarding extends Component {
   componentWillMount() {
     const { githubUsername } = this.props;
     if (githubUsername && this.state.step === 0) {
-      this.setState({step: 2});
+      this.setState({step: 1});
     }
   }
 
@@ -55,12 +54,17 @@ export class OnBoarding extends Component {
       githubUsername,
       fetchReposFromGitHub,
       appendGithubForm,
-      params
+      params,
+      notify
     } = this.props;
 
-    if (githubUsername && this.state.step === 2) {
+    if (githubUsername && this.state.step === 1) {
       appendGithubForm({username: githubUsername, token: params.token});
-      fetchReposFromGitHub(githubUsername);
+      fetchReposFromGitHub(githubUsername)
+      .catch((error) => {
+        this.setState({step: 0});
+        notify('error', error.message);
+      })
     }
   }
 
@@ -71,13 +75,15 @@ export class OnBoarding extends Component {
     return (
       <div className={`OnBoarding ${step ? '-registering' : ''}`}>
         <Notification />
-        {step !== 5 && <OnBoardingHeader active={Boolean(step)} username={githubForm.attributes.username} />}
-        {step === 0 && <OnBoardingHero onClickStart={() => this.setState({step: 1})} />}
-        {step === 1 && <OnBoardingStepConnectGithub />}
-        {step === 2 && <OnBoardingStepPickRepository repositories={repositories} onNextStep={() => this.getContributors(githubForm.attributes.repository)} {...this.props} />}
-        {step === 3 && <OnBoardingStepPickCoreContributors contributors={contributors} onNextStep={() => this.setState({step: 4})} {...this.props} />}
-        {step === 4 && <OnBoardingStepCreate onCreate={this.create.bind(this)} {...this.props} />}
-        {step === 5 && <OnBoardingStepThankYou onContinue={() => window.location = '/opensource' }/>}
+        {step !== 4 && <OnBoardingHeader active={Boolean(step)} username={githubForm.attributes.username} />}
+        {step === 0 && <OnBoardingHero />}
+        {step === 1 && <OnBoardingStepPickRepository repositories={repositories} onNextStep={(repository) => {
+          if (!githubForm.attributes.repository) githubForm.attributes.repository = repository;
+          this.getContributors(githubForm.attributes.repository);
+        }} {...this.props} />}
+        {step === 2 && <OnBoardingStepPickCoreContributors contributors={contributors} onNextStep={() => this.setState({step: 3})} {...this.props} />}
+        {step === 3 && <OnBoardingStepCreate onCreate={this.create.bind(this)} {...this.props} />}
+        {step === 4 && <OnBoardingStepThankYou onContinue={() => window.location = '/opensource' }/>}
       </div>
     )
   }
@@ -99,18 +105,22 @@ export class OnBoarding extends Component {
 
     return validateSchema(githubForm.attributes, githubSchema)
       .then(() => createGroupFromGithubRepo(payload, attr.token))
-      .then(() => this.setState({step: 5}))
+      .then(() => this.setState({step: 4}))
       .catch(({message}) => notify('error', message));
   }
 
   getContributors(selectedRepo) {
     const {
       githubUsername,
-      fetchContributorsFromGitHub } = this.props;
+      fetchContributorsFromGitHub,
+      notify } = this.props;
 
-    this.setState({step: 3, selectedRepo})
     fetchContributorsFromGitHub(githubUsername, selectedRepo)
-    .catch(err => notify('error', err.message));
+    .then(() => this.setState({step: 2, selectedRepo}))
+    .catch((error) => {
+      this.setState({step: 1});
+      notify('error', error.message);
+    });
   }
 }
 
@@ -119,6 +129,7 @@ export default connect(mapStateToProps, {
   fetchContributorsFromGitHub,
   uploadImage,
   appendGithubForm,
+  notify,
   createGroupFromGithubRepo,
   validateSchema
 })(OnBoarding);

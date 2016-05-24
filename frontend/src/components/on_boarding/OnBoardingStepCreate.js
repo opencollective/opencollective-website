@@ -26,7 +26,7 @@ export default class OnBoardingStepCreate extends React.Component {
 
     return (
       <div className="OnBoardingStepCreate">
-        <OnBoardingStepHeading step="4/4" title="Why do you want to create a collective?" subtitle="The answers will be public and will help others decide whether to back your project."/>
+        <OnBoardingStepHeading step="3/3" title="Why do you want to create a collective?" subtitle="The answers will be public and will help others decide whether to back your project."/>
         <div className="OnBoardingStepCreate-form-container">
           <div className="sm-flex items-stretch">
             <div className="order-2">
@@ -37,6 +37,7 @@ export default class OnBoardingStepCreate extends React.Component {
                   handleChange={logo => appendGithubForm({logo})}
                   label="Select collective image"
                   uploadImage={uploadImage}
+                  presets={['/static/images/repo.svg', '/static/images/code.svg', '/static/images/rocket.svg']}
                 />
               </div>
             </div>

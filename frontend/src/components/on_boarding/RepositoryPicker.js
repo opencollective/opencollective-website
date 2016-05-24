@@ -22,7 +22,7 @@ export default class RepositoryPicker extends React.Component {
               title={repo.title}
               description={repo.description}
               stars={repo.stars}
-              selected={selectedRepo === repo.title}
+              selected={selectedRepo === repo.title || repositories.length === 1}
               onClick={() => onSelect(repo.title)}
             />
           )
