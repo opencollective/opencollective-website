@@ -1,0 +1,10 @@
+/* Tweaks for general purpose components */
+
+.ProfilePage {
+	.UserPhoto {
+		width: 128px;
+		width: 8rem;
+		height: 128px;
+		height: 8rem;
+	}
+}

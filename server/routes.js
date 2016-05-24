@@ -66,6 +66,7 @@ module.exports = (app) => {
    * the explicit routes and just do `app.use(render)`
    */
   app.get('/leaderboard', mw.ga, mw.fetchLeaderboard, mw.addTitle('Open Collective Leaderboard'), render);
+  app.get('/profile/:user', mw.ga, mw.addTitle('Open Collective Profile'), render);
   app.get('/github/apply/:token', mw.ga, mw.extractGithubUsernameFromToken, mw.addTitle('Sign up your Github repository'), render);
   app.get('/github/apply', mw.ga, mw.addTitle('Sign up your Github repository'), render);
   app.get('/connect/:service(github)', mw.ga, render);
