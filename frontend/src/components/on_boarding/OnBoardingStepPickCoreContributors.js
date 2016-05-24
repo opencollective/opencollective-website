@@ -14,9 +14,8 @@ export default class OnBoardingStepPickCoreContributors extends React.Component 
 
   render() {
     const buttonContainerStyle = {margin: '0 auto', marginTop: '40px', width: '300px', textAlign: 'center'};
-    const { onNextStep, contributors: availableContributors, appendGithubForm, githubForm } = this.props;
+    const { onNextStep, contributors: availableContributors, appendGithubForm } = this.props;
     const chosenContributors = this.chosenContributors;
-    const contributors = githubForm.attributes.contributors || [];
 
     return (
       <div className="OnBoardingStepPickCoreContributors">
@@ -40,7 +39,7 @@ export default class OnBoardingStepPickCoreContributors extends React.Component 
           }}
         />
         <div style={buttonContainerStyle}>
-          <div className={`OnBoardingButton ${contributors.length >= MIN_CONTRIBUTORS_FOR_ONBOARDING ? '' : 'disabled'}`} onClick={contributors.length >= MIN_CONTRIBUTORS_FOR_ONBOARDING ? () => onNextStep(contributors) : null }>continue</div>
+          <div className={`OnBoardingButton ${chosenContributors.length >= MIN_CONTRIBUTORS_FOR_ONBOARDING ? '' : 'disabled'}`} onClick={chosenContributors.length >= MIN_CONTRIBUTORS_FOR_ONBOARDING ? () => onNextStep(chosenContributors) : null }>continue</div>
         </div>
       </div>
     )
