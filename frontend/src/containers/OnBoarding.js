@@ -98,7 +98,7 @@ export class OnBoarding extends Component {
         mission: attr.missionDescription,
         expensePolicy: attr.expenseDescription,
         logo: attr.logo || '',
-        website: `http://github.com/${attr.username}/${attr.repository}`
+        website: `https://github.com/${attr.username}/${attr.repository}`
       },
       users: attr.contributors,
       github_username: attr.username,
