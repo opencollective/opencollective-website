@@ -8,12 +8,10 @@ class Notification extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {closed: false};
   }
 
   render() {
     const { notification, autoclose, autocloseTimeout=5000 } = this.props;
-    const { closed } = this.state;
     const status = notification.status || 'hide';
 
     if (autoclose && status !== 'hide') {
@@ -23,7 +21,7 @@ class Notification extends Component {
     }
 
     return (
-      <div className={`Notification Notification--${closed ? 'hide' : status}`}>
+      <div className={`Notification Notification--${status}`}>
         {this.icon(status)}
         {notification.message}
       </div>
