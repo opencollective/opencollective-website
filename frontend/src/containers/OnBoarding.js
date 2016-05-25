@@ -62,7 +62,6 @@ export class OnBoarding extends Component {
       appendGithubForm({username: githubUsername, token: params.token});
       fetchReposFromGitHub(githubUsername)
       .catch((error) => {
-        this.setState({step: 0});
         notify('error', error.message);
       })
     }
@@ -74,7 +73,7 @@ export class OnBoarding extends Component {
 
     return (
       <div className={`OnBoarding ${step ? '-registering' : ''}`}>
-        <Notification />
+        <Notification autoclose={true} />
         {step !== 4 && <OnBoardingHeader active={Boolean(step)} username={githubForm.attributes.username} />}
         {step === 0 && <OnBoardingHero />}
         {step === 1 && <OnBoardingStepPickRepository repositories={repositories} onNextStep={(repository) => {
@@ -143,6 +142,7 @@ function mapStateToProps({github, form}) {
 
   return {
     githubUsername,
+    fetchedRepositories: Boolean(github.repositories),
     repositories: github.repositories || [],
     contributors: github.contributors || [],
     githubForm: form.github

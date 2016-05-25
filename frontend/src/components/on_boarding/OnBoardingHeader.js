@@ -2,13 +2,11 @@ import React from 'react';
 
 export default class OnBoardingHeader extends React.Component {
 
-  constructor(props)
-  {
+  constructor(props) {
     super(props);
   }
   
-  render()
-  {
+  render() {
     const { active, username } = this.props;
     const headerStyles = active ? {background: '#3d3d3d', padding: '20px 30px'} : {};
 
