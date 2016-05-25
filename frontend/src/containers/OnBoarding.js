@@ -97,7 +97,8 @@ export class OnBoarding extends Component {
         slug: attr.repository,
         mission: attr.missionDescription,
         expensePolicy: attr.expenseDescription,
-        logo: attr.logo || ''
+        logo: attr.logo || '',
+        website: `https://github.com/${attr.username}/${attr.repository}`
       },
       users: attr.contributors,
       github_username: attr.username,
