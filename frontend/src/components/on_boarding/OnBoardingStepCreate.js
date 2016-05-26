@@ -32,6 +32,7 @@ export default class OnBoardingStepCreate extends React.Component {
             <div className="order-2">
               <div className='OnBoardingStepCreate-imagepicker-cont pb3'>
                 <ImagePicker
+                  uploadOptionFirst
                   className="logo"
                   dontLookupSocialMediaAvatars
                   handleChange={logo => appendGithubForm({logo})}

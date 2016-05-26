@@ -37,7 +37,7 @@ export default class ImagePicker extends Component {
       this.options[0].source = 'default';
     }
 
-    this.options.push({
+    this.options[props.uploadOptionFirst ? 'unshift' : 'push']({
       source: 'upload',
       src: UPLOAD_AVATAR
     });
