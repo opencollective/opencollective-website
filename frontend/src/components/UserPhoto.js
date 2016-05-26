@@ -11,21 +11,22 @@ export default class UserPhoto extends React.Component {
     addBadge: false
   };
 
-  constructor(props) {
-    super(props);
-    const {user} = this.props;
-    this.state = {avatar: ''};
-    if (user.avatar)
-    {
+  componentDidMount() {
+    const { user } = this.props;
+    if (user.avatar) {
       const image = new Image();
       image.onerror = () => this.setState({avatar: getAvatarByNumber(user.id)});
       image.onload = () => this.setState({avatar: user.avatar});
       image.src = user.avatar;
     }
-    else
-    {
-      this.state.avatar = getAvatarByNumber(user.id);
+    else {
+      this.setState({avatar: getAvatarByNumber(user.id)});
     }
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {avatar: ''};
   }
 
   render() {
