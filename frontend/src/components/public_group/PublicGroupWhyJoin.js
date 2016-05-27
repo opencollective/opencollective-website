@@ -11,22 +11,18 @@ export default class PublicGroupWhyJoin extends React.Component {
       expenses
     } = this.props;
 
-    const hasMedia = (group.video || group.image);
-    const summaryNoMediaClassNames = !hasMedia ? ' mx-auto' : '';
     const whyJoinText = group.whyJoin || i18n.getString('becomeMemberText');
 
     return (
       <section id='why-join' className='bg-black white'>
-        <div className='PublicGroupWhyJoin container clearfix md-flex'>
-          {hasMedia && (
-            <div className='col md-col-6 col-12 relative'>
-              <div className='PublicGroup-Media-container'>
-                <Media group={group} />
-              </div>
+        <div className='PublicGroupWhyJoin container clearfix md-flex'>          
+          <div className='col md-col-6 col-12 relative'>
+            <div className='PublicGroup-Media-container'>
+              <Media group={group} />
             </div>
-          )}
+          </div>
 
-          <div className={`PublicGroup-summary col md-col-6 col-12 flex flex-column justify-between ${summaryNoMediaClassNames}`}>
+          <div className='PublicGroup-summary col md-col-6 col-12 flex flex-column justify-between mx-auto'>
             <div>
               <span className='PublicGroup-title white -ff-sec -fw-bold'>{i18n.getString('becomeMemberTitle')}</span>
               <p className='PublicGroup-font-17 mt3'>{whyJoinText}</p>
