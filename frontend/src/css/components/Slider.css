@@ -1,6 +1,5 @@
 .Slider-container
 {
-  --handle-diameter: 16px;
   position: relative;
   width: 100%;
   background-color: #f2f2f2;
