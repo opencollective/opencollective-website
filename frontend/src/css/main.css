@@ -33,6 +33,7 @@
 @import './containers/SubmitExpense.css';
 @import './containers/Subscriptions.css';
 @import './containers/OnBoarding.css';
+@import './containers/ProfilePage.css';
 
 /**
  * Components
