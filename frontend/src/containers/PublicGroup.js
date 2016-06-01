@@ -10,6 +10,9 @@ import filterCollection from '../lib/filter_collection';
 import roles from '../constants/roles';
 import Notification from '../containers/Notification';
 import PublicFooter from '../components/PublicFooter';
+import UserPhoto from '../components/UserPhoto';
+
+import OnBoardingHeader from '../components/on_boarding/OnBoardingHeader';
 
 import PublicGroupHero from '../components/public_group/PublicGroupHero';
 import PublicGroupWhoWeAre from '../components/public_group/PublicGroupWhoWeAre';
@@ -20,6 +23,8 @@ import PublicGroupExpenses from '../components/public_group/PublicGroupExpenses'
 import PublicGroupDonations from '../components/public_group/PublicGroupDonations';
 import PublicGroupSignupV2 from '../components/public_group/PublicGroupSignupV2';
 import PublicGroupThanksV2 from '../components/public_group/PublicGroupThanksV2';
+import BackerCard from '../components/public_group/BackerCard';
+import ContributorList from '../components/public_group/ContributorList';
 
 import fetchGroup from '../actions/groups/fetch_by_id';
 import fetchUsers from '../actions/users/fetch_by_group';
@@ -87,6 +92,75 @@ export class PublicGroup extends Component {
     });
   }
 
+  renderInactiveBackers() {
+    const list = new Array(10).fill({});
+    const backers = [];
+
+    backers.map((backer, index) => list[index] = backer);
+
+    return (
+      <div className="PublicGroup-backer-container">
+        <div className="-top-gradient"></div>
+        <div className="-wrap">
+          {list.map((backer, index) => (<BackerCard 
+            key={index}
+            title={backer.title ? backer.name : `${index+1}st Backer`} 
+            user={{avatar: backer.avatar}}
+            onClick={index === (backers.length) ? function(){} : null}
+            />)
+          )}
+        </div>
+        <div className="-bottom-gradient"></div>
+      </div>
+    )
+  }
+
+  renderInactiveContributors() {
+    const constributors = []
+    return (
+      <div className="PublicGroup-contrib-container">
+        <div className="line1" >Contributors</div>
+        <ContributorList constributors={constributors} />
+      </div>
+    )
+  }
+
+  renderInactiveAbout() {
+    return (
+      <div className="PublicGroup-about-container">
+        <div className="line1">About Open Collective</div>
+        <div className="line2">
+          We use [Open Collective host] to collect the funds on our behalf using OpenCollective. Whenever we need to use the money for something, we will submit the invoice or expense via the OpenCollective app and once approved we will be reimbursed. That way, you can always track our budget. 
+          <br/>
+          <b>Everything is transparent.</b>
+        </div>
+        <div className="more-button">learn more</div>
+      </div>
+    ) 
+  }
+
+  renderInactive() {
+    // const group_name = 'YEOMAN';
+    const group_logo = 'https://cldup.com/U1yzUnB9YJ.png';
+    const group_mission = "build the web's scaffolding tools for modern apps.";
+
+    return (
+      <div className='PublicGroup PublicGroup--inactive'>
+        <OnBoardingHeader />
+        <UserPhoto user={{avatar: group_logo}} addBadge={true} className="mx-auto" />
+        <div className="line1">Help YEOMAN create an open collective to…</div>
+        <div className="line2">{group_mission}</div>
+        <div className="line3">Help us get the first 10 backers to start the collective going.</div>
+        <div className="line4">With at least $10 you can become a member and help us cover design work, maintenance and servers.</div>
+        {this.renderInactiveBackers()}
+        hello hello hello hello hello hello hello hello
+        {this.renderInactiveContributors()}
+        {this.renderInactiveAbout()}
+        <PublicFooter />
+      </div>
+    )
+  }
+
   render() {
     const {
       group,
@@ -95,6 +169,11 @@ export class PublicGroup extends Component {
       users,
       // shareUrl,
     } = this.props;
+
+    const inactive = true;
+    if (inactive) {
+      return this.renderInactive();
+    }
 
     const publicGroupClassName = `PublicGroup ${group.slug}`;
 
