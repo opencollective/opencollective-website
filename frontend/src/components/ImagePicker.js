@@ -197,10 +197,10 @@ export default class ImagePicker extends Component {
 
   lookupSocialMediaAvatars(website, twitter)
   {
-    const { profileForm, newUser, getSocialMediaAvatars } = this.props;
+    const { profileForm, newUser, getSocialMediaAvatars, uploadOptionFirst } = this.props;
+    const defaultPresetIndex = uploadOptionFirst ? 1 : 0;
 
-    if (!this.state.isLoading)
-    {
+    if (!this.state.isLoading) {
       this.setState({isLoading: true});
     }
 
@@ -208,24 +208,34 @@ export default class ImagePicker extends Component {
     .then((response) => {
       const currentOption = this.options[this.state.currentIndex];
       const results = response.json.filter((option) => this.blacklist.indexOf(option.src) === -1 );
+      const newResults = results.filter((option) => {
+        let alreadyExists = false;
+        this.options.forEach((opt) => {
+          if (opt.src === option.src) {
+            alreadyExists = true;
+          }
+        })
+        return !alreadyExists
+      });
       let isFirstTime = false;
 
-      results.forEach(result => {
+      newResults.forEach(result => {
         const existingOption = this.options.filter((option) => {return option.source === result.source})[0];
-        if (existingOption)
-        {
+        if (existingOption) {
           existingOption.src = result.src;
-        }
-        else
-        {
-          if (this.options[0].source === 'preset')
+        } else {
+          if (this.options[defaultPresetIndex].source === 'preset')
           {
-            this.options[0].source = result.source;
-            this.options[0].src = result.src;
+            if (defaultPresetIndex) {
+              this.options.splice(defaultPresetIndex, 1);
+              this.options.splice(0, 0, result);
+            } else {
+              this.options[defaultPresetIndex].source = result.source;
+              this.options[defaultPresetIndex].src = result.src;
+            }
             isFirstTime = true;
           }
-          else
-          {
+          else {
             this.options.splice(0, 0, result);
           }
         }

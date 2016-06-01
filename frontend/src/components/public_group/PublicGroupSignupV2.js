@@ -33,6 +33,7 @@ export default class PublicGroupSignupV2 extends React.Component {
             <div className="order-2 mb2">
               <div className='pb2 pl2 pr2'>
                 <ImagePicker
+                  uploadOptionFirst
                   twitter={profileForm.attributes.twitterHandle || newUser.twitterHandle}
                   email={profileForm.attributes.email || newUser.email}
                   website={profileForm.attributes.website || newUser.website}
@@ -49,6 +50,7 @@ export default class PublicGroupSignupV2 extends React.Component {
                   {i18n.getString('displayName')}
                 </label>
                 <Input
+                  customClass='-name'
                   type='text'
                   placeholder='Your Name'
                   value={profileForm.attributes.name || newUser.name}
@@ -60,6 +62,7 @@ export default class PublicGroupSignupV2 extends React.Component {
                   <span className='pl1 h6 muted'>(Optional)</span>
                 </label>
                 <Input
+                  customClass='-website'
                   type='text'
                   placeholder='Website URL (Optional)'
                   value={profileForm.attributes.website || newUser.website}
@@ -76,6 +79,7 @@ export default class PublicGroupSignupV2 extends React.Component {
                   <span className='pl1 h6 muted'>(Optional)</span>
                 </label>
                 <Input
+                  customClass='-twitter'
                   type='text'
                   placeholder='Twitter Handle (Optional)'
                   value={profileForm.attributes.twitterHandle || newUser.twitterHandle}
