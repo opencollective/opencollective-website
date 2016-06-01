@@ -16,7 +16,7 @@
   border-radius: 50%;
 }
 
-.UserCard .UserPhoto.sponsor, .UserCard .UserPhoto.sponsor div {
+.UserCard .UserPhoto.sponsor, .UserCard .UserPhoto.sponsor div:first-child {
     border-radius: 0;
     width: 140px;
     height: 64px;
