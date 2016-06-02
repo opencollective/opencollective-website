@@ -51,7 +51,7 @@ class ExpenseForm extends Component {
     } = this.props;
 
     const attributes = transaction.attributes;
-    
+
     const className = classnames({
       'ExpenseForm': true,
       'ExpenseForm--isUploading': isUploading,
@@ -74,6 +74,22 @@ class ExpenseForm extends Component {
           name='transaction'
           className='ExpenseForm-form'
           onSubmit={this.onSubmit.bind(this)} >
+          <div className='row'>
+            <label>Name: </label>
+            <Input
+              customClass='js-transaction-name'
+              hasError={transaction.error.name}
+              value={attributes.name}
+              handleChange={name => appendTransactionForm({name})} />
+          </div>
+          <div className='row'>
+            <label>Email:</label>
+            <Input
+              customClass='js-transaction-email'
+              hasError={transaction.error.email}
+              value={attributes.email}
+              handleChange={email => appendTransactionForm({email})} />
+          </div>
           <div className='row'>
             <label>Description: </label>
             <Input
@@ -120,25 +136,14 @@ class ExpenseForm extends Component {
 
           {attributes.payoutMethod === 'paypal' && (
             <div className='row'>
-              <label>PayPal email:</label>
+              <label>PayPal email (if different than above):</label>
               <Input
                 customClass='js-transaction-paypalEmail'
                 hasError={transaction.error.paypalEmail}
-                value={attributes.paypalEmail}
+                value={attributes.paypalEmail || attributes.email}
                 handleChange={paypalEmail => appendTransactionForm({paypalEmail})} />
             </div>
           )}
-          {attributes.payoutMethod !== 'paypal' && (
-            <div className='row'>
-              <label>Email:</label>
-              <Input
-                customClass='js-transaction-email'
-                hasError={transaction.error.email}
-                value={attributes.email}
-                handleChange={email => appendTransactionForm({email})} />
-            </div>
-          )}
-
           <div className='row textarea'>
             <label>Note:</label>
             <TextArea
