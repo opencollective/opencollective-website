@@ -95,6 +95,11 @@
   background-color: white;
   border-radius: 100%;
   overflow: hidden;
+
+  img {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 .ImagePicker-prev,
