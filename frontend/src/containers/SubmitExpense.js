@@ -14,6 +14,8 @@ import validateTransaction from '../actions/form/validate_transaction';
 import tags from '../ui/tags';
 import vats from '../ui/vat';
 
+import i18n from '../lib/i18n';
+
 import roles from '../constants/roles';
 import PublicGroupThanks from '../components/PublicGroupThanks';
 
@@ -111,6 +113,10 @@ function mapStateToProps({form, notification, images, groups}) {
 
   const usersByRole = group.usersByRole || {};
 
+  group.settings = group.settings || {
+    lang: 'en'
+  };
+
   /* @xdamman:
    * We should refactor this. The /api/group route should directly return
    * group.host, group.backers, group.members, group.donations, group.expenses
@@ -129,6 +135,7 @@ function mapStateToProps({form, notification, images, groups}) {
     transaction,
     tags: tags(group.id),
     enableVAT: vats(group.id),
-    isUploading: images.isUploading || false
+    isUploading: images.isUploading || false,
+    i18n: i18n(group.settings.lang || 'en')
   };
 }

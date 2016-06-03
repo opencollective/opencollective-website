@@ -62,7 +62,7 @@ export class PublicGroup extends Component {
       return (
         <div className='PublicGroupDonationFlowWrapper px2 py4 border-box fixed top-0 left-0 right-0 bottom-0'>
           <PublicGroupThanksV2
-            message={i18n.getString('NowOnBackersWall')}
+            message={i18n.getString('nowOnBackersWall')}
             i18n={i18n}
             group={group}
             newUserId={newUser.id}
