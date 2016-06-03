@@ -14,7 +14,7 @@ export default (
     <Route path="/subscriptions/:token" component={Subscriptions} />
     <Route path="/subscriptions" component={Subscriptions} />
     <Route path="/leaderboard" component={Leaderboard} />
-    <Route path="/profile/:user" component={ProfilePage} />
+    <Route path="/profile/:username" component={ProfilePage} />
     <Route path="/github/apply/:token" component={OnBoarding} />
     <Route path="/github/apply" component={OnBoarding} />
     <Route path="/:slug" component={PublicGroup} />

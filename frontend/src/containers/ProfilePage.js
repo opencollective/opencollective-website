@@ -6,13 +6,7 @@ import UserPhoto from '../components/UserPhoto';
 import PublicFooter from '../components/PublicFooter';
 import ProfileCard from '../components/ProfileCard';
 
-const SAMPLE_BELONGS_T0 = [
-  {image: '', title: 'Hackers & Founders ProDev GDL', memberCount: 122, ownerName: 'Sergio De La Garza'},
-];
-const SAMPLE_BACKING = [
-  {image: '', title: 'Hacker Garage', memberCount: 137, ownerName: 'Darius Lau'},
-  {image: '', title: 'GeekGirls Guadalajara', memberCount: 73, ownerName: 'Veronica Madrigal'}
-];
+import filterCollection from '../lib/filter_collection';
 
 export class ProfilePage extends Component {
   constructor(props) {
@@ -21,11 +15,15 @@ export class ProfilePage extends Component {
   }
 
   render() {
-    const avatarUrl = 'https://avatars.githubusercontent.com/carlosascari?s=160';
-    const name = 'Scott Murphey';
-    const bio = 'Keeping one’s self going is a difficult thing to do. There are a million distractions that occur every day and that can mean that we do not stay on track with what we should be doing. Self-motivation is something that does not come easy to a lot of people and that means that there are some steps that need to be taken before you can become motivated to the fullest extent.';
-    const belongsTo = SAMPLE_BELONGS_T0;
-    const backing = SAMPLE_BACKING;
+
+    const { profile } = this.props;
+
+    const avatarUrl = profile.avatar;
+    const name = profile.name;
+    const bio = profile.description;
+
+    const belongsTo = filterCollection(profile.groups, { role: 'MEMBER' });
+    const backing = filterCollection(profile.groups, { role: 'BACKER' });
     const user = { avatar: avatarUrl };
     const isEmpty = belongsTo.length === backing.length && backing.length === 0;
 
@@ -39,14 +37,14 @@ export class ProfilePage extends Component {
         {belongsTo.length ? (
             <section>
               <div className="lineA">I proudly belong to these collectives...</div>
-              {belongsTo.map((collective, index) => <ProfileCard key={index} image={collective.image} title={collective.title} subtitle={`${collective.memberCount} Members`} footer={`by ${collective.ownerName}`} />)}
+              {belongsTo.map((collective, index) => <ProfileCard key={index} image={collective.logo} title={collective.name} subtitle={`${collective.members} Members`} footer={`by ${collective.ownerName}`} />)}
             </section>
           ) : null
         }
         {backing.length ? (
             <section style={{paddingBottom: '0'}}>
               <div className="lineA">And happily act as backer of these other collectives...</div>
-              {backing.map((collective, index) => <ProfileCard key={index} image={collective.image} title={collective.title} subtitle={`${collective.memberCount} Members`} footer={`by ${collective.ownerName}`} />)}
+              {backing.map((collective, index) => <ProfileCard key={index} image={collective.logo} title={collective.name} subtitle={`${collective.members} Members`} footer={`by ${collective.ownerName}`} />)}
             </section> 
           ) : null
         }
@@ -70,6 +68,10 @@ export class ProfilePage extends Component {
 
 export default connect(mapStateToProps, {})(ProfilePage);
 
-function mapStateToProps() {
-  return {};
+function mapStateToProps({
+  pages
+}) {
+  return {
+    profile: pages.profile
+  };
 }

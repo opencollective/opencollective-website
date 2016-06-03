@@ -1,4 +1,3 @@
-import banner from './controllers/banner';
 import mw from './middlewares';
 import serverStatus from 'express-server-status';
 import favicon from 'serve-favicon';
@@ -7,7 +6,8 @@ import express from 'express';
 import request from 'request';
 import robots from 'robots.txt';
 
-import collectives from './controllers/collectives';
+import controllers from './controllers';
+
 import apiUrl from './utils/api_url';
 import render from './lib/render';
 
@@ -50,13 +50,13 @@ module.exports = (app) => {
   /**
    * Routes
    */
-  app.get('/:slug/banner.md', mw.cache(300), mw.fetchGroupBySlug, mw.fetchUsers(), banner.markdown);
-  app.get('/:slug/:tier/banner.md', mw.cache(300), mw.fetchGroupBySlug, mw.fetchUsers(), banner.markdown);
-  app.get('/:slug/:tier/badge.svg', mw.cache(300), mw.fetchUsers(), banner.badge);
-  app.get('/:slug/badge/:tier.svg', mw.cache(300), mw.fetchUsers(), banner.badge);
-  app.get('/:slug/:tier/:position/avatar(.:format(png|jpg|svg))?', mw.cache(300), mw.ga, mw.fetchUsers({cache: 300}), banner.avatar);
-  app.get('/:slug/:tier/:position/website', mw.ga, mw.fetchUsers(), banner.redirect);
-  app.get('/:slug([A-Za-z0-9-]+)/widget', mw.cache(300), mw.fetchGroupBySlug, collectives.widget);
+  app.get('/:slug/banner.md', mw.cache(300), mw.fetchGroupBySlug, mw.fetchUsers(), controllers.banner.markdown);
+  app.get('/:slug/:tier/banner.md', mw.cache(300), mw.fetchGroupBySlug, mw.fetchUsers(), controllers.banner.markdown);
+  app.get('/:slug/:tier/badge.svg', mw.cache(300), mw.fetchUsers(), controllers.banner.badge);
+  app.get('/:slug/badge/:tier.svg', mw.cache(300), mw.fetchUsers(), controllers.banner.badge);
+  app.get('/:slug/:tier/:position/avatar(.:format(png|jpg|svg))?', mw.cache(300), mw.ga, mw.fetchUsers({cache: 300}), controllers.banner.avatar);
+  app.get('/:slug/:tier/:position/website', mw.ga, mw.fetchUsers(), controllers.banner.redirect);
+  app.get('/:slug([A-Za-z0-9-]+)/widget', mw.cache(300), mw.fetchGroupBySlug, controllers.collectives.widget);
 
   /**
    * Server side render the react app
@@ -66,7 +66,7 @@ module.exports = (app) => {
    * the explicit routes and just do `app.use(render)`
    */
   app.get('/leaderboard', mw.ga, mw.fetchLeaderboard, mw.addTitle('Open Collective Leaderboard'), render);
-  app.get('/profile/:user', mw.ga, mw.addTitle('Open Collective Profile'), render);
+  app.get('/profile/:username', mw.ga, mw.addTitle('Open Collective Profile'), controllers.profile, render);
   app.get('/github/apply/:token', mw.ga, mw.extractGithubUsernameFromToken, mw.addTitle('Sign up your Github repository'), render);
   app.get('/github/apply', mw.ga, mw.addTitle('Sign up your Github repository'), render);
   app.get('/connect/:service(github)', mw.ga, render);
