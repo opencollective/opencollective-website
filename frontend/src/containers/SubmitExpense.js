@@ -16,7 +16,6 @@ import vats from '../ui/vat';
 
 import roles from '../constants/roles';
 import PublicGroupThanks from '../components/PublicGroupThanks';
-import PublicGroupSignup from '../components/PublicGroupSignup';
 
 import fetchGroup from '../actions/groups/fetch_by_id';
 import notify from '../actions/notification/notify';
@@ -32,20 +31,16 @@ export class SubmitExpense extends Component {
 
     this.state = {
       showThankYouMessage: false,
-      showUserForm: false
     };
   }
 
   render() {
     const {
-      onCancel,
-      isAuthenticated
+      onCancel
     } = this.props;
 
-    if (this.state.showThankYouMessage || (isAuthenticated && this.state.showUserForm)) { // we don't handle userform from logged in users) {
+    if (this.state.showThankYouMessage) {
       return (<PublicGroupThanks message="Expense sent" />);
-    } else if (this.state.showUserForm) {
-      return (<PublicGroupSignup {...this.props} save={saveNewUser.bind(this)} />);
     } else {
       return (<ExpenseForm {...this.props} onSubmit={createExpense.bind(this)} onCancel={onCancel} />);
     }
@@ -65,8 +60,8 @@ export class SubmitExpense extends Component {
   componentDidMount() {
     // decode here because we don't handle auth on the server side yet
     this.props.decodeJWT();
+    window.scrollTo(0,0);
   }
-
 }
 
 export function createExpense() {
