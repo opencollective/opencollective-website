@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import i18n from '../lib/i18n';
+
 import OnBoardingHeader from '../components/on_boarding/OnBoardingHeader';
 import UserPhoto from '../components/UserPhoto';
 import PublicFooter from '../components/PublicFooter';
@@ -16,7 +18,7 @@ export class ProfilePage extends Component {
 
   render() {
 
-    const { profile } = this.props;
+    const { profile, i18n } = this.props;
 
     const avatarUrl = profile.avatar;
     const name = profile.name;
@@ -37,14 +39,14 @@ export class ProfilePage extends Component {
         {belongsTo.length ? (
             <section>
               <div className="lineA">I proudly belong to these collectives...</div>
-              {belongsTo.map((collective, index) => <ProfileCard key={index} image={collective.logo} title={collective.name} subtitle={`${collective.members} Members`} footer={`by ${collective.ownerName}`} />)}
+              {belongsTo.map((collective, index) => <ProfileCard key={index} image={collective.logo} title={collective.name} subtitle={`${collective.members} Members`} footer={`${i18n.getString('since')} ${i18n.moment(collective.createdAt).format('MMMM YYYY')}`} />)}
             </section>
           ) : null
         }
         {backing.length ? (
             <section style={{paddingBottom: '0'}}>
               <div className="lineA">And happily act as backer of these other collectives...</div>
-              {backing.map((collective, index) => <ProfileCard key={index} image={collective.logo} title={collective.name} subtitle={`${collective.members} Members`} footer={`by ${collective.ownerName}`} />)}
+              {backing.map((collective, index) => <ProfileCard key={index} image={collective.logo} title={collective.name} subtitle={`${collective.members} Members`} footer={`${i18n.getString('since')} ${i18n.moment(collective.createdAt).format('MMMM YYYY')}`} />)}
             </section> 
           ) : null
         }
@@ -72,6 +74,7 @@ function mapStateToProps({
   pages
 }) {
   return {
-    profile: pages.profile
+    profile: pages.profile,
+    i18n: i18n('en')
   };
 }
