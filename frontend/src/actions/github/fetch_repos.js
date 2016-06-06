@@ -10,7 +10,7 @@ export default (username) => {
   return dispatch => {
     dispatch(request(username));
 
-    return getThirdParty(`https://api.github.com/users/${username}/repos?per_page=100&sort=stars`, {params: {type: 'owner'}})
+    return getThirdParty(`https://api.github.com/users/${username}/repos?per_page=100`, {params: {type: 'owner,member'}})
     .then(json => {
       json = json.filter((repo) => repo.stargazers_count >= constants.MIN_STARS_FOR_ONBOARDING);
       dispatch(success(username, json));
