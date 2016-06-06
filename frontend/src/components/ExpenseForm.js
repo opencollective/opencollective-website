@@ -23,14 +23,15 @@ class ExpenseForm extends Component {
       enableVAT,
       transaction,
       group,
-      appendTransactionForm
+      appendTransactionForm,
+      i18n
     } = this.props;
 
     if (!enableVAT) return;
 
     return (
       <div>
-        <span className='inline'>VAT: </span>
+        <span className='inline'>{i18n.getString('vat')}</span>
         <Input
           placeholder={formatCurrency(0, group.currency)}
           hasError={transaction.error.vat}
@@ -47,11 +48,12 @@ class ExpenseForm extends Component {
       group,
       appendTransactionForm,
       isUploading,
-      enableVAT
+      enableVAT,
+      i18n
     } = this.props;
 
     const attributes = transaction.attributes;
-    
+
     const className = classnames({
       'ExpenseForm': true,
       'ExpenseForm--isUploading': isUploading,
@@ -75,7 +77,23 @@ class ExpenseForm extends Component {
           className='ExpenseForm-form'
           onSubmit={this.onSubmit.bind(this)} >
           <div className='row'>
-            <label>Description: </label>
+            <label>{i18n.getString('name')}: </label>
+            <Input
+              customClass='js-transaction-name'
+              hasError={transaction.error.name}
+              value={attributes.name}
+              handleChange={name => appendTransactionForm({name})} />
+          </div>
+          <div className='row'>
+            <label>{i18n.getString('email')}:</label>
+            <Input
+              customClass='js-transaction-email'
+              hasError={transaction.error.email}
+              value={attributes.email}
+              handleChange={email => appendTransactionForm({email})} />
+          </div>
+          <div className='row'>
+            <label>{i18n.getString('description')}: </label>
             <Input
               customClass='js-transaction-description'
               hasError={transaction.error.description}
@@ -83,7 +101,7 @@ class ExpenseForm extends Component {
               handleChange={description => appendTransactionForm({description})} />
           </div>
           <div className='row'>
-            <label>Amount: </label>
+            <label>{i18n.getString('amount')}: </label>
             <Input
               customClass='js-transaction-amount'
               placeholder={amountPlaceholder}
@@ -93,7 +111,7 @@ class ExpenseForm extends Component {
           </div>
           {this.vatInput()}
           <div className='row'>
-            <label>Date:</label>
+            <label>{i18n.getString('date')}:</label>
             <DatePicker
               customClass='js-transaction-createdAt'
               selected={moment(attributes.createdAt)}
@@ -101,7 +119,7 @@ class ExpenseForm extends Component {
               handleChange={createdAt => appendTransactionForm({createdAt})} />
           </div>
           <div className='row'>
-            <label>Category:</label>
+            <label>{i18n.getString('category')}:</label>
             <SelectTag
               customClass='js-transaction-category'
               attributes={attributes}
@@ -110,7 +128,7 @@ class ExpenseForm extends Component {
           </div>
 
           <div className='row'>
-            <label>Reimbursement method:</label>
+            <label>{i18n.getString('reimbursementMethod')}:</label>
             <Select
               customClass='js-transaction-payoutMethod'
               options={payoutMethods}
@@ -120,27 +138,16 @@ class ExpenseForm extends Component {
 
           {attributes.payoutMethod === 'paypal' && (
             <div className='row'>
-              <label>PayPal email:</label>
+              <label>{i18n.getString('paypalEmail')} ({i18n.getString('ifDifferentThanAbove')}):</label>
               <Input
                 customClass='js-transaction-paypalEmail'
                 hasError={transaction.error.paypalEmail}
-                value={attributes.paypalEmail}
+                value={attributes.paypalEmail || attributes.email}
                 handleChange={paypalEmail => appendTransactionForm({paypalEmail})} />
             </div>
           )}
-          {attributes.payoutMethod !== 'paypal' && (
-            <div className='row'>
-              <label>Email:</label>
-              <Input
-                customClass='js-transaction-email'
-                hasError={transaction.error.email}
-                value={attributes.email}
-                handleChange={email => appendTransactionForm({email})} />
-            </div>
-          )}
-
           <div className='row textarea'>
-            <label>Note:</label>
+            <label>{i18n.getString('note')}:</label>
             <TextArea
               customClass='js-transaction-note'
               placeholder='Optional'

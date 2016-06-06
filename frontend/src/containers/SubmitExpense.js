@@ -14,9 +14,10 @@ import validateTransaction from '../actions/form/validate_transaction';
 import tags from '../ui/tags';
 import vats from '../ui/vat';
 
+import i18n from '../lib/i18n';
+
 import roles from '../constants/roles';
 import PublicGroupThanks from '../components/PublicGroupThanks';
-import PublicGroupSignup from '../components/PublicGroupSignup';
 
 import fetchGroup from '../actions/groups/fetch_by_id';
 import notify from '../actions/notification/notify';
@@ -32,20 +33,16 @@ export class SubmitExpense extends Component {
 
     this.state = {
       showThankYouMessage: false,
-      showUserForm: false
     };
   }
 
   render() {
     const {
-      onCancel,
-      isAuthenticated
+      onCancel
     } = this.props;
 
-    if (this.state.showThankYouMessage || (isAuthenticated && this.state.showUserForm)) { // we don't handle userform from logged in users) {
+    if (this.state.showThankYouMessage) {
       return (<PublicGroupThanks message="Expense sent" />);
-    } else if (this.state.showUserForm) {
-      return (<PublicGroupSignup {...this.props} save={saveNewUser.bind(this)} />);
     } else {
       return (<ExpenseForm {...this.props} onSubmit={createExpense.bind(this)} onCancel={onCancel} />);
     }
@@ -65,8 +62,8 @@ export class SubmitExpense extends Component {
   componentDidMount() {
     // decode here because we don't handle auth on the server side yet
     this.props.decodeJWT();
+    window.scrollTo(0,0);
   }
-
 }
 
 export function createExpense() {
@@ -116,6 +113,10 @@ function mapStateToProps({form, notification, images, groups}) {
 
   const usersByRole = group.usersByRole || {};
 
+  group.settings = group.settings || {
+    lang: 'en'
+  };
+
   /* @xdamman:
    * We should refactor this. The /api/group route should directly return
    * group.host, group.backers, group.members, group.donations, group.expenses
@@ -134,6 +135,7 @@ function mapStateToProps({form, notification, images, groups}) {
     transaction,
     tags: tags(group.id),
     enableVAT: vats(group.id),
-    isUploading: images.isUploading || false
+    isUploading: images.isUploading || false,
+    i18n: i18n(group.settings.lang || 'en')
   };
 }

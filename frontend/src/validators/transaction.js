@@ -12,6 +12,10 @@ const schema = Joi.object().keys({
   link: Joi.string().uri()
     .label('Photo')
     .allow(null),
+  name: Joi.string().required()
+    .label('Name'),
+  email: Joi.string().email()
+    .label('Email'),
   description: Joi.string().required()
     .label('Description'),
   amount: Joi.number().precision(2).required()
@@ -30,9 +34,6 @@ const schema = Joi.object().keys({
   approved: Joi.boolean(),
   payoutMethod: Joi.string().valid(pluck(payoutMethods, 'value'))
     .label('Reimbursement method'),
-  email: Joi.string().email()
-    .label('Email')
-    .allow(null),
   paypalEmail: Joi.string().email()
     .label('PayPal email')
     .allow(null),

@@ -23,6 +23,7 @@
   --max-container-width: 1070px;
   --blur: 4px;
   --max-form-width: 400px;
+  --handle-diameter: 16px;
 }
 
 @custom-media --large-viewport (min-width: 1070px);
