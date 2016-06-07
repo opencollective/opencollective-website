@@ -4,14 +4,14 @@ import { pushState } from 'redux-router';
 
 import values from 'lodash/object/values';
 
-import createTransaction from '../actions/transactions/create';
+import createExpense from '../actions/transactions/create';
 import uploadImage from '../actions/images/upload';
 
-import resetTransactionForm from '../actions/form/reset_transaction';
-import appendTransactionForm from '../actions/form/append_transaction';
-import validateTransaction from '../actions/form/validate_transaction';
+import resetExpenseForm from '../actions/form/reset_transaction';
+import appendExpenseForm from '../actions/form/append_transaction';
+import validateExpense from '../actions/form/validate_transaction';
 
-import tags from '../ui/tags';
+import categories from '../ui/tags';
 import vats from '../ui/vat';
 
 import i18n from '../lib/i18n';
@@ -44,7 +44,7 @@ export class SubmitExpense extends Component {
     if (this.state.showThankYouMessage) {
       return (<PublicGroupThanks message="Expense sent" />);
     } else {
-      return (<ExpenseForm {...this.props} onSubmit={createExpense.bind(this)} onCancel={onCancel} />);
+      return (<ExpenseForm {...this.props} onSubmit={createExpenseFn.bind(this)} onCancel={onCancel} />);
     }
 
   }
@@ -66,24 +66,24 @@ export class SubmitExpense extends Component {
   }
 }
 
-export function createExpense() {
+export function createExpenseFn() {
   const {
     notify,
-    createTransaction,
+    createExpense,
     group,
-    validateTransaction,
+    validateExpense,
     transaction
   } = this.props;
   const attributes = transaction.attributes;
 
-  return validateTransaction(attributes)
+  return validateExpense(attributes)
   .then(() => {
-    const newTransaction = {
+    const newExpense = {
       ...attributes,
-      amount: -attributes.amount,
+      // TODO should be specified by user
       currency: group.currency
     };
-    return createTransaction(group.id, newTransaction);
+    return createExpense(group.id, newExpense);
   })
   .then(() => {
     window.scrollTo(0, 0);
@@ -93,18 +93,17 @@ export function createExpense() {
 };
 
 export default connect(mapStateToProps, {
-  createTransaction,
+  createExpense,
   uploadImage,
-  resetTransactionForm,
-  appendTransactionForm,
-  validateTransaction,
+  resetExpenseForm,
+  appendExpenseForm,
+  validateExpense,
   pushState,
   notify,
   decodeJWT,
   fetchGroup,
   resetNotifications
 })(SubmitExpense);
-
 
 function mapStateToProps({form, notification, images, groups}) {
   const transaction = form.transaction;
@@ -133,7 +132,7 @@ function mapStateToProps({form, notification, images, groups}) {
     group,
     notification,
     transaction,
-    tags: tags(group.id),
+    categories: categories(group.id),
     enableVAT: vats(group.id),
     isUploading: images.isUploading || false,
     i18n: i18n(group.settings.lang || 'en')

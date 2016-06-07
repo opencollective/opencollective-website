@@ -2,15 +2,16 @@ import { postJSON } from '../../lib/api';
 import * as constants from '../../constants/transactions';
 
 /**
- * Create a new transaction in a group
+ * Create an expense
  */
 
-export default (groupid, transaction) => {
-  const url = `/groups/${groupid}/transactions/`;
+export default (groupid, expense) => {
+  console.log("Create expense")
+  const url = `/groups/${groupid}/expenses/`;
 
   return dispatch => {
-    dispatch(request(groupid, transaction));
-    return postJSON(url, {transaction})
+    dispatch(request(groupid, expense));
+    return postJSON(url, {expense})
       .then(json => dispatch(success(groupid, json)))
       .catch(error => {
         dispatch(failure(error))
@@ -19,23 +20,23 @@ export default (groupid, transaction) => {
   };
 };
 
-function request(groupid, transaction) {
+function request(groupid, expense) {
   return {
     type: constants.CREATE_TRANSACTION_REQUEST,
     groupid,
-    transaction
+    expense
   };
 }
 
-function success(groupid, transaction) {
-  const transactions = {
-    [transaction.id]: transaction
+function success(groupid, expense) {
+  const expenses = {
+    [expense.id]: expense
   };
 
   return {
     type: constants.CREATE_TRANSACTION_SUCCESS,
     groupid,
-    transactions,
+    expenses
   };
 }
 

@@ -2,7 +2,7 @@ import * as constants from '../../constants/form';
 import transactionIsValid from '../../validators/transaction';
 
 /**
- * Validate transaction form
+ * Validate expense submission form
  */
 
 export default (newTransaction) => {

@@ -85,15 +85,15 @@ function donation(state={}, action={}) {
 }
 
 /**
- * New transaction form reducer
+ * New expense form reducer
  */
 const transactionInitialState = {
   attributes: {
-    tags: [],
-    description: '',
+    category: '',
+    title: '',
     payoutMethod: 'paypal',
     vat: null,
-    createdAt: new Date()
+    incurredAt: new Date()
   },
   error: {}
 };
