@@ -1,7 +1,7 @@
 .BackerCard {
   display: inline-block;
-  width: 190px;
-  height: 225px;
+  width: 192px;
+  height: 230px;
   border-radius: 5px;
   border: dashed 2px #e1e9ed;
   box-sizing: border-box;
@@ -43,6 +43,10 @@
     text-transform: uppercase;
     text-align: center;
     cursor: pointer;
+    &:hover {
+      cursor: pointer;
+      opacity: .94;
+    }
   }
 
   &.BackerCard--empty {

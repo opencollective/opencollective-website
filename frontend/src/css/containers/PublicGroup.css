@@ -419,13 +419,6 @@
 .PublicGroup.PublicGroup--inactive {
   font-family: Montserrat-Light, sans-serif;
 
-  & > .UserPhoto {
-    width: 128px;
-    width: 8rem;
-    height: 128px;
-    height: 8rem;
-  }
-
   .line1 {
     font-family: montserratlight;
     text-align: center;
@@ -433,6 +426,7 @@
     font-size: 16px;
     line-height: 1.8;
     color: #797d80;
+    padding: 0 15px;
   }
 
   .line2 {
@@ -446,6 +440,7 @@
     font-weight: bold;
     margin: 0 auto;
     margin-top: 10px;
+    padding: 0 15px;
   }
 
   .line3 {
@@ -457,6 +452,7 @@
     line-height: 1.6;
     color: #797d80;
     margin: 80px auto 0 auto;
+    padding: 0 15px;
   }
 
   .line4 {
@@ -467,6 +463,29 @@
     line-height: 1.6;
     color: #797d80;
     margin: 10px auto 0 auto;
+    padding: 0 15px;
+  }
+
+  .line5 {
+    text-align: center;
+    max-width: 1080px;
+    height: 33px;
+    font-family: Montserrat, sans-serif;
+    font-size: 28px;
+    color: #494b4d;
+    margin: 60px auto 0 auto;
+    padding: 0 15px;
+  }
+
+  .line6 {
+    text-align: center;
+    max-width: 628px;
+    height: 26px;
+    font-family: montserratlight;
+    font-size: 22px;
+    color: #4d4d4d;
+    margin: 10px auto 0 auto;
+    padding: 0 15px;
   }
 
   .PublicGroup-backer-container {
@@ -486,6 +505,22 @@
     .-wrap {
       max-width: 1060px;
       margin: 0 auto;
+      padding: 0 10px;
+    }
+
+    .UserCard {
+      display: inline-block;
+      vertical-align: middle;
+      margin: 10px;
+    }
+  }
+
+  .PublicGroup-contrib-container {
+    .line1 {
+      font-family: montserratlight;
+      font-size: 22px;
+      color: #4d4d4d;
+      margin-top: 100px;
     }
   }
 
