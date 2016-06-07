@@ -104,23 +104,21 @@ export class PublicGroup extends Component {
 
         <PublicGroupHero group={group} {...this.props} />
         <PublicGroupWhoWeAre group={group} {...this.props} />
-        {group.slug !== 'opensource' && <PublicGroupWhyJoin group={group} expenses={expenses} {...this.props} />}
+        <PublicGroupWhyJoin group={group} expenses={expenses} {...this.props} />
 
         <div className='bg-light-gray px2'>
-          {group.slug !== 'opensource' && <PublicGroupJoinUs {...this.props} donateToGroup={donateToGroup.bind(this)} {...this.props} /> }
+          <PublicGroupJoinUs {...this.props} donateToGroup={donateToGroup.bind(this)} {...this.props} />
           <PublicGroupMembersWall group={group} {...this.props} />
         </div>
 
-        {group.slug !== 'opensource' &&
-          <section id='expenses-and-activity' className='px2'>
-            <div className='container'>
-              <div className='PublicGroup-transactions clearfix md-flex'>
-                <PublicGroupExpenses group={group} expenses={expenses} users={users} itemsToShow={NUM_TRANSACTIONS_TO_SHOW} {...this.props} />
-                <PublicGroupDonations group={group} donations={donations} users={users} itemsToShow={NUM_TRANSACTIONS_TO_SHOW} {...this.props} />
-              </div>
+        <section id='expenses-and-activity' className='px2'>
+          <div className='container'>
+            <div className='PublicGroup-transactions clearfix md-flex'>
+              <PublicGroupExpenses group={group} expenses={expenses} users={users} itemsToShow={NUM_TRANSACTIONS_TO_SHOW} {...this.props} />
+              <PublicGroupDonations group={group} donations={donations} users={users} itemsToShow={NUM_TRANSACTIONS_TO_SHOW} {...this.props} />
             </div>
-          </section>
-        }
+          </div>
+        </section>
 
         <PublicFooter />
 
