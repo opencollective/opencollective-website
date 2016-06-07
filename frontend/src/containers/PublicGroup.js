@@ -10,7 +10,7 @@ import filterCollection from '../lib/filter_collection';
 import roles from '../constants/roles';
 import Notification from '../containers/Notification';
 import PublicFooter from '../components/PublicFooter';
-import UserPhoto from '../components/UserPhoto';
+import UserCard from '../components/UserCard';
 
 import OnBoardingHeader from '../components/on_boarding/OnBoardingHeader';
 
@@ -92,40 +92,82 @@ export class PublicGroup extends Component {
     });
   }
 
-  renderInactiveBackers() {
-    const list = new Array(10).fill({});
-    const backers = [];
-
-    backers.map((backer, index) => list[index] = backer);
+  renderPendingBackers() {
+    const backers = [ // TODO: replace with current backers of pending collective
+      { name: 'Ascari', tier: 'backer', avatar: 'https://avatars2.githubusercontent.com/u/2263170?s=96' }
+    ];
+    const backersCount = backers.length;
+  
+    if (backers.length < 10) {
+      for (var i = 0, delta = 10 - backers.length; i < delta; i++) {
+        backers.push(null)
+      }
+    }
 
     return (
       <div className="PublicGroup-backer-container">
         <div className="-top-gradient"></div>
         <div className="-wrap">
-          {list.map((backer, index) => (<BackerCard 
-            key={index}
-            title={backer.title ? backer.name : `${index+1}st Backer`} 
-            user={{avatar: backer.avatar}}
-            onClick={index === (backers.length) ? function(){} : null}
-            />)
-          )}
+          {backers.map((backer, index) => {
+            if (backer) {
+              return <UserCard user={backer} {...this.props}/>
+            } else {
+              return (
+                <BackerCard 
+                  key={index}
+                  title={`${index+1}st Backer`} 
+                  user={{avatar: ''}}
+                  onClick={index === (backersCount) ? () => { /* TODO Add a backer flow starts here */ } : null}
+                />
+              )
+            }
+          })}
+        </div>
+        <div className="mb4">
+          <small style={{color: '#919699'}}>You won’t be charged a single penny until we reach our 10 backer goal. <a href="#">More info</a></small>
         </div>
         <div className="-bottom-gradient"></div>
       </div>
     )
   }
 
-  renderInactiveContributors() {
-    const constributors = []
+  renderPendingContributors() {
+    const contributors = [ // TODO replace with contributors of opensource project
+      {name: 'Xavier Damman', avatar: 'https://avatars.githubusercontent.com/xdamman?s=96', core: true},
+      {name: 'Pia Mancini', avatar: 'https://avatars.githubusercontent.com/piamancini?s=96', core: true},
+      {name: 'Sébastien Dubois', avatar: 'https://avatars.githubusercontent.com/sedubois?s=96', core: true},
+      {name: 'Kristaps Ledins', avatar: 'https://avatars.githubusercontent.com/krysits?s=96'},
+      {name: 'Ericku', avatar: 'https://avatars.githubusercontent.com/erickrico?s=96'},
+      {name: 'Javier Bórquez', avatar: 'https://avatars.githubusercontent.com/javierbyte?s=96'},
+      {name: 'Alvaro Cabrera Durán', avatar: 'https://avatars.githubusercontent.com/pateketrueke?s=96'},
+      {name: 'Eduardo Lavaque', avatar: 'https://avatars.githubusercontent.com/greduan?s=96'},
+      {name: 'dvaughan', avatar: 'https://avatars.githubusercontent.com/dsvaughan?s=96'},
+      {name: 'Sergio de la Garza', avatar: 'https://avatars.githubusercontent.com/sgarza?s=96'},
+      {name: 'Michael Anthony', avatar: 'https://avatars.githubusercontent.com/mcanthony?s=96'},
+      {name: 'José Moreira', avatar: 'https://avatars.githubusercontent.com/cusspvz?s=96'},
+      {name: 'eduardoalbertorg', avatar: 'https://avatars.githubusercontent.com/eduardoalbertorg?s=96'},
+      {name: 'alfredopizana', avatar: 'https://avatars.githubusercontent.com/alfredopizana?s=96'},
+      {name: 'Javier Murillo', avatar: 'https://avatars.githubusercontent.com/javiermurillo?s=96'},
+      {name: 'Linnk Benavides', avatar: 'https://avatars.githubusercontent.com/Linnk?s=96'},
+      {name: 'Adrián Zúñiga Espinoza', avatar: 'https://avatars.githubusercontent.com/Adrian0350?s=96'},
+      {name: 'Ascari', avatar: 'https://avatars.githubusercontent.com/carlosascari?s=96'},
+    ].map((contributor) => {
+      contributor.stats = {
+        c: ~~(Math.random() * 400),
+        a: ~~(Math.random() * 4000),
+        d: ~~(Math.random() * 999)
+      };
+      return contributor;
+    });
     return (
       <div className="PublicGroup-contrib-container">
         <div className="line1" >Contributors</div>
-        <ContributorList constributors={constributors} />
+        <ContributorList contributors={contributors} />
       </div>
     )
   }
 
-  renderInactiveAbout() {
+  renderPendingAbout() {
     return (
       <div className="PublicGroup-about-container">
         <div className="line1">About Open Collective</div>
@@ -139,23 +181,21 @@ export class PublicGroup extends Component {
     ) 
   }
 
-  renderInactive() {
-    // const group_name = 'YEOMAN';
-    const group_logo = 'https://cldup.com/U1yzUnB9YJ.png';
-    const group_mission = "build the web's scaffolding tools for modern apps.";
-
+  renderPending() {
+    const { group } = this.props;
     return (
       <div className='PublicGroup PublicGroup--inactive'>
         <OnBoardingHeader />
-        <UserPhoto user={{avatar: group_logo}} addBadge={true} className="mx-auto" />
-        <div className="line1">Help YEOMAN create an open collective to…</div>
-        <div className="line2">{group_mission}</div>
+        <div className="PublicGroupHero-logo mb3 bg-contain" style={{backgroundImage: `url(${'https://cldup.com/U1yzUnB9YJ.png'})`}} ></div>
+        <div className="line1">Help <a href={group.website}>{group.name}</a> create an open collective to…</div>
+        <div className="line2">{group.mission}</div>
         <div className="line3">Help us get the first 10 backers to start the collective going.</div>
         <div className="line4">With at least $10 you can become a member and help us cover design work, maintenance and servers.</div>
-        {this.renderInactiveBackers()}
-        hello hello hello hello hello hello hello hello
-        {this.renderInactiveContributors()}
-        {this.renderInactiveAbout()}
+        {this.renderPendingBackers()}
+        <div className="line5">Thank you for your visit</div>
+        <div className="line6">We are the contributors of this collective nice to meet you.</div>
+        {this.renderPendingContributors()}
+        {this.renderPendingAbout()}
         <PublicFooter />
       </div>
     )
@@ -170,9 +210,8 @@ export class PublicGroup extends Component {
       // shareUrl,
     } = this.props;
 
-    const inactive = true;
-    if (inactive) {
-      return this.renderInactive();
+    if (true || group.settings.pending) { // TODO remove `true` keyword once pending setting is available or PR is made
+      return this.renderPending();
     }
 
     const publicGroupClassName = `PublicGroup ${group.slug}`;
