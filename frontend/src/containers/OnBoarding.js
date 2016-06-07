@@ -12,6 +12,7 @@ import OnBoardingStepThankYou from '../components/on_boarding/OnBoardingStepThan
 
 import fetchReposFromGitHub from '../actions/github/fetch_repos';
 import fetchContributorsFromGitHub from '../actions/github/fetch_contributors';
+import fetchUserFromGithub from '../actions/github/fetch_user';
 import uploadImage from '../actions/images/upload';
 import notify from '../actions/notification/notify';
 import appendGithubForm from '../actions/form/append_github';
@@ -40,6 +41,7 @@ export class OnBoarding extends Component {
     this.state = {
       step: 0
     };
+    this.blacklist = [];
   }
 
   componentWillMount() {
@@ -53,6 +55,7 @@ export class OnBoarding extends Component {
     const {
       githubUsername,
       fetchReposFromGitHub,
+      fetchUserFromGithub,
       appendGithubForm,
       params,
       notify
@@ -60,10 +63,14 @@ export class OnBoarding extends Component {
 
     if (githubUsername && this.state.step === 1) {
       appendGithubForm({username: githubUsername, token: params.token});
-      fetchReposFromGitHub(githubUsername)
+      fetchReposFromGitHub(githubUsername, params.token)
       .catch((error) => {
         notify('error', error.message);
-      })
+      });
+      fetchUserFromGithub(githubUsername)
+      .catch((error) => {
+        console.error(error.message);
+      });
     }
   }
 
@@ -76,9 +83,9 @@ export class OnBoarding extends Component {
         <Notification autoclose={true} />
         {step !== 4 && <OnBoardingHeader active={Boolean(step)} username={githubForm.attributes.username} />}
         {step === 0 && <OnBoardingHero />}
-        {step === 1 && <OnBoardingStepPickRepository repositories={repositories} onNextStep={(repository) => {
+        {step === 1 && <OnBoardingStepPickRepository repositories={repositories} blacklist={this.blacklist} onNextStep={(repository) => {
           if (!githubForm.attributes.repository) githubForm.attributes.repository = repository;
-          this.getContributors(githubForm.attributes.repository);
+          this.getContributors(githubForm.attributes.repository, githubForm.attributes.repoOwner);
         }} {...this.props} />}
         {step === 2 && <OnBoardingStepPickCoreContributors contributors={contributors} onNextStep={() => this.setState({step: 3})} {...this.props} />}
         {step === 3 && <OnBoardingStepCreate onCreate={this.create.bind(this)} {...this.props} />}
@@ -88,7 +95,7 @@ export class OnBoarding extends Component {
   }
 
   create() {
-    const { githubForm, validateSchema, createGroupFromGithubRepo } = this.props;
+    const { githubForm, validateSchema, createGroupFromGithubRepo, githubUser } = this.props;
     const attr = githubForm.attributes;
     const payload = {
       group: {
@@ -101,6 +108,7 @@ export class OnBoarding extends Component {
       },
       users: attr.contributors,
       github_username: attr.username,
+      user: githubUser || {}
     };
 
     return validateSchema(githubForm.attributes, githubSchema)
@@ -109,14 +117,29 @@ export class OnBoarding extends Component {
       .catch(({message}) => notify('error', message));
   }
 
-  getContributors(selectedRepo) {
+  getContributors(selectedRepo, owner) {
     const {
       githubUsername,
       fetchContributorsFromGitHub,
       notify } = this.props;
 
-    fetchContributorsFromGitHub(githubUsername, selectedRepo)
-    .then(() => this.setState({step: 2, selectedRepo}))
+    fetchContributorsFromGitHub(owner, selectedRepo)
+    .then(() => {
+      if (githubUsername !== owner) {
+        const contributors = this.props.contributors;
+        contributors.sort((A, B) => B.contributions - A.contributions);
+        const topTree = contributors.slice(0, 3).map(contributor => contributor.name);
+
+        if (topTree.indexOf(githubUsername) === -1) {
+          this.blacklist.push(selectedRepo);
+          this.setState({step: 1});
+          notify('error', `You need to be a top contributor for ${selectedRepo} in order to create a collective`);
+          this.props.contributors.length = 0;
+          return
+        }
+      }
+      this.setState({step: 2, selectedRepo})
+    })
     .catch((error) => {
       this.setState({step: 1});
       notify('error', error.message);
@@ -127,6 +150,7 @@ export class OnBoarding extends Component {
 export default connect(mapStateToProps, {
   fetchReposFromGitHub,
   fetchContributorsFromGitHub,
+  fetchUserFromGithub,
   uploadImage,
   appendGithubForm,
   notify,
@@ -143,6 +167,7 @@ function mapStateToProps({github, form}) {
 
   return {
     githubUsername,
+    githubUser: github.user,
     fetchedRepositories: Boolean(github.repositories),
     repositories: github.repositories || [],
     contributors: github.contributors || [],

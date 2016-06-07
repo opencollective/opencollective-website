@@ -5,6 +5,7 @@ const schema = Joi.alternatives().try(
   Joi.object().keys({
     username: Joi.string().label('Userame'),
     repository: Joi.string().label('Repository'),
+    repoOwner: Joi.string().label('Repository Owner'),
     contributors: Joi.array().min(MIN_CONTRIBUTORS_FOR_ONBOARDING).unique().items(Joi.string()).label('Core Contributors'),
     missionDescription: Joi.string().max(100).label('Mission Description'),
     expenseDescription: Joi.string().max(100).label('Expense Description'),
