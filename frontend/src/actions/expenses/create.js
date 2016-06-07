@@ -6,7 +6,6 @@ import * as constants from '../../constants/transactions';
  */
 
 export default (groupid, expense) => {
-  console.log("Create expense")
   const url = `/groups/${groupid}/expenses/`;
 
   return dispatch => {

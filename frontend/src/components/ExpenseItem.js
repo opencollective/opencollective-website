@@ -21,7 +21,7 @@ const ExpenseItem = ({ className = '', expense, user }) => {
         <p className='h6 m0 muted'>Submitted by {user && user.name}</p>
         <div className='mt2'>
           <span className='h3 -ff-sec -fw-bold'>
-            <Currency value={expense.amount} currency={expense.currency} colorify={false} />
+            <Currency value={expense.amount/100} currency={expense.currency} colorify={false} />
           </span>
           <span className='ExpenseStatus border align-middle ml1 muted -fw-bold -ttu'>{formatStatus(expense.status)}</span>
         </div>
@@ -46,7 +46,7 @@ ExpenseItem.defaultProps = {
 export default ExpenseItem;
 
 function formatStatus(status) {
-  return status.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+  return status.charAt(0).toUpperCase() + status.slice(1).toLowerCase();
 }
 
 function getCategoryName(category) {

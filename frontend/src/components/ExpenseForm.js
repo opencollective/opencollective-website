@@ -124,10 +124,7 @@ class ExpenseForm extends Component {
               customClass='js-transaction-category'
               attributes={attributes}
               categories={categories}
-              handleChange={category => {
-              console.log("updating category", category);
-              return appendExpenseForm({category})
-              }} />
+              handleChange={category => appendExpenseForm({category})} />
           </div>
 
           <div className='row'>

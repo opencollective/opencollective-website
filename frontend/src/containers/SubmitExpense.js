@@ -4,7 +4,7 @@ import { pushState } from 'redux-router';
 
 import values from 'lodash/object/values';
 
-import createExpense from '../actions/transactions/create';
+import createExpense from '../actions/expenses/create';
 import uploadImage from '../actions/images/upload';
 
 import resetExpenseForm from '../actions/form/reset_transaction';

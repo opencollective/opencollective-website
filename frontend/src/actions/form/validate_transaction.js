@@ -1,16 +1,16 @@
 import * as constants from '../../constants/form';
-import transactionIsValid from '../../validators/transaction';
+import expenseIsValid from '../../validators/expense';
 
 /**
  * Validate expense submission form
  */
 
-export default (newTransaction) => {
+export default (newExpense) => {
   return dispatch => {
-    dispatch(request(newTransaction));
+    dispatch(request(newExpense));
 
-    return transactionIsValid(newTransaction)
-    .then(transaction => dispatch(success(transaction)))
+    return expenseIsValid(newExpense)
+    .then(expense => dispatch(success(expense)))
     .catch(error => {
       dispatch(failure(error));
       throw new Error(error.details[0].message);
@@ -18,17 +18,17 @@ export default (newTransaction) => {
   };
 };
 
-function request(transaction) {
+function request(expense) {
   return {
     type: constants.VALIDATE_TRANSACTION_REQUEST,
-    transaction
+    expense
   };
 }
 
-function success(transaction) {
+function success(expense) {
   return {
     type: constants.VALIDATE_TRANSACTION_SUCCESS,
-    transaction
+    expense
   };
 }
 
