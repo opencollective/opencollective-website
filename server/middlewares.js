@@ -85,21 +85,6 @@ const extractGithubUsernameFromToken = (req, res, next) => {
     });
 };
 
-const fetchGithubRepositories = (req, res, next) => {
-  if (!req.params.token) {
-    return next();
-  }
-
-  api.get('/fetch-github-repositories', {headers: {Authorization: `Bearer ${req.params.token}`}})
-  .then(result => {
-    res.json(result)
-  })
-  .catch((response) => {
-    const error = response.json.error;
-    next(error);
-  });
-}
-
 /**
  * Fetch leaderboard
  */
@@ -210,7 +195,6 @@ export default {
   fetchGroupBySlug,
   fetchSubscriptionsByUserWithToken,
   extractGithubUsernameFromToken,
-  fetchGithubRepositories,
   fetchUsers,
   fetchLeaderboard,
   ga,

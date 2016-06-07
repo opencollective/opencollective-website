@@ -9,7 +9,7 @@ import * as constants from '../../constants/github';
 export default (username, token) => {
   return dispatch => {
     dispatch(request(username));
-    return get(`/../github/repositories/${token}`)
+    return get(`/github-repositories`, {headers: { Authorization: `Bearer ${token}` }})
     .then(json => {
       json = json.filter((repo) => repo.stargazers_count >= constants.MIN_STARS_FOR_ONBOARDING);
       dispatch(success(username, json));
