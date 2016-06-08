@@ -1,12 +1,12 @@
 import React from 'react';
-import ShareIcon from '../ShareIcon';
 
 export default class PublicGroupThanksV2 extends React.Component {
 
   constructor(props) {
     super(props);
     const { group } = this.props;
-    const tweet = `🎉 I'm now a proud supporter of ${group.twitterHandle ? '@' + group.twitterHandle : group.name}. You should support them too! https://opencollective.com/${group.slug} #opencollective`;
+    const mention = group.twitterHandle ? `@${group.twitterHandle}` : group.name;
+    const tweet = `🎉 I'm now a proud supporter of ${mention}. You should support them too! https://opencollective.com/${group.slug} #opencollective`;
     this.state = { tweet };
   }
 
@@ -38,8 +38,7 @@ export default class PublicGroupThanksV2 extends React.Component {
   }
 
   render() {
-    const { group, message, i18n, newUserId } = this.props;
-    const shareUrl = `${group.publicUrl}?referrerId=${newUserId}`;
+    const { group, message, i18n } = this.props;
 
     return (
       <div className='PublicGroupThanksV2 center pt3'>
