@@ -212,7 +212,7 @@ export class PublicGroup extends Component {
       // shareUrl,
     } = this.props;
 
-    if (true || group.settings.pending) { // TODO remove `true` keyword once pending setting is available or PR is made
+    if (group.settings.pending) {
       return this.renderPending();
     }
 	
