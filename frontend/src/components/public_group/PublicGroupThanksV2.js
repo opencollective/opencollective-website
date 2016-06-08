@@ -2,6 +2,14 @@ import React from 'react';
 import ShareIcon from '../ShareIcon';
 
 export default class PublicGroupThanksV2 extends React.Component {
+
+  constructor(props) {
+    super(props);
+    const { group } = this.props;
+    const tweet = `🎉 I'm now a proud supporter of ${group.twitterHandle ? '@' + group.twitterHandle : group.name}. You should support them too! https://opencollective.com/${group.slug} #opencollective`;
+    this.state = { tweet };
+  }
+
   componentDidMount() {
     document.body.style.overflow = 'hidden';
   }
@@ -10,8 +18,23 @@ export default class PublicGroupThanksV2 extends React.Component {
     document.body.style.overflow = '';
   }
 
-  close() {
+  tweet() {
+
+    const shareUrl = `https://twitter.com/intent/tweet?status=${this.state.tweet}`
+
+    const w = 650;
+    const h = 450;
+
+    const left = (screen.width / 2) - (w / 2);
+    const top = (screen.height / 2) - (h / 2);
+
+    window.open(shareUrl, 'ShareWindow', `toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=${w}, height=${h}, top=${top}, left=${left}`);
+
     this.props.closeDonationModal();
+  }
+
+  handleChange(event) {
+    this.setState({tweet: event.target.value});
   }
 
   render() {
@@ -27,12 +50,10 @@ export default class PublicGroupThanksV2 extends React.Component {
         <div className='PublicGroup-font-17 pb3 -ff-sec -fw-light'>
           {message || "Thank you for your support"}
         </div>
-        <div className='PublicGroupThanks-share mb2'>
-          <ShareIcon type='twitter' url={shareUrl} name={group.name} description={group.description} />
-          <ShareIcon type='facebook' url={shareUrl} name={group.name} description={group.description} />
-          <ShareIcon type='mail' url={shareUrl} name={group.name} description={group.description} />
+        <div className="tweet">
+          <textarea name="tweetText" onChange={this.handleChange} name="textToShare" value={this.state.tweet} />
         </div>
-        <button onClick={::this.close} className='px3 -btn -green -btn-outline -btn-small -ttu -ff-sec -fw-bold'>Done</button>
+        <button onClick={::this.tweet} className='px3 -btn -green -btn-outline -btn-small -ttu -ff-sec -fw-bold'>Tweet this!</button>
       </div>
     );
   }
