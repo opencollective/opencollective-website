@@ -1,0 +1,124 @@
+.ContributorList {
+	position: relative;
+	background-color: white;
+	min-height: 140px;
+	width: 100%;
+	max-width: 1000px;
+	margin: 0 auto;
+	box-sizing: border-box;
+	margin-top: 20px;
+	margin-bottom: 140px;
+}
+
+.ContributorList-left {
+	position: absolute;
+	width: 44px;
+	height: 44px;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+}
+
+.ContributorList-right {
+	position: absolute;
+	width: 44px;
+	height: 44px;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+}
+
+.ContributorList-body {
+	position: relative;
+	text-align: center;
+	padding-left: 40px;
+	padding-right: 40px;
+	.UserPhoto {
+		display: inline-block;
+		margin: 20px;
+	}
+}
+
+.ContributorList-container {
+	position: relative;
+}
+
+.ContributorList-pagination {
+	width: 100%;
+	height: 10px;
+	margin-top: 30px;
+}
+
+.ContributorList-item {
+	position: relative;
+	display: inline-block;
+}
+
+.ContributorList-HoverCard {
+	box-sizing: border-box;
+	position: absolute;
+	z-index: 999;
+	width: 209px;
+	height: 113px;
+	border-radius: 5px;
+	background-color: white;
+	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.25);
+	top: -110px;
+	left: -52px;
+	padding-top: 20px;
+	padding-bottom: 25px;
+
+	&:after, &:before {
+		top: 100%;
+		left: 50%;
+		border: solid transparent;
+		content: '';
+		height: 0;
+		width: 0;
+		position: absolute;
+		pointer-events: none;
+	}
+
+	&:after {
+		border-color: rgba(136, 183, 213, 0);
+		border-top-color: #fff;
+		border-width: 4px;
+		margin-left: -4px;
+	}
+	&:before {
+		border-color: rgba(0, 0, 0, 0);
+		border-top-color: rgba(0, 0, 0, 0.15);
+		border-width: 5px;
+		margin-left: -5px;
+	}
+
+}
+
+.HoverCard-name {
+	font-family: Montserrat;
+	font-size: 17px;
+	color: #46b0ed;
+	font-weight: bold;
+}
+
+.HoverCard-role {
+  font-family: Lato;
+  font-size: 14px;
+  color: #919699;
+}
+
+.HoverCard-stats {
+	font-family: Lato;
+	font-size: 12px;
+	color: #bbc1c4;
+	margin-top: 6px;
+	.-add {
+		color: rgb(110, 202, 64);
+	}
+	.-del {
+		color: rgb(195, 49, 7);
+	}
+}
+

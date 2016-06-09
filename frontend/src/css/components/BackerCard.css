@@ -1,0 +1,57 @@
+.BackerCard {
+  display: inline-block;
+  width: 192px;
+  height: 230px;
+  border-radius: 5px;
+  border: dashed 2px #e1e9ed;
+  box-sizing: border-box;
+  margin: 10px;
+  vertical-align: middle;
+
+  .UserPhoto {
+    width: 72px;
+    height: 72px;
+    margin: 20px auto 0 auto;
+    box-shadow: none;
+    border: none;
+  }
+
+  .UserPhoto-badge {
+    bottom: 3px;
+    padding: 0;
+  }
+
+  .BackerCard-title {
+    font-family: Montserrat, sans-serif;
+    font-size: 15px;
+    color: #bbc1c4;
+    margin-top: 16px;
+  }
+
+  .BackerCard-button {
+    box-sizing: border-box;
+    border-radius: 100px;
+    background-color: #75cc1f;
+    font-family: Montserrat;
+    font-weight: bold;
+    font-size: 11px;
+    color: #ffffff;
+    width: 132px;
+    height: 32px;
+    margin: 32px auto 0 auto;
+    padding: 8px 8px;
+    text-transform: uppercase;
+    text-align: center;
+    cursor: pointer;
+    &:hover {
+      cursor: pointer;
+      opacity: .94;
+    }
+  }
+
+  &.BackerCard--empty {
+    .BackerCard-button {
+      display: none;
+    }
+  }
+}
