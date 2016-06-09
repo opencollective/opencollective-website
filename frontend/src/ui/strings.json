@@ -259,5 +259,11 @@
     "membersWallText": "Proud backers and sponsors support this collective and allow us to keep going towards our mission. We would not be here if it weren’t for these amazing people. Thank you so much.",
     "membersWallTitle": "This is possible thanks to you.",
     "menuMembersWall": "Supporters"
+  },
+  
+  "opensource":{
+    "menuMembersWall": "Supporters"
+    "becomeMemberTitle": "Why support this Collective?"
+    "joinAndFulfil": "Support this collective and help bring sustainable funding to Open Source",
   }
 }
