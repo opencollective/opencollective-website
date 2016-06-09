@@ -85,29 +85,29 @@ function donation(state={}, action={}) {
 }
 
 /**
- * New transaction form reducer
+ * Expense form
  */
-const transactionInitialState = {
+const expenseInitialState = {
   attributes: {
-    tags: [],
-    description: '',
+    category: '',
+    title: '',
     payoutMethod: 'paypal',
     vat: null,
-    createdAt: new Date()
+    incurredAt: new Date()
   },
   error: {}
 };
 
-function transaction(state=transactionInitialState, action={}) {
+function expense(state=expenseInitialState, action={}) {
   switch (action.type) {
-    case constants.RESET_TRANSACTION_FORM:
-      return merge({}, transactionInitialState);
+    case constants.RESET_EXPENSE_FORM:
+      return merge({}, expenseInitialState);
 
-    case constants.APPEND_TRANSACTION_FORM:
+    case constants.APPEND_EXPENSE_FORM:
       return merge({}, state, { attributes: action.attributes });
 
     case constants.VALIDATE_SCHEMA_FAILURE:
-    case constants.VALIDATE_TRANSACTION_FAILURE:
+    case constants.VALIDATE_EXPENSE_FAILURE:
       const { path, message } = errorDetail(action);
 
       return merge({}, state, {
@@ -118,7 +118,7 @@ function transaction(state=transactionInitialState, action={}) {
       });
 
     case constants.VALIDATE_SCHEMA_FAILURE:
-    case constants.VALIDATE_TRANSACTION_REQUEST:
+    case constants.VALIDATE_EXPENSE_REQUEST:
       return merge({}, omit(state, 'error'), { error: {} });
 
     default:
@@ -146,7 +146,7 @@ function github(state=githubInitialState, action={}) {
 export default combineReducers({
   profile,
   donation,
-  transaction,
+  expense,
   schema,
   github
 });

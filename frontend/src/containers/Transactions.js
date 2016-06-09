@@ -138,7 +138,7 @@ function mapStateToProps({
   return {
     session,
     group,
-    transactions: sortBy(list, txn => txn.createdAt).reverse(),
+    transactions: sortBy(list, txn => txn.incurredAt || txn.createdAt).reverse(),
     router,
     users,
     type

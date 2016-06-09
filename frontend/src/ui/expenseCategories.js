@@ -1,18 +1,18 @@
 /**
- * Static data the for the transaction form
+ * Static data the for the expense form
  */
 
 export default function(groupid) {
   if(typeof groupid == "string")
     groupid = parseInt(groupid, 10);
 
-  let tags = [];
+  let categories = [];
   switch (groupid) {
     // Women Who Code
     case 2:
     case 3:
     case 4:
-      tags = [
+      categories = [
         'Donation',
         'Event Refreshments',
         'Event Travel',
@@ -25,7 +25,7 @@ export default function(groupid) {
     case 6: // laprimaire
     case 73: // nuitdebout
     case 24: // lesbarbares
-      tags = [
+      categories = [
         'Admin',
         'Autre',
         'Communication',
@@ -41,7 +41,7 @@ export default function(groupid) {
       ];
       break;
     default:
-      tags = [
+      categories = [
         'Communications',
         'Design',
         'Donation',
@@ -58,5 +58,5 @@ export default function(groupid) {
         'Web services'
       ];
   }
-  return tags.sort();
+  return categories.sort();
 }

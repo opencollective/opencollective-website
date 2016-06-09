@@ -9,7 +9,8 @@ import * as constants from '../../constants/transactions';
 export default (groupid, options={}) => {
   return dispatch => {
     dispatch(request(groupid));
-    return get(`/groups/${groupid}/transactions`, {
+    const endpoint = options.donation ? 'transactions' : 'expenses';
+    return get(`/groups/${groupid}/${endpoint}`, {
       schema: Schemas.TRANSACTION_ARRAY,
       params: options || {}
     })
