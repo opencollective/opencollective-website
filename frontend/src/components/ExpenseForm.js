@@ -21,7 +21,7 @@ class ExpenseForm extends Component {
   vatInput() {
     const {
       enableVAT,
-      transaction,
+      expense,
       group,
       appendExpenseForm,
       i18n
@@ -34,8 +34,8 @@ class ExpenseForm extends Component {
         <span className='inline'>{i18n.getString('vat')}</span>
         <Input
           placeholder={formatCurrency(0, group.currency)}
-          hasError={transaction.error.vat}
-          value={transaction.attributes.vat}
+          hasError={expense.error.vat}
+          value={expense.attributes.vat}
           handleChange={vat => appendExpenseForm({vat})} />
       </div>
     );
@@ -43,7 +43,7 @@ class ExpenseForm extends Component {
 
   render() {
     const {
-      transaction,
+      expense,
       categories,
       group,
       appendExpenseForm,
@@ -52,7 +52,7 @@ class ExpenseForm extends Component {
       i18n
     } = this.props;
 
-    const attributes = transaction.attributes;
+    const attributes = expense.attributes;
 
     const className = classnames({
       'ExpenseForm': true,
@@ -73,14 +73,14 @@ class ExpenseForm extends Component {
           value={attributes.attachment}
           onFinished={({url: attachment}) => appendExpenseForm({attachment})} />
         <form
-          name='transaction'
+          name='expense'
           className='ExpenseForm-form'
           onSubmit={this.onSubmit.bind(this)} >
           <div className='row'>
             <label>{i18n.getString('name')}: </label>
             <Input
               customClass='js-transaction-name'
-              hasError={transaction.error.name}
+              hasError={expense.error.name}
               value={attributes.name}
               handleChange={name => appendExpenseForm({name})} />
           </div>
@@ -88,7 +88,7 @@ class ExpenseForm extends Component {
             <label>{i18n.getString('email')}:</label>
             <Input
               customClass='js-transaction-email'
-              hasError={transaction.error.email}
+              hasError={expense.error.email}
               value={attributes.email}
               handleChange={email => appendExpenseForm({email})} />
           </div>
@@ -96,7 +96,7 @@ class ExpenseForm extends Component {
             <label>{i18n.getString('description')}: </label>
             <Input
               customClass='js-transaction-description'
-              hasError={transaction.error.title}
+              hasError={expense.error.title}
               value={attributes.title}
               handleChange={title => appendExpenseForm({title})} />
           </div>
@@ -105,9 +105,9 @@ class ExpenseForm extends Component {
             <Input
               customClass='js-transaction-amount'
               placeholder={amountPlaceholder}
-              hasError={transaction.error.amount}
-              value={attributes.amount}
-              handleChange={amount => appendExpenseForm({amount})} />
+              hasError={expense.error.amountText}
+              value={attributes.amountText}
+              handleChange={amountText => appendExpenseForm({amountText})} />
           </div>
           {this.vatInput()}
           <div className='row'>
@@ -141,7 +141,7 @@ class ExpenseForm extends Component {
               <label>{i18n.getString('paypalEmail')} ({i18n.getString('ifDifferentThanAbove')}):</label>
               <Input
                 customClass='js-transaction-paypalEmail'
-                hasError={transaction.error.paypalEmail}
+                hasError={expense.error.paypalEmail}
                 value={attributes.paypalEmail || attributes.email}
                 handleChange={paypalEmail => appendExpenseForm({paypalEmail})} />
             </div>
@@ -172,7 +172,7 @@ class ExpenseForm extends Component {
 
   onSubmit(event) {
     event.preventDefault();
-    this.props.onSubmit(this.props.transaction);
+    this.props.onSubmit(this.props.expense);
   };
 
   componentDidMount() {

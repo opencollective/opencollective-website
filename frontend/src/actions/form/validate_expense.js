@@ -20,21 +20,21 @@ export default (newExpense) => {
 
 function request(expense) {
   return {
-    type: constants.VALIDATE_TRANSACTION_REQUEST,
+    type: constants.VALIDATE_EXPENSE_REQUEST,
     expense
   };
 }
 
 function success(expense) {
   return {
-    type: constants.VALIDATE_TRANSACTION_SUCCESS,
+    type: constants.VALIDATE_EXPENSE_SUCCESS,
     expense
   };
 }
 
 function failure(error) {
   return {
-    type: constants.VALIDATE_TRANSACTION_FAILURE,
+    type: constants.VALIDATE_EXPENSE_FAILURE,
     error
   };
 }

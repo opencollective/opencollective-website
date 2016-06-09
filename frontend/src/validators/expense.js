@@ -18,8 +18,9 @@ const schema = Joi.object().keys({
     .label('Email'),
   title: Joi.string().required()
     .label('Description'),
-  amount: Joi.number().precision(2).required()
+  amount: Joi.number().integer().min(1).required()
     .label('Amount'),
+  // TODO add currency
   vat: Joi.number().precision(2).min(0).allow(null)
     .label('VAT'),
   incurredAt: Joi.date().max(dates().tomorrow).required()

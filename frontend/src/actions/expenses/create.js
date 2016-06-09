@@ -1,5 +1,5 @@
 import { postJSON } from '../../lib/api';
-import * as constants from '../../constants/transactions';
+import * as constants from '../../constants/expenses';
 
 /**
  * Create an expense
@@ -13,7 +13,7 @@ export default (groupid, expense) => {
     return postJSON(url, {expense})
       .then(json => dispatch(success(groupid, json)))
       .catch(error => {
-        dispatch(failure(error))
+        dispatch(failure(error));
         throw new Error(error.message);
       });
   };
@@ -21,7 +21,7 @@ export default (groupid, expense) => {
 
 function request(groupid, expense) {
   return {
-    type: constants.CREATE_TRANSACTION_REQUEST,
+    type: constants.CREATE_EXPENSE_REQUEST,
     groupid,
     expense
   };
@@ -33,7 +33,7 @@ function success(groupid, expense) {
   };
 
   return {
-    type: constants.CREATE_TRANSACTION_SUCCESS,
+    type: constants.CREATE_EXPENSE_SUCCESS,
     groupid,
     expenses
   };
@@ -41,7 +41,7 @@ function success(groupid, expense) {
 
 function failure(error) {
   return {
-    type: constants.CREATE_TRANSACTION_FAILURE,
-    error,
+    type: constants.CREATE_EXPENSE_FAILURE,
+    error
   };
 }
