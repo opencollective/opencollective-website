@@ -262,8 +262,8 @@
   },
   
   "opensource":{
-    "menuMembersWall": "Supporters"
-    "becomeMemberTitle": "Why support this Collective?"
-    "joinAndFulfil": "Support this collective and help bring sustainable funding to Open Source",
+    "menuMembersWall": "Supporters",
+    "becomeMemberTitle": "Why support this Collective?",
+    "joinAndFulfil": "Support this collective and help bring sustainable funding to Open Source"
   }
 }
