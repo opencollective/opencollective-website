@@ -1,3 +1,4 @@
+require('dotenv').load();
 const config = require('config');
 const resetDb = require('../lib/reset_db.js');
 

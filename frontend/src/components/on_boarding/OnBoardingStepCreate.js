@@ -14,7 +14,7 @@ export default class OnBoardingStepCreate extends React.Component {
       logo: '',
     }
   }
-  
+
   render() {
     const buttonContainerStyle = {margin: '0 auto', marginTop: '40px', width: '300px', textAlign: 'center'};
     const { uploadImage, appendGithubForm, githubForm, onCreate } = this.props;
@@ -46,11 +46,11 @@ export default class OnBoardingStepCreate extends React.Component {
               <div className="flex-auto">
                 <div className="flex flex-column">
                   <div className="OnBoardingStepCreate-label">Help us on our mission to...</div>
-                  <CustomTextArea value={missionDescription} onChange={(value) => appendGithubForm({missionDescription: value})} maxLength={100} placeholder="State the core mission of your collective"/>
+                  <CustomTextArea name={'mission'} value={missionDescription} onChange={(value) => appendGithubForm({missionDescription: value})} maxLength={100} placeholder="State the core mission of your collective"/>
                   <div className="OnBoardingStepCreate-label" style={{marginTop: '25px'}}>How are you going to spend the funds?</div>
-                  <CustomTextArea value={expenseDescription} onChange={(value) => appendGithubForm({expenseDescription: value})} maxLength={100} placeholder="Development, design, hosting, etc…"/>
+                  <CustomTextArea name={'expensePolicy'} value={expenseDescription} onChange={(value) => appendGithubForm({expenseDescription: value})} maxLength={100} placeholder="Development, design, hosting, etc…"/>
                 </div>
-              </div>            
+              </div>
             </div>
           </div>
           <div className="OnBoardingStepCreate-tos">

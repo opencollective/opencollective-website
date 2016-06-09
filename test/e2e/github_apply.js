@@ -1,4 +1,3 @@
-require('dotenv').load();
 const config = require('config');
 const resetDb = require('../lib/reset_db.js');
 
@@ -6,10 +5,8 @@ module.exports = {
   '@tags': ['connect_account_page'],
 
   beforeEach: (client) => resetDb(client)
-      .url(`${config.host.api}/connected-accounts/github?api_key=${config.apiKey}`)
-      .waitForElementVisible('body', 1000)
-      .assert.containsText('body', 'Sign in to GitHub'),
-
+    .url(`${config.host.website}/github/apply`)
+    .waitForElementVisible('body', 1000),
 
   'Redirects to Github after clicking connect': (client) => {
 
@@ -19,6 +16,8 @@ module.exports = {
     // const githubScope = encodeURIComponent('user:email');
 
     client
+      .click('.OnBoardingButton')
+      .assert.containsText('body', 'Sign in to GitHub')
       .assert.urlContains('https://github.com/login?return_to=%2Flogin%2Foauth%2Fauthorize')
       .setValue('input[name=login]', config.github.testUsername)
       .setValue('input[name=password]', config.github.testPassword)
@@ -32,6 +31,16 @@ module.exports = {
       .waitForElementVisible('body', 10000)
       // TODO this returns OK even if it's a 404 page: 404s should change window location
       .assert.urlContains('http://localhost:3000/github/apply')
+      .click('.OnBoardingButton') // Repo already selected, click continue
+      .waitForElementVisible('.ContributorPickerItemSearch-list-container', 1000)
+      .click('.ContributorPickerItemSearch-list-container') // pick a collaborator
+      .click('.OnBoardingButton')
+      .setValue('textarea[name=mission]', 'fund open source projects')
+      .setValue('textarea[name=expensePolicy]', 'pay for servers and tshirts')
+      .click('.Checkbox')
+      .click('.OnBoardingButton')
+      .pause(500)
+      .assert.containsText('.OnBoardingButton', 'EXPLORE EXISTING COLLECTIVES')
       .end();
    }
 };
