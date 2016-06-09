@@ -146,10 +146,8 @@ export class PublicGroup extends Component {
 
     fetchTransactions(group.id, {
       per_page: NUM_TRANSACTIONS_TO_SHOW,
-      sort: 'createdAt',
-      direction: 'desc',
-      exclude: 'fees',
-      expense: true
+      sort: 'incurredAt',
+      direction: 'desc'
     });
 
     fetchUsers(group.id);
@@ -331,7 +329,7 @@ function mapStateToProps({
     users,
     session,
     donations: take(sortBy(donations, txn => txn.createdAt).reverse(), NUM_TRANSACTIONS_TO_SHOW),
-    expenses: take(sortBy(expenses, exp => exp.createdAt).reverse(), NUM_TRANSACTIONS_TO_SHOW),
+    expenses: take(sortBy(expenses, exp => exp.incurredAt).reverse(), NUM_TRANSACTIONS_TO_SHOW),
     inProgress: groups.donateInProgress,
     // shareUrl: window.location.href,
     profileForm: form.profile,

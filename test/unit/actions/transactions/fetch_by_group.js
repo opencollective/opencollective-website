@@ -17,7 +17,7 @@ describe('transactions/fetch_by_group actions', () => {
     const groupid = 1;
 
     nock(env.API_ROOT)
-      .get(`/groups/${groupid}/transactions`)
+      .get(`/groups/${groupid}/expenses`)
       .reply(200, [transaction]);
 
     const store = mockStore({});
@@ -36,7 +36,7 @@ describe('transactions/fetch_by_group actions', () => {
     const groupid = 1;
 
     nock(env.API_ROOT)
-      .get(`/groups/${groupid}/transactions`)
+      .get(`/groups/${groupid}/expenses`)
       .replyWithError('');
 
     const store = mockStore({});
@@ -46,7 +46,7 @@ describe('transactions/fetch_by_group actions', () => {
       const [request, failure] = store.getActions();
       expect(request).toEqual({ type: constants.TRANSACTIONS_REQUEST, groupid });
       expect(failure.type).toEqual(constants.TRANSACTIONS_FAILURE);
-      expect(failure.error.message).toContain('request to http://localhost:3000/api/groups/1/transactions failed');
+      expect(failure.error.message).toContain('request to http://localhost:3000/api/groups/1/expenses failed');
       done();
     })
     .catch(done)
