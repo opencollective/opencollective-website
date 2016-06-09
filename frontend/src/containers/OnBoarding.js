@@ -85,7 +85,7 @@ export class OnBoarding extends Component {
         {step === 0 && <OnBoardingHero />}
         {step === 1 && <OnBoardingStepPickRepository repositories={repositories} blacklist={this.blacklist} onNextStep={(repository) => {
           if (!githubForm.attributes.repository) githubForm.attributes.repository = repository;
-          this.getContributors(githubForm.attributes.repository, githubForm.attributes.repoOwner);
+          this.getContributors(githubForm.attributes.repository, githubForm.attributes.username);
         }} {...this.props} />}
         {step === 2 && <OnBoardingStepPickCoreContributors contributors={contributors} onNextStep={() => this.setState({step: 3})} {...this.props} />}
         {step === 3 && <OnBoardingStepCreate onCreate={this.create.bind(this)} {...this.props} />}
