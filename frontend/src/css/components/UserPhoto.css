@@ -5,6 +5,7 @@
   box-shadow: 0 0 0 2px #75CC1F;
   background-image: url('/static/images/loading.gif');
   border-radius: 50%;
+  background-color: #e9eaea;
 }
 
 .UserPhoto--loaded
@@ -16,7 +17,7 @@
   border-radius: 50%;
 }
 
-.UserCard .UserPhoto.sponsor, .UserCard .UserPhoto.sponsor div {
+.UserCard .UserPhoto.sponsor, .UserCard .UserPhoto.sponsor div:first-child {
     border-radius: 0;
     width: 140px;
     height: 64px;

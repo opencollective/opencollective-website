@@ -39,43 +39,45 @@
  * Components
  */
 
+@import './components/ActivityItem.css';
 @import './components/Button.css';
+@import './components/Checkbox.css';
+@import './components/ContributorPicker.css';
 @import './components/Currency.css';
+@import './components/CustomTextArea.css';
+@import './components/DonationDistributor.css';
+@import './components/DonationDistributorItem.css';
 @import './components/DonationPicker.css';
+@import './components/ExpenseForm.css';
+@import './components/ExpenseItem.css';
 @import './components/Field.css';
 @import './components/Icon.css';
+@import './components/ImagePicker.css';
+@import './components/ImageUpload.css';
 @import './components/InlineToggle.css';
 @import './components/Input.css';
 @import './components/Label.css';
 @import './components/Metric.css';
 @import './components/Notification.css';
 @import './components/ProfilePhoto.css';
-@import './components/PublicGroupTiers.css';
 @import './components/PublicGroupThanks.css';
-@import './components/DonationDistributor.css';
-@import './components/DonationDistributorItem.css';
-@import './components/Slider.css';
-@import './components/ExpenseForm.css';
-@import './components/YoutubeVideo.css';
+@import './components/PublicGroupTiers.css';
+@import './components/RepositoryPicker.css';
+@import './components/RepositoryPickerItem.css';
 @import './components/PublicFooter.css';
 @import './components/PublicTopBar.css';
 @import './components/Select.css';
 @import './components/ShareIcon.css';
+@import './components/Slider.css';
 @import './components/SubscriptionEmailForm.css';
-@import './components/TransactionStatus.css';
 @import './components/TransactionItem.css';
-@import './components/UsersList.css';
+@import './components/TransactionStatus.css';
 @import './components/UserCard.css';
+@import './components/UsersList.css';
 @import './components/UserPhoto.css';
-@import './components/ExpenseItem.css';
-@import './components/ActivityItem.css';
 @import './components/Widget.css';
-@import './components/ImagePicker.css';
-@import './components/RepositoryPicker.css';
-@import './components/RepositoryPickerItem.css';
-@import './components/ContributorPicker.css';
-@import './components/Checkbox.css';
-@import './components/CustomTextArea.css';
+@import './components/YoutubeVideo.css';
+
 
 /**
  * Media queries

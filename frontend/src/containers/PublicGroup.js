@@ -62,7 +62,7 @@ export class PublicGroup extends Component {
       return (
         <div className='PublicGroupDonationFlowWrapper px2 py4 border-box fixed top-0 left-0 right-0 bottom-0'>
           <PublicGroupThanksV2
-            message={i18n.getString('NowOnBackersWall')}
+            message={i18n.getString('nowOnBackersWall')}
             i18n={i18n}
             group={group}
             newUserId={newUser.id}
@@ -104,23 +104,21 @@ export class PublicGroup extends Component {
 
         <PublicGroupHero group={group} {...this.props} />
         <PublicGroupWhoWeAre group={group} {...this.props} />
-        {group.slug !== 'opensource' && <PublicGroupWhyJoin group={group} expenses={expenses} {...this.props} />}
+        <PublicGroupWhyJoin group={group} expenses={expenses} {...this.props} />
 
         <div className='bg-light-gray px2'>
-          {group.slug !== 'opensource' && <PublicGroupJoinUs {...this.props} donateToGroup={donateToGroup.bind(this)} {...this.props} /> }
+          <PublicGroupJoinUs {...this.props} donateToGroup={donateToGroup.bind(this)} {...this.props} />
           <PublicGroupMembersWall group={group} {...this.props} />
         </div>
 
-        {group.slug !== 'opensource' &&
-          <section id='expenses-and-activity' className='px2'>
-            <div className='container'>
-              <div className='PublicGroup-transactions clearfix md-flex'>
-                <PublicGroupExpenses group={group} expenses={expenses} users={users} itemsToShow={NUM_TRANSACTIONS_TO_SHOW} {...this.props} />
-                <PublicGroupDonations group={group} donations={donations} users={users} itemsToShow={NUM_TRANSACTIONS_TO_SHOW} {...this.props} />
-              </div>
+        <section id='expenses-and-activity' className='px2'>
+          <div className='container'>
+            <div className='PublicGroup-transactions clearfix md-flex'>
+              <PublicGroupExpenses group={group} expenses={expenses} users={users} itemsToShow={NUM_TRANSACTIONS_TO_SHOW} {...this.props} />
+              <PublicGroupDonations group={group} donations={donations} users={users} itemsToShow={NUM_TRANSACTIONS_TO_SHOW} {...this.props} />
             </div>
-          </section>
-        }
+          </div>
+        </section>
 
         <PublicFooter />
 
@@ -148,10 +146,8 @@ export class PublicGroup extends Component {
 
     fetchTransactions(group.id, {
       per_page: NUM_TRANSACTIONS_TO_SHOW,
-      sort: 'createdAt',
-      direction: 'desc',
-      exclude: 'fees',
-      expense: true
+      sort: 'incurredAt',
+      direction: 'desc'
     });
 
     fetchUsers(group.id);
@@ -333,7 +329,7 @@ function mapStateToProps({
     users,
     session,
     donations: take(sortBy(donations, txn => txn.createdAt).reverse(), NUM_TRANSACTIONS_TO_SHOW),
-    expenses: take(sortBy(expenses, exp => exp.createdAt).reverse(), NUM_TRANSACTIONS_TO_SHOW),
+    expenses: take(sortBy(expenses, exp => exp.incurredAt).reverse(), NUM_TRANSACTIONS_TO_SHOW),
     inProgress: groups.donateInProgress,
     // shareUrl: window.location.href,
     profileForm: form.profile,

@@ -136,8 +136,8 @@ export default class DonationDistributor extends Component {
   {
     const {currency, i18n} = this.props;
     const {paymentMethod, optionalPaymentMethod} = this.state;
-    const proccesingFee = this.getCreditCardProcessingFee();
-    const formattedProccesingFee = formatCurrency(proccesingFee, currency, {compact: true});
+    const processingFee = this.getCreditCardProcessingFee();
+    const formattedProcessingFee = formatCurrency(processingFee, currency, {compact: true});
     const usingPayPal = paymentMethod === 'paypal';
     const usingStripe = paymentMethod === 'stripe';
     const formattedFixedFee = formatCurrency(0.30, currency, {compact: true});
@@ -154,14 +154,14 @@ export default class DonationDistributor extends Component {
                     </div>
                     <div className={`flex-auto left-align ${paymentMethod === 'paypal' ? '-dashed-bg' : ''}`}>
                       <div className='DonationDistributorItem-label' style={{color: paymentMethod === 'paypal' ? '#131313' : '#ccc'}}>
-                        PayPal <i>(2.9% + {formattedFixedFee} {i18n.getString('proccesingFee')})</i>
+                        PayPal <i>(2.9% + {formattedFixedFee} {i18n.getString('processingFee')})</i>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
               <div className="DonationDistributorItem-amount">
-                <span>{paymentMethod === 'paypal' ? formattedProccesingFee: ''}</span>
+                <span>{paymentMethod === 'paypal' ? formattedProcessingFee: ''}</span>
               </div>
             </div>
           </div>
@@ -177,14 +177,14 @@ export default class DonationDistributor extends Component {
                     </div>
                     <div className={`flex-auto left-align ${paymentMethod === 'stripe' ? '-dashed-bg' : ''}`}>
                       <div className='DonationDistributorItem-label' style={{color: paymentMethod === 'stripe' ? '#131313' : '#ccc'}}>
-                        {i18n.getString('creditCard')} <i>(2.9% + {formattedFixedFee} {i18n.getString('proccesingFee')})</i>
+                        {i18n.getString('creditCard')} <i>(2.9% + {formattedFixedFee} {i18n.getString('processingFee')})</i>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
               <div className="DonationDistributorItem-amount">
-                <span>{paymentMethod === 'stripe' ? formattedProccesingFee : ''}</span>
+                <span>{paymentMethod === 'stripe' ? formattedProcessingFee : ''}</span>
               </div>
             </div>
           </div>
@@ -374,8 +374,8 @@ export default class DonationDistributor extends Component {
     const processingFee = this.getCreditCardProcessingFee();
     const formattedAmount = formatCurrency(this.getSubTotal() + this.getCommissionAmount() + processingFee, currency, { compact: false });
     //TODO: renable with a flag, so we aren't always showing processing fees separately
-    //const formattedProccesingFee = formatCurrency(proccesingFee, currency, {compact: true});
-    //const feeDescription = proccesingFee ? `(+\u00A0${formattedProccesingFee}\u00A0payment\u00A0processing\u00A0fees)` : '';
+    //const formattedProcessingFee = formatCurrency(processingFee, currency, {compact: true});
+    //const feeDescription = processingFee ? `(+\u00A0${formattedProcessingFee}\u00A0payment\u00A0processing\u00A0fees)` : '';
     //return `${formattedAmount} ${frequencyHuman} ${feeDescription}`;
     return `${formattedAmount} ${frequencyHuman}`;
   }

@@ -1,6 +1,6 @@
 {
   "name": "opencollective-website",
-  "version": "0.1.113",
+  "version": "0.1.119",
   "engines": {
     "node": "5.11.0",
     "npm": "3.8.6"
@@ -13,7 +13,7 @@
   },
   "scripts": {
     "start": "NODE_CONFIG_DIR=./server/config node server",
-    "dev": "npm run build && PORT=3000 nf start -j Procfile_dev",
+    "dev": "npm run build && WEBSITE_PORT=3000 nf start -j Procfile_dev",
     "hint": "eslint '**/*.js' --quiet",
     "pretest": "npm run hint",
     "test": "npm run test:server && npm run test:unit",
