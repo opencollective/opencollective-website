@@ -32,9 +32,10 @@ module.exports = {
       // TODO this returns OK even if it's a 404 page: 404s should change window location
       .assert.urlContains('http://localhost:3000/github/apply')
       .click('.OnBoardingButton') // Repo already selected, click continue
-      .waitForElementVisible('.ContributorPickerItemSearch-list-container', 1000)
+      .pause(500)
       .click('.ContributorPickerItemSearch-list-container') // pick a collaborator
       .click('.OnBoardingButton')
+      .pause(500)
       .setValue('textarea[name=mission]', 'fund open source projects')
       .setValue('textarea[name=expensePolicy]', 'pay for servers and tshirts')
       .click('.Checkbox')
