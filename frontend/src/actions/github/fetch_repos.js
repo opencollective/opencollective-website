@@ -1,4 +1,4 @@
-import { getThirdParty } from '../../lib/api';
+import { get } from '../../lib/api';
 import * as constants from '../../constants/github';
 
 
@@ -6,11 +6,10 @@ import * as constants from '../../constants/github';
  * Fetch a user's repo
  */
 
-export default (username) => {
+export default (username, token) => {
   return dispatch => {
     dispatch(request(username));
-
-    return getThirdParty(`https://api.github.com/users/${username}/repos?per_page=100`, {params: {type: 'owner,member'}})
+    return get(`/github-repositories`, {headers: { Authorization: `Bearer ${token}` }})
     .then(json => {
       json = json.filter((repo) => repo.stargazers_count >= constants.MIN_STARS_FOR_ONBOARDING);
       dispatch(success(username, json));

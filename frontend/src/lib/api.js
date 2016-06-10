@@ -13,7 +13,7 @@ const API_ROOT = env.API_ROOT;
 export function get(endpoint, options={}) {
   const { schema, params } = options;
 
-  return fetch(url(endpoint, params), {headers: headers()})
+  return fetch(url(endpoint, params), {headers: headers(options.headers)})
     .then(checkStatus)
     .then((json={}) => {
       return schema ? normalize(json, schema).entities : json;

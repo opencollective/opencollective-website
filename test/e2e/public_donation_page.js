@@ -13,7 +13,7 @@ module.exports = {
       // wait for bottom green button to show up
       .waitForElementVisible('.Button.Button--green', 40000)
   },
-
+  /*
   'Redirects to paypal after clicking donate': (client) => {
 
     client
@@ -23,7 +23,7 @@ module.exports = {
       .assert.urlContains('https://www.sandbox.paypal.com/') // redirected to paypal
       .end();
   },
-
+  */
   'Shows thank you page after a paypal donation if user is full account': (client) => {
 
     client
