@@ -11,7 +11,8 @@ export default class CustomTextArea extends Component {
     placeholder: PropTypes.string,
     resize: PropTypes.oneOf(['none', 'both', 'veritcal', 'horizontal']),
     rows: PropTypes.number,
-    value: PropTypes.string
+    value: PropTypes.string,
+    name: PropTypes.string
   }
 
   static defaultProps = {
@@ -29,15 +30,16 @@ export default class CustomTextArea extends Component {
       hasScrollbar: false
     }
   }
-  
+
   render()
   {
-    const { disabled, onChange, className, placeholder, value, maxLength, rows, cols, resize } = this.props;
+    const { disabled, onChange, className, placeholder, value, maxLength, rows, cols, resize, name } = this.props;
     const { hasScrollbar } = this.state;
     return (
       <div className={`CustomTextArea ${className} ${disabled ? 'CustomTextArea--disabled' : ''} ${hasScrollbar ? 'CustomTextArea-has-scrollbar' : ''}`}>
       {!value && <div className="CustomTextArea-placeholder" onClick={this.onPlaceholderClick.bind(this)}>{placeholder}</div>}
       <textarea
+        name={name}
         ref='textarea'
         className='CustomTextArea-textarea'
         maxLength={maxLength}
