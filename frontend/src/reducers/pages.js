@@ -15,7 +15,6 @@ export default function users(state={
     
     case HYDRATE:
       if (action.data.profile) {
-        console.log("merging", action.data);
         return merge({}, state, {
           profile: action.data.profile
         });
