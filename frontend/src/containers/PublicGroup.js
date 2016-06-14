@@ -128,14 +128,13 @@ export class PublicGroup extends Component {
             <a href="/github/apply"><div className="button">APPLY NOW</div></a>
           </div>
         }
-        {group.slug !== 'opensource' && <PublicGroupWhyJoin group={group} expenses={expenses} {...this.props} />}
         {contributors && 
           <div className="PublicGroup-os-contrib-container">
             <div className="line1" >Contributors</div>
             <ContributorList contributors={contributors} />
           </div>
         }
-        <PublicGroupWhyJoin group={group} expenses={expenses} {...this.props} />
+        {group.slug !== 'opensource' && <PublicGroupWhyJoin group={group} expenses={expenses} {...this.props} />}
 
         <div className='bg-light-gray px2'>
           <PublicGroupJoinUs {...this.props} donateToGroup={donateToGroup.bind(this)} {...this.props} />
