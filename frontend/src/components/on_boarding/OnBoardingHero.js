@@ -1,7 +1,7 @@
 import React from 'react';
 import env from '../../lib/env';
 
-export default () => (
+export default ({ utmSource }) => (
   <div className='OnBoardingHero'>
     <div className='-title'>
       Apply to create an open collective for your <strong>open source</strong> project.
@@ -10,7 +10,7 @@ export default () => (
       We are starting to accept new open collectives. Reserve your spot today.
     </div>
     <div className='-button-container'>
-      <a href={`${env.API_ROOT}/connected-accounts/github`}>
+      <a href={`${env.API_ROOT}/connected-accounts/github?utm_source=${utmSource}`}>
         <div className='OnBoardingButton'>Connect GitHub</div>
       </a>
     </div>
