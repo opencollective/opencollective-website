@@ -45,7 +45,7 @@ export class OnBoarding extends Component {
   }
 
   componentWillMount() {
-    const { githubUsername  } = this.props;
+    const { githubUsername } = this.props;
     if (githubUsername && this.state.step === 0) {
       this.setState({step: 1});
     }
@@ -58,7 +58,7 @@ export class OnBoarding extends Component {
       fetchUserFromGithub,
       appendGithubForm,
       params,
-      notify,
+      notify
     } = this.props;
 
     if (githubUsername && this.state.step === 1) {
