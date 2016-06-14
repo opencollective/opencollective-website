@@ -145,7 +145,56 @@
   font-size: 1rem;
 }
 
-
+/* Call to action for /opensource */
+.PublicGroupOpenSourceCTA {
+  font-family: "Montserrat-Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  position: relative;
+  letter-spacing: .5px;
+  width: 100%;
+  background-color: black;
+  background-image: url(/static/images/whyjoin-placeholder.png);
+  color: white;
+  padding: 54px 20px 40px 20px;
+  text-align: center;
+  .arrow-down {
+    position: absolute; 
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 0px;
+    height: 0px;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid #F7F7F7;
+    margin: auto;
+  }
+  .line1 {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .line2 {
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  .button {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 270px;
+    border-radius: 50px;
+    background-color: #75cc1f;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    padding: 14px 24px;
+  }
+  .button:hover {
+    opacity: .96;
+  }
+  a {
+    text-decoration: none;
+  }
+}
 
 /* WHY JOIN */
 .PublicGroup-image-placeholder {
