@@ -147,6 +147,7 @@
 
 /* Call to action for /opensource */
 .PublicGroupOpenSourceCTA {
+  box-sizing: border-box;
   font-family: "Montserrat-Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
   position: relative;
   letter-spacing: .5px;
