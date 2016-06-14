@@ -20,6 +20,7 @@ import PublicGroupExpenses from '../components/public_group/PublicGroupExpenses'
 import PublicGroupDonations from '../components/public_group/PublicGroupDonations';
 import PublicGroupSignupV2 from '../components/public_group/PublicGroupSignupV2';
 import PublicGroupThanksV2 from '../components/public_group/PublicGroupThanksV2';
+import ContributorList from '../components/public_group/ContributorList';
 
 import fetchGroup from '../actions/groups/fetch_by_id';
 import fetchUsers from '../actions/users/fetch_by_group';
@@ -98,6 +99,21 @@ export class PublicGroup extends Component {
 
     const publicGroupClassName = `PublicGroup ${group.slug}`;
 
+    // `false` if there are no `group.data.githubContributors`, otherwise formats results for `ContributorList`
+    const contributors = (group.data && group.data.githubContributors) && Object.keys(group.data.githubContributors).map((username) => {
+      const commits = group.data.githubContributors[username];
+      return {
+        core: false,
+        name: username,
+        avatar: `https://avatars.githubusercontent.com/${username}?s=64`,
+        stats: {
+          c: commits,
+          a: null, 
+          d: null
+        }
+      }
+    }).sort((A, B) => (B.core * Number.MAX_SAFE_INTEGER + B.stats.c) - (A.core * Number.MAX_SAFE_INTEGER + A.stats.c));
+
     return (
       <div className={publicGroupClassName}>
         <Notification />
@@ -113,6 +129,13 @@ export class PublicGroup extends Component {
           </div>
         }
         {group.slug !== 'opensource' && <PublicGroupWhyJoin group={group} expenses={expenses} {...this.props} />}
+        {contributors && 
+          <div className="PublicGroup-os-contrib-container">
+            <div className="line1" >Contributors</div>
+            <ContributorList contributors={contributors} />
+          </div>
+        }
+        <PublicGroupWhyJoin group={group} expenses={expenses} {...this.props} />
 
         <div className='bg-light-gray px2'>
           <PublicGroupJoinUs {...this.props} donateToGroup={donateToGroup.bind(this)} {...this.props} />
