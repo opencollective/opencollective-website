@@ -70,11 +70,8 @@ export class ProfilePage extends Component {
 
 export default connect(mapStateToProps, {})(ProfilePage);
 
-function mapStateToProps({
-  pages
-}) {
+function mapStateToProps({}) {
   return {
-    profile: pages.profile,
     i18n: i18n('en')
   };
 }

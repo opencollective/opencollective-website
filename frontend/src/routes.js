@@ -7,14 +7,12 @@ import Transactions from './containers/Transactions';
 import DonatePage from './containers/DonatePage';
 import Leaderboard from './containers/Leaderboard';
 import OnBoarding from './containers/OnBoarding';
-import ProfilePage from './containers/ProfilePage';
 
 export default (
   <Route path="/">
     <Route path="/subscriptions/:token" component={Subscriptions} />
     <Route path="/subscriptions" component={Subscriptions} />
     <Route path="/leaderboard" component={Leaderboard} />
-    <Route path="/profile/:username" component={ProfilePage} />
     <Route path="/github/apply/:token" component={OnBoarding} />
     <Route path="/github/apply" component={OnBoarding} />
     <Route path="/:slug" component={PublicGroup} />
