@@ -6,5 +6,6 @@ module.exports = (req, res, next) => {
     .then(profile => {
       req.group = profile;
     })
-    .then(next);
+    .then(next)
+    .catch(next);
 }
