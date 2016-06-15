@@ -58,7 +58,12 @@ module.exports = {
     if(user.avatar && user.avatar.substr(0,1) !== '/') {
       const avatarEncoded = encodeURIComponent(user.avatar);
       const maxHeight = (format === 'svg' ) ? 128 : 64;
-      imageUrl = `https://res.cloudinary.com/opencollective/image/fetch/h_${maxHeight}/${avatarEncoded}`;
+      if (tierSingular !== 'sponsor') {
+        imageUrl = `https://res.cloudinary.com/opencollective/image/fetch/c_thumb,g_face,h_${maxHeight},r_max,w_${maxHeight},bo_3px_solid_white/c_thumb,h_${maxHeight},r_max,w_${maxHeight},bo_2px_solid_rgb:66C71A/e_trim/f_auto/${avatarEncoded}`;
+      }
+      else {
+        imageUrl = `https://res.cloudinary.com/opencollective/image/fetch/h_${maxHeight}/${avatarEncoded}`;
+      }
     }
 
     if(position == users.length) {
