@@ -36,6 +36,8 @@ import uploadImage from '../actions/images/upload';
 
 import profileSchema from '../joi_schemas/profile';
 
+import ProfilePage from './ProfilePage';
+
 // Number of expenses and revenue items to show on the public page
 const NUM_TRANSACTIONS_TO_SHOW = 3;
 
@@ -92,13 +94,19 @@ export class PublicGroup extends Component {
       group,
       expenses,
       donations,
-      users,
+      users
       // shareUrl,
     } = this.props;
 
     const publicGroupClassName = `PublicGroup ${group.slug}`;
 
     return (
+      <div>
+      { group.username &&
+        <ProfilePage profile={group} />
+      }
+
+      { group.mission &&
       <div className={publicGroupClassName}>
         <Notification />
 
@@ -132,6 +140,8 @@ export class PublicGroup extends Component {
 
         {this._donationFlow()}
       </div>
+      }
+      </div>
     );
   }
 
@@ -143,22 +153,24 @@ export class PublicGroup extends Component {
       fetchGroup
     } = this.props;
 
-    fetchGroup(group.id);
+    if (group.mission) {
+      fetchGroup(group.id);
 
-    fetchTransactions(group.id, {
-      per_page: NUM_TRANSACTIONS_TO_SHOW,
-      sort: 'createdAt',
-      direction: 'desc',
-      donation: true
-    });
+      fetchTransactions(group.id, {
+        per_page: NUM_TRANSACTIONS_TO_SHOW,
+        sort: 'createdAt',
+        direction: 'desc',
+        donation: true
+      });
 
-    fetchTransactions(group.id, {
-      per_page: NUM_TRANSACTIONS_TO_SHOW,
-      sort: 'incurredAt',
-      direction: 'desc'
-    });
+      fetchTransactions(group.id, {
+        per_page: NUM_TRANSACTIONS_TO_SHOW,
+        sort: 'incurredAt',
+        direction: 'desc'
+      });
 
-    fetchUsers(group.id);
+      fetchUsers(group.id);
+    }
   }
 
   componentWillMount() {

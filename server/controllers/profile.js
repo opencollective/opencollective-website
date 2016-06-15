@@ -2,9 +2,10 @@ import api from '../lib/api';
 
 module.exports = (req, res, next) => {
   api
-    .get(`/users/${req.params.username}?profile=true`)
+    .get(`/profile/${req.params.slug}`)
     .then(profile => {
-      req.profile = profile;
+      req.group = profile;
     })
-    .then(next);
+    .then(next)
+    .catch(next);
 }

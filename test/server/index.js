@@ -24,7 +24,7 @@ describe('server', () => {
 
   it('`wwcode-austin` should match the regex route', done => {
     const apiCall = nock('http://localhost:3060')
-      .get(`/groups/wwcode-austin/?api_key=${config.apiKey}`)
+      .get(`/profile/wwcode-austin?api_key=${config.apiKey}`)
       .reply(200, group);
 
     request(app)
@@ -46,7 +46,7 @@ describe('server', () => {
     };
 
     const apiCall = nock('http://localhost:3060')
-      .get(`/groups/wwcode/?api_key=${config.apiKey}`)
+      .get(`/profile/wwcode?api_key=${config.apiKey}`)
       .reply(403, { error });
 
     request(app)
