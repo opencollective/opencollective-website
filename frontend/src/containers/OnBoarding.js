@@ -76,13 +76,12 @@ export class OnBoarding extends Component {
 
   render() {
     const { step } = this.state;
-    const { contributors, githubForm, repositories } = this.props;
-
+    const { contributors, githubForm, repositories, utmSource } = this.props;
     return (
       <div className={`OnBoarding ${step ? '-registering' : ''}`}>
         <Notification autoclose={true} />
         {step !== 4 && <OnBoardingHeader active={Boolean(step)} username={githubForm.attributes.username} />}
-        {step === 0 && <OnBoardingHero />}
+        {step === 0 && <OnBoardingHero utmSource={utmSource} />}
         {step === 1 && <OnBoardingStepPickRepository repositories={repositories} blacklist={this.blacklist} onNextStep={(repository) => {
           if (!githubForm.attributes.repository) githubForm.attributes.repository = repository;
           this.getContributors(githubForm.attributes.repository, githubForm.attributes.username);
@@ -95,7 +94,7 @@ export class OnBoarding extends Component {
   }
 
   create() {
-    const { githubForm, validateSchema, createGroupFromGithubRepo, githubUser } = this.props;
+    const { githubForm, validateSchema, createGroupFromGithubRepo, githubUser,utmSource } = this.props;
     const attr = githubForm.attributes;
     const payload = {
       group: {
@@ -104,11 +103,13 @@ export class OnBoarding extends Component {
         mission: attr.missionDescription,
         expensePolicy: attr.expenseDescription,
         logo: attr.logo || '',
-        website: `https://github.com/${attr.username}/${attr.repository}`
+        website: `https://github.com/${attr.username}/${attr.repository}`,
+        data: {utmSource}
       },
       users: attr.contributors,
       github_username: attr.username,
-      user: githubUser || {}
+      user: githubUser || {},
+
     };
 
     return validateSchema(githubForm.attributes, githubSchema)
@@ -158,12 +159,14 @@ export default connect(mapStateToProps, {
   validateSchema
 })(OnBoarding);
 
-function mapStateToProps({github, form}) {
+function mapStateToProps({router, github, form}) {
 
   var githubUsername = '';
   if (github.connectedAccount) {
     githubUsername = github.connectedAccount.username;
   }
+  const query = router.location.query;
+  const utmSource = query.utm_source;
 
   return {
     githubUsername,
@@ -171,6 +174,7 @@ function mapStateToProps({github, form}) {
     fetchedRepositories: Boolean(github.repositories),
     repositories: github.repositories || [],
     contributors: github.contributors || [],
-    githubForm: form.github
+    githubForm: form.github,
+    utmSource
   };
 }
