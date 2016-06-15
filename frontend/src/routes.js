@@ -13,6 +13,9 @@ export default (
     <Route path="/subscriptions/:token" component={Subscriptions} />
     <Route path="/subscriptions" component={Subscriptions} />
     <Route path="/leaderboard" component={Leaderboard} />
+    <Route path="/opensource/apply/:token" component={OnBoarding} />
+    <Route path="/opensource/apply" component={OnBoarding} />
+    {/* Leaving github/apply routes for existing links */}
     <Route path="/github/apply/:token" component={OnBoarding} />
     <Route path="/github/apply" component={OnBoarding} />
     <Route path="/:slug" component={PublicGroup} />
