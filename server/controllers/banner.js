@@ -67,7 +67,8 @@ module.exports = {
     }
 
     if(position == users.length) {
-      imageUrl = `/static/images/become_${tierSingular}.svg`;
+      const btnImage = (tier.match(/sponsor/)) ? 'sponsor' : tierSingular;
+      imageUrl = `/static/images/become_${btnImage}.svg`;
     }
     else if(position > users.length) {
       imageUrl = "/static/images/1px.png";
