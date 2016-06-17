@@ -15,6 +15,12 @@ import render from './lib/render';
 module.exports = (app) => {
 
   /**
+   * Redirects
+   */
+  app.get('/consciousnesshackingsf', (req, res) => res.redirect('/chsf'));
+  app.get('/consciousnesshackingsv', (req, res) => res.redirect('/chsv'));
+
+  /**
    * Server status
    */
   app.use('/status', serverStatus(app));
@@ -45,7 +51,6 @@ module.exports = (app) => {
       .pipe(request(apiUrl(req.url), { followRedirect: false }))
       .pipe(res);
   });
-
 
   /**
    * Routes
