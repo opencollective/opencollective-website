@@ -39,6 +39,24 @@ export default function(groupid) {
         'Serveur',
         'Transport'
       ];
+       break;
+    case: 114: // partidodigital
+      categories = [
+        'Comunicación',
+        'Diseño',
+        'Aporte',
+        'Sistemas',
+        'Fondos',
+        'Alimentos y Bebidas',
+        'Marketing',
+        'Legales',
+        'Suministros & materiales',
+        'Viajes',
+        'Equipo',
+        'Oficina',
+        'Otros',
+        'Servicios Digitales'
+      ];
       break;
     default:
       categories = [
