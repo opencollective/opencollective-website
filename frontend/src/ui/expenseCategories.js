@@ -40,7 +40,7 @@ export default function(groupid) {
         'Transport'
       ];
        break;
-    case: 114: // partidodigital
+    case 114: // partidodigital
       categories = [
         'Comunicación',
         'Diseño',
