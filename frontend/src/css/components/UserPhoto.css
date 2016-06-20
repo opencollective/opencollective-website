@@ -17,6 +17,11 @@
   border-radius: 50%;
 }
 
+.UserPhoto.organization, 
+.UserPhoto.organization div:first-child {
+  border-radius: 0p;
+}
+
 .UserCard .UserPhoto.sponsor, .UserCard .UserPhoto.sponsor div:first-child {
     border-radius: 0;
     width: 140px;

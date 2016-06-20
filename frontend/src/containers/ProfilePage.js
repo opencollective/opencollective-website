@@ -32,7 +32,7 @@ export class ProfilePage extends Component {
   	return (
   		<div className='ProfilePage'>
         <OnBoardingHeader />
-        <UserPhoto user={user} addBadge={true} className="mx-auto" />
+        <UserPhoto user={user} addBadge={true} className={`mx-auto ${profile.isOrganization ? 'organization' : ''}`} />
         <div className="line1">Hello I'm</div>
         <div className="line2">{name}</div>
         <div className="line3">{bio}</div>
