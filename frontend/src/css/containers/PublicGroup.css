@@ -400,3 +400,15 @@
     color: #494b4d;
   }
 }
+
+.PublicGroup-os-contrib-container {
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 100px;
+  background-color: #F9FAFA;
+  .line1 {
+    font-family: montserratlight;
+    font-size: 22px;
+    color: #4d4d4d;
+  }
+}
