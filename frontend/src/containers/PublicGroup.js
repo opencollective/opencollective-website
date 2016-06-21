@@ -138,7 +138,7 @@ export class PublicGroup extends Component {
         }
         {contributors && 
           <div className="PublicGroup-os-contrib-container">
-            <div className="line1" >Contributors</div>
+            <div className="line1" >{contributors.length} contributors</div>
             <ContributorList contributors={contributors} />
           </div>
         }

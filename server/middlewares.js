@@ -3,6 +3,8 @@ import api from './lib/api';
 import expressSession from 'express-session';
 import ua from 'universal-analytics';
 
+import filterCollection from '../frontend/src/lib/filter_collection';
+
 /**
  * Fetch users by slug
  */
@@ -139,13 +141,43 @@ const ga = (req, res, next) => {
 const addMeta = (req, res, next) => {
   const group = req.group;
 
-  if (group) {
+  if (group.mission) {
     req.meta = {
       url: group.publicUrl,
       title: `Join ${group.name}'s open collective`,
       description: `${group.name} is collecting funds to continue their activities. Chip in!`,
       image: group.image || group.logo,
       twitter: `@${group.twitterHandle}`,
+    };
+  } else if (group.username) {
+    const user = req.group;
+    var description = '';
+
+    if(user.groups.length > 0) {
+      const belongsTo = filterCollection(user.groups, { role: 'MEMBER' });
+      const backing = filterCollection(user.groups, { role: 'BACKER' });
+
+      if(belongsTo.length > 0) {
+        description += `a member of ${belongsTo.length} collectives`;
+      }
+      if(backing.length > 0) {
+        if(description.length > 0) description += ' and ';
+        description += `supporting ${backing.length} collectives`;
+      }
+
+      user.groups.sort((a, b) => (b.members - a.members));
+      description += ' including ';
+      const includingGroups = user.groups.slice(0,3).map((g) => g.name);
+      description += includingGroups.join(', ');
+    }
+
+
+    req.meta = {
+      url: `${config.host.website}/${user.username}`,
+      title: `${user.name} is on OpenCollective`,
+      description: `${user.name} is ${description}`,
+      twitter: `@${user.twitterHandle}`,
+      image: user.avatar
     };
   } else {
     req.meta = {};
