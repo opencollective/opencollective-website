@@ -15,7 +15,7 @@ export default class PublicGroupWhyJoin extends React.Component {
 
     return (
       <section id='why-join' className='bg-black white'>
-        <div className='PublicGroupWhyJoin container clearfix md-flex'>          
+        <div className='PublicGroupWhyJoin container clearfix md-flex'>
           <div className='col md-col-6 col-12 relative'>
             <div className='PublicGroup-Media-container'>
               <Media group={group} />
@@ -29,7 +29,7 @@ export default class PublicGroupWhyJoin extends React.Component {
             </div>
             <div className='PublicGroup-metricContainer flex pt4'>
               <Metric label={i18n.getString('fundsAvailable')}
-                value={ formatCurrency(group.balance, group.currency, { precision: 0 }) }
+                value={ formatCurrency(group.balance/100, group.currency, { precision: 0 }) }
                 className='flex-auto pr2' />
 
               {(expenses.length > 0) && (

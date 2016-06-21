@@ -57,7 +57,7 @@ export class Transactions extends Component {
 
             <div className='Widget-balance'>
               <Currency
-                value={group.balance}
+                value={group.balance/100}
                 currency={group.currency}
                 precision={2} />
             </div>
