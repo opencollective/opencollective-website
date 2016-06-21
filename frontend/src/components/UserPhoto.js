@@ -30,14 +30,14 @@ export default class UserPhoto extends React.Component {
   }
 
   render() {
-    const { className, user, addBadge } = this.props;
+    const { className, user, addBadge, onMouseEnter, onMouseLeave } = this.props;
     const avatar = this.state.avatar;
     const styles = {
       backgroundImage: `url(${avatar})`
     };
 
     return (
-      <div className={`UserPhoto bg-no-repeat bg-center relative ${user.tier} ${className} ${avatar ? 'UserPhoto--loaded' : ''} `}>
+      <div className={`UserPhoto bg-no-repeat bg-center relative ${user.tier} ${className} ${avatar ? 'UserPhoto--loaded' : ''} `} onMouseEnter={ onMouseEnter } onMouseLeave={ onMouseLeave }>
         <div className='width-100 height-100 bg-contain bg-no-repeat bg-center' style={styles}></div>
         {addBadge ? (
           <div className='UserPhoto-badge absolute bg-white'>

@@ -169,7 +169,7 @@
     "allActivities": "Todos los aportes",
     "and": "y",
     "backer": "aportante",
-    "becomeA": "Conviértase en un",
+    "becomeA": "Conviértete en un",
     "becomeMemberText": "Tu aporte nos ayuda a cubrir nuestros gastos. Todos los fondos son utilizados de manera responsable y con total transparencia. Todos pueden ver como utilizamos los fondos obtenidos.",
     "becomeMemberTitle": "¿Por qué aportar?",
     "bePart": "¡Súmate!",
@@ -195,15 +195,15 @@
     "frequency": "Frecuencia",
     "fundsAvailable": "Fondos disponibles",
     "helpUsContinueOurActivities": "¡Tu aporte nos permite financiar las actividades de nuestro colectivo y seguir adelante!",
-    "hiThisIs": "¡Hola! Éste es el collectivo de ",
+    "hiThisIs": "¡Hola! Éste es el colectivo de ",
     "hostedBy": "Alojado por",
     "howDoYouWantToBeShown": "¿Cómo quieres aparecer en nuestra página? (dejar vacío para mantenerse anónimo)",
     "howWeSpend": "Ver como utilizamos los fondos",
-    "joinAndFulfil": "Súmese y ayúdenos a impulsar nuestra misión",
+    "joinAndFulfil": "Súmate y ayúdanos a impulsar nuestra misión",
     "latestActivities": "Últimos aportes",
     "latestExpenses": "Nuestros últimos gastos",
     "member": "miembro",
-    "membersWallText": "Éstos son los Aportantes y Sponsors que nos apoyan y nos permiten avanzar nuestra misión. No estaríamos aquí sin su apoyo. ¡Muchas gracias!",
+    "membersWallText": "Éstos son los Aportantes y Sponsors que nos apoyan y nos permiten avanzar nuestra misión. No estaríamos aquí sin tu apoyo. ¡Muchas gracias!",
     "membersWallTitle": "Esto es posible gracias a ti",
     "menuExpensesAndActivities": "Gastos y actividades",
     "menuMembersWall": "Muro de aportantes",
@@ -265,5 +265,9 @@
     "menuMembersWall": "Supporters",
     "becomeMemberTitle": "Why support this collective?",
     "joinAndFulfil": "Support this collective and help bring sustainable funding to Open Source"
+  }, 
+  "hoodie":{
+    "helpUsContinueOurActivities":"With your support, you’ll help us cover Hoodie’s expenses towards our goal of becoming a fully independent, self-sustained Open Source community! Our expenses are low (stickers, hosting, some travel), but to sustain Hoodie in the long term, we need dedicated people to serve the community. Our milestones are: Part-time community manager position ($10,000+ per year), Part-time fundraising position ($20,000+ per year) and Full-time community manager position ($60,000+ per year)",
+    "membersWallText":"Your support allows us to keep going towards our mission. Thank you so much."
   }
 }

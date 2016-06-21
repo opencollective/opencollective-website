@@ -42,6 +42,7 @@
 @import './components/ActivityItem.css';
 @import './components/Button.css';
 @import './components/Checkbox.css';
+@import './components/ContributorList.css';
 @import './components/ContributorPicker.css';
 @import './components/Currency.css';
 @import './components/CustomTextArea.css';
