@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import React from 'react';
 import TestUtils from 'react-addons-test-utils';
 import OnBoardingStepCreate from '../../../frontend/src/components/on_boarding/OnBoardingStepCreate';
 
