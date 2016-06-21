@@ -12,12 +12,13 @@ export default class OnBoardingStepCreate extends React.Component {
     this.state = {
       agreedTOS: false,
       logo: '',
+      disableCreateButton: false
     }
   }
 
   render() {
     const buttonContainerStyle = {margin: '0 auto', marginTop: '40px', width: '300px', textAlign: 'center'};
-    const { uploadImage, appendGithubForm, githubForm, onCreate } = this.props;
+    const { uploadImage, appendGithubForm, githubForm } = this.props;
     const { agreedTOS } = this.state;
 
     const missionDescription = githubForm.attributes.missionDescription;
@@ -58,10 +59,18 @@ export default class OnBoardingStepCreate extends React.Component {
             <span>Agree to <a href="https://docs.google.com/document/d/1-hajYd7coL05z2LTCOKXTYzXqNp40kPuw0z66kEIY5Y/pub" target='_blank'>Terms &amp; Conditions</a></span>
           </div>
           <div style={buttonContainerStyle}>
-            <div className={`OnBoardingButton ${canCreate ? '' : 'disabled'}`} onClick={canCreate && onCreate}>create!</div>
+            <div className={`OnBoardingButton ${canCreate ? '' : 'disabled'}`} onClick={canCreate && this.onCreate.bind(this)}>create!</div>
           </div>
         </div>
       </div>
     )
+  }
+
+  onCreate() {
+    if (!this.state.disableCreateButton) {
+      this.props.onCreate();
+      this.setState({disableCreateButton: true});
+      setTimeout(() => this.setState({disableCreateButton: false}), 5000);
+    }
   }
 }
