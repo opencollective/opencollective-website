@@ -136,7 +136,7 @@ export class PublicGroup extends Component {
             <a href="/github/apply"><div className="button">APPLY NOW</div></a>
           </div>
         }
-        {contributors && 
+        {contributors && contributors.length > 1 &&
           <div className="PublicGroup-os-contrib-container">
             <div className="line1" >{contributors.length} contributors</div>
             <ContributorList contributors={contributors} />

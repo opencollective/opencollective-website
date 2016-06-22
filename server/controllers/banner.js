@@ -49,6 +49,11 @@ module.exports = {
     const user = (position < users.length) ?  users[position] : {};
     const format = req.params.format || 'svg';
 
+    var maxHeight = (format === 'svg' ) ? 128 : 64;
+    if(tier.match(/silver/)) maxHeight *= 1.25;
+    if(tier.match(/gold/)) maxHeight *= 1.5;
+    if(tier.match(/diamond/)) maxHeight *= 2;
+
     // We only record a page view when loading the first avatar
     if(position==0) {
       req.ga.pageview();
@@ -57,8 +62,7 @@ module.exports = {
     var imageUrl = "/static/images/user.svg";
     if(user.avatar && user.avatar.substr(0,1) !== '/') {
       const avatarEncoded = encodeURIComponent(user.avatar);
-      const maxHeight = (format === 'svg' ) ? 128 : 64;
-      if (tierSingular !== 'sponsor') {
+      if (!tier.match(/sponsor/)) {
         imageUrl = `https://res.cloudinary.com/opencollective/image/fetch/c_thumb,g_face,h_${maxHeight},r_max,w_${maxHeight},bo_3px_solid_white/c_thumb,h_${maxHeight},r_max,w_${maxHeight},bo_2px_solid_rgb:66C71A/e_trim/f_auto/${avatarEncoded}`;
       }
       else {
@@ -82,9 +86,9 @@ module.exports = {
       request({url: imageUrl, encoding: null}, (e, r, data) => {
         const contentType = r.headers['content-type'];
 
-        const imageHeight = 64;
+        const imageHeight = Math.round(maxHeight / 2);
         let imageWidth = 64;
-        if (tierSingular === 'sponsor') {
+        if (tier.match(/sponsor/)) {
           const dimensions = sizeOf(data);
           imageWidth = Math.round(dimensions.width / dimensions.height * imageHeight);
         }
