@@ -39,7 +39,7 @@ module.exports = {
       .click('.OnBoardingButton')
       .waitForElementVisible('textarea', 1000)
       .setValue('textarea[name=mission]', 'fund open source projects')
-      .setValue('textarea[name=expensePolicy]', 'pay for servers and tshirts')
+      .setValue('textarea[name=description]', 'pay for servers and tshirts')
       .click('.Checkbox')
       .pause(500)
       .click('.OnBoardingButton')
