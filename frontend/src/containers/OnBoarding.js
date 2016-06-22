@@ -104,7 +104,25 @@ export class OnBoarding extends Component {
         expensePolicy: attr.expenseDescription,
         logo: attr.logo || '',
         website: `https://github.com/${attr.username}/${attr.repository}`,
-        data: {utmSource}
+        data: {utmSource},
+        tags: ['open source'],
+        tiers: [{
+            "name":"backer",
+            "title":"Backers",
+            "description":"Support us with a monthly donation and help us continue our activities.",
+            "button":"Become a backer",
+            "range":[2,100000],"presets":[2,5,10,25,50],
+            "interval":"monthly"
+          },
+          {
+            "name":"sponsor",
+            "title":"Sponsors",
+            "description":"Become a sponsor and get your logo on our README on Github with a link to your site.",
+            "button":"Become a sponsor",
+            "range":[100,500000],
+            "presets":[100,250,500],
+            "interval":"monthly"
+          }]
       },
       users: attr.contributors,
       github_username: attr.username,
