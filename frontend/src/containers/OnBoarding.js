@@ -100,8 +100,8 @@ export class OnBoarding extends Component {
       group: {
         name: attr.repository,
         slug: attr.repository,
-        mission: attr.missionDescription,
-        expensePolicy: attr.expenseDescription,
+        mission: attr.mission,
+        longDescription: attr.description,
         logo: attr.logo || '',
         website: `https://github.com/${attr.username}/${attr.repository}`,
         data: {utmSource},

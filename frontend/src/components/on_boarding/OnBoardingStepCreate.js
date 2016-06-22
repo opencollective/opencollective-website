@@ -21,9 +21,9 @@ export default class OnBoardingStepCreate extends React.Component {
     const { uploadImage, appendGithubForm, githubForm } = this.props;
     const { agreedTOS } = this.state;
 
-    const missionDescription = githubForm.attributes.missionDescription;
-    const expenseDescription = githubForm.attributes.expenseDescription;
-    const canCreate = expenseDescription && missionDescription && agreedTOS;
+    const mission = githubForm.attributes.mission;
+    const description = githubForm.attributes.description;
+    const canCreate = mission && description && agreedTOS;
 
     return (
       <div className="OnBoardingStepCreate">
@@ -47,9 +47,9 @@ export default class OnBoardingStepCreate extends React.Component {
               <div className="flex-auto">
                 <div className="flex flex-column">
                   <div className="OnBoardingStepCreate-label">Help us on our mission to...</div>
-                  <CustomTextArea name={'mission'} value={missionDescription} onChange={(value) => appendGithubForm({missionDescription: value})} maxLength={100} placeholder="State the core mission of your collective"/>
-                  <div className="OnBoardingStepCreate-label" style={{marginTop: '25px'}}>How are you going to spend the funds?</div>
-                  <CustomTextArea name={'expensePolicy'} value={expenseDescription} onChange={(value) => appendGithubForm({expenseDescription: value})} maxLength={100} placeholder="Development, design, hosting, etc…"/>
+                  <CustomTextArea name={'mission'} value={mission} onChange={(value) => appendGithubForm({mission: value})} maxLength={100} placeholder="State the core mission of your collective"/>
+                  <div className="OnBoardingStepCreate-label">Describe your project </div>
+                  <CustomTextArea name={'description'} value={description} onChange={(value) => appendGithubForm({description: value})} maxLength={255} placeholder="Native AngularJS implementation. Performs well with large data sets; even 10,000+ rows."/>
                 </div>
               </div>
             </div>
