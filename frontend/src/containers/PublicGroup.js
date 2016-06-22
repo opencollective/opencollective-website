@@ -46,6 +46,11 @@ import ProfilePage from './ProfilePage';
 // Number of expenses and revenue items to show on the public page
 const NUM_TRANSACTIONS_TO_SHOW = 3;
 
+function getOrdinal(n) {
+  var s=['th','st','nd','rd'], v = n % 100;
+  return n + (s[(v-20)%10]||s[v]||s[0]);
+}
+
 export class PublicGroup extends Component {
 
   constructor(props) {
@@ -95,14 +100,12 @@ export class PublicGroup extends Component {
   }
 
   renderPendingBackers() {
-    const backers = [ // TODO: replace with current backers of pending collective
-      { name: 'Ascari', tier: 'backer', avatar: 'https://avatars2.githubusercontent.com/u/2263170?s=96' }
-    ];
+    const { group } = this.props;
+    const backers = group.backers.slice(0);
     const backersCount = backers.length;
-  
-    if (backers.length < 10) {
-      for (var i = 0, delta = 10 - backers.length; i < delta; i++) {
-        backers.push(null)
+    if (backersCount < 10) {
+      for (var i = 0, delta = 10 - backersCount; i < delta; i++) {
+        backers.push(0)
       }
     }
 
@@ -112,14 +115,18 @@ export class PublicGroup extends Component {
         <div className="-wrap">
           {backers.map((backer, index) => {
             if (backer) {
-              return <UserCard user={backer} {...this.props}/>
+              return <UserCard key={index} user={backer} {...this.props}/>
             } else {
               return (
                 <BackerCard 
                   key={index}
-                  title={`${index+1}st Backer`} 
+                  title={`${getOrdinal(index+1)} Backer`} 
+                  group={{}}
                   user={{avatar: ''}}
-                  onClick={index === (backersCount) ? () => { /* TODO Add a backer flow starts here */ } : null}
+                  onClick={() => {}}
+                  showButton={index === backersCount}
+                  onToken={donateToGroup.bind(this)}
+                  {...this.props} 
                 />
               )
             }
@@ -134,39 +141,30 @@ export class PublicGroup extends Component {
   }
 
   renderPendingContributors() {
-    const contributors = [ // TODO replace with contributors of opensource project
-      {name: 'Xavier Damman', avatar: 'https://avatars.githubusercontent.com/xdamman?s=96', core: true},
-      {name: 'Pia Mancini', avatar: 'https://avatars.githubusercontent.com/piamancini?s=96', core: true},
-      {name: 'Sébastien Dubois', avatar: 'https://avatars.githubusercontent.com/sedubois?s=96', core: true},
-      {name: 'Kristaps Ledins', avatar: 'https://avatars.githubusercontent.com/krysits?s=96'},
-      {name: 'Ericku', avatar: 'https://avatars.githubusercontent.com/erickrico?s=96'},
-      {name: 'Javier Bórquez', avatar: 'https://avatars.githubusercontent.com/javierbyte?s=96'},
-      {name: 'Alvaro Cabrera Durán', avatar: 'https://avatars.githubusercontent.com/pateketrueke?s=96'},
-      {name: 'Eduardo Lavaque', avatar: 'https://avatars.githubusercontent.com/greduan?s=96'},
-      {name: 'dvaughan', avatar: 'https://avatars.githubusercontent.com/dsvaughan?s=96'},
-      {name: 'Sergio de la Garza', avatar: 'https://avatars.githubusercontent.com/sgarza?s=96'},
-      {name: 'Michael Anthony', avatar: 'https://avatars.githubusercontent.com/mcanthony?s=96'},
-      {name: 'José Moreira', avatar: 'https://avatars.githubusercontent.com/cusspvz?s=96'},
-      {name: 'eduardoalbertorg', avatar: 'https://avatars.githubusercontent.com/eduardoalbertorg?s=96'},
-      {name: 'alfredopizana', avatar: 'https://avatars.githubusercontent.com/alfredopizana?s=96'},
-      {name: 'Javier Murillo', avatar: 'https://avatars.githubusercontent.com/javiermurillo?s=96'},
-      {name: 'Linnk Benavides', avatar: 'https://avatars.githubusercontent.com/Linnk?s=96'},
-      {name: 'Adrián Zúñiga Espinoza', avatar: 'https://avatars.githubusercontent.com/Adrian0350?s=96'},
-      {name: 'Ascari', avatar: 'https://avatars.githubusercontent.com/carlosascari?s=96'},
-    ].map((contributor) => {
-      contributor.stats = {
-        c: ~~(Math.random() * 400),
-        a: ~~(Math.random() * 4000),
-        d: ~~(Math.random() * 999)
-      };
-      return contributor;
+    const { group } = this.props;
+    const githubContributors = group.data && group.data.githubContributors ? group.data.githubContributors : {};
+    const contributors = Object.keys(githubContributors).map((username) => {
+      const commits = githubContributors[username]
+      return {
+        name: username,
+        avatar: `https://avatars.githubusercontent.com/${username}?s=96`,
+        stats: {c: commits}
+      }
     });
-    return (
-      <div className="PublicGroup-contrib-container">
-        <div className="line1" >Contributors</div>
-        <ContributorList contributors={contributors} />
-      </div>
-    )
+
+    if (!contributors.length) {
+      return <div className="mt4"></div>;
+    } else {
+      return (
+        <div>
+          <div className="line6">We are the contributors of this collective nice to meet you.</div>
+          <div className="PublicGroup-contrib-container">
+            <div className="line1" >Contributors</div>
+            <ContributorList contributors={contributors} />
+          </div>
+        </div>
+      )
+    }
   }
 
   renderPendingAbout() {
@@ -195,7 +193,6 @@ export class PublicGroup extends Component {
         <div className="line4">With at least $10 you can become a member and help us cover design work, maintenance and servers.</div>
         {this.renderPendingBackers()}
         <div className="line5">Thank you for your visit</div>
-        <div className="line6">We are the contributors of this collective nice to meet you.</div>
         {this.renderPendingContributors()}
         {this.renderPendingAbout()}
         <PublicFooter />

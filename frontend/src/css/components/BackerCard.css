@@ -28,30 +28,31 @@
     margin-top: 16px;
   }
 
-  .BackerCard-button {
-    box-sizing: border-box;
-    border-radius: 100px;
-    background-color: #75cc1f;
-    font-family: Montserrat;
-    font-weight: bold;
-    font-size: 11px;
-    color: #ffffff;
-    width: 132px;
-    height: 32px;
-    margin: 32px auto 0 auto;
-    padding: 8px 8px;
-    text-transform: uppercase;
-    text-align: center;
-    cursor: pointer;
-    &:hover {
-      cursor: pointer;
-      opacity: .94;
-    }
-  }
-
-  &.BackerCard--empty {
-    .BackerCard-button {
-      display: none;
+  .DonationDistributor-donate-button {
+    position: relative;
+    margin: 0 auto;
+    .Button {
+      box-sizing: border-box;
+      border-radius: 100px;
+      background-color: #75cc1f;
+      font-family: Montserrat;
+      font-weight: bold;
+      font-size: 11px;
+      color: #ffffff;
+      width: 132px;
+      height: 32px;
+      margin: 32px auto 0 auto;
+      padding: 8px 8px;
+      text-transform: uppercase;
+      text-align: center;
+      &:not(.Button--disabled):hover {
+        cursor: pointer;
+        opacity: .84;
+      }
+      &.Button--disabled, &.Button--inProgress {
+        cursor: default;
+        background-color: #dde1e4;
+      }
     }
   }
 }

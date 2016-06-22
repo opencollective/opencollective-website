@@ -530,6 +530,7 @@
     min-height: 390px;
     background-color: #494b4d;
     padding-top: 64px;
+    margin-top: 100px;
 
     .line1 {
       text-align: center;
