@@ -6,8 +6,8 @@ const schema = Joi.alternatives().try(
     username: Joi.string().label('Userame'),
     repository: Joi.string().label('Repository'),
     contributors: Joi.array().min(MIN_CONTRIBUTORS_FOR_ONBOARDING).unique().items(Joi.string()).label('Core Contributors'),
-    missionDescription: Joi.string().max(100).label('Mission Description'),
-    expenseDescription: Joi.string().max(100).label('Expense Description'),
+    mission: Joi.string().max(100).label('Mission'),
+    description: Joi.string().max(255).label('Group Description'),
     logo: Joi.string().allow('').label('Repository Logo'),
     token: Joi.string().label('Github Access Token')
   })
