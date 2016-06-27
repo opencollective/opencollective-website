@@ -2,7 +2,6 @@ import { expect } from 'chai';
 
 import ProfilePhoto from '../../../frontend/src/components/ProfilePhoto';
 
-
 describe('ProfilePhoto component', () => {
   it('should have a default image', () => {
     const element = ProfilePhoto({});
