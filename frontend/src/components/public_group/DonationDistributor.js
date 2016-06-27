@@ -352,7 +352,7 @@ export default class DonationDistributor extends Component {
   getCreditCardProcessingFee()
   {
     const {amount} = this.props;
-    return 0.30 + 0.029 * amount;
+    return 0.30 + 0.029 * (amount - this.getCommissionAmount());
   }
 
   getDistributableAmount()

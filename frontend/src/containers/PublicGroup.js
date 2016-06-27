@@ -133,7 +133,7 @@ export class PublicGroup extends Component {
           })}
         </div>
         <div className="mb4">
-          <small style={{color: '#919699'}}>You won’t be charged a single penny until we reach our 10 backer goal. <a href="#">More info</a></small>
+          <small style={{color: '#919699'}}>You won’t be charged a single penny until we reach our 10 backer goal.</small>
         </div>
         <div className="-bottom-gradient"></div>
       </div>
