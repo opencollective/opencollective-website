@@ -38,14 +38,14 @@ export class ProfilePage extends Component {
         <div className="line3">{bio}</div>
         {belongsTo.length ? (
             <section>
-              <div className="lineA">I proudly belong to these collectives...</div>
+              <div className="lineA">{i18n.getString('proudMember')}</div>
               {belongsTo.map((collective, index) => <ProfileCard key={index} image={collective.logo} title={collective.name} subtitle={`${collective.members} Members`} footer={`${i18n.getString('member')} ${i18n.getString('since')} ${i18n.moment(collective.createdAt).format('MMMM YYYY')}`} />)}
             </section>
           ) : null
         }
         {backing.length ? (
             <section style={{paddingBottom: '0'}}>
-              <div className="lineA">And happily act as backer of these other collectives...</div>
+              <div className="lineA">{i18n.getString('proudSupporter')}</div>
               {backing.map((collective, index) => <ProfileCard key={index} image={collective.logo} title={collective.name} subtitle={`${collective.members} Members`} footer={`${i18n.getString('backer')} ${i18n.getString('since')} ${i18n.moment(collective.createdAt).format('MMMM YYYY')}`} />)}
             </section> 
           ) : null
