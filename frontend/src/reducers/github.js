@@ -21,7 +21,8 @@ export default function github(state={}, action={}) {
     case GET_REPOS_FROM_GITHUB_SUCCESS:
       const repositories = action.json.map(repo => {
         return {
-          title: repo.full_name,
+          title: repo.name,
+          fullName: repo.full_name,
           description: repo.description,
           stars: repo.stargazers_count,
           owner: repo.owner.login

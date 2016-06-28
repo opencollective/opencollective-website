@@ -18,11 +18,11 @@ export default class RepositoryPicker extends React.Component {
         {repositories && repositories.map((repo) => {
           return (
             <RepositoryPickerItem
-              key={repo.title}
-              title={repo.title}
+              key={repo.fullName}
+              title={repo.fullName}
               description={repo.description}
               stars={repo.stars}
-              selected={selectedRepo === repo.title || repositories.length === 1}
+              selected={selectedRepo === repo.fullName || repositories.length === 1}
               onClick={() => onSelect(repo.title, repo.owner)}
             />
           )
