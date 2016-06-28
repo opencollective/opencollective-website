@@ -80,7 +80,7 @@
 @import './components/UserPhoto.css';
 @import './components/Widget.css';
 @import './components/YoutubeVideo.css';
-
+@import './components/CollectiveCard.css';
 
 /**
  * Media queries
