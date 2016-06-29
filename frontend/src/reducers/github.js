@@ -22,6 +22,7 @@ export default function github(state={}, action={}) {
       const repositories = action.json.map(repo => {
         return {
           title: repo.name,
+          fullName: repo.full_name,
           description: repo.description,
           stars: repo.stargazers_count,
           owner: repo.owner.login
