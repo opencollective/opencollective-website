@@ -135,3 +135,50 @@ describe("redirect", () => {
 
 
 })
+
+describe("banner", () => {
+  it("request the banner.svg", done => {
+    request(app)
+      .get('/yeoman/backers.svg')
+      .expect('content-type', 'image/svg+xml; charset=utf-8')
+      .expect(res => {
+        const svg = new Buffer(res.body).toString('utf8');
+        const firstLine = svg.substr(0, svg.indexOf('\n'));
+        res.body = { firstLine };
+      })
+      .expect({
+        firstLine: '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="892" height="64">'
+      })
+      .expect(200, done);
+  });
+
+  it("adds a margin the banner.svg", done => {
+    request(app)
+      .get('/yeoman/backers.svg?margin=20')
+      .expect('content-type', 'image/svg+xml; charset=utf-8')
+      .expect(res => {
+        const svg = new Buffer(res.body).toString('utf8');
+        const firstLine = svg.substr(0, svg.indexOf('\n'));
+        res.body = { firstLine };
+      })
+      .expect({
+        firstLine: '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1072" height="64">'
+      })
+      .expect(200, done);
+  });
+
+  it("sets a max width for banner.svg", done => {
+    request(app)
+      .get('/yeoman/backers.svg?width=400')
+      .expect('content-type', 'image/svg+xml; charset=utf-8')
+      .expect(res => {
+        const svg = new Buffer(res.body).toString('utf8');
+        const firstLine = svg.substr(0, svg.indexOf('\n'));
+        res.body = { firstLine };
+      })
+      .expect({
+        firstLine: '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="400" height="202">'
+      })
+      .expect(200, done);
+  });
+})
