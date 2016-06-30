@@ -137,7 +137,7 @@ module.exports = {
     const slug = req.params.slug;
     const tier = req.params.tier;
     const format = req.params.format || 'svg';
-    const limit = Number(req.params.limit) || Infinity;
+    const limit = Number(req.query.limit) || Infinity;
     const margin = req.query.margin ? Number(req.query.margin) : 5;
     const imageWidth = Number(req.query.width) || 0;
     const imageHeight = Number(req.query.height) || 0;
@@ -146,9 +146,9 @@ module.exports = {
     const count = Math.min(limit, users.length);
 
     const promises = [];
-    for(var i=0; i< count; i++) {
+    for(var i = 0 ; i < count ; i++) {
       if(users[i].avatar) {
-        if(!tier.match(/sponsor/) && i < count) {
+        if(!tier.match(/sponsor/)) {
           users[i].avatar = `https://res.cloudinary.com/opencollective/image/fetch/c_thumb,g_face,h_${avatarHeight*2},r_max,w_${avatarHeight*2},bo_3px_solid_white/c_thumb,h_${avatarHeight*2},r_max,w_${avatarHeight*2},bo_2px_solid_rgb:66C71A/e_trim/f_auto/${encodeURIComponent(users[i].avatar)}`;
         }
         var options = {url: users[i].avatar, encoding: null};
@@ -163,7 +163,6 @@ module.exports = {
     };
 
     promises.push(requestPromise(btn));
-
 
     var posX = margin;
     var posY = margin;
@@ -180,15 +179,16 @@ module.exports = {
         const base64data = new Buffer(rawData).toString('base64');
 
         var avatarWidth = avatarHeight;
-        if (tier.match(/sponsor/) || !users[i]) {
-          try {
-            const dimensions = sizeOf(rawData);
-            avatarWidth = Math.round(dimensions.width / dimensions.height * avatarHeight);
-          } catch(e) {
-            console.error(`Cannot get the dimensions of the avatar of ${users[i].name}`, users[i].avatar);
-            continue;
-          }
+        try {
+          // We make sure the image loaded properly
+          const dimensions = sizeOf(rawData);
+          avatarWidth = Math.round(dimensions.width / dimensions.height * avatarHeight);
+        } catch(e) {
+          // Otherwise, we skip it
+          console.error(`Cannot get the dimensions of the avatar of ${users[i].name}`, users[i].avatar);
+          continue;
         }
+
         if(imageWidth > 0 && posX + avatarWidth + margin > imageWidth) {
           posY += (avatarHeight + margin);
           posX = margin;
