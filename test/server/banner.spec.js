@@ -158,7 +158,7 @@ describe("banner", () => {
         res.body = { firstLine };
       })
       .expect({
-        firstLine: '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="281" height="74">'
+        firstLine: '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="345" height="74">'
       })
       .expect(200, done);
   });
@@ -169,10 +169,10 @@ describe("banner", () => {
       .get('/yeoman/backers.png')
       .expect('content-type', 'image/png')
       .expect(res => {
-        res.body = { contentLength: res.headers['content-length'] };
+        res.body = { contentLength: Number(res.headers['content-length']) };
       })
       .expect({
-        contentLength: 14235
+        contentLength: 13109
       })
       .expect(200, done);
   });
@@ -187,7 +187,7 @@ describe("banner", () => {
         res.body = { firstLine };
       })
       .expect({
-        firstLine: '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="356" height="104">'
+        firstLine: '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="168" height="104">'
       })
       .expect(200, done);
   });
@@ -202,7 +202,7 @@ describe("banner", () => {
         res.body = { firstLine };
       })
       .expect({
-        firstLine: '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="143">'
+        firstLine: '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="74">'
       })
       .expect(200, done);
   });
