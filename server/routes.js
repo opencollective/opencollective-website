@@ -56,7 +56,8 @@ module.exports = (app) => {
    * Routes
    */
   app.get('/:slug/banner.md', mw.cache(300), mw.fetchGroupBySlug, mw.fetchUsers(), controllers.banner.markdown);
-  app.get('/:slug/:tier/banner.md', mw.cache(300), mw.fetchGroupBySlug, mw.fetchUsers(), controllers.banner.markdown);
+  app.get('/:slug/:tier.md', mw.cache(300), mw.fetchGroupBySlug, mw.fetchUsers(), controllers.banner.markdown);
+  app.get('/:slug/:tier.:format(svg|png)', mw.cache(300), mw.fetchUsers(), controllers.banner.banner);
   app.get('/:slug/:tier/badge.svg', mw.cache(300), mw.fetchUsers(), controllers.banner.badge);
   app.get('/:slug/badge/:tier.svg', mw.cache(300), mw.fetchUsers(), controllers.banner.badge);
   app.get('/:slug/:tier/:position/avatar(.:format(png|jpg|svg))?', mw.cache(300), mw.ga, mw.fetchUsers({cache: 300}), controllers.banner.avatar);

@@ -135,3 +135,75 @@ describe("redirect", () => {
 
 
 })
+
+describe("banner", () => {
+  before(() => {
+    sandbox = sinon.sandbox.create();
+    sandbox.stub(api, 'get', () => {
+      return Promise.resolve(mocks.users);
+    });
+  });
+
+  after(() => {
+    sandbox.restore();
+  });
+
+  it("request the banner.svg", done => {
+    request(app)
+      .get('/yeoman/backers.svg')
+      .expect('content-type', 'image/svg+xml; charset=utf-8')
+      .expect(res => {
+        const svg = new Buffer(res.body).toString('utf8');
+        const firstLine = svg.substr(0, svg.indexOf('\n'));
+        res.body = { firstLine };
+      })
+      .expect({
+        firstLine: '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="202" height="64">'
+      })
+      .expect(200, done);
+  });
+
+  it("request the banner.png", function(done) {
+    this.timeout(10000);
+    request(app)
+      .get('/yeoman/backers.png')
+      .expect('content-type', 'image/png')
+      .expect(res => {
+        res.body = { contentLength: res.headers['content-length'] };
+      })
+      .expect({
+        contentLength: 12137
+      })
+      .expect(200, done);
+  });
+
+  it("adds a margin the banner.svg", done => {
+    request(app)
+      .get('/yeoman/backers.svg?margin=20')
+      .expect('content-type', 'image/svg+xml; charset=utf-8')
+      .expect(res => {
+        const svg = new Buffer(res.body).toString('utf8');
+        const firstLine = svg.substr(0, svg.indexOf('\n'));
+        res.body = { firstLine };
+      })
+      .expect({
+        firstLine: '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="232" height="64">'
+      })
+      .expect(200, done);
+  });
+
+  it("sets a max width for banner.svg", done => {
+    request(app)
+      .get('/yeoman/backers.svg?width=200')
+      .expect('content-type', 'image/svg+xml; charset=utf-8')
+      .expect(res => {
+        const svg = new Buffer(res.body).toString('utf8');
+        const firstLine = svg.substr(0, svg.indexOf('\n'));
+        res.body = { firstLine };
+      })
+      .expect({
+        firstLine: '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="133">'
+      })
+      .expect(200, done);
+  });
+})
