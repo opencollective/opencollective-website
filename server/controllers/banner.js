@@ -6,6 +6,8 @@ import _ from 'lodash';
 import Promise from 'bluebird';
 import utils from '../lib/utils';
 
+const requestPromise = Promise.promisify(request, {multiArgs: true});
+
 const filterUsersByTier = (users, tiername) => {
   return _.uniq(filterCollection(users, { tier: tiername }), 'id');
 }
@@ -132,20 +134,21 @@ module.exports = {
   },
 
   banner: (req, res) => {
+    const slug = req.params.slug;
     const tier = req.params.tier;
     const format = req.params.format || 'svg';
+    const limit = Number(req.params.limit) || Infinity;
     const margin = req.query.margin ? Number(req.query.margin) : 5;
     const imageWidth = Number(req.query.width) || 0;
     const imageHeight = Number(req.query.height) || 0;
     const avatarHeight = Number(req.query.avatarHeight) || 64;
     const users = filterUsersByTier(req.users, tier.replace(/s$/,''));
-    const count = users.length;
+    const count = Math.min(limit, users.length);
 
     const promises = [];
-    const requestPromise = Promise.promisify(request, {multiArgs: true});
-    for(var i=0; i<count; i++) {
+    for(var i=0; i< count; i++) {
       if(users[i].avatar) {
-        if(!tier.match(/sponsor/)) {
+        if(!tier.match(/sponsor/) && i < count) {
           users[i].avatar = `https://res.cloudinary.com/opencollective/image/fetch/c_thumb,g_face,h_${avatarHeight*2},r_max,w_${avatarHeight*2},bo_3px_solid_white/c_thumb,h_${avatarHeight*2},r_max,w_${avatarHeight*2},bo_2px_solid_rgb:66C71A/e_trim/f_auto/${encodeURIComponent(users[i].avatar)}`;
         }
         var options = {url: users[i].avatar, encoding: null};
@@ -153,8 +156,17 @@ module.exports = {
       }
     }
 
-    var posX = 0;
-    var posY = 0;
+    const btnImage = (tier.match(/sponsor/)) ? 'sponsor' : tier.replace(/s$/,'');
+    const btn = {
+      url: `${config.host.website}/static/images/become_${btnImage}.svg`,
+      encoding: null
+    };
+
+    promises.push(requestPromise(btn));
+
+
+    var posX = margin;
+    var posY = margin;
 
     Promise.all(promises)
     .then(responses => {
@@ -164,11 +176,11 @@ module.exports = {
         const rawData = responses[i][1];
 
         const contentType = headers['content-type'];
-        const website = users[i].website;
+        const website = (users[i]) ? users[i].website : `${config.host.website}/${slug}`;
         const base64data = new Buffer(rawData).toString('base64');
 
         var avatarWidth = avatarHeight;
-        if (tier.match(/sponsor/)) {
+        if (tier.match(/sponsor/) || !users[i]) {
           try {
             const dimensions = sizeOf(rawData);
             avatarWidth = Math.round(dimensions.width / dimensions.height * avatarHeight);
@@ -179,7 +191,7 @@ module.exports = {
         }
         if(imageWidth > 0 && posX + avatarWidth + margin > imageWidth) {
           posY += (avatarHeight + margin);
-          posX = 0;
+          posX = margin;
         }
         var image = `<image x="${posX}" y="${posY}" width="${avatarWidth}" height="${avatarHeight}" xlink:href="data:${contentType};base64,${base64data}"/>`;
         if(website) {
@@ -189,7 +201,7 @@ module.exports = {
         posX += avatarWidth + margin;
       };
 
-      return `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${imageWidth || (posX - margin)}" height="${imageHeight || posY + avatarHeight}">
+      return `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${imageWidth || posX}" height="${imageHeight || posY + avatarHeight + margin}">
         ${images.join('\n')}
       </svg>`;
     })
@@ -226,9 +238,9 @@ module.exports = {
     const user = users[position] || {};
     user.twitter = user.twitterHandle ? `https://twitter.com/${user.twitterHandle}` : null;
 
-    var redirectUrl =  user.website || user.twitter || `https://opencollective.com/${slug}`;
+    var redirectUrl =  user.website || user.twitter || `${config.host.website}/${slug}`;
     if(position === users.length) {
-      redirectUrl = `https://opencollective.com/${slug}#support`;
+      redirectUrl = `${config.host.website}/${slug}#support`;
     }
 
     req.ga.event(`GithubWidget-${tier}`, `Click`, user.name, position);
