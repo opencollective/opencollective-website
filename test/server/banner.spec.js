@@ -163,6 +163,20 @@ describe("banner", () => {
       .expect(200, done);
   });
 
+  it("request the banner.png", function(done) {
+    this.timeout(10000);
+    request(app)
+      .get('/yeoman/backers.png')
+      .expect('content-type', 'image/png')
+      .expect(res => {
+        res.body = { contentLength: res.headers['content-length'] };
+      })
+      .expect({
+        contentLength: 12137
+      })
+      .expect(200, done);
+  });
+
   it("adds a margin the banner.svg", done => {
     request(app)
       .get('/yeoman/backers.svg?margin=20')
