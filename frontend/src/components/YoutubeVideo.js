@@ -6,11 +6,14 @@ export default ({
   height='315'
 }) => {
 
-  if(!video || !video.match(/watch\?v=/)) {
-    return;
-  }
+  if(!video) return;
 
-  const id = video.match(/watch\?v=([^&]*)/)[1];
+  var id;
+
+  if(video.match(/youtu.be/))
+    id = video.match(/youtu.be\/([^\/\?]+)/)[1];
+  else
+    id = video.match(/watch\?v=([^&]*)/)[1];
 
   return (
     <div className='YoutubeVideo height-100'>
