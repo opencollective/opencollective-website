@@ -101,6 +101,7 @@
     "robots.txt": "1.1.0",
     "serialize-javascript": "1.2.0",
     "serve-favicon": "2.3.0",
+    "svg-to-png": "^3.1.0",
     "uglify-js": "2.6.2",
     "universal-analytics": "0.3.11"
   },
