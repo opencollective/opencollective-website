@@ -209,8 +209,7 @@ module.exports = {
       res.send(svg);
     })
     .catch(e => {
-      console.log("An error happened");
-      console.log("Error: ", e);
+      console.log("Error in generating banner: ", e);
     });
   },
 
