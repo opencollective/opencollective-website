@@ -15,7 +15,8 @@ const fetchUsers = (options) => {
       .then((users) => {
         req.users = users;
       })
-      .then(next);
+      .then(next)
+      .catch(next); // make sure we return 404 if group doesn't exist
   }
 };
 

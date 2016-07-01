@@ -115,7 +115,7 @@ describe("redirect", () => {
   it("redirects to opencollective.com/:slug if no website or twitter for the backer at that position", (done) => {
     request(app)
       .get('/yeoman/backers/1/website')
-      .expect('Location', 'https://opencollective.com/yeoman')
+      .expect('Location', 'http://localhost:3000/yeoman')
       .expect(302, done);
   });
 
@@ -158,7 +158,7 @@ describe("banner", () => {
         res.body = { firstLine };
       })
       .expect({
-        firstLine: '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="202" height="64">'
+        firstLine: '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="345" height="74">'
       })
       .expect(200, done);
   });
@@ -169,10 +169,10 @@ describe("banner", () => {
       .get('/yeoman/backers.png')
       .expect('content-type', 'image/png')
       .expect(res => {
-        res.body = { contentLength: res.headers['content-length'] };
+        res.body = { contentLength: Number(res.headers['content-length']) };
       })
       .expect({
-        contentLength: 12137
+        contentLength: 13109
       })
       .expect(200, done);
   });
@@ -187,7 +187,7 @@ describe("banner", () => {
         res.body = { firstLine };
       })
       .expect({
-        firstLine: '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="232" height="64">'
+        firstLine: '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="168" height="104">'
       })
       .expect(200, done);
   });
@@ -202,7 +202,7 @@ describe("banner", () => {
         res.body = { firstLine };
       })
       .expect({
-        firstLine: '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="133">'
+        firstLine: '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="74">'
       })
       .expect(200, done);
   });

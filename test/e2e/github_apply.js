@@ -17,8 +17,8 @@ module.exports = {
 
     client
       .click('.OnBoardingButton')
-      .assert.containsText('body', 'Sign in to GitHub')
-      .assert.urlContains('https://github.com/login?return_to=%2Flogin%2Foauth%2Fauthorize')
+      .assert.containsText('body', 'Sign into GitHub')
+      .assert.urlContains('https://github.com/login?')
       .setValue('input[name=login]', config.github.testUsername)
       .setValue('input[name=password]', config.github.testPassword)
       .click('input.btn-primary') // click 'Sign In'
