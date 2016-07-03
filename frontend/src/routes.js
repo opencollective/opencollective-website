@@ -19,7 +19,7 @@ export default (
     {/* Leaving github/apply routes for existing links */}
     <Route path="/github/apply/:token" component={OnBoarding} />
     <Route path="/github/apply" component={OnBoarding} />
-    <Route path="/connect/twitter" component={ConnectTwitterButton} />
+    <Route path="/:slug/connect/twitter" component={ConnectTwitterButton} />
     <Route path="/:slug" component={PublicGroup} />
     <Route path="/:slug/expenses/new" component={Transactions} />
     <Route path="/:slug/:type(donations|expenses)" component={Transactions} />
