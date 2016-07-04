@@ -122,7 +122,7 @@ module.exports = {
     const color = req.query.color || 'brightgreen';
     const style = req.query.style;
 
-    const validator = (user) => user.tier.match(new RegExp(tier.replace(/s$/,''), 'i'));
+    const validator = (user) => (user.tier && user.tier.match(new RegExp(tier.replace(/s$/,''), 'i')));
     const users = _.uniq(filterCollection(req.users, validator), 'id');
 
     const count = users.length;
