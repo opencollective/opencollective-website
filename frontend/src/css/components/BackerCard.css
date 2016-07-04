@@ -42,7 +42,7 @@
       width: 132px;
       height: 32px;
       margin: 32px auto 0 auto;
-      padding: 8px 8px;
+      padding: 7px 8px;
       text-transform: uppercase;
       text-align: center;
       &:not(.Button--disabled):hover {

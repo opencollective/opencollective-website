@@ -87,7 +87,8 @@
     "weHave": "We have",
     "year": "year",
     "yearly": "Yearly",
-    "youDeciceDistributeYour": "You decide how to distribute your"
+    "youDeciceDistributeYour": "You decide how to distribute your",
+    "hostFee": "Host fee"
   },
   "fr": {
     "activitiesPlaceholderText": "Partagez cette page et recevez des dons de vos supporters et sponsors!",
@@ -165,7 +166,8 @@
     "weHave": "Nous avons",
     "year": "an",
     "yearly": "par an",
-    "youDeciceDistributeYour": "Vous décidez comment diffuser votre"
+    "youDeciceDistributeYour": "Vous décidez comment diffuser votre",
+    "hostFee": "Frais d'accueil"
   },
   "es": {
     "activitiesPlaceholderText": "¡Comparte esta página para recibir apoyos de aportantes y sponsors!",
@@ -242,7 +244,8 @@
     "weHave": "Contamos con",
     "year": "año",
     "yearly": "por año",
-    "youDeciceDistributeYour": "Decide como distribuir"
+    "youDeciceDistributeYour": "Decide como distribuir",
+    "hostFee": "Cuota de sede"
   },
 
   "wwcode": {

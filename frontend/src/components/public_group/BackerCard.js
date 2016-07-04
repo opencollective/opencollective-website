@@ -33,7 +33,7 @@ export default class BackerCard extends Component {
           frequency={frequency}
           editable={false}
           optionalComission={false}
-          feesOnTop={false}
+          feesOnTop={true}
           collectives={collectives}
           buttonLabel={'become backer'}
           skipModal={true}

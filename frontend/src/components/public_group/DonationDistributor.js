@@ -9,32 +9,42 @@ import DonationDistributorItem from './DonationDistributorItem';
 
 const RADIO_ON = '/static/images/radio-btn-on.svg';
 const RADIO_OFF = '/static/images/radio-btn-off.svg';
+const CC_FIXED_FEE = 0.30;
+const CC_RELATIVE_FEE = 2.9/100;
 
 export default class DonationDistributor extends Component {
 
   static propTypes = {
-    group: PropTypes.object.isRequired,
-    method: PropTypes.oneOf(['paypal', 'stripe']),
     amount: PropTypes.number.isRequired,
+    buttonLabel: PropTypes.string,
     collectives: PropTypes.arrayOf(React.PropTypes.object).isRequired,
-    editable: PropTypes.bool,
     currency: PropTypes.string.isRequired,
+    editable: PropTypes.bool,
     feesOnTop: PropTypes.bool,
     frequency: PropTypes.string.isRequired,
-    buttonLabel: PropTypes.string,
-    skipModal: PropTypes.bool
+    group: PropTypes.object.isRequired,
+    method: PropTypes.oneOf(['paypal', 'stripe']),
+    optionalComission: PropTypes.bool,
+    skipModal: PropTypes.bool,
+  }
+
+  static defaultProps = {
+    editable: false,
+    feesOnTop: true,
+    method: 'stripe',
+    optionalComission: false,
+    skipModal: false,
   }
 
   constructor(props) {
     super(props);
-    const {group, method, amount, optionalComission=false} = this.props;
-    this.stripeKey = group.stripeAccount && group.stripeAccount.stripePublishableKey ? group.stripeAccount.stripePublishableKey : '';
+    const {group, method, amount, optionalComission} = this.props;
+    this.stripeKey = (group.stripeAccount && group.stripeAccount.stripePublishableKey) ? group.stripeAccount.stripePublishableKey : '';
     const hasPaypal = group.hasPaypal;
     const hasStripe = this.stripeKey && amount;
     this.state = {
       disabled: !hasPaypal && !hasStripe,
       paymentMethod: method,
-      optionalComission: optionalComission,
       commissionPercentage: optionalComission ? 50 : 100,
       ocCommission: optionalComission ? 0.20 : 0.05,
       optionalPaymentMethod: hasStripe && hasPaypal,
@@ -43,23 +53,20 @@ export default class DonationDistributor extends Component {
     this.resetDistribution();
   }
 
-  renderDonateButton()
-  {
+  renderDonateButton() {
     const {i18n, buttonLabel} = this.props;
+    const {disabled} = this.state;
+    const buttonClassName = `Button ${disabled ? 'Button--disabled': 'Button--green'}`;
     return (
       <div className='DonationDistributor-donate-button max-width-1 mx-auto'>
-        <div
-          className={`Button ${this.state.disabled ? 'Button--disabled': 'Button--green'}`}
-          onClick={this.state.disabled ? Function.prototype : this.open.bind(this)}
-        >
+        <div className={buttonClassName} onClick={disabled ? Function.prototype : this.open.bind(this)}>
           {buttonLabel || i18n.getString('donate')}
         </div>
       </div>
     )
   }
 
-  renderCollectives()
-  {
+  renderCollectives() {
     const {currency} = this.props;
     const options = this.options;
     return options.map(
@@ -72,16 +79,13 @@ export default class DonationDistributor extends Component {
             icon={option.icon}
             editable={options.length > 1 && option.editable}
             value={option.value * 100}
-            amount={this.getDistributableAmount()}
+            amount={this.getNetDonation()}
             onChange={(percent, prev) => {
               const delta = Math.abs(prev - percent) / 100;
-              if (prev - percent < 0)
-              {
+              if (prev - percent < 0) {
                 option.value += delta;
                 this.redistribute('remove', option, delta);
-              }
-              else
-              {
+              } else {
                 option.value -= delta;
                 this.redistribute('add', option, delta);
               }
@@ -93,54 +97,60 @@ export default class DonationDistributor extends Component {
     )
   }
 
-  renderSubtotal()
-  {
-  	if (this.options.length < 2) return;
-    const {i18n} = this.props;
+  renderSubtotal() {
+    const {i18n, currency} = this.props;
     return (
       <DonationDistributorItem
         className='-no-dashed-bg -bold-amount -bold-label --subtotal'
-        currency={this.props.currency}
+        currency={currency}
         label={i18n.getString('subtotal')}
-        editable={false}
-        amount={this.getSubTotal()}
-        onChange={Function.prototype}
+        amount={this.getNetDonation()}
       />
     )
   }
 
-  renderCommission()
-  {
-    const {currency, i18n} = this.props;
-    const {optionalComission, ocCommission, commissionPercentage} = this.state;
-    const customCommissionPercentage = (commissionPercentage * ocCommission).toFixed(1).replace('.0', '');
+  renderPlatformFee() {
+    const {optionalComission, currency, i18n} = this.props;
+    const {commissionPercentage, ocCommission} = this.state;
+    const platformFeeMultiplier = this.getPlatformFeeMultiplier();
+    const customPlatformFeePercentage = (platformFeeMultiplier * 100).toFixed(1).replace('.0', '');
     return (
       <div>
         <DonationDistributorItem
           className='-no-dashed-bg'
           currency={currency}
-          label={`${i18n.getString('ocComission')} ${customCommissionPercentage}%`}
+          label={`${i18n.getString('ocComission')} ${customPlatformFeePercentage}%`}
           editable={optionalComission}
           editableAmount={optionalComission}
-          amount={this.props.amount * ocCommission}
+          amount={this.getChargeAmount() * ocCommission}
           value={commissionPercentage}
-          onChange={(percent) => {
-            this.setState({commissionPercentage: percent});
-          }}
+          onChange={percent => this.setState({commissionPercentage: percent})}
         />
       </div>
     )
   }
 
-  renderMethodPicker()
-  {
+  renderHostFee() {
+    const {group, currency, i18n} = this.props;
+    return (
+      <div>
+        <DonationDistributorItem
+          className='-no-dashed-bg'
+          currency={currency}
+          label={`${i18n.getString('hostFee')} ${group.hostFeePercent}%`}
+          amount={this.getHostFeeAmount()}
+        />
+      </div>
+    )
+  }
+
+  renderMethodPicker() {
     const {currency, i18n} = this.props;
     const {paymentMethod, optionalPaymentMethod} = this.state;
-    const processingFee = this.getCreditCardProcessingFee();
-    const formattedProcessingFee = formatCurrency(processingFee, currency, {compact: true});
+    const formattedProcessingFee = formatCurrency(this.getCreditCardFee(), currency, {compact: true});
     const usingPayPal = paymentMethod === 'paypal';
     const usingStripe = paymentMethod === 'stripe';
-    const formattedFixedFee = formatCurrency(0.30, currency, {compact: true});
+    const formattedFixedFee = formatCurrency(CC_FIXED_FEE, currency, {compact: true});
     return (
       <div>
         {(optionalPaymentMethod || usingPayPal) && (
@@ -161,7 +171,7 @@ export default class DonationDistributor extends Component {
                 </div>
               </div>
               <div className="DonationDistributorItem-amount">
-                <span>{paymentMethod === 'paypal' ? formattedProcessingFee: ''}</span>
+                <span>{paymentMethod === 'paypal' ? formattedProcessingFee : ''}</span>
               </div>
             </div>
           </div>
@@ -193,33 +203,29 @@ export default class DonationDistributor extends Component {
     )
   }
 
-  renderTotal()
-  {
+  renderTotal() {
     const {currency, i18n} = this.props;
-    const totalAmount = this.getSubTotal() + this.getCommissionAmount() + this.getCreditCardProcessingFee();
     return (
       <DonationDistributorItem
         className='-no-dashed-bg -bold-amount -bold-label --total'
         currency={currency}
         label={i18n.getString('total')}
-        editable={false}
-        amount={totalAmount}
+        amount={this.getChargeAmount()}
       />
     )
   }
 
-  renderPaymentButton()
-  {
+  renderPaymentButton() {
     const {group, inProgress, currency, frequency, onToken, i18n, buttonLabel, skipModal} = this.props;
     const stripeKey = this.stripeKey;
-    const amount = (this.getSubTotal() + this.getCommissionAmount() + this.getCreditCardProcessingFee()).toFixed(2);
-    const formattedAmount = formatCurrency(amount, currency, {compact: true});
+    const chargeAmount = this.getChargeAmount();
+    const amount = chargeAmount.toFixed(2);
+    const formattedAmount = formatCurrency(chargeAmount, currency, {compact: true});
     const distribution = this.options.map((opt) => { return {id: opt.id, value: opt.value} });
     const label = skipModal ? (buttonLabel || i18n.getString('donate')) : `${i18n.getString('pay')} ${formattedAmount}`;
     const customButtonStyle = label.length > 30 ? {fontSize: '14px', padding: '14px 16px'} : {};
 
-    if (this.state.paymentMethod === 'paypal')
-    {
+    if (this.state.paymentMethod === 'paypal') {
       return (
         <AsyncButton
           style={customButtonStyle}
@@ -239,9 +245,7 @@ export default class DonationDistributor extends Component {
           {label}
         </AsyncButton>
       )
-    }
-    else if (this.state.paymentMethod === 'stripe')
-    {
+    } else if (this.state.paymentMethod === 'stripe') {
       return (
         <StripeCheckout
           token={(token) => onToken({
@@ -271,11 +275,9 @@ export default class DonationDistributor extends Component {
     }
   }
 
-  renderDisclaimer()
-  {
+  renderDisclaimer() {
     const {group, i18n, frequency} = this.props;
     const cancellationDisclaimer = (frequency !== 'one-time') ? i18n.getString('cancelAnytime') : '';
-
     return (
       <h6>
         {i18n.getString('disclaimer')} {group.host.name} {this.getStripeDesciption()} {i18n.getString('for')} {group.name}. {cancellationDisclaimer}
@@ -284,27 +286,21 @@ export default class DonationDistributor extends Component {
   }
 
   render() {
-    if (this.props.skipModal)
-    {
-      if (this.state.disabled)
-      {
+    if (this.props.skipModal) {
+      if (this.state.disabled) {
         return this.renderDonateButton();
-      }
-      else
-      {
+      } else {
         return (
           <div className='DonationDistributor-donate-button max-width-1 mx-auto'>
             {this.renderPaymentButton()}
           </div>
         )
       }
-    }
-    else if (!this.state.opened)
-    {
+    } else if (!this.state.opened) {
       return this.renderDonateButton();
     }
 
-    const {i18n} = this.props;
+    const {i18n, group} = this.props;
     const {distributionAltered} = this.state;
 
     return (
@@ -323,8 +319,9 @@ export default class DonationDistributor extends Component {
             </div>
             <div className='DonationDistributor-hr' style={{marginTop: '30px'}}></div>
             <div className='DonationDistributor-section'>
-              {this.renderSubtotal()}
-              {this.renderCommission()}
+              {this.options.length > 1 ? this.renderSubtotal() : null}
+              {this.renderPlatformFee()}
+              {group.hostFeePercent ? this.renderHostFee() : null}
               {this.renderMethodPicker()}
             </div>
             <div className='DonationDistributor-hr'></div>
@@ -339,56 +336,53 @@ export default class DonationDistributor extends Component {
     );
   }
 
-  getTotal()
-  {
-    return this.getSubTotal() + this.getCreditCardProcessingFee() + this.getCommissionAmount();
+  getChargeAmount() {
+    const {amount, feesOnTop, group} = this.props;
+    const hostFee = group.hostFeePercent ? (group.hostFeePercent / 100) : 0;
+    return (amount + CC_FIXED_FEE) / (1 - (this.getPlatformFeeMultiplier() + (feesOnTop ? hostFee : 0) + CC_RELATIVE_FEE))
   }
 
-  getSubTotal()
-  {
-    return this.options.map((opt) => opt.value).reduce((a, b) => a + b) * this.getDistributableAmount();
-  }
-
-  getCreditCardProcessingFee()
-  {
-    const {amount} = this.props;
-    return 0.30 + 0.029 * (amount - this.getCommissionAmount());
-  }
-
-  getDistributableAmount()
-  {
-    const {amount, feesOnTop=true} = this.props;
-    return feesOnTop ? amount : amount - this.getCreditCardProcessingFee() - this.getCommissionAmount();
-  }
-
-  getCommissionAmount()
-  {
+  getPlatformFeeMultiplier() {
     const {commissionPercentage, ocCommission} = this.state;
-    return (this.props.amount * ocCommission) * (commissionPercentage/100);
+    return (commissionPercentage / 100) * ocCommission;
   }
 
-  getStripeDesciption()
-  {
+  getPlatformFeeAmount() {
+    return this.getPlatformFeeMultiplier() * this.getChargeAmount();
+  }
+
+  getHostFeeAmount() {
+    const {group} = this.props;
+    const hostFee = group.hostFeePercent ? (group.hostFeePercent / 100) : 0;
+    return hostFee * this.getChargeAmount();
+  }
+  
+  getCreditCardFee() {
+    return CC_FIXED_FEE + (this.getChargeAmount() * CC_RELATIVE_FEE);
+  }
+
+  getNetDonation() {
+    return this.getChargeAmount() - this.getPlatformFeeAmount() - this.getHostFeeAmount() - this.getCreditCardFee();
+  }
+
+  getStripeDesciption() {
     const {i18n, currency, frequency} = this.props;
+    const showFeeSeperately = false;
     const frequencyHuman = frequency === 'one-time' ? '' : `${i18n.getString('per')} ${i18n.getString(frequency.replace(/ly$/,''))}`;
-    const processingFee = this.getCreditCardProcessingFee();
-    const formattedAmount = formatCurrency(this.getSubTotal() + this.getCommissionAmount() + processingFee, currency, { compact: false });
-    //TODO: renable with a flag, so we aren't always showing processing fees separately
-    //const formattedProcessingFee = formatCurrency(processingFee, currency, {compact: true});
-    //const feeDescription = processingFee ? `(+\u00A0${formattedProcessingFee}\u00A0payment\u00A0processing\u00A0fees)` : '';
-    //return `${formattedAmount} ${frequencyHuman} ${feeDescription}`;
-    return `${formattedAmount} ${frequencyHuman}`;
+    const chargeAmount = this.getChargeAmount();
+    if (showFeeSeperately) {
+      const processingFee = this.getCreditCardFee();
+      const formattedAmount = formatCurrency(chargeAmount - processingFee, currency, { compact: false });
+      const formattedProcessingFee = formatCurrency(processingFee, currency, {compact: true});
+      const feeDescription = processingFee ? `(+\u00A0${formattedProcessingFee}\u00A0payment\u00A0processing\u00A0fees)` : '';
+      return `${formattedAmount} ${frequencyHuman} ${feeDescription}`;
+    } else {
+      const formattedAmount = formatCurrency(chargeAmount, currency, { compact: false });
+      return `${formattedAmount} ${frequencyHuman}`;
+    }
   }
 
-  resetOptions()
-  {
-    const {optionalComission} = this.props;
-    this.resetDistribution();
-    this.setState({commissionPercentage: optionalComission ? 50 : 100});
-  }
-
-  redistribute(action, activeOption, delta)
-  {
+  redistribute(action, activeOption, delta) {
     const candidates = this.options.filter((option) => {
       if (activeOption === option) return false;
       if (action === 'add' && option.value >= 1) return false;
@@ -399,26 +393,17 @@ export default class DonationDistributor extends Component {
     const deltaPiece = delta/count;
     let leftOver = 0;
     candidates.forEach((option) => {
-      if (action === 'add')
-      {
-        if (option.value + deltaPiece <= 1)
-        {
+      if (action === 'add') {
+        if (option.value + deltaPiece <= 1) {
           option.value += deltaPiece;
-        }
-        else
-        {
+        } else {
           leftOver += deltaPiece - (1 - option.value);
           option.value = 1;
         }
-      }
-      else if (action === 'remove')
-      {
-        if (option.value - deltaPiece >= 0)
-        {
+      } else if (action === 'remove') {
+        if (option.value - deltaPiece >= 0) {
           option.value -= deltaPiece;
-        }
-        else
-        {
+        } else {
           leftOver += (deltaPiece - option.value);
           option.value = 0;
         }
@@ -428,32 +413,25 @@ export default class DonationDistributor extends Component {
     // Set values
     this.options.forEach((option) => {
       const index = candidates.indexOf(option);
-      if (index !== -1)
-      {
+      if (index !== -1) {
         option.value = candidates[index].value;
       }
     });
 
-    if (leftOver > 0.000000000000001)
-    {
-      this.redistribute(action, activeOption, leftOver)
-    }
-    else
-    {
-      this.forceUpdate()
+    if (leftOver > 0.000000000000001) {
+      this.redistribute(action, activeOption, leftOver);
+    } else {
+      this.forceUpdate();
     }
   }
 
-  onMaskClick(ev)
-  {
-    if (ev.currentTarget === ev.target)
-    {
-      this.close();
-    }
+  resetOptions() {
+    const {optionalComission} = this.props;
+    this.resetDistribution();
+    this.setState({commissionPercentage: optionalComission ? 50 : 100});
   }
 
-  resetDistribution()
-  {
+  resetDistribution() {
   	const {collectives, editable} = this.props;
     this.options = collectives.map((collective) => {
       return {
@@ -461,21 +439,25 @@ export default class DonationDistributor extends Component {
         label: collective.name,
         icon: collective.logo,
         editable: editable,
-        value: !isNaN(collective.value) ? collective.value : 1 / collectives.length
+        value: !isNaN(collective.value) ? collective.value : (1 / collectives.length)
       }
     });
-    if (false) this.setState({distributionAltered: false});
+    this.forceUpdate();
   }
 
-  open()
-  {
+  onMaskClick(ev) {
+    if (ev.currentTarget === ev.target) {
+      this.close();
+    }
+  }
+
+  open() {
     document.body.style.overflow = 'hidden';
     this.resetOptions();
     this.setState({opened: true});
   }
 
-  close()
-  {
+  close() {
     document.body.style.overflow = 'auto';
     this.setState({opened: false});
   }
