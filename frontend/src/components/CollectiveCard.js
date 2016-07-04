@@ -30,22 +30,22 @@ export default class CollectiveCard extends Component {
           <div className='CollectiveCard-description'>{mission}</div>
         </div>
         <div className='CollectiveCard-footer'>
-          <div className="clearfix mt2">
-            <div className="col col-4">
+          <div className='clearfix mt2'>
+            <div className='col col-4'>
               <div className='CollectiveCard-metric'>
-                <div className='CollectiveCard-metric-value'>{backerCount}</div>
+                <div className='CollectiveCard-metric-value'>{backerCount  || 0}</div>
                 <div className='CollectiveCard-metric-label'>backers</div>
               </div>
             </div>
-            <div className="col col-4">
+            <div className='col col-4'>
               <div className='CollectiveCard-metric'>
-                <div className='CollectiveCard-metric-value'>{sponsorCount}</div>
+                <div className='CollectiveCard-metric-value'>{sponsorCount || 0}</div>
                 <div className='CollectiveCard-metric-label'>sponsors</div>
               </div>
             </div>
-            <div className="col col-4">
+            <div className='col col-4'>
               <div className='CollectiveCard-metric'>
-                <div className='CollectiveCard-metric-value'>{formattedMonthlyIncome}</div>
+                <div className='CollectiveCard-metric-value'>{formattedMonthlyIncome || 0}</div>
                 <div className='CollectiveCard-metric-label'>monthly&nbsp;income</div>
               </div>
             </div>
