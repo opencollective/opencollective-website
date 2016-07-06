@@ -11,6 +11,7 @@ import session from './session';
 import subscriptions from './subscriptions';
 import images from './images';
 import pages from './pages';
+import homepage from './homepage';
 
 export default combineReducers({
   form,
@@ -23,5 +24,6 @@ export default combineReducers({
   subscriptions,
   transactions,
   users,
-  router
+  router,
+  homepage
 });
