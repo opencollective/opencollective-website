@@ -73,6 +73,7 @@
         text-decoration: none;
       }
       .button {
+        display: inline-block;
         width: 250px;
         height: 40px;
         border-radius: 63px;

@@ -33,6 +33,8 @@ export class HomePage extends Component {
 
     // opensource.push(1,2,3,4,5,6);
     // meetup.push(1,2,3,4,5,6);
+    console.log('opensource', opensource)
+    console.log('meetup', meetup)
 
     return (
       <div className='HomePage'>
@@ -71,13 +73,13 @@ export class HomePage extends Component {
           <div className='heading'>Collectives for <span className='color-blue'>Open Source</span> projects</div>
           <div className='subheading'>These open source projects use Open Collective to share their expenses and let their community chip in.</div>
           <div className='cards'>
-            {opensource.map((group, index) => <CollectiveCard 
-              key={index}
+            {opensource.map(group => <CollectiveCard 
+              key={group.id}
               id={group.id}
               bg={group.backgroundImage}
               logo={group.logo}
               name={group.name}
-              mission={group.mission}
+              mission={group.mission || group.description}
               backerCount={group.backersCount|0}
               sponsorCount={group.sponsorCount|0}
               monthlyIncome={group.monthlyIncome|0}
@@ -95,8 +97,8 @@ export class HomePage extends Component {
           <div className='heading'>Collectives for <span className='color-green'>meetups</span></div>
           <div className='subheading'>Open Collective empowers local meetups to raise funds and have their own budget.</div>
           <div className='cards'>
-            {meetup.map((group, index) => <CollectiveCard 
-              key={index}
+            {meetup.map(group => <CollectiveCard 
+              key={group.id}
               id={group.id}
               bg={group.backgroundImage}
               logo={group.logo}
