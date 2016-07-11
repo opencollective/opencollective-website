@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import i18n from '../lib/i18n';
+import filterCollection from '../lib/filter_collection';
 
 import OnBoardingHeader from '../components/on_boarding/OnBoardingHeader';
 import UserPhoto from '../components/UserPhoto';
 import PublicFooter from '../components/PublicFooter';
-import ProfileCard from '../components/ProfileCard';
-
-import filterCollection from '../lib/filter_collection';
+import CollectiveCard from '../components/CollectiveCard';
 
 export class ProfilePage extends Component {
   constructor(props) {
@@ -20,33 +19,56 @@ export class ProfilePage extends Component {
 
     const { profile, i18n } = this.props;
 
-    const avatarUrl = profile.avatar;
-    const name = profile.name;
-    const bio = profile.description;
+    profile.groups.map((group) => {
+      group.sponsorCount = filterCollection(group.backers, {tier: 'sponsor'}).length;
+      group.backersCount = group.backers.length - group.sponsorCount;
+      group.monthlyIncome = (group.yearlyIncome / 12);
+    })
 
     const belongsTo = filterCollection(profile.groups, { role: 'MEMBER' });
     const backing = filterCollection(profile.groups, { role: 'BACKER' });
-    const user = { avatar: avatarUrl };
-    const isEmpty = belongsTo.length === backing.length && backing.length === 0;
+    const isEmpty = belongsTo.length === backing.length && backing.length === 0;console.log(backing)
 
   	return (
   		<div className='ProfilePage'>
         <OnBoardingHeader />
-        <UserPhoto user={user} addBadge={true} className={`mx-auto ${profile.isOrganization ? 'organization' : ''}`} />
+        <UserPhoto user={{ avatar: profile.avatar }} addBadge={true} className={`mx-auto ${profile.isOrganization ? 'organization' : ''}`} />
         <div className="line1">Hello I'm</div>
-        <div className="line2">{name}</div>
-        <div className="line3">{bio}</div>
+        <div className="line2">{profile.name}</div>
+        <div className="line3">{profile.description}</div>
         {belongsTo.length ? (
             <section>
               <div className="lineA">{i18n.getString('proudMember')}</div>
-              {belongsTo.map((collective, index) => <ProfileCard key={index} image={collective.logo} title={collective.name} subtitle={`${collective.members} Members`} footer={`${i18n.getString('member')} ${i18n.getString('since')} ${i18n.moment(collective.createdAt).format('MMMM YYYY')}`} />)}
+              {belongsTo.map((group, index) => <CollectiveCard 
+                key={index}
+                id={group.id}
+                bg={group.backgroundImage}
+                logo={group.logo}
+                name={group.name}
+                mission={group.mission}
+                backerCount={group.backersCount}
+                sponsorCount={group.sponsorCount}
+                monthlyIncome={group.monthlyIncome} 
+                />
+              )}
             </section>
           ) : null
         }
         {backing.length ? (
             <section style={{paddingBottom: '0'}}>
               <div className="lineA">{i18n.getString('proudSupporter')}</div>
-              {backing.map((collective, index) => <ProfileCard key={index} image={collective.logo} title={collective.name} subtitle={`${collective.members} Members`} footer={`${i18n.getString('backer')} ${i18n.getString('since')} ${i18n.moment(collective.createdAt).format('MMMM YYYY')}`} />)}
+              {backing.map((group, index) => <CollectiveCard 
+                key={index}
+                id={group.id}
+                bg={group.backgroundImage}
+                logo={group.logo}
+                name={group.name}
+                mission={group.mission}
+                backerCount={group.backersCount}
+                sponsorCount={group.sponsorCount}
+                monthlyIncome={group.monthlyIncome} 
+                />
+              )}
             </section> 
           ) : null
         }
