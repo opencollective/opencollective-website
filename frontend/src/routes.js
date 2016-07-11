@@ -7,9 +7,11 @@ import Transactions from './containers/Transactions';
 import DonatePage from './containers/DonatePage';
 import Leaderboard from './containers/Leaderboard';
 import OnBoarding from './containers/OnBoarding';
+import HomePage from './containers/HomePage';
 
 export default (
-  <Route path="/">
+  <Route>
+    <Route path="/" component={HomePage} />
     <Route path="/subscriptions/:token" component={Subscriptions} />
     <Route path="/subscriptions" component={Subscriptions} />
     <Route path="/leaderboard" component={Leaderboard} />
