@@ -31,11 +31,6 @@ export class HomePage extends Component {
     const totalDonations = homepage.stats ? homepage.stats.totalDonations : 0;
     const totalDonors = homepage.stats ? homepage.stats.totalDonors : 0;
 
-    // opensource.push(1,2,3,4,5,6);
-    // meetup.push(1,2,3,4,5,6);
-    console.log('opensource', opensource)
-    console.log('meetup', meetup)
-
     return (
       <div className='HomePage'>
         <OnBoardingHeader />
