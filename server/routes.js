@@ -71,8 +71,8 @@ module.exports = (app) => {
    * When we refactor PublicGroup to fetch the group in the container, we can remove
    * the explicit routes and just do `app.use(render)`
    */
+  app.get('/login/:token', mw.ga, mw.addTitle('Open Collective'), render);
   app.get('/login', mw.ga, mw.addTitle('Open Collective Login'), render);
-  app.get('/login/:token', mw.ga, mw.addTitle('Open Collective...'), render);
   app.get('/leaderboard', mw.ga, mw.fetchLeaderboard, mw.addTitle('Open Collective Leaderboard'), render);
   app.get('/opensource/apply/:token', mw.ga, mw.extractGithubUsernameFromToken, mw.addTitle('Sign up your Github repository'), render);
   app.get('/opensource/apply', mw.ga, mw.addTitle('Sign up your Github repository'), render);
@@ -80,8 +80,7 @@ module.exports = (app) => {
   app.get('/github/apply/:token', mw.ga, mw.extractGithubUsernameFromToken, mw.addTitle('Sign up your Github repository'), render);
   app.get('/github/apply', mw.ga, mw.addTitle('Sign up your Github repository'), render);
   app.get('/connect/:service(github)', mw.ga, render);
-  app.get('/subscriptions/:token', mw.ga, mw.fetchSubscriptionsByUserWithToken, mw.addTitle('My Subscriptions'), render);
-  app.get('/subscriptions', mw.ga, mw.fetchSubscriptionsByUserWithToken, mw.addTitle('My Subscriptions'), render);
+  app.get('/subscriptions', mw.ga, mw.addTitle('My Subscriptions'), render);
   app.get('/:slug([A-Za-z0-9-]+)/:type(expenses|donations)', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-]+)/expenses/new', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-]+)/donate/:amount', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
