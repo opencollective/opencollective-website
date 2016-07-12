@@ -53,10 +53,16 @@ module.exports = {
     const user = (position < users.length) ?  users[position] : {};
     const format = req.params.format || 'svg';
 
-    var maxHeight = (format === 'svg' ) ? 128 : 64;
-    if(tier.match(/silver/)) maxHeight *= 1.25;
-    if(tier.match(/gold/)) maxHeight *= 1.5;
-    if(tier.match(/diamond/)) maxHeight *= 2;
+    var maxHeight;
+
+    if(req.query.avatarHeight) {
+      maxHeight = Number(req.query.avatarHeight);
+    } else {
+      maxHeight = (format === 'svg' ) ? 128 : 64;
+      if(tier.match(/silver/)) maxHeight *= 1.25;
+      if(tier.match(/gold/)) maxHeight *= 1.5;
+      if(tier.match(/diamond/)) maxHeight *= 2;
+    }
 
     // We only record a page view when loading the first avatar
     if(position==0) {

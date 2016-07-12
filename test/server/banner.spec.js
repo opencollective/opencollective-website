@@ -37,7 +37,6 @@ describe("avatar", () => {
       .get('/yeoman/sponsor/0/avatar.svg')
       .expect('content-type', 'image/svg+xml; charset=utf-8')
       .expect((res) => {
-        console.log("dimensions: ", sizeOf(res.body));
         res.body = sizeOf(res.body);
       })
       .expect(200, { width: 387, height: 64, type: 'svg' }, done);
@@ -69,6 +68,15 @@ describe("avatar", () => {
       .get(`/yeoman/backers/${(mocks.backers.length+1)}/avatar`)
       .expect('Location', '/static/images/1px.png')
       .expect(302, done);
+  });
+
+  it("handles the avatarHeight option", (done) => {
+    request(app)
+      .get('/yeoman/backers/0/avatar.jpg?avatarHeight=256')
+      .expect((res) => {
+        res.body = sizeOf(res.body);
+      })
+      .expect(200, { width: 260, height: 260, type: 'jpg' }, done);
   });
 });
 
