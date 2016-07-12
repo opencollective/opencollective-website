@@ -105,7 +105,9 @@ export class OnBoarding extends Component {
         logo: attr.logo || '',
         website: `https://github.com/${attr.username}/${attr.repository}`,
         data: {
-          utmSource,
+          utmSource
+        },
+        settings: {
           githubRepo: `${attr.username}/${attr.repository}`
         },
         tags: ['open source'],
