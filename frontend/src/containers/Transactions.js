@@ -10,6 +10,7 @@ import Icon from '../components/Icon';
 import PublicFooter from '../components/PublicFooter';
 import PublicTopBar from '../containers/PublicTopBar';
 import SubmitExpense from '../containers/SubmitExpense';
+import i18n from '../lib/i18n';
 
 import TransactionItem from '../components/TransactionItem';
 
@@ -34,7 +35,8 @@ export class Transactions extends Component {
       group,
       transactions,
       users,
-      type
+      type,
+      i18n
     } = this.props;
 
     const showSubmitExpense = this.state.showSubmitExpense;
@@ -61,7 +63,7 @@ export class Transactions extends Component {
                 currency={group.currency}
                 precision={2} />
             </div>
-            <div className='Widget-label'>Available funds</div>
+            <div className='Widget-label'>{i18n.getString('fundsAvailable')}</div>
           </div>
 
           {showSubmitExpense && (<SubmitExpense onCancel={this.toggleAddExpense.bind(this)} />)}
@@ -76,13 +78,14 @@ export class Transactions extends Component {
                   <Icon type='expense' />
                 </div>
                 <label>
-                  All {type}s will show up here
+                {i18n.getString(`${type}List-showUpHere`)}
                 </label>
               </div>
             )}
             {transactions.map(tx => <TransactionItem
                                        key={tx.id}
                                        transaction={tx}
+                                       i18n={i18n}
                                        user={users[tx.UserId]}
                                        precision={2}
                                        />)}
@@ -141,6 +144,7 @@ function mapStateToProps({
     transactions: sortBy(list, txn => txn.incurredAt || txn.createdAt).reverse(),
     router,
     users,
+    i18n: i18n(group.settings.lang || 'en'),
     type
   };
 }

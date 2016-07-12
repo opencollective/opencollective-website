@@ -5,7 +5,7 @@ import ProfilePhoto from './ProfilePhoto';
 import Currency from './Currency';
 import ExpenseStatus from './ExpenseStatus';
 
-export default ({transaction, user, precision=0}) => {
+export default ({transaction, user, precision=0, i18n}) => {
   const txDate = transaction.incurredAt || transaction.createdAt;
 
   return (
@@ -27,7 +27,7 @@ export default ({transaction, user, precision=0}) => {
         </div>
 
         {!transaction.isDonation && <div className='TransactionItem-status'>
-          <ExpenseStatus status={transaction.status} />
+          <ExpenseStatus status={i18n.getString(transaction.status.toLowerCase())} />
         </div>}
       </div>
     </div>
