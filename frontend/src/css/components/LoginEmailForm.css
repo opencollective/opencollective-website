@@ -1,0 +1,11 @@
+.Login-Email {
+  display: inline-block;
+}
+
+.Login-Email-description {
+  padding-bottom: 1rem;
+}
+
+.Login-Email .Button {
+	max-width: 167px;
+}

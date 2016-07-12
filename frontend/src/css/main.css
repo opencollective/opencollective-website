@@ -58,6 +58,7 @@
 @import './components/InlineToggle.css';
 @import './components/Input.css';
 @import './components/Label.css';
+@import './components/LoginEmailForm.css';
 @import './components/Metric.css';
 @import './components/Notification.css';
 @import './components/ProfilePhoto.css';
@@ -70,7 +71,6 @@
 @import './components/Select.css';
 @import './components/ShareIcon.css';
 @import './components/Slider.css';
-@import './components/SubscriptionEmailForm.css';
 @import './components/TransactionItem.css';
 @import './components/TransactionStatus.css';
 @import './components/UserCard.css';
