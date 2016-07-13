@@ -22,7 +22,7 @@ const ExpenseItem = ({ className = '', expense, user, i18n }) => {
           <span className='h3 -ff-sec -fw-bold'>
             <Currency value={expense.amount/100} currency={expense.currency} colorify={false} />
           </span>
-          <span className='ExpenseStatus border align-middle ml1 muted -fw-bold -ttu'>{formatStatus(expense.status)}</span>
+          <span className='ExpenseStatus border align-middle ml1 muted -fw-bold -ttu'>{i18n.getString(expense.status.toLowerCase())}</span>
         </div>
       </div>
     </div>
@@ -43,10 +43,6 @@ ExpenseItem.defaultProps = {
 };
 
 export default ExpenseItem;
-
-function formatStatus(status) {
-  return status.charAt(0).toUpperCase() + status.slice(1).toLowerCase();
-}
 
 function getCategoryName(category) {
   let categoryName = category ? category.toLowerCase().replace(/\W/g, '-') : '';
