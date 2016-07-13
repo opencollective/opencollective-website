@@ -24,29 +24,29 @@ export default class DonationDistributor extends Component {
     frequency: PropTypes.string.isRequired,
     group: PropTypes.object.isRequired,
     method: PropTypes.oneOf(['paypal', 'stripe']),
-    optionalComission: PropTypes.bool,
+    optionalCommission: PropTypes.bool,
     skipModal: PropTypes.bool,
   }
 
   static defaultProps = {
     editable: false,
-    feesOnTop: true,
+    feesOnTop: false,
     method: 'stripe',
-    optionalComission: false,
-    skipModal: false,
+    optionalCommission: false,
+    skipModal: true,
   }
 
   constructor(props) {
     super(props);
-    const {group, method, amount, optionalComission} = this.props;
+    const {group, method, amount, optionalCommission} = this.props;
     this.stripeKey = (group.stripeAccount && group.stripeAccount.stripePublishableKey) ? group.stripeAccount.stripePublishableKey : '';
     const hasPaypal = group.hasPaypal;
     const hasStripe = this.stripeKey && amount;
     this.state = {
       disabled: !hasPaypal && !hasStripe,
       paymentMethod: method,
-      commissionPercentage: optionalComission ? 50 : 100,
-      ocCommission: optionalComission ? 0.20 : 0.05,
+      commissionPercentage: optionalCommission ? 50 : 100,
+      ocCommission: optionalCommission ? 0.20 : 0.05,
       optionalPaymentMethod: hasStripe && hasPaypal,
       distributionAltered: false
     };
@@ -110,7 +110,7 @@ export default class DonationDistributor extends Component {
   }
 
   renderPlatformFee() {
-    const {optionalComission, currency, i18n} = this.props;
+    const {optionalCommission, currency, i18n} = this.props;
     const {commissionPercentage, ocCommission} = this.state;
     const platformFeeMultiplier = this.getPlatformFeeMultiplier();
     const customPlatformFeePercentage = (platformFeeMultiplier * 100).toFixed(1).replace('.0', '');
@@ -119,9 +119,9 @@ export default class DonationDistributor extends Component {
         <DonationDistributorItem
           className='-no-dashed-bg'
           currency={currency}
-          label={`${i18n.getString('ocComission')} ${customPlatformFeePercentage}%`}
-          editable={optionalComission}
-          editableAmount={optionalComission}
+          label={`${i18n.getString('ocCommission')} ${customPlatformFeePercentage}%`}
+          editable={optionalCommission}
+          editableAmount={optionalCommission}
           amount={this.getChargeAmount() * ocCommission}
           value={commissionPercentage}
           onChange={percent => this.setState({commissionPercentage: percent})}
@@ -338,6 +338,9 @@ export default class DonationDistributor extends Component {
 
   getChargeAmount() {
     const {amount, feesOnTop, group} = this.props;
+    if (!feesOnTop) {
+      return amount;
+    }
     const hostFee = group.hostFeePercent ? (group.hostFeePercent / 100) : 0;
     return (amount + CC_FIXED_FEE) / (1 - (this.getPlatformFeeMultiplier() + (feesOnTop ? hostFee : 0) + CC_RELATIVE_FEE))
   }
@@ -356,7 +359,7 @@ export default class DonationDistributor extends Component {
     const hostFee = group.hostFeePercent ? (group.hostFeePercent / 100) : 0;
     return hostFee * this.getChargeAmount();
   }
-  
+
   getCreditCardFee() {
     return CC_FIXED_FEE + (this.getChargeAmount() * CC_RELATIVE_FEE);
   }
@@ -426,9 +429,9 @@ export default class DonationDistributor extends Component {
   }
 
   resetOptions() {
-    const {optionalComission} = this.props;
+    const {optionalCommission} = this.props;
     this.resetDistribution();
-    this.setState({commissionPercentage: optionalComission ? 50 : 100});
+    this.setState({commissionPercentage: optionalCommission ? 50 : 100});
   }
 
   resetDistribution() {

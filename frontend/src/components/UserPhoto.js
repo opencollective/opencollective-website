@@ -34,7 +34,7 @@ export default class UserPhoto extends React.Component {
   }
 
   render() {
-    const { className, user, addBadge, onMouseEnter, onMouseLeave } = this.props;
+    const { className, user, addBadge, onMouseEnter, onMouseLeave, customBadgeSize, customBadge } = this.props;
     const avatar = (!this.state.avatar || this.state.avatar.indexOf('/static/') === 0) ? this.state.avatar : cloudinaryUrl(this.state.avatar);
     const styles = {
       backgroundImage: `url(${avatar})`

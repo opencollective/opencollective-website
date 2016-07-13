@@ -60,7 +60,7 @@
     "name": "Name",
     "note": "Note",
     "nowOnBackersWall": "You are now in our backers wall!",
-    "ocComission": "OpenCollective Comission",
+    "ocCommission": "OpenCollective Fee",
     "one-time": "One time",
     "openCollective": "open collective",
     "optional": "optional",
@@ -112,7 +112,7 @@
     "becomeMemberText": "Avec votre contribution, vous nous aidez à couvrir nos dépenses. Tous les fonds sont gérés de manière responsable et en toute transparence. Tout le monde peut voir comment on dépense l'argent récolté.",
     "becomeMemberTitle": "Pourquoi devenir un supporter?",
     "bePart": "Faites en partie!",
-    "cancel": "Annuler",    
+    "cancel": "Annuler",
     "cancelAnytime": "Vous pouvez annuler à n'importe quel moment.",
     "category": "Catégorie",
     "comission": "Comission",
@@ -319,12 +319,12 @@
     "membersWallTitle": "This is possible thanks to you.",
     "menuMembersWall": "Supporters"
   },
-  
+
   "opensource":{
     "menuMembersWall": "Supporters",
     "becomeMemberTitle": "Why support this collective?",
     "joinAndFulfil": "Support this collective and help bring sustainable funding to Open Source"
-  }, 
+  },
   "hoodie":{
     "helpUsContinueOurActivities":"With your support, you’ll help us cover Hoodie’s expenses towards our goal of becoming a fully independent, self-sustained Open Source community! Our expenses are low (stickers, hosting, some travel), but to sustain Hoodie in the long term, we need dedicated people to serve the community. Our milestones are: Part-time community manager position ($10,000+ per year), Part-time fundraising position ($20,000+ per year) and Full-time community manager position ($60,000+ per year)",
     "membersWallText":"Your support allows us to keep going towards our mission. Thank you so much."
