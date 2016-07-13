@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Numbro from 'numbro';
 import 'numbro/dist/languages'
 
+import filterCollection from '../lib/filter_collection';
 import formatCurrency from '../lib/format_currency';
 
 import OnBoardingHeader from '../components/on_boarding/OnBoardingHeader';
@@ -10,6 +11,12 @@ import PublicFooter from '../components/PublicFooter';
 import CollectiveCard from '../components/CollectiveCard';
 
 import fetchHome from '../actions/homepage/fetch';
+
+const mapCollectiveCardProps = group => {
+  group.sponsorCount = filterCollection(group.backers, {tier: 'sponsor'}).length;
+  group.backersCount = filterCollection(group.backers, {tier: 'backer'}).length;
+  group.monthlyIncome = (group.yearlyIncome / 12);
+};
 
 export class HomePage extends Component {
 
@@ -30,6 +37,9 @@ export class HomePage extends Component {
     const totalCollectives = homepage.stats ? homepage.stats.totalCollectives : 0;
     const totalDonations = homepage.stats ? homepage.stats.totalDonations : 0;
     const totalDonors = homepage.stats ? homepage.stats.totalDonors : 0;
+
+    opensource.map(mapCollectiveCardProps);
+    meetup.map(mapCollectiveCardProps);
 
     return (
       <div className='HomePage'>
