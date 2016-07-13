@@ -91,7 +91,7 @@ ImageUpload.propTypes = {
   onFinished: PropTypes.func.isRequired,
   uploadImage: PropTypes.func.isRequired,
   isUploading: PropTypes.bool.isRequired,
-  i18n: PropTypes.string.isRequired,
+  i18n: PropTypes.func.isRequired,
   value: PropTypes.string,
 };
 
