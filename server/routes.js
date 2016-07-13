@@ -71,6 +71,7 @@ module.exports = (app) => {
    * When we refactor PublicGroup to fetch the group in the container, we can remove
    * the explicit routes and just do `app.use(render)`
    */
+  app.get('/', mw.ga, mw.addTitle('OpenCollective - Collect and disburse money transparently'), render);
   app.get('/leaderboard', mw.ga, mw.fetchLeaderboard, mw.addTitle('Open Collective Leaderboard'), render);
   app.get('/opensource/apply/:token', mw.ga, mw.extractGithubUsernameFromToken, mw.addTitle('Sign up your Github repository'), render);
   app.get('/opensource/apply', mw.ga, mw.addTitle('Sign up your Github repository'), render);

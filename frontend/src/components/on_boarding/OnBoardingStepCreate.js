@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 import OnBoardingStepHeading from './OnBoardingStepHeading';
 import ImagePicker from '../ImagePicker';
@@ -18,7 +18,7 @@ export default class OnBoardingStepCreate extends React.Component {
 
   render() {
     const buttonContainerStyle = {margin: '0 auto', marginTop: '40px', width: '300px', textAlign: 'center'};
-    const { uploadImage, appendGithubForm, githubForm } = this.props;
+    const { uploadImage, appendGithubForm, githubForm, i18n } = this.props;
     const { agreedTOS } = this.state;
 
     const mission = githubForm.attributes.mission;
@@ -39,6 +39,7 @@ export default class OnBoardingStepCreate extends React.Component {
                   handleChange={logo => appendGithubForm({logo})}
                   label="Select collective image"
                   uploadImage={uploadImage}
+                  i18n={i18n}
                   presets={['/static/images/repo.svg', '/static/images/code.svg', '/static/images/rocket.svg']}
                 />
               </div>
@@ -74,3 +75,7 @@ export default class OnBoardingStepCreate extends React.Component {
     }
   }
 }
+
+OnBoardingStepCreate.propTypes = {
+  i18n: PropTypes.func.isRequired
+};

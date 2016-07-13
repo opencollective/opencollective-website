@@ -1,6 +1,10 @@
 import React from 'react';
 import getAvatarByNumber from '../lib/avatar_by_number';
 
+const cloudinaryUrl = (url) => {
+  return `https://res.cloudinary.com/opencollective/image/fetch/h_128/${encodeURIComponent(url)}`;
+};
+
 export default class UserPhoto extends React.Component {
   static propTypes = {
     user: React.PropTypes.object,
@@ -30,8 +34,8 @@ export default class UserPhoto extends React.Component {
   }
 
   render() {
-    const { className, user, addBadge, onMouseEnter, onMouseLeave, customBadge, customBadgeSize } = this.props;
-const avatar = `https://res.cloudinary.com/opencollective/image/fetch/h_128/${encodeURIComponent(this.state.avatar)}`;
+    const { className, user, addBadge, onMouseEnter, onMouseLeave } = this.props;
+    const avatar = (!this.state.avatar || this.state.avatar.indexOf('/static/') === 0) ? this.state.avatar : cloudinaryUrl(this.state.avatar);
     const styles = {
       backgroundImage: `url(${avatar})`
     };

@@ -131,7 +131,7 @@ class ExpenseForm extends Component {
             <label>{i18n.getString('reimbursementMethod')}:</label>
             <Select
               customClass='js-transaction-payoutMethod'
-              options={payoutMethods}
+              options={payoutMethods(group.settings.lang)}
               value={attributes.payoutMethod}
               handleChange={payoutMethod => appendExpenseForm({payoutMethod})} />
           </div>
@@ -150,14 +150,14 @@ class ExpenseForm extends Component {
             <label>{i18n.getString('note')}:</label>
             <TextArea
               customClass='js-transaction-note'
-              placeholder='Optional'
+              placeholder={i18n.getString('optional')}
               value={attributes.notes}
               handleChange={notes => appendExpenseForm({notes})} />
           </div>
 
           <div className="buttonsRow">
-            <SubmitButton />
-            <Button color="red" label="Cancel" onClick={this.onCancel.bind(this)} />
+            <SubmitButton label={i18n.getString('submit')} />
+            <Button color="red" label={i18n.getString('cancel')} onClick={this.onCancel.bind(this)} />
           </div>
 
         </form>

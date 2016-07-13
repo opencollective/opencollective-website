@@ -23,7 +23,7 @@ class ImageUpload extends Component {
     );
   }
 
-  content({value, file, isUploading, uploading, template}) {
+  content({value, file, isUploading, uploading, template, i18n}) {
 
     const defaultTemplate = isFunction(template) ? template : () => (
         <div className={className}>
@@ -36,7 +36,7 @@ class ImageUpload extends Component {
 
     let className='placeholder';
     let imgsrc = '/static/images/uploading.png';
-    let label = 'Upload receipt (photo or PDF)';
+    let label = i18n.getString('uploadReceipt');
 
     if (value) {
       if(value.match(/\.pdf$/)) {
@@ -91,6 +91,7 @@ ImageUpload.propTypes = {
   onFinished: PropTypes.func.isRequired,
   uploadImage: PropTypes.func.isRequired,
   isUploading: PropTypes.bool.isRequired,
+  i18n: PropTypes.func.isRequired,
   value: PropTypes.string,
 };
 
