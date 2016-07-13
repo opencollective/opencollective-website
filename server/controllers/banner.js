@@ -122,7 +122,9 @@ module.exports = {
     const color = req.query.color || 'brightgreen';
     const style = req.query.style;
 
-    const users = filterUsersByTier(req.users, tier.replace(/s$/,''));
+    const validator = (user) => (user.tier && user.tier.match(new RegExp(tier.replace(/s$/,''), 'i')));
+    const users = _.uniq(filterCollection(req.users, validator), 'id');
+
     const count = users.length;
     const filename = `${tier}-${count}-${color}.svg`;
     const imageUrl = `https://img.shields.io/badge/${filename}?style=${style}`;

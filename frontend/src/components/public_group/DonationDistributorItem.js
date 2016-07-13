@@ -5,18 +5,21 @@ import Slider from '../Slider';
 export default class DonationDistributorItem extends Component {
 
   static propTypes = {
-    onChange: PropTypes.func,
-    value: PropTypes.number,
     amount: PropTypes.number,
     currency: PropTypes.string,
-    editableAmount: PropTypes.bool
+    editable: PropTypes.bool,
+    editableAmount: PropTypes.bool,
+    onChange: PropTypes.func,
+    value: PropTypes.number,
   }
 
   static defaultProps = {
     amount: 0,
-    value: 100,
     currency: 'USD',
-    editableAmount: false
+    editable: false,
+    editableAmount: false,
+    onChange: Function.prototype,
+    value: 100,
   }
 
   constructor(props) {
@@ -53,7 +56,7 @@ export default class DonationDistributorItem extends Component {
             {!editableAmount && (<span>{formattedItemAmount}</span>)}
             {editableAmount && !editingAmount &&  
               (<input
-                value={formatCurrency(itemAmount, currency, {compact: true})}
+                value={formattedItemAmount}
                 className='DonationDistributorItem--input'
                 onFocus={() => {
                   this.setState({editingAmount: true}, () => {

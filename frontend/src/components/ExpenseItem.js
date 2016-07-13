@@ -1,9 +1,8 @@
 import React, {PropTypes} from 'react';
-import moment from 'moment';
 import EXPENSE_ICONS from '../constants/expense_icons';
 import Currency from './Currency';
 
-const ExpenseItem = ({ className = '', expense, user }) => {
+const ExpenseItem = ({ className = '', expense, user, i18n }) => {
   const categoryName = getCategoryName(expense.category);
 
   return (
@@ -14,16 +13,16 @@ const ExpenseItem = ({ className = '', expense, user }) => {
             <use xlinkHref={`#svg-${categoryName}`}/>
           </svg>
         </div>
-        <div className='h6 white -fw-bold'>{expense.incurredAt && moment(expense.incurredAt).fromNow()}</div>
+        <div className='h6 white -fw-bold'>{expense.incurredAt && i18n.moment(expense.incurredAt).fromNow()}</div>
       </div>
       <div className='p2 flex-auto bg-white'>
         <p className='h5 mt0 mb1'>{expense.category || expense.title}</p>
-        <p className='h6 m0 muted'>Submitted by {user && user.name}</p>
+        <p className='h6 m0 muted'>{i18n.getString('submittedBy')} {user && user.name}</p>
         <div className='mt2'>
           <span className='h3 -ff-sec -fw-bold'>
             <Currency value={expense.amount/100} currency={expense.currency} colorify={false} />
           </span>
-          <span className='ExpenseStatus border align-middle ml1 muted -fw-bold -ttu'>{formatStatus(expense.status)}</span>
+          <span className='ExpenseStatus border align-middle ml1 muted -fw-bold -ttu'>{i18n.getString(expense.status.toLowerCase())}</span>
         </div>
       </div>
     </div>
@@ -44,10 +43,6 @@ ExpenseItem.defaultProps = {
 };
 
 export default ExpenseItem;
-
-function formatStatus(status) {
-  return status.charAt(0).toUpperCase() + status.slice(1).toLowerCase();
-}
 
 function getCategoryName(category) {
   let categoryName = category ? category.toLowerCase().replace(/\W/g, '-') : '';

@@ -35,7 +35,7 @@ export default class PublicGroupExpenses extends React.Component {
         </div>
         {(expenses.length === 0) && emptyState}
         <div className='PublicGroup-transactions-list'>
-          {expenses.map(expense => <ExpenseItem key={`pge_${expense.id}`} expense={expense} user={users[expense.UserId]} className='mb2' />)}
+          {expenses.map(expense => <ExpenseItem key={`pge_${expense.id}`} expense={expense} user={users[expense.UserId]} className='mb2' i18n={i18n} />)}
         </div>
         {expenses.length >= itemsToShow && (
           <div className='center pt2'>

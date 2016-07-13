@@ -1,0 +1,95 @@
+.CollectiveCard {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-block;
+  width: 350px;
+  height: 510px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px 0 rgba(45, 77, 97, 0.2);
+  margin: 20px;
+  overflow: hidden;
+  .CollectiveCard-head {
+    width: 100%;
+    height: 220px;
+    border-bottom: 5px solid #46b0ed;
+    .CollectiveCard-background {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      .CollectiveCard-image {
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 65%;
+        height: 55%;
+        margin: auto;
+      }
+    }
+  }
+  .CollectiveCard-body {
+    .CollectiveCard-name, .CollectiveCard-description {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .CollectiveCard-name {
+      width: 310px;
+      min-height: 29px;
+      font-family: Montserrat;
+      font-size: 24px;
+      font-weight: 300;
+      text-align: center;
+      color: #303233;
+      margin: 25px 20px;
+      white-space: nowrap;
+    }
+    .CollectiveCard-description {
+      width: 310px;
+      height: 92px;
+      font-family: Lato;
+      font-size: 16px;
+      font-weight: normal;
+      line-height: 1.44;
+      text-align: center;
+      color: #787d80;
+      margin: 0 20px;
+    }
+  }
+  .CollectiveCard-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 77px;
+    border-top: 1px solid #f2f2f2;
+    .CollectiveCard-metric {
+      text-align: center;
+      .CollectiveCard-metric-value,
+      .CollectiveCard-metric-label {
+        text-align: center;
+        margin: auto;
+      }
+      .CollectiveCard-metric-value {
+        font-family: Lato;
+        font-size: 18px;
+        font-weight: normal;
+        text-align: center;
+        color: #303233;
+      }
+      .CollectiveCard-metric-label {
+        font-family: Lato;
+        font-size: 9px;
+        font-weight: bold;
+        text-align: center;
+        color: #a8afb3;
+        text-transform: uppercase;
+      }
+    }
+  }
+}
