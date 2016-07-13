@@ -78,7 +78,8 @@ module.exports = (app) => {
   /* Leaving github/apply routes for existing links */
   app.get('/github/apply/:token', mw.ga, mw.extractGithubUsernameFromToken, mw.addTitle('Sign up your Github repository'), render);
   app.get('/github/apply', mw.ga, mw.addTitle('Sign up your Github repository'), render);
-  app.get('/connect/:service(github)', mw.ga, render);
+  app.get('/connect/github', mw.ga, render);
+  app.get('/:slug/connect/twitter', mw.ga, render);
   app.get('/subscriptions/:token', mw.ga, mw.fetchSubscriptionsByUserWithToken, mw.addTitle('My Subscriptions'), render);
   app.get('/subscriptions', mw.ga, mw.fetchSubscriptionsByUserWithToken, mw.addTitle('My Subscriptions'), render);
   app.get('/:slug([A-Za-z0-9-]+)/:type(expenses|donations)', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);

@@ -7,6 +7,7 @@ import Transactions from './containers/Transactions';
 import DonatePage from './containers/DonatePage';
 import Leaderboard from './containers/Leaderboard';
 import OnBoarding from './containers/OnBoarding';
+import ConnectTwitterButton from './containers/ConnectTwitterButton';
 import HomePage from './containers/HomePage';
 
 export default (
@@ -20,6 +21,7 @@ export default (
     {/* Leaving github/apply routes for existing links */}
     <Route path="/github/apply/:token" component={OnBoarding} />
     <Route path="/github/apply" component={OnBoarding} />
+    <Route path="/:slug/connect/twitter" component={ConnectTwitterButton} />
     <Route path="/:slug" component={PublicGroup} />
     <Route path="/:slug/expenses/new" component={Transactions} />
     <Route path="/:slug/:type(donations|expenses)" component={Transactions} />
