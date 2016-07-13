@@ -8,6 +8,7 @@ import OnBoardingHeader from '../components/on_boarding/OnBoardingHeader';
 import UserPhoto from '../components/UserPhoto';
 import PublicFooter from '../components/PublicFooter';
 import CollectiveCard from '../components/CollectiveCard';
+import Markdown from '../components/Markdown';
 
 export class ProfilePage extends Component {
   constructor(props) {
@@ -33,9 +34,14 @@ export class ProfilePage extends Component {
   		<div className='ProfilePage'>
         <OnBoardingHeader />
         <UserPhoto user={{ avatar: profile.avatar }} addBadge={true} className={`mx-auto ${profile.isOrganization ? 'organization' : ''}`} />
-        <div className="line1">Hello I'm</div>
+        {!profile.isOrganization &&
+          <div className="line1">Hello I'm</div>
+        }
         <div className="line2">{profile.name}</div>
         <div className="line3">{profile.description}</div>
+        {profile.longDescription && (
+              <Markdown className='line3' value={profile.longDescription} />
+        )}
         {belongsTo.length ? (
             <section>
               <div className="lineA">{i18n.getString('proudMember')}</div>
@@ -56,7 +62,7 @@ export class ProfilePage extends Component {
         }
         {backing.length ? (
             <section style={{paddingBottom: '0'}}>
-              <div className="lineA">{i18n.getString('proudSupporter')}</div>
+              <div className="lineA">{profile.isOrganization ? i18n.getString('WeAreProudSupporters') : i18n.getString('IamAProudSupporter')}</div>
               {backing.map((group, index) => <CollectiveCard 
                 key={index}
                 id={group.id}
