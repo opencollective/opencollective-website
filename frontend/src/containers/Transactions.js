@@ -135,8 +135,10 @@ function mapStateToProps({
   router
 }) {
   const type = (router.params.type) ? router.params.type.slice(0,-1) : "expense"; // remove trailing s for the API call
-  const group = values(groups)[0] || { settings: {} }; // to refactor to allow only one group
+  const group = values(groups)[0] || {}; // to refactor to allow only one group
   const list = (type === 'donation') ? transactions.isDonation : transactions.isExpense;
+
+  group.settings = group.settings || { lang: 'en' };
 
   return {
     session,
@@ -144,7 +146,7 @@ function mapStateToProps({
     transactions: sortBy(list, txn => txn.incurredAt || txn.createdAt).reverse(),
     router,
     users,
-    i18n: i18n(group.settings.lang || 'en'),
+    i18n: i18n(group.settings.lang),
     type
   };
 }
