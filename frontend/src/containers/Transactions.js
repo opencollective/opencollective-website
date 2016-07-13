@@ -135,7 +135,7 @@ function mapStateToProps({
   router
 }) {
   const type = (router.params.type) ? router.params.type.slice(0,-1) : "expense"; // remove trailing s for the API call
-  const group = values(groups)[0] || {}; // to refactor to allow only one group
+  const group = values(groups)[0] || { settings: {} }; // to refactor to allow only one group
   const list = (type === 'donation') ? transactions.isDonation : transactions.isExpense;
 
   return {
