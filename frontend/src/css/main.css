@@ -41,6 +41,7 @@
  */
 
 @import './components/ActivityItem.css';
+@import './components/BackerCard.css';
 @import './components/Button.css';
 @import './components/Checkbox.css';
 @import './components/CollectiveCard.css';
@@ -80,7 +81,6 @@
 @import './components/UserPhoto.css';
 @import './components/Widget.css';
 @import './components/YoutubeVideo.css';
-@import './components/CollectiveCard.css';
 
 /**
  * Media queries
