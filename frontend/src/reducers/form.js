@@ -143,10 +143,29 @@ function github(state=githubInitialState, action={}) {
   }
 }
 
+/**
+ * Twitter templates form
+ */
+const twitterTemplatesInitialState = {
+  attributes: {},
+  error: {}
+};
+
+function twitterTemplates(state=twitterTemplatesInitialState, action={}) {
+  switch (action.type) {
+    case constants.APPEND_TWITTER_TEMPLATES_FORM:
+      return merge({}, state, { attributes: action.attributes });
+
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   profile,
   donation,
   expense,
   schema,
-  github
+  github,
+  twitterTemplates
 });

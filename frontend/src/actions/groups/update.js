@@ -1,0 +1,45 @@
+import { putJSON } from '../../lib/api';
+import * as constants from '../../constants/groups';
+
+/**
+ * Update a group
+ */
+
+export default (groupid, group) => {
+  console.log("groups.js update", groupid, group);
+  const url = `/groups/${groupid}/`;
+
+  return dispatch => {
+    console.log("groups.js update dispatch", groupid, group);
+    dispatch(request(groupid, group));
+    return putJSON(url, {group})
+      .then(json => dispatch(success(groupid, json)))
+      .catch(error => {
+        dispatch(failure(error));
+        throw new Error(error.message);
+      });
+  };
+};
+
+function request(groupid, group) {
+  return {
+    type: constants.UPDATE_GROUP_REQUEST,
+    groupid,
+    group
+  };
+}
+
+function success(groupid, group) {
+  return {
+    type: constants.UPDATE_GROUP_SUCCESS,
+    groupid,
+    group
+  };
+}
+
+function failure(error) {
+  return {
+    type: constants.UPDATE_GROUP_FAILURE,
+    error
+  };
+}
