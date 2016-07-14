@@ -1,0 +1,14 @@
+var html = `
+  <center>
+    <h1>This is possible thanks to you<h1>
+    <h2>This project is possible thanks to our backers and sponsors</h2>
+    <object type="image/svg+xml" data="https://opencollective.com/{{slug}}/sponsors.svg"></object><br />
+    <object type="image/svg+xml" data="https://opencollective.com/{{slug}}/backers.svg"></object>
+  </center>
+`;
+
+var e = document.createElement('div');
+e.id = 'opencollective-banner';
+e.innerHTML = html;
+
+document.body.appendChild(e);

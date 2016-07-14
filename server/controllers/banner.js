@@ -45,6 +45,15 @@ module.exports = {
     })
   },
 
+  js: (req, res) => {
+    const slug = req.params.slug;
+    res.type('application/javascript');
+    res.render('bannerjs', {
+      layout: false,
+      slug
+    })
+  },
+
   avatar: (req, res) => {
     const tier = req.params.tier || '';
     const tierSingular = tier.replace(/s$/,'');
