@@ -6,11 +6,9 @@ import * as constants from '../../constants/groups';
  */
 
 export default (groupid, group) => {
-  console.log("groups.js update", groupid, group);
   const url = `/groups/${groupid}/`;
 
   return dispatch => {
-    console.log("groups.js update dispatch", groupid, group);
     dispatch(request(groupid, group));
     return putJSON(url, {group})
       .then(json => dispatch(success(groupid, json)))

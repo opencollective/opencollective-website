@@ -1,0 +1,15 @@
+.EditTwitter {
+
+  border-radius: 5px;
+  border: dashed 2px #e1e9ed;
+  box-sizing: border-box;
+  margin: 10px;
+  vertical-align: middle;
+
+  .EditTwitter-title {
+    font-family: Montserrat, sans-serif;
+    font-size: 15px;
+    color: #bbc1c4;
+    margin-top: 16px;
+  }
+}

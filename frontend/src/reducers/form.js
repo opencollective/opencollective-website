@@ -144,16 +144,16 @@ function github(state=githubInitialState, action={}) {
 }
 
 /**
- * Twitter templates form
+ * Twitter config form
  */
-const twitterTemplatesInitialState = {
+const twitterInitialState = {
   attributes: {},
   error: {}
 };
 
-function twitterTemplates(state=twitterTemplatesInitialState, action={}) {
+function twitter(state=twitterInitialState, action={}) {
   switch (action.type) {
-    case constants.APPEND_TWITTER_TEMPLATES_FORM:
+    case constants.APPEND_TWITTER_CONFIG_FORM:
       return merge({}, state, { attributes: action.attributes });
 
     default:
@@ -167,5 +167,5 @@ export default combineReducers({
   expense,
   schema,
   github,
-  twitterTemplates
+  twitter
 });
