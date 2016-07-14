@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 import { pushState } from 'redux-router';
 
 import PublicTopBar from '../containers/PublicTopBar';
@@ -80,7 +79,7 @@ export default connect(mapStateToProps, {
   decodeJWT
 })(Login);
 
-function mapStateToProps({notification, router, form}) {
+export function mapStateToProps({notification, router, form}) {
   return {
     notification,
     error: form.schema.error,

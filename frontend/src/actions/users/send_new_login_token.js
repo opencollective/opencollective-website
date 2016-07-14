@@ -7,9 +7,9 @@ import * as constants from '../../constants/users';
 
 export default (email, redirect) => {
   return dispatch => {
-    dispatch(request(email));
+    dispatch(request(email, redirect));
 
-    return postJSON('/login/new_token', { email, redirect }, {})
+    return postJSON('/users/new_login_token', { email, redirect }, {})
     .then(() => dispatch(success(email, redirect)))
     .catch(err => {
       dispatch(failure(err, email, redirect));
