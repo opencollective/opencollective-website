@@ -34,14 +34,17 @@
 @import './containers/Subscriptions.css';
 @import './containers/OnBoarding.css';
 @import './containers/ProfilePage.css';
+@import './containers/HomePage.css';
 
 /**
  * Components
  */
 
 @import './components/ActivityItem.css';
+@import './components/BackerCard.css';
 @import './components/Button.css';
 @import './components/Checkbox.css';
+@import './components/CollectiveCard.css';
 @import './components/ContributorList.css';
 @import './components/ContributorPicker.css';
 @import './components/Currency.css';
@@ -59,6 +62,7 @@
 @import './components/Input.css';
 @import './components/Label.css';
 @import './components/LoginEmailForm.css';
+@import './components/LoginTopBar.css';
 @import './components/Metric.css';
 @import './components/Notification.css';
 @import './components/ProfilePhoto.css';
@@ -78,7 +82,6 @@
 @import './components/UserPhoto.css';
 @import './components/Widget.css';
 @import './components/YoutubeVideo.css';
-
 
 /**
  * Media queries

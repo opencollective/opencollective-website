@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import Notification from '../containers/Notification';
 
+import i18n from '../lib/i18n';
+
 import OnBoardingHeader from '../components/on_boarding/OnBoardingHeader';
 import OnBoardingHero from '../components/on_boarding/OnBoardingHero';
 import OnBoardingStepPickRepository from '../components/on_boarding/OnBoardingStepPickRepository';
@@ -105,7 +107,9 @@ export class OnBoarding extends Component {
         logo: attr.logo || '',
         website: `https://github.com/${attr.username}/${attr.repository}`,
         data: {
-          utmSource,
+          utmSource
+        },
+        settings: {
           githubRepo: `${attr.username}/${attr.repository}`
         },
         tags: ['open source'],
@@ -196,6 +200,7 @@ function mapStateToProps({router, github, form}) {
     repositories: github.repositories || [],
     contributors: github.contributors || [],
     githubForm: form.github,
+    i18n: i18n('en'),
     utmSource
   };
 }

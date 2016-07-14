@@ -4,6 +4,7 @@
   border: 3px solid white;
   box-shadow: 0 0 0 2px #75CC1F;
   background-image: url('/static/images/loading.gif');
+  background-size: 12px;
   border-radius: 50%;
   background-color: #e9eaea;
 }
@@ -20,6 +21,9 @@
 .UserPhoto.organization, 
 .UserPhoto.organization div:first-child {
   border-radius: 0p;
+  border: 0;
+  box-shadow: none;
+  width: 180px;
 }
 
 .UserCard .UserPhoto.sponsor, .UserCard .UserPhoto.sponsor div:first-child {

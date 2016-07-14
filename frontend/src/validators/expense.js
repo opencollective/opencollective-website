@@ -28,7 +28,7 @@ const schema = Joi.object().keys({
     .label('IncurredAt'),
   category: Joi.string().required()
     .label('Category'),
-  payoutMethod: Joi.string().valid(pluck(payoutMethods, 'value'))
+  payoutMethod: Joi.string().valid(pluck(payoutMethods('en'), 'value'))
     .label('Reimbursement method'),
   paypalEmail: Joi.string().email()
     .label('PayPal email')

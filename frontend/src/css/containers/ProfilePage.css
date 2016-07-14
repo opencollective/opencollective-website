@@ -14,11 +14,13 @@
 		width: 8rem;
 		height: 128px;
 		height: 8rem;
+		background-color: white;
 	}
 
 	.line1 {
 		text-align: center;
-		margin-top: 20px;	
+		margin-top: 20px;
+		color: #494b4d;
 	}
 
 	.line2 {

@@ -79,7 +79,7 @@ export class Subscriptions extends Component {
                     <div className='Subscription-transactions'>
                       <InlineToggle showString='Show transactions' hideString='Hide transactions'>
                         {subscription.Transactions.map(transaction => {
-                          return <TransactionItem key={transaction.id} transaction={transaction}/>;
+                          return <TransactionItem key={transaction.id} transaction={transaction} i18n={i18n} />;
                         })}
                       </InlineToggle>
                     </div>

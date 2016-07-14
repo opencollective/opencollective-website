@@ -3,12 +3,14 @@ import React from 'react';
 import TestUtils from 'react-addons-test-utils';
 import OnBoardingStepCreate from '../../../frontend/src/components/on_boarding/OnBoardingStepCreate';
 
+const i18n = require('../../../frontend/src/lib/i18n')('en');
+
 describe('OnBoardingStepCreate component', () => {
   it('Create button should disable for 5 seconds after being clicked', function(done) {
     this.timeout(6000)
     var callCount = 0
     const element = TestUtils.renderIntoDocument(
-      <OnBoardingStepCreate onCreate={() => callCount++} githubForm={{attributes: {}}} uploadImage={Function.prototype}/>
+      <OnBoardingStepCreate onCreate={() => callCount++} githubForm={{attributes: {}}} uploadImage={Function.prototype} i18n={i18n} />
     );
     expect(element.state.disableCreateButton).to.be.false;
     element.onCreate();

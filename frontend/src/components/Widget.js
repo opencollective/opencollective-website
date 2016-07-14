@@ -37,6 +37,7 @@ export default ({
         <TransactionItem
           key={t.id}
           transaction={t}
+          i18n={i18n}
           user={users.find(({id}) => id === t.UserId)} />
       ))}
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import ImageUpload from './ImageUpload';
 import _ from 'lodash';
 
@@ -249,3 +249,7 @@ export default class ImagePicker extends Component {
     })
   }
 }
+
+ImagePicker.propTypes = {
+  i18n: PropTypes.func.isRequired
+};
