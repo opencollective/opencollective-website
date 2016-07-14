@@ -2,14 +2,14 @@ import { post } from '../../lib/api';
 import * as constants from '../../constants/users';
 
 /**
- * Send email with the new subscription token
+ * Send email with the new login token
  */
 
 export default (token) => {
   return dispatch => {
     dispatch(request(token));
 
-    return post('/subscriptions/refresh_token', {}, {
+    return post('/users/refresh_login_token', {}, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -24,21 +24,21 @@ export default (token) => {
 
 function request(token) {
   return {
-    type: constants.REFRESH_SUBSCRIPTIONS_TOKEN_REQUEST,
+    type: constants.REFRESH_LOGIN_TOKEN_REQUEST,
     token
   };
 }
 
 function success(token) {
   return {
-    type: constants.REFRESH_SUBSCRIPTIONS_TOKEN_SUCCESS,
+    type: constants.REFRESH_LOGIN_TOKEN_SUCCESS,
     token
   };
 }
 
 function failure(error, token) {
   return {
-    type: constants.REFRESH_SUBSCRIPTIONS_TOKEN_FAILURE,
+    type: constants.REFRESH_LOGIN_TOKEN_FAILURE,
     error,
     token
   };

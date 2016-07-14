@@ -8,58 +8,35 @@ import PublicFooter from '../components/PublicFooter';
 import Currency from '../components/Currency';
 import TransactionItem from '../components/TransactionItem';
 import Notification from '../containers/Notification';
-import SubscriptionEmailForm from '../components/SubscriptionEmailForm';
 import InlineToggle from '../components/InlineToggle';
 import ProfilePhoto from '../components/ProfilePhoto';
 
-import validate from '../actions/form/validate_schema';
-import decodeJWT from '../actions/session/decode_jwt';
 import cancelSubscription from '../actions/subscriptions/cancel';
-import refreshSubscriptionsToken from '../actions/users/refresh_subscriptions_token';
-import sendNewSubscriptionsToken from '../actions/users/send_new_subscriptions_token';
 import notify from '../actions/notification/notify';
 import getSubscriptions from '../actions/subscriptions/get';
-import storeToken from '../actions/session/store_token';
 
 import i18n from '../lib/i18n';
-
-// To put as standalone component when the design is final
-const SubscriptionNewTokenForm = ({sendToken}) => {
-  return (
-    <div>
-      <h2>Your link has expired</h2>
-        <p>Click here to get an email with the new link</p>
-        <div
-          className='Button Button--green'
-          onClick={() => sendToken()}>
-          Send
-        </div>
-      </div>
-  );
-};
-
 
 export class Subscriptions extends Component {
   render() {
     const {
       subscriptions,
-      session,
-      jwtTokenValid,
       i18n,
       pushState
     } = this.props;
 
     return (
       <div className='Subscription'>
+        <div className='container center'>
+        <PublicTopBar className='pt2 pb2 absolute top-0 left-0 right-0' logoFill='#6388bf' showBackgroundImage={true} />
 
-        <PublicTopBar />
         <Notification />
         <div className='PublicContent'>
           <div className='Subscription-header'>
             <div className='Subscription-page-title'>
               <h3> Your Subscriptions </h3>
             </div>
-            {jwtTokenValid && subscriptions.length > 0 &&
+            {subscriptions.length > 0 &&
               <div className='Subscription-user'>
                  <ProfilePhoto
                     hasBorder={true}
@@ -71,8 +48,6 @@ export class Subscriptions extends Component {
               </div>
             }
           </div>
-          {session.jwtExpired && <SubscriptionNewTokenForm sendToken={refreshToken.bind(this)}/>}
-          {session.jwtInvalid && <SubscriptionEmailForm onClick={sendNewToken.bind(this)} {...this.props}/>}
           {subscriptions.map(subscription => {
               const divStyle = {
                 backgroundImage: `url(${subscription.Transactions[0].Group.logo})`,
@@ -112,94 +87,61 @@ export class Subscriptions extends Component {
                 </div>
               );
           })}
-          {jwtTokenValid && subscriptions.length > 0 &&
+          {subscriptions.length > 0 &&
             <div className='Subscription-text Subscription-bottom-text'>
-              <p> Visit our <a href='https://www.opencollective.com/leaderboard'>leaderboard</a> to find more collectives to support! </p>
+              <p> Visit our <a href='https://www.opencollective.com/leaderboard'>Leaderboard</a> to find more collectives to support! </p>
             </div>
           }
-          {jwtTokenValid && subscriptions.length === 0 &&
+          {subscriptions.length === 0 &&
             <div className='Subscription-text'>
             <p> Looks like you aren't contributing right now. Let's fix it!</p>
-            <p> Visit our <a href='https://www.opencollective.com/leaderboard'>leaderboard</a> to find more collectives to support. </p>
+            <p> Visit our <a href='https://www.opencollective.com/leaderboard'>Leaderboard</a> to find more collectives to support. </p>
             </div>
           }
         </div>
         <PublicFooter />
+        </div>
       </div>
     );
   }
 
   componentDidMount(){
-    this.props.storeToken(this.props.token);
+    const { getSubscriptions } = this.props;
+    getSubscriptions();
   }
 
 }
 
 export function cancel(id) {
   const {
-    token,
     cancelSubscription,
     notify,
     getSubscriptions
   } = this.props;
 
   if (window.confirm("Are you sure you want to cancel?")) {
-    return cancelSubscription(id, token)
+    return cancelSubscription(id)
       .then(() => notify('success', 'Canceled'))
-      .then(() => getSubscriptions(token))
+      .then(() => getSubscriptions())
       .catch(({message}) => notify('error', message));
     }
 }
 
-
-export function refreshToken() {
-  const {
-    token,
-    refreshSubscriptionsToken,
-    notify
-  } = this.props;
-
-  return refreshSubscriptionsToken(token)
-  .then(() => notify('success', 'Email sent'))
-  .catch(({message}) => notify('error', message));
-}
-
-export function sendNewToken(email) {
-  const {
-    sendNewSubscriptionsToken,
-    notify
-  } = this.props;
-
-  return sendNewSubscriptionsToken(email)
-  .then(() => notify('success', 'Email sent'))
-  .catch(({message}) => notify('error', message));
-}
-
 export default connect(mapStateToProps, {
-  decodeJWT,
-  refreshSubscriptionsToken,
-  sendNewSubscriptionsToken,
   notify,
   cancelSubscription,
-  validate,
   getSubscriptions,
-  storeToken,
   pushState
 })(Subscriptions);
 
 export function mapStateToProps({
   session,
-  router,
   subscriptions,
-  users
 }) {
 
   return {
     session,
     subscriptions: subscriptions.list,
-    token: router.params.token,
-    inProgress: users.sendingEmailInProgress,
-    jwtTokenValid: !session.jwtInvalid && !session.jwtExpired,
     i18n: i18n('en')
   };
 }

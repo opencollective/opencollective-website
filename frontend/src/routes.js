@@ -7,14 +7,18 @@ import Transactions from './containers/Transactions';
 import DonatePage from './containers/DonatePage';
 import Leaderboard from './containers/Leaderboard';
 import OnBoarding from './containers/OnBoarding';
+import Login from './containers/Login';
 import ConnectTwitterButton from './containers/ConnectTwitterButton';
 import HomePage from './containers/HomePage';
+
+import { requireAuthentication } from './components/AuthenticatedComponent';
 
 export default (
   <Route>
     <Route path="/" component={HomePage} />
-    <Route path="/subscriptions/:token" component={Subscriptions} />
-    <Route path="/subscriptions" component={Subscriptions} />
+    <Route path="/login/:token" component={Login} />
+    <Route path="/login" component={Login} />,
+    <Route path="/subscriptions" component={requireAuthentication(Subscriptions)} />
     <Route path="/leaderboard" component={Leaderboard} />
     <Route path="/opensource/apply/:token" component={OnBoarding} />
     <Route path="/opensource/apply" component={OnBoarding} />
