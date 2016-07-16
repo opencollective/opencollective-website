@@ -9,6 +9,7 @@
   box-shadow: 0 1px 3px 0 rgba(45, 77, 97, 0.2);
   margin: 20px;
   overflow: hidden;
+  text-decoration: none !important;
   .CollectiveCard-head {
     width: 100%;
     height: 220px;
@@ -89,6 +90,30 @@
         text-align: center;
         color: #a8afb3;
         text-transform: uppercase;
+      }
+    }
+  }
+}
+
+.CollectiveCard.sponsor {
+  height: 335px;
+  .CollectiveCard-head {
+    height: 160px;
+  }
+  .CollectiveCard-name {
+    display: none;
+  }
+  .CollectiveCard-description {
+    margin-top: 10px;
+  }
+  .CollectiveCard-background {
+    background:none !important;
+  }
+  .CollectiveCard-head {
+    .CollectiveCard-background {
+      .CollectiveCard-image {
+        width: 75%;
+        height: 65%;
       }
     }
   }

@@ -11,12 +11,13 @@
     &.blue-gradient {
       background-image: linear-gradient(to bottom, #ffffff, #f2faff);
     }
-    a {
+    a.seemore {
       font-family: Montserrat;
       font-size: 16px;
       font-weight: normal;
       text-align: center;
       color: #75cc1f;
+      margin: 20px;
       text-decoration: underline;
     }
     .color-blue {
@@ -44,11 +45,6 @@
       margin: 100px auto;
       text-align: center;
       max-width: 1200px;
-      a {
-        position: absolute;
-        right: 25px;
-        bottom: -10px;
-      }
     }
     .cta {
       position: absolute;
@@ -74,7 +70,7 @@
       }
       .button {
         display: inline-block;
-        width: 250px;
+        width: 325px;
         height: 40px;
         border-radius: 63px;
         background-color: #fff;
