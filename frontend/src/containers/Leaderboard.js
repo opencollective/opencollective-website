@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import PublicTopBar from '../containers/PublicTopBar';
+import LoginTopBar from '../containers/LoginTopBar';
 import PublicFooter from '../components/PublicFooter';
 
 import Currency from '../components/Currency';
@@ -11,7 +11,7 @@ export class Leaderboard extends Component {
     return (
       <div className='Leaderboard'>
 
-        <PublicTopBar />
+        <LoginTopBar />
 
         <div className='PublicContent'>
 
@@ -63,10 +63,10 @@ export class Leaderboard extends Component {
       </div>
     );
   }
-
 }
 
 export default connect(mapStateToProps, {
+
 })(Leaderboard);
 
 function mapStateToProps({
@@ -74,6 +74,6 @@ function mapStateToProps({
 }) {
 
   return {
-    leaderboard: groups.leaderboard || []
+    leaderboard: groups.leaderboard || [],
   };
 }

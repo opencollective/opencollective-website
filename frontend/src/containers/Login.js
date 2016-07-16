@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { pushState } from 'redux-router';
 
-import PublicTopBar from '../containers/PublicTopBar';
 import Notification from '../containers/Notification';
+import LoginTopBar from '../containers/LoginTopBar';
 
 import PublicFooter from '../components/PublicFooter';
 import LoginEmailForm from '../components/LoginEmailForm';
@@ -25,17 +25,14 @@ export class Login extends Component {
   render() {
     return (
       <div className='Login'>
-        <PublicTopBar />
         <Notification {...this.props} />
-        <div>
-          <div className='Login-logo'>
-            <img src='/static/images/logo.svg' />
-          </div>
+        <LoginTopBar />
+        <div className='Login-content'>
           <div className='Login-quote'>
-            Collect & disburse money<br />transparently
+            <h2> Login to Open Collective </h2>
           </div>
-        </div>
         <LoginEmailForm onClick={sendNewToken.bind(this)} {...this.props} />
+        </div>
         <PublicFooter/>
       </div>
     );
@@ -84,6 +81,6 @@ export function mapStateToProps({notification, router, form}) {
     notification,
     error: form.schema.error,
     redirectRoute: router.location.query.next || '/',
-    token: router.params.token
+    token: router.params.token,
   };
 }

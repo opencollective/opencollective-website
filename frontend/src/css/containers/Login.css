@@ -1,0 +1,33 @@
+.Login-content {
+  margin-left: 3rem;
+  max-width: 600px;
+}
+
+.Login-form {
+  max-width: var(--max-form-width);
+  margin: 1rem auto;
+}
+
+.Login-logo {
+  max-width: var(--max-form-width);
+  margin: 2rem auto 0 auto;
+}
+
+.Login-quote {
+  text-align: center;
+  padding: var(--spacing) 0;
+}
+
+.Login-quote h2 {
+  color: var(--dark-gray);
+  text-align: left;
+}
+
+.Login .Field{
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.Login-buttonContainter {
+  text-align: center;
+}

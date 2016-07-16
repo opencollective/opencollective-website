@@ -9,14 +9,19 @@ import routes from './routes';
 import reducers from './reducers';
 import reduxMiddleware from './redux_middleware';
 
+import decodeJWT from './actions/session/decode_jwt';
+
 const store = compose(
-  reduxReactRouter({ createHistory }),
+  reduxReactRouter({ createHistory, routes }),
   applyMiddleware(...reduxMiddleware)
 )(createStore)(reducers, window.__INITIAL_STATE__);
 
+// Decode token if stored in localStorage
+store.dispatch(decodeJWT());
+
 const rootComponent = (
   <Provider store={store}>
-    <ReduxRouter routes={routes} />
+    <ReduxRouter/>
   </Provider>
 );
 
