@@ -43,7 +43,7 @@ export default class LoginTopBar extends Component {
   }
 
   render() {
-    const { user, isAuthenticated } = this.props;
+    const { user, isAuthenticated, redirectRoute } = this.props;
     const { showProfileMenu } = this.state;
     const avatar = isAuthenticated && user && user.avatar ? user.avatar : '/static/images/default_avatar.svg';
     const name = isAuthenticated && user && user.name ? user.name : null;
@@ -67,7 +67,7 @@ export default class LoginTopBar extends Component {
               {showProfileMenu && this.renderProfileMenu()}
             </div>
           }
-          {!isAuthenticated && <a className='LoginTopBarLink' href='/login'>Login</a>}
+          {!isAuthenticated && <a className='LoginTopBarLink' href={`\'/login?next=${redirectRoute}\'`}>Login</a>}
         </div>
       </div>
     )
