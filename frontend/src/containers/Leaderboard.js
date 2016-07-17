@@ -74,6 +74,6 @@ function mapStateToProps({
 }) {
 
   return {
-    leaderboard: groups.leaderboard || [],
+    leaderboard: groups.leaderboard || []
   };
 }
