@@ -200,6 +200,10 @@ export class PublicGroup extends Component {
     )
   }
 
+  isUserProfile(group) {
+    return (group.username);
+  }
+
   render() {
     const {
       group,
@@ -232,11 +236,11 @@ export class PublicGroup extends Component {
 
     return (
       <div>
-      { group.username &&
+      { this.isUserProfile(group) &&
         <ProfilePage profile={group} />
       }
 
-      { group.mission &&
+      { !this.isUserProfile(group) &&
       <div className={publicGroupClassName}>
         <Notification />
 

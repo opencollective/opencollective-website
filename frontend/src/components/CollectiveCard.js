@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 
 const DEFAULT_BG = '/static/images/collectives/default-header-bg.jpg';
 const DEFAULT_LOGOS = [
@@ -49,3 +49,11 @@ export default class CollectiveCard extends Component {
     );
   }
 }
+
+CollectiveCard.propTypes = {
+  stats: PropTypes.arrayOf(React.PropTypes.object).isRequired,
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string,
+  logo: PropTypes.string,
+  url: PropTypes.string
+};
