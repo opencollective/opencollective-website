@@ -15,7 +15,7 @@ const mapCollectiveCardProps = group => {
   group.mission = `We are on a mission to ${group.mission}`;
   group.stats = [];
 
-  if(group.contributors && Object.keys(group.contributors).length > 0)
+  if (group.contributors && Object.keys(group.contributors).length > 0)
     group.stats.push({ label: 'contributors', value: Object.keys(group.contributors).length });
   else
     group.stats.push({ label: 'members', value: group.members.length });
@@ -141,7 +141,7 @@ export class HomePage extends Component {
         </section>
         <section className='HomePageSponsors blue-gradient'>
           <div className='heading'>Sponsors</div>
-          <div className='subheading'>Collectives do amazing things for their communities thanks to those awesome sponsors.</div>
+          <div className='subheading'>Collectives do amazing things for their communities thanks to these awesome sponsors.</div>
           <div className='cards'>
             {sponsors.map(sponsor => <CollectiveCard 
               key={sponsor.id}
@@ -183,7 +183,6 @@ export class HomePage extends Component {
               </div>
             </div>
           </div>
-          {false && <a href='#'>Learn more about the collectives</a> }
         </section>
         <PublicFooter />
       </div>
