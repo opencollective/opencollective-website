@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import Numbro from 'numbro';
 import 'numbro/dist/languages'
 
-import filterCollection from '../lib/filter_collection';
 import formatCurrency from '../lib/format_currency';
 
 import OnBoardingHeader from '../components/on_boarding/OnBoardingHeader';
