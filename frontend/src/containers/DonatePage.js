@@ -197,14 +197,8 @@ function mapStateToProps({
   group.host = group.hosts[0] || {};
 
   group.backersCount = group.backers.length;
-
-  group.settings = group.settings || {
-    lang: 'en',
-    formatCurrency: {
-      compact: false,
-      precision: 2
-    }
-  };
+  group.settings = group.settings || { lang: 'en' };
+  group.settings.formatCurrency = group.settings.formatCurrency || { compact: false, precision: 2 };
 
   return {
     amount: router.params.amount,
