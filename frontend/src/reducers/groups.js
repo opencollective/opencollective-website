@@ -61,6 +61,10 @@ export default function groups(state={}, action={}) {
         leaderboard: action.json
       });
 
+    case constants.UPDATE_GROUP_SUCCESS:
+      window.location = `/${action.group.slug}`;
+      return state;
+
     default:
       return state;
   }

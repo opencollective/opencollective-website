@@ -143,10 +143,29 @@ function github(state=githubInitialState, action={}) {
   }
 }
 
+/**
+ * Twitter config form
+ */
+const twitterInitialState = {
+  attributes: {},
+  error: {}
+};
+
+function twitter(state=twitterInitialState, action={}) {
+  switch (action.type) {
+    case constants.APPEND_TWITTER_CONFIG_FORM:
+      return merge({}, state, { attributes: action.attributes });
+
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   profile,
   donation,
   expense,
   schema,
-  github
+  github,
+  twitter
 });
