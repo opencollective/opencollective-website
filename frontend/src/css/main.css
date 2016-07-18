@@ -27,14 +27,15 @@
  * Containers
  */
 
-@import './containers/Leaderboard.css';
-@import './containers/PublicGroup.css';
 @import './containers/DonatePage.css';
-@import './containers/SubmitExpense.css';
-@import './containers/Subscriptions.css';
+@import './containers/HomePage.css';
+@import './containers/Leaderboard.css';
+@import './containers/Login.css';
 @import './containers/OnBoarding.css';
 @import './containers/ProfilePage.css';
-@import './containers/HomePage.css';
+@import './containers/PublicGroup.css';
+@import './containers/SubmitExpense.css';
+@import './containers/Subscriptions.css';
 
 /**
  * Components

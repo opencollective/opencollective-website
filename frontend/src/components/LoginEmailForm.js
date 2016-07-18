@@ -23,7 +23,8 @@ class LoginEmailForm extends Component {
     return (
       <div className='Login-Email'>
         <div className='Login-Email-description'>
-          We will send you an email with a link to log you into Open Collective. No need to remember another password.
+          We'll send you an email with a link that automatically logs you into OpenCollective. <br/>
+          No need to remember another password.
         </div>
         <form
           className='Login-Email-form'

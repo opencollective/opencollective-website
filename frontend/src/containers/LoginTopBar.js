@@ -1,27 +1,22 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { pushState } from 'redux-router';
 
-export default class OnBoardingHeader extends Component {
+import fetchUser from '../actions/users/fetch_by_id';
+import logout from '../actions/session/logout';
+import decodeJWT from '../actions/session/decode_jwt';
 
-  static propTypes = {
-    user: PropTypes.shape({
-      name: PropTypes.string,
-      avatar: PropTypes.string
-    })
-  }
-
-  static defaultProps = {
-    user: null
-  }
+export default class LoginTopBar extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: Boolean(props.user),
       showProfileMenu: false
     };
   }
 
   renderProfileMenu() {
+
     return (
       <div className='LoginTopBarProfileMenu' onClick={(e) => e.nativeEvent.stopImmediatePropagation()}>
         <div>
@@ -30,8 +25,8 @@ export default class OnBoardingHeader extends Component {
             <div className='-dash'></div>
           </div>
           <ul>
-            <li><a href='#'>Subscriptions</a></li>
-            <li><a href='#'>Contributors</a></li>
+            <li><a href='#' onClick={this.onClickSubscriptions.bind(this)}>Subscriptions</a></li>
+            <li><a href='https://app.opencollective.com/'>App</a></li>
           </ul>
         </div>
         <div>
@@ -40,8 +35,7 @@ export default class OnBoardingHeader extends Component {
             <div className='-dash'></div>
           </div>
           <ul>
-            <li><a href='#'>Profile</a></li>
-            <li><a className='-blue' href='/logout'>Log Out</a></li>
+            <li><a className='-blue' href='#' onClick={this.onClickLogout.bind(this)}>Logout</a></li>
           </ul>
         </div>
       </div>
@@ -49,10 +43,12 @@ export default class OnBoardingHeader extends Component {
   }
 
   render() {
-    const { user } = this.props;
-    const { isLoggedIn, showProfileMenu } = this.state;
-    const avatar = isLoggedIn ? user.avatar : null;
-    const name = isLoggedIn ? user.name : null;
+    const { user, isAuthenticated, redirectRoute } = this.props;
+    const { showProfileMenu } = this.state;
+    const avatar = isAuthenticated && user && user.avatar ? user.avatar : '/static/images/default_avatar.svg';
+    const name = isAuthenticated && user && user.name ? user.name : null;
+    const email = isAuthenticated && user && user.email ? user.email : null;
+
     return (
       <div className='LoginTopBar'>
         <a href="/">
@@ -63,19 +59,25 @@ export default class OnBoardingHeader extends Component {
           <a className='LoginTopBarLink' href='/how'>How it works</a>
           <a className='LoginTopBarLink' href='/discover'>Discover</a>
           <div className='LoginTopBarSeperator'></div>
-          {isLoggedIn && 
+          {isAuthenticated &&
             <div className={`LoginTopBarProfileButton ${showProfileMenu ? '-active' : ''}`} onClick={this.toggleProfileMenu.bind(this)}>
               {avatar && <div className='LoginTopBarProfileButton-avatar' style={{backgroundImage: `url(${avatar})`}}></div>}
-              {name && <div className='LoginTopBarProfileButton-name'>{name}</div>}
+              {(name || email) && <div className='LoginTopBarProfileButton-name'>{name || email}</div>}
               <div className='LoginTopBarProfileButton-caret'></div>
               {showProfileMenu && this.renderProfileMenu()}
             </div>
           }
-          {!isLoggedIn && <a className='LoginTopBarLink' href='/login'>Login</a>}
-          {!isLoggedIn && <a className='LoginTopBarLink -blue' href='/register'>Sign up</a>}
+          {!isAuthenticated && <a className='LoginTopBarLink' href={`\'/login?next=${redirectRoute}\'`}>Login</a>}
         </div>
       </div>
     )
+  }
+
+  componentWillMount() {
+    const { isAuthenticated, user, loggedInUserId, fetchUser } = this.props;
+    if (isAuthenticated && !user) {
+      fetchUser(loggedInUserId);
+    }
   }
 
   componentDidMount() {
@@ -97,4 +99,31 @@ export default class OnBoardingHeader extends Component {
       e.nativeEvent.stopImmediatePropagation();
     }
   }
+
+  onClickLogout(e) {
+    this.props.logout();
+    this.props.decodeJWT();
+    this.toggleProfileMenu(e);
+  }
+
+  onClickSubscriptions(e) {
+    this.props.pushState(null, '/subscriptions')
+    this.toggleProfileMenu(e);
+  }
+}
+
+
+export default connect(mapStateToProps, {
+  fetchUser,
+  logout,
+  pushState,
+  decodeJWT
+})(LoginTopBar);
+
+export function mapStateToProps({session, users}){
+  return {
+    isAuthenticated: session.isAuthenticated,
+    loggedInUserId: session.user.id,
+    user: session.isAuthenticated ? users[session.user.id] : null
+  };
 }
