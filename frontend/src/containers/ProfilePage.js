@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import i18n from '../lib/i18n';
+import formatCurrency from '../lib/format_currency';
 import filterCollection from '../lib/filter_collection';
 
 import OnBoardingHeader from '../components/on_boarding/OnBoardingHeader';
@@ -21,9 +22,11 @@ export class ProfilePage extends Component {
     const { profile, i18n } = this.props;
 
     profile.groups.map((group) => {
-      group.sponsorCount = filterCollection(group.backers, {tier: 'sponsor'}).length;
-      group.backersCount = group.backers.length - group.sponsorCount;
-      group.monthlyIncome = (group.yearlyIncome / 12);
+      const sponsorsCount = filterCollection(group.backers, {tier: 'sponsor'}).length;
+      group.stats = [];
+      group.stats.push({label: 'backers', value: group.backers.length - sponsorsCount});
+      group.stats.push({label: 'sponsors', value: sponsorsCount});
+      group.stats.push({label: 'yearly income', value: formatCurrency(group.yearlyIncome/100, group.currency, { compact: true, precision: 0 })});
     })
 
     const belongsTo = filterCollection(profile.groups, { role: 'MEMBER' });
@@ -51,10 +54,8 @@ export class ProfilePage extends Component {
                 bg={group.backgroundImage}
                 logo={group.logo}
                 name={group.name}
-                mission={group.mission}
-                backerCount={group.backersCount}
-                sponsorCount={group.sponsorCount}
-                monthlyIncome={group.monthlyIncome} 
+                description={group.mission}
+                stats={group.stats}
                 />
               )}
             </section>
@@ -69,10 +70,8 @@ export class ProfilePage extends Component {
                 bg={group.backgroundImage}
                 logo={group.logo}
                 name={group.name}
-                mission={group.mission}
-                backerCount={group.backersCount}
-                sponsorCount={group.sponsorCount}
-                monthlyIncome={group.monthlyIncome} 
+                description={group.mission}
+                stats={group.stats}
                 />
               )}
             </section> 
