@@ -43,7 +43,7 @@ export class ProfilePage extends Component {
         <div className="line2">{profile.name}</div>
         <div className="line3">{profile.description}</div>
         {profile.longDescription && (
-              <Markdown className='line3' value={profile.longDescription} />
+              <Markdown className='line3 longDescription' value={profile.longDescription} />
         )}
         {belongsTo.length ? (
             <section>

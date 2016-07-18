@@ -93,27 +93,24 @@
       }
     }
   }
-}
-
-.CollectiveCard.sponsor {
-  height: 335px;
-  .CollectiveCard-head {
-    height: 160px;
-  }
-  .CollectiveCard-name {
-    display: none;
-  }
-  .CollectiveCard-description {
-    margin-top: 10px;
-  }
-  .CollectiveCard-background {
-    background:none !important;
-  }
-  .CollectiveCard-head {
-    .CollectiveCard-background {
-      .CollectiveCard-image {
-        width: 75%;
-        height: 65%;
+  &.sponsor {
+    height: 310px;
+    .CollectiveCard-head {
+      height: 160px;
+      .CollectiveCard-background {
+        background:none !important;
+        .CollectiveCard-image {
+          width: 75%;
+          height: 65%;
+        }
+      }
+    }
+    .CollectiveCard-body {
+      .CollectiveCard-name {
+        display: none;
+      }
+      .CollectiveCard-description {
+        margin-top: 10px;
       }
     }
   }
