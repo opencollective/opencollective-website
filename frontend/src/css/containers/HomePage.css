@@ -245,7 +245,7 @@
 }
 
 @media (max-width: 1200px) {
-  .HomePage section .cards a {
+  .HomePage section .cards a.seemore {
     position: absolute;
     margin: auto;
     left: 0;
