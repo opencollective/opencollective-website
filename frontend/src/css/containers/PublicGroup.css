@@ -1,4 +1,10 @@
 /* GENERAL */
+.PublicGroup {
+  .LoginTopBar {
+    margin-bottom: 20px;
+  }
+}
+
 .PublicGroup-title {
   font-size: 1.75rem;
 }

@@ -12,7 +12,7 @@ import Notification from '../containers/Notification';
 import PublicFooter from '../components/PublicFooter';
 import UserCard from '../components/UserCard';
 
-import OnBoardingHeader from '../components/on_boarding/OnBoardingHeader';
+import LoginTopBar from '../containers/LoginTopBar';
 
 import PublicGroupHero from '../components/public_group/PublicGroupHero';
 import PublicGroupWhoWeAre from '../components/public_group/PublicGroupWhoWeAre';
@@ -185,7 +185,7 @@ export class PublicGroup extends Component {
     const { group } = this.props;
     return (
       <div className='PublicGroup PublicGroup--inactive'>
-        <OnBoardingHeader />
+        <LoginTopBar />
         <div className="PublicGroupHero-logo mb3 bg-contain" style={{backgroundImage: `url(${'https://cldup.com/U1yzUnB9YJ.png'})`}} ></div>
         <div className="line1">Help <a href={group.website}>{group.name}</a> create an open collective to…</div>
         <div className="line2">{group.mission}</div>

@@ -5,7 +5,7 @@ import i18n from '../lib/i18n';
 import formatCurrency from '../lib/format_currency';
 import filterCollection from '../lib/filter_collection';
 
-import OnBoardingHeader from '../components/on_boarding/OnBoardingHeader';
+import LoginTopBar from '../containers/LoginTopBar';
 import UserPhoto from '../components/UserPhoto';
 import PublicFooter from '../components/PublicFooter';
 import CollectiveCard from '../components/CollectiveCard';
@@ -35,7 +35,7 @@ export class ProfilePage extends Component {
 
   	return (
   		<div className='ProfilePage'>
-        <OnBoardingHeader />
+        <LoginTopBar />
         <UserPhoto user={{ avatar: profile.avatar }} addBadge={true} className={`mx-auto ${profile.isOrganization ? 'organization' : ''}`} />
         {!profile.isOrganization &&
           <div className="line1">Hello I'm</div>

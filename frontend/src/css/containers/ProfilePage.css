@@ -5,6 +5,10 @@
     background-position: center -88px;
     background-size: 800px 600px;
 
+    .LoginTopBar {
+        margin-bottom: 50px;
+    }
+
     .OnBoardingHeader {
         margin-bottom: 30px;
     }

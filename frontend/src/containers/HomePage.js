@@ -5,7 +5,7 @@ import 'numbro/dist/languages'
 
 import formatCurrency from '../lib/format_currency';
 
-import OnBoardingHeader from '../components/on_boarding/OnBoardingHeader';
+import LoginTopBar from '../containers/LoginTopBar';
 import PublicFooter from '../components/PublicFooter';
 import CollectiveCard from '../components/CollectiveCard';
 
@@ -67,7 +67,7 @@ export class HomePage extends Component {
 
     return (
       <div className='HomePage'>
-        <OnBoardingHeader />
+        <LoginTopBar />
         <section className='HomePageHero'>
           <div className='title'>
             <svg width='500px' height='70px' className='align-middle'>
