@@ -116,7 +116,7 @@
 
 .CollectiveCard:not(.CollectiveCard--large) {
   width: 320px;
-  height: 454px;
+  height: 435px;
   margin: 15px;
   .CollectiveCard-head {
     width: 100%;
@@ -137,6 +137,7 @@
       margin: 0 15px;
       font-size: 14px;
       line-height: 1.24;
+      height: 90px;
     }
   }
   .CollectiveCard-footer {
