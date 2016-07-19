@@ -214,4 +214,21 @@ describe("banner", () => {
       })
       .expect(200, done);
   });
+
+  it('has target blank on the links', done => {
+    request(app)
+      .get('/yeoman/backers.svg')
+      .expect('content-type', 'image/svg+xml; charset=utf-8')
+      .expect(res => {
+        const svg = new Buffer(res.body).toString('utf8');
+        const links = svg.match(/<a([^>]+)>/g);
+        res.body = { links };
+      })
+      .expect({
+        links: [
+          '<a xlink:href="https://www.julianmotz.com" target="_blank">'
+        ]
+      })
+      .expect(200, done);
+  });
 })
