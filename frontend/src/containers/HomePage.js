@@ -44,9 +44,6 @@ export class HomePage extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      showWaitingListInput: false
-    };
   }
 
   componentDidMount() {
@@ -56,7 +53,6 @@ export class HomePage extends Component {
 
   render() {
     const { homepage } = this.props;
-    const { showWaitingListInput } = this.state;
     const currency = 'USD';
     const opensource = homepage.collectives ? homepage.collectives.opensource : [];
     const meetup = homepage.collectives ? homepage.collectives.meetup : [];
@@ -141,10 +137,10 @@ export class HomePage extends Component {
           </div>
           <div className='cta'>
             <div className='text'>We are slowly letting in new kinds of collectives</div>
-            <div className='button color-green' onClick={() => this.setState({showWaitingListInput: !showWaitingListInput})}>join the waiting list!</div>
+            <div className='button color-green'>join the waiting list!</div>
           </div>
         </section>
-        {showWaitingListInput && <MailChimpInputSection mcListId={'14d6233180'} />}
+        <MailChimpInputSection mcListId="14d6233180" />
         <section className='HomePageSponsors blue-gradient'>
           <div className='heading'>Sponsors</div>
           <div className='subheading'>Collectives do amazing things for their communities thanks to these awesome sponsors.</div>

@@ -17,7 +17,7 @@ export default class MailChimpInputSection extends Component {
     }
   }
 
-  componentWillMount() {
+  componentWillReceiveProps() {
     // Inject jQuery if it has not already been injected.
     if (Array.prototype.slice.call(document.head.querySelectorAll('script')).map(x => x.src).indexOf(`${location.protocol}${EXTERNAL_JQUERY_SRC}`) === -1) {
       const script = document.createElement('script')
