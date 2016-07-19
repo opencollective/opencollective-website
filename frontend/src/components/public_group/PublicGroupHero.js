@@ -5,8 +5,7 @@ import filterCollection from '../../lib/filter_collection';
 
 export default class PublicGroupHero extends React.Component {
 
-  renderHeroStatistics()
-  {
+  renderHeroStatistics() {
     const { group, i18n } = this.props;
     const yearlyIncome = group.yearlyIncome / 100;
     const formattedYearlyIncome = yearlyIncome && formatCurrency(yearlyIncome, group.currency, { compact: true, precision: 0 });
@@ -20,20 +19,14 @@ export default class PublicGroupHero extends React.Component {
     })
     .filter(x => x);
 
-    if (tierCountStringArray.length > 1)
-    {
-      if (tierCountStringArray.length > 2)
-      {
+    if (tierCountStringArray.length > 1) {
+      if (tierCountStringArray.length > 2) {
         const lastCountString = tierCountStringArray.pop();
         tierCountString = `${tierCountStringArray.join(', ')} ${i18n.getString('and')} ${lastCountString}`
-      }
-      else
-      {
+      } else {
         tierCountString = tierCountStringArray.join(` ${i18n.getString('and')} `);
       }
-    }
-    else
-    {
+    } else {
       tierCountString = tierCountStringArray[0];
     }
 

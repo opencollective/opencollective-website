@@ -6,11 +6,11 @@ export default ({
   height='315'
 }) => {
 
-  if(!video) return;
+  if (!video) return;
 
-  var id;
+  let id;
 
-  if(video.match(/youtu.be/))
+  if (video.match(/youtu.be/))
     id = video.match(/youtu.be\/([^\/\?]+)/)[1];
   else
     id = video.match(/watch\?v=([^&]*)/)[1];

@@ -34,7 +34,7 @@ export function getThirdParty(endpoint, options={}) {
  */
 
 export function postJSON(endpoint, body, options={}) {
-  var headers = {
+  let headers = {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     };

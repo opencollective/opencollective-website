@@ -23,16 +23,14 @@ export default class CustomTextArea extends Component {
     value: ''
   }
 
-  constructor(props)
-  {
+  constructor(props) {
     super(props);
     this.state = {
       hasScrollbar: false
     }
   }
 
-  render()
-  {
+  render() {
     const { disabled, onChange, className, placeholder, value, maxLength, rows, cols, resize, name } = this.props;
     const { hasScrollbar } = this.state;
     return (
@@ -59,13 +57,11 @@ export default class CustomTextArea extends Component {
     )
   }
 
-  onPlaceholderClick()
-  {
+  onPlaceholderClick() {
     this.refs.textarea.focus();
   }
 
-  detectScrollbar()
-  {
+  detectScrollbar() {
     const element = this.refs.textarea;
     this.setState({hasScrollbar: element.clientHeight < element.scrollHeight})
   }

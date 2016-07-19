@@ -15,7 +15,7 @@ export default class ContributorList extends React.Component {
     };
   }
 
- render() { 
+ render() {
   const { contributors } = this.props;
   const contributorsCopy = contributors.slice();
   const { pageIndex, showHoverCard, hoverCardTarget } = this.state;
@@ -23,7 +23,7 @@ export default class ContributorList extends React.Component {
   const nextIsPossible = this.nextIsPossible();
   const pageCount = Math.floor(contributors.length / MAX_ITEMS_PER_PAGE) + 1;
   const pages = new Array(pageCount);
-  for (var i = 0; i < pageCount; i++) {
+  for (let i = 0; i < pageCount; i++) {
     pages[i] = contributorsCopy.splice(0, MAX_ITEMS_PER_PAGE);
   }
 
@@ -47,7 +47,7 @@ export default class ContributorList extends React.Component {
                         <div className='HoverCard-stats'>
                           <span></span>
                           <span>{`${contributor.stats.c} commits`}</span>
-                          {typeof contributor.stats.a === 'number' && 
+                          {typeof contributor.stats.a === 'number' &&
                             <span>
                               &nbsp;
                               <span>/</span>
@@ -55,7 +55,7 @@ export default class ContributorList extends React.Component {
                               <span className='-add'>{`${contributor.stats.a}++`}</span>
                             </span>
                           }
-                          {typeof contributor.stats.d === 'number' && 
+                          {typeof contributor.stats.d === 'number' &&
                             <span>
                               &nbsp;
                               <span>/</span>
@@ -67,12 +67,12 @@ export default class ContributorList extends React.Component {
                       </div>
                     )
                   }
-                  <UserPhoto 
+                  <UserPhoto
                     key={contributor.avatar}
                     user={{avatar: contributor.avatar}}
-                    addBadge={contributor.core} 
-                    onMouseEnter={() => { this.setHoverCard(contributor) }}
-                    onMouseLeave={() => { this.setHoverCard() }}
+                    addBadge={contributor.core}
+                    onMouseEnter={() => this.setHoverCard(contributor)}
+                    onMouseLeave={() => this.setHoverCard()}
                   />
                 </div>
               )

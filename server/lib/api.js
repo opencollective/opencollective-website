@@ -13,10 +13,10 @@ const api = { fetch };
 api.get = (endpoint, options) => {
   options = options || {};
 
-  var cached = memory_cache[endpoint];
-  if(options.cache && cached) {
+  let cached = memory_cache[endpoint];
+  if (options.cache && cached) {
     return new Promise((resolve) => {
-      switch(cached.status) {
+      switch (cached.status) {
         case 'finished':
           return resolve(cached.response);
           break;
@@ -25,8 +25,7 @@ api.get = (endpoint, options) => {
           break;
       }
     });
-  }
-  else {
+  } else {
     memory_cache[endpoint] = cached = new EventEmitter();
     cached.status = 'running';
     return api.fetch(apiUrl(endpoint), {headers: options.headers})

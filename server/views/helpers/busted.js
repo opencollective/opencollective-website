@@ -4,7 +4,7 @@ import bust from 'cache-bust';
 
 const dir = path.resolve(__dirname, '../../../frontend/dist/');
 
-var cache = {};
+const cache = {};
 
 export default (file) => {
   if (!config.cacheBust) {

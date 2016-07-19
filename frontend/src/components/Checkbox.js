@@ -17,13 +17,11 @@ export default class Checkbox extends Component {
     disabled: false
   }
 
-  constructor(props)
-  {
+  constructor(props) {
     super(props);
   }
-  
-  render()
-  {
+
+  render() {
     const { disabled, checked, className, checkmark } = this.props;
     return (
       <div className={`Checkbox ${className} ${disabled ? 'Checkbox--disabled' : ''}`} onClick={!disabled && this.onClick.bind(this)}>
@@ -32,8 +30,7 @@ export default class Checkbox extends Component {
     )
   }
 
-  onClick()
-  {
+  onClick() {
     const { checked, onChange } = this.props;
     onChange(!checked);
   }

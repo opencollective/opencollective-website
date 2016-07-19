@@ -47,7 +47,7 @@ import ProfilePage from './ProfilePage';
 const NUM_TRANSACTIONS_TO_SHOW = 3;
 
 function getOrdinal(n) {
-  var s=['th','st','nd','rd'], v = n % 100;
+  const s=['th','st','nd','rd'], v = n % 100;
   return n + (s[(v-20)%10]||s[v]||s[0]);
 }
 
@@ -104,7 +104,7 @@ export class PublicGroup extends Component {
     const backers = group.backers.slice(0);
     const backersCount = backers.length;
     if (backersCount < 10) {
-      for (var i = 0, delta = 10 - backersCount; i < delta; i++) {
+      for (let i = 0, delta = 10 - backersCount; i < delta; i++) {
         backers.push(0)
       }
     }
@@ -118,15 +118,15 @@ export class PublicGroup extends Component {
               return <UserCard key={index} user={backer} {...this.props}/>
             } else {
               return (
-                <BackerCard 
+                <BackerCard
                   key={index}
-                  title={`${getOrdinal(index+1)} Backer`} 
+                  title={`${getOrdinal(index+1)} Backer`}
                   group={{}}
                   user={{avatar: ''}}
                   onClick={() => {}}
                   showButton={index === backersCount}
                   onToken={donateToGroup.bind(this)}
-                  {...this.props} 
+                  {...this.props}
                 />
               )
             }
@@ -172,13 +172,13 @@ export class PublicGroup extends Component {
       <div className="PublicGroup-about-container">
         <div className="line1">About Open Collective</div>
         <div className="line2">
-          We use [Open Collective host] to collect the funds on our behalf using OpenCollective. Whenever we need to use the money for something, we will submit the invoice or expense via the OpenCollective app and once approved we will be reimbursed. That way, you can always track our budget. 
+          We use [Open Collective host] to collect the funds on our behalf using OpenCollective. Whenever we need to use the money for something, we will submit the invoice or expense via the OpenCollective app and once approved we will be reimbursed. That way, you can always track our budget.
           <br/>
           <b>Everything is transparent.</b>
         </div>
         <div className="more-button">learn more</div>
       </div>
-    ) 
+    )
   }
 
   renderPending() {
@@ -216,7 +216,7 @@ export class PublicGroup extends Component {
     if (group.settings.pending) {
       return this.renderPending();
     }
-	
+
 	const publicGroupClassName = `PublicGroup ${group.slug}`;
 
     // `false` if there are no `group.data.githubContributors`, otherwise formats results for `ContributorList`
@@ -228,7 +228,7 @@ export class PublicGroup extends Component {
         avatar: `https://avatars.githubusercontent.com/${username}?s=64`,
         stats: {
           c: commits,
-          a: null, 
+          a: null,
           d: null
         }
       }
@@ -246,7 +246,7 @@ export class PublicGroup extends Component {
 
         <PublicGroupHero group={group} {...this.props} />
         <PublicGroupWhoWeAre group={group} {...this.props} />
-        {group.slug === 'opensource' && 
+        {group.slug === 'opensource' &&
           <div className="PublicGroupOpenSourceCTA">
             <div className="arrow-down"></div>
             <div className="line1">Apply to create an open collective for your open source project.</div>

@@ -15,7 +15,7 @@ export default (
   options.compact = (typeof options.compact === 'boolean') ? options.compact : true;
 
   let lang = 'en-US';
-  switch(currency) {
+  switch (currency) {
     case 'EUR': lang = 'fr-FR';
           break;
     case 'SEK': lang = 'sv-SE';
