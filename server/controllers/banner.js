@@ -192,7 +192,7 @@ module.exports = {
         const rawData = responses[i][1];
 
         const contentType = headers['content-type'];
-        const website = (users[i]) ? users[i].website : `${config.host.website}/${slug}`;
+        const website = (users[i] && users[i].website) ? users[i].website : `${config.host.website}/${slug}`;
         const base64data = new Buffer(rawData).toString('base64');
 
         var avatarWidth = avatarHeight;
@@ -211,10 +211,8 @@ module.exports = {
           posX = margin;
         }
         var image = `<image x="${posX}" y="${posY}" width="${avatarWidth}" height="${avatarHeight}" xlink:href="data:${contentType};base64,${base64data}"/>`;
-        if(website) {
-          image = `<a xlink:href="${website.replace(/&/g,'&amp;')}">${image}</a>`;
-        }
-        images.push(image);
+        var imageLink = `<a xlink:href="${website.replace(/&/g,'&amp;')}" target="_blank">${image}</a>`;
+        images.push(imageLink);
         posX += avatarWidth + margin;
       };
 
