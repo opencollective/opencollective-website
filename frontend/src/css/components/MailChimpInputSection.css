@@ -1,0 +1,94 @@
+.MailChimpInputSection {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 150px;
+  background-color: #515f71;
+  padding-top: 60px;
+  padding-bottom: 40px;
+  .-input {
+    outline: 0;
+    box-sizing: border-box;
+    display: inline-block;
+    width: 350px;
+    height: 50px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    box-shadow: inset 2px 1px 4px 0 rgba(0, 0, 0, 0.1);
+    border: solid 1px #f2f2f2;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    padding: 0 1rem;
+  }
+  .-button {
+    outline: 0;
+    box-sizing: border-box;
+    display: inline-block;
+    width: 140px;
+    height: 50px;
+    border-radius: 5px;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.11);
+    appearance: none;
+    border: none;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    font-family: Montserrat, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    color: #ffffff;
+    text-transform: uppercase;
+    background-color: #d6d6d6;
+    &.-valid {
+      background-color: #75cc1f;
+    }
+    &.-invalid:hover {
+      background-color: #d6d6d6;
+    }
+    &.-valid:hover {
+      cursor: pointer;
+      opacity: .94;
+    }
+  }
+  form {
+    margin: auto;
+    width: 500px;
+    .msg {
+      font-size: 13px;
+      letter-spacing: .5px;
+      color: white;
+      line-height: 1.2;
+      padding-top: 15px;
+    }
+  }
+}
+@media (min-width: 833px) {
+  .icons-container {
+    background-image: url(../images/dotted-line.svg);
+  }
+  .MailChimpInputSection {
+    form {
+      width: 420px;
+    }
+    .-input {
+      width: 280px;
+    }
+  }
+}
+@media (max-width: 512px) {
+  .numbers-container .col,
+  .icons-container .col {
+    float: none;
+  }
+  .HomePageHero .title svg {
+    width: 300px;
+    height: 45px;
+  }
+  .MailChimpInputSection {
+    form {
+      width: 340px;
+    }
+    .-input {
+      width: 200px;
+    }
+  }
+}
