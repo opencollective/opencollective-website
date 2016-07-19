@@ -41,7 +41,6 @@
       text-overflow: ellipsis;
     }
     .CollectiveCard-name {
-      width: 310px;
       min-height: 29px;
       font-family: Montserrat;
       font-size: 24px;
@@ -52,7 +51,6 @@
       white-space: nowrap;
     }
     .CollectiveCard-description {
-      width: 310px;
       height: 92px;
       font-family: Lato;
       font-size: 16px;
@@ -112,6 +110,39 @@
       .CollectiveCard-description {
         margin-top: 10px;
       }
+    }
+  }
+}
+
+.CollectiveCard:not(.CollectiveCard--large) {
+  width: 320px;
+  height: 454px;
+  margin: 15px;
+  .CollectiveCard-head {
+    width: 100%;
+    height: 180px;
+  }
+  .CollectiveCard-body {
+    .CollectiveCard-name {
+      height: 29px;
+      font-family: montserratlight;
+      font-size: 22px;
+      font-weight: 300;
+      text-align: center;
+      color: #303233;
+      font-weight: 200;
+      margin: 20px 15px;
+    }
+    .CollectiveCard-description {
+      margin: 0 15px;
+      font-size: 14px;
+      line-height: 1.24;
+    }
+  }
+  .CollectiveCard-footer {
+    height: 74px;
+    .CollectiveCard-metric-value {
+      font-size: 16px;
     }
   }
 }
