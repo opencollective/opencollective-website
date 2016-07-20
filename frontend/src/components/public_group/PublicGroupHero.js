@@ -1,5 +1,5 @@
 import React from 'react';
-import PublicTopBarV2 from '../../containers/PublicTopBarV2';
+import LoginTopBar from '../../containers/LoginTopBar';
 import formatCurrency from '../../lib/format_currency';
 import filterCollection from '../../lib/filter_collection';
 
@@ -60,7 +60,7 @@ export default class PublicGroupHero extends React.Component {
     return (
       <section className='PublicGroupHero relative px2 bg-black bg-cover white' style={{backgroundImage: `url(${collectiveBg})`}}>
         <div className='container relative center'>
-          <PublicTopBarV2 loginRedirectTo={`/${group.slug}`} className='pt3 absolute top-0 left-0 right-0' />
+          <LoginTopBar loginRedirectTo={`/${group.slug}`} classNamxe='pt3 absolute top-0 left-0 right-0' />
           <div className='PublicGroupHero-content'>
             {group.logo && (
               <div className="PublicGroupHero-logo mb3 bg-contain" style={{backgroundImage: `url(${group.logo})`}}></div>
