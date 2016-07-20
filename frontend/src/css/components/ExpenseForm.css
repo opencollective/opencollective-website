@@ -1,20 +1,112 @@
-.ExpenseForm .ImageUpload {
-  float: left;
-  margin-right: 4rem;
-  max-width: 250px;
-  overflow: hidden;
-  
-  img {
-    max-width: 250px;
+.ExpenseForm {
+  box-sizing: border-box;
+  padding: 40px;
+  .line1 {
+    height: 17px;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: normal;
+    color: #000;
+    text-transform: uppercase;
   }
-}
+  .info-block {
+    vertical-align: top;
+    display: inline-block;
+    min-width: 160px; 
+    height: 45px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    .info-block-value {
+      font-family: Montserrat;
+      font-size: 24px;
+      font-weight: normal;
+      color: #313131;
+      line-height: 1.25;
+    }
+    .info-block-label {
+      font-family: Lato;
+      font-size: 10px;
+      font-weight: bold;
+      color: #b3b3b3;
+      text-transform: uppercase;
+    }
+  }
+  .input-container {
+    label {
+      height: 19px;
+      font-family: Lato;
+      font-size: 16px;
+      font-weight: normal;
+      color: #666666;
+      margin-top: 15px;
+      margin-bottom: 5px;
+      text-transform: capitalize;
+    }
+    input {
+      box-sizing: border-box;
+      width: 100%;
+      height: 50px;
+      border-radius: 5px;
+      background-color: #ffffff;
+      box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+      border: solid 1px #f2f2f2;
+      padding: 10px 20px;
 
-@media (--medium-viewport) {
- .ExpenseForm {
-   .ImageUpload {
-     float: none;
-     margin: 0 auto;
-     margin-right: auto;
-   }
- }
+    }
+    .ImageUpload {
+      margin-top: 25px;
+      .placeholder {
+        height: 280px;
+        background-image: url(/static/images/users/upload-default.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 80px;
+        border-radius: 5px;
+        background-color: #ffffff;
+        box-shadow: 0 1px 3px 0 rgba(45, 77, 97, 0.3);
+        cursor: pointer;
+        &:hover {
+          background-image: url(/static/images/users/upload-hover.svg);
+        }
+        &:active {
+          background-image: url(/static/images/users/upload-pressed.svg);
+        }
+        img {
+          display: none;
+        }
+        label {
+          text-align: center;
+          padding-top: 15px;
+          font-family: Lato;
+          font-size: 15px;
+          font-weight: bold;
+          line-height: 1.33;
+          color: #797d80;
+        }
+      }
+    }
+    .SelectContainer {
+      width: 100%;
+      &::after {
+        cursor: pointer;
+        right: 20px !important;
+        margin-top: 5px;
+      }
+      select {
+        padding: 10px 16px;
+        outline: 0;
+        cursor: pointer;
+        appearance:none;
+        height: 50px;
+        border-radius: 5px;
+        background-color: #ffffff;
+        box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+        border: solid 1px #f2f2f2;
+        margin: 8px 0;
+      }
+    }
+  }
+  .expenses-container {
+    padding-top: 40px;
+  }
 }
