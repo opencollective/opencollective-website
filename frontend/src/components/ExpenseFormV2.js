@@ -24,7 +24,7 @@ class ExpenseForm extends Component {
     if (!enableVAT) return;
     return (
       <div>
-        <span className='inline'>{i18n.getString('vat')}</span>
+        <label>{i18n.getString('vat')}</label>
         <Input
           placeholder={formatCurrency(0, group.currency)}
           hasError={expense.error.vat}
@@ -49,7 +49,7 @@ class ExpenseForm extends Component {
 
     return (
       <div className='ExpenseForm'>
-        <Notification {...this.props} />
+        <Notification {...this.props} autoclose/>
         <div className='line1'>collective information</div>
         <div className='info-block mr3'>
           <div className='info-block-value'>{group.name}</div>
@@ -62,29 +62,29 @@ class ExpenseForm extends Component {
           <div className='info-block-label'>funds</div>
         </div>
         <div className='line1'>expense details</div>
-        <div className="clearfix input-container">
-          <div className="col col-6 pr1">
+        <div className='clearfix input-container'>
+          <div className='col col-6 pr1'>
             <ImageUpload
               {...this.props}
               value={attributes.attachment}
-              onFinished={({url: attachment}) => appendExpenseForm({attachment})}
-            />
+              onFinished={({url: attachment}) => appendExpenseForm({attachment})} />
           </div>
-          <div className="col col-6 pl1">
-            <label>amount</label>
+          <div className='col col-6 pl1'>
+            <label>{i18n.getString('amount')}</label>
             <Input
               customClass='js-transaction-amount'
               placeholder={amountPlaceholder}
               hasError={expense.error.amountText}
               value={attributes.amountText}
               handleChange={amountText => appendExpenseForm({amountText})} />
-            <label>category</label>
+            {this.vatInput()}
+            <label>{i18n.getString('category')}</label>
             <SelectCategory
               customClass='js-transaction-category'
               attributes={attributes}
               categories={categories}
               handleChange={category => appendExpenseForm({category})} />
-            <label>description (optional)</label>
+            <label>{i18n.getString('description')}</label>
             <Input
               customClass='js-transaction-description'
               hasError={expense.error.title}
@@ -93,18 +93,17 @@ class ExpenseForm extends Component {
           </div>
         </div>
         <div className='line1'>your information</div>
-        <div className="clearfix input-container">
-          <div className="col col-6 pr1">
-            <label>name</label>
+        <div className='clearfix input-container'>
+          <div className='col col-6 pr1'>
+            <label>{i18n.getString('name')}</label>
             <Input
               customClass='js-transaction-name'
               hasError={expense.error.name}
               value={attributes.name}
-              handleChange={name => appendExpenseForm({name})}
-            />
+              handleChange={name => appendExpenseForm({name})} />
           </div>
-          <div className="col col-6 pl1">
-            <label>email</label>
+          <div className='col col-6 pl1'>
+            <label>{i18n.getString('email')}</label>
             <Input
               customClass='js-transaction-email'
               hasError={expense.error.email}
@@ -112,8 +111,8 @@ class ExpenseForm extends Component {
               handleChange={email => appendExpenseForm({email})} />
           </div>
 
-          <div className="col col-6 pr1">
-            <label>reinbursment method</label>
+          <div className='col col-6 pr1'>
+            <label>{i18n.getString('reimbursementMethod')}</label>
             <Select
               customClass='js-transaction-payoutMethod'
               options={payoutMethods(group.settings.lang)}
@@ -123,7 +122,7 @@ class ExpenseForm extends Component {
 
           {attributes.payoutMethod === 'paypal' && (
             
-          <div className="col col-6 pl1">
+          <div className='col col-6 pl1'>
             <label>PayPal account/ Account number</label>
             <Input
               customClass='js-transaction-paypalEmail'
@@ -133,7 +132,7 @@ class ExpenseForm extends Component {
           </div>
           )}
         </div>
-        <div className="Button Button--green">submit expense</div>
+        <button type='submit' className='Button Button--green' onClick={this.onSubmit.bind(this)}>submit expense</button>
       </div>
     )
   }
