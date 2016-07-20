@@ -60,7 +60,7 @@ export default class PublicGroupHero extends React.Component {
     return (
       <section className='PublicGroupHero relative px2 bg-black bg-cover white' style={{backgroundImage: `url(${collectiveBg})`}}>
         <div className='container relative center'>
-          <LoginTopBar loginRedirectTo={`/${group.slug}`} classNamxe='pt3 absolute top-0 left-0 right-0' />
+          <LoginTopBar loginRedirectTo={`/${group.slug}`} />
           <div className='PublicGroupHero-content'>
             {group.logo && (
               <div className="PublicGroupHero-logo mb3 bg-contain" style={{backgroundImage: `url(${group.logo})`}}></div>
