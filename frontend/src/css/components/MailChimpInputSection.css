@@ -6,6 +6,7 @@
   padding-top: 60px;
   padding-bottom: 40px;
   .-input {
+    vertical-align: top;
     outline: 0;
     box-sizing: border-box;
     display: inline-block;

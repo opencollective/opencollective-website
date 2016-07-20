@@ -1,4 +1,5 @@
 .CollectiveCard {
+  vertical-align: top;
   position: relative;
   box-sizing: border-box;
   display: inline-block;
