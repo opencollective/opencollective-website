@@ -4,13 +4,11 @@ import ContributorPickerItem from './ContributorPickerItem'
 
 export default class ContributorPicker extends React.Component {
 
-  constructor(props)
-  {
+  constructor(props) {
     super(props);
   }
 
-  renderChosenContributors()
-  {
+  renderChosenContributors() {
     const { chosen, onRemove } = this.props;
     return chosen.map((contributor, index) => {
       return (
@@ -24,8 +22,7 @@ export default class ContributorPicker extends React.Component {
     });
   }
 
-  render()
-  {
+  render() {
     const { available, onChoose } = this.props;
     return (
       <div className="ContributorPicker">

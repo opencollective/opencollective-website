@@ -14,8 +14,7 @@ export default function groups(state={}, action={}) {
         return merge({}, state, {
           [action.data.group.id]: action.data.group
         });
-      }
-      else if (action.data.leaderboard) {
+      } else if (action.data.leaderboard) {
         return merge({}, state, {
           leaderboard: action.data.leaderboard
         });

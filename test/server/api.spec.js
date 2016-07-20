@@ -7,7 +7,7 @@ const expect = require('chai').expect;
 const sinon = require('sinon');
 
 describe("api", () => {
-  var sandbox, stub;
+  let sandbox, stub;
   before(() => {
     sandbox = sinon.sandbox.create();
     stub = sandbox.stub(api, 'fetch', () => {

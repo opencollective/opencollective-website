@@ -29,10 +29,11 @@ export default class ImagePicker extends Component {
     super(props);
     this.blacklist = [];
     this.presets = this.props.presets || PRESET_AVATARS;
-    this.options = this.presets.map(src => {return {source: 'preset', src: src}});
+    this.options = this.presets.map(src => {
+      return {source: 'preset', src: src};
+    });
 
-    if (props.src)
-    {
+    if (props.src) {
       this.options[0].src = props.src;
       this.options[0].source = 'default';
     }
@@ -60,8 +61,8 @@ export default class ImagePicker extends Component {
     let currentSrc =  currentOption.src;
 
     // Update Hover/Press images for upload option
-    if (hover && currentOption.source === 'upload' && currentOption.src.indexOf('/static') === 0)
-    {
+    if (hover && currentOption.source === 'upload' &&
+      currentOption.src.indexOf('/static') === 0) {
       currentSrc = (pressed) ? UPLOAD_AVATAR_ACTIVE : UPLOAD_AVATAR_HOVER;
     }
 
@@ -98,96 +99,76 @@ export default class ImagePicker extends Component {
 
     if (this.props.dontLookupSocialMediaAvatars) return;
 
-    if (website !== this.state.website || twitter !== this.state.twitter)
-    {
+    if (website !== this.state.website || twitter !== this.state.twitter) {
       const nextStateWebsite = REG_VALID_URL.test(website) ? website : '';
       const nextStateTwitter = REG_VALID_TWITTER_USERNAME.test(twitter) ? REG_VALID_TWITTER_USERNAME.exec(twitter)[1] : '';
 
-      if (nextStateWebsite !== this.state.website || nextStateTwitter !== this.state.twitter)
-      {
+      if (nextStateWebsite !== this.state.website || nextStateTwitter !== this.state.twitter) {
         this.state.twitter = nextStateTwitter;
         this.state.website = nextStateWebsite;
 
-        if (this.state.twitter || this.state.website)
-        {
+        if (this.state.twitter || this.state.website) {
           this.lazyLookupSocialMediaAvatars(this.state.website, this.state.twitter);
         }
       }
     }
   }
 
-  onImageError()
-  {
+  onImageError() {
     const currentOption = this.options[this.state.currentIndex];
-    if (this.blacklist.indexOf(currentOption.src) === -1)
-    {
+    if (this.blacklist.indexOf(currentOption.src) === -1) {
       this.blacklist.push(currentOption.src);
     }
 
     this.options.splice(this.state.currentIndex, 1);
 
-    if (!this.options[this.state.currentIndex])
-    {
+    if (!this.options[this.state.currentIndex]) {
       this.setState({currentIndex: 0}, this.thereWasAChange);
-    }
-    else
-    {
+    } else {
       this.forceUpdate(this.thereWasAChange);
     }
   }
 
-  thereWasAChange()
-  {
+  thereWasAChange() {
     const currentOption = this.options[this.state.currentIndex];
     this.props.handleChange(currentOption.src !== UPLOAD_AVATAR ? currentOption.src : this.presets[0]);
   }
 
-  nextIsPossible()
-  {
+  nextIsPossible() {
     return this.state.currentIndex < this.options.length - 1;
   }
 
-  prevIsPossible()
-  {
+  prevIsPossible() {
     return this.state.currentIndex > 0;
   }
 
-  select(option)
-  {
+  select(option) {
     if (this.state.isLoading) return;
     this.setState({currentIndex: this.options.indexOf(option)}, this.thereWasAChange);
   }
 
-  next()
-  {
+  next() {
     if (this.state.isLoading) return;
-    if (this.nextIsPossible())
-    {
+    if (this.nextIsPossible()) {
       this.setState({currentIndex: this.state.currentIndex + 1}, this.thereWasAChange);
     }
   }
 
-  prev()
-  {
+  prev() {
     if (this.state.isLoading) return;
-    if (this.prevIsPossible())
-    {
+    if (this.prevIsPossible()) {
       this.setState({currentIndex: this.state.currentIndex - 1}, this.thereWasAChange);
     }
   }
 
-  avatarClick(option)
-  {
-    if (option.source === 'preset' || option.source === 'upload')
-    {
+  avatarClick(option) {
+    if (option.source === 'preset' || option.source === 'upload') {
       this.refs.ImageUpload.clickInput();
     }
   }
 
-  onUploadFinished(result)
-  {
-    if (result)
-    {
+  onUploadFinished(result) {
+    if (result) {
       const uploadOption = this.options.reduce((prev, curr) => prev.source === 'upload' ? prev : curr);
       uploadOption.src = result.url;
       this.setState({currentIndex: this.options.indexOf(uploadOption)});
@@ -195,8 +176,7 @@ export default class ImagePicker extends Component {
     }
   }
 
-  lookupSocialMediaAvatars(website, twitter)
-  {
+  lookupSocialMediaAvatars(website, twitter) {
     const { profileForm, newUser, getSocialMediaAvatars, uploadOptionFirst } = this.props;
     const defaultPresetIndex = uploadOptionFirst ? 1 : 0;
 
@@ -220,12 +200,13 @@ export default class ImagePicker extends Component {
       let isFirstTime = false;
 
       newResults.forEach(result => {
-        const existingOption = this.options.filter((option) => {return option.source === result.source})[0];
+        const existingOption = this.options.filter((option) => {
+          return option.source === result.source
+        })[0];
         if (existingOption) {
           existingOption.src = result.src;
         } else {
-          if (this.options[defaultPresetIndex].source === 'preset')
-          {
+          if (this.options[defaultPresetIndex].source === 'preset') {
             if (defaultPresetIndex) {
               this.options.splice(defaultPresetIndex, 1);
               this.options.splice(0, 0, result);
@@ -234,8 +215,7 @@ export default class ImagePicker extends Component {
               this.options[defaultPresetIndex].src = result.src;
             }
             isFirstTime = true;
-          }
-          else {
+          } else {
             this.options.splice(0, 0, result);
           }
         }

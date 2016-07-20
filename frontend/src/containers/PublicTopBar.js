@@ -9,7 +9,7 @@ class PublicTopBar extends React.Component {
     const { session, logout } = this.props;
     const redirect = `/`;
 
-    if(session && session.isAuthenticated) {
+    if (session && session.isAuthenticated) {
       return (
         <div>
           <span className="long">Logged in as</span> {session.user.username} &nbsp;

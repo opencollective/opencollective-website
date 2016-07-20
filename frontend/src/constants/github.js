@@ -10,8 +10,8 @@ export const GET_USER_FROM_GITHUB_REQUEST = 'GET_USER_FROM_GITHUB_REQUEST';
 export const GET_USER_FROM_GITHUB_SUCCESS = 'GET_USER_FROM_GITHUB_SUCCESS';
 export const GET_USER_FROM_GITHUB_FAILURE = 'GET_USER_FROM_GITHUB_FAILURE';
 
-export var MIN_STARS_FOR_ONBOARDING = 100;
-export var MIN_CONTRIBUTORS_FOR_ONBOARDING = 2;
+export let MIN_STARS_FOR_ONBOARDING = 100;
+export let MIN_CONTRIBUTORS_FOR_ONBOARDING = 2;
 
 // Setting to 0 for development testing purposes
 if (!(process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging')) {

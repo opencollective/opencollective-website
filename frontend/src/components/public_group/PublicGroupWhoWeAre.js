@@ -33,7 +33,7 @@ export default class PublicGroupWhoWeAre extends React.Component {
               <h3 className='PublicGroup-subtitle mt0 mb2 -ff-sec -fw-light'>{title}</h3>
               <div className='flex flex-wrap justify-center'>
                 {group.members.map((user, index) => {
-                  if(group.slug === 'opensource') user.tier = 'collective';
+                  if (group.slug === 'opensource') user.tier = 'collective';
                   return <UserCard user={user} key={index} className='m1' i18n={i18n} />
                   })
                 }

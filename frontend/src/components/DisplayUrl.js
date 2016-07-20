@@ -1,7 +1,7 @@
 import React from 'react';
 
 export function displayUrl(url) {
-  if(typeof url !== 'string') return '';
+  if (typeof url !== 'string') return '';
   return url
           .replace(/^https?:\/\/(www\.)?/,'')
           .replace(/\/$/,'')

@@ -15,7 +15,7 @@ export default class CollectiveCard extends Component {
 
   render() {
     const {key, bg, logo, name, description, url, stats, className} = this.props;
-    if(stats.length === 2)
+    if (stats.length === 2)
       stats.unshift({label: '', value: ''});
 
     return (

@@ -7,7 +7,7 @@ const sizeOf = require('image-size');
 
 const sinon = require('sinon');
 
-var sandbox;
+let sandbox;
 mocks.backers = mocks.users.filter(u => u.tier == 'backer')
 
 describe("avatar", () => {
