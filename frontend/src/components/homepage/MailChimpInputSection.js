@@ -34,7 +34,7 @@ export default class MailChimpInputSection extends Component {
     const buttonOpts = (isValidEmail && !sending) ? {} : {disabled: 'disabled'};
     return (
       <div className='MailChimpInputSection'>
-        <form ref='form' action={formAction} method='GET' name="mc-embedded-subscribe-form" target="_blank">
+        <form ref='form' action={formAction} method='GET' name="mc-embedded-subscribe-form" target="_blank" onSubmit={e => e.preventDefault()}>
           <div>
             <input
               type='email'
