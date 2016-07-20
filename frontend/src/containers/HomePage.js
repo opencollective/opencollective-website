@@ -99,7 +99,7 @@ export class HomePage extends Component {
             </div>
           </div>
         </section>
-        <section className='HomePageOpenSource blue-gradient'>
+        <section className='HomePageOpenSource blue-gradient' id="opensource">
           <div className='heading'>Collectives for <span className='color-blue'>Open Source</span> projects</div>
           <div className='subheading'>These open source projects have created open collectives to share their expenses and let their community chip in.</div>
           <div className='cards'>
@@ -121,7 +121,7 @@ export class HomePage extends Component {
             </a>
           </div>
         </section>
-        <section className='HomePageMeetups blue-gradient'>
+        <section className='HomePageMeetups blue-gradient' id="meetups">
           <div className='heading'>Collectives for <span className='color-green'>meetups</span></div>
           <div className='subheading'>Open Collective empowers local meetups to raise funds and have their own budget.</div>
           <div className='cards'>
@@ -141,7 +141,7 @@ export class HomePage extends Component {
           </div>
         </section>
         <MailChimpInputSection mcListId="14d6233180" />
-        <section className='HomePageSponsors blue-gradient'>
+        <section className='HomePageSponsors blue-gradient' id="sponsors">
           <div className='heading'>Sponsors</div>
           <div className='subheading'>Collectives do amazing things for their communities thanks to these awesome sponsors.</div>
           <div className='cards'>
