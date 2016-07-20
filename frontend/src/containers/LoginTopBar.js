@@ -55,7 +55,7 @@ export default class LoginTopBar extends Component {
           <div className='LoginTopBar-logo'></div>
         </a>
         <div className='LoginTopBar-nav'>
-          <a className='LoginTopBarButton' href='#'>start a collective</a>
+          <a className='LoginTopBarButton' href='/#apply'>start a collective</a>
           <a className='LoginTopBarLink' href='/how'>How it works</a>
           <a className='LoginTopBarLink' href='/discover'>Discover</a>
           <div className='LoginTopBarSeperator'></div>

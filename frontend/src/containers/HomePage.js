@@ -135,7 +135,7 @@ export class HomePage extends Component {
               stats={group.stats}
             />)}
           </div>
-          <div className='cta'>
+          <div className='cta' id='apply'>
             <div className='text'>We are slowly letting in new kinds of collectives</div>
             <div className='button color-green'>join the waiting list!</div>
           </div>
