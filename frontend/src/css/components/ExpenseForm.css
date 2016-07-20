@@ -55,24 +55,75 @@
     }
     .ImageUpload {
       margin-top: 25px;
-      .placeholder {
-        height: 280px;
-        background-image: url(/static/images/users/upload-default.svg);
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: 80px;
-        border-radius: 5px;
-        background-color: #ffffff;
-        box-shadow: 0 1px 3px 0 rgba(45, 77, 97, 0.3);
-        cursor: pointer;
-        &:hover {
-          background-image: url(/static/images/users/upload-hover.svg);
+      & > div:nth-child(1) {
+        background-image: url(/static/images/ajax-loader.gif);
+        opacity: .8;
+        &:not(.imagePreview):not(.placeholder) {
+          background-size: 64px;
+          img {
+            display: none;
+          }
         }
-        &:active {
-          background-image: url(/static/images/users/upload-pressed.svg);
+        &.imagePreview {
+          height: 280px;
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: 80px;
+          border-radius: 5px;
+          background-color: #ffffff;
+          box-shadow: 0 1px 3px 0 rgba(45, 77, 97, 0.3);
+          cursor: pointer;
+          label {
+            text-align: center;
+            padding-top: 15px;
+            font-family: Lato;
+            font-size: 15px;
+            font-weight: bold;
+            line-height: 1.33;
+            color: #797d80;
+          }
         }
-        img {
-          display: none;
+        &.placeholder {
+          height: 280px;
+          background-image: url(/static/images/users/upload-default.svg);
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: 80px;
+          border-radius: 5px;
+          background-color: #ffffff;
+          box-shadow: 0 1px 3px 0 rgba(45, 77, 97, 0.3);
+          cursor: pointer;
+          &:hover {
+            background-image: url(/static/images/users/upload-hover.svg);
+          }
+          &:active {
+            background-image: url(/static/images/users/upload-pressed.svg);
+          }
+          img {
+            display: none !important;
+          }
+          label {
+            text-align: center;
+            padding-top: 15px;
+            font-family: Lato;
+            font-size: 15px;
+            font-weight: bold;
+            line-height: 1.33;
+            color: #797d80;
+          }
+        }
+        &.imagePreview {
+          overflow: hidden;
+          background-color:rgba(200, 200, 220, 0.2);
+          border: 1px solid 1px solid #f2f2f2;
+          box-shadow: 0 1px 3px 0 rgba(0,0,0,.2);
+          height: 280px;
+          img {
+            width: 100%;
+            &[src="/static/images/uploading.png"] {
+              width: 50px;
+            }
+          }
         }
         label {
           text-align: center;

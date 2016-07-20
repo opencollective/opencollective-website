@@ -37,6 +37,7 @@ class ExpenseForm extends Component {
   render() {
     const { expense, categories, group, appendExpenseForm, isUploading, enableVAT, i18n } = this.props;
     const attributes = expense.attributes;
+    const hasAttachment = attributes.attachment;
     const className = classnames({
       'ExpenseForm': true,
       'ExpenseForm--isUploading': isUploading,
@@ -66,6 +67,7 @@ class ExpenseForm extends Component {
           <div className='col col-6 pr1'>
             <ImageUpload
               {...this.props}
+              uploading={null} 
               value={attributes.attachment}
               onFinished={({url: attachment}) => appendExpenseForm({attachment})} />
           </div>
@@ -132,7 +134,7 @@ class ExpenseForm extends Component {
           </div>
           )}
         </div>
-        <button type='submit' className='Button Button--green' onClick={this.onSubmit.bind(this)}>submit expense</button>
+        <button type='submit' className={`Button ${hasAttachment ? 'Button--green' : 'Button--disabled'}`} onClick={hasAttachment && this.onSubmit.bind(this)}>submit expense</button>
       </div>
     )
   }

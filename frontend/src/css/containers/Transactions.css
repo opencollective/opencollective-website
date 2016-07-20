@@ -3,14 +3,30 @@
 	.LoginTopBar {
 		background-color: white;
 	}
+	.ExpenseItem {
+		margin-bottom: 20px;
+	}
 	.Transactions-container {
 		box-sizing: border-box;
 		max-width: 770px;
-		min-height: 882px;
 		margin: auto;
 		margin-top: 30px;
 		margin-bottom: 30px;
 		background-color: #fff;
+	}
+	.padding40 {
+		padding: 40px;
+		.line1 {
+			height: 17px;
+			font-family: Montserrat;
+			font-size: 14px;
+			font-weight: normal;
+			color: #000;
+			text-transform: uppercase;
+		}
+		.expenses-container {
+			margin-top: 30px;
+		}
 	}
 	.Button {
 		display: block;

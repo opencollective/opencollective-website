@@ -40,6 +40,9 @@ export class Transactions extends Component {
     const { group, transactions, users, type, i18n } = this.props;
     const showSubmitExpense = this.state.showSubmitExpense;
     const hasExistingTransactions = Boolean(transactions.length);
+    console.log('>>>>>>>>>>>....')
+    console.log(users)
+    console.log(transactions)
     return (
      <div className='Transactions'>
         <LoginTopBar />
@@ -49,10 +52,10 @@ export class Transactions extends Component {
           </div>
         )}
         {hasExistingTransactions && 
-          <div className='Transactions-container'>
+          <div className='Transactions-container padding40'>
             <div className='line1'>latest expenses</div>
             <div className='expenses-container'>
-              {transactions.map(tx => <TransactionItem key={tx.id} transaction={tx} i18n={i18n} user={users[tx.UserId]} precision={2} />)}
+              {transactions.filter(tx => tx.type === 'EXPENSE').map(ex => <ExpenseItem key={ex.id} expense={ex} i18n={i18n} user={users[ex.UserId]} precision={2} />)}
             </div>
           </div>
         }
