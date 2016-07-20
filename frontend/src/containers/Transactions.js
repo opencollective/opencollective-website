@@ -4,6 +4,12 @@ import { connect } from 'react-redux';
 import values from 'lodash/object/values';
 import sortBy from 'lodash/collection/sortBy';
 
+import LoginTopBar from '../containers/LoginTopBar';
+import Input from '../components/Input';
+import SelectCategory from '../components/SelectCategory';
+import ImageUpload from '../components/ImageUpload';
+import ExpenseItem from '../components/ExpenseItem';
+
 import Currency from '../components/Currency';
 import DisplayUrl from '../components/DisplayUrl';
 import Icon from '../components/Icon';
@@ -43,8 +49,68 @@ export class Transactions extends Component {
 
     return (
      <div className='Transactions'>
+        <LoginTopBar />
+        <div className='Transactions-container'>
+          <div className='line1'>collective information</div>
+          <div className='info-block'>
+            <div className='info-block-value'>Hood.ie</div>
+            <div className='info-block-label'>collective</div>
+          </div>
+          <div className='info-block'>
+            <div className='info-block-value'>$3,250.30</div>
+            <div className='info-block-label'>funds</div>
+          </div>
+          <div className='line1'>expense details</div>
+          <div className="clearfix input-container">
+            <div className="col col-6 pr1">
+              <ImageUpload {...this.props} value={null} />
+            </div>
+            <div className="col col-6 pl1">
+              <label>amount</label>
+              <Input placeholder='' />
+              <label>category</label>
+              <SelectCategory
+                customClass='js-transaction-category'
+                attributes={{}}
+                categories={['A', 'B', 'C']}
+                handleChange={category => console.log(category)} 
+              />
 
-        <PublicTopBar />
+
+              <Input placeholder='Picks A Category' />
+              <label>description (optional)</label>
+              <Input placeholder='' />
+            </div>
+          </div>
+          <div className='line1'>your information</div>
+          <div className="clearfix input-container">
+            <div className="col col-6 pr1">
+              <label>name</label>
+              <Input placeholder='' />
+            </div>
+            <div className="col col-6 pl1">
+              <label>email</label>
+              <Input placeholder='' />
+            </div>
+
+            <div className="col col-6 pr1">
+              <label>reinbursment method</label>
+              <Input placeholder='' />
+            </div>
+            <div className="col col-6 pl1">
+              <label>PayPal account/ Account number</label>
+              <Input placeholder='' />
+            </div>
+          </div>
+          <div className="Button Button--green">submit expense</div>
+        </div>
+        <div className='Transactions-container'>
+          <div className='line1'>latest expenses</div>
+          <div className='expenses-container'>
+            <ExpenseItem expense={{category: '', status: ''}} user={null} i18n={i18n}/>
+          </div>
+          
+        </div>
 
         <div className='PublicContent'>
           <div className='Widget-header'>
