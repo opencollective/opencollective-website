@@ -21,7 +21,7 @@ class Notification extends Component {
     }
 
     return (
-      <div className={`Notification Notification--${status}`}>
+      <div className={`Notification Notification--${status}`} onClick={() => this.props.resetNotifications()}>
         {this.icon(status)}
         {notification.message}
       </div>
