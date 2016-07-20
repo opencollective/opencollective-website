@@ -26,7 +26,7 @@ export class ProfilePage extends Component {
       group.stats = [];
       group.stats.push({label: 'backers', value: group.backers.length - sponsorsCount});
       group.stats.push({label: 'sponsors', value: sponsorsCount});
-      group.stats.push({label: 'yearly income', value: formatCurrency(group.yearlyIncome/100, group.currency, { compact: true, precision: 0 })});
+      group.stats.push({label: 'annual income', value: formatCurrency(group.yearlyIncome/100, group.currency, { compact: true, precision: 0 })});
     })
 
     const belongsTo = filterCollection(profile.groups, { role: 'MEMBER' });
@@ -48,7 +48,7 @@ export class ProfilePage extends Component {
         {belongsTo.length ? (
             <section>
               <div className="lineA">{i18n.getString('proudMember')}</div>
-              {belongsTo.map((group, index) => <CollectiveCard 
+              {belongsTo.map((group, index) => <CollectiveCard
                 key={index}
                 id={group.id}
                 bg={group.backgroundImage}
@@ -64,7 +64,7 @@ export class ProfilePage extends Component {
         {backing.length ? (
             <section style={{paddingBottom: '0'}}>
               <div className="lineA">{profile.isOrganization ? i18n.getString('WeAreProudSupporters') : i18n.getString('IamAProudSupporter')}</div>
-              {backing.map((group, index) => <CollectiveCard 
+              {backing.map((group, index) => <CollectiveCard
                 key={index}
                 id={group.id}
                 bg={group.backgroundImage}
@@ -74,14 +74,14 @@ export class ProfilePage extends Component {
                 stats={group.stats}
                 />
               )}
-            </section> 
+            </section>
           ) : null
         }
         <div style={{textAlign: 'center', margin: `${isEmpty ? 0 : 48}px auto 78px auto`, opacity: '.4'}} >
           {isEmpty ? (
             <div className="mb1">
               <img src="/static/images/spooky-ghost.svg" />
-              <div style={{fontStyle: 'italic', fontFamily: 'Lato', fontSize: '22px', color: '#c0c0c0', textAlign: 'center'}}>This Profile page is so empty you might find a ghost</div>              
+              <div style={{fontStyle: 'italic', fontFamily: 'Lato', fontSize: '22px', color: '#c0c0c0', textAlign: 'center'}}>This Profile page is so empty you might find a ghost</div>
             </div>
             ) : null
           }

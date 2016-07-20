@@ -22,7 +22,7 @@ const mapCollectiveCardProps = group => {
     group.stats.push({ label: 'members', value: group.members.length });
 
   group.stats.push({ label: 'backers', value: group.backers.length });
-  group.stats.push({ label: 'yearly income', value: formatCurrency(group.yearlyIncome/100, group.currency, { compact: true, precision: 0 }) });
+  group.stats.push({ label: 'annual income', value: formatCurrency(group.yearlyIncome/100, group.currency, { compact: true, precision: 0 }) });
 
   return group;
 };
@@ -80,7 +80,7 @@ export class HomePage extends Component {
         </section>
         <section className='HomePageInfo'>
           <div className='heading'>What is a Open Collective?</div>
-          <div className='subheading'>An unincorporated association that operates in full transparency</div>          
+          <div className='subheading'>An unincorporated association that operates in full transparency</div>
           <div className='icons-container clearfix'>
             <div className='col sm-col-6 md-col-4'>
               <div className='-graphic -tghost'>&nbsp;</div>
@@ -103,7 +103,7 @@ export class HomePage extends Component {
           <div className='heading'>Collectives for <span className='color-blue'>Open Source</span> projects</div>
           <div className='subheading'>These open source projects have created open collectives to share their expenses and let their community chip in.</div>
           <div className='cards'>
-            {opensource.map(group => <CollectiveCard 
+            {opensource.map(group => <CollectiveCard
               key={group.id}
               bg={group.backgroundImage}
               logo={group.logo}
@@ -125,7 +125,7 @@ export class HomePage extends Component {
           <div className='heading'>Collectives for <span className='color-green'>meetups</span></div>
           <div className='subheading'>Open Collective empowers local meetups to raise funds and have their own budget.</div>
           <div className='cards'>
-            {meetup.map(group => <CollectiveCard 
+            {meetup.map(group => <CollectiveCard
               key={group.id}
               bg={group.backgroundImage}
               logo={group.logo}
@@ -145,7 +145,7 @@ export class HomePage extends Component {
           <div className='heading'>Sponsors</div>
           <div className='subheading'>Collectives do amazing things for their communities thanks to these awesome sponsors.</div>
           <div className='cards'>
-            {sponsors.map(sponsor => <CollectiveCard 
+            {sponsors.map(sponsor => <CollectiveCard
               key={sponsor.id}
               bg={sponsor.backgroundImage}
               className='sponsor'
