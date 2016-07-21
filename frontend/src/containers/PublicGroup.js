@@ -25,6 +25,7 @@ import PublicGroupSignupV2 from '../components/public_group/PublicGroupSignupV2'
 import PublicGroupThanksV2 from '../components/public_group/PublicGroupThanksV2';
 import BackerCard from '../components/public_group/BackerCard';
 import ContributorList from '../components/public_group/ContributorList';
+import RelatedGroups from '../components/RelatedGroups';
 
 import fetchGroup from '../actions/groups/fetch_by_id';
 import fetchUsers from '../actions/users/fetch_by_group';
@@ -79,7 +80,11 @@ export class PublicGroup extends Component {
             group={group}
             newUserId={newUser.id}
             closeDonationModal={this._closeDonationFlow.bind(this)} />
+          <section className='pt4'>
+            <RelatedGroups title={'Check out similar collectives'} groupList={group.related} />
+          </section>
         </div>
+
       );
     } else if (this.state.showUserForm) {
       return (
@@ -276,6 +281,10 @@ export class PublicGroup extends Component {
           </div>
         </section>
 
+        <section id='related-groups' className='px2'>
+          <RelatedGroups groupList={group.related} />
+        </section>
+
         <PublicFooter />
 
         {this._donationFlow()}
@@ -294,24 +303,23 @@ export class PublicGroup extends Component {
     } = this.props;
 
     if (group.mission) {
-      fetchGroup(group.id);
-
-      fetchTransactions(group.id, {
-        per_page: NUM_TRANSACTIONS_TO_SHOW,
-        sort: 'createdAt',
-        direction: 'desc',
-        donation: true
-      });
-
-    fetchTransactions(group.id, {
-      per_page: NUM_TRANSACTIONS_TO_SHOW,
-      sort: 'createdAt',
-      direction: 'desc',
-      exclude: 'fees',
-      expense: true
-    });
-
-      fetchUsers(group.id);
+      return Promise.all([
+        fetchGroup(group.id),
+        fetchTransactions(group.id, {
+          per_page: NUM_TRANSACTIONS_TO_SHOW,
+          sort: 'createdAt',
+          direction: 'desc',
+          donation: true
+        }),
+        fetchTransactions(group.id, {
+          per_page: NUM_TRANSACTIONS_TO_SHOW,
+          sort: 'createdAt',
+          direction: 'desc',
+          exclude: 'fees',
+          expense: true
+        }),
+        fetchUsers(group.id)
+      ])
     }
   }
 

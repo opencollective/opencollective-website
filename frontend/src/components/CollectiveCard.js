@@ -1,5 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 
+import formatCurrency from '../lib/format_currency';
+
 const DEFAULT_BG = '/static/images/collectives/default-header-bg.jpg';
 const DEFAULT_LOGOS = [
   '/static/images/code.svg',
@@ -13,8 +15,25 @@ export default class CollectiveCard extends Component {
     super(props);
   }
 
+  mapCollectiveCardProps() {
+    const { contributors, members, backers, yearlyIncome, currency } = this.props;
+
+    const stats = [];
+    if (contributors && Object.keys(contributors).length > 0)
+      stats.push({ label: 'contributors', value: Object.keys(contributors).length });
+    else
+      stats.push({ label: 'members', value: members.length });
+
+    stats.push({ label: 'backers', value: backers.length });
+    stats.push({ label: 'yearly income', value: formatCurrency(yearlyIncome/100, currency, { compact: true, precision: 0 }) });
+
+    return stats;
+  }
+
   render() {
-    const {key, bg, logo, name, description, url, stats, className} = this.props;
+    const {key, bg, logo, name, description, url, className} = this.props;
+    const stats = this.mapCollectiveCardProps();
+
     if (stats.length === 2)
       stats.unshift({label: '', value: ''});
 
@@ -29,11 +48,11 @@ export default class CollectiveCard extends Component {
             </div>
             <div className='CollectiveCard-body'>
               <div className='CollectiveCard-name'>{name}</div>
-              <div className='CollectiveCard-description'>{description}</div>
+              <div className='CollectiveCard-description'>We are on a mission to {description}</div>
             </div>
             <div className='CollectiveCard-footer'>
               <div className='clearfix mt2'>
-              { stats.map((stat) => 
+              { stats.map((stat) =>
                 <div className='col col-4'>
                   <div className='CollectiveCard-metric'>
                     <div className='CollectiveCard-metric-value'>{stat.value}</div>
@@ -48,10 +67,10 @@ export default class CollectiveCard extends Component {
       </div>
     );
   }
+
 }
 
 CollectiveCard.propTypes = {
-  stats: PropTypes.arrayOf(React.PropTypes.object).isRequired,
   name: PropTypes.string.isRequired,
   description: PropTypes.string,
   logo: PropTypes.string,

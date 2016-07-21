@@ -12,21 +12,6 @@ import CollectiveCard from '../components/CollectiveCard';
 
 import fetchHome from '../actions/homepage/fetch';
 
-const mapCollectiveCardProps = group => {
-  group.mission = `We are on a mission to ${group.mission}`;
-  group.stats = [];
-
-  if (group.contributors && Object.keys(group.contributors).length > 0)
-    group.stats.push({ label: 'contributors', value: Object.keys(group.contributors).length });
-  else
-    group.stats.push({ label: 'members', value: group.members.length });
-
-  group.stats.push({ label: 'backers', value: group.backers.length });
-  group.stats.push({ label: 'annual income', value: formatCurrency(group.yearlyIncome/100, group.currency, { compact: true, precision: 0 }) });
-
-  return group;
-};
-
 const mapSponsorsCardProps = sponsor => {
   sponsor.publicUrl = `/${sponsor.username}`;
   sponsor.mission = `We are on a mission to ${sponsor.mission}`;
@@ -62,8 +47,6 @@ export class HomePage extends Component {
     const totalDonations = homepage.stats ? homepage.stats.totalDonations : 0;
     const totalDonors = homepage.stats ? homepage.stats.totalDonors : 0;
 
-    opensource.map(mapCollectiveCardProps);
-    meetup.map(mapCollectiveCardProps);
     sponsors.map(mapSponsorsCardProps);
 
     return (
