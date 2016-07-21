@@ -49,7 +49,7 @@ export class HomePage extends Component {
           <div className='heading'>Collect money for your community, transparently.</div>
         </section>
         <section className='HomePageInfo'>
-          <div className='heading'>What is a Open Collective?</div>
+          <div className='heading'>What is an Open Collective?</div>
           <div className='subheading'>An unincorporated association that operates in full transparency</div>
           <div className='icons-container clearfix'>
             <div className='col sm-col-6 md-col-4'>
