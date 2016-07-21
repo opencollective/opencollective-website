@@ -102,7 +102,10 @@ module.exports = {
     }
 
     if (format === 'svg') {
-      request({url: imageUrl, encoding: null}, (e, r, data) => {
+      request({url: imageUrl, encoding: null}, (err, r, data) => {
+        if (err) {
+          return res.status(500).send(`Unable to fetch ${imageUrl}`);
+        }
         const contentType = r.headers['content-type'];
 
         const imageHeight = Math.round(maxHeight / 2);
@@ -144,6 +147,9 @@ module.exports = {
     const imageUrl = `https://img.shields.io/badge/${filename}?style=${style}`;
 
     request(imageUrl, (err, response, body) => {
+      if (err) {
+        return res.status(500).send(`Unable to fetch ${imageUrl}`);
+      }
       res.setHeader('content-type','image/svg+xml;charset=utf-8');
       res.send(body);
     });
