@@ -293,7 +293,7 @@ export class PublicGroup extends Component {
       fetchGroup
     } = this.props;
 
-    if (group.mission) {
+    if (!this.isUserProfile(group)) {
       fetchGroup(group.id);
 
       fetchTransactions(group.id, {
