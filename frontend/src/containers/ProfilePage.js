@@ -54,6 +54,7 @@ export class ProfilePage extends Component {
                 bg={group.backgroundImage}
                 logo={group.logo}
                 name={group.name}
+                url={group.publicUrl}
                 description={group.mission}
                 stats={group.stats}
                 />
@@ -69,6 +70,7 @@ export class ProfilePage extends Component {
                 id={group.id}
                 bg={group.backgroundImage}
                 logo={group.logo}
+                url={group.publicUrl}
                 name={group.name}
                 description={group.mission}
                 stats={group.stats}
