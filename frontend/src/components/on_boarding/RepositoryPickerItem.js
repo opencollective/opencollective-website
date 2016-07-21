@@ -2,13 +2,11 @@ import React from 'react';
 
 export default class RepositoryPickerItem extends React.Component {
 
-  constructor(props)
-  {
+  constructor(props) {
     super(props);
   }
-  
-  render()
-  {
+
+  render() {
     const { title, description, stars, selected, onClick } = this.props;
     return (
       <div className={`RepositoryPickerItem ${selected ? 'RepositoryPickerItem--selected' : ''}`} onClick={onClick}>

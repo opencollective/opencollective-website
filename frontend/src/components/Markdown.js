@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import marked from 'marked';
 
 const rawMarkup = (text) => {
-  var rawMarkup = (text) ? marked(text, {sanitize: true}) : '';
+  const rawMarkup = (text) ? marked(text, {sanitize: true}) : '';
   return { __html: rawMarkup };
 }
 

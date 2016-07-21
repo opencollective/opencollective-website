@@ -23,12 +23,11 @@ export default ({value, currency, frequency, presets, onChange, showCurrencyPick
   }
 
   function presetListItem(presetLabel) {
-    var amountLabel, amountValue;
-    if(presetLabel === 'other') {
+    let amountLabel, amountValue;
+    if (presetLabel === 'other') {
       amountValue = '100';
       amountLabel = i18n.getString('other');
-    }
-    else {
+    } else {
       amountValue = presetLabel;
       amountLabel = (<Currency value={amountValue} currency={currency} precision={0} colorify={false} />);
     }
@@ -69,7 +68,7 @@ function customField({onChange, value, frequency, currency, showCurrencyPicker, 
     value: 'one-time'
   }];
 
-  var currencies = [{
+  const currencies = [{
     label: 'USD',
     value: 'USD'
   }, {

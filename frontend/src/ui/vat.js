@@ -3,7 +3,7 @@
  */
 
 export default function(groupid) {
-  if(typeof groupid == "string")
+  if (typeof groupid == "string")
     groupid = parseInt(groupid, 10);
 
   let vat = false;

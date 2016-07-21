@@ -186,7 +186,7 @@ export default connect(mapStateToProps, {
 
 function mapStateToProps({router, github, form}) {
 
-  var githubUsername = '';
+  let githubUsername = '';
   if (github.connectedAccount) {
     githubUsername = github.connectedAccount.username;
   }

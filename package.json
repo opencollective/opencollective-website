@@ -1,6 +1,6 @@
 {
   "name": "opencollective-website",
-  "version": "0.1.142",
+  "version": "0.1.144",
   "engines": {
     "node": "5.11.0",
     "npm": "3.8.6"
@@ -38,7 +38,7 @@
   "dependencies": {
     "babel": "5.8.38",
     "babel-core": "6.7.7",
-    "babel-eslint": "4.1.8",
+    "babel-eslint": "6.1.2",
     "babel-plugin-add-module-exports": "0.1.4",
     "babel-plugin-lodash": "2.3.0",
     "babel-plugin-transform-es2015-modules-commonjs": "6.7.7",
@@ -110,9 +110,9 @@
     "chai-spies": "0.7.1",
     "chromedriver": "2.21.2",
     "dotenv": "2.0.0",
-    "eslint": "1.10.3",
-    "eslint-config-opencollective": "1.1.0",
-    "eslint-plugin-react": "3.16.1",
+    "eslint": "3.1.1",
+    "eslint-config-opencollective": "1.1.4",
+    "eslint-plugin-react": "5.2.2",
     "expect": "1.18.0",
     "foreman": "^1.4.1",
     "jscs": "2.11.0",

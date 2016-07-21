@@ -2,8 +2,7 @@ import React from 'react';
 
 export default class ContributorPickerItem extends React.Component {
 
-  constructor(props)
-  {
+  constructor(props) {
     super(props);
     this.state = {
       showContributorList: true,
@@ -11,12 +10,13 @@ export default class ContributorPickerItem extends React.Component {
     };
   }
 
-  renderAvailableContributorsList()
-  {
+  renderAvailableContributorsList() {
     const { available, onChoose } = this.props;
     const { filterValue } = this.state;
     return available
-      .filter((contributor) => {return !filterValue || contributor.name.indexOf(filterValue) !== -1 })
+      .filter((contributor) => {
+        return !filterValue || contributor.name.indexOf(filterValue) !== -1
+      })
       .sort((A, B) => B.contributions - A.contributions)
       .map((contributor, index) => {
       return (
@@ -33,8 +33,7 @@ export default class ContributorPickerItem extends React.Component {
     });
   }
 
-  render()
-  {
+  render() {
     const { name, avatar, onRemove } = this.props;
     const { showContributorList, filterValue } = this.state;
     return (

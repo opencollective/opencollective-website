@@ -22,8 +22,7 @@ export default class UserPhoto extends React.Component {
       image.onerror = () => this.setState({avatar: getAvatarByNumber(user.id)});
       image.onload = () => this.setState({avatar: user.avatar});
       image.src = user.avatar;
-    }
-    else {
+    } else {
       this.setState({avatar: getAvatarByNumber(user.id)});
     }
   }

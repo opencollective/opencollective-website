@@ -92,7 +92,7 @@
     }
   }
   &.sponsor {
-    height: 310px;
+    height: 400px !important;
     .CollectiveCard-head {
       height: 160px;
       .CollectiveCard-background {
@@ -108,7 +108,15 @@
         display: none;
       }
       .CollectiveCard-description {
-        margin-top: 10px;
+        margin-top: 25px !important;
+      }
+    }
+    .CollectiveCard-footer {
+      & > .clearfix > .col {
+        width: 50%;
+        &:nth-child(1) {
+          display: none;
+        }
       }
     }
   }
@@ -116,7 +124,7 @@
 
 .CollectiveCard:not(.CollectiveCard--large) {
   width: 320px;
-  height: 454px;
+  height: 435px;
   margin: 15px;
   .CollectiveCard-head {
     width: 100%;
@@ -137,6 +145,7 @@
       margin: 0 15px;
       font-size: 14px;
       line-height: 1.24;
+      height: 90px;
     }
   }
   .CollectiveCard-footer {

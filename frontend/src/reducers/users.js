@@ -4,7 +4,7 @@ import Schemas from '../lib/schemas';
 import { normalize } from 'normalizr';
 
 import * as constants from '../constants/users';
-import {DONATE_GROUP_SUCCESS} from'../constants/groups';
+import {DONATE_GROUP_SUCCESS} from '../constants/groups';
 
 
 export default function users(state={

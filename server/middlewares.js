@@ -152,17 +152,17 @@ const addMeta = (req, res, next) => {
     };
   } else if (group.username) {
     const user = req.group;
-    var description = '';
+    let description = '';
 
-    if(user.groups.length > 0) {
+    if (user.groups.length > 0) {
       const belongsTo = filterCollection(user.groups, { role: 'MEMBER' });
       const backing = filterCollection(user.groups, { role: 'BACKER' });
 
-      if(belongsTo.length > 0) {
+      if (belongsTo.length > 0) {
         description += `a member of ${belongsTo.length} collectives`;
       }
-      if(backing.length > 0) {
-        if(description.length > 0) description += ' and ';
+      if (backing.length > 0) {
+        if (description.length > 0) description += ' and ';
         description += `supporting ${backing.length} collectives`;
       }
 

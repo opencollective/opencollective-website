@@ -74,7 +74,7 @@ function profile(state=profileInitialState, action={}) {
  * Donation form
  */
 function donation(state={}, action={}) {
-  switch(action.type) {
+  switch (action.type) {
     case constants.APPEND_DONATION_FORM:
       const newState = {};
       newState[action.tiername] = action.attributes;
@@ -135,7 +135,7 @@ const githubInitialState = {
 };
 
 function github(state=githubInitialState, action={}) {
-  switch(action.type) {
+  switch (action.type) {
     case constants.APPEND_GITHUB_FORM:
       return merge({}, state, { attributes: action.attributes });
     default:

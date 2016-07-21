@@ -12,6 +12,7 @@
       background-image: linear-gradient(to bottom, #ffffff, #f2faff);
     }
     a.seemore {
+      display: block;
       font-family: Montserrat;
       font-size: 16px;
       font-weight: normal;
@@ -211,7 +212,6 @@
     }
   }
 }
-
 @media (min-width: 833px) {
   .icons-container {
     background-image: url(../images/dotted-line.svg);
@@ -241,15 +241,5 @@
     .title {
       font-size: 32px;
     }
-  }
-}
-
-@media (max-width: 1200px) {
-  .HomePage section .cards a.seemore {
-    position: absolute;
-    margin: auto;
-    left: 0;
-    right: 0;
-    bottom: -10px;
   }
 }

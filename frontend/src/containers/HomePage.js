@@ -5,7 +5,12 @@ import 'numbro/dist/languages'
 
 import formatCurrency from '../lib/format_currency';
 
+<<<<<<< HEAD
 import LoginTopBar from '../containers/LoginTopBar';
+=======
+import OnBoardingHeader from '../components/on_boarding/OnBoardingHeader';
+import MailChimpInputSection from '../components/homepage/MailChimpInputSection';
+>>>>>>> master
 import PublicFooter from '../components/PublicFooter';
 import CollectiveCard from '../components/CollectiveCard';
 
@@ -136,9 +141,10 @@ export class HomePage extends Component {
           </div>
           <div className='cta'>
             <div className='text'>We are slowly letting in new kinds of collectives</div>
-            <div className='button color-green'><a href="mailto:info@opencollective.com?subject=join%20waiting%20list">join the waiting list!</a></div>
+            <div className='button color-green'>join the waiting list!</div>
           </div>
         </section>
+        <MailChimpInputSection mcListId="14d6233180" />
         <section className='HomePageSponsors blue-gradient'>
           <div className='heading'>Sponsors</div>
           <div className='subheading'>Collectives do amazing things for their communities thanks to these awesome sponsors.</div>
