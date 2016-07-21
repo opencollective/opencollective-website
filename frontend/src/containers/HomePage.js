@@ -4,6 +4,7 @@ import Numbro from 'numbro';
 import 'numbro/dist/languages'
 
 import formatCurrency from '../lib/format_currency';
+import i18n from '../lib/i18n';
 
 import LoginTopBar from '../containers/LoginTopBar';
 import MailChimpInputSection from '../components/homepage/MailChimpInputSection';
@@ -12,18 +13,6 @@ import CollectiveCard from '../components/CollectiveCard';
 
 import fetchHome from '../actions/homepage/fetch';
 
-const mapSponsorsCardProps = sponsor => {
-  sponsor.publicUrl = `/${sponsor.username}`;
-  sponsor.mission = `We are on a mission to ${sponsor.mission}`;
-  sponsor.stats = [{
-    label: 'collectives',
-    value: sponsor.collectives
-  },{
-    label: 'donations',
-    value: formatCurrency(sponsor.totalDonations, sponsor.currency, { compact: true, precision: 0 })
-  }];
-  return sponsor;
-};
 
 export class HomePage extends Component {
 
@@ -37,7 +26,7 @@ export class HomePage extends Component {
   }
 
   render() {
-    const { homepage } = this.props;
+    const { homepage, i18n } = this.props;
     const currency = 'USD';
     const opensource = homepage.collectives ? homepage.collectives.opensource : [];
     const meetup = homepage.collectives ? homepage.collectives.meetup : [];
@@ -46,8 +35,6 @@ export class HomePage extends Component {
     const totalCollectives = homepage.stats ? homepage.stats.totalCollectives : 0;
     const totalDonations = homepage.stats ? homepage.stats.totalDonations : 0;
     const totalDonors = homepage.stats ? homepage.stats.totalDonors : 0;
-
-    sponsors.map(mapSponsorsCardProps);
 
     return (
       <div className='HomePage'>
@@ -88,12 +75,8 @@ export class HomePage extends Component {
           <div className='cards'>
             {opensource.map(group => <CollectiveCard
               key={group.id}
-              bg={group.backgroundImage}
-              logo={group.logo}
-              name={group.name}
-              description={group.mission || group.description}
-              url={group.publicUrl}
-              stats={group.stats}
+              i18n={i18n}
+              {...group}
             />)}
             <a href='/opensource' className='seemore'>See more collectives</a>
           </div>
@@ -110,12 +93,8 @@ export class HomePage extends Component {
           <div className='cards'>
             {meetup.map(group => <CollectiveCard
               key={group.id}
-              bg={group.backgroundImage}
-              logo={group.logo}
-              name={group.name}
-              description={group.mission}
-              url={group.publicUrl}
-              stats={group.stats}
+              i18n={i18n}
+              {...group}
             />)}
           </div>
           <div className='cta' id='apply'>
@@ -130,13 +109,10 @@ export class HomePage extends Component {
           <div className='cards'>
             {sponsors.map(sponsor => <CollectiveCard
               key={sponsor.id}
-              bg={sponsor.backgroundImage}
-              className='sponsor'
-              logo={sponsor.logo}
-              name={sponsor.name}
-              description={sponsor.mission}
-              url={sponsor.publicUrl}
-              stats={sponsor.stats}
+              i18n={i18n}
+              publicUrl={`/${sponsor.username}`}
+              isSponsor={true}
+              {...sponsor}
             />)}
           </div>
           <div className='cta'>
@@ -181,6 +157,7 @@ export default connect(mapStateToProps, {
 
 function mapStateToProps({ homepage }) {
   return {
-    homepage
+    homepage,
+    i18n: i18n('en')
   }
 }

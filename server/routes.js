@@ -55,15 +55,15 @@ module.exports = (app) => {
   /**
    * Routes
    */
-  app.get('/:slug/banner.md', mw.cache(300), mw.fetchGroupBySlug, mw.fetchUsers(), controllers.banner.markdown);
-  app.get('/:slug/banner.js', mw.cache(3000), mw.fetchGroupBySlug, mw.fetchUsers(), controllers.banner.js);
-  app.get('/:slug/:tier.md', mw.cache(300), mw.fetchGroupBySlug, mw.fetchUsers(), controllers.banner.markdown);
+  app.get('/:slug/banner.md', mw.cache(300), controllers.profile, mw.fetchUsers(), controllers.banner.markdown);
+  app.get('/:slug/banner.js', mw.cache(3000), controllers.profile, mw.fetchUsers(), controllers.banner.js);
+  app.get('/:slug/:tier.md', mw.cache(300), controllers.profile, mw.fetchUsers(), controllers.banner.markdown);
   app.get('/:slug/:tier.:format(svg|png)', mw.cache(300), mw.fetchUsers(), controllers.banner.banner);
   app.get('/:slug/:tier/badge.svg', mw.cache(300), mw.fetchUsers(), controllers.banner.badge);
   app.get('/:slug/badge/:tier.svg', mw.cache(300), mw.fetchUsers(), controllers.banner.badge);
   app.get('/:slug/:tier/:position/avatar(.:format(png|jpg|svg))?', mw.cache(300), mw.ga, mw.fetchUsers({cache: 300}), controllers.banner.avatar);
   app.get('/:slug/:tier/:position/website', mw.ga, mw.fetchUsers(), controllers.banner.redirect);
-  app.get('/:slug([A-Za-z0-9-]+)/widget', mw.cache(300), mw.fetchGroupBySlug, controllers.collectives.widget);
+  app.get('/:slug([A-Za-z0-9-]+)/widget', mw.cache(300), controllers.profile, controllers.collectives.widget);
 
   /**
    * Server side render the react app
@@ -72,7 +72,7 @@ module.exports = (app) => {
    * When we refactor PublicGroup to fetch the group in the container, we can remove
    * the explicit routes and just do `app.use(render)`
    */
-  app.get('/', mw.ga, mw.addTitle('OpenCollective - Collect and disburse money transparently'), render);
+  app.get('/', mw.ga, controllers.homepage, mw.addTitle('OpenCollective - Collect and disburse money transparently'), render);
   app.get('/login/:token', mw.ga, mw.addTitle('Open Collective'), render);
   app.get('/login', mw.ga, mw.addTitle('Open Collective Login'), render);
   app.get('/leaderboard', mw.ga, mw.fetchLeaderboard, mw.addTitle('Open Collective Leaderboard'), render);
@@ -83,12 +83,12 @@ module.exports = (app) => {
   app.get('/github/apply', mw.ga, mw.addTitle('Sign up your Github repository'), render);
   app.get('/connect/github', mw.ga, render);
   app.get('/:slug/connect/twitter', mw.ga, render);
-  app.get('/:slug/edit-twitter', mw.ga, mw.fetchGroupBySlug, render);
+  app.get('/:slug/edit-twitter', mw.ga, controllers.profile, render);
   app.get('/subscriptions', mw.ga, mw.addTitle('My Subscriptions'), render);
-  app.get('/:slug([A-Za-z0-9-]+)/:type(expenses|donations)', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
-  app.get('/:slug([A-Za-z0-9-]+)/expenses/new', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
-  app.get('/:slug([A-Za-z0-9-]+)/donate/:amount', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
-  app.get('/:slug([A-Za-z0-9-]+)/donate/:amount/:interval', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
+  app.get('/:slug([A-Za-z0-9-]+)/:type(expenses|donations)', mw.ga, controllers.profile, mw.addMeta, render);
+  app.get('/:slug([A-Za-z0-9-]+)/expenses/new', mw.ga, controllers.profile, mw.addMeta, render);
+  app.get('/:slug([A-Za-z0-9-]+)/donate/:amount', mw.ga, controllers.profile, mw.addMeta, render);
+  app.get('/:slug([A-Za-z0-9-]+)/donate/:amount/:interval', mw.ga, controllers.profile, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-]+)', mw.ga, controllers.profile, mw.addMeta, render);
 
   app.use(mw.handleUncaughtError)

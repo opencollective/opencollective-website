@@ -18,16 +18,8 @@ const RelatedGroups = ({
 			</h2>
             {groupList.map(group => <CollectiveCard
               key={group.id}
-              bg={group.backgroundImage}
-              logo={group.logo}
-              name={group.name}
-              description={group.mission || group.description}
-              url={group.publicUrl}
-              yearlyIncome={group.yearlyIncome}
-              contributors={group.contributors}
-              backers={group.backers}
-              members={group.members}
               i18n={i18n}
+              {...group}
             />)}
 		</div>
 		</div>

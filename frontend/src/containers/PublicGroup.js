@@ -39,6 +39,7 @@ import getSocialMediaAvatars from '../actions/users/get_social_media_avatars';
 import validateSchema from '../actions/form/validate_schema';
 import decodeJWT from '../actions/session/decode_jwt';
 import uploadImage from '../actions/images/upload';
+import fetchProfile from '../actions/profile/fetch_by_slug';
 
 import profileSchema from '../joi_schemas/profile';
 
@@ -325,13 +326,12 @@ export class PublicGroup extends Component {
 
   componentWillMount() {
     const {
-      decodeJWT,
+      group,
       paypalIsDone,
-      hasFullAccount
+      hasFullAccount,
+      slug,
+      fetchProfile
     } = this.props;
-
-    // decode here because we don't handle auth on the server side yet
-    decodeJWT();
 
     if (paypalIsDone) {
       this.refreshData();
@@ -340,6 +340,11 @@ export class PublicGroup extends Component {
         showThankYouMessage: hasFullAccount
       });
     }
+
+    if (!group.mission) {
+      fetchProfile(slug);
+    }
+
   }
 
   // Used after a donation
@@ -436,7 +441,8 @@ export default connect(mapStateToProps, {
   getSocialMediaAvatars,
   validateSchema,
   decodeJWT,
-  appendDonationForm
+  appendDonationForm,
+  fetchProfile
 })(PublicGroup);
 
 function mapStateToProps({
@@ -510,6 +516,7 @@ function mapStateToProps({
     paypalIsDone: query.status === 'payment_success' && !!newUserId,
     newUser,
     hasFullAccount: newUser.hasFullAccount || false,
-    i18n: i18n(group.settings.lang || 'en')
+    i18n: i18n(group.settings.lang || 'en'),
+    slug: router.params.slug
   };
 }

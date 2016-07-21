@@ -20,49 +20,6 @@ const fetchUsers = (options) => {
   }
 };
 
-/**
- * Fetch group by slug
- */
-const fetchGroupBySlug = (req, res, next) => {
-  api
-    .get(`/groups/${req.params.slug.toLowerCase()}/`)
-    .then(group => {
-      req.group = group;
-      next();
-    })
-    .catch(next);
-};
-
-/**
- * Fetch the transactions server side
- */
-const fetchSubscriptionsByUserWithToken = (req, res, next) => {
-
-  if (!req.params.token) {
-    req.jwtInvalid = true;
-    return next();
-  }
-
-  api.get('/subscriptions', {headers: {
-      Authorization: `Bearer ${req.params.token}`
-    }})
-    .then(subscriptions => {
-      req.subscriptions = subscriptions;
-      next();
-    })
-    .catch((response) => {
-      const error = response.json.error;
-      if (error.type === 'jwt_expired') {
-        req.jwtExpired = true; // we will display the input form to renew the jwt
-        return next();
-      } else if (error.type === 'unauthorized') {
-        req.jwtInvalid = true;
-        return next();
-      }
-      next(error);
-    });
-};
-
 /*
  * Extract github username from token
  */
@@ -204,7 +161,7 @@ const handleUncaughtError = (error, req, res, next) => {
       }
       console.log('Error', error);
       console.log('Error stack', error.stack);
-      
+
       res
       .status(500)
       .render('pages/error', {
@@ -214,7 +171,7 @@ const handleUncaughtError = (error, req, res, next) => {
         options: {
           showGA: config.GoogleAnalytics.active
         }
-      }); 
+      });
     } else {
       next(error)
     }
@@ -224,8 +181,6 @@ export default {
   addMeta,
   addTitle,
   cache,
-  fetchGroupBySlug,
-  fetchSubscriptionsByUserWithToken,
   extractGithubUsernameFromToken,
   fetchUsers,
   fetchLeaderboard,

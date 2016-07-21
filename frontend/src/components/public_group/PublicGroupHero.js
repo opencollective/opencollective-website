@@ -38,7 +38,7 @@ export default class PublicGroupHero extends React.Component {
         </div>
         {yearlyIncome > 0 && (
             <div className='PublicGroupHero-backer-yearly-budget'>
-              {formattedYearlyIncome.split('').map((character) => <span className={/[^0-9]/.test(character) ? '-character' : '-digit'}>{character}</span>)}
+              {formattedYearlyIncome.split('').map((character, index) => <span key={index} className={/[^0-9]/.test(character) ? '-character' : '-digit'}>{character}</span>)}
             </div>
           )
         }

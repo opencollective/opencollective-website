@@ -21,6 +21,7 @@ export default function groups(state={}, action={}) {
       }
       return state;
 
+    case constants.PROFILE_SUCCESS:
     case constants.GROUP_SUCCESS:
       return merge({}, state, action.groups);
 

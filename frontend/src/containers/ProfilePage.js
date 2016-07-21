@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import i18n from '../lib/i18n';
-import formatCurrency from '../lib/format_currency';
 import filterCollection from '../lib/filter_collection';
 
 import LoginTopBar from '../containers/LoginTopBar';
@@ -21,17 +20,9 @@ export class ProfilePage extends Component {
 
     const { profile, i18n } = this.props;
 
-    profile.groups.map((group) => {
-      const sponsorsCount = filterCollection(group.backers, {tier: 'sponsor'}).length;
-      group.stats = [];
-      group.stats.push({label: 'backers', value: group.backers.length - sponsorsCount});
-      group.stats.push({label: 'sponsors', value: sponsorsCount});
-      group.stats.push({label: 'annual income', value: formatCurrency(group.yearlyIncome/100, group.currency, { compact: true, precision: 0 })});
-    })
-
     const belongsTo = filterCollection(profile.groups, { role: 'MEMBER' });
     const backing = filterCollection(profile.groups, { role: 'BACKER' });
-    const isEmpty = belongsTo.length === backing.length && backing.length === 0;console.log(backing)
+    const isEmpty = belongsTo.length === backing.length && backing.length === 0;
 
   	return (
   		<div className='ProfilePage'>
@@ -50,12 +41,9 @@ export class ProfilePage extends Component {
               <div className="lineA">{i18n.getString('proudMember')}</div>
               {belongsTo.map((group, index) => <CollectiveCard
                 key={index}
-                id={group.id}
-                bg={group.backgroundImage}
-                logo={group.logo}
-                name={group.name}
-                description={group.mission}
-                stats={group.stats}
+                i18n={i18n}
+                isCollectiveOnProfile={true}
+                {...group}
                 />
               )}
             </section>
@@ -66,12 +54,9 @@ export class ProfilePage extends Component {
               <div className="lineA">{profile.isOrganization ? i18n.getString('WeAreProudSupporters') : i18n.getString('IamAProudSupporter')}</div>
               {backing.map((group, index) => <CollectiveCard
                 key={index}
-                id={group.id}
-                bg={group.backgroundImage}
-                logo={group.logo}
-                name={group.name}
-                description={group.mission}
-                stats={group.stats}
+                i18n={i18n}
+                isCollectiveOnProfile={true}
+                {...group}
                 />
               )}
             </section>

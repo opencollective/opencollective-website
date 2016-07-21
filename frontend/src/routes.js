@@ -28,10 +28,10 @@ export default (
     <Route path="/github/apply" component={OnBoarding} />
     <Route path="/:slug/connect/twitter" component={ConnectTwitterButton} />
     <Route path="/:slug/edit-twitter" component={EditTwitter} />
-    <Route path="/:slug" component={PublicGroup} />
     <Route path="/:slug/expenses/new" component={Transactions} />
     <Route path="/:slug/:type(donations|expenses)" component={Transactions} />
-    <Route path="/:slug/donate/:amount" component={DonatePage} />
     <Route path="/:slug/donate/:amount/:interval" component={DonatePage} />
+    <Route path="/:slug/donate/:amount" component={DonatePage} />
+    <Route path="/:slug" component={PublicGroup} />
   </Route>
 );
