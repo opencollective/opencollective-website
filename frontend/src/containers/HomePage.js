@@ -5,7 +5,7 @@ import 'numbro/dist/languages'
 
 import formatCurrency from '../lib/format_currency';
 
-import OnBoardingHeader from '../components/on_boarding/OnBoardingHeader';
+import LoginTopBar from '../containers/LoginTopBar';
 import MailChimpInputSection from '../components/homepage/MailChimpInputSection';
 import PublicFooter from '../components/PublicFooter';
 import CollectiveCard from '../components/CollectiveCard';
@@ -68,7 +68,7 @@ export class HomePage extends Component {
 
     return (
       <div className='HomePage'>
-        <OnBoardingHeader />
+        <LoginTopBar />
         <section className='HomePageHero'>
           <div className='title'>
             <svg width='500px' height='70px' className='align-middle'>
@@ -80,7 +80,7 @@ export class HomePage extends Component {
         </section>
         <section className='HomePageInfo'>
           <div className='heading'>What is a Open Collective?</div>
-          <div className='subheading'>An unincorporated association that operates in full transparency</div>          
+          <div className='subheading'>An unincorporated association that operates in full transparency</div>
           <div className='icons-container clearfix'>
             <div className='col sm-col-6 md-col-4'>
               <div className='-graphic -tghost'>&nbsp;</div>
@@ -103,7 +103,7 @@ export class HomePage extends Component {
           <div className='heading'>Collectives for <span className='color-blue'>Open Source</span> projects</div>
           <div className='subheading'>These open source projects have created open collectives to share their expenses and let their community chip in.</div>
           <div className='cards'>
-            {opensource.map(group => <CollectiveCard 
+            {opensource.map(group => <CollectiveCard
               key={group.id}
               bg={group.backgroundImage}
               logo={group.logo}
@@ -125,7 +125,7 @@ export class HomePage extends Component {
           <div className='heading'>Collectives for <span className='color-green'>meetups</span></div>
           <div className='subheading'>Open Collective empowers local meetups to raise funds and have their own budget.</div>
           <div className='cards'>
-            {meetup.map(group => <CollectiveCard 
+            {meetup.map(group => <CollectiveCard
               key={group.id}
               bg={group.backgroundImage}
               logo={group.logo}
@@ -145,7 +145,7 @@ export class HomePage extends Component {
           <div className='heading'>Sponsors</div>
           <div className='subheading'>Collectives do amazing things for their communities thanks to these awesome sponsors.</div>
           <div className='cards'>
-            {sponsors.map(sponsor => <CollectiveCard 
+            {sponsors.map(sponsor => <CollectiveCard
               key={sponsor.id}
               bg={sponsor.backgroundImage}
               className='sponsor'
