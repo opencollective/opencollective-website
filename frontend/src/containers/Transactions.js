@@ -6,6 +6,8 @@ import sortBy from 'lodash/collection/sortBy';
 
 import LoginTopBar from '../containers/LoginTopBar';
 import ExpenseItem from '../components/ExpenseItem';
+import Button from '../components/Button';
+import Icon from '../components/Icon';
 
 import PublicFooter from '../components/PublicFooter';
 import SubmitExpense from '../containers/SubmitExpense';
@@ -19,7 +21,7 @@ export class Transactions extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {showSubmitExpense: props.router.location.pathname.match(/new$/) };
+    this.state = {showSubmitExpense: Boolean(props.router.location.pathname.match(/new$/)) };
   };
 
   toggleAddExpense() {
@@ -30,15 +32,17 @@ export class Transactions extends Component {
     const { transactions, users, i18n } = this.props;
     const showSubmitExpense = this.state.showSubmitExpense;
     const hasExistingTransactions = Boolean(transactions.length);
-    console.log('>>>>>>>>>>>....')
-    console.log(users)
-    console.log(transactions)
     return (
      <div className='Transactions'>
         <LoginTopBar />
         {showSubmitExpense && (
           <div className='Transactions-container'>
             <SubmitExpense onCancel={this.toggleAddExpense.bind(this)} />
+          </div>
+        )}
+        {!showSubmitExpense && (
+          <div className='Transactions-container padding40'>
+            <Button onClick={this.toggleAddExpense.bind(this)} label='Submit Expense' id='submitExpenseBtn' />
           </div>
         )}
         {hasExistingTransactions && 
@@ -49,6 +53,15 @@ export class Transactions extends Component {
             </div>
           </div>
         }
+        {!hasExistingTransactions && (
+          <div className='Transactions-container padding40 -empty-state' style={{height: '140px'}}>
+            <Icon type='expense' />
+            <div className='line1 inline'>
+              {i18n.getString(`expenseList-showUpHere`)}
+            </div>
+          </div>
+        )}
+
         <PublicFooter />
       </div>
     );
@@ -92,7 +105,7 @@ function mapStateToProps({
   users,
   router
 }) {
-  const type = (router.params.type) ? router.params.type.slice(0,-1) : "expense"; // remove trailing s for the API call
+  const type = (router.params.type) ? router.params.type.slice(0,-1) : 'expense'; // remove trailing s for the API call
   const group = values(groups)[0] || {}; // to refactor to allow only one group
   const list = (type === 'donation') ? transactions.isDonation : transactions.isExpense;
 

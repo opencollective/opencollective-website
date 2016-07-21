@@ -1,3 +1,7 @@
+body {
+	overflow-x: hidden;
+}
+
 .Transactions {
 	background-color: rgb(245, 246, 247);
 	.LoginTopBar {
@@ -13,6 +17,23 @@
 		margin-top: 30px;
 		margin-bottom: 30px;
 		background-color: #fff;
+		&.-empty-state {
+			.Icon {
+				vertical-align: middle;
+				margin-right: 20px;
+				height: 64px;
+				display: inline-block;
+				&:before {
+					font-size: 64px;
+				}
+			}
+			.line1 {
+				color: rgba(0, 0, 0, 0.4);
+			}
+		}
+		.PublicGroupThanks {
+			padding: 20px;
+		}
 	}
 	.padding40 {
 		padding: 40px;
@@ -21,7 +42,7 @@
 			font-family: Montserrat;
 			font-size: 14px;
 			font-weight: normal;
-			color: #000;
+			color: #363636;
 			text-transform: uppercase;
 		}
 		.expenses-container {
