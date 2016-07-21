@@ -16,10 +16,10 @@ export default () => {
           <nav>
             <ul className='list-reset m0'>
               <li className='inline-block'>
-                <a className='block h6 py3 px2 white muted -ff-sec -fw-bold' href='https://opencollective.com/#how'>How It Works</a>
+                <a className='block h6 py3 px2 white muted -ff-sec -fw-bold' href='https://opencollective.com/#howitworks'>How It Works</a>
               </li>
               <li className='inline-block'>
-                <a className='block h6 py3 px2 white muted -ff-sec -fw-bold' href='https://opencollective.com/#usecases'>Use Cases</a>
+                <a className='block h6 py3 px2 white muted -ff-sec -fw-bold' href='https://opencollective.com/#opensource'>Use Cases</a>
               </li>
               <li className='inline-block'>
                 <a className='block h6 py3 px2 white muted -ff-sec -fw-bold' href='https://opencollective.com/faq'>FAQ</a>
