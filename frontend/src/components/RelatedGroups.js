@@ -4,8 +4,12 @@ import CollectiveCard from '../components/CollectiveCard';
 
 const RelatedGroups = ({
 	groupList,
-	title
+	title,
+	i18n
 }) => {
+	if (groupList.length === 0) {
+		return (<div/>);
+	}
 	return (
 		<div className='container'>
 		<div className='RelatedGroups'>
@@ -23,6 +27,7 @@ const RelatedGroups = ({
               contributors={group.contributors}
               backers={group.backers}
               members={group.members}
+              i18n={i18n}
             />)}
 		</div>
 		</div>
@@ -36,7 +41,7 @@ RelatedGroups.propTypes = {
 
 RelatedGroups.defaultProps = {
 	groupList: [],
-	title: 'Related Collectives'
+	title: ''
 }
 
 export default RelatedGroups;

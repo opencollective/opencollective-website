@@ -16,22 +16,22 @@ export default class CollectiveCard extends Component {
   }
 
   mapCollectiveCardProps() {
-    const { contributors, members, backers, yearlyIncome, currency } = this.props;
+    const { contributors, members, backers, yearlyIncome, currency, i18n } = this.props;
 
     const stats = [];
     if (contributors && Object.keys(contributors).length > 0)
-      stats.push({ label: 'contributors', value: Object.keys(contributors).length });
+      stats.push({ label: i18n.getString('coreContributors'), value: Object.keys(contributors).length });
     else
-      stats.push({ label: 'members', value: members.length });
+      stats.push({ label: i18n.getString('members'), value: members.length });
 
-    stats.push({ label: 'backers', value: backers.length });
-    stats.push({ label: 'yearly income', value: formatCurrency(yearlyIncome/100, currency, { compact: true, precision: 0 }) });
+    stats.push({ label: i18n.getString('backers'), value: backers.length });
+    stats.push({ label: i18n.getString('annualIncome'), value: formatCurrency(yearlyIncome/100, currency, { compact: true, precision: 0 }) });
 
     return stats;
   }
 
   render() {
-    const {key, bg, logo, name, description, url, className} = this.props;
+    const {key, bg, logo, name, description, url, className, i18n} = this.props;
     const stats = this.mapCollectiveCardProps();
 
     if (stats.length === 2)
@@ -48,7 +48,7 @@ export default class CollectiveCard extends Component {
             </div>
             <div className='CollectiveCard-body'>
               <div className='CollectiveCard-name'>{name}</div>
-              <div className='CollectiveCard-description'>We are on a mission to {description}</div>
+              <div className='CollectiveCard-description'>{i18n.getString('missionTo')} {description}</div>
             </div>
             <div className='CollectiveCard-footer'>
               <div className='clearfix mt2'>

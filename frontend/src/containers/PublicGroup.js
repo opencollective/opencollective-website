@@ -81,7 +81,7 @@ export class PublicGroup extends Component {
             newUserId={newUser.id}
             closeDonationModal={this._closeDonationFlow.bind(this)} />
           <section className='pt4'>
-            <RelatedGroups title={'Check out similar collectives'} groupList={group.related} />
+            <RelatedGroups title={i18n.getString('checkOutOtherSimilarCollectives')} groupList={group.related} {...this.props} />
           </section>
         </div>
 
@@ -214,7 +214,7 @@ export class PublicGroup extends Component {
       group,
       expenses,
       donations,
-      users,
+      users
       // shareUrl,
     } = this.props;
 
@@ -282,7 +282,7 @@ export class PublicGroup extends Component {
         </section>
 
         <section id='related-groups' className='px2'>
-          <RelatedGroups groupList={group.related} />
+          <RelatedGroups groupList={group.related} {...this.props} />
         </section>
 
         <PublicFooter />
