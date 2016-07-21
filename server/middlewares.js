@@ -142,15 +142,16 @@ const ga = (req, res, next) => {
 const addMeta = (req, res, next) => {
   const group = req.group;
 
-  if (group.mission) {
+  req.meta = {};
+  if (!group.username) {
     req.meta = {
       url: group.publicUrl,
-      title: `Join ${group.name}'s open collective`,
-      description: `${group.name} is collecting funds to continue their activities. Chip in!`,
+      title: `${group.name} is on Open Collective`,
+      description: `${group.name} is on a mission to ${group.mission}`,
       image: group.image || group.logo,
       twitter: `@${group.twitterHandle}`,
     };
-  } else if (group.username) {
+  } else {
     const user = req.group;
     let description = '';
 
@@ -180,8 +181,6 @@ const addMeta = (req, res, next) => {
       twitter: `@${user.twitterHandle}`,
       image: user.avatar
     };
-  } else {
-    req.meta = {};
   }
 
   next();
