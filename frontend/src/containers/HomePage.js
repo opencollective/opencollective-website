@@ -22,7 +22,7 @@ const mapCollectiveCardProps = group => {
     group.stats.push({ label: 'members', value: group.members.length });
 
   group.stats.push({ label: 'backers', value: group.backers.length });
-  group.stats.push({ label: 'yearly income', value: formatCurrency(group.yearlyIncome/100, group.currency, { compact: true, precision: 0 }) });
+  group.stats.push({ label: 'annual income', value: formatCurrency(group.yearlyIncome/100, group.currency, { compact: true, precision: 0 }) });
 
   return group;
 };
