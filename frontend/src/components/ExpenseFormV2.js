@@ -10,7 +10,7 @@ import ImageUpload from './ImageUpload';
 import Input from './Input';
 import SelectCategory from './SelectCategory';
 import Select from './Select';
-import TextArea from './TextArea';
+import CustomTextArea from './CustomTextArea';
 import Notification from '../containers/Notification';
 import SubmitButton from './SubmitButton';
 import Button from './Button';
@@ -69,9 +69,10 @@ class ExpenseForm extends Component {
               {...this.props}
               uploading={null} 
               value={attributes.attachment}
-              onFinished={({url: attachment}) => appendExpenseForm({attachment})} />
+              onFinished={({url: attachment}) => appendExpenseForm({attachment})}
+              noDefaultImage />
           </div>
-          <div className='col col-6 pl1'>
+          <div className='col col-6 pl1 mt0'>
             <label>{i18n.getString('amount')}</label>
             <Input
               customClass='js-transaction-amount'
@@ -87,11 +88,14 @@ class ExpenseForm extends Component {
               categories={categories}
               handleChange={category => appendExpenseForm({category})} />
             <label>{i18n.getString('description')}</label>
-            <Input
+            <CustomTextArea
+              rows='1' 
+              resize='vertical'
               customClass='js-transaction-description'
               hasError={expense.error.title}
               value={attributes.title}
-              handleChange={title => appendExpenseForm({title})} />
+              onChange={title => appendExpenseForm({title})}
+              maxLength={255} />
           </div>
         </div>
         <div className='line1'>your information</div>
