@@ -56,6 +56,7 @@
     .ImageUpload {
       margin-top: 10px;
       padding-bottom: 30px;
+      text-align: center;
       & > div:nth-child(1) {
         height: 288px;
         background-color: #ffffff;
@@ -87,6 +88,11 @@
           }
           &:active {
             background-image: url(/static/images/users/upload-pressed.svg);
+          }
+          img[src="/static/images/mime-pdf.png"] {
+            height: 200px;
+            margin-top: 20px;
+            background-color: white;
           }
         }
         &.imagePreview {
