@@ -5,25 +5,15 @@ import values from 'lodash/object/values';
 import sortBy from 'lodash/collection/sortBy';
 
 import LoginTopBar from '../containers/LoginTopBar';
-import Input from '../components/Input';
-import SelectCategory from '../components/SelectCategory';
-import ImageUpload from '../components/ImageUpload';
 import ExpenseItem from '../components/ExpenseItem';
 
-import Currency from '../components/Currency';
-import DisplayUrl from '../components/DisplayUrl';
-import Icon from '../components/Icon';
 import PublicFooter from '../components/PublicFooter';
-import PublicTopBar from '../containers/PublicTopBar';
 import SubmitExpense from '../containers/SubmitExpense';
 import i18n from '../lib/i18n';
-
-import TransactionItem from '../components/TransactionItem';
 
 import fetchUsers from '../actions/users/fetch_by_group';
 import fetchTransactions from '../actions/transactions/fetch_by_group';
 import decodeJWT from '../actions/session/decode_jwt';
-import Button from '../components/Button';
 
 export class Transactions extends Component {
 
@@ -37,7 +27,7 @@ export class Transactions extends Component {
   };
 
   render() {
-    const { group, transactions, users, type, i18n } = this.props;
+    const { transactions, users, i18n } = this.props;
     const showSubmitExpense = this.state.showSubmitExpense;
     const hasExistingTransactions = Boolean(transactions.length);
     console.log('>>>>>>>>>>>....')

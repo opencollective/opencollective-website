@@ -39,3 +39,9 @@
 		line-height: 1.75;
 	}
 }
+
+@media (max-width: 818px) {
+	.Transactions .Transactions-container {
+		margin: 10px;
+	}
+}

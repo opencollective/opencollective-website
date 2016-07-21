@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
-import moment from 'moment';
 
 import formatCurrency from '../lib/format_currency';
 
@@ -12,9 +11,6 @@ import SelectCategory from './SelectCategory';
 import Select from './Select';
 import CustomTextArea from './CustomTextArea';
 import Notification from '../containers/Notification';
-import SubmitButton from './SubmitButton';
-import Button from './Button';
-import DatePicker from './DatePicker';
 import Currency from './Currency';
 
 class ExpenseForm extends Component {
@@ -49,7 +45,7 @@ class ExpenseForm extends Component {
     }
 
     return (
-      <div className='ExpenseForm'>
+      <div className={className}>
         <Notification {...this.props} autoclose/>
         <div className='line1'>collective information</div>
         <div className='info-block mr3'>
@@ -64,7 +60,7 @@ class ExpenseForm extends Component {
         </div>
         <div className='line1'>expense details</div>
         <div className='clearfix input-container'>
-          <div className='col col-6 pr1'>
+          <div className='col col-12 sm-col-12 md-col-6 lg-col-6 pr1'>
             <ImageUpload
               {...this.props}
               uploading={null} 
@@ -72,7 +68,7 @@ class ExpenseForm extends Component {
               onFinished={({url: attachment}) => appendExpenseForm({attachment})}
               noDefaultImage />
           </div>
-          <div className='col col-6 pl1 mt0'>
+          <div className='col col-12 sm-col-12 md-col-6 lg-col-6 pl1 mt0'>
             <label>{i18n.getString('amount')}</label>
             <Input
               customClass='js-transaction-amount'
@@ -100,7 +96,7 @@ class ExpenseForm extends Component {
         </div>
         <div className='line1'>your information</div>
         <div className='clearfix input-container'>
-          <div className='col col-6 pr1'>
+          <div className='col col-12 sm-col-12 md-col-6 lg-col-6 pr1'>
             <label>{i18n.getString('name')}</label>
             <Input
               customClass='js-transaction-name'
@@ -108,7 +104,7 @@ class ExpenseForm extends Component {
               value={attributes.name}
               handleChange={name => appendExpenseForm({name})} />
           </div>
-          <div className='col col-6 pl1'>
+          <div className='col col-12 sm-col-12 md-col-6 lg-col-6 pl1'>
             <label>{i18n.getString('email')}</label>
             <Input
               customClass='js-transaction-email'
@@ -117,7 +113,7 @@ class ExpenseForm extends Component {
               handleChange={email => appendExpenseForm({email})} />
           </div>
 
-          <div className='col col-6 pr1'>
+          <div className='col col-12 sm-col-12 md-col-6 lg-col-6  pr1'>
             <label>{i18n.getString('reimbursementMethod')}</label>
             <Select
               customClass='js-transaction-payoutMethod'
@@ -128,7 +124,7 @@ class ExpenseForm extends Component {
 
           {attributes.payoutMethod === 'paypal' && (
             
-          <div className='col col-6 pl1'>
+          <div className='col col-12 sm-col-12 md-col-6 lg-col-6  pl1'>
             <label>PayPal account/ Account number</label>
             <Input
               customClass='js-transaction-paypalEmail'
