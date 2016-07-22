@@ -33,7 +33,7 @@ export default class DonationDistributor extends Component {
     feesOnTop: false,
     method: 'stripe',
     optionalCommission: false,
-    skipModal: true,
+    skipModal: true
   }
 
   constructor(props) {

@@ -1,0 +1,1 @@
+export const INITIAL_RENDER = 'INITIAL_RENDER';

@@ -25,6 +25,7 @@ import PublicGroupSignupV2 from '../components/public_group/PublicGroupSignupV2'
 import PublicGroupThanksV2 from '../components/public_group/PublicGroupThanksV2';
 import BackerCard from '../components/public_group/BackerCard';
 import ContributorList from '../components/public_group/ContributorList';
+import RelatedGroups from '../components/RelatedGroups';
 
 import fetchGroup from '../actions/groups/fetch_by_id';
 import fetchUsers from '../actions/users/fetch_by_group';
@@ -38,6 +39,7 @@ import getSocialMediaAvatars from '../actions/users/get_social_media_avatars';
 import validateSchema from '../actions/form/validate_schema';
 import decodeJWT from '../actions/session/decode_jwt';
 import uploadImage from '../actions/images/upload';
+import fetchProfile from '../actions/profile/fetch_by_slug';
 
 import profileSchema from '../joi_schemas/profile';
 
@@ -79,7 +81,11 @@ export class PublicGroup extends Component {
             group={group}
             newUserId={newUser.id}
             closeDonationModal={this._closeDonationFlow.bind(this)} />
+          <section className='pt4'>
+            <RelatedGroups title={i18n.getString('checkOutOtherSimilarCollectives')} groupList={group.related} {...this.props} />
+          </section>
         </div>
+
       );
     } else if (this.state.showUserForm) {
       return (
@@ -209,7 +215,7 @@ export class PublicGroup extends Component {
       group,
       expenses,
       donations,
-      users,
+      users
       // shareUrl,
     } = this.props;
 
@@ -276,6 +282,10 @@ export class PublicGroup extends Component {
           </div>
         </section>
 
+        <section id='related-groups' className='px2'>
+          <RelatedGroups groupList={group.related} {...this.props} />
+        </section>
+
         <PublicFooter />
 
         {this._donationFlow()}
@@ -293,37 +303,36 @@ export class PublicGroup extends Component {
       fetchGroup
     } = this.props;
 
-    if (group.mission) {
-      fetchGroup(group.id);
-
-      fetchTransactions(group.id, {
-        per_page: NUM_TRANSACTIONS_TO_SHOW,
-        sort: 'createdAt',
-        direction: 'desc',
-        donation: true
-      });
-
-    fetchTransactions(group.id, {
-      per_page: NUM_TRANSACTIONS_TO_SHOW,
-      sort: 'createdAt',
-      direction: 'desc',
-      exclude: 'fees',
-      expense: true
-    });
-
-      fetchUsers(group.id);
+    if (!this.isUserProfile(group)) {
+      return Promise.all([
+        fetchGroup(group.id),
+        fetchTransactions(group.id, {
+          per_page: NUM_TRANSACTIONS_TO_SHOW,
+          sort: 'createdAt',
+          direction: 'desc',
+          donation: true
+        }),
+        fetchTransactions(group.id, {
+          per_page: NUM_TRANSACTIONS_TO_SHOW,
+          sort: 'createdAt',
+          direction: 'desc',
+          exclude: 'fees',
+          expense: true
+        }),
+        fetchUsers(group.id)
+      ])
     }
   }
 
   componentWillMount() {
     const {
-      decodeJWT,
+      group,
       paypalIsDone,
-      hasFullAccount
+      hasFullAccount,
+      slug,
+      fetchProfile,
+      loadData
     } = this.props;
-
-    // decode here because we don't handle auth on the server side yet
-    decodeJWT();
 
     if (paypalIsDone) {
       this.refreshData();
@@ -332,6 +341,11 @@ export class PublicGroup extends Component {
         showThankYouMessage: hasFullAccount
       });
     }
+
+    if (!this.isUserProfile(group) && loadData) {
+      fetchProfile(slug);
+    }
+
   }
 
   // Used after a donation
@@ -428,7 +442,8 @@ export default connect(mapStateToProps, {
   getSocialMediaAvatars,
   validateSchema,
   decodeJWT,
-  appendDonationForm
+  appendDonationForm,
+  fetchProfile
 })(PublicGroup);
 
 function mapStateToProps({
@@ -437,7 +452,8 @@ function mapStateToProps({
   transactions,
   users,
   session,
-  router
+  router,
+  app
 }) {
   const query = router.location.query;
   const newUserId = query.userid;
@@ -502,6 +518,8 @@ function mapStateToProps({
     paypalIsDone: query.status === 'payment_success' && !!newUserId,
     newUser,
     hasFullAccount: newUser.hasFullAccount || false,
-    i18n: i18n(group.settings.lang || 'en')
+    i18n: i18n(group.settings.lang || 'en'),
+    slug: router.params.slug,
+    loadData: app.rendered
   };
 }
