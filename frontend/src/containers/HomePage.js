@@ -4,41 +4,15 @@ import Numbro from 'numbro';
 import 'numbro/dist/languages'
 
 import formatCurrency from '../lib/format_currency';
+import i18n from '../lib/i18n';
 
-import OnBoardingHeader from '../components/on_boarding/OnBoardingHeader';
+import LoginTopBar from '../containers/LoginTopBar';
 import MailChimpInputSection from '../components/homepage/MailChimpInputSection';
 import PublicFooter from '../components/PublicFooter';
 import CollectiveCard from '../components/CollectiveCard';
 
 import fetchHome from '../actions/homepage/fetch';
 
-const mapCollectiveCardProps = group => {
-  group.mission = `We are on a mission to ${group.mission}`;
-  group.stats = [];
-
-  if (group.contributors && Object.keys(group.contributors).length > 0)
-    group.stats.push({ label: 'contributors', value: Object.keys(group.contributors).length });
-  else
-    group.stats.push({ label: 'members', value: group.members.length });
-
-  group.stats.push({ label: 'backers', value: group.backers.length });
-  group.stats.push({ label: 'yearly income', value: formatCurrency(group.yearlyIncome/100, group.currency, { compact: true, precision: 0 }) });
-
-  return group;
-};
-
-const mapSponsorsCardProps = sponsor => {
-  sponsor.publicUrl = `/${sponsor.username}`;
-  sponsor.mission = `We are on a mission to ${sponsor.mission}`;
-  sponsor.stats = [{
-    label: 'collectives',
-    value: sponsor.collectives
-  },{
-    label: 'donations',
-    value: formatCurrency(sponsor.totalDonations, sponsor.currency, { compact: true, precision: 0 })
-  }];
-  return sponsor;
-};
 
 export class HomePage extends Component {
 
@@ -47,12 +21,15 @@ export class HomePage extends Component {
   }
 
   componentDidMount() {
-    const { fetchHome } = this.props;
-    fetchHome();
+    const { fetchHome, loadData} = this.props;
+
+    if (loadData) {
+      fetchHome();
+    }
   }
 
   render() {
-    const { homepage } = this.props;
+    const { homepage, i18n } = this.props;
     const currency = 'USD';
     const opensource = homepage.collectives ? homepage.collectives.opensource : [];
     const meetup = homepage.collectives ? homepage.collectives.meetup : [];
@@ -62,13 +39,9 @@ export class HomePage extends Component {
     const totalDonations = homepage.stats ? homepage.stats.totalDonations : 0;
     const totalDonors = homepage.stats ? homepage.stats.totalDonors : 0;
 
-    opensource.map(mapCollectiveCardProps);
-    meetup.map(mapCollectiveCardProps);
-    sponsors.map(mapSponsorsCardProps);
-
     return (
       <div className='HomePage'>
-        <OnBoardingHeader />
+        <LoginTopBar />
         <section className='HomePageHero'>
           <div className='title'>
             <svg width='500px' height='70px' className='align-middle'>
@@ -78,9 +51,9 @@ export class HomePage extends Component {
           <div className='subtitle'>organizing the Internet generation</div>
           <div className='heading'>Collect money for your community, transparently.</div>
         </section>
-        <section className='HomePageInfo'>
-          <div className='heading'>What is a Open Collective?</div>
-          <div className='subheading'>An unincorporated association that operates in full transparency</div>          
+        <section className='HomePageInfo' id="howitworks">
+          <div className='heading'>What is an open collective?</div>
+          <div className='subheading'>An unincorporated association that operates in full transparency</div>
           <div className='icons-container clearfix'>
             <div className='col sm-col-6 md-col-4'>
               <div className='-graphic -tghost'>&nbsp;</div>
@@ -99,18 +72,14 @@ export class HomePage extends Component {
             </div>
           </div>
         </section>
-        <section className='HomePageOpenSource blue-gradient'>
+        <section className='HomePageOpenSource blue-gradient' id="opensource">
           <div className='heading'>Collectives for <span className='color-blue'>Open Source</span> projects</div>
           <div className='subheading'>These open source projects have created open collectives to share their expenses and let their community chip in.</div>
           <div className='cards'>
-            {opensource.map(group => <CollectiveCard 
+            {opensource.map(group => <CollectiveCard
               key={group.id}
-              bg={group.backgroundImage}
-              logo={group.logo}
-              name={group.name}
-              description={group.mission || group.description}
-              url={group.publicUrl}
-              stats={group.stats}
+              i18n={i18n}
+              {...group}
             />)}
             <a href='/opensource' className='seemore'>See more collectives</a>
           </div>
@@ -121,39 +90,32 @@ export class HomePage extends Component {
             </a>
           </div>
         </section>
-        <section className='HomePageMeetups blue-gradient'>
+        <section className='HomePageMeetups blue-gradient' id="meetups">
           <div className='heading'>Collectives for <span className='color-green'>meetups</span></div>
           <div className='subheading'>Open Collective empowers local meetups to raise funds and have their own budget.</div>
           <div className='cards'>
-            {meetup.map(group => <CollectiveCard 
+            {meetup.map(group => <CollectiveCard
               key={group.id}
-              bg={group.backgroundImage}
-              logo={group.logo}
-              name={group.name}
-              description={group.mission}
-              url={group.publicUrl}
-              stats={group.stats}
+              i18n={i18n}
+              {...group}
             />)}
           </div>
-          <div className='cta'>
+          <div className='cta' id='apply'>
             <div className='text'>We are slowly letting in new kinds of collectives</div>
             <div className='button color-green'>join the waiting list!</div>
           </div>
         </section>
         <MailChimpInputSection mcListId="14d6233180" />
-        <section className='HomePageSponsors blue-gradient'>
+        <section className='HomePageSponsors blue-gradient' id="sponsors">
           <div className='heading'>Sponsors</div>
           <div className='subheading'>Collectives do amazing things for their communities thanks to these awesome sponsors.</div>
           <div className='cards'>
-            {sponsors.map(sponsor => <CollectiveCard 
+            {sponsors.map(sponsor => <CollectiveCard
               key={sponsor.id}
-              bg={sponsor.backgroundImage}
-              className='sponsor'
-              logo={sponsor.logo}
-              name={sponsor.name}
-              description={sponsor.mission}
-              url={sponsor.publicUrl}
-              stats={sponsor.stats}
+              i18n={i18n}
+              publicUrl={`/${sponsor.username}`}
+              isSponsor={true}
+              {...sponsor}
             />)}
           </div>
           <div className='cta'>
@@ -196,8 +158,10 @@ export default connect(mapStateToProps, {
   fetchHome
 })(HomePage);
 
-function mapStateToProps({ homepage }) {
+function mapStateToProps({ homepage, app}) {
   return {
-    homepage
+    homepage,
+    i18n: i18n('en'),
+    loadData: app.rendered
   }
 }

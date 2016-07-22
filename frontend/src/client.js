@@ -10,6 +10,7 @@ import reducers from './reducers';
 import reduxMiddleware from './redux_middleware';
 
 import decodeJWT from './actions/session/decode_jwt';
+import initialRender from './actions/app/initial_render';
 
 const store = compose(
   reduxReactRouter({ createHistory, routes }),
@@ -27,4 +28,9 @@ const rootComponent = (
 
 const mountNode = document.getElementById('content');
 
-ReactDOM.render(rootComponent, mountNode);
+ReactDOM.render(
+	rootComponent,
+	mountNode,
+	() => store.dispatch(initialRender()));
+	// initialRender is called after the initial component loads
+	// so we don't refetch the data clientside

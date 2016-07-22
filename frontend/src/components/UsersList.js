@@ -6,10 +6,9 @@ import moment from 'moment';
 export default ({users=[], i18n}) => {
 
   const link = (href, title, component) => {
-    if(href) {
+    if (href) {
       return (<a href={href} title={title}>{component}</a>);
-    }
-    else {
+    } else {
       return component;
     }
   }

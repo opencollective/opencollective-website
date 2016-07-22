@@ -53,7 +53,7 @@ export class DonatePage extends Component {
       range: [amount, 10000000]
     }];
 
-    var donationSection;
+    let donationSection;
     if (this.state.showThankYouMessage || (isAuthenticated && this.state.showUserForm)) { // we don't handle userform from logged in users) {
       donationSection = <PublicGroupThanks message={i18n.getString('thankyou')} />;
     } else if (this.state.showUserForm) {

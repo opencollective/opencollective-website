@@ -3,7 +3,7 @@ import svg_to_png from 'svg-to-png';
 import crypto from 'crypto';
 import Promise from 'bluebird';
 
-var readFile = Promise.promisify(fs.readFile);
+const readFile = Promise.promisify(fs.readFile);
 
 module.exports = {
     /**
@@ -23,8 +23,7 @@ module.exports = {
             //       the creation of a new png :-)
             fs.statSync(outputFile);
             return readFile(outputFile);
-        }
-        catch (e) {
+        } catch (e) {
             // Otherwise, generate a new png (slow)
             fs.writeFileSync(svgFilePath, svg);
 

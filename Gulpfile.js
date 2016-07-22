@@ -12,10 +12,10 @@ const config = require('config');
 const request = require('request');
 
 gulp.task('purge', (cb) => {
-  if(!config.cloudflare.email) {
+  if (!config.cloudflare.email) {
     return gutil.log("purge", gutil.colors.yellow("CLOUDFLARE_EMAIL missing in the env. Skipping purging cloudflare cache"));
   }
-  if(!config.cloudflare.key) {
+  if (!config.cloudflare.key) {
     return gutil.log("purge", gutil.colors.yellow("CLOUDFLARE_KEY missing in the env. Skipping purging cloudflare cache"));
   }
   const options = {
@@ -29,9 +29,9 @@ gulp.task('purge', (cb) => {
     body: JSON.stringify({'purge_everything': true})
   }
   request(options, (err, res, body) => {
-    if(err) return cb(JSON.stringify(err));
+    if (err) return cb(JSON.stringify(err));
     const response = JSON.parse(body);
-    if(!response.success) return cb(response.errors[0].message);
+    if (!response.success) return cb(response.errors[0].message);
     return cb(null, "Success");
   });
 });

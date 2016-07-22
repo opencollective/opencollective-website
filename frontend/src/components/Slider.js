@@ -25,7 +25,7 @@ export default class Slider extends Component {
 
   render() {
     return (
-      <div 
+      <div
         ref="container"
         className={`Slider-container ${this.props.className}`}
         onMouseDown={this.onPress}
@@ -43,21 +43,18 @@ export default class Slider extends Component {
     );
   }
 
-  getContainerRect()
-  {
+  getContainerRect() {
     return this.refs.container.getBoundingClientRect();
   }
 
-  getPercentage(clientX)
-  {
+  getPercentage(clientX) {
     const containerRect = this.getContainerRect();
     if (clientX > containerRect.right) return 100;
     if (clientX < containerRect.left) return 0;
     return 100 * ((clientX - containerRect.left)/containerRect.width);
   }
 
-  mousifyTouchEvent(eventHandler)
-  {
+  mousifyTouchEvent(eventHandler) {
     return function mousifier(ev) {
       eventHandler(ev.touches[0]);
       ev.preventDefault();
@@ -66,8 +63,7 @@ export default class Slider extends Component {
 
   onPress(ev){
     const nextPercentage = this.getPercentage(ev.clientX);
-    if (this.props.value !== nextPercentage)
-    {
+    if (this.props.value !== nextPercentage) {
       this.props.onChange(nextPercentage, this.props.value);
     }
     window.addEventListener('mousemove', this.onMove, true);
@@ -79,12 +75,10 @@ export default class Slider extends Component {
   }
 
   onMove(ev){
-    if (this.state.pressed)
-    {
+    if (this.state.pressed) {
       const nextPercentage = this.getPercentage(ev.clientX);
-      if (this.props.value !== nextPercentage)
-      {
-        this.props.onChange(nextPercentage, this.props.value);      
+      if (this.props.value !== nextPercentage) {
+        this.props.onChange(nextPercentage, this.props.value);
         this.setState({dragging: true});
       }
     }

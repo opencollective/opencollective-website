@@ -2,7 +2,7 @@ import contains from 'lodash/collection/contains';
 import createLogger from 'redux-logger';
 import thunk from 'redux-thunk';
 
-var options = {};
+const options = {};
 
 if (process.env.NODE_ENV === 'production') {
   // Only show failure on production

@@ -33,36 +33,6 @@ const fetchGroupBySlug = (req, res, next) => {
     .catch(next);
 };
 
-/**
- * Fetch the transactions server side
- */
-const fetchSubscriptionsByUserWithToken = (req, res, next) => {
-
-  if (!req.params.token) {
-    req.jwtInvalid = true;
-    return next();
-  }
-
-  api.get('/subscriptions', {headers: {
-      Authorization: `Bearer ${req.params.token}`
-    }})
-    .then(subscriptions => {
-      req.subscriptions = subscriptions;
-      next();
-    })
-    .catch((response) => {
-      const error = response.json.error;
-      if (error.type === 'jwt_expired') {
-        req.jwtExpired = true; // we will display the input form to renew the jwt
-        return next();
-      } else if (error.type === 'unauthorized') {
-        req.jwtInvalid = true;
-        return next();
-      }
-      next(error);
-    });
-};
-
 /*
  * Extract github username from token
  */
@@ -142,27 +112,28 @@ const ga = (req, res, next) => {
 const addMeta = (req, res, next) => {
   const group = req.group;
 
-  if (group.mission) {
+  req.meta = {};
+  if (!group.username) {
     req.meta = {
       url: group.publicUrl,
-      title: `Join ${group.name}'s open collective`,
-      description: `${group.name} is collecting funds to continue their activities. Chip in!`,
+      title: `${group.name} is on Open Collective`,
+      description: `${group.name} is on a mission to ${group.mission}`,
       image: group.image || group.logo,
       twitter: `@${group.twitterHandle}`,
     };
-  } else if (group.username) {
+  } else {
     const user = req.group;
-    var description = '';
+    let description = '';
 
-    if(user.groups.length > 0) {
+    if (user.groups.length > 0) {
       const belongsTo = filterCollection(user.groups, { role: 'MEMBER' });
       const backing = filterCollection(user.groups, { role: 'BACKER' });
 
-      if(belongsTo.length > 0) {
+      if (belongsTo.length > 0) {
         description += `a member of ${belongsTo.length} collectives`;
       }
-      if(backing.length > 0) {
-        if(description.length > 0) description += ' and ';
+      if (backing.length > 0) {
+        if (description.length > 0) description += ' and ';
         description += `supporting ${backing.length} collectives`;
       }
 
@@ -180,8 +151,6 @@ const addMeta = (req, res, next) => {
       twitter: `@${user.twitterHandle}`,
       image: user.avatar
     };
-  } else {
-    req.meta = {};
   }
 
   next();
@@ -205,7 +174,7 @@ const handleUncaughtError = (error, req, res, next) => {
       }
       console.log('Error', error);
       console.log('Error stack', error.stack);
-      
+
       res
       .status(500)
       .render('pages/error', {
@@ -215,7 +184,7 @@ const handleUncaughtError = (error, req, res, next) => {
         options: {
           showGA: config.GoogleAnalytics.active
         }
-      }); 
+      });
     } else {
       next(error)
     }
@@ -226,7 +195,6 @@ export default {
   addTitle,
   cache,
   fetchGroupBySlug,
-  fetchSubscriptionsByUserWithToken,
   extractGithubUsernameFromToken,
   fetchUsers,
   fetchLeaderboard,

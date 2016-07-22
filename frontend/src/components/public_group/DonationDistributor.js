@@ -33,7 +33,7 @@ export default class DonationDistributor extends Component {
     feesOnTop: false,
     method: 'stripe',
     optionalCommission: false,
-    skipModal: true,
+    skipModal: true
   }
 
   constructor(props) {
@@ -221,7 +221,9 @@ export default class DonationDistributor extends Component {
     const chargeAmount = this.getChargeAmount();
     const amount = chargeAmount.toFixed(2);
     const formattedAmount = formatCurrency(chargeAmount, currency, {compact: true});
-    const distribution = this.options.map((opt) => { return {id: opt.id, value: opt.value} });
+    const distribution = this.options.map((opt) => {
+      return {id: opt.id, value: opt.value}
+    });
     const label = skipModal ? (buttonLabel || i18n.getString('donate')) : `${i18n.getString('pay')} ${formattedAmount}`;
     const customButtonStyle = label.length > 30 ? {fontSize: '14px', padding: '14px 16px'} : {};
 

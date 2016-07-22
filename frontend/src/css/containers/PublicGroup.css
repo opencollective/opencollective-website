@@ -1,4 +1,10 @@
 /* GENERAL */
+.PublicGroup {
+  .LoginTopBar {
+    margin-bottom: 20px;
+  }
+}
+
 .PublicGroup-title {
   font-size: 1.75rem;
 }
@@ -25,6 +31,30 @@
 
 
 /* HERO */
+.PublicGroupHero {
+  .LoginTopBar {
+    background-color: transparent;
+    position: absolute;
+    top: 15px;
+    left: 0;
+    right: 0;
+    .LoginTopBar-nav .LoginTopBarButton {
+      color: white;
+      border-color: white;
+      &:hover {
+        background-color: transparent;
+        opacity: .8;
+      }
+    }
+    .LoginTopBar-nav .LoginTopBarLink {
+      color: white !important;
+      &:hover {
+        opacity: .8;
+      }
+    }
+
+  }
+}
 .PublicGroupHero.bg-cover {
   background-position: 50% 50%;
 }

@@ -43,7 +43,7 @@ export default class LoginTopBar extends Component {
   }
 
   render() {
-    const { user, isAuthenticated, redirectRoute } = this.props;
+    const { user, isAuthenticated, redirectRoute, pushState } = this.props;
     const { showProfileMenu } = this.state;
     const avatar = isAuthenticated && user && user.avatar ? user.avatar : '/static/images/default_avatar.svg';
     const name = isAuthenticated && user && user.name ? user.name : null;
@@ -51,13 +51,13 @@ export default class LoginTopBar extends Component {
 
     return (
       <div className='LoginTopBar'>
-        <a href="/">
-          <div className='LoginTopBar-logo'></div>
+        <a>
+          <div className='LoginTopBar-logo' onClick={() => pushState(null, '/')}></div>
         </a>
         <div className='LoginTopBar-nav'>
-          <a className='LoginTopBarButton' href='#'>start a collective</a>
-          <a className='LoginTopBarLink' href='/how'>How it works</a>
-          <a className='LoginTopBarLink' href='/discover'>Discover</a>
+          <a className='LoginTopBarButton' href='/#apply'>start a collective</a>
+          <a className='LoginTopBarLink' href='#howitworks'>How it works</a>
+          <a className='LoginTopBarLink' href='#opensource'>Discover</a>
           <div className='LoginTopBarSeperator'></div>
           {isAuthenticated &&
             <div className={`LoginTopBarProfileButton ${showProfileMenu ? '-active' : ''}`} onClick={this.toggleProfileMenu.bind(this)}>
@@ -67,7 +67,7 @@ export default class LoginTopBar extends Component {
               {showProfileMenu && this.renderProfileMenu()}
             </div>
           }
-          {!isAuthenticated && <a className='LoginTopBarLink' href={`\'/login?next=${redirectRoute}\'`}>Login</a>}
+          {!isAuthenticated && <a className='LoginTopBarLink' href={`/login?next=${redirectRoute || window.location.pathname}`}>Login</a>}
         </div>
       </div>
     )

@@ -39,11 +39,10 @@ class ImageUpload extends Component {
     let label = i18n.getString('uploadReceipt');
 
     if (value) {
-      if(value.match(/\.pdf$/)) {
+      if (value.match(/\.pdf$/)) {
         imgsrc = '/static/images/mime-pdf.png';
         label = file.name;
-      }
-      else {
+      } else {
         imgsrc = value;
         label = ''
         className = 'imagePreview';
@@ -53,8 +52,7 @@ class ImageUpload extends Component {
     if (isUploading) {
       label = 'Uploading...';
       return uploadingTemplate();
-    }
-    else {
+    } else {
       return defaultTemplate();
     }
 

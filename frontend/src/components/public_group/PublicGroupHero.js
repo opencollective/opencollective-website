@@ -1,12 +1,11 @@
 import React from 'react';
-import PublicTopBarV2 from '../../containers/PublicTopBarV2';
+import LoginTopBar from '../../containers/LoginTopBar';
 import formatCurrency from '../../lib/format_currency';
 import filterCollection from '../../lib/filter_collection';
 
 export default class PublicGroupHero extends React.Component {
 
-  renderHeroStatistics()
-  {
+  renderHeroStatistics() {
     const { group, i18n } = this.props;
     const yearlyIncome = group.yearlyIncome / 100;
     const formattedYearlyIncome = yearlyIncome && formatCurrency(yearlyIncome, group.currency, { compact: true, precision: 0 });
@@ -20,20 +19,14 @@ export default class PublicGroupHero extends React.Component {
     })
     .filter(x => x);
 
-    if (tierCountStringArray.length > 1)
-    {
-      if (tierCountStringArray.length > 2)
-      {
+    if (tierCountStringArray.length > 1) {
+      if (tierCountStringArray.length > 2) {
         const lastCountString = tierCountStringArray.pop();
         tierCountString = `${tierCountStringArray.join(', ')} ${i18n.getString('and')} ${lastCountString}`
-      }
-      else
-      {
+      } else {
         tierCountString = tierCountStringArray.join(` ${i18n.getString('and')} `);
       }
-    }
-    else
-    {
+    } else {
       tierCountString = tierCountStringArray[0];
     }
 
@@ -45,7 +38,7 @@ export default class PublicGroupHero extends React.Component {
         </div>
         {yearlyIncome > 0 && (
             <div className='PublicGroupHero-backer-yearly-budget'>
-              {formattedYearlyIncome.split('').map((character) => <span className={/[^0-9]/.test(character) ? '-character' : '-digit'}>{character}</span>)}
+              {formattedYearlyIncome.split('').map((character, index) => <span key={index} className={/[^0-9]/.test(character) ? '-character' : '-digit'}>{character}</span>)}
             </div>
           )
         }
@@ -60,7 +53,7 @@ export default class PublicGroupHero extends React.Component {
     return (
       <section className='PublicGroupHero relative px2 bg-black bg-cover white' style={{backgroundImage: `url(${collectiveBg})`}}>
         <div className='container relative center'>
-          <PublicTopBarV2 loginRedirectTo={`/${group.slug}`} className='pt3 absolute top-0 left-0 right-0' />
+          <LoginTopBar loginRedirectTo={`/${group.slug}`} />
           <div className='PublicGroupHero-content'>
             {group.logo && (
               <div className="PublicGroupHero-logo mb3 bg-contain" style={{backgroundImage: `url(${group.logo})`}}></div>
