@@ -8,8 +8,8 @@ module.exports = {
     resetDb(client)
       .url(`${config.host.website}/testcollective/donations`)
       .waitForElementVisible('body', 1000)
-      .assert.containsText('body', 'OpenCollective Test Group')
-      .waitForElementVisible('.expenses-container', 5000)
+      .assert.containsText('body', 'OpenCollective test group on the test server')
+      .assert.visible('.expenses-container', 5000)
   },
 
   'Donations list': (client) => {
