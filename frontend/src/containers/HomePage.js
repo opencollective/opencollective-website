@@ -21,8 +21,11 @@ export class HomePage extends Component {
   }
 
   componentDidMount() {
-    const { fetchHome } = this.props;
-    fetchHome();
+    const { fetchHome, loadData} = this.props;
+
+    if (loadData) {
+      fetchHome();
+    }
   }
 
   render() {
@@ -155,9 +158,10 @@ export default connect(mapStateToProps, {
   fetchHome
 })(HomePage);
 
-function mapStateToProps({ homepage }) {
+function mapStateToProps({ homepage, app}) {
   return {
     homepage,
-    i18n: i18n('en')
+    i18n: i18n('en'),
+    loadData: app.rendered
   }
 }

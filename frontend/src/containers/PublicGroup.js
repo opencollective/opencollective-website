@@ -303,7 +303,7 @@ export class PublicGroup extends Component {
       fetchGroup
     } = this.props;
 
-    if (group.mission) {
+    if (!this.isUserProfile(group)) {
       return Promise.all([
         fetchGroup(group.id),
         fetchTransactions(group.id, {
@@ -330,7 +330,8 @@ export class PublicGroup extends Component {
       paypalIsDone,
       hasFullAccount,
       slug,
-      fetchProfile
+      fetchProfile,
+      loadData
     } = this.props;
 
     if (paypalIsDone) {
@@ -341,7 +342,7 @@ export class PublicGroup extends Component {
       });
     }
 
-    if (!group.mission) {
+    if (!this.isUserProfile(group) && loadData) {
       fetchProfile(slug);
     }
 
@@ -451,7 +452,8 @@ function mapStateToProps({
   transactions,
   users,
   session,
-  router
+  router,
+  app
 }) {
   const query = router.location.query;
   const newUserId = query.userid;
@@ -517,6 +519,7 @@ function mapStateToProps({
     newUser,
     hasFullAccount: newUser.hasFullAccount || false,
     i18n: i18n(group.settings.lang || 'en'),
-    slug: router.params.slug
+    slug: router.params.slug,
+    loadData: app.rendered
   };
 }

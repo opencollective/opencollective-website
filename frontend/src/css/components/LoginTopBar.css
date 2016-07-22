@@ -13,6 +13,9 @@
     left: 20px;
     top: 15px;
   }
+  .LoginTopBar-logo:hover {
+    cursor: pointer;
+  }
   .LoginTopBar-nav {
     position: absolute;
     right: 20px;
@@ -88,7 +91,7 @@
           }
         }
       }
-      &:active, 
+      &:active,
       &.-active {
         background-color: #f7f7f7;
         .LoginTopBarProfileButton-caret {
@@ -219,7 +222,7 @@
   .-dash {
     position: absolute;
     top: 7px;
-    left: 20px; 
+    left: 20px;
     right: 20px;
     height: 1px;
     background-color: #e6e6e6;
