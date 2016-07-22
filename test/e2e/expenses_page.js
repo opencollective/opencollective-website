@@ -15,7 +15,6 @@ module.exports = {
   'Expenses list': (client) => {
 
      client
-       // .assert.containsText('.line1.-latest', 'Latest expenses')
        .assert.containsText('.ExpenseItem:first-child', 'Expense 2')
        .assert.containsText('.ExpenseItem:last-child', 'Expense 1')
        .end();

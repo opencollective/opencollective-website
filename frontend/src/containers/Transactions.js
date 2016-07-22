@@ -6,6 +6,7 @@ import sortBy from 'lodash/collection/sortBy';
 
 import LoginTopBar from '../containers/LoginTopBar';
 import ExpenseItem from '../components/ExpenseItem';
+import TransactionItem from '../components/TransactionItem';
 import Button from '../components/Button';
 import Icon from '../components/Icon';
 import Currency from '../components/Currency';
@@ -64,7 +65,13 @@ export class Transactions extends Component {
           <div className='Transactions-container padding40 expenses-container'>
             <div className='line1'>latest {`${type}s`}</div>
             <div className='-list'>
-              {transactions.map(tx => <ExpenseItem key={tx.id} expense={tx} i18n={i18n} user={users[tx.UserId]} precision={2} />)}
+              {transactions.map(tx => {
+                if (type === 'expense') {
+                  return <ExpenseItem key={tx.id} expense={tx} i18n={i18n} user={users[tx.UserId]} precision={2} />;
+                } else {
+                  return <TransactionItem key={tx.id} transaction={tx} i18n={i18n} user={users[tx.UserId]} precision={2} />;
+                }
+              })}
             </div>
           </div>
         }

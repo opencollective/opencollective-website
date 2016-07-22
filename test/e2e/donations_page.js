@@ -15,9 +15,8 @@ module.exports = {
   'Donations list': (client) => {
 
      client
-       // .assert.containsText('.line1.-latest', 'Latest donations')
-       .assert.containsText('.ExpenseItem:first-child', 'Donation 2')
-       .assert.containsText('.ExpenseItem:last-child', 'Donation 1')
+       .assert.containsText('.TransactionItem:first-child', 'Donation 2')
+       .assert.containsText('.TransactionItem:last-child', 'Donation 1')
        .end();
    }
 };
