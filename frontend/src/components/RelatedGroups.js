@@ -14,7 +14,7 @@ const RelatedGroups = ({
 		<div className='container'>
 		<div className='RelatedGroups'>
 			<h2 className='RelatedGroups-title center m0 -ff-sec -fw-bold'>
-				{title}
+				{title || i18n.getString('otherSimilarCollectives')}
 			</h2>
             {groupList.map(group => <CollectiveCard
               key={group.id}
