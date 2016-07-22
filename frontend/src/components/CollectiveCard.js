@@ -1,7 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 
 import formatCurrency from '../lib/format_currency';
-import filterCollection from '../lib/filter_collection';
 
 const DEFAULT_BG = '/static/images/collectives/default-header-bg.jpg';
 const DEFAULT_LOGOS = [
@@ -18,25 +17,25 @@ export default class CollectiveCard extends Component {
 
   mapCollectiveCardProps() {
     const {
-      contributors,
-      members,
-      backers,
+      contributorsCount,
+      membersCount,
+      backersAndSponsorsCount,
       yearlyIncome,
       currency,
       i18n
     } = this.props;
 
     const stats = [];
-    if (contributors && Object.keys(contributors).length > 0)
-      stats.push({ label: i18n.getString('coreContributors'), value: Object.keys(contributors).length });
-    else if (members && Object.keys(members).length > 0) {
-      stats.push({ label: i18n.getString('members'), value: members.length });
+    if (contributorsCount)
+      stats.push({ label: i18n.getString('coreContributors'), value: contributorsCount});
+    else if (membersCount) {
+      stats.push({ label: i18n.getString('members'), value: membersCount });
     } else {
       stats.push({ label: ' ', value: ' '});
     }
 
-    if (backers && Object.keys(backers).length > 0) {
-      stats.push({ label: i18n.getString('backers'), value: backers.length });
+    if (backersAndSponsorsCount) {
+      stats.push({ label: i18n.getString('backers'), value: backersAndSponsorsCount });
     }
 
     stats.push({ label: i18n.getString('annualIncome'), value: formatCurrency(yearlyIncome/100, currency, { compact: true, precision: 0 }) });
@@ -44,10 +43,9 @@ export default class CollectiveCard extends Component {
   }
 
   mapCollectiveCardOnProfileProps() {
-    const { backers, yearlyIncome, currency, i18n } = this.props;
-    const sponsorsCount = filterCollection(backers, {tier: 'sponsor'}).length;
+    const { backersCount, sponsorsCount, yearlyIncome, currency, i18n } = this.props;
     const stats = [];
-    stats.push({label: i18n.getString('backers'), value: backers.length - sponsorsCount});
+    stats.push({label: i18n.getString('backers'), value: backersCount});
     stats.push({label: i18n.getString('sponsors'), value: sponsorsCount});
     stats.push({label: i18n.getString('annualIncome'), value: formatCurrency(yearlyIncome/100, currency, { compact: true, precision: 0 })});
     return stats;
