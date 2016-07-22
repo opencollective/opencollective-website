@@ -20,6 +20,19 @@ const fetchUsers = (options) => {
   }
 };
 
+/**
+ * Fetch group by slug
+ */
+const fetchGroupBySlug = (req, res, next) => {
+  api
+    .get(`/groups/${req.params.slug.toLowerCase()}/`)
+    .then(group => {
+      req.group = group;
+      next();
+    })
+    .catch(next);
+};
+
 /*
  * Extract github username from token
  */
@@ -181,6 +194,7 @@ export default {
   addMeta,
   addTitle,
   cache,
+  fetchGroupBySlug,
   extractGithubUsernameFromToken,
   fetchUsers,
   fetchLeaderboard,

@@ -8,7 +8,7 @@ module.exports = {
     resetDb(client)
       .url(`${config.host.website}/`)
       .waitForElementVisible('body', 1000)
-      .assert.containsText('body', 'What is an Open Collective');
+      .assert.containsText('body', 'What is an open collective');
   },
 
   'Homepage shows': (client) => {
