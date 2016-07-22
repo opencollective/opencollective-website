@@ -24,7 +24,7 @@ import notify from '../actions/notification/notify';
 import resetNotifications from '../actions/notification/reset';
 import decodeJWT from '../actions/session/decode_jwt';
 
-import ExpenseForm from '../components/ExpenseFormV2';
+import ExpenseForm from '../components/ExpenseForm';
 
 export class SubmitExpense extends Component {
 
