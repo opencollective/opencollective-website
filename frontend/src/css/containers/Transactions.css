@@ -31,8 +31,16 @@ body {
 				color: rgba(0, 0, 0, 0.4);
 			}
 		}
+		&.expenses-container {
+			.-list {
+				padding-top: 40px;
+			}
+		}
 		.PublicGroupThanks {
 			padding: 20px;
+		}
+		.ExpenseForm {
+			padding-top: 30px;
 		}
 	}
 	.padding40 {
@@ -47,6 +55,27 @@ body {
 		}
 		.expenses-container {
 			margin-top: 30px;
+		}
+		.info-block {
+			vertical-align: top;
+			display: inline-block;
+			min-width: 160px; 
+			height: 45px;
+			margin-top: 20px;
+			.info-block-value {
+				font-family: Montserrat;
+				font-size: 24px;
+				font-weight: normal;
+				color: #313131;
+				line-height: 1.25;
+			}
+			.info-block-label {
+				font-family: Lato;
+				font-size: 10px;
+				font-weight: bold;
+				color: #b3b3b3;
+				text-transform: uppercase;
+			}
 		}
 	}
 	.Button {
@@ -64,5 +93,8 @@ body {
 @media (max-width: 818px) {
 	.Transactions .Transactions-container {
 		margin: 10px;
+		&:nth-child(2) {
+			border-bottom: 1px solid #e2e2e2;
+		}
 	}
 }

@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
 
 import formatCurrency from '../lib/format_currency';
+import env from '../lib/env';
 
 import payoutMethods from '../ui/payout_methods';
 
@@ -11,7 +12,6 @@ import SelectCategory from './SelectCategory';
 import Select from './Select';
 import CustomTextArea from './CustomTextArea';
 import Notification from '../containers/Notification';
-import Currency from './Currency';
 
 class ExpenseForm extends Component {
 
@@ -33,7 +33,7 @@ class ExpenseForm extends Component {
   render() {
     const { expense, categories, group, appendExpenseForm, isUploading, enableVAT, i18n } = this.props;
     const attributes = expense.attributes;
-    const hasAttachment = attributes.attachment;
+    const hasAttachment = env.NODE_ENV !== 'production' || attributes.attachment;
     const className = classnames({
       'ExpenseForm': true,
       'ExpenseForm--isUploading': isUploading,
@@ -47,17 +47,6 @@ class ExpenseForm extends Component {
     return (
       <div className={className}>
         <Notification {...this.props} autoclose/>
-        <div className='line1'>collective information</div>
-        <div className='info-block mr3'>
-          <div className='info-block-value'>{group.name}</div>
-          <div className='info-block-label'>collective</div>
-        </div>
-        <div className='info-block'>
-          <div className='info-block-value'>
-            <Currency value={group.balance/100} currency={group.currency} precision={2} />
-          </div>
-          <div className='info-block-label'>funds</div>
-        </div>
         <div className='line1'>expense details</div>
         <div className='clearfix input-container'>
           <div className='col col-12 sm-col-12 md-col-6 lg-col-6 pr1'>

@@ -1,6 +1,7 @@
 .ExpenseForm {
   box-sizing: border-box;
   padding: 40px;
+  margin: 0;
   .line1 {
     height: 17px;
     font-family: Montserrat;
@@ -9,28 +10,6 @@
     color: #363636;
     text-transform: uppercase;
     margin-bottom: 15px;
-  }
-  .info-block {
-    vertical-align: top;
-    display: inline-block;
-    min-width: 160px; 
-    height: 45px;
-    margin-top: 20px;
-    margin-bottom: 40px;
-    .info-block-value {
-      font-family: Montserrat;
-      font-size: 24px;
-      font-weight: normal;
-      color: #313131;
-      line-height: 1.25;
-    }
-    .info-block-label {
-      font-family: Lato;
-      font-size: 10px;
-      font-weight: bold;
-      color: #b3b3b3;
-      text-transform: uppercase;
-    }
   }
   .input-container {
     label {
@@ -130,9 +109,6 @@
     input[type="file"] {
       position: absolute; 
     }
-  }
-  .expenses-container {
-    padding-top: 40px;
   }
 }
 

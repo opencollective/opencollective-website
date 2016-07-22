@@ -8,16 +8,16 @@ module.exports = {
     resetDb(client)
       .url(`${config.host.website}/testcollective/donations`)
       .waitForElementVisible('body', 1000)
-      .assert.containsText('body', 'OpenCollective test group on the test server')
-      .assert.visible('div[class=PublicGroup-transactions]', 5000)
+      .assert.containsText('body', 'OpenCollective Test Group')
+      .waitForElementVisible('.expenses-container', 5000)
   },
 
   'Donations list': (client) => {
 
      client
-       .assert.containsText('div[class=PublicContent] > h2', 'All donations')
-       .assert.containsText('div[class=TransactionItem]:first-child', 'Donation 2')
-       .assert.containsText('div[class=TransactionItem]:last-child', 'Donation 1')
+       // .assert.containsText('.line1.-latest', 'Latest donations')
+       .assert.containsText('.ExpenseItem:first-child', 'Donation 2')
+       .assert.containsText('.ExpenseItem:last-child', 'Donation 1')
        .end();
    }
 };

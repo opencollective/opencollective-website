@@ -8,16 +8,16 @@ module.exports = {
     resetDb(client)
       .url(`${config.host.website}/testcollective/expenses`)
       .waitForElementVisible('body', 1000)
-      .assert.containsText('body', 'OpenCollective test group on the test server')
-      .assert.visible('div[class=PublicGroup-transactions]', 5000)
+      .assert.containsText('body', 'OpenCollective Test Group')
+      .assert.visible('.expenses-container', 5000)
   },
 
   'Expenses list': (client) => {
 
      client
-       .assert.containsText('div[class=PublicContent] > h2', 'All expenses')
-       .assert.containsText('div[class=TransactionItem]:first-child', 'Expense 2')
-       .assert.containsText('div[class=TransactionItem]:last-child', 'Expense 1')
+       // .assert.containsText('.line1.-latest', 'Latest expenses')
+       .assert.containsText('.ExpenseItem:first-child', 'Expense 2')
+       .assert.containsText('.ExpenseItem:last-child', 'Expense 1')
        .end();
    },
 
@@ -26,10 +26,10 @@ module.exports = {
       .click('#submitExpenseBtn')
       .setValue('.js-transaction-name input', 'test user 1')
       .setValue('.js-transaction-email input', 'test@gmail.com')
-      .setValue('.js-transaction-description input', 'drinks')
+      .setValue('.CustomTextArea textarea', 'drinks')
       .setValue('.js-transaction-amount input', 10)
       .setValue('.js-transaction-payoutMethod', 'other')
-      .setValue('.js-transaction-note', 'test note')
+      .setValue('.ImageUpload input', 'someReceipt.pdf')
       .click('button[type=submit]')
       .waitForElementVisible('.PublicGroupThanks', 5000)
       .assert.containsText('.PublicGroupThanks', 'Expense sent')

@@ -8,6 +8,7 @@ import LoginTopBar from '../containers/LoginTopBar';
 import ExpenseItem from '../components/ExpenseItem';
 import Button from '../components/Button';
 import Icon from '../components/Icon';
+import Currency from '../components/Currency';
 
 import PublicFooter from '../components/PublicFooter';
 import SubmitExpense from '../containers/SubmitExpense';
@@ -29,35 +30,49 @@ export class Transactions extends Component {
   };
 
   render() {
-    const { transactions, users, i18n } = this.props;
+    const { transactions, users, i18n, group, type } = this.props;
     const showSubmitExpense = this.state.showSubmitExpense;
     const hasExistingTransactions = Boolean(transactions.length);
     return (
      <div className='Transactions'>
         <LoginTopBar />
-        {showSubmitExpense && (
-          <div className='Transactions-container'>
+        <div className='Transactions-container padding40' style={{marginBottom: '0'}}>
+          <div className='line1'>collective information</div>
+          <div className='info-block mr3'>
+            <div className='info-block-value'>{group.name}</div>
+            <div className='info-block-label'>collective</div>
+          </div>
+          <div className='info-block'>
+            <div className='info-block-value'>
+              <Currency value={group.balance/100} currency={group.currency} precision={2} />
+            </div>
+            <div className='info-block-label'>funds</div>
+          </div>
+        </div>
+
+        {type === 'expense' && showSubmitExpense && (
+          <div className='Transactions-container' style={{marginTop: '0'}}>
             <SubmitExpense onCancel={this.toggleAddExpense.bind(this)} />
           </div>
         )}
-        {!showSubmitExpense && (
-          <div className='Transactions-container padding40'>
+        {(!showSubmitExpense && type === 'expense') && (
+          <div className='Transactions-container padding40' style={{marginTop: '0'}}>
             <Button onClick={this.toggleAddExpense.bind(this)} label='Submit Expense' id='submitExpenseBtn' />
           </div>
         )}
         {hasExistingTransactions && 
-          <div className='Transactions-container padding40'>
-            <div className='line1'>latest expenses</div>
-            <div className='expenses-container'>
-              {transactions.filter(tx => tx.type === 'EXPENSE').map(ex => <ExpenseItem key={ex.id} expense={ex} i18n={i18n} user={users[ex.UserId]} precision={2} />)}
+          <div className='Transactions-container padding40 expenses-container'>
+            <div className='line1'>latest {`${type}s`}</div>
+            <div className='-list'>
+              {transactions.map(tx => <ExpenseItem key={tx.id} expense={tx} i18n={i18n} user={users[tx.UserId]} precision={2} />)}
             </div>
           </div>
         }
         {!hasExistingTransactions && (
-          <div className='Transactions-container padding40 -empty-state' style={{height: '140px'}}>
+          <div className='Transactions-container padding40 expenses-container -empty-state' style={{height: '140px'}}>
             <Icon type='expense' />
             <div className='line1 inline'>
-              {i18n.getString(`expenseList-showUpHere`)}
+              {i18n.getString(`${type}List-showUpHere`)}
             </div>
           </div>
         )}
