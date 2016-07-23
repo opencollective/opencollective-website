@@ -3,10 +3,11 @@ import React from 'react';
 import UserCard from '../../components/UserCard';
 import Markdown from '../../components/Markdown';
 import { displayUrl } from '../../components/DisplayUrl';
+import RelatedGroups from '../../components/RelatedGroups';
 
 export default class PublicGroupWhoWeAre extends React.Component {
   render() {
-    const { group, i18n } = this.props;
+    const { group, i18n, isSupercollective } = this.props;
 
     const title = (group.slug === 'opensource') ? '' : i18n.getString('coreContributors');
 
@@ -15,7 +16,7 @@ export default class PublicGroupWhoWeAre extends React.Component {
         <div className='PublicGroupIntro-container container center relative PublicGroupIntro--no-logo bg-no-repeat'>
           <h2 className='PublicGroupIntro-title m0 -ff-sec -fw-bold'>{i18n.getString('weAre')} {group.name}</h2>
           <h3 className='PublicGroup-subtitle mt0 mb2 -ff-sec -fw-light max-width-3 mx-auto'>{group.description}</h3>
-          
+
           {group.website && (
             <div className='PublicGroupIntro-website pt1'>
               <a href={group.website} className='px3 -btn -green -btn-outline -btn-small -ttu -ff-sec -fw-bold'>{displayUrl(group.website)}</a>
@@ -40,6 +41,10 @@ export default class PublicGroupWhoWeAre extends React.Component {
               </div>
             </div>
           ) : null}
+
+          {isSupercollective ?
+            <RelatedGroups title={''} groupList={group.superCollectiveData} {...this.props} />
+            : null }
         </div>
       </section>
     );
