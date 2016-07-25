@@ -31,6 +31,14 @@
       box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.2);
       border: solid 1px #f2f2f2;
       padding: 10px 20px;
+      &.disabled, &[disabled] {
+        box-shadow: none;
+        color: #7a7b82;
+        &:hover, &:active {
+          color: #7a7b82;
+          cursor: default;
+        }
+      }
     }
     .ImageUpload {
       margin-top: 10px;
@@ -107,7 +115,9 @@
       margin-bottom: 20px;
     }
     input[type="file"] {
-      position: absolute; 
+      position: absolute;
+      width: 1px;
+      height: 1px;
     }
   }
 }

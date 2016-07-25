@@ -31,7 +31,7 @@ export class Transactions extends Component {
   };
 
   render() {
-    const { transactions, users, i18n, group, type } = this.props;
+    const { transactions, users, i18n, group, type, user } = this.props;
     const showSubmitExpense = this.state.showSubmitExpense;
     const hasExistingTransactions = Boolean(transactions.length);
     return (
@@ -53,7 +53,7 @@ export class Transactions extends Component {
 
         {type === 'expense' && showSubmitExpense && (
           <div className='Transactions-container' style={{marginTop: '0'}}>
-            <SubmitExpense onCancel={this.toggleAddExpense.bind(this)} />
+            <SubmitExpense onCancel={this.toggleAddExpense.bind(this)} user={user} />
           </div>
         )}
         {(!showSubmitExpense && type === 'expense') && (
@@ -132,7 +132,6 @@ function mapStateToProps({
   const list = (type === 'donation') ? transactions.isDonation : transactions.isExpense;
 
   group.settings = group.settings || { lang: 'en' };
-
   return {
     session,
     group,
@@ -140,6 +139,7 @@ function mapStateToProps({
     router,
     users,
     i18n: i18n(group.settings.lang),
-    type
+    type,
+    user: session.isAuthenticated ? users[session.user.id] : null
   };
 }

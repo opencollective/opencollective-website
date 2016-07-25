@@ -30,8 +30,16 @@ class ExpenseForm extends Component {
     );
   }
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      prefilled: false,
+    };
+  }
+
   render() {
-    const { expense, categories, group, appendExpenseForm, isUploading, enableVAT, i18n } = this.props;
+    const { expense, categories, group, appendExpenseForm, isUploading, enableVAT, i18n, user } = this.props;
+    const prefilled = this.state.prefilled;
     const attributes = expense.attributes;
     const hasAttachment = env.NODE_ENV !== 'production' || attributes.attachment;
     const className = classnames({
@@ -42,6 +50,15 @@ class ExpenseForm extends Component {
     let amountPlaceholder = formatCurrency(0, group.currency);
     if (enableVAT) {
       amountPlaceholder += ' (including VAT)';
+    }
+
+    if (user && !prefilled) {
+      attributes.name = user.name;
+      attributes.email = user.email;
+      if (user.paypalEmail) {
+        attributes.paypalEmail = user.paypalEmail;
+      }
+      this.setState({prefilled: true});
     }
 
     return (
@@ -96,6 +113,7 @@ class ExpenseForm extends Component {
           <div className='col col-12 sm-col-12 md-col-6 lg-col-6 pl1'>
             <label>{i18n.getString('email')}</label>
             <Input
+              disabled={user && user.email}
               customClass='js-transaction-email'
               hasError={expense.error.email}
               value={attributes.email}
@@ -114,7 +132,7 @@ class ExpenseForm extends Component {
           {attributes.payoutMethod === 'paypal' && (
             
           <div className='col col-12 sm-col-12 md-col-6 lg-col-6  pl1'>
-            <label>PayPal account/ Account number</label>
+            <label>Paypal Email</label>
             <Input
               customClass='js-transaction-paypalEmail'
               hasError={expense.error.paypalEmail}

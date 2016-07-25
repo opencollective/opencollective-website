@@ -10,17 +10,19 @@ const Input = (
     handleChange,
     value,
     customClass,
-    prefix
+    prefix,
+    disabled
   }) => {
     const className = classnames({
       Input: true,
       'Input--error': hasError,
       [customClass]: !!customClass
     });
-
+    const disabledProp = disabled ? {disabled: disabled} : {}
     return (
       <div className={className} data-prefix={prefix}>
         <input
+          {...disabledProp}
           className='Field'
           type={type}
           maxLength={maxLength}
