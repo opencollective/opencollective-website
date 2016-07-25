@@ -520,6 +520,7 @@ function mapStateToProps({
     hasFullAccount: newUser.hasFullAccount || false,
     i18n: i18n(group.settings.lang || 'en'),
     slug: router.params.slug,
-    loadData: app.rendered
+    loadData: app.rendered,
+    isSupercollective: group.isSupercollective
   };
 }

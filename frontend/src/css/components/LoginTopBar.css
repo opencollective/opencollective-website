@@ -17,9 +17,20 @@
     cursor: pointer;
   }
   .LoginTopBar-nav {
+    box-sizing: border-box;
     position: absolute;
     right: 20px;
     padding-top: 15px;
+    .LoginTopBar-Links {
+      display: inline-block;
+      min-width: 200px;
+      list-style: none;
+      li {
+        display: inline-block;
+      }
+      padding-left: 10px;
+      padding-right: 10px;
+    }
     .LoginTopBarProfileButton,
     .LoginTopBarButton,
     .LoginTopBarLink {
@@ -233,4 +244,47 @@
 .LoginTopBar-nav .LoginTopBarLink:last-child {
   margin-right: 0;
   padding-right: 0;
+}
+
+@media (min-width: 701px) {
+  .LoginTopBar .LoginTopBarProfileMenu {
+    .LoginTopBar-Links {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .LoginTopBar div:not(.LoginTopBarProfileMenu) {
+    .LoginTopBar-Links {
+      display: none;
+    }
+    .LoginTopBarSeperator {
+      visibility: hidden;
+    }
+  }
+  .LoginTopBar .LoginTopBarProfileMenu {
+    .LoginTopBar-Links {
+      display: block !important;
+      width: 100%;
+      .LoginTopBarButton {
+        display: none;
+      }
+      .LoginTopBarLink {
+        box-sizing: border-box;
+        display: inline-block;
+        width: 100%;
+        text-decoration: none;
+        font-family: Montserrat;
+        font-size: 14px;
+        font-weight: 400;
+        text-align: left;
+        color: #84898c;
+        padding: 1px 20px;
+        border-radius: 4px;
+        margin: 0;
+        letter-spacing: 0;
+      }
+    }
+  }
 }
