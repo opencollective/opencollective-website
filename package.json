@@ -13,7 +13,8 @@
   },
   "scripts": {
     "start": "NODE_CONFIG_DIR=./server/config node server",
-    "dev": "npm run build && WEBSITE_PORT=3000 nf start -j Procfile_dev",
+    "dev": "WEBSITE_PORT=3000 nf start -j Procfile_dev",
+    "dev:server": "node server/webpack.dev.js",
     "hint": "eslint '**/*.js' --quiet",
     "pretest": "npm run hint",
     "test": "npm run test:server && npm run test:unit",
@@ -108,7 +109,8 @@
     "svg-to-png": "^3.1.0",
     "uglify-js": "2.6.2",
     "universal-analytics": "0.3.11",
-    "webpack": "^2.1.0-beta.20"
+    "webpack": "^2.1.0-beta.20",
+    "webpack-dev-server": "^1.14.1"
   },
   "devDependencies": {
     "chai": "3.5.0",

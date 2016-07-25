@@ -48,7 +48,7 @@ export class HomePage extends Component {
               <use xlinkHref='#svg-logotype' fill='#303233'/>
             </svg>
           </div>
-          <div className='subtitle'>organizing the Internet generation</div>
+          <div className='subtitle'>organizing the Internet</div>
           <div className='heading'>Collect money for your community, transparently.</div>
         </section>
         <section className='HomePageInfo' id="howitworks">
