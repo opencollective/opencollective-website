@@ -1,0 +1,63 @@
+.Faq {
+  background-color: #f5f6f7;
+
+  .LoginTopBar {
+    background-color: #fff;
+  }
+  .paper {
+    box-sizing: border-box;
+    margin: 30px auto 90px auto;
+    padding: 20px;
+    width: 900px;
+    min-height: 200px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px 0 rgba(45, 77, 97, 0.3);
+  }
+  h1 {
+    height: 38px;
+    font-family: Montserrat;
+    font-size: 32px;
+    font-weight: 300;
+    text-align: center;
+    color: #000000;
+  }
+  h2 {
+    height: 29px;
+    font-family: Montserrat;
+    font-size: 24px;
+    font-weight: 300;
+    color: #000000;
+
+  }
+  h3 {
+    height: 24px;
+    font-family: Montserrat;
+    font-size: 20px;
+    font-weight: 300;
+    color: #000000;
+  }
+  h4 {
+    height: 22px;
+    font-family: Lato;
+    font-size: 18px;
+    font-weight: normal;
+    color: #000000;
+  }
+  h5 {
+    height: 19px;
+    font-family: Montserrat;
+    font-size: 16px;
+    font-weight: normal;
+    color: #000000;
+  }
+  p, label {
+    height: 23px;
+    font-family: Lato;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 1.44;
+    text-align: center;
+    color: #787d80;
+  }
+}
