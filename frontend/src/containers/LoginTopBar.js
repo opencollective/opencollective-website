@@ -15,11 +15,22 @@ export default class LoginTopBar extends Component {
     };
   }
 
+  renderLinks() {
+    return (
+      <ul className='LoginTopBar-Links'>
+        <li><a className='LoginTopBarButton' href='/#apply'>start a collective</a></li>
+        <li><a className='LoginTopBarLink' href='/#howitworks'>How it works</a></li>
+        <li><a className='LoginTopBarLink' href='/#opensource'>Discover</a></li>
+      </ul>
+    )
+  }
+
   renderProfileMenu() {
 
     return (
       <div className='LoginTopBarProfileMenu' onClick={(e) => e.nativeEvent.stopImmediatePropagation()}>
         <div>
+          {this.renderLinks()}
           <div className='LoginTopBarProfileMenuHeading'>
             <span>collectives</span>
             <div className='-dash'></div>
@@ -55,9 +66,7 @@ export default class LoginTopBar extends Component {
           <div className='LoginTopBar-logo' onClick={() => pushState(null, '/')}></div>
         </a>
         <div className='LoginTopBar-nav'>
-          <a className='LoginTopBarButton' href='/#apply'>start a collective</a>
-          <a className='LoginTopBarLink' href='#howitworks'>How it works</a>
-          <a className='LoginTopBarLink' href='#opensource'>Discover</a>
+          {this.renderLinks()}
           <div className='LoginTopBarSeperator'></div>
           {isAuthenticated &&
             <div className={`LoginTopBarProfileButton ${showProfileMenu ? '-active' : ''}`} onClick={this.toggleProfileMenu.bind(this)}>
