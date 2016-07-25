@@ -43,7 +43,7 @@ export default class PublicGroupWhoWeAre extends React.Component {
           ) : null}
 
           {isSupercollective ?
-            <RelatedGroups title={''} groupList={group.superCollectiveData} {...this.props} />
+            <RelatedGroups title={' '} groupList={group.superCollectiveData} {...this.props} />
             : null }
         </div>
       </section>
