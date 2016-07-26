@@ -42,7 +42,14 @@ export class SubmitExpense extends Component {
     } = this.props;
 
     if (this.state.showThankYouMessage) {
-      return (<PublicGroupThanks message="Expense sent" />);
+      return (
+        <div>
+          <PublicGroupThanks message="Expense sent" />
+            <div style={{padding: '20px', textAlign: 'center', paddingTop: 0}}>
+              <a href="#another" onClick={() => window.location.reload()} >Submit another expense</a>
+            </div>
+        </div>
+      );
     } else {
       return (<ExpenseForm {...this.props} onSubmit={createExpenseFn.bind(this)} onCancel={onCancel} />);
     }
@@ -91,7 +98,7 @@ export function createExpenseFn() {
   })
   .then(() => {
     window.scrollTo(0, 0);
-    this.setState({ showThankYouMessage: true })
+    this.setState({ showThankYouMessage: true });
   })
   .catch(error => notify('error', error.message));
 };

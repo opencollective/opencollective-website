@@ -23,7 +23,7 @@ class ImageUpload extends Component {
     );
   }
 
-  content({value, file, isUploading, uploading, template, i18n}) {
+  content({value, file, isUploading, uploading, template, i18n, noDefaultImage}) {
 
     const defaultTemplate = isFunction(template) ? template : () => (
         <div className={className}>
@@ -35,7 +35,7 @@ class ImageUpload extends Component {
     const uploadingTemplate = isFunction(uploading) ? uploading : defaultTemplate;
 
     let className='placeholder';
-    let imgsrc = '/static/images/uploading.png';
+    let imgsrc = noDefaultImage ? '' : '/static/images/uploading.png';
     let label = i18n.getString('uploadReceipt');
 
     if (value) {

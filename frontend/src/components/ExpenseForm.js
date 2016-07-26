@@ -1,37 +1,26 @@
 import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
-import moment from 'moment';
 
 import formatCurrency from '../lib/format_currency';
+import env from '../lib/env';
 
 import payoutMethods from '../ui/payout_methods';
 
 import ImageUpload from './ImageUpload';
 import Input from './Input';
-import SelectTag from './SelectCategory';
+import SelectCategory from './SelectCategory';
 import Select from './Select';
-import TextArea from './TextArea';
+import CustomTextArea from './CustomTextArea';
 import Notification from '../containers/Notification';
-import SubmitButton from './SubmitButton';
-import Button from './Button';
-import DatePicker from './DatePicker';
 
 class ExpenseForm extends Component {
 
   vatInput() {
-    const {
-      enableVAT,
-      expense,
-      group,
-      appendExpenseForm,
-      i18n
-    } = this.props;
-
+    const { enableVAT, expense, group, appendExpenseForm, i18n } = this.props;
     if (!enableVAT) return;
-
     return (
       <div>
-        <span className='inline'>{i18n.getString('vat')}</span>
+        <label>{i18n.getString('vat')}</label>
         <Input
           placeholder={formatCurrency(0, group.currency)}
           hasError={expense.error.vat}
@@ -41,94 +30,98 @@ class ExpenseForm extends Component {
     );
   }
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      prefilled: false,
+    };
+  }
+
   render() {
-    const {
-      expense,
-      categories,
-      group,
-      appendExpenseForm,
-      isUploading,
-      enableVAT,
-      i18n
-    } = this.props;
-
+    const { expense, categories, group, appendExpenseForm, isUploading, enableVAT, i18n, user } = this.props;
+    const prefilled = this.state.prefilled;
     const attributes = expense.attributes;
-
+    const hasAttachment = env.NODE_ENV !== 'production' || attributes.attachment;
     const className = classnames({
       'ExpenseForm': true,
       'ExpenseForm--isUploading': isUploading,
       'js-form': true, // for testing
     });
-
     let amountPlaceholder = formatCurrency(0, group.currency);
     if (enableVAT) {
       amountPlaceholder += ' (including VAT)';
     }
 
+    if (user && !prefilled) {
+      attributes.name = user.name;
+      attributes.email = user.email;
+      if (user.paypalEmail) {
+        attributes.paypalEmail = user.paypalEmail;
+      }
+      this.setState({prefilled: true});
+    }
+
     return (
       <div className={className}>
-        <Notification {...this.props} />
-        <ImageUpload
-          {...this.props}
-          value={attributes.attachment}
-          onFinished={({url: attachment}) => appendExpenseForm({attachment})} />
-        <form
-          name='expense'
-          className='ExpenseForm-form'
-          onSubmit={this.onSubmit.bind(this)} >
-          <div className='row'>
-            <label>{i18n.getString('name')}: </label>
-            <Input
-              customClass='js-transaction-name'
-              hasError={expense.error.name}
-              value={attributes.name}
-              handleChange={name => appendExpenseForm({name})} />
+        <Notification {...this.props} autoclose/>
+        <div className='line1'>expense details</div>
+        <div className='clearfix input-container'>
+          <div className='col col-12 sm-col-12 md-col-6 lg-col-6 pr1'>
+            <ImageUpload
+              {...this.props}
+              uploading={null} 
+              value={attributes.attachment}
+              onFinished={({url: attachment}) => appendExpenseForm({attachment})}
+              noDefaultImage />
           </div>
-          <div className='row'>
-            <label>{i18n.getString('email')}:</label>
-            <Input
-              customClass='js-transaction-email'
-              hasError={expense.error.email}
-              value={attributes.email}
-              handleChange={email => appendExpenseForm({email})} />
-          </div>
-          <div className='row'>
-            <label>{i18n.getString('description')}: </label>
-            <Input
-              customClass='js-transaction-description'
-              hasError={expense.error.title}
-              value={attributes.title}
-              handleChange={title => appendExpenseForm({title})} />
-          </div>
-          <div className='row'>
-            <label>{i18n.getString('amount')}: </label>
+          <div className='col col-12 sm-col-12 md-col-6 lg-col-6 pl1 mt0'>
+            <label>{i18n.getString('amount')}</label>
             <Input
               customClass='js-transaction-amount'
               placeholder={amountPlaceholder}
               hasError={expense.error.amountText}
               value={attributes.amountText}
               handleChange={amountText => appendExpenseForm({amountText})} />
-          </div>
-          {this.vatInput()}
-          <div className='row'>
-            <label>{i18n.getString('date')}:</label>
-            <DatePicker
-              customClass='js-transaction-createdAt'
-              selected={moment(attributes.incurredAt)}
-              maxDate={moment()}
-              handleChange={incurredAt => appendExpenseForm({incurredAt})} />
-          </div>
-          <div className='row'>
-            <label>{i18n.getString('category')}:</label>
-            <SelectTag
+            {this.vatInput()}
+            <label>{i18n.getString('category')}</label>
+            <SelectCategory
               customClass='js-transaction-category'
               attributes={attributes}
               categories={categories}
               handleChange={category => appendExpenseForm({category})} />
+            <label>{i18n.getString('description')}</label>
+            <CustomTextArea
+              rows='1' 
+              resize='vertical'
+              customClass='js-transaction-description'
+              hasError={expense.error.title}
+              value={attributes.title}
+              onChange={title => appendExpenseForm({title})}
+              maxLength={255} />
+          </div>
+        </div>
+        <div className='line1'>your information</div>
+        <div className='clearfix input-container'>
+          <div className='col col-12 sm-col-12 md-col-6 lg-col-6 pr1'>
+            <label>{i18n.getString('name')}</label>
+            <Input
+              customClass='js-transaction-name'
+              hasError={expense.error.name}
+              value={attributes.name}
+              handleChange={name => appendExpenseForm({name})} />
+          </div>
+          <div className='col col-12 sm-col-12 md-col-6 lg-col-6 pl1'>
+            <label>{i18n.getString('email')}</label>
+            <Input
+              disabled={user && user.email}
+              customClass='js-transaction-email'
+              hasError={expense.error.email}
+              value={attributes.email}
+              handleChange={email => appendExpenseForm({email})} />
           </div>
 
-          <div className='row'>
-            <label>{i18n.getString('reimbursementMethod')}:</label>
+          <div className='col col-12 sm-col-12 md-col-6 lg-col-6  pr1'>
+            <label>{i18n.getString('reimbursementMethod')}</label>
             <Select
               customClass='js-transaction-payoutMethod'
               options={payoutMethods(group.settings.lang)}
@@ -137,32 +130,20 @@ class ExpenseForm extends Component {
           </div>
 
           {attributes.payoutMethod === 'paypal' && (
-            <div className='row'>
-              <label>{i18n.getString('paypalEmail')} ({i18n.getString('ifDifferentThanAbove')}):</label>
-              <Input
-                customClass='js-transaction-paypalEmail'
-                hasError={expense.error.paypalEmail}
-                value={attributes.paypalEmail || attributes.email}
-                handleChange={paypalEmail => appendExpenseForm({paypalEmail})} />
-            </div>
+            
+          <div className='col col-12 sm-col-12 md-col-6 lg-col-6  pl1'>
+            <label>Paypal Email</label>
+            <Input
+              customClass='js-transaction-paypalEmail'
+              hasError={expense.error.paypalEmail}
+              value={attributes.paypalEmail || attributes.email}
+              handleChange={paypalEmail => appendExpenseForm({paypalEmail})} />
+          </div>
           )}
-          <div className='row textarea'>
-            <label>{i18n.getString('note')}:</label>
-            <TextArea
-              customClass='js-transaction-note'
-              placeholder={i18n.getString('optional')}
-              value={attributes.notes}
-              handleChange={notes => appendExpenseForm({notes})} />
-          </div>
-
-          <div className="buttonsRow">
-            <SubmitButton label={i18n.getString('submit')} />
-            <Button color="red" label={i18n.getString('cancel')} onClick={this.onCancel.bind(this)} />
-          </div>
-
-        </form>
+        </div>
+        <button type='submit' className={`Button ${hasAttachment ? 'Button--green' : 'Button--disabled'}`} onClick={hasAttachment && this.onSubmit.bind(this)}>submit expense</button>
       </div>
-    );
+    )
   }
 
   onCancel(event) {
@@ -176,15 +157,9 @@ class ExpenseForm extends Component {
   };
 
   componentDidMount() {
-    const {
-      categories,
-      resetExpenseForm,
-      appendExpenseForm,
-    } = this.props;
-
+    const { categories, resetExpenseForm, appendExpenseForm } = this.props;
     resetExpenseForm();
     appendExpenseForm({category: categories[0]});
-
   }
 }
 

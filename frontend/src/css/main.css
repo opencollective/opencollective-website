@@ -36,6 +36,7 @@
 @import './containers/PublicGroup.css';
 @import './containers/SubmitExpense.css';
 @import './containers/Subscriptions.css';
+@import './containers/Transactions.css';
 
 /**
  * Components
