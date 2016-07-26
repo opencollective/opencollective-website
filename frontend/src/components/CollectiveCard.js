@@ -77,15 +77,16 @@ export default class CollectiveCard extends Component {
       description,
       mission,
       publicUrl,
-      className,
       i18n,
       isSponsor,
       isCollectiveOnProfile
     } = this.props;
 
     let stats = [];
+    let className = '';
 
     if (isSponsor) {
+      className = 'sponsor';
       stats = this.mapSponsorsCardProps();
     } else if (isCollectiveOnProfile) {
       stats = this.mapCollectiveCardOnProfileProps();
