@@ -1,0 +1,62 @@
+.Faq {
+  background-color: #f5f6f7;
+
+  .LoginTopBar {
+    background-color: #fff;
+  }
+  .Faq-container {
+    box-sizing: border-box;
+    margin: 30px auto 90px auto;
+    padding: 30px 60px;
+    width: 900px;
+    min-height: 200px;
+    background-color: white;
+  }
+  h1 {
+    font-family: Montserrat;
+    font-size: 32px;
+    font-weight: 300;
+    text-align: center;
+    color: #000000;
+    margin-bottom: 30px;
+    margin-bottom: 40px;
+  }
+  h2 {
+    font-family: Montserrat;
+    font-size: 24px;
+    font-weight: 300;
+    color: #000000;
+  }
+  h3 {
+    font-family: Montserrat;
+    font-size: 20px;
+    font-weight: 300;
+    color: #000000;
+  }
+  h4 {
+    font-family: Lato;
+    font-size: 18px;
+    font-weight: normal;
+    color: #000000;
+  }
+  h5 {
+    font-family: Montserrat;
+    font-size: 16px;
+    font-weight: normal;
+    color: #000000;
+  }
+  p, label {
+    font-family: Lato;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 1.44;
+    color: #787d80;
+  }
+}
+
+@media (max-width: 900px) {
+  .Faq .Faq-container {
+    width: auto !important;
+    margin: 15px !important;
+  }
+}
