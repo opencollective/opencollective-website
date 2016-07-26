@@ -1,0 +1,76 @@
+.SubscriptionItem {
+  box-sizing: border-box;
+  width: 800px;
+  height: 220px;
+  background-color: #ffffff;
+  margin: 30px auto;
+  .SubscriptionItem-header {
+    box-sizing: border-box;
+    border-bottom: 1px solid #f2f2f2;
+    height: 40px;
+    padding: 10px 20px;
+    .left {
+      font-family: Montserrat;
+      font-size: 12px;
+      font-weight: 700;
+      color: #4a4a4a;
+    }
+    .right {
+      font-family: Lato;
+      font-size: 12px;
+      font-weight: 400;
+      font-style: italic;
+      text-align: right;
+      color: #b3b3b3;
+    }
+  }
+  .SubscriptionItem-body {
+    box-sizing: border-box;
+    height: 150px;
+    padding: 20px;
+    .SubscriptionItem-image {
+      display: inline-block;
+      width: 110px;
+      height: 110px;
+      background-color: #ffffff;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.13);
+      vertical-align: top;
+      margin-right: 15px;
+    }
+    .SubscriptionItem-info {
+      display: inline-block;
+      min-width: 105px;
+      height: 105px;
+      padding-top: 15px;
+      .SubscriptionItem-info-amount {
+        font-family: montserratlight;
+        font-size: 33px;
+        color: #2a2a2a;
+        .currency-code {
+          font-size: 12px;
+        }
+      }
+      .SubscriptionItem-info-recurrence {
+        font-family: Lato;
+        font-size: 12px;
+        font-weight: 400;
+        color: #9b9b9b;
+      }
+    }
+  }
+  .SubscriptionItem-footer {
+    box-sizing: border-box;
+    height: 30px;
+    .footer-button {
+      border-top: 1px dotted #f2f2f2;
+      font-family: Lato;
+      font-size: 12px;
+      line-height: 2.25;
+      font-weight: 400;
+      color: #7fadf2;
+      text-align: center;
+      text-transform: uppercase;
+      height: 30px;
+    }
+  }
+}
