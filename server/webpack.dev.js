@@ -6,7 +6,8 @@ var config = require('../frontend/config/webpack.dev.babel');
 var server = new WebpackDevServer(webpack(config), {
   // webpack-dev-server options
   publicPath: config.output.publicPath,
-  stats: { colors: true },
+  quiet: true,
+  hot: true
 });
 
 server.listen(8080, "localhost", function() {
