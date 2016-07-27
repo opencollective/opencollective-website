@@ -40,7 +40,7 @@
   height: 100px;
 }
 
-.DonationDistributor-header h1, h2, small
+.DonationDistributor-header h1, .DonationDistributor-header h2, .DonationDistributor-header small
 {
   color: white;
 }
