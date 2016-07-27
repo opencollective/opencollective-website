@@ -81,7 +81,7 @@ export class PublicGroup extends Component {
             group={group}
             newUserId={newUser.id}
             closeDonationModal={this._closeDonationFlow.bind(this)} />
-          <section className='pt4'>
+          <section className='pt4 center'>
             <RelatedGroups title={i18n.getString('checkOutOtherSimilarCollectives')} groupList={group.related} {...this.props} />
           </section>
         </div>
