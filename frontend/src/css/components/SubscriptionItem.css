@@ -22,6 +22,10 @@
       font-style: italic;
       text-align: right;
       color: #b3b3b3;
+      &:not(.canceled):hover {
+        color: #7fadf2;
+        cursor: pointer;
+      }
     }
   }
   .SubscriptionItem-body {
@@ -29,6 +33,7 @@
     height: 150px;
     padding: 20px;
     .SubscriptionItem-image {
+      position: relative;
       display: inline-block;
       width: 110px;
       height: 110px;
@@ -36,6 +41,8 @@
       box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.13);
       vertical-align: top;
       margin-right: 15px;
+      background-size: contain;
+      overflow: hidden;
     }
     .SubscriptionItem-info {
       display: inline-block;
@@ -108,11 +115,14 @@
             border-radius: 100%;
           }
           .description {
-            height: 17px;
+            min-height: 17px;
             font-family: Lato;
             font-size: 14px;
             font-weight: 700;
             color: #4a4a4a;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
           }
           .time-ago {
             height: 17px;
@@ -134,3 +144,19 @@
     }
   }
 }
+
+@media (max-width: 900px) {
+  .SubscriptionItem {
+    width: auto;
+    margin: 15px;
+    .SubscriptionItem-info-amount {
+      font-size: 22px !important;
+    }
+    .SubscriptionItem-footer ul {
+      padding: 0;
+      padding-left: 15px;
+    }
+  }
+}
+
+

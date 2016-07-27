@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
-import moment from 'moment';
 import { connect } from 'react-redux';
 import { pushState } from 'redux-router';
 
 import LoginTopBar from '../containers/LoginTopBar';
 import PublicFooter from '../components/PublicFooter';
-import Currency from '../components/Currency';
-import TransactionItem from '../components/TransactionItem';
 import Notification from '../containers/Notification';
-import InlineToggle from '../components/InlineToggle';
-import ProfilePhoto from '../components/ProfilePhoto';
 import SubscriptionItem from '../components/SubscriptionItem';
 
 import cancelSubscription from '../actions/subscriptions/cancel';
@@ -22,7 +17,6 @@ export class Subscriptions extends Component {
   render() {
     const {
       subscriptions,
-      i18n,
       pushState
     } = this.props;
 
@@ -31,8 +25,26 @@ export class Subscriptions extends Component {
         <LoginTopBar />
         <Notification />
         <div className='Subscriptions-container'>
-          {!subscriptions.length ? <b>empty</b> : null}
-          {subscriptions.length ? subscriptions.map(subscription => <SubscriptionItem key={subscription.id} subscription={subscription} {...this.props}/>) : null}
+          {!subscriptions.length ? (
+            <div className='block-container center'>
+              <p> Looks like you aren't contributing right now. Let's fix it!</p>
+              <p> Visit our <a href='https://www.opencollective.com/leaderboard'>Leaderboard</a> to find more collectives to support. </p>
+            </div>
+          ) : null}
+          {subscriptions.length ? subscriptions.map(subscription => {
+            return (<SubscriptionItem 
+              key={subscription.id} 
+              subscription={subscription} 
+              onCancel={cancel.bind(this)}
+              onClickImage={() => pushState(null, `/${subscription.Transactions[0].Group.slug}`)}
+              {...this.props} />
+            )
+          }) : null}
+          {subscriptions.length ? (
+            <div className='block-container center'>
+              <p> Visit our <a href='https://www.opencollective.com/leaderboard'>Leaderboard</a> to find more collectives to support! </p>
+            </div>
+          ) : null}
         </div>
         <PublicFooter />
       </div>

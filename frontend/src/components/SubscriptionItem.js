@@ -1,6 +1,6 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 
-import formatCurrency, {currencySymbolLookup} from '../lib/format_currency';
+import formatCurrency from '../lib/format_currency';
 import moment from 'moment';
 
 export default class SubscriptionItem extends Component {
@@ -13,13 +13,13 @@ export default class SubscriptionItem extends Component {
   }
 
   render() {
-    const { subscription, i18n } = this.props;
+    const { subscription, i18n, onClickImage } = this.props;
     const { opened } = this.state;
     const amount = subscription.amount;
     const createdAt = subscription.createdAt
     const currency = subscription.currency;
     const interval = subscription.interval;
-    const isActive = true//subscription.isActive;
+    const isActive = subscription.isActive;
     const formattedAmount = formatCurrency(amount, currency, {compact: true});
     const formattedInterval = `${interval[0].toUpperCase()}${interval.substr(1)}ly`;
     const formattedCreatedAt = isActive ? `${i18n.getString('since')} ${moment(createdAt).format('MMM, YYYY')}`: 'Inactive';
@@ -31,10 +31,10 @@ export default class SubscriptionItem extends Component {
       <div className='SubscriptionItem'>
         <div className='SubscriptionItem-header'>
           <div className='left'>{ name }</div>
-          <div className='right'>{`${isActive ? 'Cancel Subscription' : 'Subscribe'}`}</div>
+          <div className={`right ${isActive ? '' : 'canceled'}`} onClick={this.toggleActivation.bind(this)}>{`${isActive ? 'Cancel Subscription' : 'Canceled'}`}</div>
         </div>
         <div className='SubscriptionItem-body'>
-          <div className='SubscriptionItem-image' style={{backgroundImage: `url(${image})`}}></div>
+          <div className='SubscriptionItem-image' onClick={onClickImage} style={{display: image ? 'inline-block': 'none', backgroundImage: `url(${image})`}}></div>
           <div className='SubscriptionItem-info'>
             <div className='SubscriptionItem-info-amount'>
               <span>{formattedAmount}</span>
@@ -79,6 +79,15 @@ export default class SubscriptionItem extends Component {
         </div>
       </div>
     )
+  }
+
+  toggleActivation() {
+    const { subscription, onCancel, onSubscribe } = this.props;
+    if (subscription.isActive) {
+      if (onCancel) onCancel(subscription.id);
+    } else {
+      if (onSubscribe) onSubscribe(subscription.id);
+    }
   }
 
   toggleOpened() {

@@ -3,118 +3,18 @@
   .LoginTopBar {
     background-color: white;
   }
-  .Subscriptions-container {
-
+  .block-container {
+    box-sizing: border-box;
+    width: 800px;
+    background-color: #ffffff;
+    margin: 30px auto;
+    padding: 15px;
   }
 }
 
-
-
-
-
-
-
-
-
-.Subscription-header {
-  display:inline-block;
-  width: 100%;
-  padding-bottom: 1rem;
-}
-
-.Subscription-page-title {
-  max-width: 200px;
-  display: inline-block;
-}
-
-.Subscription-user {
-  padding-top: 11px;
-  padding-bottom: 11px;
-  float:right;
-}
-
-.Subscription-user .ProfilePhoto {
-  float: left;
-  width: 2rem;
-  height: 2rem;
-}
-
-.Subscription-user-name {
-  margin-left: 0.5rem;
-  margin-top: 0.5rem;
-  display: inline-block;
-}
-
-.Subscription-group {
-  display: block;
-  margin-bottom: 1rem;
-  clear:both;
-}
-
-.Subscription-logo {
-  height: 100px;
-  width: 100px;
-  margin: 0 auto 0.5rem;
-  float: left;
-  cursor: pointer;
-}
-
-.Subscription-info {
-  display: inline-block;
-  padding-top: var(--spacing);
-  margin-left: var(--spacing);
-}
-
-.Subscription-name {
-  float:left;
-  font-weight: bold;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
-}
-
-.Subscription-amount {
-  clear:both;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
-}
-
-.Subscription-status {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 80%;
-}
-
-.Subscription-group .InlineToggle-text{
-  color: var(--light-blue);
-}
-
-.Subscription-transactions {
-  margin-top: 1rem;
-  margin-left: calc(100px + var(--spacing));
-}
-
-.Subscription-cancel {
-  cursor: pointer;
-  color: var(--light-blue);
-  margin-left: 1rem;
-  font-style: normal;
-}
-
-.Subscription-text {
-  text-align: center;
-}
-
-.Subscription-bottom-text {
-  margin-top:2rem;
-}
-
-.Truncate {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+@media (max-width: 900px) {
+  .Subscriptions .block-container {
+    width: auto;
+    margin: 15px;
+  }
 }
