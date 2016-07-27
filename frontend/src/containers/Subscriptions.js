@@ -31,7 +31,8 @@ export class Subscriptions extends Component {
         <LoginTopBar />
         <Notification />
         <div className='Subscriptions-container'>
-          <SubscriptionItem />
+          {!subscriptions.length ? <b>empty</b> : null}
+          {subscriptions.length ? subscriptions.map(subscription => <SubscriptionItem key={subscription.id} subscription={subscription} {...this.props}/>) : null}
         </div>
         <PublicFooter />
       </div>

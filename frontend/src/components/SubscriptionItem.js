@@ -1,58 +1,87 @@
 import React, { Component, PropTypes } from 'react';
 
+import formatCurrency, {currencySymbolLookup} from '../lib/format_currency';
+import moment from 'moment';
+
 export default class SubscriptionItem extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      opened: true
+      opened: false
     };
   }
 
   render() {
+    const { subscription, i18n } = this.props;
     const { opened } = this.state;
+    const amount = subscription.amount;
+    const createdAt = subscription.createdAt
+    const currency = subscription.currency;
+    const interval = subscription.interval;
+    const isActive = true//subscription.isActive;
+    const formattedAmount = formatCurrency(amount, currency, {compact: true});
+    const formattedInterval = `${interval[0].toUpperCase()}${interval.substr(1)}ly`;
+    const formattedCreatedAt = isActive ? `${i18n.getString('since')} ${moment(createdAt).format('MMM, YYYY')}`: 'Inactive';
+    const Transactions = subscription.Transactions;
+    const Group = Transactions.length ? Transactions[0].Group : null;
+    const name = Group ? Group.name : '';
+    const image = Group ? Group.image : '';
     return (
       <div className='SubscriptionItem'>
         <div className='SubscriptionItem-header'>
-          <div className='left'>WWCode Seattle</div>
-          <div className='right'>Cancel Subscription</div>
+          <div className='left'>{ name }</div>
+          <div className='right'>{`${isActive ? 'Cancel Subscription' : 'Subscribe'}`}</div>
         </div>
         <div className='SubscriptionItem-body'>
-          <div className='SubscriptionItem-image'></div>
+          <div className='SubscriptionItem-image' style={{backgroundImage: `url(${image})`}}></div>
           <div className='SubscriptionItem-info'>
-          <div className='SubscriptionItem-info-amount'>
-            <span>$1.00</span>
-            <span className='currency-code'>usd</span>
-          </div>
-          <div className='SubscriptionItem-info-recurrence'>Monthly (Inactive)</div>
+            <div className='SubscriptionItem-info-amount'>
+              <span>{formattedAmount}</span>
+              <span className='currency-code'>{currency}</span>
+            </div>
+            <div className='SubscriptionItem-info-recurrence'>{`${formattedInterval} (${formattedCreatedAt})`}</div>
           </div>
         </div>
         <div className='SubscriptionItem-footer'>
-          {!opened && <div className='footer-button'>show transactions</div>}
-          <ul>
-            <li>
-              <div className='SubscriptionItem-DonationItem'>
-                <div className='flex'>
-                  <div>
-                    <img src='//d1ts43dypk8bqh.cloudfront.net/v1/avatars/1b16216d-38b1-45d6-b1d1-b89d0330fd68' height='40px' width='40px'/>
-                  </div>
-                  <div className='flex-auto'>
-                    <div className='flex flex-column'>
+          {opened && (
+            <ul>
+              {Transactions.map((transaction, index) => {
+                const description = transaction.title || transaction.description;
+                const avatar = transaction.User.avatar;
+                const txDate = transaction.incurredAt || transaction.createdAt;
+                return (
+                  <li key={index}>
+                    <div className='SubscriptionItem-DonationItem'>
                       <div className='flex'>
-                        <div className='flex-auto'>
-                          <div className='type'>Recurring Subscription</div>
+                        <div>
+                          <img src={avatar} height='40px' width='40px'/>
                         </div>
-                        <div className='amount'>$1.00<small>USD</small></div>
+                        <div className='flex-auto'>
+                          <div className='flex flex-column'>
+                            <div className='flex'>
+                              <div className='flex-auto'>
+                                <div className='description'>{description}</div>
+                              </div>
+                              <div className='amount'>{formattedAmount}<small>{currency}</small></div>
+                            </div>
+                            <div className='time-ago'>{moment(txDate).fromNow()}</div>
+                          </div>
+                        </div>
                       </div>
-                      <div className='timeago'>1 month ago</div>
                     </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-          </ul>
+                  </li>
+                )
+              })}
+            </ul>
+          )}
+          <div className='footer-button' onClick={this.toggleOpened.bind(this)}>{`${opened ? 'hide' : 'show'} transactions`}</div>
         </div>
       </div>
     )
-  } 
+  }
+
+  toggleOpened() {
+    this.setState({opened: !this.state.opened});
+  }
 }

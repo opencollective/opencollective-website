@@ -48,6 +48,7 @@
         color: #2a2a2a;
         .currency-code {
           font-size: 12px;
+          text-transform: uppercase;
         }
       }
       .SubscriptionItem-info-recurrence {
@@ -55,6 +56,7 @@
         font-size: 12px;
         font-weight: 400;
         color: #9b9b9b;
+        text-transform: capitalize;
       }
     }
   }
@@ -64,18 +66,23 @@
     .footer-button {
       border-top: 1px dotted #f2f2f2;
       font-family: Lato;
-      font-size: 12px;
-      line-height: 2.25;
+      font-size: 11px;
+      line-height: 2.7;
       font-weight: 400;
       color: #7fadf2;
       text-align: center;
       text-transform: uppercase;
       height: 30px;
+      &:hover {
+        cursor: pointer;
+        background-color: #7fadf2;
+        color: white;
+      }
     }
     ul {
       list-style: none;
       margin: 0px;
-      padding: 0px 40px 20px;
+      padding: 0px 40px 0;
       li {
         border-bottom: 1px solid #e6e6e6;
         box-sizing: border-box;
@@ -83,6 +90,9 @@
         padding: 20px 0px;
         vertical-align: middle;
         width: 100%;
+        &:last-child {
+          border: none;
+        }
         .SubscriptionItem-DonationItem {
           box-sizing: border-box;
           height: 40px;
@@ -90,20 +100,21 @@
           font-size: 14px;
           font-family: Lato;
           img {
+            box-sizing: border-box;
             width: 40px;
             height: 40px;
-            border: solid 1px #7faff5;
+            border: solid 2px #7faff5;
             margin-right: 10px;
             border-radius: 100%;
           }
-          .type {
+          .description {
             height: 17px;
             font-family: Lato;
             font-size: 14px;
             font-weight: 700;
             color: #4a4a4a;
           }
-          .timeago {
+          .time-ago {
             height: 17px;
             font-family: Lato;
             font-size: 14px;
