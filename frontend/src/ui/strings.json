@@ -348,5 +348,8 @@
   "hoodie":{
     "helpUsContinueOurActivities":"With your support, you’ll help us cover Hoodie’s expenses towards our goal of becoming a fully independent, self-sustained Open Source community! Our expenses are low (stickers, hosting, some travel), but to sustain Hoodie in the long term, we need dedicated people to serve the community. Our milestones are: Part-time community manager position ($10,000+ per year), Part-time fundraising position ($20,000+ per year) and Full-time community manager position ($60,000+ per year)",
     "membersWallText":"Your support allows us to keep going towards our mission. Thank you so much."
+  },
+  "railsgirlsatl": {
+    "coreContributors": "Rails Girls Board"
   }
 }
