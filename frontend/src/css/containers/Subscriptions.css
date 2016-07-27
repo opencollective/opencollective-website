@@ -1,3 +1,21 @@
+.Subscriptions {
+  background-color: rgb(245, 246, 247);
+  .LoginTopBar {
+    background-color: white;
+  }
+  .Subscriptions-container {
+
+  }
+}
+
+
+
+
+
+
+
+
+
 .Subscription-header {
   display:inline-block;
   width: 100%;
