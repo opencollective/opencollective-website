@@ -1,7 +1,7 @@
 .SubscriptionItem {
   box-sizing: border-box;
   width: 800px;
-  height: 220px;
+  min-height: 220px;
   background-color: #ffffff;
   margin: 30px auto;
   .SubscriptionItem-header {
@@ -60,7 +60,7 @@
   }
   .SubscriptionItem-footer {
     box-sizing: border-box;
-    height: 30px;
+    min-height: 30px;
     .footer-button {
       border-top: 1px dotted #f2f2f2;
       font-family: Lato;
@@ -71,6 +71,55 @@
       text-align: center;
       text-transform: uppercase;
       height: 30px;
+    }
+    ul {
+      list-style: none;
+      margin: 0px;
+      padding: 0px 40px 20px;
+      li {
+        border-bottom: 1px solid #e6e6e6;
+        box-sizing: border-box;
+        height: 80px;
+        padding: 20px 0px;
+        vertical-align: middle;
+        width: 100%;
+        .SubscriptionItem-DonationItem {
+          box-sizing: border-box;
+          height: 40px;
+          width: 100%;
+          font-size: 14px;
+          font-family: Lato;
+          img {
+            width: 40px;
+            height: 40px;
+            border: solid 1px #7faff5;
+            margin-right: 10px;
+            border-radius: 100%;
+          }
+          .type {
+            height: 17px;
+            font-family: Lato;
+            font-size: 14px;
+            font-weight: 700;
+            color: #4a4a4a;
+          }
+          .timeago {
+            height: 17px;
+            font-family: Lato;
+            font-size: 14px;
+            font-weight: 400;
+            color: #969696;
+          }
+          .amount {
+            height: 17px;
+            font-family: Lato;
+            font-size: 14px;
+            font-weight: 400;
+            text-align: right;
+            color: #75cc1f;
+          }
+        }
+      }
     }
   }
 }
