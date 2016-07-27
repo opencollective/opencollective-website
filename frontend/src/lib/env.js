@@ -2,12 +2,14 @@
  * Environment variables
  */
 
-if (typeof process.env.NODE_ENV === 'undefined') {
-  process.env.NODE_ENV = 'development';
+let NODE_ENV = process.env.NODE_ENV;
+
+if (NODE_ENV === 'undefined') {
+  NODE_ENV = 'development';
 }
 
 const env = {
-  NODE_ENV: process.env.NODE_ENV,
+  NODE_ENV,
   API_ROOT: `${process.env.WEBSITE_URL}/api`
 };
 
