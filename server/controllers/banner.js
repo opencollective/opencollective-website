@@ -270,7 +270,7 @@ module.exports = {
 
     params.utm_source = params.utm_source || 'opencollective';
     params.utm_medium = params.utm_medium || 'github';
-    params.campaign = params.campaign || slug;
+    params.utm_campaign = params.utm_campaign || slug;
 
     parsedUrl.search = `?${queryString.stringify(params)}`;
     redirectUrl = url.format(parsedUrl);
