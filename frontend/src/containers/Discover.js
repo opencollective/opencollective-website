@@ -3,8 +3,11 @@ import { connect } from 'react-redux';
 
 import i18n from '../lib/i18n';
 
+import DiscoverSelect from '../components/discover/DiscoverSelect';
+
 import LoginTopBar from '../containers/LoginTopBar';
 import PublicFooter from '../components/PublicFooter';
+import CollectiveCard from '../components/CollectiveCard';
 
 export class Discover extends Component {
 
@@ -21,6 +24,7 @@ export class Discover extends Component {
   }
 
   render() {
+  	const { i18n } = this.props;
   	return (
   		<div className='Discover'>
 	        <LoginTopBar />
@@ -30,11 +34,15 @@ export class Discover extends Component {
 	        			<div className='Discover-hero-line1'>Discover awesome collectives to support</div>
 	        			<div className='Discover-hero-line2'>Let's make great things together.</div>
 	        			<div className='Discover-hero-actions'>
+	        				<DiscoverSelect label='Show' />
+	        				<DiscoverSelect label='Sort by' />
 	        			</div>
 	        		</div>
 	        	</div>
         		<div className='Discover-results'>
-        			Discover-results
+        			<CollectiveCard i18n={i18n} />
+        			<CollectiveCard i18n={i18n} />
+        			<CollectiveCard i18n={i18n} />
         		</div>
 	        </div>
 	        <PublicFooter />

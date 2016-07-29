@@ -40,19 +40,24 @@
         }
         .Discover-hero-actions {
           width: 280px;
+          width: 310px;
           height:30px; 
-          background-color: red;
           margin: auto;
           margin-top:160px;
+          .DiscoverSelect {
+            margin-right: 40px;
+            &:last-child {
+              margin-right: 0;
+            }
+          }
         }
       }
     }
     .Discover-results {
+      text-align: center;
       width: 100%;
       min-height: 200px;
-      background-color: green;
-      opacity: .4;
-      margin-top: -50px;
+      margin-top: -60px;
     }
   }
 }
