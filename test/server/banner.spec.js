@@ -123,24 +123,23 @@ describe("redirect", () => {
   it("redirects to opencollective.com/:slug if no website or twitter for the backer at that position", (done) => {
     request(app)
       .get('/yeoman/backers/1/website')
-      .expect('Location', 'http://localhost:3000/yeoman')
+      .expect('Location', 'http://localhost:3000/yeoman?campaign=yeoman&utm_medium=github&utm_source=opencollective')
       .expect(302, done);
   });
 
-  it(`redirects to the website of the backer (${mocks.backers[3].website})`, (done) => {
+  it(`redirects to the website of the backer and keeps pre-existing utm tracking data`, (done) => {
     request(app)
       .get('/yeoman/backers/3/website')
-      .expect('Location', mocks.backers[3].website)
+      .expect('Location', `https://www.julianmotz.com/?campaign=yeoman&utm_campaign=opensource&utm_medium=github&utm_source=oc`)
       .expect(302, done);
   });
 
   it(`redirects to the twitter of the backer (@${mocks.backers[2].twitterHandle})`, (done) => {
     request(app)
       .get('/yeoman/backers/2/website')
-      .expect('Location', `https://twitter.com/${mocks.backers[2].twitterHandle}`)
+      .expect('Location', `https://twitter.com/${mocks.backers[2].twitterHandle}?campaign=yeoman&utm_medium=github&utm_source=opencollective`)
       .expect(302, done);
   });
-
 
 })
 
@@ -226,7 +225,7 @@ describe("banner", () => {
       })
       .expect({
         links: [
-          '<a xlink:href="https://www.julianmotz.com" target="_blank">'
+          '<a xlink:href="https://www.julianmotz.com?utm_source=oc&amp;utm_campaign=opensource" target="_blank">'
         ]
       })
       .expect(200, done);
