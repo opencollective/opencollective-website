@@ -1,4 +1,5 @@
 .DiscoverSelect {
+  position: relative;
   display: inline-block;
   .DiscoverSelect-label {
     display: inline-block;
@@ -16,10 +17,39 @@
     font-family: montserratlight;
     font-size: 24px;
     color: #75cc1f;
-    padding-bottom: 4px;
+    padding-bottom: 2px;
     &:hover {
       cursor: pointer;
-      border-bottom: 1px dashed #75cc1f;
+      span:first-child {
+        border-bottom: 1px dashed #75cc1f;
+      }
+    }
+  }
+  .DiscoverSelect-menu {
+    box-sizing: border-box;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    z-index: 999;
+    border-radius: 5px;
+    background-color: #ffffff;
+    padding: 15px 30px;
+    box-shadow: 0 1px 3px 0 rgba(45, 77, 97, 0.3);
+    margin-top: 5px;
+    text-align: left;
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      li {
+        margin-right: .5px;
+        &:hover {
+          color: #75cc1f;
+          cursor: pointer;
+          margin-left: .5px;
+          margin-right: 0;
+        }
+      }
     }
   }
 }
