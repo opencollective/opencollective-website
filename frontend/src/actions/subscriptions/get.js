@@ -5,26 +5,24 @@ import * as constants from '../../constants/subscriptions';
  * Fetch subscriptions for a user
  */
 
-export default (token) => {
+export default () => {
   return dispatch => {
-    dispatch(request(token));
+    dispatch(request());
     return get(`/subscriptions`)
-    .then(json => dispatch(success(token, json)))
+    .then(json => dispatch(success(json)))
     .catch(error => dispatch(failure(error)));
   };
 };
 
-function request(token) {
+function request() {
   return {
     type: constants.GET_SUBSCRIPTIONS_REQUEST,
-    token
   };
 }
 
-function success(token, json) {
+function success(json) {
   return {
     type: constants.GET_SUBSCRIPTIONS_SUCCESS,
-    token,
     subscriptions: json
   };
 }
@@ -32,6 +30,6 @@ function success(token, json) {
 function failure(error) {
   return {
     type: constants.GET_SUBSCRIPTIONS_FAILURE,
-    error,
+    error
   };
 }

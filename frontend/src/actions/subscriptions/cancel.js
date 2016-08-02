@@ -5,43 +5,36 @@ import * as constants from '../../constants/subscriptions';
  * Cancel a subscription
  */
 
-export default (id, token) => {
+export default (id) => {
   return dispatch => {
-    dispatch(request(id, token));
-    return post(`/subscriptions/${id}/cancel`, {}, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-    .then(() => dispatch(success(id, token)))
+    dispatch(request(id));
+    return post(`/subscriptions/${id}/cancel`)
+    .then(() => dispatch(success(id)))
     .catch(error => {
-      dispatch(failure(id, token, error));
+      dispatch(failure(id, error));
       throw new Error(error.message);
     });
   };
 };
 
-function request(id, token) {
+function request(id) {
   return {
     type: constants.CANCEL_SUBSCRIPTION_REQUEST,
-    id,
-    token
+    id
   };
 }
 
-export function success(id, token) {
+export function success(id) {
   return {
     type: constants.CANCEL_SUBSCRIPTION_SUCCESS,
-    id,
-    token
+    id
   };
 }
 
-function failure(id, token, error) {
+function failure(id, error) {
   return {
     type: constants.CANCEL_SUBSCRIPTION_FAILURE,
     id,
-    token,
     error
   };
 }

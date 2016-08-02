@@ -11,7 +11,6 @@ describe('subscriptions/get', () => {
   afterEach(() => nock.cleanAll());
 
   it('dispatches GET_SUBSCRIPTIONS_SUCCESS', (done) => {
-    const token = 'token_abc';
     const subscriptions = [{id: 1}];
 
     nock(env.API_ROOT)
@@ -20,19 +19,18 @@ describe('subscriptions/get', () => {
 
     const store = mockStore({});
 
-    store.dispatch(getSubscriptions(token))
+    store.dispatch(getSubscriptions())
       .then(() => {
         const [request, success] = store.getActions();
 
-        expect(request).toEqual({ type: constants.GET_SUBSCRIPTIONS_REQUEST, token });
-        expect(success).toEqual({ type: constants.GET_SUBSCRIPTIONS_SUCCESS, token, subscriptions });
+        expect(request).toEqual({ type: constants.GET_SUBSCRIPTIONS_REQUEST });
+        expect(success).toEqual({ type: constants.GET_SUBSCRIPTIONS_SUCCESS, subscriptions });
         done();
       })
       .catch(done);
   });
 
  it('dispatches GET_SUBSCRIPTIONS_FAILURE when it fails', (done) => {
-    const token = 'token_abc';
 
     nock(env.API_ROOT)
       .get(`/subscriptions`)
@@ -40,11 +38,11 @@ describe('subscriptions/get', () => {
 
     const store = mockStore({});
 
-    store.dispatch(getSubscriptions(token))
+    store.dispatch(getSubscriptions())
       .then(() => {
         const [request, failure] = store.getActions();
 
-        expect(request).toEqual({ type: constants.GET_SUBSCRIPTIONS_REQUEST, token });
+        expect(request).toEqual({ type: constants.GET_SUBSCRIPTIONS_REQUEST });
         expect(failure.type).toEqual(constants.GET_SUBSCRIPTIONS_FAILURE);
         expect(failure.error.message).toContain('request to http://localhost:3000/api/subscriptions failed');
         done();
