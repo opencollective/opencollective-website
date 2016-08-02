@@ -4,6 +4,7 @@
     background-color: #fff;
   }
   .Discover-container {
+    padding-bottom: 40px;
     .Discover-hero {
       position: relative;
       width: 100%;
@@ -16,11 +17,10 @@
         top: 0;
         bottom: 0;
         background-image: url(/static/images/discover-bg.svg);
+        padding: 0 15px;
         .Discover-hero-line1 {
           margin: auto;
           margin-top: 190px;
-          width: 832px;
-          height: 48px;
           font-family: Montserrat;
           font-size: 40px;
           font-weight: 700;
@@ -31,18 +31,20 @@
         .Discover-hero-line2 {
           margin: auto;
           margin-top: 15px;
-          width: 386px;
           height: 29px;
           font-family: montserratlight;
           font-size: 24px;
           color: #ffffff;
           letter-spacing: -.5px;
+          text-align: center;
         }
         .Discover-hero-actions {
-          width: 100%;
-          height:30px; 
+          z-index: 9;
+          position: absolute;
+          bottom: 70px;
+          left: 0;
+          right: 0;
           margin: auto;
-          margin-top:160px;
           text-align: center;
           .DiscoverSelect {
             margin-right: 40px;
@@ -55,9 +57,28 @@
     }
     .Discover-results {
       text-align: center;
-      width: 100%;
       min-height: 200px;
       margin-top: -60px;
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .Discover .Discover-container .Discover-hero .Discover-hero-cover {
+    .Discover-hero-line1 {
+      font-size: 30px;
+      margin-top: 100px;
+    }
+
+    .Discover-hero-line2 {
+      font-size: 20px;
+    }
+
+    .Discover-hero-actions {
+      bottom: 200px;
+      .DiscoverSelect {
+        text-align: left;
+      }
     }
   }
 }

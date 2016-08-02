@@ -9,6 +9,8 @@ import LoginTopBar from '../containers/LoginTopBar';
 import PublicFooter from '../components/PublicFooter';
 import CollectiveCard from '../components/CollectiveCard';
 
+import fetchDiscover from '../actions/discover/fetch';
+
 export class Discover extends Component {
 
   constructor(props) {
@@ -20,20 +22,20 @@ export class Discover extends Component {
   }
 
   componentDidMount() {
-    const { fetchHome, loadData} = this.props;
+    const { fetchDiscover, loadData} = this.props;
 
     if (loadData) {
-      fetchHome();
+      fetchDiscover();
     }
   }
 
   render() {
-    const { i18n } = this.props;
+    const { i18n, discover } = this.props;
     const { currentShowOption, currentSortOption } = this.state;
     const showOptions = ['Open Source', 'Meetup'];
     const sortOptions = ['Newest'];
     const results = [1,2,4,5,6,7];
-    
+    console.log('discover', discover)
     if (!currentShowOption && showOptions.length) {
       this.setState({currentShowOption: showOptions[0]});
     }
@@ -66,10 +68,14 @@ export class Discover extends Component {
 }
 
 
-export default connect(mapStateToProps, {})(Discover);
+export default connect(mapStateToProps, {
+  fetchDiscover
+})(Discover);
 
-function mapStateToProps() {
+function mapStateToProps({ discover, app}) {
   return {
-    i18n: i18n('en')
+    discover,
+    i18n: i18n('en'),
+    loadData: app.rendered
   }
 }
