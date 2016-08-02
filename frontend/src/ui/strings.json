@@ -353,6 +353,7 @@
     "coreContributors": "Rails Girls Board"
   },
   "freeridetovote":{
-    "helpUsContinueOurActivities": "With your support, you’ll help people living in underserved communities get to the polling stations to cast their vote."
+    "helpUsContinueOurActivities": "With your support, you’ll help people living in underserved communities get to the polling stations to cast their vote.",
+    "becomeA": "Be an"
   }
 }
