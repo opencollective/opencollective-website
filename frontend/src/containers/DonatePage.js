@@ -11,6 +11,7 @@ import PublicGroupThanks from '../components/PublicGroupThanks';
 import DisplayUrl from '../components/DisplayUrl';
 import PublicGroupSignup from '../components/PublicGroupSignup';
 import Tiers from '../components/Tiers';
+import { getTier } from '../lib/tiers';
 
 import fetchGroup from '../actions/groups/fetch_by_id';
 import fetchUsers from '../actions/users/fetch_by_group';
@@ -44,14 +45,15 @@ export class DonatePage extends Component {
       i18n
     } = this.props;
 
-    const tiers = [{
+    const tier = getTier({amount, interval}, group.tiers) || {
       name: "custom",
       title: " ",
       description: i18n.getString('defaultTierDescription'),
       amount,
       interval: interval || 'one-time',
       range: [amount, 10000000]
-    }];
+    };
+    const tiers = [tier];
 
     let donationSection;
     if (this.state.showThankYouMessage || (isAuthenticated && this.state.showUserForm)) { // we don't handle userform from logged in users) {
@@ -73,7 +75,7 @@ export class DonatePage extends Component {
             <div className='PublicGroupHeader-website'><DisplayUrl url={group.website} /></div>
             <div className='PublicGroupHeader-host'>{i18n.getString('hostedBy')} <a href={group.host.website}>{group.host.name}</a></div>
             <div className='PublicGroupHeader-description'>
-              {group.description}
+              {i18n.getString('missionTo')} {group.mission}
             </div>
           </div>
 
