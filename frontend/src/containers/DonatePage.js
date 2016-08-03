@@ -7,9 +7,10 @@ import i18n from '../lib/i18n';
 import roles from '../constants/roles';
 import Notification from '../containers/Notification';
 import PublicFooter from '../components/PublicFooter';
-import PublicGroupThanks from '../components/PublicGroupThanks';
+import PublicGroupThanks from '../components/public_group/PublicGroupThanksV2';
 import DisplayUrl from '../components/DisplayUrl';
-import PublicGroupSignup from '../components/PublicGroupSignup';
+import getSocialMediaAvatars from '../actions/users/get_social_media_avatars';
+import PublicGroupSignup from '../components/public_group/PublicGroupSignupV2';
 import Tiers from '../components/Tiers';
 import { getTier } from '../lib/tiers';
 
@@ -55,9 +56,11 @@ export class DonatePage extends Component {
     };
     const tiers = [tier];
 
+    group.backers = []; // We don't show the backers
+
     let donationSection;
     if (this.state.showThankYouMessage || (isAuthenticated && this.state.showUserForm)) { // we don't handle userform from logged in users) {
-      donationSection = <PublicGroupThanks message={i18n.getString('thankyou')} />;
+      donationSection = <PublicGroupThanks i18n={i18n} group={group} message={i18n.getString('thankyou')} />;
     } else if (this.state.showUserForm) {
       donationSection = <PublicGroupSignup {...this.props} save={saveNewUser.bind(this)} />
     } else {
@@ -68,7 +71,7 @@ export class DonatePage extends Component {
       <div className='DonatePage'>
         <Notification />
 
-        <div className='PublicContent'>
+        <div>
 
           <div className='PublicGroupHeader'>
             <img className='PublicGroupHeader-logo' src={group.logo ? group.logo : '/static/images/media-placeholder.svg'} />
@@ -170,6 +173,7 @@ export default connect(mapStateToProps, {
   appendProfileForm,
   updateUser,
   validateSchema,
+  getSocialMediaAvatars,
   decodeJWT,
   appendDonationForm
 })(DonatePage);
