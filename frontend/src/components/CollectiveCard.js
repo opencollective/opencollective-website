@@ -30,8 +30,6 @@ export default class CollectiveCard extends Component {
       stats.push({ label: i18n.getString('coreContributors'), value: contributorsCount});
     else if (membersCount) {
       stats.push({ label: i18n.getString('members'), value: membersCount });
-    } else {
-      stats.push({ label: ' ', value: ' '});
     }
 
     if (backersAndSponsorsCount) {
@@ -94,9 +92,6 @@ export default class CollectiveCard extends Component {
       stats = this.mapCollectiveCardProps();
     }
 
-    if (stats.length == 2)
-      stats.unshift({label: ' ', value: ' '});
-
     return (
       <div className={`CollectiveCard ${className}`}>
         <a href={publicUrl}>
@@ -113,7 +108,7 @@ export default class CollectiveCard extends Component {
             <div className='CollectiveCard-footer'>
               <div className='clearfix mt2'>
               { stats.map((stat) =>
-                <div key={stat.label} className='col col-4'>
+                <div key={stat.label} className={`col col-${12/(stats.length||1)}`}>
                   <div className='CollectiveCard-metric'>
                     <div className='CollectiveCard-metric-value'>{stat.value}</div>
                     <div className='CollectiveCard-metric-label'>{stat.label}</div>
