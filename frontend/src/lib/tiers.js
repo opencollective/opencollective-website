@@ -1,5 +1,8 @@
 const getTier = (query, tiers) => {
 
+  if (!tiers || tiers.length === 0)
+    return null;
+
   // We order the tiers by start range DESC
   tiers.sort((a,b) => {
     return a.range[0] < b.range[0];
