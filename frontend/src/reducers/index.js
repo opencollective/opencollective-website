@@ -12,6 +12,7 @@ import subscriptions from './subscriptions';
 import images from './images';
 import pages from './pages';
 import homepage from './homepage';
+import discover from './discover';
 import app from './app';
 
 export default combineReducers({
@@ -27,5 +28,6 @@ export default combineReducers({
   users,
   router,
   homepage,
+  discover,
   app
 });

@@ -22,11 +22,8 @@ export class Discover extends Component {
   }
 
   componentDidMount() {
-    const { fetchDiscover, loadData} = this.props;
-
-    if (loadData) {
-      fetchDiscover();
-    }
+    const { fetchDiscover } = this.props;
+    fetchDiscover();
   }
 
   render() {
@@ -34,11 +31,12 @@ export class Discover extends Component {
     const { currentShowOption, currentSortOption } = this.state;
     const showOptions = ['Open Source', 'Meetup'];
     const sortOptions = ['Newest'];
-    const results = [1,2,4,5,6,7];
-    console.log('discover', discover)
+    const collectives = discover.collectives ? discover.collectives : [];
+
     if (!currentShowOption && showOptions.length) {
       this.setState({currentShowOption: showOptions[0]});
     }
+
     if (!currentSortOption && sortOptions.length) {
       this.setState({currentSortOption: sortOptions[0]});
     }
@@ -58,7 +56,7 @@ export class Discover extends Component {
               </div>
             </div>
             <div className='Discover-results'>
-              {results.map(collective => <CollectiveCard i18n={i18n} />)}
+              {collectives.map(collective => <CollectiveCard i18n={i18n} {...collective}/>)}
             </div>
           </div>
           <PublicFooter />
@@ -72,10 +70,9 @@ export default connect(mapStateToProps, {
   fetchDiscover
 })(Discover);
 
-function mapStateToProps({ discover, app}) {
+function mapStateToProps({ discover }) {
   return {
     discover,
-    i18n: i18n('en'),
-    loadData: app.rendered
+    i18n: i18n('en')
   }
 }
