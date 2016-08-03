@@ -7,10 +7,12 @@ import i18n from '../lib/i18n';
 import roles from '../constants/roles';
 import Notification from '../containers/Notification';
 import PublicFooter from '../components/PublicFooter';
-import PublicGroupThanks from '../components/PublicGroupThanks';
+import PublicGroupThanks from '../components/public_group/PublicGroupThanksV2';
 import DisplayUrl from '../components/DisplayUrl';
-import PublicGroupSignup from '../components/PublicGroupSignup';
+import getSocialMediaAvatars from '../actions/users/get_social_media_avatars';
+import PublicGroupSignup from '../components/public_group/PublicGroupSignupV2';
 import Tiers from '../components/Tiers';
+import { getTier } from '../lib/tiers';
 
 import fetchGroup from '../actions/groups/fetch_by_id';
 import fetchUsers from '../actions/users/fetch_by_group';
@@ -44,18 +46,21 @@ export class DonatePage extends Component {
       i18n
     } = this.props;
 
-    const tiers = [{
+    const tier = getTier({amount, interval}, group.tiers) || {
       name: "custom",
       title: " ",
       description: i18n.getString('defaultTierDescription'),
       amount,
       interval: interval || 'one-time',
       range: [amount, 10000000]
-    }];
+    };
+    const tiers = [tier];
+
+    group.backers = []; // We don't show the backers
 
     let donationSection;
     if (this.state.showThankYouMessage || (isAuthenticated && this.state.showUserForm)) { // we don't handle userform from logged in users) {
-      donationSection = <PublicGroupThanks message={i18n.getString('thankyou')} />;
+      donationSection = <PublicGroupThanks i18n={i18n} group={group} message={i18n.getString('thankyou')} />;
     } else if (this.state.showUserForm) {
       donationSection = <PublicGroupSignup {...this.props} save={saveNewUser.bind(this)} />
     } else {
@@ -66,14 +71,14 @@ export class DonatePage extends Component {
       <div className='DonatePage'>
         <Notification />
 
-        <div className='PublicContent'>
+        <div>
 
           <div className='PublicGroupHeader'>
             <img className='PublicGroupHeader-logo' src={group.logo ? group.logo : '/static/images/media-placeholder.svg'} />
             <div className='PublicGroupHeader-website'><DisplayUrl url={group.website} /></div>
             <div className='PublicGroupHeader-host'>{i18n.getString('hostedBy')} <a href={group.host.website}>{group.host.name}</a></div>
             <div className='PublicGroupHeader-description'>
-              {group.description}
+              {i18n.getString('missionTo')} {group.mission}
             </div>
           </div>
 
@@ -168,6 +173,7 @@ export default connect(mapStateToProps, {
   appendProfileForm,
   updateUser,
   validateSchema,
+  getSocialMediaAvatars,
   decodeJWT,
   appendDonationForm
 })(DonatePage);

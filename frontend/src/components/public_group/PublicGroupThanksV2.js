@@ -51,8 +51,8 @@ export default class PublicGroupThanksV2 extends React.Component {
         </div>
         <div className="tweet">
           <textarea name="tweetText" onChange={this.handleChange} name="textToShare" value={this.state.tweet} />
+          <button onClick={::this.tweet} className='px3 -btn -green -btn-outline -btn-small -ttu -ff-sec -fw-bold'>Tweet this!</button>
         </div>
-        <button onClick={::this.tweet} className='px3 -btn -green -btn-outline -btn-small -ttu -ff-sec -fw-bold'>Tweet this!</button>
       </div>
     );
   }
