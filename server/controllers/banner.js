@@ -5,6 +5,8 @@ import filterCollection from '../../frontend/src/lib/filter_collection';
 import _ from 'lodash';
 import Promise from 'bluebird';
 import utils from '../lib/utils';
+import queryString from 'query-string';
+import url from 'url';
 
 const requestPromise = Promise.promisify(request, {multiArgs: true});
 
@@ -262,6 +264,16 @@ module.exports = {
     if (position === users.length) {
       redirectUrl = `${config.host.website}/${slug}#support`;
     }
+
+    const parsedUrl = url.parse(redirectUrl);
+    const params = queryString.parse(parsedUrl.query);
+
+    params.utm_source = params.utm_source || 'opencollective';
+    params.utm_medium = params.utm_medium || 'github';
+    params.utm_campaign = params.utm_campaign || slug;
+
+    parsedUrl.search = `?${queryString.stringify(params)}`;
+    redirectUrl = url.format(parsedUrl);
 
     req.ga.event(`GithubWidget-${tier}`, `Click`, user.name, position);
 

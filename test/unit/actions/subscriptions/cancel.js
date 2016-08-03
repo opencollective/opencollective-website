@@ -11,7 +11,6 @@ describe('subscriptions/cancel', () => {
   afterEach(() => nock.cleanAll());
 
   it('dispatches CANCEL_SUBSCRIPTION_SUCCESS', (done) => {
-    const token = 'token_abc';
     const id = 1;
 
     nock(env.API_ROOT)
@@ -20,19 +19,18 @@ describe('subscriptions/cancel', () => {
 
     const store = mockStore({});
 
-    store.dispatch(cancelSubscription(id, token))
+    store.dispatch(cancelSubscription(id))
     .then(() => {
       const [request, success] = store.getActions();
 
-      expect(request).toEqual({ type: constants.CANCEL_SUBSCRIPTION_REQUEST, id, token });
-      expect(success).toEqual({ type: constants.CANCEL_SUBSCRIPTION_SUCCESS, id, token });
+      expect(request).toEqual({ type: constants.CANCEL_SUBSCRIPTION_REQUEST, id });
+      expect(success).toEqual({ type: constants.CANCEL_SUBSCRIPTION_SUCCESS, id });
       done();
     })
     .catch(done)
   });
 
  it('dispatches CANCEL_SUBSCRIPTION_FAILURE when it fails', (done) => {
-    const token = 'token_abc';
     const id = 1;
 
     nock(env.API_ROOT)
@@ -41,14 +39,13 @@ describe('subscriptions/cancel', () => {
 
     const store = mockStore({});
 
-    store.dispatch(cancelSubscription(id, token))
+    store.dispatch(cancelSubscription(id))
     .catch(() => {
       const [request, failure] = store.getActions();
 
-      expect(request).toEqual({ type: constants.CANCEL_SUBSCRIPTION_REQUEST, id, token });
+      expect(request).toEqual({ type: constants.CANCEL_SUBSCRIPTION_REQUEST, id });
       expect(failure.type).toEqual(constants.CANCEL_SUBSCRIPTION_FAILURE);
       expect(failure.id).toEqual(id);
-      expect(failure.token).toEqual(token);
       expect(failure.error.message).toContain(`request to http://localhost:3000/api/subscriptions/${id}/cancel failed`);
       done();
     });
