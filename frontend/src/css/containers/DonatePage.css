@@ -23,9 +23,8 @@
     padding: 0 15px;
   }
   .DonatePage-line2 {
-    width: 715px;
     font-family: Montserrat;
-    font-size: 44px;
+    font-size: 36px;
     font-weight: 700;
     line-height: 1.27;
     letter-spacing: -0.5px;
@@ -104,7 +103,12 @@
 
 
 @media (max-width: 700px) {
-  .DonatePage .DonatePage-donation-container {
-    width: auto;
+  .DonatePage {
+    .DonatePage-donation-container {
+      width: auto;
+    }
+    .DonatePage-line2 {
+      font-size: 28px;
+    }
   }
 }
