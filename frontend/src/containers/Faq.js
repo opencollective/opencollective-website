@@ -93,21 +93,38 @@ export class Faq extends Component {
           <h3>Can’t find the answer you are looking for?</h3>
           <p>Shoot us an email at support@opencollective.com or drop by our Slack channel https://slack.opencollective.com</p>
           
-          <h3>Who are your investors?</h3>
+          <h3 id="investors">Who are your investors?</h3>
           <p>We did a first pre-seed round of $500k in October 2015 (<a href="https://www.ycombinator.com/docs/SAFE_Cap.rtf">SAFE</a>, $5M cap) with:
             <ul>
-              <li><span>$250k</span> <a href="http://generalcatalyst.com">General Catalyst</a> (<a href="https://www.linkedin.com/in/hemanttaneja">Hemant Taneja</a>)</li>
-              <li><span>$50k</span> <a href="https://www.linkedin.com/in/jsiegel">Jonathan Siegel</a></li>
-              <li><span>$50k</span> <a href="http://belcube.com">Belcube</a></li>
-              <li><span>$50k</span> <a href="https://www.linkedin.com/in/teljamou">Tony Jamous</a> (<a href="https://nexmo.com">Nexmo</a>)</li>
-              <li><span>$25k</span> <a href="https://uk.linkedin.com/in/enadalin">Eric Nadalin</a> (<a href="https://nexmo.com">Nexmo</a>)</li>
-              <li><span>$25k</span> <a href="https://www.linkedin.com/in/brian-larson-43904010">Brian Larson</a> (engineer at Google, Twitter)</li>
-              <li><span>$15k</span> <a href="https://twitter.com/rauchg">Guillermo Rauch</a> (<a href="http://socket.io">socket.io</a>)</li>
-              <li><span>$10k</span> <a href="http://buytaert.net">Dries Buytaert</a> (<a href="https://drupal.org">Drupal</a>)</li>
-              <li><span>$10k</span> <a href="http://assemble.vc">Assemble.vc</a></li>
-              <li><span>$5k</span> <a href="https://www.linkedin.com/in/toonvanagt">Toon Vanagt</a> (<a href="http://data.be">data.be</a>)</li>
-              <li><span>$5k</span> <a href="https://www.linkedin.com/in/xaviercorman">Xavier Corman</a> (<a href="http://edebex.com">Edebex</a>)</li>
+              <li><span>$250k</span> <a href="http://generalcatalyst.com">General Catalyst</a> (SF/NYC/Boston, <a href="https://www.linkedin.com/in/hemanttaneja">Hemant Taneja</a>)</li>
+              <li><span>$50k</span> <a href="https://www.linkedin.com/in/jsiegel">Jonathan Siegel</a> (can't pin down his location)</li>
+              <li><span>$50k</span> <a href="http://belcube.com">Belcube</a> (Brussels)</li>
+              <li><span>$50k</span> <a href="https://www.linkedin.com/in/teljamou">Tony Jamous</a> (London, <a href="https://nexmo.com">Nexmo</a>)</li>
+              <li><span>$25k</span> <a href="https://uk.linkedin.com/in/enadalin">Eric Nadalin</a> (London, <a href="https://nexmo.com">Nexmo</a>)</li>
+              <li><span>$25k</span> <a href="https://www.linkedin.com/in/brian-larson-43904010">Brian Larson</a> (SF, engineer at Google, Twitter)</li>
+              <li><span>$15k</span> <a href="https://twitter.com/rauchg">Guillermo Rauch</a> (SF/Buenos Aires, <a href="http://socket.io">socket.io</a>)</li>
+              <li><span>$10k</span> <a href="http://buytaert.net">Dries Buytaert</a> (Boston, <a href="https://drupal.org">Drupal</a>)</li>
+              <li><span>$10k</span> <a href="http://assemble.vc">Assemble.vc</a> (Boston)</li>
+              <li><span>$5k</span> <a href="https://www.linkedin.com/in/toonvanagt">Toon Vanagt</a> (Brussels, <a href="http://data.be">data.be</a>)</li>
+              <li><span>$5k</span> <a href="https://www.linkedin.com/in/xaviercorman">Xavier Corman</a> (Brussels, <a href="http://edebex.com">Edebex</a>)</li>
               <li><span>$5k</span> Personal friend</li>
+            </ul>
+          </p>
+
+          <p>We did a follow up round of $305k in July 2016 (<a href="https://www.ycombinator.com/docs/SAFE_Cap.rtf">SAFE</a>, $8M cap) with:
+            <ul>
+              <li><span>$100k</span> <a href="https://www.linkedin.com/in/ricardo-gorodisch-9b057889">Ricardo Gorodisch</a> (Argentina, President <a href="http://www.fundacionkaleidos.org/">Foundation Kaleidos</a>)</li>
+              <li><span>$50k</span> <a href="https://www.linkedin.com/in/petekoomen">Pete Koomen</a> (SF, Cofounder/CTO <a href="http://optimizely.com">Optimizely</a>)</li>
+              <li><span>$25k</span> <a href="https://www.linkedin.com/in/jpayne">Jim Payne</a> (NYC, Cofounder MoPub, EIR Accel Partners)</li>
+              <li><span>$25k</span> <a href="https://www.linkedin.com/in/caesar-sengupta-2743b">Caesar Sengupta</a> (Bay Area, VP Product Management at Google)</li>
+              <li><span>$25k</span> <a href="https://www.linkedin.com/in/gkgandhi">Gautam Gandhi</a> (India, Head New Business Development India at Google)</li>
+              <li><span>$15k</span> <a href="https://www.linkedin.com/in/tpbrown5">Tom Brown</a> (FinTech lawyer, partner at Paul Hastings, former VP at Visa )</li>
+              <li><span>$15k</span> Vadim (NYC/Bay Area/Buenos Aires)</li>
+              <li><span>$10k</span> <a href="https://www.linkedin.com/in/johnkobs">John Kobs</a> (SF, Entrepreneur/CEO at <a href="http://ApartmentList.com">ApartmentList</a>)</li>
+              <li><span>$10k</span> <a href="https://www.linkedin.com/in/nicolaswittenborn">Nicolas Wittenborn</a> (Berlin, principal at point 9 venture)</li>
+              <li><span>$10k</span> <a href="https://www.linkedin.com/in/derek-parham-b7b5504">Derek Parham</a> (NYC, deputy CTO at Hillary For America)</li>
+              <li><span>$10k</span> <a href="https://www.linkedin.com/in/hbridge">Henry Bridge</a> (NYC, Director of Product at Hillary For America)</li>
+              <li><span>$10k</span> <a href="https://www.linkedin.com/in/xaviercorman">Antoine Perdaens</a> (Belgium, Cofounder/CEO at <a href="http://knowledgeplaza.net">KnowledgePlaza</a>)</li>
             </ul>
           </p>
 
