@@ -46,7 +46,7 @@
     margin: auto;
     margin-bottom: 40px;
     min-width: 129px;
-    height: 30px;
+    min-height: 30px;
     border-radius: 100px;
     border: solid 2px #75cc1f;
     line-height: 3;
