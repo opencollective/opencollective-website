@@ -5,11 +5,11 @@ import * as constants from '../../constants/discover';
  * Fetch one group
  */
 
-export default () => {
+export default (tag, sort) => {
   return dispatch => {
     dispatch(request());
 
-    return get('/discover')
+    return get('/discover', {params: {show: tag, sort: sort}})
     .then(json => dispatch(success(json)))
     .catch(error => dispatch(failure(error)));
   };

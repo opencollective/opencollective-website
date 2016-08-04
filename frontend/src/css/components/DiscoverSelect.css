@@ -18,6 +18,7 @@
     font-size: 24px;
     color: #75cc1f;
     padding-bottom: 2px;
+    text-transform: capitalize;
     &:hover {
       cursor: pointer;
       span:first-child {
@@ -43,6 +44,7 @@
       margin: 0;
       li {
         margin-right: .5px;
+        text-transform: capitalize;
         &:hover {
           color: #75cc1f;
           cursor: pointer;

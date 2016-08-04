@@ -16,21 +16,24 @@ export class Discover extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentShowOption: null,
-      currentSortOption: null
+      currentShowOption: 'All',
+      currentSortOption: 'Newest'
     };
+    this.onSelectShowOption = this.onSelectShowOption.bind(this);
+    this.onSelectSortOption = this.onSelectSortOption.bind(this);
   }
 
   componentDidMount() {
     const { fetchDiscover } = this.props;
-    fetchDiscover();
+    const { currentShowOption, currentSortOption } = this.state;
+    fetchDiscover(currentShowOption, currentSortOption);
   }
 
   render() {
     const { i18n, discover } = this.props;
     const { currentShowOption, currentSortOption } = this.state;
-    const showOptions = ['Open Source', 'Meetup'];
-    const sortOptions = ['Newest'];
+    const showOptions = ['all', 'open source', 'meetup'];
+    const sortOptions = ['newest', 'oldest'];
     const collectives = discover.collectives ? discover.collectives : [];
 
     if (!currentShowOption && showOptions.length) {
@@ -50,8 +53,8 @@ export class Discover extends Component {
                 <div className='Discover-hero-line1'>Discover awesome collectives to support</div>
                 <div className='Discover-hero-line2'>Let's make great things together.</div>
                 <div className='Discover-hero-actions'>
-                  <DiscoverSelect label='Show' options={ showOptions } currentOption={ currentShowOption || '' } onSelect={option => this.setState({currentShowOption: option})} />
-                  <DiscoverSelect label='Sort by' options={ sortOptions } currentOption={ currentSortOption } onSelect={option => this.setState({currentSortOption: option})} />
+                  <DiscoverSelect label='Show' options={ showOptions } currentOption={ currentShowOption || '' } onSelect={this.onSelectShowOption} />
+                  <DiscoverSelect label='Sort by' options={ sortOptions } currentOption={ currentSortOption } onSelect={this.onSelectSortOption} />
                 </div>
               </div>
             </div>
@@ -62,6 +65,27 @@ export class Discover extends Component {
           <PublicFooter />
       </div>
     )
+  }
+
+  onSelectShowOption(option) {
+    const { currentSortOption } = this.state;
+    this.discover(option, currentSortOption)
+    .then(() => {
+      this.setState({currentShowOption: option});
+    });
+  }
+
+  onSelectSortOption(option) {
+    const { currentSortOption } = this.state;
+    this.discover(currentShowOption, option)
+    .then(() => {
+      this.setState({currentSortOption: option});
+    });
+  }
+
+  discover(show, sort) {
+    const { fetchDiscover } = this.props;
+    return fetchDiscover(show, sort);
   }
 }
 
