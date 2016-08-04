@@ -47,7 +47,9 @@ export class DonatePage extends Component {
       i18n
     } = this.props;
 
-    const tier = getTier({amount, interval}, group.tiers) || {
+    let tier = getTier({amount, interval}, group.tiers);
+    if (!tier || tier.presets && tier.presets.length > 1) 
+      tier = {
       name: "custom",
       title: " ",
       description: i18n.getString('defaultTierDescription'),
@@ -75,7 +77,7 @@ export class DonatePage extends Component {
         <div className='DonatePage-logo' style={{backgroundImage: `url(${group.logo ? group.logo : '/static/images/rocket.svg'})`}}></div>
         <div className='DonatePage-line1'>Hi we are <b>{ group.name }</b> with your support we can</div>
         {group.mission ? <div className='DonatePage-line2'>{ group.mission }</div> : null}
-        {group.host.name ? <a className='DonatePage-line3' href={group.host.website}>{group.host.name}</a> : null}
+        {group.website ? <a className='DonatePage-line3' href={group.website}>{group.website}</a> : null}
         <div className='DonatePage-donation-container'>{ donationSection }</div>
         <PublicFooter />
       </div>

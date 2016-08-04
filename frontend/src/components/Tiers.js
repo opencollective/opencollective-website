@@ -53,6 +53,7 @@ export default class Tiers extends Component {
               currency={currency}
               frequency={frequency}
               presets={tier.presets}
+              i18n={i18n}
               onChange={({amount, frequency, currency}) => appendDonationForm(tier.name, {amount, frequency, currency})}
               // MAJOR HACK to support a donation for this group.
               showCurrencyPicker={group.id == 10}/>
