@@ -10,31 +10,39 @@ import PublicFooter from '../components/PublicFooter';
 import CollectiveCard from '../components/CollectiveCard';
 
 import fetchDiscover from '../actions/discover/fetch';
+import fetchGroupTags from '../actions/groups/tags';
 
 export class Discover extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      currentShowOption: 'All',
-      currentSortOption: 'Newest'
+      currentShowOption: 'all',
+      currentSortOption: 'newest'
     };
     this.onSelectShowOption = this.onSelectShowOption.bind(this);
     this.onSelectSortOption = this.onSelectSortOption.bind(this);
   }
 
   componentDidMount() {
-    const { fetchDiscover } = this.props;
+    const { fetchDiscover, fetchGroupTags } = this.props;
     const { currentShowOption, currentSortOption } = this.state;
     fetchDiscover(currentShowOption, currentSortOption);
+    fetchGroupTags();
   }
 
   render() {
-    const { i18n, discover } = this.props;
+    const { i18n, discover, tags } = this.props;
     const { currentShowOption, currentSortOption } = this.state;
-    const showOptions = ['all', 'open source', 'meetup'];
+    const showOptions = ['all'];
     const sortOptions = ['newest', 'oldest'];
     const collectives = discover.collectives ? discover.collectives : [];
+
+    if (tags) {
+      for (var i = 0, l = tags.length; i < l; i++) {
+        showOptions.push(tags[i]);
+      }
+    }
 
     if (!currentShowOption && showOptions.length) {
       this.setState({currentShowOption: showOptions[0]});
@@ -91,12 +99,14 @@ export class Discover extends Component {
 
 
 export default connect(mapStateToProps, {
-  fetchDiscover
+  fetchDiscover,
+  fetchGroupTags
 })(Discover);
 
-function mapStateToProps({ discover }) {
+function mapStateToProps({ discover, groups }) {
   return {
     discover,
+    tags: groups.tags,
     i18n: i18n('en')
   }
 }

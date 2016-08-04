@@ -1,11 +1,11 @@
 import { get } from '../../lib/api';
-import * as constants from '../../constants/discover';
+import * as constants from '../../constants/groups';
 
-export default (tag, sort) => {
+export default () => {
   return dispatch => {
     dispatch(request());
 
-    return get('/discover', {params: {show: tag, sort: sort}})
+    return get('/groups/tags')
     .then(json => dispatch(success(json)))
     .catch(error => dispatch(failure(error)));
   };
@@ -13,20 +13,20 @@ export default (tag, sort) => {
 
 function request() {
   return {
-    type: constants.DISCOVER_REQUEST
+    type: constants.GROUP_TAGS_REQUEST
   };
 }
 
 export function success(json) {
   return {
-    type: constants.DISCOVER_SUCCESS,
+    type: constants.GROUP_TAGS_SUCCESS,
     json
   };
 }
 
 function failure(error) {
   return {
-    type: constants.DISCOVER_FAILURE,
+    type: constants.GROUP_TAGS_FAILURE,
     error
   };
 }
