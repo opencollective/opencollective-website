@@ -4,11 +4,12 @@ import { connect } from 'react-redux';
 import values from 'lodash/object/values';
 import i18n from '../lib/i18n';
 
+import LoginTopBar from '../containers/LoginTopBar';
+
 import roles from '../constants/roles';
 import Notification from '../containers/Notification';
 import PublicFooter from '../components/PublicFooter';
 import PublicGroupThanks from '../components/public_group/PublicGroupThanksV2';
-import DisplayUrl from '../components/DisplayUrl';
 import getSocialMediaAvatars from '../actions/users/get_social_media_avatars';
 import PublicGroupSignup from '../components/public_group/PublicGroupSignupV2';
 import Tiers from '../components/Tiers';
@@ -69,24 +70,13 @@ export class DonatePage extends Component {
 
     return (
       <div className='DonatePage'>
+        <LoginTopBar />
         <Notification />
-
-        <div>
-
-          <div className='PublicGroupHeader'>
-            <img className='PublicGroupHeader-logo' src={group.logo ? group.logo : '/static/images/media-placeholder.svg'} />
-            <div className='PublicGroupHeader-website'><DisplayUrl url={group.website} /></div>
-            <div className='PublicGroupHeader-host'>{i18n.getString('hostedBy')} <a href={group.host.website}>{group.host.name}</a></div>
-            <div className='PublicGroupHeader-description'>
-              {i18n.getString('missionTo')} {group.mission}
-            </div>
-          </div>
-
-          <center>
-            {donationSection}
-          </center>
-
-        </div>
+        <div className='DonatePage-logo' style={{backgroundImage: `url(${group.logo ? group.logo : '/static/images/rocket.svg'})`}}></div>
+        <div className='DonatePage-line1'>Hi we are <b>{ group.name }</b> with your support we can</div>
+        {group.mission ? <div className='DonatePage-line2'>{ group.mission }</div> : null}
+        {group.host.name ? <a className='DonatePage-line3' href={group.host.website}>{group.host.name}</a> : null}
+        <div className='DonatePage-donation-container'>{ donationSection }</div>
         <PublicFooter />
       </div>
     );
