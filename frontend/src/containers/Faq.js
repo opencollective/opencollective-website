@@ -124,7 +124,7 @@ export class Faq extends Component {
               <li><span>$10k</span> <a href="https://www.linkedin.com/in/nicolaswittenborn">Nicolas Wittenborn</a> (Berlin, principal at point 9 venture)</li>
               <li><span>$10k</span> <a href="https://www.linkedin.com/in/derek-parham-b7b5504">Derek Parham</a> (NYC, deputy CTO at Hillary For America)</li>
               <li><span>$10k</span> <a href="https://www.linkedin.com/in/hbridge">Henry Bridge</a> (NYC, Director of Product at Hillary For America)</li>
-              <li><span>$10k</span> <a href="https://www.linkedin.com/in/xaviercorman">Antoine Perdaens</a> (Belgium, Cofounder/CEO at <a href="http://knowledgeplaza.net">KnowledgePlaza</a>)</li>
+              <li><span>$10k</span> <a href="https://www.linkedin.com/in/antoineperdaens">Antoine Perdaens</a> (Belgium, Cofounder/CEO at <a href="http://knowledgeplaza.net">KnowledgePlaza</a>)</li>
             </ul>
           </p>
 
