@@ -1,4 +1,5 @@
 .DonatePage {
+  text-align: center;
   .DonatePage-logo {
     width: 152px;
     height: 152px;
@@ -35,8 +36,7 @@
     padding: 0 15px;
   }
   .DonatePage-line3 {
-    display: block;
-    width: 84px;
+    display: inline-block;
     font-family: Montserrat;
     font-size: 10px;
     font-weight: 700;
@@ -45,7 +45,7 @@
     color: #75cc1f;
     margin: auto;
     margin-bottom: 40px;
-    width: 129px;
+    min-width: 129px;
     height: 30px;
     border-radius: 100px;
     border: solid 2px #75cc1f;
