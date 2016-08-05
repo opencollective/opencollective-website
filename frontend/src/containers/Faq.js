@@ -117,7 +117,7 @@ export class Faq extends Component {
               <li><span>$50k</span> <a href="https://www.linkedin.com/in/petekoomen">Pete Koomen</a> (SF, Cofounder/CTO <a href="http://optimizely.com">Optimizely</a>)</li>
               <li><span>$25k</span> <a href="https://www.linkedin.com/in/jpayne">Jim Payne</a> (NYC, Cofounder MoPub, EIR Accel Partners)</li>
               <li><span>$25k</span> <a href="https://www.linkedin.com/in/caesar-sengupta-2743b">Caesar Sengupta</a> (Bay Area, VP Product Management at Google)</li>
-              <li><span>$25k</span> <a href="https://www.linkedin.com/in/gkgandhi">Gautam Gandhi</a> (India, Head New Business Development India at Google)</li>
+              <li><span>$25k</span> <a href="https://www.linkedin.com/in/gkgandhi">Gautam Gandhi</a> (India, Entrepreneur, former Head New Business Development India at Google)</li>
               <li><span>$15k</span> <a href="https://www.linkedin.com/in/tpbrown5">Tom Brown</a> (FinTech lawyer, partner at Paul Hastings, former VP at Visa )</li>
               <li><span>$15k</span> Vadim (NYC/Bay Area/Buenos Aires)</li>
               <li><span>$10k</span> <a href="https://www.linkedin.com/in/johnkobs">John Kobs</a> (SF, Entrepreneur/CEO at <a href="http://ApartmentList.com">ApartmentList</a>)</li>
