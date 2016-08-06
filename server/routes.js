@@ -73,6 +73,7 @@ module.exports = (app) => {
    * the explicit routes and just do `app.use(render)`
    */
   app.get('/', mw.ga, mw.addTitle('OpenCollective - Collect and disburse money transparently'), controllers.homepage, render);
+  app.get('/about', mw.ga, mw.addTitle('About'), render);
   app.get('/faq', mw.ga, mw.addTitle('Answers'), render);
   app.get('/login/:token', mw.ga, mw.addTitle('Open Collective'), render);
   app.get('/login', mw.ga, mw.addTitle('Open Collective Login'), render);

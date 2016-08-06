@@ -1,0 +1,215 @@
+.About {
+  background-color: #f5f6f7;
+
+  .LoginTopBar {
+    background-color: #fff;
+  }
+  .MailChimpInputSection {
+    background: none;
+  }
+  .About-container {
+    box-sizing: border-box;
+    margin: 30px auto 30px auto;
+    padding: 30px 60px;
+    width: 900px;
+    min-height: 200px;
+    background-color: white;
+    &.no-bg {
+      background: none;
+    }
+    h1 {
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 20px 0;
+    }
+  }
+  .team-member {
+    text-align: center;
+    margin: 10px auto;
+    img {
+      box-sizing: border-box;
+      display: block;
+      margin: 0 auto;
+      border: 8px solid white;
+      box-shadow: 0 0 1px rgba(0,0,100,.5);
+      max-width: 200px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+    p, h4 {
+      text-align: center;
+      margin: 0;
+    }
+    h4 {
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+    ul, ul.social-list {
+      padding-left: 0;
+      margin-left: -5px;
+      list-style: none;
+      li {
+        display: inline-block;
+        padding-right: 5px;
+        padding-left: 5px;
+        list-style: none;
+        a {
+          display: block;
+          background-color: #d5d6fe;
+          height: 40px;
+          width: 40px;
+          border-radius: 100%;
+          font-size: 20px;
+          line-height: 40px;
+          color: white;
+          outline: none;
+          transition: all 0.3s;
+          &:hover {
+            background-color: #46b0ed;
+          }
+          i {
+            background-size: 50%;
+            width: 100%;
+            display: block;
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            &.fa-twitter {
+              background-image: url(../images/fa-twitter.svg);
+            }
+            &.fa-facebook {
+              background-image: url(../images/fa-facebook-f.svg);
+            }
+            &.fa-linkedin {
+              background-image: url(../images/fa-linkedin.svg);
+            }
+          }
+        }
+      }
+    }
+  }
+  h1 {
+    font-family: Montserrat;
+    font-size: 32px;
+    font-weight: 300;
+    text-align: center;
+    color: #000000;
+    margin-bottom: 30px;
+    margin-bottom: 40px;
+  }
+  h2 {
+    font-family: Montserrat;
+    font-size: 24px;
+    font-weight: 300;
+    color: #000000;
+  }
+  h3 {
+    font-family: Montserrat;
+    font-size: 20px;
+    font-weight: 300;
+    color: #000000;
+  }
+  h4 {
+    font-family: Lato;
+    font-size: 18px;
+    font-weight: normal;
+    color: #000000;
+  }
+  h5 {
+    font-family: Montserrat;
+    font-size: 16px;
+    font-weight: normal;
+    color: #000000;
+  }
+  p, label {
+    font-family: Lato;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 1.44;
+    line-height: 1.6;
+    color: #787d80;
+  }
+}
+
+@media (max-width: 900px) {
+  .About .About-container {
+    width: auto !important;
+    margin: 15px !important;
+    padding: 30px 50px;
+  }
+}
+
+@media (max-width: 600px) {
+  .About .About-container {
+    padding: 30px;
+  }
+}
+
+
+
+
+
+
+
+
+ul.social-list {
+  padding-left: 0;
+  margin-left: -5px;
+  list-style: none;
+  li {
+    display: inline-block;
+    padding-right: 5px;
+    padding-left: 5px;
+    list-style: none;
+    a {
+      display: block;
+      background-color: #d5d6fe;
+      height: 40px;
+      width: 40px;
+      border-radius: 100%;
+      font-size: 20px;
+      line-height: 40px;
+      color: white;
+      outline: none;
+      transition: all 0.3s;
+      &:hover {
+        background-color: #46b0ed;
+      }
+      i {
+        background-size: 50%;
+        width: 100%;
+        display: block;
+        height: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        &.fa-twitter {
+          background-image: url(../images/fa-twitter.svg);
+        }
+        &.fa-facebook {
+          background-image: url(../images/fa-facebook-f.svg);
+        }
+        &.fa-linkedin {
+          background-image: url(../images/fa-linkedin.svg);
+        }
+        &.fa-medium {
+          background-image: url(../images/fa-medium.svg);
+        }
+        &.fa-slack {
+          background-image: url(../images/fa-slack.svg);
+        }
+        &.fa-envelope-o {
+          background-image: url(../images/fa-envelope-o.svg);
+        }
+        &.fa-github {
+          background-image: url(../images/fa-github.svg);
+        }
+      }
+    }
+  }
+}
+
+.links {
+  a {
+    margin: 0 5px;
+  }
+}

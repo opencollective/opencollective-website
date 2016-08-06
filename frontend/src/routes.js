@@ -12,12 +12,14 @@ import ConnectTwitterButton from './components/ConnectTwitterButton';
 import EditTwitter from './components/EditTwitter';
 import HomePage from './containers/HomePage';
 import Faq from './containers/Faq';
+import About from './containers/About';
 
 import { requireAuthentication } from './components/AuthenticatedComponent';
 
 export default (
   <Route>
     <Route path="/" component={HomePage} />
+    <Route path="/about" component={About} />
     <Route path="/faq" component={Faq} />
     <Route path="/login/:token" component={Login} />
     <Route path="/login" component={Login} />,
