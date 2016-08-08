@@ -27,6 +27,7 @@
  * Containers
  */
 
+@import './containers/About.css';
 @import './containers/DonatePage.css';
 @import './containers/Faq.css';
 @import './containers/HomePage.css';

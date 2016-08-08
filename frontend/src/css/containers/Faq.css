@@ -6,7 +6,7 @@
   }
   .Faq-container {
     box-sizing: border-box;
-    margin: 30px auto 90px auto;
+    margin: 30px auto 30px auto;
     padding: 30px 60px;
     width: 900px;
     min-height: 200px;
@@ -50,6 +50,7 @@
     font-size: 16px;
     font-weight: normal;
     line-height: 1.44;
+    line-height: 1.6;
     color: #787d80;
   }
 }
