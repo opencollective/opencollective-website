@@ -143,16 +143,15 @@ export class About extends Component {
 
           <div className='links center'>
             <ul className='social-list'>
-                <li><a href='//twitter.com/xdamman'><i className='fa-twitter'></i></a></li>
-                <li><a href='//'><i className='fa-envelope-o'></i></a></li>
-                <li><a href='//google.com'><i className='fa-medium'></i></a></li>
-                <li><a href='//google.com'><i className='fa-slack'></i></a></li>
-                <li><a href='//'><i className='fa-github'></i></a></li>
+                <li><a href='//twitter.com/opencollect'><i className='fa-twitter'></i></a></li>
+                <li><a href='mailto:info@opencollective'><i className='fa-envelope-o'></i></a></li>
+                <li><a href='//medium.com/open-collective'><i className='fa-medium'></i></a></li>
+                <li><a href='//slack.opencollective.com/'><i className='fa-slack'></i></a></li>
+                <li><a href='//github.com/OpenCollective/OpenCollective'><i className='fa-github'></i></a></li>
             </ul>
-            <a href='#'>About</a>
-            <a href='#'>Blog</a>
-            <a href='#'>Open&nbsp;Source</a>
-            <a href='#'>Community&nbsp;Guidelines</a>
+            <a href='https://medium.com/open-collective'>Blog</a>
+            <a href='https://github.com/OpenCollective/OpenCollective'>Open&nbsp;Source</a>
+            <a href='https://github.com/OpenCollective/OpenCollective/blob/master/COMMUNITY-GUIDELINES.MD'>Community&nbsp;Guidelines</a>
           </div>
         </div>
         <PublicFooter />
