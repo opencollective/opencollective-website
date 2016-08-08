@@ -610,9 +610,9 @@
 .tweet {
   margin: 20px 0px;
   textarea {
-    width: 75%;
+    width: 100%;
     max-width: 600px;
-    height: 4rem;
+    height: 6rem;
   }
   button {
     display: block;

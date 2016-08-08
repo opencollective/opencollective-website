@@ -32,7 +32,7 @@ export class DonatePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showThankYouMessage: false,
+      showThankYouMessage: true,
       showUserForm: false
     };
   }
@@ -63,7 +63,7 @@ export class DonatePage extends Component {
 
     let donationSection;
     if (this.state.showThankYouMessage || (isAuthenticated && this.state.showUserForm)) { // we don't handle userform from logged in users) {
-      donationSection = <PublicGroupThanks i18n={i18n} group={group} message={i18n.getString('thankyou')} />;
+      donationSection = <PublicGroupThanks i18n={i18n} group={group} message={i18n.getString('thankyou')} tweet={tier.tweet} />;
     } else if (this.state.showUserForm) {
       donationSection = <PublicGroupSignup {...this.props} save={saveNewUser.bind(this)} />
     } else {
