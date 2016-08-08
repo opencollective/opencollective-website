@@ -87,6 +87,7 @@ module.exports = (app) => {
   app.get('/:slug/connect/twitter', mw.ga, render);
   app.get('/:slug/edit-twitter', mw.ga, controllers.profile, render);
   app.get('/subscriptions', mw.ga, mw.addTitle('My Subscriptions'), render);
+  app.get('/:slug([A-Za-z0-9-]+)/connected-accounts', mw.ga, render);
   app.get('/:slug([A-Za-z0-9-]+)/:type(expenses|donations)', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-]+)/expenses/new', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-]+)/donate/:amount', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
