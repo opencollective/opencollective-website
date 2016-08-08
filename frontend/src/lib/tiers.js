@@ -11,7 +11,7 @@ const getTier = (query, tiers) => {
   // We get the first tier for which the totalDonations is higher than the minimum amount for that tier
   const tier = tiers.find((tier) => {
     if (query.interval && query.interval !== tier.interval) return false;
-    if (query.amount && query.amount >= tier.range[0] && query.amount <= tier.range[1]) return true;
+    if (query.amount && parseInt(query.amount, 10) === parseInt(tier.amount,10)) return true;
     return false;
   });
 
