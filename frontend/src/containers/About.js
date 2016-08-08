@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import i18n from '../lib/i18n';
-
 import LoginTopBar from '../containers/LoginTopBar';
 import PublicFooter from '../components/PublicFooter';
 import MailChimpInputSection from '../components/homepage/MailChimpInputSection';
@@ -163,7 +161,5 @@ export class About extends Component {
 export default connect(mapStateToProps, {})(About);
 
 function mapStateToProps() {
-  return {
-    i18n: i18n('en')
-  }
+  return {};
 }
