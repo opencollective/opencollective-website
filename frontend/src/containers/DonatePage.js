@@ -32,7 +32,7 @@ export class DonatePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showThankYouMessage: true,
+      showThankYouMessage: false,
       showUserForm: false
     };
   }
