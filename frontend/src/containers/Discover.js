@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import debounce from 'lodash/function/debounce';
 
 import i18n from '../lib/i18n';
 
@@ -27,8 +28,16 @@ export class Discover extends Component {
   componentDidMount() {
     const { fetchDiscover, fetchGroupTags } = this.props;
     const { currentShowOption, currentSortOption } = this.state;
-    fetchDiscover(currentShowOption, currentSortOption);
     fetchGroupTags();
+    fetchDiscover(currentShowOption, currentSortOption);
+    let lastTop = 0xFFFF; // Require scroll towards bottom.
+    window.onscroll = debounce(() => {
+      const bottomDirection = lastTop < document.documentElement.scrollTop;
+      if (bottomDirection && document.documentElement.scrollHeight - (window.innerHeight + document.documentElement.scrollTop) < 100) {
+        fetchDiscover(this.state.currentShowOption, this.state.currentSortOption, this.props.discover.collectives.length);
+      }
+      lastTop = document.documentElement.scrollTop;
+    }, 200);
   }
 
   render() {
@@ -39,7 +48,7 @@ export class Discover extends Component {
     const collectives = discover.collectives ? discover.collectives : [];
 
     if (tags) {
-      for (var i = 0, l = tags.length; i < l; i++) {
+      for (let i = 0, l = tags.length; i < l; i++) {
         showOptions.push(tags[i]);
       }
     }
@@ -61,13 +70,13 @@ export class Discover extends Component {
                 <div className='Discover-hero-line1'>Discover awesome collectives to support</div>
                 <div className='Discover-hero-line2'>Let's make great things together.</div>
                 <div className='Discover-hero-actions'>
-                  <DiscoverSelect label='Show' options={ showOptions } currentOption={ currentShowOption || '' } onSelect={this.onSelectShowOption} />
+                  <DiscoverSelect label='Show' options={ showOptions } currentOption={ currentShowOption } onSelect={this.onSelectShowOption} />
                   <DiscoverSelect label='Sort by' options={ sortOptions } currentOption={ currentSortOption } onSelect={this.onSelectSortOption} />
                 </div>
               </div>
             </div>
             <div className='Discover-results'>
-              {collectives.map(collective => <CollectiveCard i18n={i18n} {...collective}/>)}
+              {collectives.map(collective => <CollectiveCard key={collective.id} i18n={i18n} {...collective} />)}
             </div>
           </div>
           <PublicFooter />
@@ -84,7 +93,7 @@ export class Discover extends Component {
   }
 
   onSelectSortOption(option) {
-    const { currentSortOption } = this.state;
+    const { currentShowOption } = this.state;
     this.discover(currentShowOption, option)
     .then(() => {
       this.setState({currentSortOption: option});

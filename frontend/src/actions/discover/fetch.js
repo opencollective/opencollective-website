@@ -1,11 +1,11 @@
 import { get } from '../../lib/api';
 import * as constants from '../../constants/discover';
 
-export default (tag, sort) => {
+export default (tag, sort, offset) => {
   return dispatch => {
     dispatch(request());
 
-    return get('/discover', {params: {show: tag, sort: sort}})
+    return get('/discover', {params: {show: tag, sort: sort, offset: offset}})
     .then(json => dispatch(success(json)))
     .catch(error => dispatch(failure(error)));
   };
