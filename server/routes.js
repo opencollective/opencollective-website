@@ -73,6 +73,7 @@ module.exports = (app) => {
    * the explicit routes and just do `app.use(render)`
    */
   app.get('/', mw.ga, mw.addTitle('OpenCollective - Collect and disburse money transparently'), controllers.homepage, render);
+  app.get('/about', mw.ga, mw.addTitle('About'), render);
   app.get('/discover', mw.ga, mw.addTitle('Discover'), render);
   app.get('/faq', mw.ga, mw.addTitle('Answers'), render);
   app.get('/login/:token', mw.ga, mw.addTitle('Open Collective'), render);
@@ -87,6 +88,7 @@ module.exports = (app) => {
   app.get('/:slug/connect/twitter', mw.ga, render);
   app.get('/:slug/edit-twitter', mw.ga, controllers.profile, render);
   app.get('/subscriptions', mw.ga, mw.addTitle('My Subscriptions'), render);
+  app.get('/:slug([A-Za-z0-9-]+)/connected-accounts', mw.ga, render);
   app.get('/:slug([A-Za-z0-9-]+)/:type(expenses|donations)', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-]+)/expenses/new', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-]+)/donate/:amount', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);

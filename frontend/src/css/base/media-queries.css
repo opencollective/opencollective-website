@@ -127,6 +127,15 @@
     max-width: 75%
   }
 
+  .PublicGroupThanksV2 {
+    .tweet {
+      margin: 20px 0px;
+      textarea {
+        width: 90%;
+        height: 7rem;
+      }
+    }
+  }
 
 /* For the subscription page */
 

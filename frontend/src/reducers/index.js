@@ -14,6 +14,7 @@ import pages from './pages';
 import homepage from './homepage';
 import discover from './discover';
 import app from './app';
+import connectedAccounts from './connectedAccounts';
 
 export default combineReducers({
   form,
@@ -29,5 +30,6 @@ export default combineReducers({
   router,
   homepage,
   discover,
-  app
+  app,
+  connectedAccounts
 });

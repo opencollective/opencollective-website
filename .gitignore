@@ -46,3 +46,6 @@ test-results.xml
 
 # extra binaries
 bin
+
+# JetBrains
+*.iml

@@ -13,12 +13,15 @@ import EditTwitter from './components/EditTwitter';
 import HomePage from './containers/HomePage';
 import Faq from './containers/Faq';
 import Discover from './containers/Discover';
+import About from './containers/About';
+import ConnectedAccounts from './components/ConnectedAccounts';
 
 import { requireAuthentication } from './components/AuthenticatedComponent';
 
 export default (
   <Route>
     <Route path="/" component={HomePage} />
+    <Route path="/about" component={About} />
     <Route path="/faq" component={Faq} />
     <Route path="/discover" component={Discover} />
     <Route path="/login/:token" component={Login} />
@@ -30,6 +33,7 @@ export default (
     {/* Leaving github/apply routes for existing links */}
     <Route path="/github/apply/:token" component={OnBoarding} />
     <Route path="/github/apply" component={OnBoarding} />
+    <Route path="/:slug/connected-accounts" component={ConnectedAccounts} />
     <Route path="/:slug/connect/twitter" component={ConnectTwitterButton} />
     <Route path="/:slug/edit-twitter" component={EditTwitter} />
     <Route path="/:slug" component={PublicGroup} />

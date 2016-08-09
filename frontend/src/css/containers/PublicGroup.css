@@ -606,3 +606,20 @@
     }
   }
 }
+
+.tweet {
+  margin: 20px 0px;
+  textarea {
+    width: 75%;
+    max-width: 600px;
+    height: 4rem;
+  }
+  button {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+.PublicFooter {
+  margin-top: 20px;
+}
