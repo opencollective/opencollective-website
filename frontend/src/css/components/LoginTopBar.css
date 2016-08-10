@@ -20,11 +20,12 @@
     box-sizing: border-box;
     position: absolute;
     right: 20px;
-    padding-top: 5px;
+    padding-top: 15px;
     .LoginTopBar-Links {
       display: inline-block;
       min-width: 200px;
       list-style: none;
+      margin: 0;
       li {
         display: inline-block;
       }
@@ -121,6 +122,8 @@
         overflow: hidden;
         background-size: contain;
         margin-right: 5px;
+        background-repeat: no-repeat;
+        background-position: center;
       }
       .LoginTopBarProfileButton-name {
         display: inline-block;
