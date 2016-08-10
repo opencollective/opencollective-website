@@ -6,7 +6,7 @@ export default class PublicGroupThanksV2 extends React.Component {
     super(props);
     const { group } = this.props;
     const mention = group.twitterHandle ? `@${group.twitterHandle}` : group.name;
-    const tweet = `🎉 I'm now a proud supporter of ${mention}. You should support them too! https://opencollective.com/${group.slug} #opencollective`;
+    const tweet = this.props.tweet || `🎉 I'm now a proud supporter of ${mention}. You should support them too! https://opencollective.com/${group.slug} #opencollective`;
     this.state = { tweet };
   }
 
