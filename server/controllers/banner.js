@@ -166,8 +166,16 @@ module.exports = {
     const imageWidth = Number(req.query.width) || 0;
     const imageHeight = Number(req.query.height) || 0;
     const avatarHeight = Number(req.query.avatarHeight) || 64;
-    const users = filterUsersByTier(req.users, tier.replace(/s$/,''));
+    let users = filterUsersByTier(req.users, tier.replace(/s$/,''));
     const count = Math.min(limit, users.length);
+    const showBtn = (req.query.button === 'false') ? false : true;
+    const order = req.query.order;
+
+    if (order === 'recent') {
+      users = users.sort((a,b) => {
+        return (new Date(b.createdAt) - new Date(a.createdAt));
+      });
+    }
 
     const promises = [];
     for (let i = 0 ; i < count ; i++) {
@@ -180,13 +188,15 @@ module.exports = {
       }
     }
 
-    const btnImage = (tier.match(/sponsor/)) ? 'sponsor' : tier.replace(/s$/,'');
-    const btn = {
-      url: `${config.host.website}/static/images/become_${btnImage}.svg`,
-      encoding: null
-    };
+    if (showBtn) {
+      const btnImage = (tier.match(/sponsor/)) ? 'sponsor' : tier.replace(/s$/,'');
+      const btn = {
+        url: `${config.host.website}/static/images/become_${btnImage}.svg`,
+        encoding: null
+      };
 
-    promises.push(requestPromise(btn));
+      promises.push(requestPromise(btn));
+    }
 
     let posX = margin;
     let posY = margin;
