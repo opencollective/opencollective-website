@@ -4,7 +4,7 @@ export default () => {
   return  (
     <div className='PublicFooter px2'>
       <div className='container clearfix'>
-        <div className='left pt3'>
+        <div className='left'>
           <svg width='14' height='14' className='inline-block align-middle mr1'>
             <use xlinkHref='#svg-isotype' fill='#7FADF2'/>
           </svg>

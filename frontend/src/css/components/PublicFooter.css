@@ -1,5 +1,8 @@
 .PublicFooter {
   background-color: #303233;
+  .left {
+    padding-top: 28px;
+  }
 }
 
 .PublicFooter-menuItem {
@@ -10,4 +13,17 @@
   text-transform: uppercase;
   font-size: 0.8rem;
   font-weight: bold;
+}
+
+@media (max-width: 700px) {
+  .PublicFooter {
+    .left {
+      display: none;
+    }
+    .right {
+      float: none;
+      width: 100%;
+      text-align: center;
+    }
+  }
 }
