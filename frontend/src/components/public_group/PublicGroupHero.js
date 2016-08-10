@@ -2,6 +2,7 @@ import React from 'react';
 import LoginTopBar from '../../containers/LoginTopBar';
 import formatCurrency from '../../lib/format_currency';
 import filterCollection from '../../lib/filter_collection';
+import toAbsoluteURI from '../../lib/toAbsoluteURI';
 
 export default class PublicGroupHero extends React.Component {
 
@@ -49,9 +50,10 @@ export default class PublicGroupHero extends React.Component {
   render() {
     const { group, i18n } = this.props;
     const collectiveBg = group.backgroundImage || '/static/images/collectives/default-header-bg.jpg';
+    const proxiedBg = `https://res.cloudinary.com/opencollective/image/fetch/f_auto/${encodeURIComponent(toAbsoluteURI(collectiveBg))}`;
 
     return (
-      <section className='PublicGroupHero relative px2 bg-black bg-cover white' style={{backgroundImage: `url(${collectiveBg})`}}>
+      <section className='PublicGroupHero relative px2 bg-black bg-cover white' style={{backgroundImage: `url(${proxiedBg})`}}>
         <div className='container relative center'>
           <LoginTopBar loginRedirectTo={`/${group.slug}`} />
           <div className='PublicGroupHero-content'>
