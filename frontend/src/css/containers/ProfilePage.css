@@ -21,6 +21,10 @@
         background-color: white;
     }
 
+    .PublicFooter {
+        margin-top: 0;
+    }
+
     .line1 {
         text-align: center;
         margin-top: 20px;
@@ -80,6 +84,58 @@
         text-align: center;margin-bottom: 40px;
         letter-spacing: 1px;
         padding: 0 15px;
+    }
+
+    .sponsorship {
+        margin-top: -70px;
+        background-image: linear-gradient(to bottom, #09062f, #116ca2);
+        padding-top: 130px;
+        padding-bottom: 80px;
+        .sponsorship-container {
+            width: 560px;
+            margin: 0 auto;
+            .sponsorship-label {
+                width: auto;
+                color: white;
+                font-family: Montserrat;
+                font-size: 24px;
+                font-weight: 700;
+                color: #ffffff;
+                margin-bottom: 20px;
+                text-align: center;
+                padding: 0 15px;
+            }
+            .sponsorship-md-container {
+                width: 100%;
+                height: 200px;
+                background-color: red;
+                font-family: Lato;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.75;
+                color: #ffffff;
+                padding: 0 15px;
+            }
+            .sponsorship-button {
+                width: 280px;
+                height: 40px;
+                border-radius: 100px;
+                border: solid 2px #75cc1f;
+                font-family: Montserrat;
+                font-size: 12px;
+                font-weight: 700;
+                letter-spacing: 1.2px;
+                text-align: center;
+                color: #ffffff;
+                line-height: 3.5;
+                text-transform: uppercase;
+                margin: 30px auto 0 auto;
+                cursor: pointer;
+                &:hover {
+                    opacity: .8;
+                }
+            }
+        }
     }
 }
 
@@ -159,6 +215,15 @@
 @media (--medium-viewport) {
     .ProfilePage {
         background-position: center -105px;
+        .sponsorship .sponsorship-container {
+            width: 100%;
+        }
+    }
+}
+
+@media (--small-viewport) {
+    .ProfilePage {
+        background-position: center -110px;
     }
 }
 

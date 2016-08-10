@@ -62,18 +62,31 @@ export class ProfilePage extends Component {
             </section>
           ) : null
         }
-        <div style={{textAlign: 'center', margin: `${isEmpty ? 0 : 48}px auto 78px auto`, opacity: '.4'}} >
-          {isEmpty ? (
-            <div className="mb1">
-              <img src="/static/images/spooky-ghost.svg" />
-              <div style={{fontStyle: 'italic', fontFamily: 'Lato', fontSize: '22px', color: '#c0c0c0', textAlign: 'center'}}>This Profile page is so empty you might find a ghost</div>
+
+        {profile.isOrganization && (
+          <div className='sponsorship'>
+            <div className='sponsorship-container'>
+              <div className='sponsorship-label'>We are receiving sponsorship applications</div>
+              <div className='sponsorship-md-container'></div>
+              <div className='sponsorship-button'>apply for sponsorship</div>
             </div>
-            ) : null
-          }
-          <svg width='36px' height='36px' className='-light-blue align-middle mr1'>
-            <use xlinkHref='#svg-isotype'/>
-          </svg>
-        </div>
+          </div>
+        )}
+
+        {!profile.isOrganization && (
+          <div style={{textAlign: 'center', margin: `${isEmpty ? 0 : 48}px auto 78px auto`, opacity: '.4'}} >
+            {isEmpty ? (
+              <div className="mb1">
+                <img src="/static/images/spooky-ghost.svg" />
+                <div style={{fontStyle: 'italic', fontFamily: 'Lato', fontSize: '22px', color: '#c0c0c0', textAlign: 'center'}}>This Profile page is so empty you might find a ghost</div>
+              </div>
+              ) : null
+            }
+            <svg width='36px' height='36px' className='-light-blue align-middle mr1'>
+              <use xlinkHref='#svg-isotype'/>
+            </svg>
+          </div>
+        )}
         <PublicFooter />
   		</div>
   	)
