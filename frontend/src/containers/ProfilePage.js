@@ -28,7 +28,7 @@ export class ProfilePage extends Component {
   	return (
   		<div className='ProfilePage'>
         <LoginTopBar />
-        <UserPhoto user={{ avatar: profile.avatar }} addBadge={true} className={`mx-auto ${profile.isOrganization ? 'organization' : ''}`} />
+        <UserPhoto user={{ avatar: profile.avatar }} addBadge={!profile.isOrganization} className={`mx-auto ${profile.isOrganization ? 'organization' : ''}`} />
         {!profile.isOrganization && <div className="line1">Hello I'm</div>}
         {profile.isOrganization && <div className="line1">Hello We are</div>}
         <div className="line2">{profile.name}</div>
