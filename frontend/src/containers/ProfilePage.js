@@ -8,6 +8,7 @@ import LoginTopBar from '../containers/LoginTopBar';
 import UserPhoto from '../components/UserPhoto';
 import PublicFooter from '../components/PublicFooter';
 import CollectiveCard from '../components/CollectiveCard';
+import SponsoredCard from '../components/SponsoredCard';
 import Markdown from '../components/Markdown';
 
 export class ProfilePage extends Component {
@@ -28,9 +29,8 @@ export class ProfilePage extends Component {
   		<div className='ProfilePage'>
         <LoginTopBar />
         <UserPhoto user={{ avatar: profile.avatar }} addBadge={true} className={`mx-auto ${profile.isOrganization ? 'organization' : ''}`} />
-        {!profile.isOrganization &&
-          <div className="line1">Hello I'm</div>
-        }
+        {!profile.isOrganization && <div className="line1">Hello I'm</div>}
+        {profile.isOrganization && <div className="line1">Hello We are</div>}
         <div className="line2">{profile.name}</div>
         <div className="line3">{profile.description}</div>
         {profile.longDescription && (
@@ -52,13 +52,13 @@ export class ProfilePage extends Component {
         {backing.length ? (
             <section style={{paddingBottom: '0'}}>
               <div className="lineA">{profile.isOrganization ? i18n.getString('WeAreProudSupporters') : i18n.getString('IamAProudSupporter')}</div>
-              {backing.map((group, index) => <CollectiveCard
-                key={index}
-                i18n={i18n}
-                isCollectiveOnProfile={true}
-                {...group}
-                />
-              )}
+              {backing.map((group, index) => {
+                if (profile.isOrganization) {
+                  return <SponsoredCard key={index} i18n={i18n} isCollectiveOnProfile={true} {...group} />
+                } else {
+                  return <CollectiveCard key={index} i18n={i18n} isCollectiveOnProfile={true} {...group} />
+                }
+              })}
             </section>
           ) : null
         }

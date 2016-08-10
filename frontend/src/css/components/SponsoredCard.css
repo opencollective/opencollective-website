@@ -1,0 +1,28 @@
+.SponsoredCard {
+  vertical-align: top;
+  position: relative;
+  box-sizing: border-box;
+  display: inline-block;
+  width: 280px;
+  height: 330px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px 0 rgba(45, 77, 97, 0.2);
+  margin: 20px;
+  overflow: hidden;
+  text-decoration: none !important;
+  .SponsoredCard-head {
+    width: 280px;
+    height: 180px;
+  }
+  .SponsoredCard-body {
+    width: 100%;
+    height: 67px;
+    border-top: solid 1px #e1e9ed;
+  }
+  .SponsoredCard-footer {
+    width: 100%;
+    height: 80px;
+    border-top: solid 1px #e1e9ed;
+  }
+}
