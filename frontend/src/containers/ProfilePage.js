@@ -25,6 +25,10 @@ export class ProfilePage extends Component {
     const backing = filterCollection(profile.groups, { role: 'BACKER' });
     const isEmpty = belongsTo.length === backing.length && backing.length === 0;
 
+    // TODO: Get next two variables as props (Api needs to send this data)
+    const sponsorshipRequirements = '';
+    const isSponsoring = false;
+
   	return (
   		<div className='ProfilePage'>
         <LoginTopBar />
@@ -50,7 +54,7 @@ export class ProfilePage extends Component {
           ) : null
         }
         {backing.length ? (
-            <section style={{paddingBottom: '0'}}>
+            <section style={{paddingBottom: '20px'}}>
               <div className="lineA">{profile.isOrganization ? i18n.getString('WeAreProudSupporters') : i18n.getString('IamAProudSupporter')}</div>
               {backing.map((group, index) => {
                 if (profile.isOrganization) {
@@ -63,11 +67,13 @@ export class ProfilePage extends Component {
           ) : null
         }
 
-        {profile.isOrganization && (
+        {profile.isOrganization && isSponsoring && (
           <div className='sponsorship'>
             <div className='sponsorship-container'>
               <div className='sponsorship-label'>We are receiving sponsorship applications</div>
-              <div className='sponsorship-md-container'></div>
+              <div className='sponsorship-md-container'>
+                <Markdown value={ sponsorshipRequirements } />
+              </div>
               <div className='sponsorship-button'>apply for sponsorship</div>
             </div>
           </div>

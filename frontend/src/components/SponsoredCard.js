@@ -11,22 +11,22 @@ const DEFAULT_LOGOS = [
 
 export default class SponsoredCard extends Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const {
-      key,
+      amount,
       backgroundImage,
+      className,
+      currency,
+      interval,
+      key,
       logo,
       name,
-      description,
-      mission,
       publicUrl,
-      className,
-      i18n
+      type,
     } = this.props;
+
+    const formattedType = `${type} sponsor`;
+    const formattedAmount = formatCurrency(amount, currency, { compact: true, precision: 0 });
 
     return (
       <div className={`SponsoredCard ${className}`}>
@@ -41,8 +41,8 @@ export default class SponsoredCard extends Component {
             	<div className='SponsoredCard-name'>{ name }</div>
             </div>
             <div className='SponsoredCard-footer'>
-	            <div className='SponsoredCard-type'>platinum sponsor</div>
-	            <div className='SponsoredCard-amount'>$10,000.00 Monthly</div>
+	            <div className='SponsoredCard-type'>{ formattedType }</div>
+	            <div className='SponsoredCard-amount'>{`${formattedAmount} ${interval}`}</div>
             </div>
           </div>
         </a>
@@ -53,8 +53,18 @@ export default class SponsoredCard extends Component {
 }
 
 SponsoredCard.propTypes = {
-  name: PropTypes.string.isRequired,
-  description: PropTypes.string,
+  amount: PropTypes.number.isRequired,
+  currency: PropTypes.string.isRequired,
+  interval: PropTypes.string.isRequired,
   logo: PropTypes.string,
-  url: PropTypes.string
+  name: PropTypes.string.isRequired,
+  publicUrl: PropTypes.string,
+  type: PropTypes.string.isRequired,
 };
+
+SponsoredCard.defaultProps = {
+  amount: 0,
+  currency: 'USD',
+  interval: '',
+  type: '',
+}
