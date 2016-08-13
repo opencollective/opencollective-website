@@ -12,5 +12,9 @@
   "github": {
     "testUsername": "GITHUB_TEST_USERNAME",
     "testPassword": "GITHUB_TEST_PASSWORD"
+  },
+  "twitter": {
+    "testUsername": "TWITTER_TEST_USERNAME",
+    "testPassword": "TWITTER_TEST_PASSWORD"
   }
 }
