@@ -1,0 +1,69 @@
+.DiscoverSelect {
+  position: relative;
+  display: inline-block;
+  .DiscoverSelect-label {
+    display: inline-block;
+    min-width: 32px;
+    height: 29px;
+    font-family: montserratlight;
+    font-size: 24px;
+    color: #ffffff;
+    margin-right: 6px;
+  }
+  .DiscoverSelect-selected {
+    display: inline-block;
+    min-width: 32px;
+    height: 29px;
+    font-family: montserratlight;
+    font-size: 24px;
+    color: #75cc1f;
+    padding-bottom: 2px;
+    text-transform: capitalize;
+    &:hover {
+      cursor: pointer;
+      span:first-child {
+        border-bottom: 1px dashed #75cc1f;
+      }
+    }
+  }
+  .DiscoverSelect-menu {
+    box-sizing: border-box;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    z-index: 999;
+    border-radius: 5px;
+    background-color: #ffffff;
+    padding: 15px 30px;
+    box-shadow: 0 1px 3px 0 rgba(45, 77, 97, 0.3);
+    margin-top: 5px;
+    text-align: left;
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      li {
+        margin-right: .5px;
+        text-transform: capitalize;
+        &:hover {
+          color: #75cc1f;
+          cursor: pointer;
+          margin-left: .5px;
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
+
+.arrow--bottom {
+  vertical-align: top;
+  margin: 12px 4px 0px;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-top: 1px solid #75cc1f;
+  border-right: 1px solid #75cc1f;
+  border-width: 2px;
+  transform: rotate(135deg);
+}
