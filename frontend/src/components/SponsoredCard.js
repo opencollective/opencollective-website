@@ -22,10 +22,9 @@ export default class SponsoredCard extends Component {
       logo,
       name,
       publicUrl,
-      type,
+      tier,
     } = this.props;
 
-    const formattedType = `${type} sponsor`;
     const formattedAmount = formatCurrency(amount, currency, { compact: true, precision: 0 });
 
     return (
@@ -41,7 +40,7 @@ export default class SponsoredCard extends Component {
             	<div className='SponsoredCard-name'>{ name }</div>
             </div>
             <div className='SponsoredCard-footer'>
-	            <div className='SponsoredCard-type'>{ formattedType }</div>
+	            <div className='SponsoredCard-type'>{ tier.title }</div>
 	            <div className='SponsoredCard-amount'>{`${formattedAmount} ${interval}`}</div>
             </div>
           </div>
@@ -59,12 +58,12 @@ SponsoredCard.propTypes = {
   logo: PropTypes.string,
   name: PropTypes.string.isRequired,
   publicUrl: PropTypes.string,
-  type: PropTypes.string.isRequired,
+  tier: PropTypes.string.isRequired,
 };
 
 SponsoredCard.defaultProps = {
   amount: 0,
   currency: 'USD',
   interval: '',
-  type: '',
+  tier: '',
 }

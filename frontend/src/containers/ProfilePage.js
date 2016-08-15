@@ -25,9 +25,11 @@ export class ProfilePage extends Component {
     const backing = filterCollection(profile.groups, { role: 'BACKER' });
     const isEmpty = belongsTo.length === backing.length && backing.length === 0;
 
-    // TODO: Get next two variables as props (Api needs to send this data)
-    const sponsorshipRequirements = '';
-    const isSponsoring = false;
+    const sponsorshipRequirements = ''; // UNUSED Markdown string, rendered when available.
+    const isSponsoring = [
+      'digitalocean', 'auth0', 'saucelabs', 
+      'pubnub', 'idonethis', 'gitlab'
+    ].indexOf(profile.username) !== -1;
 
   	return (
   		<div className='ProfilePage'>
@@ -38,7 +40,7 @@ export class ProfilePage extends Component {
         <div className="line2">{profile.name}</div>
         <div className="line3">{profile.description}</div>
         {profile.longDescription && (
-              <Markdown className='line3 longDescription' value={profile.longDescription} />
+          <Markdown className='line3 longDescription' value={profile.longDescription} />
         )}
         {belongsTo.length ? (
             <section>
@@ -58,7 +60,21 @@ export class ProfilePage extends Component {
               <div className="lineA">{profile.isOrganization ? i18n.getString('WeAreProudSupporters') : i18n.getString('IamAProudSupporter')}</div>
               {backing.map((group, index) => {
                 if (profile.isOrganization) {
-                  return <SponsoredCard key={index} i18n={i18n} isCollectiveOnProfile={true} {...group} />
+                  // When sponsored amount & tier exists the `SponsoredCard` will be rendered
+                  if (group.sponsoredAmount && group.sponsoredTier) {
+                    return (
+                      <SponsoredCard 
+                        key={index}
+                        i18n={i18n}
+                        isCollectiveOnProfile={true}
+                        {...group}
+                        amount={group.sponsoredAmount}
+                        tier={group.sponsoredTier}
+                      />
+                    )
+                  } else {
+                    return <CollectiveCard key={index} i18n={i18n} isCollectiveOnProfile={true} {...group} />
+                  }
                 } else {
                   return <CollectiveCard key={index} i18n={i18n} isCollectiveOnProfile={true} {...group} />
                 }
@@ -74,7 +90,9 @@ export class ProfilePage extends Component {
               <div className='sponsorship-md-container'>
                 <Markdown value={ sponsorshipRequirements } />
               </div>
-              <div className='sponsorship-button'>apply for sponsorship</div>
+              <a href={`mailto:info+${profile.username}@opencollective.com`}>
+                <div className='sponsorship-button'>apply for sponsorship</div>
+              </a>
             </div>
           </div>
         )}
