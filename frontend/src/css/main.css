@@ -30,6 +30,7 @@
 @import './containers/About.css';
 @import './containers/Discover.css';
 @import './containers/DonatePage.css';
+@import './containers/EditCollective.css';
 @import './containers/Faq.css';
 @import './containers/HomePage.css';
 @import './containers/Leaderboard.css';
