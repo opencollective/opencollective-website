@@ -12,6 +12,7 @@ import ConnectTwitterButton from './components/ConnectTwitterButton';
 import EditTwitter from './components/EditTwitter';
 import HomePage from './containers/HomePage';
 import Faq from './containers/Faq';
+import Discover from './containers/Discover';
 import About from './containers/About';
 import ConnectedAccounts from './components/ConnectedAccounts';
 
@@ -22,6 +23,7 @@ export default (
     <Route path="/" component={HomePage} />
     <Route path="/about" component={About} />
     <Route path="/faq" component={Faq} />
+    <Route path="/discover" component={Discover} />
     <Route path="/login/:token" component={Login} />
     <Route path="/login" component={Login} />,
     <Route path="/subscriptions" component={requireAuthentication(Subscriptions)} />

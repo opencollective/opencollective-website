@@ -28,6 +28,7 @@
  */
 
 @import './containers/About.css';
+@import './containers/Discover.css';
 @import './containers/DonatePage.css';
 @import './containers/Faq.css';
 @import './containers/HomePage.css';
@@ -53,6 +54,7 @@
 @import './components/ContributorPicker.css';
 @import './components/Currency.css';
 @import './components/CustomTextArea.css';
+@import './components/DiscoverSelect.css';
 @import './components/DonationDistributor.css';
 @import './components/DonationDistributorItem.css';
 @import './components/DonationPicker.css';

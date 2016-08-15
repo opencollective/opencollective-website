@@ -65,6 +65,10 @@ export default function groups(state={}, action={}) {
       window.location = `/${action.group.slug}`;
       return state;
 
+    case constants.GROUP_TAGS_SUCCESS:
+        return merge({}, state, {
+          tags: action.json
+        });
     default:
       return state;
   }
