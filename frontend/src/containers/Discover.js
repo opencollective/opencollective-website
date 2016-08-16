@@ -28,15 +28,17 @@ export class Discover extends Component {
   componentDidMount() {
     const { fetchDiscover, fetchGroupTags } = this.props;
     const { currentShowOption, currentSortOption } = this.state;
+    const getScrollTop = () => (window.scrollY || window.pageYOffset || document.body.scrollTop) + (document.documentElement && document.documentElement.scrollTop || 0);
     fetchGroupTags();
     fetchDiscover(currentShowOption, currentSortOption);
     let lastTop = 0xFFFF; // Require scroll towards bottom.
     window.onscroll = debounce(() => {
-      const bottomDirection = lastTop < document.documentElement.scrollTop;
-      if (bottomDirection && document.documentElement.scrollHeight - (window.innerHeight + document.documentElement.scrollTop) < 100) {
+      const scrollTop = getScrollTop();
+      const bottomDirection = lastTop < scrollTop;
+      if (bottomDirection && document.documentElement.scrollHeight - (window.innerHeight + scrollTop) < 100) {
         fetchDiscover(this.state.currentShowOption, this.state.currentSortOption, this.props.discover.collectives.length);
       }
-      lastTop = document.documentElement.scrollTop;
+      lastTop = scrollTop;
     }, 200);
   }
 
