@@ -242,6 +242,16 @@
   bottom: 0;
 }
 
+.DonationDistributor-disclaimer {
+  position: absolute;
+  bottom: -40px;
+  h6 {
+    margin: 0;
+    font-weight: 400;
+    color: #797b7d;
+  }
+}
+
 .-no-dashed-bg .-dashed-bg
 {
   background: none;
