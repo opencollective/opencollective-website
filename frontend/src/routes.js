@@ -8,13 +8,13 @@ import DonatePage from './containers/DonatePage';
 import Leaderboard from './containers/Leaderboard';
 import OnBoarding from './containers/OnBoarding';
 import Login from './containers/Login';
-import ConnectTwitterButton from './components/ConnectTwitterButton';
+import ConnectedAccounts from './components/ConnectedAccounts';
+import ConnectAuthProviderButton from './components/ConnectAuthProviderButton';
 import EditTwitter from './components/EditTwitter';
 import HomePage from './containers/HomePage';
 import Faq from './containers/Faq';
 import Discover from './containers/Discover';
 import About from './containers/About';
-import ConnectedAccounts from './components/ConnectedAccounts';
 
 import { requireAuthentication } from './components/AuthenticatedComponent';
 
@@ -34,7 +34,7 @@ export default (
     <Route path="/github/apply/:token" component={OnBoarding} />
     <Route path="/github/apply" component={OnBoarding} />
     <Route path="/:slug/connected-accounts" component={ConnectedAccounts} />
-    <Route path="/:slug/connect/twitter" component={ConnectTwitterButton} />
+    <Route path="/:slug/connect/:provider" component={ConnectAuthProviderButton} />
     <Route path="/:slug/edit-twitter" component={EditTwitter} />
     <Route path="/:slug" component={PublicGroup} />
     <Route path="/:slug/expenses/new" component={Transactions} />
