@@ -21,6 +21,7 @@ export default class DiscoverSelect extends Component {
       opened: false
     }
     this.onClick = this.onClick.bind(this);
+    this.onClickOutsideRef = this.onClickOutside.bind(this);
   }
 
   render() {
@@ -34,7 +35,7 @@ export default class DiscoverSelect extends Component {
           <span className='arrow--bottom'></span>
         </div>
         {opened ? (
-          <div className='DiscoverSelect-menu'>
+          <div className='DiscoverSelect-menu' onClick={e => e.nativeEvent.stopImmediatePropagation()}>
             <ul>
               {options && options.map(option => <li onClick={this.onMenuItemClickMiddleware(option)}>{ option.replace(/\s+/g, nbsp) }</li>)}
             </ul>
@@ -44,8 +45,21 @@ export default class DiscoverSelect extends Component {
     )
   }
 
-  onClick() {
+  componentDidMount() {
+    document.addEventListener('click', this.onClickOutsideRef);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('click', this.onClickOutsideRef);
+  }
+
+  onClick(e) {
     this.setState({opened: !this.state.opened});
+    e.nativeEvent.stopImmediatePropagation();
+  }
+
+  onClickOutside() {
+    this.setState({opened: false});
   }
 
   onMenuItemClickMiddleware(option) {
@@ -55,5 +69,4 @@ export default class DiscoverSelect extends Component {
       this.setState({opened: false});
     }
   }
-
 }
