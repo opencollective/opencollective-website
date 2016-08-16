@@ -53,7 +53,7 @@ export class HomePage extends Component {
         </section>
         <section className='HomePageInfo' id="howitworks">
           <div className='heading'>What is an open collective?</div>
-          <div className='subheading'>An unincorporated association that operates in full transparency</div>
+          <div className='subheading'>A group of people with a shared mission that operates in full transparency</div>
           <div className='icons-container clearfix'>
             <div className='col sm-col-6 md-col-4'>
               <div className='-graphic -tghost'>&nbsp;</div>
