@@ -6,11 +6,11 @@
   background-size: 24px 24px;
   min-height: 100%;
   .-vspacer {
-    width: 60px;
+    width: 80px;
     min-height: 20px;
   }
   .-hspacer {
-    height: 60px;
+    height: 80px;
   }
 }
 
@@ -20,7 +20,19 @@
 }
 
 .EditCollective-viewport {
+  position: relative;
   background-color: #ffffff;
   border-radius: 6px;
   box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  .-screen {
+    user-select: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: linear-gradient(top, rgba(255, 255, 255, .15), rgba(0, 0, 0, .25)), 
+                linear-gradient(left top, rgba(255, 255, 255, 0), rgba(255, 255, 255, .1) 50%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0));
+  }
 }
