@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import i18n from '../lib/i18n';
 
+import PublicFooter from '../components/PublicFooter';
 import PublicGroupHero from '../components/public_group/PublicGroupHero';
 import PublicGroupWhoWeAre from '../components/public_group/PublicGroupWhoWeAre';
 import PublicGroupWhyJoin from '../components/public_group/PublicGroupWhyJoin';
@@ -10,6 +11,7 @@ import PublicGroupJoinUs from '../components/public_group/PublicGroupJoinUs';
 import PublicGroupMembersWall from '../components/public_group/PublicGroupMembersWall';
 import PublicGroupExpenses from '../components/public_group/PublicGroupExpenses';
 import PublicGroupDonations from '../components/public_group/PublicGroupDonations';
+import ContributorList from '../components/public_group/ContributorList';
 
 export default class EditCollective extends Component {
   constructor(props) {
@@ -30,7 +32,7 @@ export default class EditCollective extends Component {
         {name: 'Rory Aronson', role: 'contributor', website: 'http://roryaronson.com/'}
       ],
       contributors:[
-        {name: 'Rory Aronson', role: 'contributor', website: 'http://roryaronson.com/'}
+        {name: 'Rory Aronson', role: 'contributor', website: 'http://roryaronson.com/', stats: {}}
       ]
     };
     return (
@@ -48,7 +50,9 @@ export default class EditCollective extends Component {
               </div>
             </div>
           </div>
-          <div className='-vspacer'></div>
+          <div className='-vspacer'>
+            <div className='EditCollective-EditButton'></div>
+          </div>
         </div>
 
         <div className='-hspacer'></div>
@@ -59,6 +63,11 @@ export default class EditCollective extends Component {
               <div className='-vspacer'></div>
               <div className='EditCollective-viewport flex-auto'>
                 <PublicGroupWhoWeAre group={group} {...this.props} />
+                <div className="PublicGroup-os-contrib-container">
+                  <div className="line1" >{group.contributors.length} contributors</div>
+                  <ContributorList contributors={group.contributors} />
+                </div>
+                <div className='-screen'></div>
               </div>
             </div>
           </div>
@@ -73,6 +82,7 @@ export default class EditCollective extends Component {
               <div className='-vspacer'></div>
               <div className='EditCollective-viewport flex-auto'>
                 <PublicGroupWhyJoin group={group} expenses={[]} {...this.props} />
+                <div className='-screen'></div>
               </div>
             </div>
           </div>
@@ -93,6 +103,7 @@ export default class EditCollective extends Component {
                   <PublicGroupJoinUs group={group} donateToGroup={Function.prototype} {...this.props} />
                   <PublicGroupMembersWall group={group} {...this.props} />
                 </div>
+                <div className='-screen'></div>
               </div>
             </div>
           </div>
@@ -114,6 +125,8 @@ export default class EditCollective extends Component {
                     <PublicGroupDonations group={group} donations={[]} users={{}} itemsToShow={2} {...this.props} />
                   </div>
                 </div>
+                <PublicFooter></PublicFooter>
+                <div className='-screen'></div>
               </div>
             </div>
           </div>
