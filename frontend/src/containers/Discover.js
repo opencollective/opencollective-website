@@ -18,7 +18,7 @@ export class Discover extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentShowOption: props.show || 'all',
+      currentShowOption: props.params.tag || props.show || 'all',
       currentSortOption: props.sort || 'newest'
     };
     this.onSelectShowOption = this.onSelectShowOption.bind(this);

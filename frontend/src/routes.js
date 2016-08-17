@@ -23,7 +23,7 @@ export default (
     <Route path="/" component={HomePage} />
     <Route path="/about" component={About} />
     <Route path="/faq" component={Faq} />
-    <Route path="/discover" component={Discover} />
+    <Route path="/discover(/:tag)" component={Discover} />
     <Route path="/login/:token" component={Login} />
     <Route path="/login" component={Login} />,
     <Route path="/subscriptions" component={requireAuthentication(Subscriptions)} />
