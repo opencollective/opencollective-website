@@ -290,7 +290,7 @@ export default class DonationDistributor extends Component {
 
   render() {
     if (this.props.skipModal) {
-      if (true || this.state.disabled) {
+      if (this.state.disabled) {
         return this.renderDonateButton();
       } else {
         return (
