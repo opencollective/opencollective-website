@@ -8,10 +8,10 @@ import filterCollection from '../frontend/src/lib/filter_collection';
 /**
  * Fetch users by slug
  */
-const fetchUsers = (options) => {
+const fetchActiveUsers = (options) => {
   return (req, res, next) => {
     api
-      .get(`/groups/${req.params.slug}/users`, options)
+      .get(`/groups/${req.params.slug}/active_users`, options)
       .then((users) => {
         req.users = users;
       })
@@ -196,7 +196,7 @@ export default {
   cache,
   fetchGroupBySlug,
   extractGithubUsernameFromToken,
-  fetchUsers,
+  fetchActiveUsers,
   fetchLeaderboard,
   ga,
   handleUncaughtError
