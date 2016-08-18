@@ -99,6 +99,7 @@ export class HomePage extends Component {
               i18n={i18n}
               {...group}
             />)}
+            <a href='/discover?show=meetup' className='seemore'>See more meetups</a>
           </div>
           <div className='cta' id='apply'>
             <div className='text'>We are slowly letting in new kinds of collectives</div>
