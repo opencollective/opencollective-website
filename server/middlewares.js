@@ -11,7 +11,7 @@ import filterCollection from '../frontend/src/lib/filter_collection';
 const fetchActiveUsers = (options) => {
   return (req, res, next) => {
     api
-      .get(`/groups/${req.params.slug}/active_users`, options)
+      .get(`/groups/${req.params.slug}/users?filter=active`, options)
       .then((users) => {
         req.users = users;
       })
