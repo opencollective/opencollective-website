@@ -33,6 +33,7 @@ import PublicGroupExpenses from '../components/public_group/PublicGroupExpenses'
 import PublicGroupHero from '../components/public_group/PublicGroupHero';
 import PublicGroupJoinUs from '../components/public_group/PublicGroupJoinUs';
 import PublicGroupMembersWall from '../components/public_group/PublicGroupMembersWall';
+import PublicGroupOpenSourceCTA from '../components/public_group/PublicGroupOpenSourceCTA';
 import PublicGroupPending from '../components/public_group/PublicGroupPending';
 import PublicGroupSignupV2 from '../components/public_group/PublicGroupSignupV2';
 import PublicGroupThanksV2 from '../components/public_group/PublicGroupThanksV2';
@@ -149,14 +150,7 @@ export class PublicGroup extends Component {
 
         <PublicGroupHero group={group} {...this.props} />
         <PublicGroupWhoWeAre group={group} {...this.props} />
-        {group.slug === 'opensource' &&
-          <div className="PublicGroupOpenSourceCTA">
-            <div className="arrow-down"></div>
-            <div className="line1">Apply to create an open collective for your open source project.</div>
-            <div className="line2">We are slowly accepting new open collectives. Reserve your spot today.</div>
-            <a href="/github/apply"><div className="button">APPLY NOW</div></a>
-          </div>
-        }
+        {group.slug === 'opensource' && <PublicGroupOpenSourceCTA />}
         {contributors && contributors.length > 1 &&
           <div className="PublicGroup-os-contrib-container">
             <div className="line1" >{contributors.length} contributors</div>
