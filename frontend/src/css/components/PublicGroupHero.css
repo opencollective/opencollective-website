@@ -1,0 +1,86 @@
+.PublicGroupHero {
+  &.bg-cover {
+    background-position: 50% 50%;
+  }
+  .LoginTopBar {
+    background-color: transparent;
+    position: absolute;
+    top: 15px;
+    left: 0;
+    right: 0;
+    .LoginTopBar-nav .LoginTopBarButton {
+      color: white;
+      border-color: white;
+      &:hover {
+        background-color: transparent;
+        opacity: .8;
+      }
+    }
+    .LoginTopBar-nav .LoginTopBarLink {
+      color: white !important;
+      &:hover {
+        opacity: .8;
+      }
+    }
+  }
+  .PublicGroupHero-content {
+    padding: 8rem 0 6rem;
+  } 
+  .PublicGroupHero-logo {
+    width: 240px;
+    height: 160px;
+    margin: auto;
+    margin-bottom: 32px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .PublicGroupHero-mission {
+    line-height: 2.5rem;
+    letter-spacing: -.5px;
+  }
+  .PublicGroupHero-menu {
+    font-size: 13px;
+    background-color: rgba(0,0,0,.75);
+    a:hover {
+      opacity: .8;
+    }
+  }
+  .PublicGroupHero-backer-statistics {
+    width: 300px;
+    margin: auto;
+  }
+  .PublicGroupHero-backer-count-text {
+    font-family: Lato;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #ffffff;
+    b {
+      font-size: 14px;
+    }
+  }
+  .PublicGroupHero-backer-yearly-budget {
+    margin-top: 14px;
+    margin-bottom: 44px;
+    .-character {
+      font-family: Lato;
+      font-size: 22px;
+      color: #ffffff;
+      font-weight: bold;
+      margin: 1px;
+    }
+    .-digit {
+      display: inline-block;
+      width: 20px;
+      height: 28px;
+      border-radius: 3px;
+      background-color: rgba(0, 0, 0, 0.6);
+      border: solid 1px #000000;
+      font-family: Lato;
+      font-size: 22px;
+      color: #ffffff;
+      font-weight: bold;
+      line-height: 1.25;
+      margin: 1px;
+    }
+  }
+}

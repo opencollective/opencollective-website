@@ -1,58 +1,50 @@
 import React, { Component } from 'react';
-
 import { connect } from 'react-redux';
+
+import sortBy from 'lodash/collection/sortBy';
 import take from 'lodash/array/take';
 import values from 'lodash/object/values';
-import sortBy from 'lodash/collection/sortBy';
-import i18n from '../lib/i18n';
+
 import filterCollection from '../lib/filter_collection';
-
+import i18n from '../lib/i18n';
+import profileSchema from '../joi_schemas/profile';
 import roles from '../constants/roles';
-import Notification from '../containers/Notification';
-import PublicFooter from '../components/PublicFooter';
-import UserCard from '../components/UserCard';
 
-import LoginTopBar from '../containers/LoginTopBar';
-
-import PublicGroupHero from '../components/public_group/PublicGroupHero';
-import PublicGroupWhoWeAre from '../components/public_group/PublicGroupWhoWeAre';
-import PublicGroupWhyJoin from '../components/public_group/PublicGroupWhyJoin';
-import PublicGroupJoinUs from '../components/public_group/PublicGroupJoinUs';
-import PublicGroupMembersWall from '../components/public_group/PublicGroupMembersWall';
-import PublicGroupExpenses from '../components/public_group/PublicGroupExpenses';
-import PublicGroupDonations from '../components/public_group/PublicGroupDonations';
-import PublicGroupSignupV2 from '../components/public_group/PublicGroupSignupV2';
-import PublicGroupThanksV2 from '../components/public_group/PublicGroupThanksV2';
-import BackerCard from '../components/public_group/BackerCard';
-import ContributorList from '../components/public_group/ContributorList';
-import RelatedGroups from '../components/RelatedGroups';
-import PublicGroupOpenSourceCTA from '../components/public_group/PublicGroupOpenSourceCTA';
-
-import fetchGroup from '../actions/groups/fetch_by_id';
-import fetchUsers from '../actions/users/fetch_by_group';
-import fetchTransactions from '../actions/transactions/fetch_by_group';
-import donate from '../actions/groups/donate';
-import notify from '../actions/notification/notify';
 import appendDonationForm from '../actions/form/append_donation';
 import appendProfileForm from '../actions/form/append_profile';
-import updateUser from '../actions/users/update';
-import getSocialMediaAvatars from '../actions/users/get_social_media_avatars';
-import validateSchema from '../actions/form/validate_schema';
 import decodeJWT from '../actions/session/decode_jwt';
-import uploadImage from '../actions/images/upload';
+import donate from '../actions/groups/donate';
+import fetchGroup from '../actions/groups/fetch_by_id';
 import fetchProfile from '../actions/profile/fetch_by_slug';
+import fetchTransactions from '../actions/transactions/fetch_by_group';
+import fetchUsers from '../actions/users/fetch_by_group';
+import getSocialMediaAvatars from '../actions/users/get_social_media_avatars';
+import notify from '../actions/notification/notify';
+import updateUser from '../actions/users/update';
+import uploadImage from '../actions/images/upload';
+import validateSchema from '../actions/form/validate_schema';
 
-import profileSchema from '../joi_schemas/profile';
-
+import Notification from './Notification';
 import ProfilePage from './ProfilePage';
+
+import ContributorList from '../components/public_group/ContributorList';
+import PublicGroupDonations from '../components/public_group/PublicGroupDonations';
+import PublicGroupExpenses from '../components/public_group/PublicGroupExpenses';
+import PublicGroupHero from '../components/public_group/PublicGroupHero';
+import PublicGroupJoinUs from '../components/public_group/PublicGroupJoinUs';
+import PublicGroupMembersWall from '../components/public_group/PublicGroupMembersWall';
+import PublicGroupOpenSourceCTA from '../components/public_group/PublicGroupOpenSourceCTA';
+import PublicGroupPending from '../components/public_group/PublicGroupPending';
+import PublicGroupSignupV2 from '../components/public_group/PublicGroupSignupV2';
+import PublicGroupThanksV2 from '../components/public_group/PublicGroupThanksV2';
+import PublicGroupWhoWeAre from '../components/public_group/PublicGroupWhoWeAre';
+import PublicGroupWhyJoin from '../components/public_group/PublicGroupWhyJoin';
+
+import PublicFooter from '../components/PublicFooter';
+import RelatedGroups from '../components/RelatedGroups';
 
 // Number of expenses and revenue items to show on the public page
 const NUM_TRANSACTIONS_TO_SHOW = 3;
-
-function getOrdinal(n) {
-  const s=['th','st','nd','rd'], v = n % 100;
-  return n + (s[(v-20)%10]||s[v]||s[0]);
-}
 
 export class PublicGroup extends Component {
 
@@ -62,6 +54,7 @@ export class PublicGroup extends Component {
       showThankYouMessage: false,
       showUserForm: false
     };
+    this.donateToGroupRef = donateToGroup.bind(this);
   }
 
   _donationFlow() {
@@ -106,107 +99,6 @@ export class PublicGroup extends Component {
     });
   }
 
-  renderPendingBackers() {
-    const { group } = this.props;
-    const backers = group.backers.slice(0);
-    const backersCount = backers.length;
-    if (backersCount < 10) {
-      for (let i = 0, delta = 10 - backersCount; i < delta; i++) {
-        backers.push(0)
-      }
-    }
-
-    return (
-      <div className="PublicGroup-backer-container">
-        <div className="-top-gradient"></div>
-        <div className="-wrap">
-          {backers.map((backer, index) => {
-            if (backer) {
-              return <UserCard key={index} user={backer} {...this.props}/>
-            } else {
-              return (
-                <BackerCard
-                  key={index}
-                  title={`${getOrdinal(index+1)} Backer`}
-                  group={{}}
-                  user={{avatar: ''}}
-                  onClick={() => {}}
-                  showButton={index === backersCount}
-                  onToken={donateToGroup.bind(this)}
-                  {...this.props}
-                />
-              )
-            }
-          })}
-        </div>
-        <div className="mb4">
-          <small style={{color: '#919699'}}>You won’t be charged a single penny until we reach our 10 backer goal.</small>
-        </div>
-        <div className="-bottom-gradient"></div>
-      </div>
-    )
-  }
-
-  renderPendingContributors() {
-    const { group } = this.props;
-    const githubContributors = group.data && group.data.githubContributors ? group.data.githubContributors : {};
-    const contributors = Object.keys(githubContributors).map((username) => {
-      const commits = githubContributors[username]
-      return {
-        name: username,
-        avatar: `https://avatars.githubusercontent.com/${username}?s=96`,
-        stats: {c: commits}
-      }
-    });
-
-    if (!contributors.length) {
-      return <div className="mt4"></div>;
-    } else {
-      return (
-        <div>
-          <div className="line6">We are the contributors of this collective nice to meet you.</div>
-          <div className="PublicGroup-contrib-container">
-            <div className="line1" >Contributors</div>
-            <ContributorList contributors={contributors} />
-          </div>
-        </div>
-      )
-    }
-  }
-
-  renderPendingAbout() {
-    return (
-      <div className="PublicGroup-about-container">
-        <div className="line1">About Open Collective</div>
-        <div className="line2">
-          We use [Open Collective host] to collect the funds on our behalf using OpenCollective. Whenever we need to use the money for something, we will submit the invoice or expense via the OpenCollective app and once approved we will be reimbursed. That way, you can always track our budget.
-          <br/>
-          <b>Everything is transparent.</b>
-        </div>
-        <div className="more-button">learn more</div>
-      </div>
-    )
-  }
-
-  renderPending() {
-    const { group } = this.props;
-    return (
-      <div className='PublicGroup PublicGroup--inactive'>
-        <LoginTopBar />
-        <div className="PublicGroupHero-logo mb3 bg-contain" style={{backgroundImage: `url(${'https://cldup.com/U1yzUnB9YJ.png'})`}} ></div>
-        <div className="line1">Help <a href={group.website}>{group.name}</a> create an open collective to…</div>
-        <div className="line2">{group.mission}</div>
-        <div className="line3">Help us get the first 10 backers to start the collective going.</div>
-        <div className="line4">With at least $10 you can become a member and help us cover design work, maintenance and servers.</div>
-        {this.renderPendingBackers()}
-        <div className="line5">Thank you for your visit</div>
-        {this.renderPendingContributors()}
-        {this.renderPendingAbout()}
-        <PublicFooter />
-      </div>
-    )
-  }
-
   isUserProfile(group) {
     return (group.username);
   }
@@ -221,7 +113,12 @@ export class PublicGroup extends Component {
     } = this.props;
 
     if (group.settings.pending) {
-      return this.renderPending();
+      return (
+        <PublicGroupPending
+          group={group}
+          donateToGroup={ this.donateToGroupRef }
+          {...this.props} />
+      )
     }
 
 	const publicGroupClassName = `PublicGroup ${group.slug}`;
@@ -263,7 +160,7 @@ export class PublicGroup extends Component {
         {group.slug !== 'opensource' && <PublicGroupWhyJoin group={group} expenses={expenses} {...this.props} />}
 
         <div className='bg-light-gray px2'>
-          <PublicGroupJoinUs {...this.props} donateToGroup={donateToGroup.bind(this)} {...this.props} />
+          <PublicGroupJoinUs {...this.props} donateToGroup={this.donateToGroupRef} {...this.props} />
           <PublicGroupMembersWall group={group} {...this.props} />
         </div>
 
