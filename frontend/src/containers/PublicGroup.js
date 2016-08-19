@@ -45,6 +45,53 @@ import RelatedGroups from '../components/RelatedGroups';
 
 // Number of expenses and revenue items to show on the public page
 const NUM_TRANSACTIONS_TO_SHOW = 3;
+const FETCH_DONATIONS_OPTIONS = {
+  per_page: NUM_TRANSACTIONS_TO_SHOW,
+  sort: 'createdAt',
+  direction: 'desc',
+  donation: true
+};
+const FETCH_EXPENSES_OPTIONS = {
+  per_page: NUM_TRANSACTIONS_TO_SHOW,
+  sort: 'createdAt',
+  direction: 'desc',
+  exclude: 'fees',
+  expense: true
+};
+const DEFAULT_GROUP_SETTINGS = {
+  lang: 'en',
+  formatCurrency: {
+    compact: false,
+    precision: 2
+  }
+};
+const DEFAULT_GROUP_TIERS = [{
+  name: 'backer',
+  title: "Backers",
+  description: "Support us with a monthly donation and help us continue our activities.",
+  presets: [1, 5, 10, 50, 100],
+  range: [1, 1000000],
+  interval: 'monthly',
+  button: "Become a backer"
+}];
+const isUserProfile = (group) => Boolean(group.username);
+// Formats results for `ContributorList` component
+// Sorts results, giving precedence to `core` Boolean first, then Number of `commits`
+const formatGithubContributors = (githubContributors) => {
+  return Object.keys(githubContributors).map(username => {
+    const commits = githubContributors[username];
+    return {
+      core: false,
+      name: username,
+      avatar: `https://avatars.githubusercontent.com/${ username }?s=64`,
+      stats: {
+        c: commits,
+        a: null,
+        d: null,
+      }
+    }
+  }).sort((A, B) => (B.core * Number.MAX_SAFE_INTEGER + B.stats.c) - (A.core * Number.MAX_SAFE_INTEGER + A.stats.c));
+};
 
 export class PublicGroup extends Component {
 
@@ -55,9 +102,10 @@ export class PublicGroup extends Component {
       showUserForm: false
     };
     this.donateToGroupRef = donateToGroup.bind(this);
+    this.closeDonationFlowRef = this.closeDonationFlow.bind(this);
   }
 
-  _donationFlow() {
+  renderDonationFlow() {
     const {
       isAuthenticated,
       showPaypalThankYou,
@@ -74,7 +122,7 @@ export class PublicGroup extends Component {
             i18n={i18n}
             group={group}
             newUserId={newUser.id}
-            closeDonationModal={this._closeDonationFlow.bind(this)} />
+            closeDonationModal={ this.closeDonationFlowRef } />
           <section className='pt4 center'>
             <RelatedGroups title={i18n.getString('checkOutOtherSimilarCollectives')} groupList={group.related} {...this.props} />
           </section>
@@ -90,17 +138,6 @@ export class PublicGroup extends Component {
     }
 
     return null;
-  }
-
-  _closeDonationFlow() {
-    this.setState({
-      showThankYouMessage: false,
-      showUserForm: false
-    });
-  }
-
-  isUserProfile(group) {
-    return (group.username);
   }
 
   render() {
@@ -121,30 +158,16 @@ export class PublicGroup extends Component {
       )
     }
 
-	const publicGroupClassName = `PublicGroup ${group.slug}`;
+	  const publicGroupClassName = `PublicGroup ${group.slug}`;
 
-    // `false` if there are no `group.data.githubContributors`, otherwise formats results for `ContributorList`
-    const contributors = (group.data && group.data.githubContributors) && Object.keys(group.data.githubContributors).map((username) => {
-      const commits = group.data.githubContributors[username];
-      return {
-        core: false,
-        name: username,
-        avatar: `https://avatars.githubusercontent.com/${username}?s=64`,
-        stats: {
-          c: commits,
-          a: null,
-          d: null
-        }
-      }
-    }).sort((A, B) => (B.core * Number.MAX_SAFE_INTEGER + B.stats.c) - (A.core * Number.MAX_SAFE_INTEGER + A.stats.c));
+    // `false` if there are no `group.data.githubContributors`
+    const contributors = (group.data && group.data.githubContributors) && formatGithubContributors(group.data.githubContributors);
 
     return (
       <div>
-      { this.isUserProfile(group) &&
-        <ProfilePage profile={group} />
-      }
+      { isUserProfile(group) && <ProfilePage profile={group} /> }
 
-      { !this.isUserProfile(group) &&
+      { !isUserProfile(group) &&
       <div className={publicGroupClassName}>
         <Notification />
 
@@ -179,7 +202,7 @@ export class PublicGroup extends Component {
 
         <PublicFooter />
 
-        {this._donationFlow()}
+        {this.renderDonationFlow()}
       </div>
       }
       </div>
@@ -194,22 +217,11 @@ export class PublicGroup extends Component {
       fetchGroup
     } = this.props;
 
-    if (!this.isUserProfile(group)) {
+    if (!isUserProfile(group)) {
       return Promise.all([
         fetchGroup(group.id),
-        fetchTransactions(group.id, {
-          per_page: NUM_TRANSACTIONS_TO_SHOW,
-          sort: 'createdAt',
-          direction: 'desc',
-          donation: true
-        }),
-        fetchTransactions(group.id, {
-          per_page: NUM_TRANSACTIONS_TO_SHOW,
-          sort: 'createdAt',
-          direction: 'desc',
-          exclude: 'fees',
-          expense: true
-        }),
+        fetchTransactions(group.id, FETCH_DONATIONS_OPTIONS),
+        fetchTransactions(group.id, FETCH_EXPENSES_OPTIONS),
         fetchUsers(group.id)
       ])
     }
@@ -233,10 +245,16 @@ export class PublicGroup extends Component {
       });
     }
 
-    if (!this.isUserProfile(group) && loadData) {
+    if (!isUserProfile(group) && loadData) {
       fetchProfile(slug);
     }
+  }
 
+  closeDonationFlow() {
+    this.setState({
+      showThankYouMessage: false,
+      showUserForm: false
+    });
   }
 
   // Used after a donation
@@ -251,12 +269,7 @@ export class PublicGroup extends Component {
     return Promise.all([
       fetchGroup(group.id),
       fetchUsers(group.id),
-      fetchTransactions(group.id, {
-        per_page: NUM_TRANSACTIONS_TO_SHOW,
-        sort: 'createdAt',
-        direction: 'desc',
-        donation: true
-      })
+      fetchTransactions(group.id, FETCH_DONATIONS_OPTIONS)
     ]);
   }
 }
@@ -284,18 +297,17 @@ export function donateToGroup({amount, frequency, currency, token, options}) {
 
   return donate(group.id, payment, options)
     .then(() => {
-      if (options && options.paypal) {
-        // Paypal will redirect to this page and we will refresh at that moment
-        return;
-      }
-        // stripe donation is immediate after the request
-      return this.refreshData()
-      .then(() => {
-        this.setState({
-          showUserForm: !this.props.hasFullAccount,
-          showThankYouMessage: this.props.hasFullAccount
+      // Paypal will redirect to this page and we will refresh at that moment.
+      // A Stripe donation on the other hand is immediate after the request:
+      if (!(options && options.paypal)) { 
+        return this.refreshData()
+        .then(() => {
+          this.setState({
+            showUserForm: !this.props.hasFullAccount,
+            showThankYouMessage: this.props.hasFullAccount
+          });
         });
-      });
+      }
     })
     .catch((err) => notify('error', err.message));
 }
@@ -363,32 +375,14 @@ function mapStateToProps({
    * group.host, group.backers, group.members, group.donations, group.expenses
    */
   group.id = Number(group.id);
-
   group.hosts = usersByRole[roles.HOST] || [];
   group.members = usersByRole[roles.MEMBER] || [];
   group.backers = usersByRole[roles.BACKER] || [];
-
   group.host = group.hosts[0] || {};
-
   group.backersCount = group.backers.length;
   group.transactions = filterCollection(transactions, { GroupId: group.id });
-  group.tiers = group.tiers || [{
-    name: 'backer',
-    title: "Backers",
-    description: "Support us with a monthly donation and help us continue our activities.",
-    presets: [1, 5, 10, 50, 100],
-    range: [1, 1000000],
-    interval: 'monthly',
-    button: "Become a backer"
-  }];
-
-  group.settings = group.settings || {
-    lang: 'en',
-    formatCurrency: {
-      compact: false,
-      precision: 2
-    }
-  };
+  group.tiers = group.tiers || DEFAULT_GROUP_TIERS;
+  group.settings = group.settings || DEFAULT_GROUP_SETTINGS;
 
   const donations = transactions.isDonation;
   const expenses = transactions.isExpense;
