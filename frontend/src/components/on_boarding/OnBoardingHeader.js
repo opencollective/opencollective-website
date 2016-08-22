@@ -1,29 +1,47 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 
-export default class OnBoardingHeader extends React.Component {
+export default class OnBoardingHeader extends Component {
+
+  static propTypes = {
+    active: PropTypes.bool,
+    hideLogoText: PropTypes.bool,
+    links: PropTypes.arrayOf(PropTypes.object),
+    logoSize: PropTypes.number,
+    username: PropTypes.string
+  }
+
+  static defaultProps = {
+    active: false,
+    hideLogoText: false,
+    links: [],
+    logoSize: 18,
+    username: ''
+  }
 
   constructor(props) {
     super(props);
   }
   
   render() {
-    const { active, username } = this.props;
+    const { active, username, logoSize, links, hideLogoText } = this.props;
     const headerStyles = active ? {background: '#3d3d3d', padding: '20px 30px'} : {};
-
     return (
       <div className='OnBoardingHeader' style={headerStyles}>
         <a className='-brand' href="/">
-          <svg width='18px' height='18px' className='-light-blue align-middle mr1'>
+          <svg width={`${logoSize}px`} height={`${logoSize}px`} className='-light-blue align-middle mr1'>
             <use xlinkHref='#svg-isotype'/>
           </svg>
-          <svg width='172px' height='30px' className='align-middle'>
-            <use xlinkHref='#svg-logotype' fill={active ? '#fff': '#6388bf'}/>
-          </svg>
+          {!hideLogoText && (
+              <svg width='172px' height='30px' className='align-middle'>
+                <use xlinkHref='#svg-logotype' fill={active ? '#fff': '#6388bf'}/>
+              </svg>
+            )
+          }
         </a>
         {!active && 
           <div className='-nav'>
             <a href="https://opencollective.com/#apply">start a collective</a>
-            <a href="https://app.opencollective.com/github/apply?next=/opencollective">login</a>
+            {links.length && links.map(link => <a href={link.href}>{link.text}</a>)}
           </div>
         }
         {active &&

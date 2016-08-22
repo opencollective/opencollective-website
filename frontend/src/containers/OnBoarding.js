@@ -79,10 +79,13 @@ export class OnBoarding extends Component {
   render() {
     const { step } = this.state;
     const { contributors, githubForm, repositories, utmSource } = this.props;
+    const headerLinks = [
+      {href: 'https://app.opencollective.com/github/apply?next=/opencollective', text: 'login'}
+    ];
     return (
       <div className={`OnBoarding ${step ? '-registering' : ''}`}>
         <Notification autoclose={true} />
-        {step !== 4 && <OnBoardingHeader active={Boolean(step)} username={githubForm.attributes.username} />}
+        {step !== 4 && <OnBoardingHeader active={Boolean(step)} username={githubForm.attributes.username} links={headerLinks} />}
         {step === 0 && <OnBoardingHero utmSource={utmSource} />}
         {step === 1 && <OnBoardingStepPickRepository repositories={repositories} blacklist={this.blacklist} onNextStep={(repository) => {
           if (!githubForm.attributes.repository) githubForm.attributes.repository = repository;
