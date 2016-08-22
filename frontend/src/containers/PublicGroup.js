@@ -366,6 +366,8 @@ function mapStateToProps({
   };
 
   const newUser = users.newUser || paypalUser;
+  newUser.referrerId = query.referrerId;
+
 
   const group = values(groups)[0] || {stripeAccount: {}}; // to refactor to allow only one group
   const usersByRole = group.usersByRole || {};
