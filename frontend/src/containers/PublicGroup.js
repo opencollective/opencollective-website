@@ -27,16 +27,15 @@ import validateSchema from '../actions/form/validate_schema';
 import Notification from './Notification';
 import ProfilePage from './ProfilePage';
 
-import ContributorList from '../components/public_group/ContributorList';
-import PublicGroupDonations from '../components/public_group/PublicGroupDonations';
-import PublicGroupExpenses from '../components/public_group/PublicGroupExpenses';
+import PublicGroupContributors from '../components/public_group/PublicGroupContributors';
+import PublicGroupDonationFlow from '../components/public_group/PublicGroupDonationFlow';
+import PublicGroupExpensesAndActivity from '../components/public_group/PublicGroupExpensesAndActivity';
 import PublicGroupHero from '../components/public_group/PublicGroupHero';
 import PublicGroupJoinUs from '../components/public_group/PublicGroupJoinUs';
 import PublicGroupMembersWall from '../components/public_group/PublicGroupMembersWall';
 import PublicGroupOpenSourceCTA from '../components/public_group/PublicGroupOpenSourceCTA';
 import PublicGroupPending from '../components/public_group/PublicGroupPending';
-import PublicGroupSignupV2 from '../components/public_group/PublicGroupSignupV2';
-import PublicGroupThanksV2 from '../components/public_group/PublicGroupThanksV2';
+
 import PublicGroupWhoWeAre from '../components/public_group/PublicGroupWhoWeAre';
 import PublicGroupWhyJoin from '../components/public_group/PublicGroupWhyJoin';
 
@@ -103,110 +102,61 @@ export class PublicGroup extends Component {
     };
     this.donateToGroupRef = donateToGroup.bind(this);
     this.closeDonationFlowRef = this.closeDonationFlow.bind(this);
-  }
-
-  renderDonationFlow() {
-    const {
-      isAuthenticated,
-      showPaypalThankYou,
-      i18n,
-      group,
-      newUser
-    } = this.props;
-
-    if (this.state.showThankYouMessage || (isAuthenticated && this.state.showUserForm) || showPaypalThankYou) {
-      return (
-        <div className='PublicGroupDonationFlowWrapper px2 py4 border-box fixed top-0 left-0 right-0 bottom-0'>
-          <PublicGroupThanksV2
-            message={i18n.getString('nowOnBackersWall')}
-            i18n={i18n}
-            group={group}
-            newUserId={newUser.id}
-            closeDonationModal={ this.closeDonationFlowRef } />
-          <section className='pt4 center'>
-            <RelatedGroups title={i18n.getString('checkOutOtherSimilarCollectives')} groupList={group.related} {...this.props} />
-          </section>
-        </div>
-
-      );
-    } else if (this.state.showUserForm) {
-      return (
-        <div className='PublicGroupDonationFlowWrapper px2 py4 border-box fixed top-0 left-0 right-0 bottom-0 bg-white'>
-          <PublicGroupSignupV2 {...this.props} save={saveNewUser.bind(this)} />
-        </div>
-      );
-    }
-
-    return null;
+    this.saveNewUserRef = saveNewUser.bind(this);
   }
 
   render() {
     const {
-      group,
-      expenses,
       donations,
-      users
-      // shareUrl,
+      expenses,
+      group,
+      isAuthenticated,
+      showPaypalThankYou,
     } = this.props;
-
-    if (group.settings.pending) {
-      return (
-        <PublicGroupPending
-          group={group}
-          donateToGroup={ this.donateToGroupRef }
-          {...this.props} />
-      )
-    }
-
-	  const publicGroupClassName = `PublicGroup ${group.slug}`;
 
     // `false` if there are no `group.data.githubContributors`
     const contributors = (group.data && group.data.githubContributors) && formatGithubContributors(group.data.githubContributors);
 
+    if (group.settings.pending) {
+      return <PublicGroupPending group={ group } donateToGroup={ this.donateToGroupRef } {...this.props} />
+    } else if (isUserProfile(group)) {
+      return <ProfilePage profile={ group } />
+    }
+
     return (
-      <div>
-      { isUserProfile(group) && <ProfilePage profile={group} /> }
-
-      { !isUserProfile(group) &&
-      <div className={publicGroupClassName}>
+      <div className={`PublicGroup ${ group.slug }`}>
         <Notification />
-
-        <PublicGroupHero group={group} {...this.props} />
-        <PublicGroupWhoWeAre group={group} {...this.props} />
+        <PublicGroupHero group={ group } {...this.props} />
+        <PublicGroupWhoWeAre group={ group } {...this.props} />
+        
         {group.slug === 'opensource' && <PublicGroupOpenSourceCTA />}
-        {contributors && contributors.length > 1 &&
-          <div className="PublicGroup-os-contrib-container">
-            <div className="line1" >{contributors.length} contributors</div>
-            <ContributorList contributors={contributors} />
-          </div>
-        }
-        {group.slug !== 'opensource' && <PublicGroupWhyJoin group={group} expenses={expenses} {...this.props} />}
 
+        {contributors && <PublicGroupContributors contributors={ contributors } />}
+
+        {group.slug !== 'opensource' && <PublicGroupWhyJoin group={ group } expenses={ expenses } {...this.props} />}
+        
         <div className='bg-light-gray px2'>
           <PublicGroupJoinUs {...this.props} donateToGroup={this.donateToGroupRef} {...this.props} />
           <PublicGroupMembersWall group={group} {...this.props} />
         </div>
-
-        <section id='expenses-and-activity' className='px2'>
-          <div className='container'>
-            <div className='PublicGroup-transactions clearfix md-flex'>
-              <PublicGroupExpenses group={group} expenses={expenses} users={users} itemsToShow={NUM_TRANSACTIONS_TO_SHOW} {...this.props} />
-              <PublicGroupDonations group={group} donations={donations} users={users} itemsToShow={NUM_TRANSACTIONS_TO_SHOW} {...this.props} />
-            </div>
-          </div>
-        </section>
-
+        <PublicGroupExpensesAndActivity
+          group={ group }
+          expenses={ expenses }
+          donations={ donations }
+          itemsToShow={ NUM_TRANSACTIONS_TO_SHOW }
+          {...this.props} />
         <section id='related-groups' className='px2'>
-          <RelatedGroups groupList={group.related} {...this.props} />
+          <RelatedGroups groupList={ group.related } {...this.props} />
         </section>
-
         <PublicFooter />
-
-        {this.renderDonationFlow()}
+        <PublicGroupDonationFlow 
+          showThankYouMessage={ this.state.showThankYouMessage || (isAuthenticated && this.state.showUserForm) || showPaypalThankYou }
+          showUserForm={ this.state.showUserForm }
+          onCloseDonation={ this.closeDonationFlowRef }
+          onSave={ this.saveNewUserRef }
+          {...this.props} />
       </div>
-      }
-      </div>
-    );
+    )
   }
 
   componentDidMount() {
