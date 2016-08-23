@@ -17,7 +17,13 @@ export default class PublicGroupDonationFlow extends Component {
       onCloseDonation,
     } = this.props;
 
-    if (showThankYouMessage) {
+    if (showUserForm) {
+      return (
+        <div className='PublicGroupDonationFlowWrapper px2 py4 border-box fixed top-0 left-0 right-0 bottom-0 bg-white'>
+          <PublicGroupSignupV2 save={ onSave } {...this.props} />
+        </div>
+      )
+    } else if (showThankYouMessage) {
       return (
         <div className='PublicGroupDonationFlowWrapper px2 py4 border-box fixed top-0 left-0 right-0 bottom-0'>
           <PublicGroupThanksV2
@@ -29,12 +35,6 @@ export default class PublicGroupDonationFlow extends Component {
           <section className='pt4 center'>
             <RelatedGroups title={ i18n.getString('checkOutOtherSimilarCollectives') } groupList={ group.related } {...this.props} />
           </section>
-        </div>
-      )
-    } else if (showUserForm) {
-      return (
-        <div className='PublicGroupDonationFlowWrapper px2 py4 border-box fixed top-0 left-0 right-0 bottom-0 bg-white'>
-          <PublicGroupSignupV2 save={ onSave } {...this.props} />
         </div>
       )
     } else {

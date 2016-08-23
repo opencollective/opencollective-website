@@ -66,12 +66,12 @@ const DEFAULT_GROUP_SETTINGS = {
 };
 const DEFAULT_GROUP_TIERS = [{
   name: 'backer',
-  title: "Backers",
-  description: "Support us with a monthly donation and help us continue our activities.",
+  title: 'Backers',
+  description: 'Support us with a monthly donation and help us continue our activities.',
   presets: [1, 5, 10, 50, 100],
   range: [1, 1000000],
   interval: 'monthly',
-  button: "Become a backer"
+  button: 'Become a backer'
 }];
 const isUserProfile = (group) => Boolean(group.username);
 // Formats results for `ContributorList` component
