@@ -25,7 +25,7 @@ export class ProfilePage extends Component {
     const backing = filterCollection(profile.groups, { role: 'BACKER' });
     const isEmpty = belongsTo.length === backing.length && backing.length === 0;
 
-    const sponsorshipRequirements = ''; // UNUSED Markdown string, rendered when available.
+    const sponsorshipRequirements = `We are supporting the open source community. If you have an open source project, [create an open collective](https://opencollective.com/opensource/apply) and apply to receive sponsorship.`; // Markdown string
     const isSponsoring = [
       'digitalocean', 'auth0', 'saucelabs', 
       'pubnub', 'idonethis', 'gitlab'
