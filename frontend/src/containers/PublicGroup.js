@@ -28,13 +28,14 @@ import Notification from './Notification';
 import ProfilePage from './ProfilePage';
 
 import PublicGroupContributors from '../components/public_group/PublicGroupContributors';
-import PublicGroupDonationFlow from '../components/public_group/PublicGroupDonationFlow';
 import PublicGroupExpensesAndActivity from '../components/public_group/PublicGroupExpensesAndActivity';
 import PublicGroupHero from '../components/public_group/PublicGroupHero';
 import PublicGroupJoinUs from '../components/public_group/PublicGroupJoinUs';
 import PublicGroupMembersWall from '../components/public_group/PublicGroupMembersWall';
 import PublicGroupOpenSourceCTA from '../components/public_group/PublicGroupOpenSourceCTA';
 import PublicGroupPending from '../components/public_group/PublicGroupPending';
+import PublicGroupSignupV2 from '../components/public_group/PublicGroupSignupV2';
+import PublicGroupThanksV2 from '../components/public_group/PublicGroupThanksV2';
 
 import PublicGroupWhoWeAre from '../components/public_group/PublicGroupWhoWeAre';
 import PublicGroupWhyJoin from '../components/public_group/PublicGroupWhyJoin';
@@ -110,8 +111,6 @@ export class PublicGroup extends Component {
       donations,
       expenses,
       group,
-      isAuthenticated,
-      showPaypalThankYou,
     } = this.props;
 
     // `false` if there are no `group.data.githubContributors`
@@ -149,14 +148,42 @@ export class PublicGroup extends Component {
           <RelatedGroups groupList={ group.related } {...this.props} />
         </section>
         <PublicFooter />
-        <PublicGroupDonationFlow 
-          showThankYouMessage={ this.state.showThankYouMessage || (isAuthenticated && this.state.showUserForm) || showPaypalThankYou }
-          showUserForm={ this.state.showUserForm }
-          onCloseDonation={ this.closeDonationFlowRef }
-          onSave={ this.saveNewUserRef }
-          {...this.props} />
+        {this.renderDonationFlow()}
       </div>
     )
+  }
+
+  renderDonationFlow() {
+    const {
+      isAuthenticated,
+      showPaypalThankYou,
+      i18n,
+      group,
+      newUser
+    } = this.props;
+
+    if (this.state.showThankYouMessage || (isAuthenticated && this.state.showUserForm) || showPaypalThankYou) {
+      return (
+        <div className='PublicGroupDonationFlowWrapper px2 py4 border-box fixed top-0 left-0 right-0 bottom-0'>
+          <PublicGroupThanksV2
+            message={i18n.getString('nowOnBackersWall')}
+            i18n={i18n}
+            group={group}
+            newUserId={newUser.id}
+            closeDonationModal={ this.closeDonationFlowRef } />
+          <section className='pt4 center'>
+            <RelatedGroups title={i18n.getString('checkOutOtherSimilarCollectives')} groupList={group.related} {...this.props} />
+          </section>
+        </div>
+      );
+    } else if (this.state.showUserForm) {
+      return (
+        <div className='PublicGroupDonationFlowWrapper px2 py4 border-box fixed top-0 left-0 right-0 bottom-0 bg-white'>
+          <PublicGroupSignupV2 {...this.props} save={saveNewUser.bind(this)} />
+        </div>
+      );
+    }
+    return null;
   }
 
   componentDidMount() {
