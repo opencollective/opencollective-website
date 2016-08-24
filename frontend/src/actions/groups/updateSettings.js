@@ -2,11 +2,11 @@ import { putJSON } from '../../lib/api';
 import * as constants from '../../constants/groups';
 
 /**
- * Update a group
+ * Update group settings
  */
 
 export default (groupid, group) => {
-  const url = `/groups/${groupid}/`;
+  const url = `/groups/${groupid}/settings`;
 
   return dispatch => {
     dispatch(request(groupid, group));
