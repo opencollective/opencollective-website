@@ -13,6 +13,14 @@ import PublicGroupExpenses from '../components/public_group/PublicGroupExpenses'
 import PublicGroupDonations from '../components/public_group/PublicGroupDonations';
 import ContributorList from '../components/public_group/ContributorList';
 
+const Highlight = ({ ref, style, label}) => (
+  <div ref={ ref } className='EditCollective-highlight' style={ style }>
+    <div className='EditCollective-EditButton EditButton--Upload'>
+      <div className='EditCollective-EditButtonLabel'>{ label }</div>
+    </div>
+  </div>
+);
+
 export default class EditCollective extends Component {
   constructor(props) {
     super(props);
@@ -45,14 +53,16 @@ export default class EditCollective extends Component {
             <div className='flex'>
               <div className='-vspacer'></div>
               <div className='EditCollective-viewport flex-auto'>
-                <PublicGroupHero group={group} {...this.props} />
+                <PublicGroupHero ref='PublicGroupHero' group={group} {...this.props} />
                 <div className='-screen'></div>
               </div>
+              <Highlight ref='PublicGroupHero-logo-highlight' label='Update Logo' style={ this.state.PublicGroupHeroLogoHighlightStyle }/>
+              <Highlight ref='PublicGroupHero-name-highlight' label='Update Name' style={ this.state.PublicGroupHeroNameHighlightStyle }/>
+              <Highlight ref='PublicGroupHero-mission-highlight' label='Update Mission' style={ this.state.PublicGroupHeroMissionHighlightStyle }/>
+              <Highlight ref='PublicGroupHero-backgroundImage-highlight' label='Update Background' style={ this.state.PublicGroupHeroBackgroundImageHighlightStyle }/>
             </div>
           </div>
-          <div className='-vspacer'>
-            <div className='EditCollective-EditButton'></div>
-          </div>
+          <div className='-vspacer'></div>
         </div>
 
         <div className='-hspacer'></div>
@@ -140,6 +150,46 @@ export default class EditCollective extends Component {
         <div className='-hspacer'></div>
       </div>
     )
+  }
+  componentDidMount() {
+    const { PublicGroupHero } = this.refs;
+    const scrollY = window.scrollY;
+
+    // .PublicGroupHero-logo
+    const PublicGroupHeroLogo = PublicGroupHero.refs['PublicGroupHero-logo'];
+    const PublicGroupHeroLogoHighlight = this.refs['PublicGroupHero-logo-highlight'];
+    const PublicGroupHeroLogoRect = PublicGroupHeroLogo.getBoundingClientRect();
+    // .PublicGroupHero-name
+    const PublicGroupHeroName = PublicGroupHero.refs['PublicGroupHero-name'];
+    const PublicGroupHeroNameHighlight = this.refs['PublicGroupHero-name-highlight'];
+    const PublicGroupHeroNameRect = PublicGroupHeroName.getBoundingClientRect();
+    // .PublicGroupHero-mission
+    const PublicGroupHeroMission = PublicGroupHero.refs['PublicGroupHero-mission'];
+    const PublicGroupHeroMissionHighlight = this.refs['PublicGroupHero-mission-highlight'];
+    const PublicGroupHeroMissionRect = PublicGroupHeroMission.getBoundingClientRect();
+    // .PublicGroupHero-backgroundImage
+    const PublicGroupHeroBackgroundImage = PublicGroupHero.refs['PublicGroupHero-backgroundImage'];
+    const PublicGroupHeroBackgroundImageHighlight = this.refs['PublicGroupHero-backgroundImage-highlight'];
+    const PublicGroupHeroBackgroundImageRect = PublicGroupHeroBackgroundImage.getBoundingClientRect();
+
+    this.setState({
+      PublicGroupHeroLogoHighlightStyle: {
+        top: `${PublicGroupHeroLogoRect.y + scrollY}px`,
+        height: `${PublicGroupHeroLogoRect.height}px`,
+      },
+      PublicGroupHeroNameHighlightStyle: {
+        top: `${PublicGroupHeroNameRect.y + scrollY}px`,
+        height: `${PublicGroupHeroNameRect.height}px`,
+      },
+      PublicGroupHeroMissionHighlightStyle: {
+        top: `${PublicGroupHeroMissionRect.y + scrollY}px`,
+        height: `${PublicGroupHeroMissionRect.height}px`,
+      },
+      PublicGroupHeroBackgroundImageHighlightStyle: {
+        top: `${PublicGroupHeroBackgroundImageRect.y + scrollY + -PublicGroupHeroBackgroundImageRect.height}px`,
+        height: '85px',
+      }
+    });
   }
 }
 
