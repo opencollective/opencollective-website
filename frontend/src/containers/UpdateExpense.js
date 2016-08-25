@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { pushState } from 'redux-router';
 
 import LoginTopBar from '../containers/LoginTopBar';
 import PublicFooter from '../components/PublicFooter';
@@ -19,9 +18,7 @@ const messages = {
 export class UpdateExpense extends Component {
   render() {
     const {
-      expenseId,
-      action,
-      pushState
+      action
     } = this.props;
 
     return (
@@ -47,8 +44,7 @@ export class UpdateExpense extends Component {
 
 export default connect(mapStateToProps, {
   notify,
-  updateExpense,
-  pushState
+  updateExpense
 })(UpdateExpense);
 
 export function mapStateToProps({
