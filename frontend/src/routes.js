@@ -5,6 +5,7 @@ import PublicGroup from './containers/PublicGroup';
 import Subscriptions from './containers/Subscriptions';
 import Transactions from './containers/Transactions';
 import DonatePage from './containers/DonatePage';
+import UpdateExpense from './containers/UpdateExpense';
 import Leaderboard from './containers/Leaderboard';
 import OnBoarding from './containers/OnBoarding';
 import Login from './containers/Login';
@@ -38,6 +39,7 @@ export default (
     <Route path="/:slug/edit-twitter" component={EditTwitter} />
     <Route path="/:slug" component={PublicGroup} />
     <Route path="/:slug/expenses/new" component={Transactions} />
+    <Route path="/:slug/expenses/:expenseId([0-9]+)/:action(approve|reject)" component={UpdateExpense} />
     <Route path="/:slug/:type(donations|expenses)" component={Transactions} />
     <Route path="/:slug/donate/:amount" component={DonatePage} />
     <Route path="/:slug/donate/:amount/:interval" component={DonatePage} />
