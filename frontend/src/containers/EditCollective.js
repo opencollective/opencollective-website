@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
 import merge from 'lodash/object/merge';
+import values from 'lodash/object/values';
 
 import i18n from '../lib/i18n';
 
@@ -13,6 +15,8 @@ import PublicGroupJoinUs from '../components/public_group/PublicGroupJoinUs';
 import PublicGroupMembersWall from '../components/public_group/PublicGroupMembersWall';
 import PublicGroupWhoWeAre from '../components/public_group/PublicGroupWhoWeAre';
 import PublicGroupWhyJoin from '../components/public_group/PublicGroupWhyJoin';
+
+import CustomTextArea from '../components/CustomTextArea';
 
 const highlights = [ {
   refpath: 'PublicGroupHero/PublicGroupHero-logo',
@@ -74,7 +78,17 @@ class EditCollectiveTopBar extends Component {
   render() {
     return (
       <div className='EditCollective-TopBar'>
-        <div className='EditCollective-TopBar-container'>
+        <div className='EditCollective-TopBar-brand'>
+          <svg width='18px' height='18px' className='-light-blue align-middle mr1'>
+            <use xlinkHref='#svg-isotype'/>
+          </svg>
+          <svg width='172px' height='30px' className='align-middle'>
+            <use xlinkHref='#svg-logotype' fill='#fff' />
+          </svg>
+        </div>
+        <div className='EditCollective-TopBar-buttons'>
+          <div className='EditCollective-TopBar-Button'>Save Changes</div>
+          <div className='EditCollective-TopBar-Button trans'>Exit Edit Mode</div>
         </div>
       </div>
     )
@@ -88,7 +102,8 @@ export default class EditCollective extends Component {
   }
 
   render() {
-    const group = {
+    const { originalGroup } = this.props;
+    const group = { // originalGroup
       name: 'OpenFarm',
       backgroundImage: 'https://cldup.com/MYtRsISOBg.jpg',
       logo: 'https://openfarm.cc/assets/openfarm_logo_small-0d10c658a1abcd1ac7e3d6f37b5802cf.png',
@@ -116,6 +131,17 @@ export default class EditCollective extends Component {
           <PublicGroupMembersWall group={ group } {...this.props} />
           <PublicFooter></PublicFooter>
         </EditCollectiveViewport>
+        <div className='EditCollective-Overlay'>
+          <div className='EditCollective-Modal'>
+            <div className='EditCollective-Modal-title'>Update Name</div>
+            <div className='EditCollective-Modal-body'>
+              <CustomTextArea cols='29'/>
+              <div className='EditCollective-Modal-buttons'>
+                <div className='EditCollective-Modal-Button'>Done</div>
+              </div>
+            </div>
+          </div>
+        </div>
         { highlights.map(highlight => <Highlight { ...highlight } />) }
       </div>
     )
@@ -154,8 +180,11 @@ export default class EditCollective extends Component {
 }
 
 export default connect(mapStateToProps, {})(EditCollective);
-export function mapStateToProps({}){
+export function mapStateToProps({ groups }){
+  const group = values(groups)[0] || {stripeAccount: {}}; // to refactor to allow only one group
+  group.tiers = group.tiers || [];
   return {
+    originalGroup: group,
     i18n: i18n('en')
   };
 }

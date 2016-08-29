@@ -24,6 +24,42 @@
   height: 70px;
   background-color: rgba(0, 0, 0, 0.65);
   z-index: 99999;
+  padding: 19px 70px 0px;
+  box-sizing: border-box;
+  .EditCollective-TopBar-brand {
+    display: inline-block;
+  } 
+  .EditCollective-TopBar-buttons {
+    display: inline-block;
+    float: right;
+    .EditCollective-TopBar-Button {
+      margin-left: 20px;
+      box-sizing: border-box;
+      display: inline-block;
+      width: 115px;
+      height: 28px;
+      border-radius: 100px;
+      font-family: Montserrat;
+      font-size: 12px;
+      font-weight: bold;
+      color: #ffffff;
+      text-align: center;
+      line-height: 2;
+      &:not(.trans) {
+        background-color: #75cc1f;
+        border: solid 2px #75cc1f;
+      }
+      &.trans {
+        opacity: 0.6;
+        border-radius: 100px;
+        border: solid 2px #ffffff;
+      }
+      &:hover {
+        opacity: .9;
+        cursor: pointer;
+      }
+    }
+  }
 }
 
 .EditCollective-Viewport {
@@ -127,6 +163,76 @@
       font-family: Montserrat;
       font-size: 14px;
       color: #ffffff;
+    }
+  }
+}
+
+.EditCollective-Overlay {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 99999;
+  .EditCollective-Overlay-Close {}
+}
+.EditCollective-Modal {
+  border-radius: 5px;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px 0 rgba(45, 77, 97, 0.2);
+  min-height: 100px;
+  min-width: 100px;
+  max-height: 400px;
+  max-width: 400px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  .EditCollective-Modal-body {
+    padding: 20px;
+    text-align: center;
+  }
+  .EditCollective-Modal-title {
+    text-align: center;
+    font-size: 22px;
+    padding: 20px;
+  }
+  .EditCollective-Modal-buttons {
+    text-align: center;
+    height: 40px;
+    width: 100%;
+    .EditCollective-Modal-Button {
+      margin-left: 20px;
+      box-sizing: border-box;
+      display: inline-block;
+      width: 115px;
+      height: 28px;
+      border-radius: 100px;
+      font-family: Montserrat;
+      font-size: 12px;
+      font-weight: bold;
+      color: #ffffff;
+      text-align: center;
+      line-height: 2;
+      &:not(.trans) {
+        background-color: #75cc1f;
+        border: solid 2px #75cc1f;
+      }
+      &.trans {
+        opacity: 0.6;
+        border-radius: 100px;
+        border: solid 2px #ffffff;
+      }
+      &:hover {
+        opacity: .9;
+        cursor: pointer;
+      }
+    }
     }
   }
 }
