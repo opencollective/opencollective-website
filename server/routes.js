@@ -91,6 +91,7 @@ module.exports = (app) => {
   app.get('/:slug([A-Za-z0-9-]+)/connected-accounts', mw.ga, render);
   app.get('/:slug([A-Za-z0-9-]+)/:type(expenses|donations)', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-]+)/expenses/new', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
+  app.get('/:slug/expenses/:id([0-9]+)/:action(approve|reject)', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-]+)/donate/:amount', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-]+)/donate/:amount/:interval', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-]+)', mw.ga, controllers.profile, mw.addMeta, render);
