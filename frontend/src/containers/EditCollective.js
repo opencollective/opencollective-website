@@ -6,10 +6,7 @@ import values from 'lodash/object/values';
 
 import i18n from '../lib/i18n';
 
-import ContributorList from '../components/public_group/ContributorList';
 import PublicFooter from '../components/PublicFooter';
-import PublicGroupDonations from '../components/public_group/PublicGroupDonations';
-import PublicGroupExpenses from '../components/public_group/PublicGroupExpenses';
 import PublicGroupHero from '../components/public_group/PublicGroupHero';
 import PublicGroupJoinUs from '../components/public_group/PublicGroupJoinUs';
 import PublicGroupMembersWall from '../components/public_group/PublicGroupMembersWall';
@@ -17,19 +14,24 @@ import PublicGroupWhoWeAre from '../components/public_group/PublicGroupWhoWeAre'
 import PublicGroupWhyJoin from '../components/public_group/PublicGroupWhyJoin';
 
 import CustomTextArea from '../components/CustomTextArea';
+import ImagePicker from '../components/ImagePicker';
+import Input from '../components/Input';
 
 const highlights = [ {
   refpath: 'PublicGroupHero/PublicGroupHero-logo',
   label: 'Update Logo',
-  buttonClassName: 'EditButton--Upload'
+  buttonClassName: 'EditButton--Upload',
+  field: 'logo',
 }, {
   refpath: 'PublicGroupHero/PublicGroupHero-name',
   label: 'Update Name',
-  buttonClassName: 'EditButton--Text'
+  buttonClassName: 'EditButton--Text',
+  field: 'name',
 }, {
   refpath: 'PublicGroupHero/PublicGroupHero-mission',
   label: 'Update Mission',
-  buttonClassName: 'EditButton--Text'
+  buttonClassName: 'EditButton--Text',
+  field: 'mission',
 }, {
   refpath: 'PublicGroupHero/PublicGroupHero-backgroundImage',
   label: 'Update Background',
@@ -40,41 +42,70 @@ const highlights = [ {
 }, {
   refpath: 'PublicGroupWhoWeAre/PublicGroupWhoWeAre-description',
   label: 'Update Description',
-  buttonClassName: 'EditButton--Text'
+  buttonClassName: 'EditButton--Text',
+  field: 'description',
 }, {
   refpath: 'PublicGroupWhoWeAre/PublicGroupWhoWeAre-website',
   label: 'Update Website',
-  buttonClassName: 'EditButton--Link'
+  buttonClassName: 'EditButton--Link',
+  field: 'website',
 }, {
   refpath: 'PublicGroupWhoWeAre/PublicGroupWhoWeAre-longDescription',
   label: 'Update Long Description',
-  buttonClassName: 'EditButton--Text'
+  buttonClassName: 'EditButton--Text',
+  field: 'longDescription',
 }, {
   refpath: 'PublicGroupWhyJoin/PublicGroupWhyJoin-whyJoinText',
   label: 'Update Text',
-  buttonClassName: 'EditButton--Text'
+  buttonClassName: 'EditButton--Text',
+  field: 'whyJoin',
 },
 ].map(h => {
   h.ref = `${h.refpath}--highlight`;
   return h;
 });
 
-const Highlight = ({ ref, style, label, buttonClassName }) => (
-  <div ref={ ref } className='EditCollective-highlight' style={ style }>
+const Highlight = ({ ref, style, label, buttonClassName, onClick }) => (
+  <div ref={ ref } className='EditCollective-Highlight' style={ style } onClick={ onClick }>
     <div className={`EditCollective-EditButton ${ buttonClassName }`}>
       <div className='EditCollective-EditButtonLabel'>{ label }</div>
     </div>
   </div>
 );
 
-const EditCollectiveViewport = props => (
+const Viewport = props => (
   <div className='EditCollective-Viewport'>
     { props.children }
     <div className='-screen'></div>
   </div>
 );
 
-class EditCollectiveTopBar extends Component {
+const Overlay = props => (
+  <div className='EditCollective-Overlay' onClick={ props.onClick }>
+    { props.children }
+  </div>
+);
+
+const Modal = props => (
+  <div className='EditCollective-Modal' onClick={ (e) => {
+    e.nativeEvent.stopImmediatePropagation()
+    return false;
+  } }>
+    <div className='EditCollective-Modal-title'>
+      <span>{ props.title }</span>
+      <div className='-close' onClick={ props.onClose }>✖</div>
+    </div>
+    <div className='EditCollective-Modal-body' onClick={ e => {
+      e.nativeEvent.stopImmediatePropagation()
+      return false; 
+    } }>
+      { props.children }
+      <div className='OnBoardingButton'>Save Changes</div>
+    </div>
+  </div>
+);
+
+class TopBar extends Component {
   render() {
     return (
       <div className='EditCollective-TopBar'>
@@ -87,8 +118,7 @@ class EditCollectiveTopBar extends Component {
           </svg>
         </div>
         <div className='EditCollective-TopBar-buttons'>
-          <div className='EditCollective-TopBar-Button'>Save Changes</div>
-          <div className='EditCollective-TopBar-Button trans'>Exit Edit Mode</div>
+          <a href='.'><div className='EditCollective-TopBar-Button trans'>Exit Edit Mode</div></a>
         </div>
       </div>
     )
@@ -96,13 +126,30 @@ class EditCollectiveTopBar extends Component {
 }
 
 export default class EditCollective extends Component {
+  
   constructor(props) {
     super(props);
-    this.state = {};
+    const originalGroup = props.originalGroup;
+    this.state = {
+      showModal: false,
+      highlightLabel: null,
+      highlightField: null,
+      fields: {
+        backgroundImage: originalGroup.backgroundImage,
+        description: originalGroup.description,
+        logo: originalGroup.logo,
+        longDescription: originalGroup.longDescription,
+        mission: originalGroup.mission,
+        name: originalGroup.name,
+        website: originalGroup.website,
+        whyJoin: originalGroup.whyJoin,
+      }
+    };
+    this.onCloseModalRef = this.onCloseModal.bind(this);
   }
 
   render() {
-    const { originalGroup } = this.props;
+    const { showModal, highlightLabel, highlightField, fields } = this.state;
     const group = { // originalGroup
       name: 'OpenFarm',
       backgroundImage: 'https://cldup.com/MYtRsISOBg.jpg',
@@ -122,27 +169,32 @@ export default class EditCollective extends Component {
     };
     return (
       <div className='EditCollective'>
-        <EditCollectiveTopBar />
-        <EditCollectiveViewport>
+        <TopBar />
+        <Viewport>
           <PublicGroupHero ref='PublicGroupHero' group={ group } {...this.props} />
           <PublicGroupWhoWeAre ref='PublicGroupWhoWeAre' group={ group } {...this.props} />
           <PublicGroupWhyJoin ref='PublicGroupWhyJoin' group={ group } expenses={[]} {...this.props} />
           <PublicGroupJoinUs group={ group } donateToGroup={ Function.prototype } {...this.props} />
           <PublicGroupMembersWall group={ group } {...this.props} />
           <PublicFooter></PublicFooter>
-        </EditCollectiveViewport>
-        <div className='EditCollective-Overlay'>
-          <div className='EditCollective-Modal'>
-            <div className='EditCollective-Modal-title'>Update Name</div>
-            <div className='EditCollective-Modal-body'>
-              <CustomTextArea cols='29'/>
-              <div className='EditCollective-Modal-buttons'>
-                <div className='EditCollective-Modal-Button'>Done</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        { highlights.map(highlight => <Highlight { ...highlight } />) }
+        </Viewport>
+        {showModal && (
+          <Overlay onClick={ this.onCloseModalRef }>
+            <Modal onClose={ this.onCloseModalRef } title={ highlightLabel } >
+              { highlightField === 'backgroundImage' && <ImagePicker {...this.props} /> }
+              { highlightField === 'description' && <CustomTextArea cols='29' {...this.props} value={ fields[highlightField] } /> }
+              { highlightField === 'logo' && <ImagePicker {...this.props} /> }
+              { highlightField === 'longDescription' && <CustomTextArea cols='29' {...this.props} value={ fields[highlightField] } /> }
+              { highlightField === 'mission' && <CustomTextArea cols='29' {...this.props} value={ fields[highlightField] } /> }
+              { highlightField === 'name' && <Input {...this.props} value={ fields[highlightField] } /> }
+              { highlightField === 'website' && <Input {...this.props} value={ fields[highlightField] } /> }
+              { highlightField === 'whyJoin' && <CustomTextArea cols='29' {...this.props} value={ fields[highlightField] } /> }
+            </Modal>
+          </Overlay>
+        )}
+        {highlights.map(highlight => {
+          return <Highlight { ...highlight } onClick={ () => this.onClickHighlight(highlight) } />
+        })}
       </div>
     )
   }
@@ -151,15 +203,29 @@ export default class EditCollective extends Component {
     this.updateHighlights();
   }
 
+  onCloseModal(e) {
+    const targetClassName = e.target.className;
+    if (targetClassName === 'EditCollective-Overlay' || targetClassName === '-close' ) {
+      this.setState({showModal: false});
+    }
+  }
+
+  onClickHighlight(highlight) {
+    this.setState({
+      showModal: true,
+      highlightLabel: highlight.label,
+      highlightField: highlight.field,
+    });
+  }
+
   updateHighlights() {
     const scrollY = window.scrollY;
     highlights.forEach(h => {
       const extendStyle = h.extendStyle;
       const customStyle = h.customStyle;
-      var context = this.refs;
-      var target = null;
-      var refpath = h.refpath.split('/');
-      refpath.forEach(rpath => {
+      let context = this.refs;
+      let target = null;
+      h.refpath.split('/').forEach(rpath => {
         if (context[rpath]) {
           target = context[rpath], 
           context = target.refs;

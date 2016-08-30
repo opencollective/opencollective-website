@@ -33,7 +33,6 @@
     display: inline-block;
     float: right;
     .EditCollective-TopBar-Button {
-      margin-left: 20px;
       box-sizing: border-box;
       display: inline-block;
       width: 115px;
@@ -105,7 +104,7 @@
   }
 }
 
-.EditCollective-highlight {
+.EditCollective-Highlight {
   position: absolute;
   width: 100%;
   left: 0;
@@ -147,6 +146,7 @@
     bottom: 0;
     z-index: 999;
     .EditCollective-EditButtonLabel {
+      user-select: none;
       white-space: pre;
       opacity: 0;
       position: absolute;
@@ -173,19 +173,16 @@
   right: 0;
   bottom: 0;
   top: 0;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(45, 45, 45, 0.8);
   z-index: 99999;
   .EditCollective-Overlay-Close {}
 }
+
 .EditCollective-Modal {
   border-radius: 5px;
-  border-top-right-radius: 0;
-  border-top-left-radius: 0;
-  background-color: #ffffff;
   box-shadow: 0 1px 3px 0 rgba(45, 77, 97, 0.2);
-  min-height: 100px;
+  height: 400px;
   min-width: 100px;
-  max-height: 400px;
   max-width: 400px;
   position: absolute;
   left: 0;
@@ -193,14 +190,56 @@
   top: 0;
   bottom: 0;
   margin: auto;
-  .EditCollective-Modal-body {
-    padding: 20px;
-    text-align: center;
+  .OnBoardingButton {
+    margin-top: 40px;
+    width: 100%;
+  }
+  .Input {
+    input {
+      margin: 0;
+      box-sizing: border-box;
+      width: 100%;
+      height: 100%;
+      border-radius: 5px;
+      background-color: #ffffff;
+      box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+      overflow: auto;
+      font-family: Lato;
+      font-size: 16px;
+      color: #667985;
+      border: none;
+      letter-spacing: .5px;
+    }
   }
   .EditCollective-Modal-title {
-    text-align: center;
-    font-size: 22px;
+    text-transform: capitalize;
     padding: 20px;
+    background-color: #393939;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    font-family: Montserrat;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    color: #ffffff;
+    .-close {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      color: #5f5f5f;
+      cursor: pointer;
+      &:hover {
+        color: white;
+      }
+    }
+  }
+  .EditCollective-Modal-body {
+    padding: 40px;
+    text-align: center;
+    background-color: #f5f6f7;
+    border-radius: 5px;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
   }
   .EditCollective-Modal-buttons {
     text-align: center;
@@ -232,7 +271,6 @@
         opacity: .9;
         cursor: pointer;
       }
-    }
     }
   }
 }
