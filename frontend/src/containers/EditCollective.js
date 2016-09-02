@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import debounce from 'lodash/function/debounce';
 import merge from 'lodash/object/merge';
 import values from 'lodash/object/values';
 
@@ -8,8 +9,6 @@ import i18n from '../lib/i18n';
 
 import PublicFooter from '../components/PublicFooter';
 import PublicGroupHero from '../components/public_group/PublicGroupHero';
-import PublicGroupJoinUs from '../components/public_group/PublicGroupJoinUs';
-import PublicGroupMembersWall from '../components/public_group/PublicGroupMembersWall';
 import PublicGroupWhoWeAre from '../components/public_group/PublicGroupWhoWeAre';
 import PublicGroupWhyJoin from '../components/public_group/PublicGroupWhyJoin';
 
@@ -36,6 +35,7 @@ const highlights = [ {
   refpath: 'PublicGroupHero/PublicGroupHero-backgroundImage',
   label: 'Update Background',
   buttonClassName: 'EditButton--Image',
+  field: 'backgroundImage',
   extendStyle: (target, rect, scrollY, style) => {
     style.top = rect.top + scrollY - rect.height;
   }
@@ -87,43 +87,37 @@ const Overlay = props => (
 );
 
 const Modal = props => (
-  <div className='EditCollective-Modal' onClick={ (e) => {
-    e.nativeEvent.stopImmediatePropagation()
+  <div className='EditCollective-Modal' onClick={e => {
+    e.nativeEvent.stopImmediatePropagation();
     return false;
-  } }>
+  }}>
     <div className='EditCollective-Modal-title'>
       <span>{ props.title }</span>
       <div className='-close' onClick={ props.onClose }>✖</div>
     </div>
-    <div className='EditCollective-Modal-body' onClick={ e => {
-      e.nativeEvent.stopImmediatePropagation()
-      return false; 
-    } }>
+    <div className='EditCollective-Modal-body'>
       { props.children }
-      <div className='OnBoardingButton'>Save Changes</div>
+      <div className='OnBoardingButton' onClick={ props.onClose }>Done</div>
     </div>
   </div>
 );
 
-class TopBar extends Component {
-  render() {
-    return (
-      <div className='EditCollective-TopBar'>
-        <div className='EditCollective-TopBar-brand'>
-          <svg width='18px' height='18px' className='-light-blue align-middle mr1'>
-            <use xlinkHref='#svg-isotype'/>
-          </svg>
-          <svg width='172px' height='30px' className='align-middle'>
-            <use xlinkHref='#svg-logotype' fill='#fff' />
-          </svg>
-        </div>
-        <div className='EditCollective-TopBar-buttons'>
-          <a href='.'><div className='EditCollective-TopBar-Button trans'>Exit Edit Mode</div></a>
-        </div>
-      </div>
-    )
-  }
-}
+const TopBar = props => (
+  <div className='EditCollective-TopBar'>
+    <div className='EditCollective-TopBar-brand'>
+      <svg width='18px' height='18px' className='-light-blue align-middle mr1'>
+        <use xlinkHref='#svg-isotype'/>
+      </svg>
+      <svg width='172px' height='30px' className='align-middle'>
+        <use xlinkHref='#svg-logotype' fill='#fff' />
+      </svg>
+    </div>
+    <div className='EditCollective-TopBar-buttons'>
+      <div className='EditCollective-TopBar-Button' onClick={ props.onPublish }>Publish</div>
+      <a href='.'><div className='EditCollective-TopBar-Button trans'>Exit Edit Mode</div></a>
+    </div>
+  </div>
+);
 
 export default class EditCollective extends Component {
   
@@ -146,49 +140,66 @@ export default class EditCollective extends Component {
       }
     };
     this.onCloseModalRef = this.onCloseModal.bind(this);
+    this.onChangeHighlightValueRef = this.onChangeHighlightValue.bind(this);
+    this.onPublishRef = this.onPublish.bind(this);
+    this.lazyUpdateHighlights = debounce(() => {
+      this.updateHighlights();
+      this.forceUpdate();
+    }, 400);
   }
 
   render() {
+    const { originalGroup } = this.props;
     const { showModal, highlightLabel, highlightField, fields } = this.state;
-    const group = { // originalGroup
-      name: 'OpenFarm',
-      backgroundImage: 'https://cldup.com/MYtRsISOBg.jpg',
-      logo: 'https://openfarm.cc/assets/openfarm_logo_small-0d10c658a1abcd1ac7e3d6f37b5802cf.png',
-      mission: 'develop a community and tools for freely sharing plant knowledge locally and globally.',
-      description: 'A free and open database for farming and gardening knowledge. You can grow anything!',
-      longDescription: 'OpenFarm is a free and open database and web application for farming and gardening knowledge. One might think of it as the Wikipedia or Freebase for growing plants, though it functions more like a cooking recipes site.\n\nThe main content are Growing Guides: creative, crowd-sourced, single-author, structured documents that include all of the necessary information for a person or machine to grow a plant, i.e.: seed spacing and depth, watering regimen, recommended soil composition and companion plants, sun/shade requirements, etc.\n\nOther use cases: a mobile app for home gardeners, Google providing “One Box” answers to search queries such as “How do I grow tomatoes?”, smart garden sensors, automated farming machines.',
-      website: 'openfarm.cc',
+    const highlightValue = highlightField ? fields[highlightField] : null;
+    const group = {
+      name: fields['name'] || ' ',
+      backgroundImage: fields['backgroundImage'],
+      logo: fields['logo'] || '/static/images/rocket.svg',
+      mission: fields['mission'],
+      description: fields['description'],
+      longDescription: fields['longDescription'],
+      website: fields['website'],
       tiers:[],
-      members:[
-        {name: 'Simon Vansintjan', role: 'contributor', website: 'http://simon.vansintjan.net/'},
-        {name: 'Rory Aronson', role: 'contributor', website: 'http://roryaronson.com/'}
-      ],
-      contributors:[
-        {name: 'Rory Aronson', role: 'contributor', website: 'http://roryaronson.com/', stats: {}}
-      ]
+      members:[],
+      contributors: originalGroup.contributors
     };
     return (
       <div className='EditCollective'>
-        <TopBar />
+        <TopBar onPublish={ this.onPublishRef } />
         <Viewport>
           <PublicGroupHero ref='PublicGroupHero' group={ group } {...this.props} />
           <PublicGroupWhoWeAre ref='PublicGroupWhoWeAre' group={ group } {...this.props} />
           <PublicGroupWhyJoin ref='PublicGroupWhyJoin' group={ group } expenses={[]} {...this.props} />
-          <PublicGroupJoinUs group={ group } donateToGroup={ Function.prototype } {...this.props} />
-          <PublicGroupMembersWall group={ group } {...this.props} />
           <PublicFooter></PublicFooter>
         </Viewport>
         {showModal && (
           <Overlay onClick={ this.onCloseModalRef }>
             <Modal onClose={ this.onCloseModalRef } title={ highlightLabel } >
-              { highlightField === 'backgroundImage' && <ImagePicker {...this.props} /> }
-              { highlightField === 'description' && <CustomTextArea cols='29' {...this.props} value={ fields[highlightField] } /> }
-              { highlightField === 'logo' && <ImagePicker {...this.props} /> }
-              { highlightField === 'longDescription' && <CustomTextArea cols='29' {...this.props} value={ fields[highlightField] } /> }
-              { highlightField === 'mission' && <CustomTextArea cols='29' {...this.props} value={ fields[highlightField] } /> }
-              { highlightField === 'name' && <Input {...this.props} value={ fields[highlightField] } /> }
-              { highlightField === 'website' && <Input {...this.props} value={ fields[highlightField] } /> }
-              { highlightField === 'whyJoin' && <CustomTextArea cols='29' {...this.props} value={ fields[highlightField] } /> }
+              {highlightField === 'backgroundImage' && (
+                <ImagePicker {...this.props} />
+              )}
+              {highlightField === 'description' && (
+                <CustomTextArea cols='29' {...this.props} value={ highlightValue } onChange={ this.onChangeHighlightValueRef } />
+              )}
+              {highlightField === 'logo' && (
+                <ImagePicker {...this.props} />
+              )}
+              {highlightField === 'longDescription' && (
+                <CustomTextArea cols='29' {...this.props} value={ highlightValue } onChange={ this.onChangeHighlightValueRef } />
+              )}
+              {highlightField === 'mission' && (
+                <CustomTextArea cols='29' {...this.props} value={ highlightValue } onChange={ this.onChangeHighlightValueRef } />
+              )}
+              {highlightField === 'name' && (
+                <Input {...this.props} value={ highlightValue } />
+              )}
+              {highlightField === 'website' && (
+                <Input {...this.props} value={ highlightValue } />
+              )}
+              {highlightField === 'whyJoin' && (
+                <CustomTextArea cols='29' {...this.props} value={ highlightValue } onChange={ this.onChangeHighlightValueRef } />
+              )}
             </Modal>
           </Overlay>
         )}
@@ -201,12 +212,30 @@ export default class EditCollective extends Component {
 
   componentDidMount() {
     this.updateHighlights();
+    window.addEventListener('resize', this.lazyUpdateHighlights);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.lazyUpdateHighlights);
+  }
+
+  onPublish() {
+
   }
 
   onCloseModal(e) {
     const targetClassName = e.target.className;
-    if (targetClassName === 'EditCollective-Overlay' || targetClassName === '-close' ) {
+    if (targetClassName === 'EditCollective-Overlay' || targetClassName === 'OnBoardingButton' || targetClassName === '-close' ) {
       this.setState({showModal: false});
+    }
+  }
+
+  onChangeHighlightValue(newValue) {
+    const { highlightField, fields } = this.state;
+    if (fields[highlightField]) {
+      fields[highlightField] = newValue;
+      this.setState({fields: fields});
+      this.updateHighlights();
     }
   }
 

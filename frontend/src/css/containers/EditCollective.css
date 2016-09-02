@@ -33,6 +33,7 @@
     display: inline-block;
     float: right;
     .EditCollective-TopBar-Button {
+      margin-left: 20px;
       box-sizing: border-box;
       display: inline-block;
       width: 115px;
@@ -69,6 +70,9 @@
   min-height: 100px;
   overflow: hidden;
   margin: 0px 70px;
+  .PublicFooter {
+    margin-top: 0;
+  }
   .-screen {
     user-select: none;
     position: absolute;
