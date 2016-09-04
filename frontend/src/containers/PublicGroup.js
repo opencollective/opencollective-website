@@ -127,13 +127,13 @@ export class PublicGroup extends Component {
         <Notification />
         <PublicGroupHero group={ group } {...this.props} />
         <PublicGroupWhoWeAre group={ group } {...this.props} />
-        
+
         {group.slug === 'opensource' && <PublicGroupOpenSourceCTA />}
 
         {contributors && <PublicGroupContributors contributors={ contributors } />}
 
         {group.slug !== 'opensource' && <PublicGroupWhyJoin group={ group } expenses={ expenses } {...this.props} />}
-        
+
         <div className='bg-light-gray px2'>
           <PublicGroupJoinUs {...this.props} donateToGroup={this.donateToGroupRef} {...this.props} />
           <PublicGroupMembersWall group={group} {...this.props} />
@@ -276,7 +276,7 @@ export function donateToGroup({amount, frequency, currency, token, options}) {
     .then(() => {
       // Paypal will redirect to this page and we will refresh at that moment.
       // A Stripe donation on the other hand is immediate after the request:
-      if (!(options && options.paypal)) { 
+      if (!(options && options.paypal)) {
         return this.refreshData()
         .then(() => {
           this.setState({

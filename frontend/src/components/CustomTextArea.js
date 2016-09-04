@@ -9,7 +9,7 @@ export default class CustomTextArea extends Component {
     maxLength: PropTypes.number,
     onChange: PropTypes.func,
     placeholder: PropTypes.string,
-    resize: PropTypes.oneOf(['none', 'both', 'veritcal', 'horizontal']),
+    resize: PropTypes.oneOf(['none', 'both', 'vertical', 'horizontal']),
     rows: PropTypes.number,
     value: PropTypes.string,
     name: PropTypes.string
