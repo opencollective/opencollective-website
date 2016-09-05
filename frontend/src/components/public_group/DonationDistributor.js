@@ -62,7 +62,7 @@ export default class DonationDistributor extends Component {
         <div className={buttonClassName} onClick={disabled ? Function.prototype : this.open.bind(this)}>
           {buttonLabel || i18n.getString('donate')}
         </div>
-        {showDisclaimer && <div className='DonationDistributor-disclaimer muted'>{this.renderDisclaimer()}</div>}
+        {showDisclaimer && <div className='DonationDistributor-disclaimer'>{this.renderDisclaimer()}</div>}
       </div>
     )
   }
@@ -296,7 +296,7 @@ export default class DonationDistributor extends Component {
         return (
           <div className='DonationDistributor-donate-button max-width-1 mx-auto'>
             {this.renderPaymentButton()}
-            {this.props.showDisclaimer && <div className='DonationDistributor-disclaimer muted'>{this.renderDisclaimer()}</div>}
+            {this.props.showDisclaimer && <div className='DonationDistributor-disclaimer'>{this.renderDisclaimer()}</div>}
           </div>
         )
       }

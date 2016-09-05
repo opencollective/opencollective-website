@@ -8,7 +8,7 @@ import { displayUrl } from '../../components/DisplayUrl';
 export default class PublicGroupWhoWeAre extends Component {
   render() {
     const { group, i18n, isSupercollective } = this.props;
-    const title = (group.slug !== 'opensource') ? i18n.getString('coreContributors') : '';
+    const title = i18n.getString('coreContributors');
     return (
       <section id='who-we-are' className='PublicGroupWhoWeAre PublicGroupIntro'>
         <div className='PublicGroupIntro-container PublicGroupWhoWeAre-container'>
@@ -41,8 +41,13 @@ export default class PublicGroupWhoWeAre extends Component {
           ) : null}
 
           {isSupercollective ? (
-            <RelatedGroups title={ ' ' } groupList={ group.superCollectiveData } {...this.props} />
-          ) : null}
+            <div>
+              <div className='Collectives-title mt0 mb2 -ff-sec -fw-light'>
+                {i18n.getString('WeAreProudSupporters')}
+              </div>
+              <RelatedGroups title={' '} groupList={ group.superCollectiveData } {...this.props} />
+            </div>
+            ) : null}
         </div>
       </section>
     );
