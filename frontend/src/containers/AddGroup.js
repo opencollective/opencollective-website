@@ -34,7 +34,8 @@ export class AddGroup extends Component {
     const {
       appendGroupForm,
       groupForm,
-      i18n
+      i18n,
+      uploadImage
     } = this.props;
 
     const {
