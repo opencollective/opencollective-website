@@ -42,7 +42,7 @@ class Notification extends Component {
   componentDidMount() {
     this.props.resetNotifications();
   }
-};
+}
 
 Notification.propTypes = {
   resetNotifications: PropTypes.func.isRequired,

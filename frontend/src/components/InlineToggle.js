@@ -8,22 +8,22 @@ class InlineToggle extends Component {
 		}
 	}
   render() {
-  	const {
-  		showString,
-  		hideString
-  	} = this.props
+    const {
+      showString,
+      hideString
+    } = this.props
     return (
       <div className='InlineToggle'>
-      	<div className='InlineToggle-text' onClick={this.clickHandler.bind(this)}>
-      		{this.state.showChildren ? hideString : showString}
-      	</div>
+        <div className='InlineToggle-text' onClick={this.clickHandler.bind(this)}>
+          {this.state.showChildren ? hideString : showString}
+        </div>
         {this.state.showChildren && this.props.children}
       </div>
     );
   }
 
   clickHandler(){
-  	this.setState({showChildren: !this.state.showChildren});
+    this.setState({showChildren: !this.state.showChildren});
   }
 }
 

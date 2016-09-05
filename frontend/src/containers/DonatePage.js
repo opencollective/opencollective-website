@@ -13,7 +13,7 @@ import PublicGroupThanks from '../components/public_group/PublicGroupThanksV2';
 import getSocialMediaAvatars from '../actions/users/get_social_media_avatars';
 import PublicGroupSignup from '../components/public_group/PublicGroupSignupV2';
 import Tiers from '../components/Tiers';
-import { getTier } from '../lib/tiers';
+import getTier from '../lib/tiers';
 
 import fetchGroup from '../actions/groups/fetch_by_id';
 import fetchUsers from '../actions/users/fetch_by_group';
@@ -48,7 +48,7 @@ export class DonatePage extends Component {
     } = this.props;
 
     let tier = getTier({amount, interval}, group.tiers);
-    if (!tier || tier.presets && tier.presets.length > 1) 
+    if (!tier || tier.presets && tier.presets.length > 1)
       tier = {
       name: "custom",
       title: " ",

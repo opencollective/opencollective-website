@@ -9,15 +9,15 @@ export default function transactions(state={
 }, action={}) {
   switch (action.type) {
     case constants.TRANSACTIONS_SUCCESS:
-    case constants.TRANSACTION_SUCCESS:
-      const { transactions } = action;
+    case constants.TRANSACTION_SUCCESS: {
+      const {transactions} = action;
       const transactionsArr = values(transactions);
 
       return merge({}, state, transactions, {
         isDonation: transactionsArr.filter(t => t.isDonation),
         isExpense: transactionsArr.filter(t => t.incurredAt)
       });
-
+    }
     default:
       return state;
   }

@@ -2,9 +2,9 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
   require('dotenv').load();
 }
 
-require('babel-register');
-require('./global');
+import 'babel-register';
+import './global';
 
-const app = require('./app');
+import app from './app';
 
-module.exports = app;
+export default app;

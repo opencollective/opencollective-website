@@ -1,11 +1,4 @@
-import collectives from './collectives';
-import banner from './banner';
-import profile from './profile';
-import homepage from './homepage';
-
-module.exports = {
-  collectives,
-  profile,
-  banner,
-  homepage
-}
+export collectives from './collectives';
+export banner from './banner';
+export profile from './profile';
+export homepage from './homepage';

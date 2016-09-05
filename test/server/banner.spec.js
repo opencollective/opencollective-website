@@ -1,11 +1,11 @@
-const mocks = require('../data/mocks.json');
+import mocks from '../data/mocks.json'; // eslint-disable-line
 
-const api = require('../../server/lib/api');
-const app = require('../../server/index');
-const request = require('supertest');
-const sizeOf = require('image-size');
+import api from '../../server/lib/api';
+import app from '../../server/index';
+import request from 'supertest';
+import sizeOf from 'image-size';
 
-const sinon = require('sinon');
+import sinon from 'sinon';
 
 let sandbox;
 mocks.backers = mocks.users.filter(u => u.tier == 'backer')

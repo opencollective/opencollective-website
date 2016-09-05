@@ -21,8 +21,9 @@ export default function session(state={
         isAuthenticated: false
       });
 
-    case constants.SHOW_POPOVERMENU:
-      return merge({}, state, { hasPopOverMenuOpen: action.hasPopOverMenuOpen });
+    // TODO constants.SHOW_POPOVERMENU doesn't exist, should it?
+    // case constants.SHOW_POPOVERMENU:
+    //   return merge({}, state, { hasPopOverMenuOpen: action.hasPopOverMenuOpen });
 
     case constants.HYDRATE:
       return merge({}, state, {

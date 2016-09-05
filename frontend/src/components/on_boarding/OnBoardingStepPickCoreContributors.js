@@ -15,7 +15,7 @@ export default class OnBoardingStepPickCoreContributors extends React.Component 
   render() {
     const buttonContainerStyle = {margin: '0 auto', marginTop: '40px', width: '300px', textAlign: 'center'};
     const { onNextStep, contributors: availableContributors, appendGithubForm } = this.props;
-    const chosenContributors = this.chosenContributors;
+    const { chosenContributors } = this;
     const canContinue = chosenContributors.length >= MIN_CONTRIBUTORS_FOR_ONBOARDING;
 
     return (

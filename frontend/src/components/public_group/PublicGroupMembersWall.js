@@ -29,4 +29,4 @@ export default class PublicGroupMembersWall extends React.Component {
       </section>
     );
   }
-};
+}

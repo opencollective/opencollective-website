@@ -18,4 +18,4 @@ const getTier = (query, tiers) => {
   return tier;
 };
 
-module.exports = { getTier };
+export default { getTier };

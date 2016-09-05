@@ -47,7 +47,7 @@ export default class CustomTextArea extends Component {
         style={{
           width: cols ? 'auto' : null,
           height: rows ? 'auto' : null,
-          resize: resize
+          resize
         }}
         onChange={(e) => onChange(e.target.value) }
         onKeyUp={this.detectScrollbar.bind(this)}

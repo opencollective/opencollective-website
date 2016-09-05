@@ -6,7 +6,7 @@ import React from 'react';
 import config from 'config';
 import { renderToString } from 'react-dom/server';
 
-import { get } from '../lib/api';
+import api from '../lib/api';
 import Widget from '../../frontend/src/components/Widget';
 import i18n from '../../frontend/src/lib/i18n';
 
@@ -14,11 +14,11 @@ import i18n from '../../frontend/src/lib/i18n';
  * Show the widget of a collective
  */
 const widget = (req, res, next) => {
-  const group = req.group;
+  const { group } = req;
 
   Promise.all([
-    get(`/groups/${group.slug}/transactions?per_page=3`),
-    get(`/groups/${group.slug}/users`)
+    api.get(`/groups/${group.slug}/transactions?per_page=3`),
+    api.get(`/groups/${group.slug}/users`)
   ])
   .then(([transactions, users]) => {
     const props = {

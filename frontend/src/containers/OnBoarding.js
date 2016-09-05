@@ -152,7 +152,7 @@ export class OnBoarding extends Component {
     fetchContributorsFromGitHub(owner, selectedRepo)
     .then(() => {
       if (githubUsername !== owner) {
-        const contributors = this.props.contributors;
+        const { contributors } = this.props;
         contributors.sort((A, B) => B.contributions - A.contributions);
         const topTree = contributors.slice(0, 3).map(contributor => contributor.name);
 
@@ -190,7 +190,7 @@ function mapStateToProps({router, github, form}) {
   if (github.connectedAccount) {
     githubUsername = github.connectedAccount.username;
   }
-  const query = router.location.query;
+  const { query } = router.location;
   const utmSource = query.utm_source;
 
   return {

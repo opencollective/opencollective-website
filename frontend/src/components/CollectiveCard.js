@@ -64,7 +64,7 @@ export default class CollectiveCard extends Component {
         value: formatCurrency(totalDonations, currency, { compact: true, precision: 0 })
       }];
     return stats;
-  };
+  }
 
   render() {
     const {

@@ -12,8 +12,8 @@ function schema(state={
   error: {}
 }, action={}) {
   switch (action.type) {
-    case constants.VALIDATE_SCHEMA_FAILURE:
-      const { path, message } = errorDetail(action);
+    case constants.VALIDATE_SCHEMA_FAILURE: {
+      const {path, message} = errorDetail(action);
 
       return merge({}, state, {
         error: {
@@ -21,9 +21,8 @@ function schema(state={
           message
         }
       });
-
+    }
     case constants.VALIDATE_SCHEMA_SUCCESS:
-    case constants.VALIDATE_SCHEMA_FAILURE:
       return merge({}, omit(state, 'error'), { error: {} });
 
     default:
@@ -42,22 +41,26 @@ const profileInitialState = {
 
 function profile(state=profileInitialState, action={}) {
   switch (action.type) {
-    case constants.SET_EDIT_MODE_PROFILE:
-      if (!action.isEditMode) {
-        return merge({}, profileInitialState, { isEditMode: action.isEditMode });
-      }
-      return merge({}, state, { isEditMode: action.isEditMode });
+    // TODO constants.SET_EDIT_MODE_PROFILE doesn't exist, should it?
+    // case constants.SET_EDIT_MODE_PROFILE:
+    //   if (!action.isEditMode) {
+    //     return merge({}, profileInitialState, { isEditMode: action.isEditMode });
+    //   }
+    //   return merge({}, state, { isEditMode: action.isEditMode });
 
     case constants.APPEND_PROFILE_FORM:
       return merge({}, state, { attributes: action.attributes });
 
     case constants.VALIDATE_PROFILE_REQUEST:
-    case constants.VALIDATE_DONATION_PROFILE_REQUEST:
+    // TODO constants.VALIDATE_DONATION_PROFILE_REQUEST doesn't exist, should it?
+    // case constants.VALIDATE_DONATION_PROFILE_REQUEST:
       return merge({}, omit(state, 'error'), { error: {} });
 
     case constants.VALIDATE_PROFILE_FAILURE:
-    case constants.VALIDATE_DONATION_PROFILE_FAILURE:
-      const { path, message } = errorDetail(action);
+    // TODO constants.VALIDATE_DONATION_PROFILE_FAILURE doesn't exist, should it?
+    // case constants.VALIDATE_DONATION_PROFILE_FAILURE:
+    {
+      const {path, message} = errorDetail(action);
 
       return merge({}, state, {
         error: {
@@ -65,6 +68,7 @@ function profile(state=profileInitialState, action={}) {
           message
         }
       });
+    }
     default:
       return state;
   }
@@ -75,10 +79,11 @@ function profile(state=profileInitialState, action={}) {
  */
 function donation(state={}, action={}) {
   switch (action.type) {
-    case constants.APPEND_DONATION_FORM:
+    case constants.APPEND_DONATION_FORM: {
       const newState = {};
       newState[action.tiername] = action.attributes;
       return merge({}, state, newState);
+    }
     default:
       return state;
   }
@@ -107,8 +112,8 @@ function expense(state=expenseInitialState, action={}) {
       return merge({}, state, { attributes: action.attributes });
 
     case constants.VALIDATE_SCHEMA_FAILURE:
-    case constants.VALIDATE_EXPENSE_FAILURE:
-      const { path, message } = errorDetail(action);
+    case constants.VALIDATE_EXPENSE_FAILURE: {
+      const {path, message} = errorDetail(action);
 
       return merge({}, state, {
         error: {
@@ -116,8 +121,7 @@ function expense(state=expenseInitialState, action={}) {
           message
         }
       });
-
-    case constants.VALIDATE_SCHEMA_FAILURE:
+    }
     case constants.VALIDATE_EXPENSE_REQUEST:
       return merge({}, omit(state, 'error'), { error: {} });
 

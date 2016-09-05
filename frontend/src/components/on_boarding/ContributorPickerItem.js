@@ -39,9 +39,9 @@ export default class ContributorPickerItem extends React.Component {
     return (
       <div>
         <div className={`ContributorPickerItem ${name ? 'ContributorPickerItem--active': ''}`} onClick={() => this.setState({showContributorList: !showContributorList})}>
-        	<img src={name ? avatar : "/static/images/add-contributor.svg"} width="32px" height="32px" />
-        	<span>{name || 'Add Contributor'}</span>
-        	{name && <i onClick={onRemove}>Remove</i>}
+          <img src={name ? avatar : "/static/images/add-contributor.svg"} width="32px" height="32px" />
+          <span>{name || 'Add Contributor'}</span>
+          {name && <i onClick={onRemove}>Remove</i>}
         </div>
 
         {!name && showContributorList &&
