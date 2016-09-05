@@ -5,7 +5,6 @@ import LoginTopBar from '../containers/LoginTopBar';
 import Notification from '../containers/Notification';
 
 import CustomTextArea from '../components/CustomTextArea';
-import ImagePicker from '../components/ImagePicker';
 import Input from '../components/CustomTextArea';
 import PublicFooter from '../components/PublicFooter';
 import Select from '../components/Select';
@@ -13,15 +12,12 @@ import Select from '../components/Select';
 import appendGroupForm from '../actions/form/append_group';
 import createGroup from '../actions/groups/create';
 import notify from '../actions/notification/notify';
-import uploadImage from '../actions/images/upload';
 import validateSchema from '../actions/form/validate_schema';
 
 import groupSchema from '../joi_schemas/group';
 
-import i18n from '../lib/i18n';
 
 const MEMBER = 'MEMBER';
-const LOGO_PRESET = ['/static/images/repo.svg', '/static/images/code.svg', '/static/images/rocket.svg'];
 
 export class AddGroup extends Component {
 
@@ -33,9 +29,7 @@ export class AddGroup extends Component {
   render() {
     const {
       appendGroupForm,
-      groupForm,
-      i18n,
-      uploadImage
+      groupForm
     } = this.props;
 
     const {
@@ -48,6 +42,8 @@ export class AddGroup extends Component {
       description,
       longDescription,
       whyJoin,
+      logo,
+      image,
       tags,
       users1,
       users2,
@@ -66,30 +62,6 @@ export class AddGroup extends Component {
           </div>
             <div className='AddGroup-form-container'>
               <div className='sm-flex items-stretch'>
-                <div className='order-2'>
-                  <div className='AddGroup-imagepicker-cont pb3'>
-                    <ImagePicker
-                      uploadOptionFirst
-                      className='logo'
-                      dontLookupSocialMediaAvatars
-                      handleChange={logo => appendGroupForm({logo})}
-                      label='Select collective logo'
-                      uploadImage={uploadImage}
-                      i18n={i18n}
-                      presets={LOGO_PRESET}
-                    />
-                    <ImagePicker
-                      uploadOptionFirst
-                      className='image'
-                      dontLookupSocialMediaAvatars
-                      handleChange={image => appendGroupForm({image})}
-                      label='Select collective image'
-                      uploadImage={uploadImage}
-                      i18n={i18n}
-                      presets={LOGO_PRESET}
-                    />
-                  </div>
-                </div>
                 <div className='sm-col-10 order-1 content-center'>
                   <div className='flex-auto'>
                     <div className='flex flex-column'>
@@ -121,8 +93,24 @@ export class AddGroup extends Component {
                         name='website'
                         value={website}
                         onChange={(value) => appendGroupForm({website: value})}
-                        maxLength={100}
+                        maxLength={255}
                         placeholder='http://railsgirlsatlanta.com'/>
+
+                      <div className='AddGroup-label'>Logo</div>
+                      <Input
+                        name='logo'
+                        value={logo}
+                        onChange={(value) => appendGroupForm({logo: value})}
+                        maxLength={255}
+                        placeholder='http://railsgirlsatlanta.com/rails.png'/>
+
+                      <div className='AddGroup-label'>Image</div>
+                      <Input
+                        name='image'
+                        value={image}
+                        onChange={(value) => appendGroupForm({image: value})}
+                        maxLength={255}
+                        placeholder='http://railsgirlsatlanta.com/railscollective.png'/>
 
                       <div className='AddGroup-label'>Video</div>
                       <Input
@@ -189,7 +177,7 @@ export class AddGroup extends Component {
                         <Input
                           name='name'
                           value={users1.name}
-                          onChange={(value) => appendGroupForm({users1: {name: value, email: users1.email, twitterHandle: users1.twitterHandle}})}
+                          onChange={(value) => appendGroupForm({users1: {name: value, email: users1.email, twitterHandle: users1.twitterHandle, avatar: users1.avatar}})}
                           maxLength={50}
                           placeholder='Charlie Chaplin'/>
                       </div>
@@ -198,27 +186,37 @@ export class AddGroup extends Component {
                          <Input
                           name='email'
                           value={users1.email}
-                          onChange={(value) => appendGroupForm({users1: {name: users1.name, email: value, twitterHandle: users1.twitterHandle}})}
+                          onChange={(value) => appendGroupForm({users1: {name: users1.name, email: value, twitterHandle: users1.twitterHandle, avatar: users1.avatar}})}
                           maxLength={50}
                           placeholder='charlie@chaps.com'/>
                       </div>
                       <div>
-                        <div className='AddGroup-label'>Twitterhandle </div>
+                        <div className='AddGroup-label'>Twitterhandle</div>
                          <Input
                           name='twitterHandle'
                           value={users1.twitterHandle}
-                          onChange={(value) => appendGroupForm({users1: {name: users1.name, email: users1.email, twitterHandle: value}})}
+                          onChange={(value) => appendGroupForm({users1: {name: users1.name, email: users1.email, twitterHandle: value, avatar: users1.avatar}})}
                           maxLength={50}
-                          placeholder='@charliechaps'/>
+                          placeholder='charliechaps'/>
+                      </div>
+                      <div>
+                        <div className='AddGroup-label'>Avatar</div>
+                         <Input
+                          name='avatar'
+                          value={users1.avatar}
+                          onChange={(value) => appendGroupForm({users1: {name: users1.name, email: users1.email, twitterHandle: users1.twitterHandle, avatar: value}})}
+                          maxLength={255}
+                          placeholder='http://userinfo.com/image.png'/>
                       </div>
                     </div>
+
                     <div className='flex flex-row'>
                       <div>
                         <div className='AddGroup-label'>Name</div>
                         <Input
                           name='name'
                           value={users2.name}
-                          onChange={(value) => appendGroupForm({users2: {name: value, email: users2.email, twitterHandle: users2.twitterHandle}})}
+                          onChange={(value) => appendGroupForm({users2: {name: value, email: users2.email, twitterHandle: users2.twitterHandle, avatar: users2.avatar}})}
                           maxLength={50}
                           placeholder='Charlie Chaplin'/>
                       </div>
@@ -227,27 +225,37 @@ export class AddGroup extends Component {
                          <Input
                           name='email'
                           value={users2.email}
-                          onChange={(value) => appendGroupForm({users2: {name: users2.name, email: value, twitterHandle: users2.twitterHandle}})}
+                          onChange={(value) => appendGroupForm({users2: {name: users2.name, email: value, twitterHandle: users2.twitterHandle, avatar: users2.avatar}})}
                           maxLength={50}
                           placeholder='charlie@chaps.com'/>
                       </div>
                       <div>
-                        <div className='AddGroup-label'>Twitterhandle </div>
+                        <div className='AddGroup-label'>Twitterhandle</div>
                          <Input
                           name='twitterHandle'
                           value={users2.twitterHandle}
-                          onChange={(value) => appendGroupForm({users2: {name: users2.name, email: users2.email, twitterHandle: value}})}
+                          onChange={(value) => appendGroupForm({users2: {name: users2.name, email: users2.email, twitterHandle: value, avatar: users2.avatar}})}
                           maxLength={50}
-                          placeholder='@charliechaps'/>
+                          placeholder='charliechaps'/>
+                      </div>
+                      <div>
+                        <div className='AddGroup-label'>Avatar</div>
+                         <Input
+                          name='avatar'
+                          value={users2.avatar}
+                          onChange={(value) => appendGroupForm({users2: {name: users2.name, email: users2.email, twitterHandle: users2.twitterHandle, avatar: value}})}
+                          maxLength={255}
+                          placeholder='http://userinfo.com/image.png'/>
                       </div>
                     </div>
+
                     <div className='flex flex-row'>
                       <div>
                         <div className='AddGroup-label'>Name</div>
                         <Input
                           name='name'
                           value={users3.name}
-                          onChange={(value) => appendGroupForm({users3: {name: value, email: users3.email, twitterHandle: users3.twitterHandle}})}
+                          onChange={(value) => appendGroupForm({users3: {name: value, email: users3.email, twitterHandle: users3.twitterHandle, avatar: users3.avatar}})}
                           maxLength={50}
                           placeholder='Charlie Chaplin'/>
                       </div>
@@ -256,27 +264,37 @@ export class AddGroup extends Component {
                          <Input
                           name='email'
                           value={users3.email}
-                          onChange={(value) => appendGroupForm({users3: {name: users3.name, email: value, twitterHandle: users3.twitterHandle}})}
+                          onChange={(value) => appendGroupForm({users3: {name: users3.name, email: value, twitterHandle: users3.twitterHandle, avatar: users3.avatar}})}
                           maxLength={50}
                           placeholder='charlie@chaps.com'/>
                       </div>
                       <div>
-                        <div className='AddGroup-label'>Twitterhandle </div>
+                        <div className='AddGroup-label'>Twitterhandle</div>
                          <Input
                           name='twitterHandle'
                           value={users3.twitterHandle}
-                          onChange={(value) => appendGroupForm({users3: {name: users3.name, email: users3.email, twitterHandle: value}})}
+                          onChange={(value) => appendGroupForm({users3: {name: users3.name, email: users3.email, twitterHandle: value, avatar: users3.avatar}})}
                           maxLength={50}
-                          placeholder='@charliechaps'/>
+                          placeholder='charliechaps'/>
+                      </div>
+                      <div>
+                        <div className='AddGroup-label'>Avatar</div>
+                         <Input
+                          name='avatar'
+                          value={users3.avatar}
+                          onChange={(value) => appendGroupForm({users3: {name: users3.name, email: users3.email, twitterHandle: users3.twitterHandle, avatar: value}})}
+                          maxLength={255}
+                          placeholder='http://userinfo.com/image.png'/>
                       </div>
                     </div>
+
                     <div className='flex flex-row'>
                       <div>
                         <div className='AddGroup-label'>Name</div>
                         <Input
                           name='name'
                           value={users4.name}
-                          onChange={(value) => appendGroupForm({users4: {name: value, email: users4.email, twitterHandle: users4.twitterHandle}})}
+                          onChange={(value) => appendGroupForm({users4: {name: value, email: users4.email, twitterHandle: users4.twitterHandle, avatar: users4.avatar}})}
                           maxLength={50}
                           placeholder='Charlie Chaplin'/>
                       </div>
@@ -285,27 +303,37 @@ export class AddGroup extends Component {
                          <Input
                           name='email'
                           value={users4.email}
-                          onChange={(value) => appendGroupForm({users4: {name: users4.name, email: value, twitterHandle: users4.twitterHandle}})}
+                          onChange={(value) => appendGroupForm({users4: {name: users4.name, email: value, twitterHandle: users4.twitterHandle, avatar: users4.avatar}})}
                           maxLength={50}
                           placeholder='charlie@chaps.com'/>
                       </div>
                       <div>
-                        <div className='AddGroup-label'>Twitterhandle </div>
+                        <div className='AddGroup-label'>Twitterhandle</div>
                          <Input
                           name='twitterHandle'
                           value={users4.twitterHandle}
-                          onChange={(value) => appendGroupForm({users4: {name: users4.name, email: users4.email, twitterHandle: value}})}
+                          onChange={(value) => appendGroupForm({users4: {name: users4.name, email: users4.email, twitterHandle: value, avatar: users4.avatar}})}
                           maxLength={50}
-                          placeholder='@charliechaps'/>
+                          placeholder='charliechaps'/>
+                      </div>
+                      <div>
+                        <div className='AddGroup-label'>Avatar</div>
+                         <Input
+                          name='avatar'
+                          value={users4.avatar}
+                          onChange={(value) => appendGroupForm({users4: {name: users4.name, email: users4.email, twitterHandle: users4.twitterHandle, avatar: value}})}
+                          maxLength={255}
+                          placeholder='http://userinfo.com/image.png'/>
                       </div>
                     </div>
+
                     <div className='flex flex-row'>
                       <div>
                         <div className='AddGroup-label'>Name</div>
                         <Input
                           name='name'
                           value={users5.name}
-                          onChange={(value) => appendGroupForm({users5: {name: value, email: users5.email, twitterHandle: users5.twitterHandle}})}
+                          onChange={(value) => appendGroupForm({users5: {name: value, email: users5.email, twitterHandle: users5.twitterHandle, avatar: users5.avatar}})}
                           maxLength={50}
                           placeholder='Charlie Chaplin'/>
                       </div>
@@ -314,18 +342,27 @@ export class AddGroup extends Component {
                          <Input
                           name='email'
                           value={users5.email}
-                          onChange={(value) => appendGroupForm({users5: {name: users5.name, email: value, twitterHandle: users5.twitterHandle}})}
+                          onChange={(value) => appendGroupForm({users5: {name: users5.name, email: value, twitterHandle: users5.twitterHandle, avatar: users5.avatar}})}
                           maxLength={50}
                           placeholder='charlie@chaps.com'/>
                       </div>
                       <div>
-                        <div className='AddGroup-label'>Twitterhandle </div>
+                        <div className='AddGroup-label'>Twitterhandle</div>
                          <Input
                           name='twitterHandle'
                           value={users5.twitterHandle}
-                          onChange={(value) => appendGroupForm({users5: {name: users5.name, email: users5.email, twitterHandle: value}})}
+                          onChange={(value) => appendGroupForm({users5: {name: users5.name, email: users5.email, twitterHandle: value, avatar: users5.avatar}})}
                           maxLength={50}
-                          placeholder='@charliechaps'/>
+                          placeholder='charliechaps'/>
+                      </div>
+                      <div>
+                        <div className='AddGroup-label'>Avatar</div>
+                         <Input
+                          name='avatar'
+                          value={users5.avatar}
+                          onChange={(value) => appendGroupForm({users5: {name: users5.name, email: users5.email, twitterHandle: users5.twitterHandle, avatar: value}})}
+                          maxLength={255}
+                          placeholder='http://userinfo.com/image.png'/>
                       </div>
                     </div>
                   </div>
@@ -346,8 +383,10 @@ export class AddGroup extends Component {
       name: attr.name,
       slug: attr.slug,
       mission: attr.mission,
-      longDescription: attr.description,
+      description: attr.description,
+      longDescription: attr.longDescription,
       logo: attr.logo || '',
+      image: attr.image,
       website: attr.website,
       data: {
         utmSource
@@ -373,7 +412,6 @@ export class AddGroup extends Component {
 }
 
 export default connect(mapStateToProps, {
-  uploadImage,
   appendGroupForm,
   notify,
   createGroup,
@@ -387,7 +425,6 @@ export function mapStateToProps({router, form}) {
 
   return {
     groupForm: form.addgroup,
-    i18n: i18n('en'),
     utmSource
   };
 }
