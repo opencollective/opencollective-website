@@ -16,6 +16,13 @@ import CustomTextArea from '../components/CustomTextArea';
 import ImagePicker from '../components/ImagePicker';
 import Input from '../components/Input';
 
+const PRESET_LOGOS = [
+  '/static/images/users/icon-avatar-placeholder.svg',
+  '/static/images/users/avatar-02.svg',
+  '/static/images/users/avatar-03.svg',
+  '/static/images/users/avatar-04.svg',
+];
+
 const highlights = [ {
   refpath: 'PublicGroupHero/PublicGroupHero-logo',
   label: 'Update Logo',
@@ -37,7 +44,9 @@ const highlights = [ {
   buttonClassName: 'EditButton--Image',
   field: 'backgroundImage',
   extendStyle: (target, rect, scrollY, style) => {
-    style.top = rect.top + scrollY - rect.height;
+    const height = Math.min(rect.height, 80);
+    style.top = rect.top + scrollY - height;
+    style.height = `${ height }px`;
   }
 }, {
   refpath: 'PublicGroupWhoWeAre/PublicGroupWhoWeAre-description',
@@ -58,15 +67,35 @@ const highlights = [ {
   refpath: 'PublicGroupWhyJoin/PublicGroupWhyJoin-whyJoinText',
   label: 'Update Text',
   buttonClassName: 'EditButton--Text',
+  auxClassName: '-whyJoinText',
   field: 'whyJoin',
+  extendStyle: function(target, rect, scrollY, style) {
+    const aux = this.refs['PublicGroupWhyJoin/PublicGroupWhyJoin-whyJoinText--highlight'];
+    const whyJoinMediaRect = this.refs['PublicGroupWhyJoin'].refs['PublicGroupWhyJoin-whyJoinMedia'].getBoundingClientRect();
+    style.left =  `${ whyJoinMediaRect.right }px`;
+    style.width = 'auto';
+    console.log('aux', this.refs)
+  }
+}, {
+  refpath: 'PublicGroupWhyJoin/PublicGroupWhyJoin-whyJoinMedia',
+  label: 'Update Media',
+  buttonClassName: 'EditButton--Upload EditButton--left',
+  auxClassName: '-whyJoinMedia',
+  field: 'image',
+  extendStyle: function(target, rect, scrollY, style) {
+    const whyJoinTextRect = this.refs['PublicGroupWhyJoin'].refs['PublicGroupWhyJoin-whyJoinText'].getBoundingClientRect();
+    style.right = rect.width + 70 + 'px'; // 70px is the padding on the edges of the layout.
+    style.width = 'auto';
+  }
 },
 ].map(h => {
   h.ref = `${h.refpath}--highlight`;
   return h;
 });
 
-const Highlight = ({ ref, style, label, buttonClassName, onClick }) => (
+const Highlight = ({ ref, style, label, auxClassName, buttonClassName, onClick }) => (
   <div ref={ ref } className='EditCollective-Highlight' style={ style } onClick={ onClick }>
+    <div className={`Highlight-aux ${ auxClassName }`}></div>
     <div className={`EditCollective-EditButton ${ buttonClassName }`}>
       <div className='EditCollective-EditButtonLabel'>{ label }</div>
     </div>
@@ -108,7 +137,7 @@ const TopBar = props => (
       <svg width='18px' height='18px' className='-light-blue align-middle mr1'>
         <use xlinkHref='#svg-isotype'/>
       </svg>
-      <svg width='172px' height='30px' className='align-middle'>
+      <svg width='172px' height='30px' className='align-middle -logo-text'>
         <use xlinkHref='#svg-logotype' fill='#fff' />
       </svg>
     </div>
@@ -137,6 +166,8 @@ export default class EditCollective extends Component {
         name: originalGroup.name,
         website: originalGroup.website,
         whyJoin: originalGroup.whyJoin,
+        image: originalGroup.image,
+        video: originalGroup.video,
       }
     };
     this.onCloseModalRef = this.onCloseModal.bind(this);
@@ -146,6 +177,7 @@ export default class EditCollective extends Component {
       this.updateHighlights();
       this.forceUpdate();
     }, 400);
+    console.log('originalGroup', originalGroup)
   }
 
   render() {
@@ -160,10 +192,18 @@ export default class EditCollective extends Component {
       description: fields['description'],
       longDescription: fields['longDescription'],
       website: fields['website'],
-      tiers:[],
-      members:[],
-      contributors: originalGroup.contributors
+      tiers: [],
+      members: [],
+      contributors: originalGroup.contributors,
+      whyJoin: fields['whyJoin'],
+      image: fields['image'],
+      video: fields['video'],
+      donationTotal: originalGroup.donationTotal,
+      balance: originalGroup.balance,
+      currency: originalGroup.currency,
     };
+    console.log('fields', fields)
+    console.log('group', group)
     return (
       <div className='EditCollective'>
         <TopBar onPublish={ this.onPublishRef } />
@@ -177,13 +217,23 @@ export default class EditCollective extends Component {
           <Overlay onClick={ this.onCloseModalRef }>
             <Modal onClose={ this.onCloseModalRef } title={ highlightLabel } >
               {highlightField === 'backgroundImage' && (
-                <ImagePicker {...this.props} />
+                <ImagePicker 
+                  dontLookupSocialMediaAvatars
+                  presets={ PRESET_LOGOS }
+                  src={ highlightValue }
+                  handleChange={ this.onChangeHighlightValueRef } 
+                  {...this.props} />
               )}
               {highlightField === 'description' && (
                 <CustomTextArea cols='29' {...this.props} value={ highlightValue } onChange={ this.onChangeHighlightValueRef } />
               )}
               {highlightField === 'logo' && (
-                <ImagePicker {...this.props} />
+                <ImagePicker
+                  dontLookupSocialMediaAvatars
+                  presets={ PRESET_LOGOS }
+                  src={ highlightValue }
+                  handleChange={ this.onChangeHighlightValueRef } 
+                  {...this.props} />
               )}
               {highlightField === 'longDescription' && (
                 <CustomTextArea cols='29' {...this.props} value={ highlightValue } onChange={ this.onChangeHighlightValueRef } />
@@ -192,13 +242,21 @@ export default class EditCollective extends Component {
                 <CustomTextArea cols='29' {...this.props} value={ highlightValue } onChange={ this.onChangeHighlightValueRef } />
               )}
               {highlightField === 'name' && (
-                <Input {...this.props} value={ highlightValue } />
+                <Input {...this.props} value={ highlightValue } handleChange={ this.onChangeHighlightValueRef } />
               )}
               {highlightField === 'website' && (
-                <Input {...this.props} value={ highlightValue } />
+                <Input {...this.props} value={ highlightValue } handleChange={ this.onChangeHighlightValueRef } />
               )}
               {highlightField === 'whyJoin' && (
                 <CustomTextArea cols='29' {...this.props} value={ highlightValue } onChange={ this.onChangeHighlightValueRef } />
+              )}
+              {highlightField === 'image' && (
+                <ImagePicker
+                  dontLookupSocialMediaAvatars
+                  presets={ PRESET_LOGOS }
+                  src={ highlightValue }
+                  handleChange={ this.onChangeHighlightValueRef } 
+                  {...this.props} />
               )}
             </Modal>
           </Overlay>
@@ -213,6 +271,7 @@ export default class EditCollective extends Component {
   componentDidMount() {
     this.updateHighlights();
     window.addEventListener('resize', this.lazyUpdateHighlights);
+    this.forceUpdate();
   }
 
   componentWillUnmount() {
@@ -231,19 +290,17 @@ export default class EditCollective extends Component {
   }
 
   onChangeHighlightValue(newValue) {
-    const { highlightField, fields } = this.state;
-    if (fields[highlightField]) {
-      fields[highlightField] = newValue;
-      this.setState({fields: fields});
-      this.updateHighlights();
-    }
+    const { highlightField, fields } = this.state;    
+    fields[highlightField] = newValue;
+    this.setState({fields: fields});
+    this.updateHighlights();
   }
 
   onClickHighlight(highlight) {
     this.setState({
       showModal: true,
       highlightLabel: highlight.label,
-      highlightField: highlight.field,
+      highlightField: typeof highlight.field === 'funciton' ? highlight.field(this.state) : highlight.field,
     });
   }
 
@@ -262,14 +319,16 @@ export default class EditCollective extends Component {
           target = null;
         }
       });
-      if (!target) return target;      
+      if (!target) {
+        return target;
+      }
       const rect = target.getBoundingClientRect();
       const defaultStyle = {
         top: `${ rect.top + scrollY }px`,
         height: `${ rect.height }px`,
       };
       h.style = (customStyle ? defaultStyle : merge(defaultStyle, customStyle));
-      if (extendStyle) extendStyle(target, rect, scrollY,  h.style);
+      if (extendStyle) extendStyle.call(this, target, rect, scrollY,  h.style);
     });
   }
 }

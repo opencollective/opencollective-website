@@ -109,6 +109,7 @@
 }
 
 .EditCollective-Highlight {
+  --color-overlay: rgba(0, 0, 0, .3);
   position: absolute;
   width: 100%;
   left: 0;
@@ -117,9 +118,12 @@
   border-right: 0;
   cursor: pointer;
   &.-active, &:active {
+    .Highlight-aux {
+      display: block;
+    }
     &::before {
       content: '';
-      background-color: rgba(0,0,0,.3);
+      background-color: var(--color-overlay);
       position: absolute;
       bottom: 100%;
       z-index: 99;
@@ -129,7 +133,7 @@
     }
     &::after {
       content: '';
-      background-color: rgba(0,0,0,.3);
+      background-color: var(--color-overlay);
       position: absolute;
       z-index: 99;
       left: 0;
@@ -143,12 +147,43 @@
       opacity: 1;
     }
   }
+  .Highlight-aux {
+    position: absolute;
+    display: none;
+    background-color: var(--color-overlay);
+    &.-whyJoinText {
+      left: -100%;
+      min-width: 100px;
+      min-height: 100px;
+      right: 100%;
+      top: -300%;
+      bottom: -300%;
+    }
+    &.-whyJoinMedia {
+      right: -100%;
+      min-width: 100px;
+      min-height: 100px;
+      left: 100%;
+      top: -300%;
+      bottom: -300%;
+    }
+  }
   .EditCollective-EditButton {
-    right: 20px;
     position: absolute;
     top: 0;
     bottom: 0;
     z-index: 999;
+    &, &.EditButton--right {
+      right: 20px;
+    }
+    &.EditButton--left {
+      left: 20px;
+      right: auto;
+      .EditCollective-EditButtonLabel {
+        left: 140%;
+        right: auto;
+      }
+    }
     .EditCollective-EditButtonLabel {
       user-select: none;
       white-space: pre;
@@ -275,6 +310,24 @@
         opacity: .9;
         cursor: pointer;
       }
+    }
+  }
+}
+
+
+
+@media (max-width: 701px) {
+  .EditCollective-TopBar {
+    .-logo-text {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 820px) {
+  .EditCollective-Highlight {
+    .Highlight-aux {
+      display: none;
     }
   }
 }

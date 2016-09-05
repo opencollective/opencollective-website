@@ -17,7 +17,7 @@ export default class PublicGroupWhyJoin extends React.Component {
     return (
       <section id='why-join' className='bg-black white'>
         <div className='PublicGroupWhyJoin container clearfix md-flex'>
-          <div className='col md-col-6 col-12 relative'>
+          <div className='col md-col-6 col-12 relative' ref='PublicGroupWhyJoin-whyJoinMedia'>
             <div className='PublicGroup-Media-container'>
               <Media group={group} />
             </div>
