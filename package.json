@@ -12,7 +12,7 @@
     ]
   },
   "scripts": {
-    "start": "NODE_CONFIG_DIR=./server/config babel-node server",
+    "start": "NODE_CONFIG_DIR=./server/config node server",
     "dev": "npm run build && WEBSITE_PORT=3000 nf start -j Procfile_dev",
     "hint": "eslint '**/*.js' --quiet",
     "pretest": "npm run hint",

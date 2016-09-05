@@ -1,6 +1,6 @@
 require('dotenv').load();
-const config = require('config');
-const resetDb = require('../lib/reset_db.js');
+import config from 'config';
+import resetDb from '../lib/reset_db.js';
 
 module.exports = {
   '@tags': ['connect_twitter_button'],
