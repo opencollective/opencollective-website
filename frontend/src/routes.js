@@ -15,7 +15,7 @@ import HomePage from './containers/HomePage';
 import Faq from './containers/Faq';
 import Discover from './containers/Discover';
 import About from './containers/About';
-import AddGroup from './containers/Addgroup';
+import AddGroup from './containers/AddGroup';
 
 import { requireAuthentication } from './components/AuthenticatedComponent';
 
