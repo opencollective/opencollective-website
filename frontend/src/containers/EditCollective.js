@@ -7,20 +7,25 @@ import values from 'lodash/object/values';
 
 import i18n from '../lib/i18n';
 
+import notify from '../actions/notification/notify';
+import updateGroup from '../actions/groups/update';
+import uploadImage from '../actions/images/upload';
+
+import Notification from '../containers/Notification';
+
 import PublicFooter from '../components/PublicFooter';
 import PublicGroupHero from '../components/public_group/PublicGroupHero';
 import PublicGroupWhoWeAre from '../components/public_group/PublicGroupWhoWeAre';
-import PublicGroupWhyJoin from '../components/public_group/PublicGroupWhyJoin';
+// import PublicGroupWhyJoin from '../components/public_group/PublicGroupWhyJoin';
 
 import CustomTextArea from '../components/CustomTextArea';
 import ImagePicker from '../components/ImagePicker';
 import Input from '../components/Input';
 
 const PRESET_LOGOS = [
-  '/static/images/users/icon-avatar-placeholder.svg',
-  '/static/images/users/avatar-02.svg',
-  '/static/images/users/avatar-03.svg',
-  '/static/images/users/avatar-04.svg',
+  '/static/images/rocket.svg',
+  '/static/images/code.svg',
+  '/static/images/repo.svg',
 ];
 
 const highlights = [ {
@@ -70,11 +75,9 @@ const highlights = [ {
   auxClassName: '-whyJoinText',
   field: 'whyJoin',
   extendStyle: function(target, rect, scrollY, style) {
-    const aux = this.refs['PublicGroupWhyJoin/PublicGroupWhyJoin-whyJoinText--highlight'];
     const whyJoinMediaRect = this.refs['PublicGroupWhyJoin'].refs['PublicGroupWhyJoin-whyJoinMedia'].getBoundingClientRect();
     style.left =  `${ whyJoinMediaRect.right }px`;
     style.width = 'auto';
-    console.log('aux', this.refs)
   }
 }, {
   refpath: 'PublicGroupWhyJoin/PublicGroupWhyJoin-whyJoinMedia',
@@ -83,8 +86,8 @@ const highlights = [ {
   auxClassName: '-whyJoinMedia',
   field: 'image',
   extendStyle: function(target, rect, scrollY, style) {
-    const whyJoinTextRect = this.refs['PublicGroupWhyJoin'].refs['PublicGroupWhyJoin-whyJoinText'].getBoundingClientRect();
-    style.right = rect.width + 70 + 'px'; // 70px is the padding on the edges of the layout.
+    // const whyJoinTextRect = this.refs['PublicGroupWhyJoin'].refs['PublicGroupWhyJoin-whyJoinText'].getBoundingClientRect();
+    style.right =  `${ rect.width + 70 }px`; // 70px is the padding on the edges of the layout.
     style.width = 'auto';
   }
 },
@@ -165,9 +168,9 @@ export default class EditCollective extends Component {
         mission: originalGroup.mission,
         name: originalGroup.name,
         website: originalGroup.website,
-        whyJoin: originalGroup.whyJoin,
-        image: originalGroup.image,
-        video: originalGroup.video,
+        // whyJoin: originalGroup.whyJoin,
+        // image: originalGroup.image,
+        // video: originalGroup.video,
       }
     };
     this.onCloseModalRef = this.onCloseModal.bind(this);
@@ -177,7 +180,6 @@ export default class EditCollective extends Component {
       this.updateHighlights();
       this.forceUpdate();
     }, 400);
-    console.log('originalGroup', originalGroup)
   }
 
   render() {
@@ -202,15 +204,14 @@ export default class EditCollective extends Component {
       balance: originalGroup.balance,
       currency: originalGroup.currency,
     };
-    console.log('fields', fields)
-    console.log('group', group)
     return (
       <div className='EditCollective'>
+        <Notification />
         <TopBar onPublish={ this.onPublishRef } />
         <Viewport>
           <PublicGroupHero ref='PublicGroupHero' group={ group } {...this.props} />
           <PublicGroupWhoWeAre ref='PublicGroupWhoWeAre' group={ group } {...this.props} />
-          <PublicGroupWhyJoin ref='PublicGroupWhyJoin' group={ group } expenses={[]} {...this.props} />
+          {/*<PublicGroupWhyJoin ref='PublicGroupWhyJoin' group={ group } expenses={[]} {...this.props} />*/}
           <PublicFooter></PublicFooter>
         </Viewport>
         {showModal && (
@@ -218,19 +219,25 @@ export default class EditCollective extends Component {
             <Modal onClose={ this.onCloseModalRef } title={ highlightLabel } >
               {highlightField === 'backgroundImage' && (
                 <ImagePicker 
+                  uploadOptionFirst
+                  label='Choose a background image'
                   dontLookupSocialMediaAvatars
-                  presets={ PRESET_LOGOS }
+                  className="logo"
+                  presets={ [ originalGroup.backgroundImage ] }
                   src={ highlightValue }
                   handleChange={ this.onChangeHighlightValueRef } 
                   {...this.props} />
               )}
               {highlightField === 'description' && (
-                <CustomTextArea cols='29' {...this.props} value={ highlightValue } onChange={ this.onChangeHighlightValueRef } />
+                <CustomTextArea cols='29' maxLength={125} value={ highlightValue } onChange={ this.onChangeHighlightValueRef } {...this.props}/>
               )}
               {highlightField === 'logo' && (
                 <ImagePicker
+                  uploadOptionFirst
+                  label='Choose a logo or upload your own'
                   dontLookupSocialMediaAvatars
                   presets={ PRESET_LOGOS }
+                  className="logo"
                   src={ highlightValue }
                   handleChange={ this.onChangeHighlightValueRef } 
                   {...this.props} />
@@ -239,19 +246,22 @@ export default class EditCollective extends Component {
                 <CustomTextArea cols='29' {...this.props} value={ highlightValue } onChange={ this.onChangeHighlightValueRef } />
               )}
               {highlightField === 'mission' && (
-                <CustomTextArea cols='29' {...this.props} value={ highlightValue } onChange={ this.onChangeHighlightValueRef } />
+                <CustomTextArea cols='29' {...this.props} value={ highlightValue } onChange={ this.onChangeHighlightValueRef } maxLength={100}/>
               )}
               {highlightField === 'name' && (
-                <Input {...this.props} value={ highlightValue } handleChange={ this.onChangeHighlightValueRef } />
+                <Input {...this.props} value={ highlightValue } handleChange={ this.onChangeHighlightValueRef } maxLength={255}/>
               )}
               {highlightField === 'website' && (
-                <Input {...this.props} value={ highlightValue } handleChange={ this.onChangeHighlightValueRef } />
+                <Input {...this.props} value={ highlightValue } handleChange={ this.onChangeHighlightValueRef } maxLength={255}/>
               )}
               {highlightField === 'whyJoin' && (
                 <CustomTextArea cols='29' {...this.props} value={ highlightValue } onChange={ this.onChangeHighlightValueRef } />
               )}
               {highlightField === 'image' && (
                 <ImagePicker
+                  uploadOptionFirst
+                  label='Choose media source'
+                  className="logo"
                   dontLookupSocialMediaAvatars
                   presets={ PRESET_LOGOS }
                   src={ highlightValue }
@@ -279,7 +289,18 @@ export default class EditCollective extends Component {
   }
 
   onPublish() {
-
+    const { originalGroup, updateGroup } = this.props;
+    const { fields } = this.state;
+    const updatedFields = {};
+    Object.keys(fields).forEach(fieldName => {
+      if (originalGroup[fieldName] !== fields[fieldName]) {
+        updatedFields[fieldName] = fields[fieldName];
+      }
+    })
+    if (Object.keys(updatedFields).length) {
+      updateGroup(originalGroup.id, updatedFields)
+      .catch(error => notify('error', error.message));
+    }
   }
 
   onCloseModal(e) {
@@ -320,6 +341,7 @@ export default class EditCollective extends Component {
         }
       });
       if (!target) {
+        h.style = {display: 'none'};
         return target;
       }
       const rect = target.getBoundingClientRect();
@@ -333,7 +355,11 @@ export default class EditCollective extends Component {
   }
 }
 
-export default connect(mapStateToProps, {})(EditCollective);
+export default connect(mapStateToProps, {
+  notify,
+  updateGroup,
+  uploadImage,
+})(EditCollective);
 export function mapStateToProps({ groups }){
   const group = values(groups)[0] || {stripeAccount: {}}; // to refactor to allow only one group
   group.tiers = group.tiers || [];

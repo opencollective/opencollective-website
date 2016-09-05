@@ -14,6 +14,19 @@
   .-hspacer {
     height: 80px;
   }
+  .ImagePicker-container {
+    width: auto;
+    height: 200px;
+    .ImagePicker-preview, .ImagePicker-preview img {
+      background: none;
+      height: 96px;
+      width: 96px;
+      user-select: none;
+    }
+    .ImagePicker-label {
+      width: auto;
+    }
+  }
 }
 
 .EditCollective-TopBar {
@@ -313,8 +326,6 @@
     }
   }
 }
-
-
 
 @media (max-width: 701px) {
   .EditCollective-TopBar {
