@@ -1,6 +1,5 @@
 import fetch from 'isomorphic-fetch';
 import { normalize } from 'normalizr';
-import extend from 'lodash/object/extend';
 import queryString from 'query-string';
 import env from './env';
 
@@ -137,7 +136,8 @@ export function checkStatus(response) {
 function addAuthTokenToHeader(obj) {
   const accessToken = localStorage.getItem('accessToken');
   if (!accessToken) return obj;
-  return extend({
+  return {
     Authorization: `Bearer ${accessToken}`,
-  }, obj);
+    ...obj,
+  };
 }

@@ -1,4 +1,4 @@
-import merge from 'lodash/object/merge';
+import merge from 'lodash/merge';
 import {
   GET_REPOS_FROM_GITHUB_SUCCESS,
   GET_CONTRIBUTORS_FROM_GITHUB_SUCCESS,

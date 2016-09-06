@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
-import isString from 'lodash/lang/isString';
-import isObject from 'lodash/lang/isObject';
+import isString from 'lodash/isString';
+import isObject from 'lodash/isObject';
 
 const Select = ({options=[], value, handleChange, customClass, disabled}) => {
   const className = classnames({

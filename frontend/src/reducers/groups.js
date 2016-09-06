@@ -1,6 +1,6 @@
-import merge from 'lodash/object/merge';
-import values from 'lodash/object/values';
-import groupBy from 'lodash/collection/groupBy';
+import merge from 'lodash/merge';
+import values from 'lodash/values';
+import groupBy from 'lodash/groupBy';
 
 import * as constants from '../constants/groups';
 import { FETCH_USERS_BY_GROUP_SUCCESS } from '../constants/users';

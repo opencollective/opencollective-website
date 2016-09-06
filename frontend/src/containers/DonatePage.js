@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
-import values from 'lodash/object/values';
+import values from 'lodash/values';
 import i18n from '../lib/i18n';
 
 import LoginTopBar from '../containers/LoginTopBar';
