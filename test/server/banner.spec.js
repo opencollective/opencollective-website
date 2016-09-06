@@ -7,18 +7,18 @@ import sizeOf from 'image-size';
 
 import sinon from 'sinon';
 
-let sandbox;
 mocks.backers = mocks.users.filter(u => u.tier == 'backer')
 
 describe("avatar", () => {
-  before(() => {
+  let sandbox;
+  beforeEach(() => {
     sandbox = sinon.sandbox.create();
     sandbox.stub(api, 'get', () => {
       return Promise.resolve(mocks.users);
     });
   });
 
-  after(() => {
+  afterEach(() => {
     sandbox.restore();
   });
 
@@ -81,14 +81,15 @@ describe("avatar", () => {
 });
 
 describe("badge", () => {
-  before(() => {
+  let sandbox;
+  beforeEach(() => {
     sandbox = sinon.sandbox.create();
     sandbox.stub(api, 'get', () => {
       return Promise.resolve(mocks.users);
     });
   });
 
-  after(() => {
+  afterEach(() => {
     sandbox.restore();
   });
 
@@ -103,14 +104,15 @@ describe("badge", () => {
 
 describe("redirect", () => {
 
-  before(() => {
+  let sandbox;
+  beforeEach(() => {
     sandbox = sinon.sandbox.create();
     sandbox.stub(api, 'get', () => {
       return Promise.resolve(mocks.users);
     });
   });
 
-  after(() => {
+  afterEach(() => {
     sandbox.restore();
   });
 
@@ -144,14 +146,15 @@ describe("redirect", () => {
 })
 
 describe("banner", () => {
-  before(() => {
+  let sandbox;
+  beforeEach(() => {
     sandbox = sinon.sandbox.create();
     sandbox.stub(api, 'get', () => {
       return Promise.resolve(mocks.users);
     });
   });
 
-  after(() => {
+  afterEach(() => {
     sandbox.restore();
   });
 
