@@ -1,5 +1,5 @@
-import merge from 'lodash/object/merge';
-import values from 'lodash/object/values';
+import merge from 'lodash/merge';
+import values from 'lodash/values';
 
 import * as constants from '../constants/transactions';
 

@@ -1,4 +1,4 @@
-import merge from 'lodash/object/merge';
+import merge from 'lodash/merge';
 import { HOMEPAGE_SUCCESS } from '../constants/homepage';
 import { HYDRATE } from '../constants/session';
 

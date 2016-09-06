@@ -1,4 +1,4 @@
-import merge from 'lodash/object/merge';
+import merge from 'lodash/merge';
 
 import Schemas from '../lib/schemas';
 import { normalize } from 'normalizr';

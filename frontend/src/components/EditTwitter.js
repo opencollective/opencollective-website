@@ -4,7 +4,7 @@ import Input from './Input';
 import SubmitButton from './SubmitButton';
 
 import { connect } from 'react-redux';
-import values from 'lodash/object/values';
+import values from 'lodash/values';
 import updateForm from '../actions/form/update_twitter_config';
 import updateGroup from '../actions/groups/updateSettings';
 

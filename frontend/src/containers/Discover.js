@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import debounce from 'lodash/function/debounce';
+import debounce from 'lodash/debounce';
 
 import i18n from '../lib/i18n';
 
