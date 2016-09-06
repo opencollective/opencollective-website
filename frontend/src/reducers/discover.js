@@ -1,4 +1,4 @@
-import merge from 'lodash/object/merge';
+import merge from 'lodash/merge';
 import { DISCOVER_SUCCESS } from '../constants/discover';
 
 export default function discover(state={}, action={}) {

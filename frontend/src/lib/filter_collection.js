@@ -1,4 +1,3 @@
-import filter from 'lodash/collection/filter';
-import values from 'lodash/object/values';
+import values from 'lodash/values';
 
-export default (collection, validator) => filter(values(collection), validator);
+export default (collection, validator) => values(collection).filter(validator);
