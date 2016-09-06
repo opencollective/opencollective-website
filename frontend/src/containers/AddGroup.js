@@ -85,7 +85,7 @@ export class AddGroup extends Component {
                       <Select
                         name='currency'
                         value={currency || 'USD'}
-                        options={['USD', 'EUR', 'AUD', 'CAD', 'GBP', 'JPY', 'MXN']}
+                        options={['USD', 'EUR', 'AUD', 'CAD', 'GBP', 'JPY', 'MXN', 'BRL']}
                         handleChange={(value) => appendGroupForm({currency: value})}/>
 
                       <div className='AddGroup-label'>Website</div>
@@ -149,7 +149,7 @@ export class AddGroup extends Component {
                         name='why join'
                         value={whyJoin}
                         onChange={(value) => appendGroupForm({whyJoin: value})}
-                        maxLength={100}
+                        maxLength={1000}
                         placeholder='to support us'/>
 
                       <div className='AddGroup-label'>Tag your project (comma-separated list)</div>
@@ -385,9 +385,10 @@ export class AddGroup extends Component {
       mission: attr.mission,
       description: attr.description,
       longDescription: attr.longDescription,
-      logo: attr.logo || '',
+      logo: attr.logo,
       image: attr.image,
       website: attr.website,
+      whyJoin: attr.whyJoin,
       data: {
         utmSource
       },
