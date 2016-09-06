@@ -1,6 +1,6 @@
 const config = require('config');
 
-export default client => {
+module.exports = client => {
   const resetUrl = `${config.host.api}/database/reset`;
   return client
     .url(resetUrl)
