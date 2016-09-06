@@ -13,15 +13,15 @@ export default class PublicGroupWhoWeAre extends Component {
       <section id='who-we-are' className='PublicGroupWhoWeAre PublicGroupIntro'>
         <div className='PublicGroupIntro-container PublicGroupWhoWeAre-container'>
           <h2 className='PublicGroupWhoWeAre-title'>{ i18n.getString('weAre') } { group.name }</h2>
-          <h3 className='PublicGroupWhoWeAre-subtitle'>{ group.description }</h3>
+          <h3 ref='PublicGroupWhoWeAre-description' className='PublicGroupWhoWeAre-subtitle'>{ group.description }</h3>
 
           {group.website && (
             <div className='PublicGroupWhoWeAre-website'>
-              <a href={ group.website } className='px3 -btn -green -btn-outline -btn-small -ttu -ff-sec -fw-bold'>{ displayUrl(group.website) }</a>
+              <a ref='PublicGroupWhoWeAre-website' href={ group.website } className='px3 -btn -green -btn-outline -btn-small -ttu -ff-sec -fw-bold'>{ displayUrl(group.website) }</a>
             </div>
           )}
 
-          <div className='PublicGroupWhoWeAre-long-description'>
+          <div ref='PublicGroupWhoWeAre-longDescription' className='PublicGroupWhoWeAre-long-description'>
             {group.longDescription && (
               <Markdown className='PublicGroup-quoteText left-align' value={ group.longDescription } />
             )}

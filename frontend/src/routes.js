@@ -16,6 +16,7 @@ import Faq from './containers/Faq';
 import Discover from './containers/Discover';
 import About from './containers/About';
 import AddGroup from './containers/AddGroup';
+import EditCollective from './containers/EditCollective';
 
 import { requireAuthentication } from './components/AuthenticatedComponent';
 
@@ -38,6 +39,7 @@ export default (
     <Route path="/:slug/connected-accounts" component={ConnectedAccounts} />
     <Route path="/:slug/connect/:provider" component={ConnectAuthProviderButton} />
     <Route path="/:slug/edit-twitter" component={EditTwitter} />
+    <Route path="/:slug/edit" component={EditCollective} />
     <Route path="/:slug" component={PublicGroup} />
     <Route path="/:slug/expenses/new" component={Transactions} />
     <Route path="/:slug/:type(donations|expenses)" component={Transactions} />
