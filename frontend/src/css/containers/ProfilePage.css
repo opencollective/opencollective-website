@@ -213,7 +213,7 @@
 @media (--medium-viewport) {
     .ProfilePage {
         background-position: center -105px;
-        .sponsorship .sponsorship-container {
+        .Profile-apply .Profile-apply-container {
             width: 100%;
         }
     }
