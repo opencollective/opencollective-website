@@ -41,25 +41,13 @@ const profileInitialState = {
 
 function profile(state=profileInitialState, action={}) {
   switch (action.type) {
-    // TODO constants.SET_EDIT_MODE_PROFILE doesn't exist, should it?
-    // case constants.SET_EDIT_MODE_PROFILE:
-    //   if (!action.isEditMode) {
-    //     return merge({}, profileInitialState, { isEditMode: action.isEditMode });
-    //   }
-    //   return merge({}, state, { isEditMode: action.isEditMode });
-
     case constants.APPEND_PROFILE_FORM:
       return merge({}, state, { attributes: action.attributes });
 
     case constants.VALIDATE_PROFILE_REQUEST:
-    // TODO constants.VALIDATE_DONATION_PROFILE_REQUEST doesn't exist, should it?
-    // case constants.VALIDATE_DONATION_PROFILE_REQUEST:
       return merge({}, omit(state, 'error'), { error: {} });
 
-    case constants.VALIDATE_PROFILE_FAILURE:
-    // TODO constants.VALIDATE_DONATION_PROFILE_FAILURE doesn't exist, should it?
-    // case constants.VALIDATE_DONATION_PROFILE_FAILURE:
-    {
+    case constants.VALIDATE_PROFILE_FAILURE: {
       const {path, message} = errorDetail(action);
 
       return merge({}, state, {
