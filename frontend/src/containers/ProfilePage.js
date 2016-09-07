@@ -84,14 +84,14 @@ export class ProfilePage extends Component {
         }
 
         {profile.isOrganization && isSponsoring && (
-          <div className='sponsorship'>
-            <div className='sponsorship-container'>
-              <div className='sponsorship-label'>We are receiving sponsorship applications</div>
-              <div className='sponsorship-md-container'>
+          <div className='Profile-apply'>
+            <div className='Profile-apply-container'>
+              <div className='Profile-apply-label'>We are receiving sponsorship applications</div>
+              <div className='Profile-apply-md-container'>
                 <Markdown value={ sponsorshipRequirements } />
               </div>
               <a href={`mailto:info+${profile.username}@opencollective.com`}>
-                <div className='sponsorship-button'>apply for sponsorship</div>
+                <div className='Profile-apply-button'>apply for sponsorship</div>
               </a>
             </div>
           </div>
