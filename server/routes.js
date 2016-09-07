@@ -6,13 +6,13 @@ import express from 'express';
 import request from 'request';
 import robots from 'robots.txt';
 
-import controllers from './controllers';
+import * as controllers from './controllers';
 
 import apiUrl from './utils/api_url';
 import render from './lib/render';
 
 
-module.exports = (app) => {
+export default (app) => {
 
   /**
    * Redirects

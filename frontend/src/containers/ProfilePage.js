@@ -27,12 +27,12 @@ export class ProfilePage extends Component {
 
     const sponsorshipRequirements = `We are supporting the open source community. If you have an open source project, [create an open collective](https://opencollective.com/opensource/apply) and apply to receive sponsorship.`; // Markdown string
     const isSponsoring = [
-      'digitalocean', 'auth0', 'saucelabs', 
+      'digitalocean', 'auth0', 'saucelabs',
       'pubnub', 'idonethis', 'gitlab'
     ].indexOf(profile.username) !== -1;
 
-  	return (
-  		<div className='ProfilePage'>
+    return (
+      <div className='ProfilePage'>
         <LoginTopBar />
         <UserPhoto user={{ avatar: profile.avatar }} addBadge={!profile.isOrganization} className={`mx-auto ${profile.isOrganization ? 'organization' : ''}`} />
         {!profile.isOrganization && <div className="line1">Hello I'm</div>}
@@ -63,7 +63,7 @@ export class ProfilePage extends Component {
                   // When sponsored amount & tier exists the `SponsoredCard` will be rendered
                   if (group.sponsoredAmount && group.sponsoredTier) {
                     return (
-                      <SponsoredCard 
+                      <SponsoredCard
                         key={index}
                         i18n={i18n}
                         isCollectiveOnProfile={true}
@@ -112,14 +112,14 @@ export class ProfilePage extends Component {
           </div>
         )}
         <PublicFooter />
-  		</div>
-  	)
+      </div>
+    )
   }
 }
 
 export default connect(mapStateToProps, {})(ProfilePage);
 
-function mapStateToProps({}) {
+function mapStateToProps() {
   return {
     i18n: i18n('en')
   };

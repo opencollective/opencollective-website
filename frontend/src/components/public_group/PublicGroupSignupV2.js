@@ -120,4 +120,4 @@ export default class PublicGroupSignupV2 extends React.Component {
 
     return weburl;
   }
-};
+}

@@ -1,4 +1,4 @@
-const getTier = (query, tiers) => {
+export default function getTier(query, tiers) {
 
   if (!tiers || tiers.length === 0)
     return null;
@@ -16,6 +16,4 @@ const getTier = (query, tiers) => {
   });
 
   return tier;
-};
-
-module.exports = { getTier };
+}

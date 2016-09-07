@@ -5,7 +5,7 @@ import Promise from 'bluebird';
 
 const readFile = Promise.promisify(fs.readFile);
 
-module.exports = {
+export default {
     /**
      * Converts an svg string into a PNG data blob
      * (returns a promise)
@@ -29,7 +29,7 @@ module.exports = {
 
             return svg_to_png.convert(svgFilePath, outputDir)
                     .then(() => readFile(outputFile));
-        };
+        }
 
     }
 }

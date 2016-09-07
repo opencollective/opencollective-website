@@ -25,7 +25,7 @@ export default class Tiers extends Component {
     } = this.props;
 
     const stripeKey = group.stripeAccount && group.stripeAccount.stripePublishableKey;
-    const hasPaypal = group.hasPaypal;
+    const { hasPaypal } = group;
     const hasStripe = stripeKey && amount !== '';
 
     donationForm[tier.name] = donationForm[tier.name] || {};
@@ -101,18 +101,18 @@ export default class Tiers extends Component {
         </div>
       </div>
     )
-  };
+  }
 
   render() {
 
     const tiers = this.props.tiers || [{
         name: 'backer',
         title: "Backers",
-        description: i18n.getString('defaultTierDescription'),
+        description: this.props.i18n.getString('defaultTierDescription'),
         presets: [1, 5, 10, 50, 100],
         range: [1, 1000000],
         interval: 'monthly',
-        button: i18n.getString("defaultTierButton")
+        button: this.props.i18n.getString("defaultTierButton")
       }];
 
     return (

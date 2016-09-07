@@ -21,9 +21,6 @@ export default function session(state={
         isAuthenticated: false
       });
 
-    case constants.SHOW_POPOVERMENU:
-      return merge({}, state, { hasPopOverMenuOpen: action.hasPopOverMenuOpen });
-
     case constants.HYDRATE:
       return merge({}, state, {
         jwtExpired: action.data.jwtExpired,

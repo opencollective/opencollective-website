@@ -2,7 +2,6 @@ import config from 'config';
 import api from './lib/api';
 import expressSession from 'express-session';
 import ua from 'universal-analytics';
-
 import filterCollection from '../frontend/src/lib/filter_collection';
 
 /**
@@ -53,7 +52,7 @@ const extractGithubUsernameFromToken = (req, res, next) => {
       next();
     })
     .catch((response) => {
-      const error = response.json.error;
+      const { error } = response.json;
       next(error);
     });
 };
@@ -110,7 +109,7 @@ const ga = (req, res, next) => {
 };
 
 const addMeta = (req, res, next) => {
-  const group = req.group;
+  const { group } = req;
 
   req.meta = {};
   if (!group.username) {
@@ -159,7 +158,7 @@ const addMeta = (req, res, next) => {
 const addTitle = (title) => {
   return (req, res, next) => {
     req.meta = {
-      title: title
+      title
     }
     next();
   }

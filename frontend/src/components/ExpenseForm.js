@@ -39,8 +39,8 @@ class ExpenseForm extends Component {
 
   render() {
     const { expense, categories, group, appendExpenseForm, isUploading, enableVAT, i18n, user } = this.props;
-    const prefilled = this.state.prefilled;
-    const attributes = expense.attributes;
+    const { prefilled } = this.state;
+    const { attributes } = expense;
     const hasAttachment = env.NODE_ENV !== 'production' || attributes.attachment;
     const className = classnames({
       'ExpenseForm': true,
@@ -69,7 +69,7 @@ class ExpenseForm extends Component {
           <div className='col col-12 sm-col-12 md-col-6 lg-col-6 pr1'>
             <ImageUpload
               {...this.props}
-              uploading={null} 
+              uploading={null}
               value={attributes.attachment}
               onFinished={({url: attachment}) => appendExpenseForm({attachment})}
               noDefaultImage />
@@ -91,7 +91,7 @@ class ExpenseForm extends Component {
               handleChange={category => appendExpenseForm({category})} />
             <label>{i18n.getString('description')}</label>
             <CustomTextArea
-              rows='1' 
+              rows='1'
               resize='vertical'
               customClass='js-transaction-description'
               hasError={expense.error.title}
@@ -130,7 +130,7 @@ class ExpenseForm extends Component {
           </div>
 
           {attributes.payoutMethod === 'paypal' && (
-            
+
           <div className='col col-12 sm-col-12 md-col-6 lg-col-6  pl1'>
             <label>Paypal Email</label>
             <Input
@@ -149,12 +149,12 @@ class ExpenseForm extends Component {
   onCancel(event) {
     event.preventDefault();
     this.props.onCancel();
-  };
+  }
 
   onSubmit(event) {
     event.preventDefault();
     this.props.onSubmit(this.props.expense);
-  };
+  }
 
   componentDidMount() {
     const { categories, resetExpenseForm, appendExpenseForm } = this.props;

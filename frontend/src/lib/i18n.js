@@ -1,7 +1,7 @@
 import moment from './moment'
-import strings from '../ui/strings.json';
+import strings from '../ui/strings.json'; // eslint-disable-line
 
-module.exports = (lang) => {
+export default (lang) => {
   lang = lang || 'en';
   moment.locale(lang);
   return {
@@ -9,5 +9,5 @@ module.exports = (lang) => {
       return strings[lang][strid] || strings['en'][strid];
     },
     moment
-  };  
+  };
 }

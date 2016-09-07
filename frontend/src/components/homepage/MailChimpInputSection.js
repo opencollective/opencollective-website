@@ -7,7 +7,7 @@ export default class MailChimpInputSection extends Component {
 
   static propTypes = {
     mcListId: PropTypes.string.isRequired
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -25,7 +25,7 @@ export default class MailChimpInputSection extends Component {
       document.head.appendChild(script);
     }
   }
-  
+
   render() {
     const { mcListId, buttonLabel } = this.props;
     const { waitingListInputValue, sending } = this.state;
@@ -47,7 +47,7 @@ export default class MailChimpInputSection extends Component {
               value={waitingListInputValue}
               placeholder='Email'
               className='-input'
-              onChange={e => this.setState({waitingListInputValue: e.target.value})} 
+              onChange={e => this.setState({waitingListInputValue: e.target.value})}
             />
             <input
               type='button'
@@ -70,10 +70,10 @@ export default class MailChimpInputSection extends Component {
     const formElement = this.refs.form;
     const messageElement = formElement.querySelector('.msg');
     this.setState({sending: true});
-    $.ajax({
+    $.ajax({ // eslint-disable-line
       type: 'GET',
       url: endpoint,
-      data: $(formElement).serialize(),
+      data: $(formElement).serialize(),  // eslint-disable-line
       dataType: 'json',
       contentType: "application/json; charset=utf-8",
       error: () => {

@@ -5,7 +5,7 @@ export default (tag, sort, offset) => {
   return dispatch => {
     dispatch(request());
 
-    return get('/discover', {params: {show: tag, sort: sort, offset: offset}})
+    return get('/discover', {params: {show: tag, sort, offset}})
     .then(json => dispatch(success(json)))
     .catch(error => dispatch(failure(error)));
   };

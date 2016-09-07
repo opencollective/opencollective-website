@@ -11,7 +11,7 @@ class ImageUpload extends Component {
 
   render() {
     const {customClassName } = this.props;
-    const isUploading = this.state.isUploading;
+    const { isUploading } = this.state;
 
     return (
       <div className={customClassName || 'ImageUpload'} onClick={this.clickInput.bind(this, isUploading)}>

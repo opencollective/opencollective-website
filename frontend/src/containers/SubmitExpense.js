@@ -101,7 +101,7 @@ export function createExpenseFn() {
     this.setState({ showThankYouMessage: true });
   })
   .catch(error => notify('error', error.message));
-};
+}
 
 export default connect(mapStateToProps, {
   createExpense,
@@ -117,7 +117,7 @@ export default connect(mapStateToProps, {
 })(SubmitExpense);
 
 function mapStateToProps({form, notification, images, groups}) {
-  const expense = form.expense;
+  const { expense } = form;
 
   const group = values(groups)[0] || {stripeAccount: {}}; // to refactor to allow only one group
 

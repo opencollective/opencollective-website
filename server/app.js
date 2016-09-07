@@ -2,7 +2,7 @@ import express from 'express';
 import morgan from 'morgan';
 import config from 'config';
 import compression from 'compression';
-import pkg from '../package.json';
+import pkg from '../package.json'; // eslint-disable-line
 
 /**
  * Express app
@@ -89,4 +89,4 @@ app
       console.log(err);
   });
 
-module.exports = app;
+export default app;

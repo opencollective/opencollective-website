@@ -18,7 +18,7 @@ const Input = (
       'Input--error': hasError,
       [customClass]: !!customClass
     });
-    const disabledProp = disabled ? {disabled: disabled} : {}
+    const disabledProp = disabled ? {disabled} : {}
     return (
       <div className={className} data-prefix={prefix}>
         <input

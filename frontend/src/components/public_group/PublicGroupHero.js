@@ -95,4 +95,4 @@ export default class PublicGroupHero extends Component {
       </div>
     )
   }
-};
+}

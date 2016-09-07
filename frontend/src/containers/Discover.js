@@ -114,7 +114,7 @@ export default connect(mapStateToProps, {
 })(Discover);
 
 function mapStateToProps({ discover, groups, router }) {
-  const query = router.location.query;
+  const { query } = router.location;
   return {
     discover,
     tags: groups.tags,
