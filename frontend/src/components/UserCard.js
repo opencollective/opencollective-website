@@ -34,7 +34,7 @@ export default class UserCard extends Component {
     const addBadge = (roleLabel !== 'sponsor' && roleLabel !== 'member');
 
     return (
-      <article className={`UserCard bg-white pt3 ${className} ${user.tier}`}>
+      <article className={`UserCard bg-white pt3 ${className} ${user.tier}`} ref='UserCard'>
         {this._link(href, <UserPhoto user={user} addBadge={addBadge} className='mx-auto' />)}
         <p className='UserCard-name PublicGroup-font-15 h5 my2 px2 -ff-sec'>{this._link(href, user.name)}</p>
         <div className='border-top border-gray px3 py2'>

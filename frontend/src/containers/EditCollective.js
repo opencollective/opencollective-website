@@ -100,6 +100,35 @@ const highlights = [ {
   return h;
 });
 
+class EditCog extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showMenu: false
+    };
+    this.toggleMenuRef = this.toggleMenu.bind(this);
+  }
+  render() {
+    const { style } = this.props;
+    const { showMenu } = this.state;
+    return (
+      <div className='EditCog' style={ style } onClick={ this.toggleMenuRef }>
+        {showMenu && (
+          <div className='EditCog-Menu'>
+            <ul>
+              <li>Edit</li>
+              <li>Remove</li>
+            </ul>
+          </div>
+        )}
+      </div>
+    )    
+  }
+  toggleMenu() {
+    this.setState({showMenu: !this.state.showMenu});
+  }
+}
+
 const Highlight = ({ ref, style, label, auxClassName, buttonClassName, onClick }) => (
   <div ref={ ref } className='EditCollective-Highlight' style={ style } onClick={ onClick }>
     <div className={`Highlight-aux ${ auxClassName }`}></div>
@@ -192,9 +221,9 @@ export class EditCollective extends Component {
     const highlightValue = highlightField ? fields[highlightField] : null;
     const groupChanged = Boolean(Object.keys(this.getUpdatedFields()).length);
     const group = {
-      name: fields['name'] || ' ',
-      backgroundImage: fields['backgroundImage'],
-      logo: fields['logo'] || '/static/images/rocket.svg',
+      name: fields.name || ' ',
+      backgroundImage: fields.backgroundImage,
+      logo: fields.logo || '/static/images/rocket.svg',
       mission: fields.mission,
       description: fields.description,
       longDescription: fields.longDescription,
@@ -208,6 +237,7 @@ export class EditCollective extends Component {
       donationTotal: originalGroup.donationTotal,
       balance: originalGroup.balance,
       currency: originalGroup.currency,
+      backers: originalGroup.backers
     };
     return (
       <div className='EditCollective'>
@@ -219,7 +249,7 @@ export class EditCollective extends Component {
           <PublicGroupWhyJoin ref='PublicGroupWhyJoin' group={ group } expenses={[]} {...this.props} />
           <div className='bg-light-gray px2 -joinUsAndMembersWall'>
             <PublicGroupJoinUs group={ group } donateToGroup={() => {}} {...this.props} />
-            <PublicGroupMembersWall group={ group } {...this.props} />
+            <PublicGroupMembersWall ref='PublicGroupMembersWall' group={ group } {...this.props} />
           </div>
           <PublicFooter></PublicFooter>
         </Viewport>
@@ -282,6 +312,16 @@ export class EditCollective extends Component {
         )}
         {highlights.map(highlight => {
           return <Highlight { ...highlight } onClick={ () => this.onClickHighlight(highlight) } />
+        })}
+        {this.refs.PublicGroupMembersWall && Object.keys(this.refs.PublicGroupMembersWall.refs).map((refName, i) => {
+          const userCardElement = this.refs.PublicGroupMembersWall.refs[refName].refs.UserCard;
+          const userCardRect = userCardElement.getBoundingClientRect();
+          const scrollY = window.scrollY;
+          const customStyle = {
+            top: `${ userCardRect.top + scrollY - 15 }px`,
+            left: `${ userCardRect.right - 15 }px`,
+          };
+          return <EditCog key={ i } style={ customStyle }/>
         })}
       </div>
     )
@@ -380,7 +420,7 @@ export function mapStateToProps({ groups }){
 
   const usersByRole = group.usersByRole || {};
   group.members = usersByRole[roles.MEMBER] || [];
-  group.backers = usersByRole[roles.BACKER] || [];
+  group.backers = usersByRole[roles.BACKER] || [{tier: 'backer', 'name': 'Alfred'}, {tier: 'backer', 'name': 'Betty'}];
   group.hosts = usersByRole[roles.HOST] || [];
   group.tiers = group.tiers || [];
   group.host = group.hosts[0] || {};
