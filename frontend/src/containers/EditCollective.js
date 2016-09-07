@@ -321,7 +321,7 @@ export class EditCollective extends Component {
     this.setState({
       showModal: true,
       highlightLabel: highlight.label,
-      highlightField: typeof highlight.field === 'funciton' ? highlight.field(this.state) : highlight.field,
+      highlightField: typeof highlight.field === 'function' ? highlight.field(this.state) : highlight.field,
     });
   }
 
