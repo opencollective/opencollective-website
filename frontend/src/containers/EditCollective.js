@@ -5,6 +5,8 @@ import debounce from 'lodash/debounce';
 import merge from 'lodash/merge';
 import values from 'lodash/values';
 
+import roles from '../constants/roles';
+
 import i18n from '../lib/i18n';
 
 import notify from '../actions/notification/notify';
@@ -15,8 +17,10 @@ import Notification from '../containers/Notification';
 
 import PublicFooter from '../components/PublicFooter';
 import PublicGroupHero from '../components/public_group/PublicGroupHero';
+import PublicGroupJoinUs from '../components/public_group/PublicGroupJoinUs';
+import PublicGroupMembersWall from '../components/public_group/PublicGroupMembersWall';
 import PublicGroupWhoWeAre from '../components/public_group/PublicGroupWhoWeAre';
-// import PublicGroupWhyJoin from '../components/public_group/PublicGroupWhyJoin';
+import PublicGroupWhyJoin from '../components/public_group/PublicGroupWhyJoin';
 
 import CustomTextArea from '../components/CustomTextArea';
 import ImagePicker from '../components/ImagePicker';
@@ -86,8 +90,8 @@ const highlights = [ {
   auxClassName: '-whyJoinMedia',
   field: 'image',
   extendStyle: function(target, rect, scrollY, style) {
-    // const whyJoinTextRect = this.refs['PublicGroupWhyJoin'].refs['PublicGroupWhyJoin-whyJoinText'].getBoundingClientRect();
-    style.right =  `${ rect.width + 70 }px`; // 70px is the padding on the edges of the layout.
+    const whyJoinTextRect = this.refs['PublicGroupWhyJoin'].refs['PublicGroupWhyJoin-whyJoinText'].getBoundingClientRect();
+    style.right =  `${ whyJoinTextRect.left }px`;
     style.width = 'auto';
   }
 },
@@ -168,9 +172,9 @@ export class EditCollective extends Component {
         mission: originalGroup.mission,
         name: originalGroup.name,
         website: originalGroup.website,
-        // whyJoin: originalGroup.whyJoin,
-        // image: originalGroup.image,
-        // video: originalGroup.video,
+        whyJoin: originalGroup.whyJoin,
+        image: originalGroup.image,
+        video: originalGroup.video,
       }
     };
     this.onCloseModalRef = this.onCloseModal.bind(this);
@@ -190,16 +194,16 @@ export class EditCollective extends Component {
       name: fields['name'] || ' ',
       backgroundImage: fields['backgroundImage'],
       logo: fields['logo'] || '/static/images/rocket.svg',
-      mission: fields['mission'],
-      description: fields['description'],
-      longDescription: fields['longDescription'],
-      website: fields['website'],
-      tiers: [],
+      mission: fields.mission,
+      description: fields.description,
+      longDescription: fields.longDescription,
+      website: fields.website,
+      tiers: originalGroup.tiers,
       members: [],
       contributors: originalGroup.contributors,
-      whyJoin: fields['whyJoin'],
-      image: fields['image'],
-      video: fields['video'],
+      whyJoin: fields.whyJoin,
+      image: fields.image,
+      video: fields.video,
       donationTotal: originalGroup.donationTotal,
       balance: originalGroup.balance,
       currency: originalGroup.currency,
@@ -211,7 +215,11 @@ export class EditCollective extends Component {
         <Viewport>
           <PublicGroupHero ref='PublicGroupHero' group={ group } {...this.props} />
           <PublicGroupWhoWeAre ref='PublicGroupWhoWeAre' group={ group } {...this.props} />
-          {/*<PublicGroupWhyJoin ref='PublicGroupWhyJoin' group={ group } expenses={[]} {...this.props} />*/}
+          <PublicGroupWhyJoin ref='PublicGroupWhyJoin' group={ group } expenses={[]} {...this.props} />
+          <div className='bg-light-gray px2 -joinUsAndMembersWall'>
+            <PublicGroupJoinUs group={ group } donateToGroup={() => {}} {...this.props} />
+            <PublicGroupMembersWall group={ group } {...this.props} />
+          </div>
           <PublicFooter></PublicFooter>
         </Viewport>
         {showModal && (
@@ -362,9 +370,16 @@ export default connect(mapStateToProps, {
 })(EditCollective);
 export function mapStateToProps({ groups }){
   const group = values(groups)[0] || {stripeAccount: {}}; // to refactor to allow only one group
+
+  const usersByRole = group.usersByRole || {};
+  group.members = usersByRole[roles.MEMBER] || [];
+  group.backers = usersByRole[roles.BACKER] || [];
+  group.hosts = usersByRole[roles.HOST] || [];
   group.tiers = group.tiers || [];
+  group.host = group.hosts[0] || {};
   return {
     originalGroup: group,
-    i18n: i18n('en')
+    i18n: i18n('en'),
+    donationForm: {}
   };
 }

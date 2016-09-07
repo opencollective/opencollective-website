@@ -23,10 +23,10 @@ export default class PublicGroupWhyJoin extends React.Component {
             </div>
           </div>
 
-          <div className='PublicGroup-summary col md-col-6 col-12 flex flex-column justify-between mx-auto'>
+          <div className='PublicGroup-summary col md-col-6 col-12 flex flex-column justify-between mx-auto' ref='PublicGroupWhyJoin-whyJoinText'>
             <div>
               <span className='PublicGroup-title white -ff-sec -fw-bold'>{i18n.getString('becomeMemberTitle')}</span>
-              <div ref='PublicGroupWhyJoin-whyJoinText'>
+              <div>
                 <Markdown className='PublicGroup-font-17 mt3' value={whyJoinText} />
               </div>
             </div>

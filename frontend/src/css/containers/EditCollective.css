@@ -14,6 +14,16 @@
   .-hspacer {
     height: 80px;
   }
+
+  .PublicGroupHero-content .-btn-big.-bg-green,
+  .PublicGroupHero-content p.h6,
+  .PublicGroupHero-content svg,
+  .PublicGroupHero-menu,
+  .PublicGroupWhoWeAre-title,
+  .-joinUsAndMembersWall,
+  .LoginTopBar {
+    opacity: .6;
+  }
   .ImagePicker-container {
     width: auto;
     height: 200px;
@@ -165,7 +175,7 @@
     display: none;
     background-color: var(--color-overlay);
     &.-whyJoinText {
-      left: -100%;
+      left: -150%;
       min-width: 100px;
       min-height: 100px;
       right: 100%;
@@ -173,7 +183,7 @@
       bottom: -300%;
     }
     &.-whyJoinMedia {
-      right: -100%;
+      right: -150%;
       min-width: 100px;
       min-height: 100px;
       left: 100%;
@@ -341,4 +351,11 @@
       display: none;
     }
   }
+}
+
+.EditCog {
+  width: 30px;
+  height: 30px;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
 }
