@@ -1,11 +1,12 @@
 import mocks from '../data/mocks.json'; // eslint-disable-line
+import request from 'supertest';
+import sinon from 'sinon';
+import sizeOf from 'image-size';
 
 import api from '../../server/src/lib/api';
 import app from '../../server/src/index';
-import request from 'supertest';
-import sizeOf from 'image-size';
 
-import sinon from 'sinon';
+import shieldIONock from '../data/shields.io.nock'; // eslint-disable-line
 
 mocks.backers = mocks.users.filter(u => u.tier == 'backer')
 
@@ -88,6 +89,8 @@ describe("badge", () => {
       return Promise.resolve(mocks.users);
     });
   });
+
+  beforeEach(() => shieldIONock());
 
   afterEach(() => {
     sandbox.restore();
