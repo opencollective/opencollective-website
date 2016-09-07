@@ -1,7 +1,7 @@
 import mocks from '../data/mocks.json'; // eslint-disable-line
 mocks.backers = mocks.users.filter(u => u.tier === 'backer');
 
-import api from '../../server/lib/api';
+import api from '../../server/src/lib/api';
 import { expect } from 'chai';
 
 import sinon from 'sinon';

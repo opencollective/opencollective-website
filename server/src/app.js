@@ -2,7 +2,9 @@ import express from 'express';
 import morgan from 'morgan';
 import config from 'config';
 import compression from 'compression';
-import pkg from '../package.json'; // eslint-disable-line
+import pkg from '../../package.json'; // eslint-disable-line
+import routes from './routes';
+import views from './views';
 
 /**
  * Express app
@@ -30,8 +32,8 @@ app.use(compression());
 /**
  * Handlebars template engine
  */
-require('./views')(app);
-require('./routes')(app);
+views(app);
+routes(app);
 
 /**
  * 404 route

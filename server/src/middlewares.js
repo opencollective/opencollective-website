@@ -2,7 +2,7 @@ import config from 'config';
 import api from './lib/api';
 import expressSession from 'express-session';
 import ua from 'universal-analytics';
-import filterCollection from '../frontend/src/lib/filter_collection';
+import filterCollection from '../../frontend/src/lib/filter_collection';
 
 /**
  * Fetch users by slug

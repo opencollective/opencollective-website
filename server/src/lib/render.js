@@ -7,11 +7,10 @@ import { reduxReactRouter, match } from 'redux-router/server';
 import { createMemoryHistory } from 'history';
 import serialize from 'serialize-javascript';
 import qs from 'query-string';
-
-import reducers from '../../frontend/src/reducers';
-import routes from '../../frontend/src/routes';
-import reduxMiddleware from '../../frontend/src/redux_middleware';
-import hydrate from '../../frontend/src/actions/session/hydrate';
+import reducers from '../../../frontend/src/reducers';
+import routes from '../../../frontend/src/routes';
+import reduxMiddleware from '../../../frontend/src/redux_middleware';
+import hydrate from '../../../frontend/src/actions/session/hydrate';
 
 /**
  * Example taken from redux-router documentation

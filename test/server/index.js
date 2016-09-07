@@ -3,7 +3,7 @@ import nock from 'nock';
 import config from 'config';
 import { expect } from 'chai';
 
-import app from '../../server';
+import app from '../../server/src';
 
 describe('server', () => {
   const group = {

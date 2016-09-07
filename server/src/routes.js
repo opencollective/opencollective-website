@@ -5,12 +5,9 @@ import path from 'path';
 import express from 'express';
 import request from 'request';
 import robots from 'robots.txt';
-
 import * as controllers from './controllers';
-
 import apiUrl from './utils/api_url';
 import render from './lib/render';
-
 
 export default (app) => {
 
@@ -28,17 +25,17 @@ export default (app) => {
   /**
    * Favicon
    */
-  app.use(favicon(path.join(__dirname, '/../frontend/dist/images/favicon.ico.png')));
+  app.use(favicon(path.join(__dirname, '/../../frontend/dist/images/favicon.ico.png')));
 
   /**
    * Static folder
    */
-  app.use('/static', express.static(path.join(__dirname, `../frontend/dist`), { maxAge: '1d' }));
+  app.use('/static', express.static(path.join(__dirname, `../../frontend/dist`), { maxAge: '1d' }));
 
   /**
    * GET /robots.txt
    */
-  app.use(robots(path.join(__dirname, '../frontend/dist/robots.txt')));
+  app.use(robots(path.join(__dirname, '../../frontend/dist/robots.txt')));
 
   /**
    * Pipe the requests before the middlewares, the piping will only work with raw
@@ -97,5 +94,5 @@ export default (app) => {
   app.get('/:slug([A-Za-z0-9-]+)/donate/:amount/:interval', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-]+)', mw.ga, controllers.profile, mw.addMeta, render);
 
-  app.use(mw.handleUncaughtError)
+  app.use(mw.handleUncaughtError);
 };

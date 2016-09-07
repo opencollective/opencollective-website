@@ -1,2 +1,3 @@
+server/dist/
 frontend/dist/js/*.js
 node_modules/

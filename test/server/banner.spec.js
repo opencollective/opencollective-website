@@ -1,7 +1,7 @@
 import mocks from '../data/mocks.json'; // eslint-disable-line
 
-import api from '../../server/lib/api';
-import app from '../../server/index';
+import api from '../../server/src/lib/api';
+import app from '../../server/src/index';
 import request from 'supertest';
 import sizeOf from 'image-size';
 

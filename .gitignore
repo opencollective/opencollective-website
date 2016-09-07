@@ -37,8 +37,8 @@ build/Release
 node_modules
 
 # Build
+server/dist/
 frontend/dist/
-server/views/partials/sprite.symbol.html
 
 # test artifacts
 output/
