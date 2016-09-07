@@ -149,7 +149,7 @@ const TopBar = props => (
       </svg>
     </div>
     <div className='EditCollective-TopBar-buttons'>
-      <div className='EditCollective-TopBar-Button' onClick={ props.onPublish }>Publish</div>
+      <div className={`EditCollective-TopBar-Button ${ !props.canPublish ? '-disabled' : '' }`} onClick={ props.onPublish }>Save Changes</div>
       <a href='.'><div className='EditCollective-TopBar-Button trans'>Exit Edit Mode</div></a>
     </div>
   </div>
@@ -190,6 +190,7 @@ export class EditCollective extends Component {
     const { originalGroup } = this.props;
     const { showModal, highlightLabel, highlightField, fields } = this.state;
     const highlightValue = highlightField ? fields[highlightField] : null;
+    const groupChanged = Boolean(Object.keys(this.getUpdatedFields()).length);
     const group = {
       name: fields['name'] || ' ',
       backgroundImage: fields['backgroundImage'],
@@ -211,7 +212,7 @@ export class EditCollective extends Component {
     return (
       <div className='EditCollective'>
         <Notification />
-        <TopBar onPublish={ this.onPublishRef } />
+        <TopBar onPublish={ this.onPublishRef } canPublish={ groupChanged } />
         <Viewport>
           <PublicGroupHero ref='PublicGroupHero' group={ group } {...this.props} />
           <PublicGroupWhoWeAre ref='PublicGroupWhoWeAre' group={ group } {...this.props} />
@@ -296,8 +297,8 @@ export class EditCollective extends Component {
     window.removeEventListener('resize', this.lazyUpdateHighlights);
   }
 
-  onPublish() {
-    const { originalGroup, updateGroup } = this.props;
+  getUpdatedFields() {
+    const { originalGroup } = this.props;
     const { fields } = this.state;
     const updatedFields = {};
     Object.keys(fields).forEach(fieldName => {
@@ -305,6 +306,12 @@ export class EditCollective extends Component {
         updatedFields[fieldName] = fields[fieldName];
       }
     })
+    return updatedFields;
+  }
+
+  onPublish() {
+    const { originalGroup, updateGroup } = this.props;
+    const updatedFields = this.getUpdatedFields();
     if (Object.keys(updatedFields).length) {
       updateGroup(originalGroup.id, updatedFields)
       .catch(error => notify('error', error.message));

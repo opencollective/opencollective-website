@@ -68,6 +68,10 @@
       color: #ffffff;
       text-align: center;
       line-height: 2;
+      &.-disabled {
+        cursor: default;
+        opacity: 0.4;
+      }
       &:not(.trans) {
         background-color: #75cc1f;
         border: solid 2px #75cc1f;
@@ -77,7 +81,7 @@
         border-radius: 100px;
         border: solid 2px #ffffff;
       }
-      &:hover {
+      &:not(.-disabled):hover {
         opacity: .9;
         cursor: pointer;
       }
