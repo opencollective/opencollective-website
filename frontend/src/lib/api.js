@@ -1,5 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import { normalize } from 'normalizr';
+import extend from 'lodash/extend';
 import queryString from 'query-string';
 import env from './env';
 
