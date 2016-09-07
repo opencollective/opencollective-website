@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
-import values from 'lodash/object/values';
-import sortBy from 'lodash/collection/sortBy';
+import values from 'lodash/values';
+import sortBy from 'lodash/sortBy';
 
 import LoginTopBar from '../containers/LoginTopBar';
 import ExpenseItem from '../components/ExpenseItem';

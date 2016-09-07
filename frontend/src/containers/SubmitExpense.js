@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { pushState } from 'redux-router';
 
-import values from 'lodash/object/values';
+import values from 'lodash/values';
 
 import createExpense from '../actions/expenses/create';
 import uploadImage from '../actions/images/upload';

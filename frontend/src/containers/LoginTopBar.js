@@ -6,7 +6,7 @@ import fetchUser from '../actions/users/fetch_by_id';
 import logout from '../actions/session/logout';
 import decodeJWT from '../actions/session/decode_jwt';
 
-export default class LoginTopBar extends Component {
+export class LoginTopBar extends Component {
 
   constructor(props) {
     super(props);

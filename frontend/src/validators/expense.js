@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import pluck from 'lodash/collection/pluck';
+import pluck from 'lodash/map';
 
 import dates from '../lib/dates';
 import validate from '../lib/validate';
