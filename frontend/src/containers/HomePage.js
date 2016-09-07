@@ -18,6 +18,9 @@ export class HomePage extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      showSponsorMailInput: false
+    };
   }
 
   componentDidMount() {
@@ -30,6 +33,7 @@ export class HomePage extends Component {
 
   render() {
     const { homepage, i18n } = this.props;
+    const { showSponsorMailInput } = this.state;
     const currency = 'USD';
     const opensource = homepage.collectives ? homepage.collectives.opensource : [];
     const meetup = homepage.collectives ? homepage.collectives.meetup : [];
@@ -51,9 +55,9 @@ export class HomePage extends Component {
           <div className='subtitle'>organizing the Internet generation</div>
           <div className='heading'>Collect money for your community, transparently.</div>
         </section>
-        <section className='HomePageInfo' id="howitworks">
+        <section className='HomePageInfo' id='howitworks'>
           <div className='heading'>What is an open collective?</div>
-          <div className='subheading'>An unincorporated association that operates in full transparency</div>
+          <div className='subheading'>A group of people with a shared mission that operates in full transparency</div>
           <div className='icons-container clearfix'>
             <div className='col sm-col-6 md-col-4'>
               <div className='-graphic -tghost'>&nbsp;</div>
@@ -72,7 +76,7 @@ export class HomePage extends Component {
             </div>
           </div>
         </section>
-        <section className='HomePageOpenSource blue-gradient' id="opensource">
+        <section className='HomePageOpenSource blue-gradient' id='opensource'>
           <div className='heading'>Collectives for <span className='color-blue'>Open Source</span> projects</div>
           <div className='subheading'>These open source projects have created open collectives to share their expenses and let their community chip in.</div>
           <div className='cards'>
@@ -85,12 +89,12 @@ export class HomePage extends Component {
           </div>
           <div className='cta'>
             <div className='text'>Have an open source project?</div>
-            <a href="/opensource/apply">
+            <a href='/opensource/apply'>
               <div className='button color-blue'>apply to create a collective!</div>
             </a>
           </div>
         </section>
-        <section className='HomePageMeetups blue-gradient' id="meetups">
+        <section className='HomePageMeetups blue-gradient' id='meetups'>
           <div className='heading'>Collectives for <span className='color-green'>meetups</span></div>
           <div className='subheading'>Open Collective empowers local meetups to raise funds and have their own budget.</div>
           <div className='cards'>
@@ -99,14 +103,15 @@ export class HomePage extends Component {
               i18n={i18n}
               {...group}
             />)}
+            <a href='/discover?show=meetup' className='seemore'>See more meetups</a>
           </div>
           <div className='cta' id='apply'>
             <div className='text'>We are slowly letting in new kinds of collectives</div>
             <div className='button color-green'>join the waiting list!</div>
           </div>
         </section>
-        <MailChimpInputSection mcListId="14d6233180" />
-        <section className='HomePageSponsors blue-gradient' id="sponsors">
+        <MailChimpInputSection mcListId='14d6233180' />
+        <section className='HomePageSponsors blue-gradient' id='sponsors'>
           <div className='heading'>Sponsors</div>
           <div className='subheading'>Collectives do amazing things for their communities thanks to these awesome sponsors.</div>
           <div className='cards'>
@@ -120,9 +125,10 @@ export class HomePage extends Component {
           </div>
           <div className='cta'>
             <div className='text'>Become a sponsor and reach out to the right communities</div>
-            <div className='button color-green'><a href="mailto:info@opencollective.com?subject=become%20a%20sponsor">become a sponsor</a></div>
+            <div className='button color-green' onClick={() => this.setState({showSponsorMailInput: !showSponsorMailInput})}>become a sponsor</div>
           </div>
         </section>
+        {showSponsorMailInput && <MailChimpInputSection mcListId='4cbda7da19' buttonLabel='Apply' />}
         <section className='HomePageNumber'>
           <div className='heading'>Open Numbers</div>
           <div className='numbers-container'>

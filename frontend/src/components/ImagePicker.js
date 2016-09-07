@@ -58,6 +58,7 @@ export default class ImagePicker extends Component {
     const {isLoading, currentIndex, hover, pressed} = this.state;
     const options = this.options;
     const currentOption = options[currentIndex];
+    const hasMultipleOptions = options.length > 1;
     let currentSrc =  currentOption.src;
 
     // Update Hover/Press images for upload option
@@ -72,16 +73,16 @@ export default class ImagePicker extends Component {
           <div className="loader"></div>
         </div>
         <div className="ImagePicker-label">{label}</div>
-        <div className={this.prevIsPossible() ? 'ImagePicker-prev active' : 'ImagePicker-prev'} onClick={this.prev.bind(this)}></div>
+        {hasMultipleOptions && <div className={this.prevIsPossible() ? 'ImagePicker-prev active' : 'ImagePicker-prev'} onClick={this.prev.bind(this)}></div>}
         <div className='ImagePicker-preview' onClick={() => this.avatarClick.call(this, currentOption)} onMouseOver={() => this.setState({'hover': true})} onMouseOut={() => this.setState({'hover': false, pressed: false})} onMouseDown={() => this.setState({'pressed': true})} onMouseUp={() => this.setState({'pressed': false})}>
           <img src={currentSrc} onError={this.onImageError.bind(this)} />
         </div>
         <div className='ImagePicker-source-badge' style={{display : (KNOWN_SOURCES[currentOption.source] ? 'block' : 'none')}}>
           <img src={KNOWN_SOURCES[currentOption.source]}/>
         </div>
-        <div className={this.nextIsPossible() ? 'ImagePicker-next active' : 'ImagePicker-next'} onClick={this.next.bind(this)}></div>
+        {hasMultipleOptions && <div className={this.nextIsPossible() ? 'ImagePicker-next active' : 'ImagePicker-next'} onClick={this.next.bind(this)}></div>}
         <ul className='ImagePicker-dot-list'>
-          {options.map(
+          {hasMultipleOptions && options.map(
             option => {
               return <li key={option.source + option.src} onClick={() => this.select.call(this, option)} className={option === options[currentIndex] ? 'selected' : ''}></li>;
             }

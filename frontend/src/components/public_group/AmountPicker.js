@@ -47,6 +47,7 @@ export default class AmountPicker extends React.Component {
           collectives={collectives}
           buttonLabel={tier.button}
           skipModal={!(group.settings && group.settings.DonationDistributor)}
+          showDisclaimer={true}
           {...this.props}
         />
       </div>

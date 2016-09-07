@@ -28,8 +28,10 @@
  */
 
 @import './containers/About.css';
+@import './containers/AddGroup.css';
 @import './containers/Discover.css';
 @import './containers/DonatePage.css';
+@import './containers/EditCollective.css';
 @import './containers/Faq.css';
 @import './containers/HomePage.css';
 @import './containers/Leaderboard.css';
@@ -74,8 +76,11 @@
 @import './components/Metric.css';
 @import './components/Notification.css';
 @import './components/ProfilePhoto.css';
+@import './components/PublicGroupHero.css';
+@import './components/PublicGroupOpenSourceCTA.css';
 @import './components/PublicGroupThanks.css';
 @import './components/PublicGroupTiers.css';
+@import './components/PublicGroupWhoWeAre.css';
 @import './components/RelatedGroups.css';
 @import './components/RepositoryPicker.css';
 @import './components/RepositoryPickerItem.css';
@@ -84,6 +89,7 @@
 @import './components/Select.css';
 @import './components/ShareIcon.css';
 @import './components/Slider.css';
+@import './components/SponsoredCard.css';
 @import './components/SubscriptionItem.css';
 @import './components/TransactionItem.css';
 @import './components/TransactionStatus.css';

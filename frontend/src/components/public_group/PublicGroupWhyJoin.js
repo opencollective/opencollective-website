@@ -17,7 +17,7 @@ export default class PublicGroupWhyJoin extends React.Component {
     return (
       <section id='why-join' className='bg-black white'>
         <div className='PublicGroupWhyJoin container clearfix md-flex'>
-          <div className='col md-col-6 col-12 relative'>
+          <div className='col md-col-6 col-12 relative' ref='PublicGroupWhyJoin-whyJoinMedia'>
             <div className='PublicGroup-Media-container'>
               <Media group={group} />
             </div>
@@ -26,7 +26,9 @@ export default class PublicGroupWhyJoin extends React.Component {
           <div className='PublicGroup-summary col md-col-6 col-12 flex flex-column justify-between mx-auto'>
             <div>
               <span className='PublicGroup-title white -ff-sec -fw-bold'>{i18n.getString('becomeMemberTitle')}</span>
-              <Markdown className='PublicGroup-font-17 mt3' value={whyJoinText} />
+              <div ref='PublicGroupWhyJoin-whyJoinText'>
+                <Markdown className='PublicGroup-font-17 mt3' value={whyJoinText} />
+              </div>
             </div>
             <div className='PublicGroup-metricContainer flex pt4'>
               <Metric label={i18n.getString('fundsAvailable')}

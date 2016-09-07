@@ -144,6 +144,23 @@ function github(state=githubInitialState, action={}) {
 }
 
 /**
+ * Group form reducer
+ */
+
+const groupInitialState = {
+  attributes: { users1: {}, users2: {}, users3: {}, users4: {}, users5: {}}
+};
+
+function addgroup(state=groupInitialState, action={}) {
+  switch (action.type) {
+    case constants.APPEND_GROUP_FORM:
+      return merge({}, state, { attributes: action.attributes });
+    default:
+      return state;
+  }
+}
+
+/**
  * Twitter config form
  */
 const twitterInitialState = {
@@ -167,5 +184,6 @@ export default combineReducers({
   expense,
   schema,
   github,
+  addgroup,
   twitter
 });

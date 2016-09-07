@@ -226,20 +226,29 @@
   cursor: pointer;
 }
 
-.DonationDistributor-hr 
+.DonationDistributor-hr
 {
   height: 1px;
   background-color: #e6e6e6;
   width: 100%;
 }
 
-.DonationDistributor-donate-button 
+.DonationDistributor-donate-button
 {
   position: absolute;
   left: 0;
   right: 0;
   margin: -25px auto;
   bottom: 0;
+}
+
+.DonationDistributor-disclaimer {
+  position: absolute;
+  h6 {
+    margin: 1rem 0px 0px 0px;
+    font-weight: 400;
+    color: var(--dark-gray);
+  }
 }
 
 .-no-dashed-bg .-dashed-bg

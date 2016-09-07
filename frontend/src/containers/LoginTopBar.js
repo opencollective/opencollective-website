@@ -20,7 +20,7 @@ export default class LoginTopBar extends Component {
       <ul className='LoginTopBar-Links'>
         <li><a className='LoginTopBarButton' href='/#apply'>start a collective</a></li>
         <li><a className='LoginTopBarLink' href='/#howitworks'>How it works</a></li>
-        <li><a className='LoginTopBarLink' href='/#opensource'>Discover</a></li>
+        <li><a className='LoginTopBarLink' href='/discover'>Discover</a></li>
       </ul>
     )
   }

@@ -1,0 +1,70 @@
+.PublicGroupWhoWeAre {
+  position: relative;
+  padding: 0 15px;
+  background-color: var(--light-gray);
+  &:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 100%;
+    background-image: linear-gradient(#fff, var(--light-gray));
+  }
+  .PublicGroupWhoWeAre-container {
+    position: relative;
+    padding-top: 6.25rem;
+    padding-bottom: 6.25rem;
+    background-repeat: no-repeat;
+    text-align: center;
+    max-width: 1070px;
+    margin: 0 auto;
+    padding-top: 216px;
+    padding-top: 13.5rem;
+    background-image: url(/static/images/collectives/logo-placeholder.png);
+    background-size: 41.3125rem 26.1875rem;
+    background-position: 50% 0;
+    .PublicGroupWhoWeAre-title {
+      color: #494b4d;
+      font-size: 36px;
+      font-size: 2.25rem;
+      margin: 0;
+      font-weight: 700;
+      font-family: Montserrat,sans-serif;
+    }
+    .Collectives-title {
+      margin-top: 3rem;
+      font-size: 22px;
+      color: #494b4d;
+      text-align: center;
+      letter-spacing: 1px;
+      padding: 0 15px;
+    }
+    .PublicGroupWhoWeAre-subtitle {
+      font-family: montserratlight;
+      font-size: 22px;
+      font-size: 1.375rem;
+      margin: 0 auto;
+      margin-bottom: 16px;
+      margin-bottom: 1rem;
+      max-width: 768px;
+      max-width: 48rem;
+      font-weight: 300;
+    }
+    .PublicGroupWhoWeAre-website {
+      color: var(--light-blue);
+      font-size: 1rem;
+      padding-top: 16px;
+      padding-top: 1rem;
+    }
+    .PublicGroupWhoWeAre-long-description {
+      font-size: 15px;
+      font-size: .9375rem;
+      line-height: 27.008px;
+      line-height: 1.688rem;
+      margin: 0 auto;
+      max-width: 768px;
+      max-width: 48rem;
+    }
+  }
+}

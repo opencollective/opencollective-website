@@ -18,8 +18,8 @@ export class Discover extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentShowOption: 'all',
-      currentSortOption: 'newest'
+      currentShowOption: props.params.tag || props.show || 'all',
+      currentSortOption: props.sort || 'newest'
     };
     this.onSelectShowOption = this.onSelectShowOption.bind(this);
     this.onSelectSortOption = this.onSelectSortOption.bind(this);
@@ -108,16 +108,18 @@ export class Discover extends Component {
   }
 }
 
-
 export default connect(mapStateToProps, {
   fetchDiscover,
   fetchGroupTags
 })(Discover);
 
-function mapStateToProps({ discover, groups }) {
+function mapStateToProps({ discover, groups, router }) {
+  const query = router.location.query;
   return {
     discover,
     tags: groups.tags,
-    i18n: i18n('en')
+    i18n: i18n('en'),
+    show: query.show,
+    sort: query.sort,
   }
 }

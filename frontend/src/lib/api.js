@@ -13,7 +13,7 @@ const API_ROOT = env.API_ROOT;
 export function get(endpoint, options={}) {
   const { schema, params } = options;
 
-  return fetch(url(endpoint, params), {headers: headers(options.headers)})
+  return fetch(url(endpoint, params), {headers: addAuthTokenToHeader(options.headers)})
     .then(checkStatus)
     .then((json={}) => {
       return schema ? normalize(json, schema).entities : json;
@@ -41,6 +41,8 @@ export function postJSON(endpoint, body, options={}) {
 
   if (options.headers) {
     headers = extend(options.headers, headers);
+  } else {
+    headers = addAuthTokenToHeader(headers);
   }
 
   return fetch(url(endpoint), {
@@ -58,7 +60,7 @@ export function postJSON(endpoint, body, options={}) {
 export function putJSON(endpoint, body) {
   return fetch(url(endpoint), {
     method: 'put',
-    headers: headers({
+    headers: addAuthTokenToHeader({
       Accept: 'application/json',
       'Content-Type': 'application/json',
     }),
@@ -73,7 +75,7 @@ export function putJSON(endpoint, body) {
 
 export function post(endpoint, body, options={}) {
   return fetch(url(endpoint), {
-    headers: headers(options.headers),
+    headers: addAuthTokenToHeader(options.headers),
     method: 'post',
     body,
   })
@@ -86,7 +88,7 @@ export function post(endpoint, body, options={}) {
 
 export function del(endpoint) {
   return fetch(url(endpoint), {
-    headers: headers(),
+    headers: addAuthTokenToHeader(),
     method: 'delete'
   })
   .then(checkStatus);
@@ -132,7 +134,7 @@ export function checkStatus(response) {
   }
 }
 
-function headers(obj) {
+function addAuthTokenToHeader(obj) {
   const accessToken = localStorage.getItem('accessToken');
   if (!accessToken) return obj;
   return extend({

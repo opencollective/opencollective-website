@@ -1,0 +1,80 @@
+.SponsoredCard {
+  vertical-align: top;
+  position: relative;
+  box-sizing: border-box;
+  display: inline-block;
+  width: 280px;
+  height: 330px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px 0 rgba(45, 77, 97, 0.2);
+  margin: 20px;
+  overflow: hidden;
+  text-decoration: none !important;
+  .SponsoredCard-head {
+    width: 280px;
+    height: 180px;
+    .SponsoredCard-background {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      .SponsoredCard-image {
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 80%;
+        height: 80%;
+        margin: auto;
+      }
+    }
+  }
+  .SponsoredCard-body {
+    width: 100%;
+    height: 67px;
+    border-top: solid 1px #e1e9ed;
+    .SponsoredCard-name {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      height: 29px;
+      font-family: montserratlight;
+      font-size: 22px;
+      font-weight: 300;
+      text-align: center;
+      color: #303233;
+      margin: 20px 20px;
+      white-space: nowrap;
+      line-height: 29px;
+    }
+  }
+  .SponsoredCard-footer {
+    border-top: solid 1px #e1e9ed;
+    padding: 20px 10px;
+    text-align: center;
+    .SponsoredCard-type {
+      min-height: 13px;
+      font-family: Montserrat;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: #75cc1f;
+      text-transform: uppercase;
+    }
+    .SponsoredCard-amount {
+      min-height: 18px;
+      font-family: Lato;
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 1.5;
+      text-align: center;
+      color: #aab0b3;
+      text-transform: capitalize;
+    }
+  }
+}

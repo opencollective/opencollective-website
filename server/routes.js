@@ -55,14 +55,14 @@ module.exports = (app) => {
   /**
    * Routes
    */
-  app.get('/:slug/banner.md', mw.cache(300), mw.fetchGroupBySlug, mw.fetchUsers(), controllers.banner.markdown);
-  app.get('/:slug/banner.js', mw.cache(3000), mw.fetchGroupBySlug, mw.fetchUsers(), controllers.banner.js);
-  app.get('/:slug/:tier.md', mw.cache(300), mw.fetchGroupBySlug, mw.fetchUsers(), controllers.banner.markdown);
-  app.get('/:slug/:tier.:format(svg|png)', mw.cache(300), mw.fetchUsers(), controllers.banner.banner);
-  app.get('/:slug/:tier/badge.svg', mw.cache(300), mw.fetchUsers(), controllers.banner.badge);
-  app.get('/:slug/badge/:tier.svg', mw.cache(300), mw.fetchUsers(), controllers.banner.badge);
-  app.get('/:slug/:tier/:position/avatar(.:format(png|jpg|svg))?', mw.cache(300), mw.ga, mw.fetchUsers({cache: 300}), controllers.banner.avatar);
-  app.get('/:slug/:tier/:position/website', mw.ga, mw.fetchUsers(), controllers.banner.redirect);
+  app.get('/:slug/banner.md', mw.cache(300), mw.fetchGroupBySlug, mw.fetchActiveUsers(), controllers.banner.markdown);
+  app.get('/:slug/banner.js', mw.cache(3000), mw.fetchGroupBySlug, mw.fetchActiveUsers(), controllers.banner.js);
+  app.get('/:slug/:tier.md', mw.cache(300), mw.fetchGroupBySlug, mw.fetchActiveUsers(), controllers.banner.markdown);
+  app.get('/:slug/:tier.:format(svg|png)', mw.cache(300), mw.fetchActiveUsers(), controllers.banner.banner);
+  app.get('/:slug/:tier/badge.svg', mw.cache(300), mw.fetchActiveUsers(), controllers.banner.badge);
+  app.get('/:slug/badge/:tier.svg', mw.cache(300), mw.fetchActiveUsers(), controllers.banner.badge);
+  app.get('/:slug/:tier/:position/avatar(.:format(png|jpg|svg))?', mw.cache(300), mw.ga, mw.fetchActiveUsers({cache: 300}), controllers.banner.avatar);
+  app.get('/:slug/:tier/:position/website', mw.ga, mw.fetchActiveUsers(), controllers.banner.redirect);
   app.get('/:slug([A-Za-z0-9-]+)/widget', mw.cache(300), mw.fetchGroupBySlug, controllers.collectives.widget);
 
   /**
@@ -74,8 +74,9 @@ module.exports = (app) => {
    */
   app.get('/', mw.ga, mw.addTitle('OpenCollective - Collect and disburse money transparently'), controllers.homepage, render);
   app.get('/about', mw.ga, mw.addTitle('About'), render);
-  app.get('/discover', mw.ga, mw.addTitle('Discover'), render);
+  app.get('/discover/:tag?', mw.ga, mw.addTitle('Discover'), render);
   app.get('/faq', mw.ga, mw.addTitle('Answers'), render);
+  app.get('/addgroup', mw.ga, mw.addTitle('Create a new group'), render);
   app.get('/login/:token', mw.ga, mw.addTitle('Open Collective'), render);
   app.get('/login', mw.ga, mw.addTitle('Open Collective Login'), render);
   app.get('/leaderboard', mw.ga, mw.fetchLeaderboard, mw.addTitle('Open Collective Leaderboard'), render);
@@ -87,6 +88,7 @@ module.exports = (app) => {
   app.get('/connect/github', mw.ga, render);
   app.get('/:slug/connect/:provider', mw.ga, render);
   app.get('/:slug/edit-twitter', mw.ga, controllers.profile, render);
+  app.get('/:slug/edit', mw.ga, mw.addTitle('Edit'), mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/subscriptions', mw.ga, mw.addTitle('My Subscriptions'), render);
   app.get('/:slug([A-Za-z0-9-]+)/connected-accounts', mw.ga, render);
   app.get('/:slug([A-Za-z0-9-]+)/:type(expenses|donations)', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);

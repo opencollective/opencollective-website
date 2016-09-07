@@ -27,7 +27,7 @@ export default class MailChimpInputSection extends Component {
   }
   
   render() {
-    const { mcListId } = this.props;
+    const { mcListId, buttonLabel } = this.props;
     const { waitingListInputValue, sending } = this.state;
     const formAction = `//opencollective.us12.list-manage.com/subscribe/post?u=88fc8f0f3b646152f1cfe447a&id=${mcListId}`;
     const isValidEmail = RE_EMAIL.test(waitingListInputValue);
@@ -51,7 +51,7 @@ export default class MailChimpInputSection extends Component {
             />
             <input
               type='button'
-              value='Join'
+              value={buttonLabel || 'Join'}
               name='subscribe'
               className={`-button ${isValidEmail ? '-valid' : '-invalid'}`}
               {...buttonOpts}
