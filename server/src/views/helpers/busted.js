@@ -2,7 +2,7 @@ import config from 'config';
 import path from 'path';
 import bust from 'cache-bust';
 
-const dir = path.resolve(__dirname, '../../../frontend/dist/');
+const dir = path.resolve(__dirname, '../../../../frontend/dist/');
 
 const cache = {};
 

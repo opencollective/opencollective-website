@@ -1,7 +1,7 @@
 import sizeOf from 'image-size';
 import config from 'config';
 import request from 'request';
-import filterCollection from '../../frontend/src/lib/filter_collection';
+import filterCollection from '../../../frontend/src/lib/filter_collection';
 import _ from 'lodash';
 import Promise from 'bluebird';
 import utils from '../lib/utils';
@@ -12,7 +12,7 @@ const requestPromise = Promise.promisify(request, {multiArgs: true});
 
 const filterUsersByTier = (users, tiername) => {
   return _.uniq(filterCollection(users, { tier: tiername }), 'id');
-}
+};
 
 export default {
 

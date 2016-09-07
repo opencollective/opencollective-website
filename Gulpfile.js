@@ -89,7 +89,7 @@ gulp.task('build:svg', () => {
         }
       }
     }))
-    .pipe(gulp.dest('server/views'));
+    .pipe(gulp.dest('server/dist/views'));
 });
 
 gulp.task('watch:svg', () => {
