@@ -389,6 +389,7 @@ export class AddGroup extends Component {
       image: attr.image,
       website: attr.website,
       whyJoin: attr.whyJoin,
+      video: attr.video,
       data: {
         utmSource
       },
