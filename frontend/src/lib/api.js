@@ -1,10 +1,10 @@
 import fetch from 'isomorphic-fetch';
 import { normalize } from 'normalizr';
-import extend from 'lodash/object/extend';
+import extend from 'lodash/extend';
 import queryString from 'query-string';
 import env from './env';
 
-const API_ROOT = env.API_ROOT;
+const { API_ROOT } = env;
 
 /**
  * Get request
@@ -47,7 +47,7 @@ export function postJSON(endpoint, body, options={}) {
 
   return fetch(url(endpoint), {
     method: 'post',
-    headers: headers,
+    headers,
     body: JSON.stringify(body),
   })
   .then(checkStatus);
@@ -119,7 +119,7 @@ function urlThirdParty(endpoint, params) {
  */
 
 export function checkStatus(response) {
-  const status = response.status;
+  const { status } = response;
 
   if (status >= 200 && status < 300) {
     return response.json();
@@ -137,7 +137,8 @@ export function checkStatus(response) {
 function addAuthTokenToHeader(obj) {
   const accessToken = localStorage.getItem('accessToken');
   if (!accessToken) return obj;
-  return extend({
+  return {
     Authorization: `Bearer ${accessToken}`,
-  }, obj);
+    ...obj,
+  };
 }

@@ -21,8 +21,8 @@ export default class OnBoardingStepCreate extends React.Component {
     const { uploadImage, appendGithubForm, githubForm, i18n } = this.props;
     const { agreedTOS } = this.state;
 
-    const mission = githubForm.attributes.mission;
-    const description = githubForm.attributes.description;
+    const { mission } = githubForm.attributes;
+    const { description } = githubForm.attributes;
     const canCreate = mission && description && agreedTOS;
 
     return (

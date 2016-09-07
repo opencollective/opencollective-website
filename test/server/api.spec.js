@@ -1,10 +1,10 @@
-const mocks = require('../data/mocks.json');
+import mocks from '../data/mocks.json'; // eslint-disable-line
 mocks.backers = mocks.users.filter(u => u.tier === 'backer');
 
-const api = require('../../server/lib/api');
-const expect = require('chai').expect;
+import api from '../../server/lib/api';
+import { expect } from 'chai';
 
-const sinon = require('sinon');
+import sinon from 'sinon';
 
 describe("api", () => {
   let sandbox, stub;
@@ -27,19 +27,19 @@ describe("api", () => {
     const p1 = api.get('/groups/yeoman/users', { cache: 5 });
     const p2 = api.get('/groups/yeoman/users', { cache: 5 });
     const p3 = api.get('/groups/yeoman/users', { cache: 5 });
-        
+
     Promise.all([p1, p2, p3])
       .then(() => {
         expect(stub.calledOnce).to.be.true;
         done();
       });
   });
-  
+
   it("calls the api every time if cache off", (done) => {
     const p1 = api.get('/groups/yeoman/users');
     const p2 = api.get('/groups/yeoman/users');
     const p3 = api.get('/groups/yeoman/users');
-        
+
     Promise.all([p1, p2, p3])
       .then(() => {
         expect(stub.calledOnce).to.be.false;

@@ -43,4 +43,4 @@ export default class PublicGroupDonations extends React.Component {
       </div>
     );
   }
-};
+}

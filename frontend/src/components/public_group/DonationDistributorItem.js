@@ -60,7 +60,7 @@ export default class DonationDistributorItem extends Component {
                 className='DonationDistributorItem--input'
                 onFocus={() => {
                   this.setState({editingAmount: true}, () => {
-                    const amountInput = this.refs.amountInput;
+                    const { amountInput } = this.refs;
                     amountInput.value = itemAmount.toFixed(2);
                     amountInput.setSelectionRange(0, amountInput.value.length);
                     amountInput.focus();

@@ -17,7 +17,7 @@ export default ({children, label, color, inProgress}) => {
 
         type='submit'
         className={className}>
-        {!!children ? children : (
+        {children ? children : (
           <span>
             <Icon type='upload' /> {label || 'Submit'}
           </span>

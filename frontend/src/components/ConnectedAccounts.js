@@ -8,7 +8,7 @@ class ConnectedAccounts extends React.Component {
   }
 
   render() {
-    const connectedAccounts = this.props.connectedAccounts;
+    const { connectedAccounts } = this.props;
     return (
       <div>
         <h>{connectedAccounts.length} accounts connected to {this.props.params.slug}</h>

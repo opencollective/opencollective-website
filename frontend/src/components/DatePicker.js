@@ -20,6 +20,6 @@ class DatePicker extends Component {
   handleChange(date) {
     this.props.handleChange(date.format('YYYY-MM-DD'));
   }
-};
+}
 
 export default DatePicker;

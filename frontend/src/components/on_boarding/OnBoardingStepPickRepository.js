@@ -7,7 +7,7 @@ import * as constants from '../../constants/github.js';
 export default ({ onNextStep, githubForm, repositories, blacklist, appendGithubForm, fetchedRepositories}) => {
 
   const buttonContainerStyle = {margin: '0 auto', marginTop: '30px', width: '300px', textAlign: 'center'};
-  const repository = githubForm.attributes.repository;
+  const { repository } = githubForm.attributes;
   repositories = repositories.sort((A, B) => B.stars - A.stars);
   const singleRepo = repositories.length === 1;
   const validRepos = repositories.filter(repo => blacklist.indexOf(repo.title) === -1);

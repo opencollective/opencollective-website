@@ -47,4 +47,4 @@ export default class PublicGroupExpenses extends React.Component {
       </div>
     );
   }
-};
+}

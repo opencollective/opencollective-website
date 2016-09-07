@@ -1,6 +1,6 @@
-import merge from 'lodash/object/merge';
-import values from 'lodash/object/values';
-import groupBy from 'lodash/collection/groupBy';
+import merge from 'lodash/merge';
+import values from 'lodash/values';
+import groupBy from 'lodash/groupBy';
 
 import * as constants from '../constants/groups';
 import { FETCH_USERS_BY_GROUP_SUCCESS } from '../constants/users';
@@ -31,15 +31,15 @@ export default function groups(state={}, action={}) {
     //
     //  }
     // }
-    case FETCH_USERS_BY_GROUP_SUCCESS:
-      const users = values(action.users)
+    case FETCH_USERS_BY_GROUP_SUCCESS: {
+      const users = values(action.users);
 
       return merge({}, state, {
         [action.groupid]: {
           usersByRole: groupBy(users, 'role')
         }
       });
-
+    }
     case constants.DONATE_GROUP_REQUEST:
       return merge({}, state, { donateInProgress: true });
 

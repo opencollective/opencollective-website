@@ -40,7 +40,7 @@ export default class DonationDistributor extends Component {
     super(props);
     const {group, method, amount, optionalCommission} = this.props;
     this.stripeKey = (group.stripeAccount && group.stripeAccount.stripePublishableKey) ? group.stripeAccount.stripePublishableKey : '';
-    const hasPaypal = group.hasPaypal;
+    const { hasPaypal } = group;
     const hasStripe = this.stripeKey && amount;
     this.state = {
       disabled: !hasPaypal && !hasStripe,
@@ -69,7 +69,7 @@ export default class DonationDistributor extends Component {
 
   renderCollectives() {
     const {currency} = this.props;
-    const options = this.options;
+    const { options } = this;
     return options.map(
       (option, index) => {
         return (
@@ -218,7 +218,7 @@ export default class DonationDistributor extends Component {
 
   renderPaymentButton() {
     const {group, inProgress, currency, frequency, onToken, i18n, buttonLabel, skipModal} = this.props;
-    const stripeKey = this.stripeKey;
+    const { stripeKey } = this;
     const chargeAmount = this.getChargeAmount();
     const amount = chargeAmount.toFixed(2);
     const formattedAmount = formatCurrency(chargeAmount, currency, {compact: true});
@@ -439,13 +439,13 @@ export default class DonationDistributor extends Component {
   }
 
   resetDistribution() {
-  	const {collectives, editable} = this.props;
+    const {collectives, editable} = this.props;
     this.options = collectives.map((collective) => {
       return {
         id: collective.id,
         label: collective.name,
         icon: collective.logo,
-        editable: editable,
+        editable,
         value: !isNaN(collective.value) ? collective.value : (1 / collectives.length)
       }
     });

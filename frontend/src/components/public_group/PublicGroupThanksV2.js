@@ -56,4 +56,4 @@ export default class PublicGroupThanksV2 extends React.Component {
       </div>
     );
   }
-};
+}

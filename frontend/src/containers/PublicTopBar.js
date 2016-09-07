@@ -44,7 +44,7 @@ class PublicTopBar extends React.Component {
       </div>
     );
   }
-};
+}
 
 export default connect(mapStateToProps, {
   logout

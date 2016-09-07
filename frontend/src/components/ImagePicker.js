@@ -30,7 +30,7 @@ export default class ImagePicker extends Component {
     this.blacklist = [];
     this.presets = this.props.presets || PRESET_AVATARS;
     this.options = this.presets.map(src => {
-      return {source: 'preset', src: src};
+      return {source: 'preset', src};
     });
 
     if (props.src) {
@@ -56,7 +56,7 @@ export default class ImagePicker extends Component {
   render() {
     const {className='avatar', label='Choose a Profile Image'} = this.props;
     const {isLoading, currentIndex, hover, pressed} = this.state;
-    const options = this.options;
+    const { options } = this;
     const currentOption = options[currentIndex];
     const hasMultipleOptions = options.length > 1;
     let currentSrc =  currentOption.src;
@@ -185,7 +185,7 @@ export default class ImagePicker extends Component {
       this.setState({isLoading: true});
     }
 
-    getSocialMediaAvatars(newUser.id, {website: website, twitterHandle: twitter, name: profileForm.name})
+    getSocialMediaAvatars(newUser.id, {website, twitterHandle: twitter, name: profileForm.name})
     .then((response) => {
       const currentOption = this.options[this.state.currentIndex];
       const results = response.json.filter((option) => this.blacklist.indexOf(option.src) === -1 );

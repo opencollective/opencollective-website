@@ -1,4 +1,4 @@
-import merge from 'lodash/object/merge';
+import merge from 'lodash/merge';
 import * as constants from '../constants/session';
 
 export default function session(state={
@@ -20,9 +20,6 @@ export default function session(state={
       return merge({}, state, {
         isAuthenticated: false
       });
-
-    case constants.SHOW_POPOVERMENU:
-      return merge({}, state, { hasPopOverMenuOpen: action.hasPopOverMenuOpen });
 
     case constants.HYDRATE:
       return merge({}, state, {

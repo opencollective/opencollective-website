@@ -15,15 +15,15 @@ export default class SubscriptionItem extends Component {
   render() {
     const { subscription, i18n, onClickImage } = this.props;
     const { opened } = this.state;
-    const amount = subscription.amount;
-    const createdAt = subscription.createdAt
-    const currency = subscription.currency;
-    const interval = subscription.interval;
-    const isActive = subscription.isActive;
+    const { amount } = subscription;
+    const { createdAt } = subscription
+    const { currency } = subscription;
+    const { interval } = subscription;
+    const { isActive } = subscription;
     const formattedAmount = formatCurrency(amount, currency, {compact: true});
     const formattedInterval = `${interval[0].toUpperCase()}${interval.substr(1)}ly`;
     const formattedCreatedAt = isActive ? `${i18n.getString('since')} ${moment(createdAt).format('MMM, YYYY')}`: 'Inactive';
-    const Transactions = subscription.Transactions;
+    const { Transactions } = subscription;
     const Group = Transactions.length ? Transactions[0].Group : null;
     const name = Group ? Group.name : '';
     const image = Group ? Group.image : '';
@@ -48,7 +48,7 @@ export default class SubscriptionItem extends Component {
             <ul>
               {Transactions.map((transaction, index) => {
                 const description = transaction.title || transaction.description;
-                const avatar = transaction.User.avatar;
+                const { avatar } = transaction.User;
                 const txDate = transaction.incurredAt || transaction.createdAt;
                 return (
                   <li key={index}>

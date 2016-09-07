@@ -36,4 +36,4 @@ export default class PublicGroupJoinUs extends React.Component {
       </section>
     );
   }
-};
+}

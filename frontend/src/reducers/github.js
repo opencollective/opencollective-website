@@ -1,4 +1,4 @@
-import merge from 'lodash/object/merge';
+import merge from 'lodash/merge';
 import {
   GET_REPOS_FROM_GITHUB_SUCCESS,
   GET_CONTRIBUTORS_FROM_GITHUB_SUCCESS,
@@ -18,7 +18,7 @@ export default function github(state={}, action={}) {
       }
       return state;
 
-    case GET_REPOS_FROM_GITHUB_SUCCESS:
+    case GET_REPOS_FROM_GITHUB_SUCCESS: {
       const repositories = action.json.map(repo => {
         return {
           title: repo.name,
@@ -28,9 +28,9 @@ export default function github(state={}, action={}) {
           owner: repo.owner.login
         };
       });
-      return merge({}, state, { repositories });
-
-    case GET_CONTRIBUTORS_FROM_GITHUB_SUCCESS:
+      return merge({}, state, {repositories});
+    }
+    case GET_CONTRIBUTORS_FROM_GITHUB_SUCCESS: {
       const contributors = action.json.map(contributor => {
         return {
           name: contributor.login,
@@ -38,13 +38,13 @@ export default function github(state={}, action={}) {
           contributions: contributor.contributions,
         };
       });
-      return merge({}, state, { contributors });
-
-    case GET_USER_FROM_GITHUB_SUCCESS:
+      return merge({}, state, {contributors});
+    }
+    case GET_USER_FROM_GITHUB_SUCCESS: {
       const user = {};
       ['id', 'login', 'name', 'email', 'blog'].forEach((key) => user[key] = action.json[key]);
-      return merge({}, state, { user });
-
+      return merge({}, state, {user});
+    }
     default:
       return state;
   }

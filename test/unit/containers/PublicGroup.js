@@ -51,7 +51,7 @@ describe('PublicGroup container', () => {
 
   it('should donate to the group', (done) => {
     const { actions, group, setState, refreshData, token } = setup();
-    const currency = group.currency;
+    const { currency } = group;
 
     const donate = chai.spy((groupid, payment) => {
       expect(groupid).to.be.equal(1);

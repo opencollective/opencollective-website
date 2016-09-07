@@ -1,4 +1,4 @@
-import merge from 'lodash/object/merge';
+import merge from 'lodash/merge';
 
 import Schemas from '../lib/schemas';
 import { normalize } from 'normalizr';
@@ -21,21 +21,21 @@ export default function users(state={
   switch (type) {
 
     case constants.FETCH_USER_SUCCESS:
-    case constants.FETCH_USERS_BY_GROUP_SUCCESS:
+    case constants.FETCH_USERS_BY_GROUP_SUCCESS: {
       /*
        * Note: the 'role' and 'createdAt' is stored in groups reducer.
        * Removing them from here so we can merge user data (which comes
        * appended with userGroup data) without conflicts
        */
       const options = {
-        assignEntity: function(obj, key, val){
+        assignEntity (obj, key, val) {
           if (key !== 'role' && key !== 'createdAt') {
             obj[key] = val;
           }
         }
       };
       return merge({}, state, normalize(users, Schemas.USER_ARRAY, options).entities.users);
-
+    }
     case constants.REFRESH_LOGIN_TOKEN_REQUEST:
     case constants.SEND_NEW_LOGIN_TOKEN_REQUEST:
       return merge({}, state, { sendingEmailInProgress: true });

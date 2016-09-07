@@ -17,7 +17,7 @@ export default class BackerCard extends Component {
     const amount = donationForm[tier.name].amount !== undefined ? donationForm[tier.name].amount : tier.range[0];
     const frequency = donationForm[tier.name].frequency || tier.interval;
     const currency = donationForm[tier.name].currency || group.currency;
-    const hasPaypal = group.hasPaypal;
+    const { hasPaypal } = group;
     const hasStripe = stripeKey && amount !== '';
     const collectives = [
       {id: group.id, name: group.name, logo: group.logo},

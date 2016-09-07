@@ -31,7 +31,7 @@ function success(json) {
 function failure(error) {
   return {
     type: constants.UPLOAD_IMAGE_FAILURE,
-    error: error
+    error
   };
 }
 

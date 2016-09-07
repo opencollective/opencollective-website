@@ -43,7 +43,7 @@ module.exports = {
       .click('.Checkbox')
       .pause(500)
       .click('.OnBoardingButton')
-      .pause(500)
+      .pause(1000)
       .assert.containsText('.OnBoardingButton', 'EXPLORE EXISTING COLLECTIVES')
       .end();
    }

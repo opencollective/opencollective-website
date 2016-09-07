@@ -4,7 +4,7 @@ import Input from './Input';
 import SubmitButton from './SubmitButton';
 
 import { connect } from 'react-redux';
-import values from 'lodash/object/values';
+import values from 'lodash/values';
 import updateForm from '../actions/form/update_twitter_config';
 import updateGroup from '../actions/groups/updateSettings';
 
@@ -13,17 +13,17 @@ export class EditTwitter extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-  };
+  }
 
   componentWillMount() {
-    const form = this.props.form;
+    const { form } = this.props;
     form.twitter.attributes = this.props.group.settings.twitter;
     this.setState({form});
   }
 
   render() {
-    const updateForm = this.props.updateForm;
-    const attributes = this.props.form.twitter.attributes;
+    const { updateForm } = this.props;
+    const { attributes } = this.props.form.twitter;
 
     return (
       <form name="twitter"
@@ -69,13 +69,13 @@ export class EditTwitter extends Component {
         <SubmitButton />
       </form>
     );
-  };
+  }
 
   onSubmit(event) {
     event.preventDefault();
     const twitter = this.props.form.twitter.attributes;
     this.props.updateGroup(this.props.group.id, { settings: { twitter }});
-  };
+  }
 }
 
 export default connect(mapStateToProps, {

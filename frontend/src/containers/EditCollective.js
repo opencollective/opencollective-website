@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import debounce from 'lodash/function/debounce';
-import merge from 'lodash/object/merge';
-import values from 'lodash/object/values';
+import debounce from 'lodash/debounce';
+import merge from 'lodash/merge';
+import values from 'lodash/values';
 
 import i18n from '../lib/i18n';
 
@@ -151,8 +151,8 @@ const TopBar = props => (
   </div>
 );
 
-export default class EditCollective extends Component {
-  
+export class EditCollective extends Component {
+
   constructor(props) {
     super(props);
     const originalGroup = props.originalGroup;
@@ -218,14 +218,14 @@ export default class EditCollective extends Component {
           <Overlay onClick={ this.onCloseModalRef }>
             <Modal onClose={ this.onCloseModalRef } title={ highlightLabel } >
               {highlightField === 'backgroundImage' && (
-                <ImagePicker 
+                <ImagePicker
                   uploadOptionFirst
                   label='Choose a background image'
                   dontLookupSocialMediaAvatars
                   className="logo"
                   presets={ [ originalGroup.backgroundImage ] }
                   src={ highlightValue }
-                  handleChange={ this.onChangeHighlightValueRef } 
+                  handleChange={ this.onChangeHighlightValueRef }
                   {...this.props} />
               )}
               {highlightField === 'description' && (
@@ -239,7 +239,7 @@ export default class EditCollective extends Component {
                   presets={ PRESET_LOGOS }
                   className="logo"
                   src={ highlightValue }
-                  handleChange={ this.onChangeHighlightValueRef } 
+                  handleChange={ this.onChangeHighlightValueRef }
                   {...this.props} />
               )}
               {highlightField === 'longDescription' && (
@@ -265,7 +265,7 @@ export default class EditCollective extends Component {
                   dontLookupSocialMediaAvatars
                   presets={ PRESET_LOGOS }
                   src={ highlightValue }
-                  handleChange={ this.onChangeHighlightValueRef } 
+                  handleChange={ this.onChangeHighlightValueRef }
                   {...this.props} />
               )}
             </Modal>
@@ -311,7 +311,7 @@ export default class EditCollective extends Component {
   }
 
   onChangeHighlightValue(newValue) {
-    const { highlightField, fields } = this.state;    
+    const { highlightField, fields } = this.state;
     fields[highlightField] = newValue;
     this.setState({fields: fields});
     this.updateHighlights();
@@ -321,7 +321,7 @@ export default class EditCollective extends Component {
     this.setState({
       showModal: true,
       highlightLabel: highlight.label,
-      highlightField: typeof highlight.field === 'funciton' ? highlight.field(this.state) : highlight.field,
+      highlightField: typeof highlight.field === 'function' ? highlight.field(this.state) : highlight.field,
     });
   }
 
@@ -334,7 +334,7 @@ export default class EditCollective extends Component {
       let target = null;
       h.refpath.split('/').forEach(rpath => {
         if (context[rpath]) {
-          target = context[rpath], 
+          target = context[rpath],
           context = target.refs;
         } else {
           target = null;

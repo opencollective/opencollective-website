@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import isFunction from 'lodash/lang/isFunction';
+import isFunction from 'lodash/isFunction';
 
 class ImageUpload extends Component {
 
@@ -11,7 +11,7 @@ class ImageUpload extends Component {
 
   render() {
     const {customClassName } = this.props;
-    const isUploading = this.state.isUploading;
+    const { isUploading } = this.state;
 
     return (
       <div className={customClassName || 'ImageUpload'} onClick={this.clickInput.bind(this, isUploading)}>

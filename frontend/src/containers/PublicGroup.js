@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import sortBy from 'lodash/collection/sortBy';
-import take from 'lodash/array/take';
-import values from 'lodash/object/values';
+import sortBy from 'lodash/sortBy';
+import take from 'lodash/take';
+import values from 'lodash/values';
 
 import filterCollection from '../lib/filter_collection';
 import i18n from '../lib/i18n';
@@ -335,7 +335,7 @@ function mapStateToProps({
   router,
   app
 }) {
-  const query = router.location.query;
+  const { query } = router.location;
   const newUserId = query.userid;
   const paypalUser = {
     id: query.userid,

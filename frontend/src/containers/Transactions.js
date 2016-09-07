@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
-import values from 'lodash/object/values';
-import sortBy from 'lodash/collection/sortBy';
+import values from 'lodash/values';
+import sortBy from 'lodash/sortBy';
 
 import LoginTopBar from '../containers/LoginTopBar';
 import ExpenseItem from '../components/ExpenseItem';
@@ -24,15 +24,15 @@ export class Transactions extends Component {
   constructor(props) {
     super(props);
     this.state = {showSubmitExpense: Boolean(props.router.location.pathname.match(/new$/)) };
-  };
+  }
 
   toggleAddExpense() {
     this.setState({ showSubmitExpense: !this.state.showSubmitExpense });
-  };
+  }
 
   render() {
     const { transactions, users, i18n, group, type, user } = this.props;
-    const showSubmitExpense = this.state.showSubmitExpense;
+    const { showSubmitExpense } = this.state;
     const hasExistingTransactions = Boolean(transactions.length);
     return (
      <div className='Transactions'>
@@ -61,7 +61,7 @@ export class Transactions extends Component {
             <Button onClick={this.toggleAddExpense.bind(this)} label='Submit Expense' id='submitExpenseBtn' />
           </div>
         )}
-        {hasExistingTransactions && 
+        {hasExistingTransactions &&
           <div className='Transactions-container padding40 expenses-container'>
             <div className='line1'>latest {`${type}s`}</div>
             <div className='-list'>

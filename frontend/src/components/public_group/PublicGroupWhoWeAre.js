@@ -52,4 +52,4 @@ export default class PublicGroupWhoWeAre extends Component {
       </section>
     );
   }
-};
+}

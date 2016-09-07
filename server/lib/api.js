@@ -19,10 +19,8 @@ api.get = (endpoint, options) => {
       switch (cached.status) {
         case 'finished':
           return resolve(cached.response);
-          break;
         case 'running':
           return cached.once('finished', () => resolve(cached.response));
-          break;
       }
     });
   } else {
@@ -52,7 +50,7 @@ api.post = (endpoint, body) => {
     }
   };
 
-  return fetch(apiUrl(endpoint), options)
+  return api.fetch(apiUrl(endpoint), options)
     .then(checkStatus);
 };
 

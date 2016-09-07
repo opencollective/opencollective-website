@@ -14,7 +14,7 @@ const filterUsersByTier = (users, tiername) => {
   return _.uniq(filterCollection(users, { tier: tiername }), 'id');
 }
 
-module.exports = {
+export default {
 
   index: (req, res) => {
     res.render('backers', {
@@ -23,7 +23,7 @@ module.exports = {
   },
 
   markdown: (req, res) => {
-    const slug = req.params.slug;
+    const { slug } = req.params;
     const positions = [];
     const spots = req.params.spots || 30;
     const tiername = req.params.tier || '';
@@ -32,7 +32,7 @@ module.exports = {
       positions[i] = { position: i };
     }
 
-    let tiers = req.group.tiers;
+    let { tiers } = req.group;
     tiers.map(t => {
       t.positions = positions;
     });
@@ -50,7 +50,7 @@ module.exports = {
   },
 
   js: (req, res) => {
-    const slug = req.params.slug;
+    const { slug } = req.params;
     res.type('application/javascript');
     res.render('bannerjs', {
       layout: false,
@@ -137,9 +137,9 @@ module.exports = {
   },
 
   badge: (req, res) => {
-    const tier = req.params.tier;
+    const { tier } = req.params;
     const color = req.query.color || 'brightgreen';
-    const style = req.query.style;
+    const { style } = req.query;
 
     const validator = (user) => (user.tier && user.tier.match(new RegExp(tier.replace(/s$/,''), 'i')));
     const users = _.uniq(filterCollection(req.users, validator), 'id');
@@ -158,8 +158,8 @@ module.exports = {
   },
 
   banner: (req, res) => {
-    const slug = req.params.slug;
-    const tier = req.params.tier;
+    const { slug } = req.params;
+    const { tier } = req.params;
     const format = req.params.format || 'svg';
     const limit = Number(req.query.limit) || Infinity;
     const margin = req.query.margin ? Number(req.query.margin) : 5;
@@ -169,7 +169,7 @@ module.exports = {
     let users = filterUsersByTier(req.users, tier.replace(/s$/,''));
     const count = Math.min(limit, users.length);
     const showBtn = (req.query.button === 'false') ? false : true;
-    const order = req.query.order;
+    const { order } = req.query;
 
     if (order === 'recent') {
       users = users.sort((a,b) => {
@@ -205,7 +205,7 @@ module.exports = {
     .then(responses => {
       const images = [];
       for (let i=0;i<responses.length;i++) {
-        const headers = responses[i][0].headers;
+        const { headers } = responses[i][0];
         const rawData = responses[i][1];
 
         const contentType = headers['content-type'];
@@ -231,7 +231,7 @@ module.exports = {
         const imageLink = `<a xlink:href="${website.replace(/&/g,'&amp;')}" target="_blank">${image}</a>`;
         images.push(imageLink);
         posX += avatarWidth + margin;
-      };
+      }
 
       return `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${imageWidth || posX}" height="${imageHeight || posY + avatarHeight + margin}">
         ${images.join('\n')}
@@ -258,9 +258,9 @@ module.exports = {
   },
 
   redirect: (req, res) => {
-    const tier = req.params.tier;
+    const { tier } = req.params;
     const users = filterUsersByTier(req.users, tier.replace(/s$/,''));
-    const slug = req.params.slug;
+    const { slug } = req.params;
     const position = parseInt(req.params.position, 10);
 
     if (position > users.length) {

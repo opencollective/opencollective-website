@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import debounce from 'lodash/function/debounce';
+import debounce from 'lodash/debounce';
 
 import i18n from '../lib/i18n';
 
@@ -114,7 +114,7 @@ export default connect(mapStateToProps, {
 })(Discover);
 
 function mapStateToProps({ discover, groups, router }) {
-  const query = router.location.query;
+  const { query } = router.location;
   return {
     discover,
     tags: groups.tags,
