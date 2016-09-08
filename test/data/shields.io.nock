@@ -1,0 +1,16 @@
+import nock from 'nock';
+
+export default () => {
+  nock('https://img.shields.io:443')
+    .get('/badge/backers-4-brightgreen.svg')
+    .query({"style":"undefined"})
+    .reply(200, "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"70\" height=\"20\"><linearGradient id=\"b\" x2=\"0\" y2=\"100%\"><stop offset=\"0\" stop-color=\"#bbb\" stop-opacity=\".1\"/><stop offset=\"1\" stop-opacity=\".1\"/></linearGradient><mask id=\"a\"><rect width=\"70\" height=\"20\" rx=\"3\" fill=\"#fff\"/></mask><g mask=\"url(#a)\"><path fill=\"#555\" d=\"M0 0h53v20H0z\"/><path fill=\"#4c1\" d=\"M53 0h17v20H53z\"/><path fill=\"url(#b)\" d=\"M0 0h70v20H0z\"/></g><g fill=\"#fff\" text-anchor=\"middle\" font-family=\"DejaVu Sans,Verdana,Geneva,sans-serif\" font-size=\"11\"><text x=\"26.5\" y=\"15\" fill=\"#010101\" fill-opacity=\".3\">backers</text><text x=\"26.5\" y=\"14\">backers</text><text x=\"60.5\" y=\"15\" fill=\"#010101\" fill-opacity=\".3\">4</text><text x=\"60.5\" y=\"14\">4</text></g></svg>", { date: 'Wed, 07 Sep 2016 22:30:28 GMT',
+    'content-type': 'image/svg+xml;charset=utf-8',
+    'transfer-encoding': 'chunked',
+    connection: 'close',
+    'set-cookie': [ '__cfduid=d120afac73cf284e9c9b2e4a815eda40f1473287428; expires=Thu, 07-Sep-17 22:30:28 GMT; path=/; domain=.shields.io; HttpOnly' ],
+    'cache-control': 'max-age=86400',
+    'last-modified': 'Wed, 07 Sep 2016 21:47:14 GMT',
+    server: 'cloudflare-nginx',
+    'cf-ray': '2ded9afac84946fe-EWR' });
+}
