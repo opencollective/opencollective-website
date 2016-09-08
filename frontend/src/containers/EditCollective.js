@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import debounce from 'lodash/debounce';
-import merge from 'lodash/merge';
 import values from 'lodash/values';
 
 import roles from '../constants/roles';
@@ -94,7 +93,16 @@ const highlights = [ {
     style.right =  `${ whyJoinTextRect.left }px`;
     style.width = 'auto';
   }
-},
+}, {
+  refpath: 'PublicGroupMembersWall/PublicGroupMembersWall-list',
+  label: 'New Contributor',
+  buttonClassName: 'EditButton--NewUser',
+  field: null,
+  extendStyle: function(target, rect, scrollY, style) {
+    style.left = 'auto';
+    style.width = '0px';
+  }
+}
 ].map(h => {
   h.ref = `${h.refpath}--highlight`;
   return h;
@@ -107,6 +115,7 @@ class EditCog extends Component {
       showMenu: false
     };
     this.toggleMenuRef = this.toggleMenu.bind(this);
+    this.onClickOutsideRef = this.onClickOutside.bind(this);
   }
   render() {
     const { style } = this.props;
@@ -124,8 +133,19 @@ class EditCog extends Component {
       </div>
     )    
   }
-  toggleMenu() {
+  onClickOutside() {
+    this.setState({showMenu: false});
+  }
+  componentDidMount() {
+    this.onClickOutsideRef = this.onClickOutside.bind(this);
+    document.addEventListener('click', this.onClickOutsideRef);
+  }
+  componentWillUnmount() {
+    document.removeEventListener('click', this.onClickOutsideRef);
+  }  
+  toggleMenu(e) {
     this.setState({showMenu: !this.state.showMenu});
+    e.nativeEvent.stopImmediatePropagation();
   }
 }
 
@@ -152,7 +172,7 @@ const Overlay = props => (
 );
 
 const Modal = props => (
-  <div className='EditCollective-Modal' onClick={e => {
+  <div className={`EditCollective-Modal ${ props.className || '' }`} onClick={e => {
     e.nativeEvent.stopImmediatePropagation();
     return false;
   }}>
@@ -204,7 +224,8 @@ export class EditCollective extends Component {
         whyJoin: originalGroup.whyJoin,
         image: originalGroup.image,
         video: originalGroup.video,
-      }
+      },
+      backers: originalGroup.backers, // array to edit with editcog
     };
     this.onCloseModalRef = this.onCloseModal.bind(this);
     this.onChangeHighlightValueRef = this.onChangeHighlightValue.bind(this);
@@ -220,6 +241,7 @@ export class EditCollective extends Component {
     const { showModal, highlightLabel, highlightField, fields } = this.state;
     const highlightValue = highlightField ? fields[highlightField] : null;
     const groupChanged = Boolean(Object.keys(this.getUpdatedFields()).length);
+    const createOrUpdateMembers = highlightField === null;
     const group = {
       name: fields.name || ' ',
       backgroundImage: fields.backgroundImage,
@@ -237,7 +259,7 @@ export class EditCollective extends Component {
       donationTotal: originalGroup.donationTotal,
       balance: originalGroup.balance,
       currency: originalGroup.currency,
-      backers: originalGroup.backers
+      backers: this.state.backers,
     };
     return (
       <div className='EditCollective'>
@@ -255,7 +277,7 @@ export class EditCollective extends Component {
         </Viewport>
         {showModal && (
           <Overlay onClick={ this.onCloseModalRef }>
-            <Modal onClose={ this.onCloseModalRef } title={ highlightLabel } >
+            <Modal onClose={ this.onCloseModalRef } title={ highlightLabel } className={ createOrUpdateMembers ? '-createOrUpdate' : '' }>
               {highlightField === 'backgroundImage' && (
                 <ImagePicker
                   uploadOptionFirst
@@ -307,13 +329,31 @@ export class EditCollective extends Component {
                   handleChange={ this.onChangeHighlightValueRef }
                   {...this.props} />
               )}
+              {createOrUpdateMembers && (
+                <div>
+                  <ImagePicker
+                    uploadOptionFirst
+                    label='Choose media source'
+                    className="logo"
+                    dontLookupSocialMediaAvatars
+                    src={ highlightValue }
+                    handleChange={ this.onChangeHighlightValueRef }
+                    {...this.props} />
+                    <Input {...this.props} value={ highlightValue } handleChange={ this.onChangeHighlightValueRef } placeholder='Name' maxLength={255}/>
+                    <Input {...this.props} value={ highlightValue } handleChange={ this.onChangeHighlightValueRef } placeholder='Website (Optional)' maxLength={255}/>
+                    <div className='-radio-group'>
+                      <input type="radio" name="trype" value="regular" /><span>Regular</span>
+                      <input type="radio" name="trype" value="core" /><span>Core</span>
+                    </div>
+                </div>
+              )}
             </Modal>
           </Overlay>
         )}
         {highlights.map(highlight => {
           return <Highlight { ...highlight } onClick={ () => this.onClickHighlight(highlight) } />
         })}
-        {this.refs.PublicGroupMembersWall && Object.keys(this.refs.PublicGroupMembersWall.refs).map((refName, i) => {
+        {this.refs.PublicGroupMembersWall && Object.keys(this.refs.PublicGroupMembersWall.refs).filter(x => x.indexOf('UserCard-') === 0).map((refName, i) => {
           const userCardElement = this.refs.PublicGroupMembersWall.refs[refName].refs.UserCard;
           const userCardRect = userCardElement.getBoundingClientRect();
           const scrollY = window.scrollY;
@@ -384,7 +424,6 @@ export class EditCollective extends Component {
     const scrollY = window.scrollY;
     highlights.forEach(h => {
       const extendStyle = h.extendStyle;
-      const customStyle = h.customStyle;
       let context = this.refs;
       let target = null;
       h.refpath.split('/').forEach(rpath => {
@@ -404,7 +443,7 @@ export class EditCollective extends Component {
         top: `${ rect.top + scrollY }px`,
         height: `${ rect.height }px`,
       };
-      h.style = (customStyle ? defaultStyle : merge(defaultStyle, customStyle));
+      h.style = defaultStyle;
       if (extendStyle) extendStyle.call(this, target, rect, scrollY,  h.style);
     });
   }

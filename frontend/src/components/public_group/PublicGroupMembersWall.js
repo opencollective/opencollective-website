@@ -9,7 +9,7 @@ export default class PublicGroupMembersWall extends React.Component {
     const plural = (tiername) => `${tiername}s`;
 
     return ((group.tiers || []).map((tier, i) => (
-      <div id={plural(tier.name)} className='flex flex-wrap justify-center pb3' key={i} >
+      <div id={plural(tier.name)} className='flex flex-wrap justify-center pb3' key={i} ref='PublicGroupMembersWall-list' >
         {filterCollection(group.backers, {tier: tier.name}).map((user, j) => <UserCard ref={`UserCard-${j}`} user={user} key={j} className='m1' i18n={i18n} />)}
       </div>)
     ));
