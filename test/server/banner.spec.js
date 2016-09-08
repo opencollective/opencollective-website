@@ -6,7 +6,7 @@ import sizeOf from 'image-size';
 import api from '../../server/src/lib/api';
 import app from '../../server/src/index';
 
-import shieldIONock from '../data/shields.io.nock'; // eslint-disable-line
+import shieldIONock from '../data/shields.io.nock';
 
 mocks.backers = mocks.users.filter(u => u.tier == 'backer')
 
@@ -90,7 +90,7 @@ describe("badge", () => {
     });
   });
 
-  beforeEach(() => shieldIONock());
+  beforeEach(shieldIONock);
 
   afterEach(() => {
     sandbox.restore();
