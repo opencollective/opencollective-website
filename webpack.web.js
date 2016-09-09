@@ -45,7 +45,7 @@ function generateBase(options = {}) {
     devtool: 'eval',
     target: 'web',
     entry: {
-      bundle: './frontend/src/index.web.js'
+      bundle: ['./frontend/src/index.web.js']
     },
     output: {
       path: options.outputPath || join(process.cwd(), 'frontend', 'dist'),
@@ -150,7 +150,7 @@ function addStyleLoader(config, options = {}) {
 
   config.module.loaders.push({
     test: /\.css$/,
-    loader: styleExtract.extract(['style','css','postcss']) ,
+    loader: styleExtract.extract(['css','postcss']) ,
     exclude:[
       /node_modules/
     ]

@@ -27,10 +27,11 @@ export default (app) => {
    */
   app.use(favicon(path.join(__dirname, '/../../frontend/dist/images/favicon.ico.png')));
 
-  /**
-   * Static folder
-   */
-  app.use('/static', express.static(path.join(__dirname, `../../frontend/dist`), { maxAge: '1d' }));
+  if (process.env.NODE_ENV !== 'production') {
+    require('./development')(app)
+  } else {
+    app.use('/static', express.static(path.join(__dirname, `../../frontend/dist`), { maxAge: '1d' }));
+  }
 
   /**
    * GET /robots.txt

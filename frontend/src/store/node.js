@@ -4,6 +4,11 @@ import { createMemoryHistory } from 'history';
 import reducers from '../reducers';
 import reduxMiddleware from './middleware';
 
+// TEMP
+if (process.env.NODE_ENV === 'development') {
+  reduxMiddleware.pop()
+}
+
 export function create(routes) {
   const store = compose(
     reduxReactRouter({ routes, createHistory: createMemoryHistory }),
@@ -13,4 +18,4 @@ export function create(routes) {
   return store
 }
 
-export default create 
+export default create
