@@ -49,3 +49,7 @@ bin
 
 # JetBrains
 *.iml
+
+# Project Build Artifacts
+project/cache/*.*
+project/stats/*.*

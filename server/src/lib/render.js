@@ -1,11 +1,11 @@
-import render from '../renderer'
+import { renderer } from '../renderer'
 
 /**
  * Example taken from redux-router documentation
  * https://github.com/acdlite/redux-router/tree/master/examples/server-rendering
  */
 export function middleware (req, res, next) {
-  render(req)
+  renderer(req)
     .then((result) => {
       if (result.notFound) {
         next()

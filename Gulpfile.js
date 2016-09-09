@@ -1,11 +1,8 @@
 const gulp = require('gulp');
 const gutil = require("gulp-util");
-const postcss = require('gulp-postcss');
-const changed = require('gulp-changed');
 const svgSprite = require('gulp-svg-sprite');
 
 const SRC_DIR = 'frontend/src';
-const DIST_DIR = 'frontend/dist';
 
 process.env.NODE_CONFIG_DIR = "./server/config";
 const config = require('config');
@@ -36,41 +33,39 @@ gulp.task('purge', (cb) => {
   });
 });
 
-gulp.task('build', ['build:assets','build:css', 'purge']);
+gulp.task('build', ['build:svg', 'webpack:node', 'webpack:web'])
 
-/**
- * Copy all static assets from ./frontend/src/assets/* to ./frontend/dist/
- * (includes /images, /fonts, /robots.txt)
- */
-gulp.task('build:assets', () => {
-  return gulp.src([`${SRC_DIR}/assets/**/*`])
-    .pipe(changed(`${DIST_DIR}`))
-    .pipe(gulp.dest(DIST_DIR));
-});
+gulp.task('webpack:web', (callback) => {
+  const webpack = require('webpack')
 
-gulp.task('watch:assets', () => {
-  gulp.watch(`${SRC_DIR}/assets/**/*`, ['build:assets']);
-});
+  const config = require('./webpack.web')(process.env.NODE_ENV || 'development', {
+    hot: false
+  })
 
-/**
- * Build css for main or widget
- */
-gulp.task('build:css', () => {
+  const output = require('./server/src/utils/webpack-helpers').outputCompilerStats
 
-  return gulp.src(`${SRC_DIR}/css/*.css`)
-    .pipe(postcss([
-      require('postcss-import')(),
-      require('postcss-nested'),
-      require('postcss-cssnext')(),
-      require('postcss-discard-comments')(),
-      require('cssnano')(),
-    ]))
-    .pipe(gulp.dest(`${DIST_DIR}/css`));
-});
+  webpack(config, (err, stats) => {
+    if (err) {
+      callback(err)
+    } else {
+      output(stats, () => callback(), (...args) => gutil.log(...args))
+    }
+  })
+})
 
-gulp.task('watch:css', () => {
-  gulp.watch(`${SRC_DIR}/css/**/*.css`, ['build:css']);
-});
+gulp.task('webpack:node', (callback) =>  {
+  const webpack = require('webpack')
+  const config = require('./webpack.node')
+  const output = require('./server/src/utils/webpack-helpers').outputCompilerStats
+
+  webpack(config, (err, stats) => {
+    if (err) {
+      callback(err)
+    } else {
+      output(stats, () => callback(), (...args) => gutil.log(...args))
+    }
+  })
+})
 
 gulp.task('build:svg', () => {
   return gulp.src(`${SRC_DIR}/assets/svg/*.svg`)
