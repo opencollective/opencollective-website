@@ -15,6 +15,14 @@
     height: 80px;
   }
 
+  .-joinUsAndMembersWall {
+    padding-left: 16px;
+    padding-left: 1rem;
+    padding-right: 16px;
+    padding-right: 1rem;
+    background-color: rgb(249, 250, 250);
+  }
+
   .PublicGroupHero-content .-btn-big.-bg-green,
   .PublicGroupHero-content p.h6,
   .PublicGroupHero-content svg,

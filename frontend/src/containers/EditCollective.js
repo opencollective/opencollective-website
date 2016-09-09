@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import debounce from 'lodash/debounce';
 import values from 'lodash/values';
+import isEqual from 'lodash/isEqual';
 
 import roles from '../constants/roles';
 
@@ -101,10 +102,10 @@ const highlights = [ {
     style.width = 'auto';
   }
 }, {
-  refpath: 'PublicGroupMembersWall/PublicGroupMembersWall-list',
-  label: 'New Contributor',
+  refpath: 'PublicGroupWhoWeAre/PublicGroupWhoWeAre-members',
+  label: 'New Member',
   buttonClassName: 'EditButton--NewUser',
-  field: 'backers',
+  field: 'members',
   extendStyle: function(target, rect, scrollY, style) {
     style.left = 'auto';
     style.width = '0px';
@@ -135,8 +136,9 @@ export class EditCollective extends Component {
         whyJoin: originalGroup.whyJoin,
         image: originalGroup.image,
         video: originalGroup.video,
-        backers: originalGroup.backers,
+        members: originalGroup.members,
       },
+      newMember: {}
     };
     this.onCloseModalRef = this.onCloseModal.bind(this);
     this.onChangeHighlightValueRef = this.onChangeHighlightValue.bind(this);
@@ -148,35 +150,9 @@ export class EditCollective extends Component {
   }
 
   render() {
-    const { originalGroup } = this.props;
-    const { showModal, highlightLabel, highlightField, highlightIndex, fields } = this.state;
-    const highlightValue = highlightField ? fields[highlightField] : null;
+    const { showModal } = this.state;
     const groupChanged = Boolean(Object.keys(this.getUpdatedFields()).length);
-    const createOrUpdateMembers = highlightField === 'backers';
-    const memberBeingEdited = (createOrUpdateMembers) 
-                                  ? (highlightValue[highlightIndex]) 
-                                      ? highlightValue[highlightIndex] 
-                                      : {name:'', website:'', avatar:'', core: false, _new: true} // new member
-                                  : null;
-    const group = {
-      name: fields.name || ' ',
-      backgroundImage: fields.backgroundImage,
-      logo: fields.logo || '/static/images/rocket.svg',
-      mission: fields.mission,
-      description: fields.description,
-      longDescription: fields.longDescription,
-      website: fields.website,
-      tiers: originalGroup.tiers,
-      members: [],
-      contributors: originalGroup.contributors,
-      whyJoin: fields.whyJoin,
-      image: fields.image,
-      video: fields.video,
-      donationTotal: originalGroup.donationTotal,
-      balance: originalGroup.balance,
-      currency: originalGroup.currency,
-      backers: fields.backers,
-    };
+    const group = this.getGroupPreview();
     return (
       <div className='EditCollective'>
         <Notification />
@@ -185,170 +161,375 @@ export class EditCollective extends Component {
           <PublicGroupHero ref='PublicGroupHero' group={ group } {...this.props} />
           <PublicGroupWhoWeAre ref='PublicGroupWhoWeAre' group={ group } {...this.props} />
           <PublicGroupWhyJoin ref='PublicGroupWhyJoin' group={ group } expenses={[]} {...this.props} />
-          <div className='bg-light-gray px2 -joinUsAndMembersWall'>
-            <PublicGroupJoinUs group={ group } donateToGroup={() => {}} {...this.props} />
+          <div className='-joinUsAndMembersWall'>
+            <PublicGroupJoinUs group={ group } donateToGroup={ Function.prototype } {...this.props} />
             <PublicGroupMembersWall ref='PublicGroupMembersWall' group={ group } {...this.props} />
           </div>
           <PublicFooter></PublicFooter>
         </Viewport>
-        {showModal && (
-          <Overlay onClick={ this.onCloseModalRef }>
-            <Modal 
-              onClose={ this.onCloseModalRef } 
-              title={ highlightLabel } 
-              className={ createOrUpdateMembers ? '-createOrUpdate' : '' }
-              onDone={() => {
-                this.onCloseModal({target:{className: '-close'}}); // TODO
-              }}
-              >
-              {highlightField === 'backgroundImage' && (
-                <ImagePicker
-                  uploadOptionFirst
-                  label='Choose a background image'
-                  dontLookupSocialMediaAvatars
-                  className="logo"
-                  presets={ [ originalGroup.backgroundImage ] }
-                  src={ highlightValue }
-                  handleChange={ this.onChangeHighlightValueRef }
-                  {...this.props} />
-              )}
-              {highlightField === 'description' && (
-                <CustomTextArea cols='29' maxLength={125} value={ highlightValue } onChange={ this.onChangeHighlightValueRef } {...this.props}/>
-              )}
-              {highlightField === 'logo' && (
-                <ImagePicker
-                  uploadOptionFirst
-                  label='Choose a logo or upload your own'
-                  dontLookupSocialMediaAvatars
-                  presets={ PRESET_LOGOS }
-                  className="logo"
-                  src={ highlightValue }
-                  handleChange={ this.onChangeHighlightValueRef }
-                  {...this.props} />
-              )}
-              {highlightField === 'longDescription' && (
-                <CustomTextArea cols='29' {...this.props} value={ highlightValue } onChange={ this.onChangeHighlightValueRef } />
-              )}
-              {highlightField === 'mission' && (
-                <CustomTextArea cols='29' {...this.props} value={ highlightValue } onChange={ this.onChangeHighlightValueRef } maxLength={100}/>
-              )}
-              {highlightField === 'name' && (
-                <Input {...this.props} value={ highlightValue } handleChange={ this.onChangeHighlightValueRef } maxLength={255}/>
-              )}
-              {highlightField === 'website' && (
-                <Input {...this.props} value={ highlightValue } handleChange={ this.onChangeHighlightValueRef } maxLength={255}/>
-              )}
-              {highlightField === 'whyJoin' && (
-                <CustomTextArea cols='29' {...this.props} value={ highlightValue } onChange={ this.onChangeHighlightValueRef } />
-              )}
-              {highlightField === 'image' && (
-                <ImagePicker
-                  uploadOptionFirst
-                  label='Choose media source'
-                  className="logo"
-                  dontLookupSocialMediaAvatars
-                  presets={ PRESET_LOGOS }
-                  src={ highlightValue }
-                  handleChange={ this.onChangeHighlightValueRef }
-                  {...this.props} />
-              )}
-              {createOrUpdateMembers && (
-                <div>
-                  <ImagePicker
-                    uploadOptionFirst
-                    label='Choose avatar'
-                    className='avatar'
-                    dontLookupSocialMediaAvatars
-                    src={ memberBeingEdited.avatar } 
-                    handleChange={ val => memberBeingEdited.avatar = val }
-                    {...this.props} />
-                    <Input 
-                      handleChange={val => {
-                        memberBeingEdited.name = val;
-                        fields[highlightField][highlightIndex] = memberBeingEdited;
-                        this.setState({fields: fields});
-                      }}
-                      maxLength={255}
-                      placeholder='Name'
-                      value={ memberBeingEdited.name }
-                      {...this.props} 
-                    />
-                    <Input
-                      handleChange={val => {
-                        memberBeingEdited.website = val;
-                        fields[highlightField][highlightIndex] = memberBeingEdited;
-                        this.setState({fields: fields});
-                      }}
-                      maxLength={255}
-                      placeholder='Website (Optional)'
-                      value={ memberBeingEdited.website }
-                      {...this.props}
-                    />
-                    <div className='-radio-group'>
-                      <input
-                        checked={ !Boolean(memberBeingEdited.core) }
-                        type="radio"
-                        name="type"
-                        value="regular"
-                        onChange={(e) => {
-                          memberBeingEdited.core = e.target.value === 'core';
-                          fields[highlightField][highlightIndex] = memberBeingEdited;
-                          this.setState({fields: fields});
-                        }}
-                      /><span>Regular</span>
-                      <input
-                        checked={ Boolean(memberBeingEdited.core) }
-                        type="radio"
-                        name="type"
-                        value="core"
-                        onChange={(e) => {
-                          memberBeingEdited.core = e.target.value === 'core';
-                          fields[highlightField][highlightIndex] = memberBeingEdited;
-                          this.setState({fields: fields});
-                        }}
-                      /><span>Core</span>
-                    </div>
-                </div>
-              )}
-            </Modal>
-          </Overlay>
-        )}
-        {highlights.map(highlight => {
-          return <Highlight { ...highlight } onClick={ () => this.onClickHighlight(highlight) } />
-        })}
-        {this.refs.PublicGroupMembersWall && Object.keys(this.refs.PublicGroupMembersWall.refs).filter(x => x.indexOf('UserCard-') === 0).map((refName, i) => {
-          const userCardElement = this.refs.PublicGroupMembersWall.refs[refName].refs.UserCard;
-          const userCardRect = userCardElement.getBoundingClientRect();
-          const scrollY = window.scrollY;
-          const customStyle = {
-            top: `${ userCardRect.top + scrollY - 15 }px`,
-            left: `${ userCardRect.right - 15 }px`,
-          };
-          return (
-            <EditCog
-              key={ i }
-              style={ customStyle } 
-              onEdit={() => {
-                this.setState({
-                  showModal: true,
-                  highlightLabel: 'Edit Contributor',
-                  highlightField: 'backers',
-                  highlightIndex: i
-                });
-              }}
-              onRemove={() => {
-                fields.backers.splice(highlightIndex, 1);
-                this.setState({fields: fields});
-                setTimeout(() => {
-                  // Removal of refs is delayed, not sure why..
-                  this.forceUpdate();
-                }, 100)
-              }}
-            />
-          )
-        })}
+        { showModal && this.renderModal() }
+        { this.renderHighlights() }
+        { this.renderEditCogs() }
       </div>
     )
+  }
+
+  getGroupPreview() {
+    const { originalGroup } = this.props;
+    const { fields } = this.state;
+    return {
+      name: fields.name || ' ',
+      backgroundImage: fields.backgroundImage,
+      logo: fields.logo || '/static/images/rocket.svg',
+      mission: fields.mission,
+      description: fields.description,
+      longDescription: fields.longDescription,
+      website: fields.website,
+      tiers: originalGroup.tiers,
+      contributors: originalGroup.contributors,
+      whyJoin: fields.whyJoin,
+      image: fields.image,
+      video: fields.video,
+      donationTotal: originalGroup.donationTotal,
+      balance: originalGroup.balance,
+      currency: originalGroup.currency,
+      members: fields.members,
+    };
+  }
+
+  renderModal() {
+    const { originalGroup } = this.props;
+    const { highlightLabel, highlightField, highlightIndex, fields, newMember } = this.state;
+    const createOrUpdateMembers = highlightField === 'members';
+    const highlightValue = highlightField ? fields[highlightField] : null;
+    const modalProps = {
+      onClose: this.onCloseModalRef,
+      title: highlightLabel,
+      className: createOrUpdateMembers ? '-createOrUpdate' : '',
+      onDone: () => { 
+        this.onCloseModal({
+          target: {className: '-close'}
+        });
+      }
+    };
+
+    if (highlightField === 'backgroundImage') {
+      return (
+        <Overlay onClick={ this.onCloseModalRef }>
+          <Modal {...modalProps}>
+            <ImagePicker
+              className='logo'
+              dontLookupSocialMediaAvatars
+              handleChange={ this.onChangeHighlightValueRef }
+              label='Choose a background image'
+              presets={ [ originalGroup.backgroundImage ] }
+              src={ highlightValue }
+              uploadOptionFirst
+              {...this.props} />
+          </Modal>
+        </Overlay>
+      )
+    }
+
+    if (highlightField === 'description') {
+      return (
+        <Overlay onClick={ this.onCloseModalRef }>
+          <Modal {...modalProps}>
+            <CustomTextArea
+              cols='29'
+              maxLength={125}
+              onChange={ this.onChangeHighlightValueRef }
+              value={ highlightValue }
+              {...this.props} />
+          </Modal>
+        </Overlay>
+      )
+    }
+
+    if (highlightField === 'logo') {
+      return (
+        <Overlay onClick={ this.onCloseModalRef }>
+          <Modal {...modalProps}>
+            <ImagePicker
+              className='logo'
+              dontLookupSocialMediaAvatars
+              handleChange={ this.onChangeHighlightValueRef }
+              label='Choose a logo or upload your own'
+              presets={ PRESET_LOGOS }
+              src={ highlightValue }
+              uploadOptionFirst
+              {...this.props} />
+          </Modal>
+        </Overlay>
+      )
+    }
+
+    if (highlightField === 'longDescription') {
+      return (
+        <Overlay onClick={ this.onCloseModalRef }>
+          <Modal {...modalProps}>
+            <CustomTextArea
+              cols='29'
+              onChange={ this.onChangeHighlightValueRef }
+              value={ highlightValue }
+              {...this.props} />
+          </Modal>
+        </Overlay>
+      )
+    }
+
+    if (highlightField === 'mission') {
+      return (
+        <Overlay onClick={ this.onCloseModalRef }>
+          <Modal {...modalProps}>
+            <CustomTextArea
+              cols='29'
+              maxLength={100}
+              onChange={ this.onChangeHighlightValueRef }
+              value={ highlightValue }
+              {...this.props} />
+          </Modal>
+        </Overlay>
+      )
+    }
+
+    if (highlightField === 'name') {
+      return (
+        <Overlay onClick={ this.onCloseModalRef }>
+          <Modal {...modalProps}>
+            <Input
+              handleChange={ this.onChangeHighlightValueRef }
+              maxLength={255}
+              value={ highlightValue }
+              {...this.props} />
+          </Modal>
+        </Overlay>
+      )
+    }
+
+    if (highlightField === 'website') {
+      return (
+        <Overlay onClick={ this.onCloseModalRef }>
+          <Modal {...modalProps}>
+            <Input
+              handleChange={ this.onChangeHighlightValueRef }
+              maxLength={255}
+              value={ highlightValue }
+              {...this.props} />
+          </Modal>
+        </Overlay>
+      )
+    }
+
+    if (highlightField === 'whyJoin') {
+      return (
+        <Overlay onClick={ this.onCloseModalRef }>
+          <Modal {...modalProps}>
+            <CustomTextArea
+              cols='29'
+              onChange={ this.onChangeHighlightValueRef }
+              value={ highlightValue }
+              {...this.props} />
+          </Modal>
+        </Overlay>
+      )
+    }
+
+    if (highlightField === 'image') {
+      return (
+        <Overlay onClick={ this.onCloseModalRef }>
+          <Modal {...modalProps}>
+            <ImagePicker
+              className='logo'
+              dontLookupSocialMediaAvatars
+              handleChange={ this.onChangeHighlightValueRef }
+              label='Choose media source'
+              presets={ PRESET_LOGOS }
+              src={ highlightValue }
+              uploadOptionFirst
+              {...this.props} />
+          </Modal>
+        </Overlay>
+      )
+    }
+
+    const setFieldOnChange = propName => {
+      return val => {
+        fields[highlightField][highlightIndex][propName] = val;
+        this.setState({fields: fields});
+      };
+    };
+    const onCreateDone = () => {
+      newMember.role = 'member';
+      fields[highlightField].push(newMember);
+      this.setState({fields: fields});
+      this.onCloseModal({target:{className: '-close'}});
+      this.delayedUpdate();
+    };
+    const memberIsBeingCreated = typeof highlightIndex !== 'number';
+    const memberIsBeingEdited = highlightIndex !== null;
+    if (createOrUpdateMembers) {
+      if (memberIsBeingCreated) {
+        return (
+          <Overlay onClick={ this.onCloseModalRef }>
+            <Modal {...modalProps} onDone={ onCreateDone }>
+              <ImagePicker
+                className='avatar'
+                dontLookupSocialMediaAvatars
+                handleChange={val => {
+                  newMember.avatar = val;
+                  this.setState({newMember: newMember});
+                }}
+                label='Choose avatar'
+                src={ newMember.avatar }
+                uploadOptionFirst
+                {...this.props} />
+                <Input
+                  handleChange={val => {
+                    newMember.name = val;
+                    this.setState({newMember: newMember});
+                  }}
+                  maxLength={255}
+                  placeholder='Name'
+                  value={ newMember.name }
+                  {...this.props} />
+                <Input
+                  handleChange={val => {
+                    newMember.website = val;
+                    this.setState({newMember: newMember});
+                  }}
+                  maxLength={255}
+                  placeholder='Website (Optional)'
+                  value={ newMember.website }
+                  {...this.props} />
+                <div className='-radio-group'>
+                  <input
+                    checked={ !newMember.core }
+                    type='radio'
+                    name='type'
+                    value='regular'
+                    onChange={e => {
+                      newMember.core = (e.target.value === 'core');
+                      this.setState({newMember: newMember});
+                    }} />
+                  <span>Regular</span>
+                  <input
+                    checked={ Boolean(newMember.core) }
+                    name='type'
+                    type='radio'
+                    value='core'
+                    onChange={e => {
+                      newMember.core = (e.target.value === 'core');
+                      this.setState({newMember: newMember});
+                    }} />
+                  <span>Core</span>
+                </div>
+            </Modal>
+          </Overlay>
+        )
+      }
+
+      if (memberIsBeingEdited) {
+        return (
+          <Overlay onClick={ this.onCloseModalRef }>
+            <Modal {...modalProps}>
+              <ImagePicker
+                className='avatar'
+                dontLookupSocialMediaAvatars
+                handleChange={ setFieldOnChange('avatar') }
+                label='Choose avatar'
+                src={ fields[highlightField][highlightIndex].avatar } 
+                uploadOptionFirst
+                {...this.props} />
+                <Input
+                  handleChange={ setFieldOnChange('name') }
+                  maxLength={255}
+                  placeholder='Name'
+                  value={ fields[highlightField][highlightIndex].name }
+                  {...this.props} />
+                <Input
+                  handleChange={ setFieldOnChange('website') }
+                  maxLength={255}
+                  placeholder='Website (Optional)'
+                  value={ fields[highlightField][highlightIndex].website }
+                  {...this.props} />
+                <div className='-radio-group'>
+                  <input
+                    checked={ !fields[highlightField][highlightIndex].core }
+                    type='radio'
+                    name='type'
+                    value='regular'
+                    onChange={e => {
+                      fields[highlightField][highlightIndex].core = (e.target.value === 'core');
+                      this.setState({fields: fields});
+                    }} />
+                  <span>Regular</span>
+                  <input
+                    checked={ Boolean(fields[highlightField][highlightIndex].core) }
+                    name='type'
+                    type='radio'
+                    value='core'
+                    onChange={e => {
+                      fields[highlightField][highlightIndex].core = (e.target.value === 'core');
+                      this.setState({fields: fields});
+                    }} />
+                  <span>Core</span>
+                </div>
+            </Modal>
+          </Overlay>
+        )
+      }
+    }
+  }
+
+  renderHighlights() {
+    return highlights.map(highlight => (
+      <Highlight { ...highlight } onClick={ () => this.onClickHighlight(highlight) } />
+    ));
+  }
+
+  renderEditCogs() {
+    const { highlightIndex, fields } = this.state;
+    const isRefReady = Boolean(this.refs.PublicGroupWhoWeAre);
+    if (isRefReady) {
+      const refList = Object.keys(this.refs.PublicGroupWhoWeAre.refs).filter(x => x.indexOf('UserCard-') === 0);
+      return refList.map((refName, i) => {
+        const userCardElement = this.refs.PublicGroupWhoWeAre.refs[refName].refs.UserCard;
+        const userCardRect = userCardElement.getBoundingClientRect();
+        const scrollY = window.scrollY;
+        const customStyle = {
+          top: `${ userCardRect.top + scrollY - 15 }px`,
+          left: `${ userCardRect.right - 15 }px`,
+        };
+        return (
+          <EditCog
+            key={ i }
+            style={ customStyle } 
+            onEdit={() => {
+              this.setState({
+                showModal: true,
+                highlightLabel: 'Edit Member',
+                highlightField: 'members',
+                highlightIndex: i
+              });
+            }}
+            onRemove={() => {
+              fields.members.splice(highlightIndex, 1);
+              this.setState({fields: fields});
+              this.delayedUpdate();
+            }}
+          />
+        )
+      });
+    }
+  }
+
+  /**
+  * refs are updated AFTER a state updated, so when creating/removing a component
+  * that has a ref, it will not be visible until another state update is made.
+  */
+  delayedUpdate() {
+    setTimeout(() => this.forceUpdate(), 100);
   }
 
   componentDidMount() {
@@ -366,7 +547,7 @@ export class EditCollective extends Component {
     const { fields } = this.state;
     const updatedFields = {};
     Object.keys(fields).forEach(fieldName => {
-      if (originalGroup[fieldName] !== fields[fieldName]) {
+      if (!isEqual(originalGroup[fieldName], fields[fieldName])) {
         updatedFields[fieldName] = fields[fieldName];
       }
     })
@@ -385,7 +566,7 @@ export class EditCollective extends Component {
   onCloseModal(e) {
     const targetClassName = e.target.className;
     if (targetClassName === 'EditCollective-Overlay' || targetClassName === 'OnBoardingButton' || targetClassName === '-close' ) {
-      this.setState({showModal: false, highlightLabel: null, highlightField: null, highlightIndex: null});
+      this.setState({showModal: false, highlightLabel: null, highlightField: null, highlightIndex: null, newMember: {}});
     }
   }
 
@@ -438,15 +619,13 @@ export default connect(mapStateToProps, {
   updateGroup,
   uploadImage,
 })(EditCollective);
+
 export function mapStateToProps({ groups }){
   const group = values(groups)[0] || {stripeAccount: {}}; // to refactor to allow only one group
 
   const usersByRole = group.usersByRole || {};
-  group.members = usersByRole[roles.MEMBER] || [];
-  group.backers = usersByRole[roles.BACKER] || [{tier: 'backer', 'name': 'Alfred'}, {tier: 'backer', 'name': 'Betty'}];
-  group.hosts = usersByRole[roles.HOST] || [];
+  group.members = usersByRole[roles.MEMBER] || [{tier: 'backer', 'name': 'Alfred'}, {tier: 'backer', 'name': 'Betty'}];
   group.tiers = group.tiers || [];
-  group.host = group.hosts[0] || {};
   return {
     originalGroup: group,
     i18n: i18n('en'),

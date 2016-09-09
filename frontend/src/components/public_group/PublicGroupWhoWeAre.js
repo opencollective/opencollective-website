@@ -30,10 +30,10 @@ export default class PublicGroupWhoWeAre extends Component {
           {group.members.length ? (
             <div className='PublicGroup-members pt4'>
               <h3 className='PublicGroup-subtitle mt0 mb2 -ff-sec -fw-light'>{ title }</h3>
-              <div className='flex flex-wrap justify-center'>
+              <div ref='PublicGroupWhoWeAre-members' className='flex flex-wrap justify-center'>
                 {group.members.map((user, index) => {
                   if (group.slug === 'opensource') user.tier = 'collective';
-                  return <UserCard user={ user } key={ index } className='m1' i18n={ i18n } />
+                  return <UserCard ref={`UserCard-${ index }`}  user={ user } key={ index } className='m1' i18n={ i18n } />
                   })
                 }
               </div>
