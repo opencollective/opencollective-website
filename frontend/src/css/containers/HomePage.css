@@ -1,5 +1,5 @@
 .HomePage {
-  background-image: url(../images/homepage-bg.svg);
+  background-image: url(../assets/images/homepage-bg.svg);
   background-position: center 0;
   background-repeat: no-repeat;
   font-family: Montserrat, sans-serif;
@@ -137,13 +137,13 @@
         background-repeat: no-repeat;
         margin: auto;
         &.-tghost {
-          background-image: url(../images/transparency-ghost.svg);
+          background-image: url(../assets/images/transparency-ghost.svg);
         }
         &.-oc {
-          background-image: url(../images/oc-icon.svg);
+          background-image: url(../assets/images/oc-icon.svg);
         }
         &.-fluid {
-          background-image: url(../images/fluid-icon.svg);
+          background-image: url(../assets/images/fluid-icon.svg);
         }
       }
       .-heading {
@@ -186,13 +186,13 @@
         background-repeat: no-repeat;
         margin: auto;
         &.-tghost {
-          background-image: url(../images/home-oc-icon.svg);
+          background-image: url(../assets/images/home-oc-icon.svg);
         }
         &.-oc {
-          background-image: url(../images/home-backers.svg);
+          background-image: url(../assets/images/home-backers.svg);
         }
         &.-fluid {
-          background-image: url(../images/home-money.svg);
+          background-image: url(../assets/images/home-money.svg);
         }
         .-value {
           text-align: center;
@@ -214,7 +214,7 @@
 }
 @media (min-width: 833px) {
   .icons-container {
-    background-image: url(../images/dotted-line.svg);
+    background-image: url(../assets/images/dotted-line.svg);
   }
 }
 

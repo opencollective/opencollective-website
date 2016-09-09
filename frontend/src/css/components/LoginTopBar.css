@@ -5,7 +5,7 @@
   background-color: rgba(255, 255, 255, 0.2);
   .LoginTopBar-logo {
     position: absolute;
-    background-image: url(../images/oc-logo-icon.svg);
+    background-image: url(../assets/images/oc-logo-icon.svg);
     background-repeat: no-repeat;
     background-size: contain;
     width: 40px;
