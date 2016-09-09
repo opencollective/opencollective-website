@@ -14,6 +14,13 @@ import uploadImage from '../actions/images/upload';
 
 import Notification from '../containers/Notification';
 
+import TopBar from '../components/edit_collective/EditCollectiveTopBar';
+import Modal from '../components/edit_collective/EditCollectiveModal';
+import Viewport from '../components/edit_collective/EditCollectiveViewport';
+import Overlay from '../components/edit_collective/EditCollectiveOverlay';
+import Highlight from '../components/edit_collective/EditCollectiveHighlight';
+import EditCog from '../components/edit_collective/EditCollectiveEditCog';
+
 import PublicFooter from '../components/PublicFooter';
 import PublicGroupHero from '../components/public_group/PublicGroupHero';
 import PublicGroupJoinUs from '../components/public_group/PublicGroupJoinUs';
@@ -97,7 +104,7 @@ const highlights = [ {
   refpath: 'PublicGroupMembersWall/PublicGroupMembersWall-list',
   label: 'New Contributor',
   buttonClassName: 'EditButton--NewUser',
-  field: null,
+  field: 'backers',
   extendStyle: function(target, rect, scrollY, style) {
     style.left = 'auto';
     style.width = '0px';
@@ -107,102 +114,6 @@ const highlights = [ {
   h.ref = `${h.refpath}--highlight`;
   return h;
 });
-
-class EditCog extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showMenu: false
-    };
-    this.toggleMenuRef = this.toggleMenu.bind(this);
-    this.onClickOutsideRef = this.onClickOutside.bind(this);
-  }
-  render() {
-    const { style } = this.props;
-    const { showMenu } = this.state;
-    return (
-      <div className='EditCog' style={ style } onClick={ this.toggleMenuRef }>
-        {showMenu && (
-          <div className='EditCog-Menu'>
-            <ul>
-              <li>Edit</li>
-              <li>Remove</li>
-            </ul>
-          </div>
-        )}
-      </div>
-    )    
-  }
-  onClickOutside() {
-    this.setState({showMenu: false});
-  }
-  componentDidMount() {
-    this.onClickOutsideRef = this.onClickOutside.bind(this);
-    document.addEventListener('click', this.onClickOutsideRef);
-  }
-  componentWillUnmount() {
-    document.removeEventListener('click', this.onClickOutsideRef);
-  }  
-  toggleMenu(e) {
-    this.setState({showMenu: !this.state.showMenu});
-    e.nativeEvent.stopImmediatePropagation();
-  }
-}
-
-const Highlight = ({ ref, style, label, auxClassName, buttonClassName, onClick }) => (
-  <div ref={ ref } className='EditCollective-Highlight' style={ style } onClick={ onClick }>
-    <div className={`Highlight-aux ${ auxClassName }`}></div>
-    <div className={`EditCollective-EditButton ${ buttonClassName }`}>
-      <div className='EditCollective-EditButtonLabel'>{ label }</div>
-    </div>
-  </div>
-);
-
-const Viewport = props => (
-  <div className='EditCollective-Viewport'>
-    { props.children }
-    <div className='-screen'></div>
-  </div>
-);
-
-const Overlay = props => (
-  <div className='EditCollective-Overlay' onClick={ props.onClick }>
-    { props.children }
-  </div>
-);
-
-const Modal = props => (
-  <div className={`EditCollective-Modal ${ props.className || '' }`} onClick={e => {
-    e.nativeEvent.stopImmediatePropagation();
-    return false;
-  }}>
-    <div className='EditCollective-Modal-title'>
-      <span>{ props.title }</span>
-      <div className='-close' onClick={ props.onClose }>✖</div>
-    </div>
-    <div className='EditCollective-Modal-body'>
-      { props.children }
-      <div className='OnBoardingButton' onClick={ props.onClose }>Done</div>
-    </div>
-  </div>
-);
-
-const TopBar = props => (
-  <div className='EditCollective-TopBar'>
-    <div className='EditCollective-TopBar-brand'>
-      <svg width='18px' height='18px' className='-light-blue align-middle mr1'>
-        <use xlinkHref='#svg-isotype'/>
-      </svg>
-      <svg width='172px' height='30px' className='align-middle -logo-text'>
-        <use xlinkHref='#svg-logotype' fill='#fff' />
-      </svg>
-    </div>
-    <div className='EditCollective-TopBar-buttons'>
-      <div className={`EditCollective-TopBar-Button ${ !props.canPublish ? '-disabled' : '' }`} onClick={ props.onPublish }>Save Changes</div>
-      <a href='.'><div className='EditCollective-TopBar-Button trans'>Exit Edit Mode</div></a>
-    </div>
-  </div>
-);
 
 export class EditCollective extends Component {
 
@@ -224,8 +135,8 @@ export class EditCollective extends Component {
         whyJoin: originalGroup.whyJoin,
         image: originalGroup.image,
         video: originalGroup.video,
+        backers: originalGroup.backers,
       },
-      backers: originalGroup.backers, // array to edit with editcog
     };
     this.onCloseModalRef = this.onCloseModal.bind(this);
     this.onChangeHighlightValueRef = this.onChangeHighlightValue.bind(this);
@@ -238,10 +149,15 @@ export class EditCollective extends Component {
 
   render() {
     const { originalGroup } = this.props;
-    const { showModal, highlightLabel, highlightField, fields } = this.state;
+    const { showModal, highlightLabel, highlightField, highlightIndex, fields } = this.state;
     const highlightValue = highlightField ? fields[highlightField] : null;
     const groupChanged = Boolean(Object.keys(this.getUpdatedFields()).length);
-    const createOrUpdateMembers = highlightField === null;
+    const createOrUpdateMembers = highlightField === 'backers';
+    const memberBeingEdited = (createOrUpdateMembers) 
+                                  ? (highlightValue[highlightIndex]) 
+                                      ? highlightValue[highlightIndex] 
+                                      : {name:'', website:'', avatar:'', core: false, _new: true} // new member
+                                  : null;
     const group = {
       name: fields.name || ' ',
       backgroundImage: fields.backgroundImage,
@@ -259,7 +175,7 @@ export class EditCollective extends Component {
       donationTotal: originalGroup.donationTotal,
       balance: originalGroup.balance,
       currency: originalGroup.currency,
-      backers: this.state.backers,
+      backers: fields.backers,
     };
     return (
       <div className='EditCollective'>
@@ -277,7 +193,14 @@ export class EditCollective extends Component {
         </Viewport>
         {showModal && (
           <Overlay onClick={ this.onCloseModalRef }>
-            <Modal onClose={ this.onCloseModalRef } title={ highlightLabel } className={ createOrUpdateMembers ? '-createOrUpdate' : '' }>
+            <Modal 
+              onClose={ this.onCloseModalRef } 
+              title={ highlightLabel } 
+              className={ createOrUpdateMembers ? '-createOrUpdate' : '' }
+              onDone={() => {
+                this.onCloseModal({target:{className: '-close'}}); // TODO
+              }}
+              >
               {highlightField === 'backgroundImage' && (
                 <ImagePicker
                   uploadOptionFirst
@@ -333,17 +256,57 @@ export class EditCollective extends Component {
                 <div>
                   <ImagePicker
                     uploadOptionFirst
-                    label='Choose media source'
-                    className="logo"
+                    label='Choose avatar'
+                    className='avatar'
                     dontLookupSocialMediaAvatars
-                    src={ highlightValue }
-                    handleChange={ this.onChangeHighlightValueRef }
+                    src={ memberBeingEdited.avatar } 
+                    handleChange={ val => memberBeingEdited.avatar = val }
                     {...this.props} />
-                    <Input {...this.props} value={ highlightValue } handleChange={ this.onChangeHighlightValueRef } placeholder='Name' maxLength={255}/>
-                    <Input {...this.props} value={ highlightValue } handleChange={ this.onChangeHighlightValueRef } placeholder='Website (Optional)' maxLength={255}/>
+                    <Input 
+                      handleChange={val => {
+                        memberBeingEdited.name = val;
+                        fields[highlightField][highlightIndex] = memberBeingEdited;
+                        this.setState({fields: fields});
+                      }}
+                      maxLength={255}
+                      placeholder='Name'
+                      value={ memberBeingEdited.name }
+                      {...this.props} 
+                    />
+                    <Input
+                      handleChange={val => {
+                        memberBeingEdited.website = val;
+                        fields[highlightField][highlightIndex] = memberBeingEdited;
+                        this.setState({fields: fields});
+                      }}
+                      maxLength={255}
+                      placeholder='Website (Optional)'
+                      value={ memberBeingEdited.website }
+                      {...this.props}
+                    />
                     <div className='-radio-group'>
-                      <input type="radio" name="trype" value="regular" /><span>Regular</span>
-                      <input type="radio" name="trype" value="core" /><span>Core</span>
+                      <input
+                        checked={ !Boolean(memberBeingEdited.core) }
+                        type="radio"
+                        name="type"
+                        value="regular"
+                        onChange={(e) => {
+                          memberBeingEdited.core = e.target.value === 'core';
+                          fields[highlightField][highlightIndex] = memberBeingEdited;
+                          this.setState({fields: fields});
+                        }}
+                      /><span>Regular</span>
+                      <input
+                        checked={ Boolean(memberBeingEdited.core) }
+                        type="radio"
+                        name="type"
+                        value="core"
+                        onChange={(e) => {
+                          memberBeingEdited.core = e.target.value === 'core';
+                          fields[highlightField][highlightIndex] = memberBeingEdited;
+                          this.setState({fields: fields});
+                        }}
+                      /><span>Core</span>
                     </div>
                 </div>
               )}
@@ -361,7 +324,28 @@ export class EditCollective extends Component {
             top: `${ userCardRect.top + scrollY - 15 }px`,
             left: `${ userCardRect.right - 15 }px`,
           };
-          return <EditCog key={ i } style={ customStyle }/>
+          return (
+            <EditCog
+              key={ i }
+              style={ customStyle } 
+              onEdit={() => {
+                this.setState({
+                  showModal: true,
+                  highlightLabel: 'Edit Contributor',
+                  highlightField: 'backers',
+                  highlightIndex: i
+                });
+              }}
+              onRemove={() => {
+                fields.backers.splice(highlightIndex, 1);
+                this.setState({fields: fields});
+                setTimeout(() => {
+                  // Removal of refs is delayed, not sure why..
+                  this.forceUpdate();
+                }, 100)
+              }}
+            />
+          )
         })}
       </div>
     )
@@ -401,7 +385,7 @@ export class EditCollective extends Component {
   onCloseModal(e) {
     const targetClassName = e.target.className;
     if (targetClassName === 'EditCollective-Overlay' || targetClassName === 'OnBoardingButton' || targetClassName === '-close' ) {
-      this.setState({showModal: false});
+      this.setState({showModal: false, highlightLabel: null, highlightField: null, highlightIndex: null});
     }
   }
 
