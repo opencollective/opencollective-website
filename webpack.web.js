@@ -146,7 +146,7 @@ function addStyleLoader(config, options = {}) {
     ]
   }
 
-  const styleExtract = new ExtractTextPlugin('frontend/src/css/[name].css')
+  const styleExtract = new ExtractTextPlugin('[name].css')
 
   config.module.loaders.push({
     test: /\.css$/,

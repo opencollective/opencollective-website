@@ -11,7 +11,7 @@ export default (app) => {
     noInfo: true,
     publicPath: webpackConfig.output.publicPath,
     silent: true,
-    stats: 'errors-only'
+    stats: 'normal'
   });
 
   app.use(middleware);
