@@ -9,7 +9,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const babelConfig = {
   babelrc: false,
   cacheDirectory: true,
-  presets: ["es2015", "stage-0", "react", "react-hmre"].map(i => require.resolve(`babel-preset-${i}`)),
+  presets: ["es2015-webpack", "stage-0", "react", "react-hmre"].map(i => require.resolve(`babel-preset-${i}`)),
+
   plugins: [
     "add-module-exports",
     "lodash"
@@ -42,11 +43,20 @@ function buildConfig(environment = process.env.NODE_ENV || 'development', option
 function generateBase(options = {}) {
   return {
     context: process.cwd(),
+
     devtool: 'eval',
     target: 'web',
+
+    cache: true,
+
     entry: {
       bundle: ['./frontend/src/index.web.js']
     },
+
+    node: {
+      console: true
+    },
+
     output: {
       path: options.outputPath || join(process.cwd(), 'frontend', 'dist'),
       filename: '[name].js',
@@ -99,14 +109,12 @@ function generateBase(options = {}) {
         'joi': 'joi-browser'
       },
 
-      // modifies the paths we use to satisfy require statements
       modules: [
         join(process.cwd(), 'frontend', 'src'),
         // normal commonjs behavior e.g. require('react')
         join(process.cwd(), 'node_modules')
       ],
 
-      // when requiring a module, which package.json fields should webpack use for the main script
       mainFields: [
         'jsnext:main',
         'main'

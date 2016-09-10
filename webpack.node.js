@@ -7,7 +7,8 @@ const externalNodeModules = require('webpack-node-externals')
 const babelConfig = {
   babelrc: false,
   cacheDirectory: true,
-  presets: ["es2015", "stage-0", "react"],
+  presets: ["es2015-webpack", "stage-0", "react"],
+
   plugins: [
     "add-module-exports",
     "lodash"
@@ -17,8 +18,10 @@ const babelConfig = {
 module.exports = {
   target: 'node',
 
+  cache: true,
+
   node: {
-    console: false
+    console: true
   },
 
   entry: {
