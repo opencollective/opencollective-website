@@ -39,14 +39,9 @@ class ImageUpload extends Component {
     let label = i18n.getString('uploadReceipt');
 
     if (value) {
-      if (value.match(/\.pdf$/)) {
-        imgsrc = '/static/images/mime-pdf.png';
-        label = file.name;
-      } else {
-        imgsrc = value;
-        label = ''
-        className = 'imagePreview';
-      }
+      className = 'imagePreview';
+      imgsrc = `http://res.cloudinary.com/opencollective/image/fetch/w_335,c_fill,f_jpg/${encodeURIComponent(value)}`;
+      label = (value.match(/\.pdf$/)) ? file.name : '';
     }
 
     if (isUploading) {
