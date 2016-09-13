@@ -421,6 +421,7 @@
   background-position: center;
   background-repeat: no-repeat;
   .EditCog-Menu {
+    z-index: 999999;
     position: absolute;
     width: 70px;
     border-radius: 5px;
