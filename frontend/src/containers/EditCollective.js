@@ -12,6 +12,7 @@ import i18n from '../lib/i18n';
 
 import notify from '../actions/notification/notify';
 import updateGroup from '../actions/groups/update';
+import updateGroupMembers from '../actions/groups/updateMembers';
 import uploadImage from '../actions/images/upload';
 
 import Notification from '../containers/Notification';
@@ -33,11 +34,6 @@ import PublicGroupWhyJoin from '../components/public_group/PublicGroupWhyJoin';
 import CustomTextArea from '../components/CustomTextArea';
 import ImagePicker from '../components/ImagePicker';
 import Input from '../components/Input';
-
-const SAMPLE_BACKERS = [
-  {tier: 'backer', 'name': 'Alfred'}, 
-  {tier: 'backer', 'name': 'Betty'}
-];
 
 const PRESET_LOGOS = [
   '/static/images/rocket.svg',
@@ -120,11 +116,6 @@ const highlights = [ {
 ].map(h => {
   h.ref = `${h.refpath}--highlight`;
   return h;
-});
-
-const updateGroupMembers = (groupId, members) => new Promise((resolve) => {
-  console.log('updateGroupMembers', groupId, members);
-  resolve();
 });
 
 export class EditCollective extends Component {
@@ -506,12 +497,10 @@ export class EditCollective extends Component {
     const { fields } = this.state;
     const updatedFields = {};
     Object.keys(fields).forEach(fieldName => {
-      console.log('testing', fieldName, originalGroup[fieldName], '===', fields[fieldName]);
       if (!isEqual(originalGroup[fieldName], fields[fieldName])) {
         updatedFields[fieldName] = fields[fieldName];
       }
-    })
-    console.log('getUpdatedFields', updatedFields);
+    });
     return updatedFields;
   }
 
@@ -596,7 +585,7 @@ export function mapStateToProps({ groups }){
   const group = values(groups)[0] || {stripeAccount: {}}; // to refactor to allow only one group
 
   const usersByRole = group.usersByRole || {};
-  group.members = usersByRole[roles.MEMBER] || SAMPLE_BACKERS || [];
+  group.members = usersByRole[roles.MEMBER] || [];
   group.tiers = group.tiers || [];
   return {
     originalGroup: group,
