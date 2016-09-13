@@ -1,0 +1,46 @@
+.Response {
+  background-color: #fff;
+  height: 100%;
+  .PublicFooter {
+    margin-top: 100px;
+  }
+  .Response-container {
+    text-align: center;
+    .image {
+      margin-top: 90px;
+      width: 200px;
+    }
+    .title {
+      font-family: Montserrat;
+      font-size: 37px;
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.51;
+      text-align: center;
+      color: #494b4d;
+      margin: 30px 0 10px 0;
+    }
+    .description {
+      font-family: Montserrat;
+      font-size: 21px;
+      font-weight: 300;
+      font-style: normal;
+      font-stretch: normal;
+      text-align: center;
+      color: #616466;
+      margin-bottom: 25px;
+    }
+    .green-link {
+      font-family: Lato;
+      font-size: 16px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.69;
+      text-align: center;
+      color: #75cc1f;
+      text-decoration: underline;
+    }
+  }
+}
