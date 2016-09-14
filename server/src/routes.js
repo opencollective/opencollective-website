@@ -89,6 +89,7 @@ export default (app) => {
   app.get('/github/apply/:token', mw.ga, mw.extractGithubUsernameFromToken, mw.addTitle('Sign up your Github repository'), render);
   app.get('/github/apply', mw.ga, mw.addTitle('Sign up your Github repository'), render);
   app.get('/connect/github', mw.ga, render);
+  app.get('/:slug/:tier', mw.ga, render); // <-------- WIP
   app.get('/:slug/connect/:provider', mw.ga, render);
   app.get('/:slug/edit-twitter', mw.ga, controllers.profile, render);
   app.get('/:slug/edit', mw.ga, mw.addTitle('Edit'), mw.fetchGroupBySlug, mw.addMeta, render);

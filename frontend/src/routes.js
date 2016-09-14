@@ -17,6 +17,7 @@ import Discover from './containers/Discover';
 import About from './containers/About';
 import AddGroup from './containers/AddGroup';
 import EditCollective from './containers/EditCollective';
+import GroupTierList from './containers/GroupTierList';
 import Response from './containers/Response';
 
 import { requireAuthentication } from './components/AuthenticatedComponent';
@@ -38,6 +39,7 @@ export default (
     {/* Leaving github/apply routes for existing links */}
     <Route path="/github/apply/:token" component={OnBoarding} />
     <Route path="/github/apply" component={OnBoarding} />
+    <Route path="/:slug/:tier" component={GroupTierList} />
     <Route path="/:slug/connected-accounts" component={ConnectedAccounts} />
     <Route path="/:slug/connect/:provider" component={ConnectAuthProviderButton} />
     <Route path="/:slug/edit-twitter" component={EditTwitter} />
