@@ -54,7 +54,7 @@ export class GroupTierList extends Component {
                 <div className='GroupTierList-empty'>There are no users with the name: <strong>{searchQuery}</strong></div>
               )}
               {(!tierList || tierList.length === 0) && (
-                <div className='GroupTierList-empty'>There are no <strong>{tier}</strong> in this collective</div>
+                <div className='GroupTierList-empty'>There are no <strong>{tier}</strong> in this collective.</div>
               )}
             </div>
           </div>
