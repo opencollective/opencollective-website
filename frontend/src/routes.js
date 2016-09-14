@@ -17,6 +17,7 @@ import Discover from './containers/Discover';
 import About from './containers/About';
 import AddGroup from './containers/AddGroup';
 import EditCollective from './containers/EditCollective';
+import Components from './containers/Components';
 
 import { requireAuthentication } from './components/AuthenticatedComponent';
 
@@ -24,6 +25,7 @@ export default (
   <Route>
     <Route path="/" component={HomePage} />
     <Route path="/about" component={About} />
+    <Route path="/components" component={Components} />
     <Route path="/faq" component={Faq} />
     <Route path="/discover(/:tag)" component={Discover} />
     <Route path="/addgroup" component={requireAuthentication(AddGroup)} />

@@ -11,6 +11,10 @@ import render from './lib/render';
 
 export default (app) => {
 
+  if (app.get('env') === 'development') {
+    app.get('/components', mw.addTitle('Components'), render);
+  }
+
   /**
    * Redirects
    */
