@@ -66,9 +66,13 @@ export default function groups(state={}, action={}) {
       return state;
 
     case constants.GROUP_TAGS_SUCCESS:
-        return merge({}, state, {
-          tags: action.json
-        });
+      return merge({}, state, {
+        tags: action.json
+      });
+    case constants.GROUP_TIER_LIST_SUCCESS:
+      return merge({}, state, {
+        tierList: action.tierList
+      });
     default:
       return state;
   }
