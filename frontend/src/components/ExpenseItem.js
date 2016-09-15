@@ -16,7 +16,7 @@ const ExpenseItem = ({ className = '', expense, user, i18n }) => {
         <div className='h6 white -fw-bold'>{expense.incurredAt && i18n.moment(expense.incurredAt).fromNow()}</div>
       </div>
       <div className='p2 flex-auto bg-white'>
-        <p className='h5 mt0 mb1'>{expense.category || expense.title}</p>
+        <p className='h5 mt0 mb1'>{expense.title || expense.category}</p>
         <p className='h6 m0 muted'>{i18n.getString('submittedBy')} {user && user.name}</p>
         <div className='mt2'>
           <span className='h3 -ff-sec -fw-bold'>
