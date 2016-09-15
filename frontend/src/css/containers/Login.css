@@ -1,6 +1,20 @@
-.Login-content {
-  margin-left: 3rem;
-  max-width: 600px;
+.Login {
+  background-color: rgb(240,245,248);
+  .LoginTopBar {
+    background-color: #fff;
+  }
+  .Login-container {
+    .Login-box {
+      margin-left: 3rem;
+      max-width: 600px;
+      height: 100%;
+      margin: auto;
+      padding: 60px;
+    }
+  }
+  .PublicFooter {
+
+  }
 }
 
 .Login-form {

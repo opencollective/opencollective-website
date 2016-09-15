@@ -27,11 +27,13 @@ export class Login extends Component {
       <div className='Login'>
         <Notification {...this.props} />
         <LoginTopBar />
-        <div className='Login-content'>
-          <div className='Login-quote'>
-            <h2> Login to Open Collective </h2>
+        <div className='Login-container'>
+          <div className='Login-box'>
+            <div className='Login-quote'>
+              <h2> Login to Open Collective </h2>
+            </div>
+            <LoginEmailForm onClick={sendNewToken.bind(this)} {...this.props} />
           </div>
-        <LoginEmailForm onClick={sendNewToken.bind(this)} {...this.props} />
         </div>
         <PublicFooter/>
       </div>
