@@ -133,7 +133,7 @@
   }
   .CollectiveCard-body {
     .CollectiveCard-name {
-      height: 29px;
+      min-height: 29px;
       font-family: montserratlight;
       font-size: 22px;
       font-weight: 300;
