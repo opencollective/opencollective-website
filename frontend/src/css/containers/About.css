@@ -75,13 +75,13 @@
             background-position: center;
             background-repeat: no-repeat;
             &.fa-twitter {
-              background-image: url(../images/fa-twitter.svg);
+              background-image: url(~assets/images/fa-twitter.svg);
             }
             &.fa-facebook {
-              background-image: url(../images/fa-facebook-f.svg);
+              background-image: url(~assets/images/fa-facebook-f.svg);
             }
             &.fa-linkedin {
-              background-image: url(../images/fa-linkedin.svg);
+              background-image: url(~assets/images/fa-linkedin.svg);
             }
           }
         }
@@ -183,25 +183,25 @@ ul.social-list {
         background-position: center;
         background-repeat: no-repeat;
         &.fa-twitter {
-          background-image: url(../images/fa-twitter.svg);
+          background-image: url(~assets/images/fa-twitter.svg);
         }
         &.fa-facebook {
-          background-image: url(../images/fa-facebook-f.svg);
+          background-image: url(~assets/images/fa-facebook-f.svg);
         }
         &.fa-linkedin {
-          background-image: url(../images/fa-linkedin.svg);
+          background-image: url(~assets/images/fa-linkedin.svg);
         }
         &.fa-medium {
-          background-image: url(../images/fa-medium.svg);
+          background-image: url(~assets/images/fa-medium.svg);
         }
         &.fa-slack {
-          background-image: url(../images/fa-slack.svg);
+          background-image: url(~assets/images/fa-slack.svg);
         }
         &.fa-envelope-o {
-          background-image: url(../images/fa-envelope-o.svg);
+          background-image: url(~assets/images/fa-envelope-o.svg);
         }
         &.fa-github {
-          background-image: url(../images/fa-github.svg);
+          background-image: url(~assets/images/fa-github.svg);
         }
       }
     }

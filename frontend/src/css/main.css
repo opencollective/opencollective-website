@@ -28,10 +28,8 @@
  */
 
 @import './containers/About.css';
-@import './containers/AddGroup.css';
 @import './containers/Discover.css';
 @import './containers/DonatePage.css';
-@import './containers/EditCollective.css';
 @import './containers/Faq.css';
 @import './containers/HomePage.css';
 @import './containers/Leaderboard.css';
@@ -39,7 +37,6 @@
 @import './containers/OnBoarding.css';
 @import './containers/ProfilePage.css';
 @import './containers/PublicGroup.css';
-@import './containers/Response.css';
 @import './containers/SubmitExpense.css';
 @import './containers/Subscriptions.css';
 @import './containers/Transactions.css';
@@ -65,7 +62,6 @@
 @import './components/ExpenseForm.css';
 @import './components/ExpenseItem.css';
 @import './components/Field.css';
-@import './components/Grid.css';
 @import './components/Icon.css';
 @import './components/ImagePicker.css';
 @import './components/ImageUpload.css';

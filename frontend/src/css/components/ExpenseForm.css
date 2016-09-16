@@ -46,7 +46,6 @@
       text-align: center;
       & > div:nth-child(1) {
         height: 288px;
-        position: relative;
         background-color: #ffffff;
         background-position: center;
         background-repeat: no-repeat;
@@ -68,14 +67,14 @@
           color: #797d80;
         }
         &.placeholder, &:not(.imagePreview) {
-          background-image: url(/static/images/users/upload-default.svg);
+          background-image: url(~assets/images/users/upload-default.svg);
           background-repeat: no-repeat;
           background-position: center;
           &:hover {
-            background-image: url(/static/images/users/upload-hover.svg);
+            background-image: url(~assets/images/users/upload-hover.svg);
           }
           &:active {
-            background-image: url(/static/images/users/upload-pressed.svg);
+            background-image: url(~assets/images/users/upload-pressed.svg);
           }
           img[src="/static/images/mime-pdf.png"] {
             height: 200px;
@@ -86,12 +85,6 @@
         &.imagePreview {
           img {
             width: 100%;
-          }
-          label {
-            position: absolute;
-            width: 100%;
-            bottom: 0px;
-            left: 0px;
           }
         }
       }

@@ -3,7 +3,7 @@
   .DonatePage-logo {
     width: 152px;
     height: 152px;
-    background-image: url(../images/rocket.svg);
+    background-image: url(~assets/images/rocket.svg);
     background-repeat: no-repeat;
     background-position: center;
     margin: auto;
