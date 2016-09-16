@@ -17,12 +17,14 @@ import Discover from './containers/Discover';
 import About from './containers/About';
 import AddGroup from './containers/AddGroup';
 import EditCollective from './containers/EditCollective';
+import Response from './containers/Response';
 
 import { requireAuthentication } from './components/AuthenticatedComponent';
 
 export default (
   <Route>
     <Route path="/" component={HomePage} />
+    <Route path="/services/email/:action(unsubscribe|approve)" component={Response} />
     <Route path="/about" component={About} />
     <Route path="/faq" component={Faq} />
     <Route path="/discover(/:tag)" component={Discover} />

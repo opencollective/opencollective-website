@@ -50,6 +50,12 @@ export default (app) => {
   });
 
   /**
+  * Email Subscription
+  */
+  app.get('/services/email/unsubscribe', mw.ga, controllers.unsubscribe, render);
+  app.get('/services/email/approve', mw.ga, controllers.subscribe, render);
+
+  /**
    * Routes
    */
   app.get('/:slug/banner.md', mw.cache(300), mw.fetchGroupBySlug, mw.fetchActiveUsers(), controllers.banner.markdown);
