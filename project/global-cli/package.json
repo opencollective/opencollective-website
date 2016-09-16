@@ -1,0 +1,22 @@
+{
+  "name": "opencollective-devtools-cli",
+  "license": "MIT",
+  "version": "1.0.0",
+  "main": "index.js",
+
+  "preferGlobal": "true",
+
+  "scripts": {
+    "test": "exit 0"
+  },
+
+  "bin": {
+    "ocdevtool": "index.js"
+  },
+
+  "author": "Jon Soeder <jon@chicago.com> (https://twitter.com/soederpop)",
+
+  "dependencies": {
+    "findup-sync": "latest"
+  }
+}
