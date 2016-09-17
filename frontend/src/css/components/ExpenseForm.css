@@ -2,6 +2,9 @@
   box-sizing: border-box;
   padding: 40px;
   margin: 0;
+  .-notes textarea {
+    height: 145px;
+  }
   .line1 {
     height: 17px;
     font-family: Montserrat;
@@ -139,7 +142,7 @@
     }
   }
   .ExpenseForm {
-    padding: 20px;
+    padding: 20px 20px 40px 20px;
     .line1 {
       font-size: 16px;
       font-family: montserratlight, sans-serif;

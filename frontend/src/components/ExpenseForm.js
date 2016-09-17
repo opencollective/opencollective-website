@@ -1,11 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
+import moment from 'moment';
 
 import formatCurrency from '../lib/format_currency';
 import env from '../lib/env';
 
 import payoutMethods from '../ui/payout_methods';
 
+import DatePicker from './DatePicker';
 import ImageUpload from './ImageUpload';
 import Input from './Input';
 import SelectCategory from './SelectCategory';
@@ -127,19 +129,39 @@ class ExpenseForm extends Component {
               options={payoutMethods(group.settings.lang)}
               value={attributes.payoutMethod}
               handleChange={payoutMethod => appendExpenseForm({payoutMethod})} />
+            <label>{i18n.getString('date')}</label>
+            <DatePicker
+              customClass='js-transaction-createdAt'
+              selected={moment(attributes.incurredAt)}
+              maxDate={moment()}
+              handleChange={incurredAt => appendExpenseForm({incurredAt})} />
           </div>
 
           {attributes.payoutMethod === 'paypal' && (
-
-          <div className='col col-12 sm-col-12 md-col-6 lg-col-6  pl1'>
-            <label>Paypal Email</label>
-            <Input
-              customClass='js-transaction-paypalEmail'
-              hasError={expense.error.paypalEmail}
-              value={attributes.paypalEmail || attributes.email}
-              handleChange={paypalEmail => appendExpenseForm({paypalEmail})} />
-          </div>
+            <div className='col col-12 sm-col-12 md-col-6 lg-col-6  pl1'>
+              <label>Paypal Email</label>
+              <Input
+                customClass='js-transaction-paypalEmail'
+                hasError={expense.error.paypalEmail}
+                value={attributes.paypalEmail || attributes.email}
+                handleChange={paypalEmail => appendExpenseForm({paypalEmail})} />
+            </div>
           )}
+
+          {attributes.payoutMethod !== 'paypal' && (
+            <div className='col col-12 sm-col-12 md-col-6 lg-col-6 pl1'>
+              <label>{i18n.getString('note')}</label>
+              <CustomTextArea
+                resize='vertical'
+                customClass='js-transaction-description'
+                className='-notes'
+                hasError={expense.error.title}
+                value={attributes.notes}
+                onChange={notes => appendExpenseForm({notes})}
+                maxLength={255} />
+            </div>
+          )}
+
         </div>
         <button type='submit' className={`Button ${hasAttachment ? 'Button--green' : 'Button--disabled'}`} onClick={hasAttachment && this.onSubmit.bind(this)}>submit expense</button>
       </div>
