@@ -1,5 +1,4 @@
-web: npm run watch:server
-js: npm run watch:js
-css: gulp watch:css
-assets: gulp watch:assets
+server: ENABLE_HMR=true HMR_PUBLIC_PATH="http://localhost:8080" make start-dev
+web: make build-frontend-watch
+js: make run-dev-hot
 svg: gulp watch:svg

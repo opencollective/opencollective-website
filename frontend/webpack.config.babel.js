@@ -24,7 +24,11 @@ export default (env, options = {}) => {
   return {
     postcss: postcss,
     ...config,
-    context: __dirname
+    context: __dirname,
+    devServer: {
+      info: false,
+      stats: 'normal'
+    }
   }
 }
 
@@ -35,7 +39,12 @@ export const webBuilder = () => (
 
   .entry(prepare({
     bundle: 'src/index.web.js',
-    widget: 'src/css/widget.css'
+
+    // We may need to use extract text loader here in development if we want the css to be output as a file
+    // however currently i don't think that would be hot reloadable. the downside of not doing it is the
+    // initial page load in dev does not have CSS in the head tag; only when the JS is loaded 
+    widget: 'src/css/widget.css',
+    main: 'src/css/main.css'
   }))
 
   .output({

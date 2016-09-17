@@ -14,7 +14,7 @@ export default (options) => ({
     "babel-preset-es2015",
     "babel-preset-stage-0",
     "babel-preset-react",
-    (options.hot === 'enabled' ? "babel-preset-react-hmre" : null)
+    (options.hot ? "babel-preset-react-hmre" : null)
   ]),
 
   plugins: resolvePaths([
