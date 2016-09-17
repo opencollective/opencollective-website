@@ -62,7 +62,6 @@ export default (options = {}, {project, paths}) => (
     })
 
     .plugin('webpack.NamedModulesPlugin')
-    .plugin('webpack.optimize.DedupePlugin')
 
     /**
      * Include polyfills for fetch and use bluebird for Promise
@@ -109,6 +108,7 @@ const production = (project, paths, builder) => {
       })
     })
 
+    .plugin('webpack.optimize.DedupePlugin')
     .plugin('webpack.optimize.CommonsChunkPlugin', {
       name: 'vendor',
       children: true,
