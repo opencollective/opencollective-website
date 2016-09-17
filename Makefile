@@ -3,16 +3,14 @@ NODE_CONFIG_DIR ?= ./server/config
 FRONTEND_DIST_PATH ?= ./frontend/dist
 SERVER_VIEWS_PATH ?= ./server/dist/views
 
-start: build start-dev-cold
+start: clean build start-server
 
-# Server Side HMR is experimental and opt-in, requires
-# this flag to be set
-start-dev: build
+start-server-hot: build-frontend
 	@echo Starting Server
 	@NODE_CONFIG_DIR=$(NODE_CONFIG_DIR) ENABLE_HMR=true \
 		node server/dist
 
-start-dev-cold:
+start-server:
 	@echo Starting Server
 	@NODE_CONFIG_DIR=$(NODE_CONFIG_DIR) node server/dist
 

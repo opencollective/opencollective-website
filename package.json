@@ -7,7 +7,7 @@
   },
   "scripts": {
     "start": "NODE_CONFIG_DIR=./server/config node server/dist",
-    "dev": "npm run build && WEBSITE_PORT=3000 nf start -j Procfile_dev",
+    "dev": "WEBSITE_PORT=3000 nf start -j Procfile_dev",
     "hint": "eslint '**/*.js' --quiet",
     "pretest": "npm run hint",
     "test": "npm run test:server && npm run test:unit",

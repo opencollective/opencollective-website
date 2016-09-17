@@ -1,4 +1,4 @@
-server: ENABLE_HMR=true HMR_PUBLIC_PATH="http://localhost:8080" make start-dev
 web: make build-frontend-watch
-js: make run-dev-hot
+js: make build-server-webpack-watch
+universal: make build-universal-watch
 svg: gulp watch:svg
