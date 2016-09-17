@@ -19,10 +19,10 @@ export default () => {
 
   // Instead of webpack's non-descript integer ids for our modules
   .plugin('webpack.NamedModulesPlugin')
-
-  .plugin('webpack.DefinePlugin', {
-    'process.env.NODE_CONFIG_DIR': './config'
-  })
+  .plugin('copy-webpack-plugin', [{
+    from: server.join('src/views'),
+    to: server.join('dist/views')
+  }])
 
   if (wantsHMR) {
     builder.when('development', (builder) => builder
@@ -30,8 +30,6 @@ export default () => {
       .plugin('webpack.NoErrorsPlugin') // NoErrorsPlugin prevents HMR from applying broken updates
     )
   }
-
-  console.log("Builder", builder.getState())
 
   const config = builder.getConfig()
 

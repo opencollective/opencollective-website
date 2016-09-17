@@ -31,11 +31,12 @@ export default (app) => {
     return (options.precision == 2) ? number.format('$ 0,0.00') : number.format('$ 0,0');
   });
 
-  app.engine('hbs', hbs.express4({
-    partialsDir: path.join(__dirname, '/partials'),
-    defaultLayout: path.join(__dirname, '/layouts/default')
-  }));
   app.set('view engine', 'hbs');
-  app.set('views', __dirname);
   app.set('view cache', config.viewCache);
+  
+  app.engine('hbs', hbs.express4({
+    partialsDir: path.join(app.get('views'), '/partials'),
+    defaultLayout: path.join(app.get('views'), '/layouts/default')
+  }));
+
 }
