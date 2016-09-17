@@ -12,12 +12,17 @@ export default (options = {}, {project, paths}) => (
       path: paths.output
     })
 
+    .modules(paths.src)
+
     /**
      * COMMON LOADERS
      *
      * These files are treated the same for all environments
      */
     .loader('json', '.json')
+    .loader('yaml', ['.yml','.yaml'], {
+      loader: 'json!yaml'
+    })
 
     .loader('file', ['.eot','.svg','.ttf','.woff','.woff2'], {
       include: [paths.assets],
@@ -36,7 +41,6 @@ export default (options = {}, {project, paths}) => (
     .when('development', (builder) => development(project, paths, builder))
     .when('production', (builder) => production(project, paths, builder))
 
-    .modules(paths.src)
     /**
      * Expose environment vars such as NODE_ENV as process.env.NODE_ENV in our build
      */
@@ -57,18 +61,20 @@ export default (options = {}, {project, paths}) => (
       __BROWSER__: true
     })
 
+    .plugin('webpack.NamedModulesPlugin')
+    .plugin('webpack.optimize.DedupePlugin')
+
     /**
      * Include polyfills for fetch and use bluebird for Promise
      */
     .plugin('webpack.ProvidePlugin', {
       Promise: 'bluebird',
-      fetch: 'exports?window.fetch!whatwg-fetch'
+      fetch: 'exports?window.fetch!whatwg-fetch',
+      React: 'react' // make react available anywhere
     })
 )
 
 const production = (project, paths, builder) => {
-console.log('BUILDING PRODUCTION', process.env.NODE_ENV)
-
   const { loader } = plugins.helpers.styleExtractor({name:'[name].css'})
 
   const prod = builder
@@ -103,14 +109,11 @@ console.log('BUILDING PRODUCTION', process.env.NODE_ENV)
       })
     })
 
-
     .plugin('webpack.optimize.CommonsChunkPlugin', {
       name: 'vendor',
       children: true,
       minChunks: 2
     })
-
-    .plugin('webpack.optimize.DedupePlugin')
 
     .plugin('webpack.optimize.UglifyJsPlugin', {
       compress: {

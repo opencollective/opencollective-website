@@ -1,18 +1,8 @@
-/**
- * Webpack Configuration: Target node / commonjs
- *
- * Outputs modules which expect to be run in node.js.  A main difference
- * between the node and browser target is that our module will be able to
- * use nodes / npm module resolution at runtime.  This is accomplished by
- * treating all of the modules in node_modules/ as webpack `externals`
- *
- * See: https://webpack.github.io/docs/library-and-externals.html
- */
-import * as loaders from './webpack/loaders'
-const { EXPOSE_ENV } = require('./env')
-
-const passThroughNodeModules = require('./webpack/node-module-externals')
 const project = require('..')
+const loaders = require('./webpack/loaders')
+const passThroughNodeModules = require('./webpack/node-module-externals')
+const { EXPOSE_ENV } = require('./env')
+const wantsHMR = process.env.ENABLE_HMR || process.argv.indexOf('--hot')
 
 export default (options = {}, {paths}) => (
   require('@terse/webpack').api()
@@ -23,33 +13,27 @@ export default (options = {}, {paths}) => (
       filename: '[name].js'
     })
 
-    .externals(
-      passThroughNodeModules({
-        pkg: require(paths.join('package.json'))
-      })
-    )
-
-    .externals(project.paths.tools)
-
-    /**
-     * Source Map Support in node requires the source-map-support module
-    .sourcemap("source-map")
-    .plugin("webpack.BannerPlugin", {
-      banner: `require("source-map-support").install();`,
-      raw: true
-    })
-     */
-     
-    /**
-     * COMMON LOADERS
-     *
-     * These files are treated the same for all environments
-     */
+    // File Loaders
     .loader('json', '.json')
+    .loader('yml', ['.yml','.yaml'], {
+      loader: 'json!yaml'
+    })
 
-    // Apply our environment specific configurations
-    .when('development', (builder) => development(project, paths, builder))
-    .when('production', (builder) => production(project, paths, builder))
+    // Tell webpack not to bundle our package dependencies
+    .externals(passThroughNodeModules({
+      pkg: require(paths.join('package.json'))
+    }))
+
+    // Also don't bundle any of our sibling projects
+    .externals(project.paths.frontend.context)
+
+    // Tells webpack to leave these alone
+    .node({
+      __dirname: false,
+      __filename: false,
+      process: false,
+      console: false
+    })
 
     /**
      * Expose environment vars such as NODE_ENV as process.env.NODE_ENV in our build
@@ -71,40 +55,50 @@ export default (options = {}, {paths}) => (
       Promise: 'bluebird'
     })
 
+    .plugin('webpack.NamedModulesPlugin')
+
+    // Make react available to everything
+    .plugin('webpack.ProvidePlugin', {
+      React: 'react'
+    })
+
     // ignore auto-lazy loaded moment-locales
     .plugin('webpack.IgnorePlugin', /^\.\/locale$/, /moment$/)
-)
 
-const production = (project, paths, builder) => (
-  builder
-    .loader('babel', '.js', loaders.scripts.babelLoader({
-      exclude: [
-        /node_modules/,
-        paths.output,
-        project.paths.frontend.output
-      ],
-      include: [
-        project.paths.server.src,
-        project.paths.frontend.src,
-        project.paths.copy.src,
-        project.paths.tools
-      ]
-    }))
-)
+     // Source Map Support in node requires the source-map-support module
+    .sourcemap("source-map")
+    .plugin("webpack.BannerPlugin", {
+      banner: `require("source-map-support").install();`,
+      raw: true
+    })
 
-const development = (project, paths, builder) => (
-  builder
-    .loader('babel', '.js', loaders.scripts.babelHotLoader({
-      hot: (process.argv.indexOf('--hot') >= 0 || process.env.ENABLE_HMR),
-      exclude: [
-        /node_modules/,
-        paths.output
-      ],
-      include: [
-        project.paths.server.src,
-        project.paths.frontend.src,
-        project.paths.copy.src,
-        project.paths.tools
-      ]
-    }))
+    .when('production', (builder) => (builder
+      .loader('babel', '.js', loaders.scripts.babelLoader({
+        exclude: [
+          /node_modules/,
+          paths.output,
+          project.paths.frontend.output
+        ],
+        include: [
+          project.paths.server.src,
+          project.paths.frontend.src
+        ]
+      }))
+    ))
+
+    // In development we use a few different babel-presets and babel-loader options
+    .when('development', (builder) => (builder
+      .loader('babel', '.js', loaders.scripts.babelHotLoader({
+        hot: wantsHMR,
+        exclude: [
+          /node_modules/,
+          paths.output,
+          project.paths.frontend.output
+        ],
+        include: [
+          project.paths.server.src,
+          project.paths.frontend.src
+        ]
+      }))
+    ))
 )
