@@ -21,7 +21,7 @@ export default (options = {}, {paths}) => (
 
     // Tell webpack not to bundle our package dependencies
     .externals(passThroughNodeModules({
-      pkg: require(paths.join('package.json'))
+      pkg: require(project.paths.join('package.json'))
     }))
 
     // Also don't bundle any of our sibling projects
