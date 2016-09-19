@@ -1,4 +1,4 @@
-web: make build-frontend-watch
-js: make build-server-webpack-watch
+frontend: make build-frontend-watch
+server: make build-server-webpack-watch
 universal: make build-universal-watch
 svg: gulp watch:svg
