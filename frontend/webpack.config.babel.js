@@ -20,6 +20,15 @@ export default (env, options = {}) => {
 
   builder.context(__dirname)
 
+  if (process.env.RUN_LINTER) {
+    // Run everything through eslint first
+    builder.preLoader('eslint', '.js', {
+      include: [paths.src],
+      exclude: [/node_modules/],
+      loader: 'eslint'
+    })
+  }
+
   const config = builder.getConfig()
 
   // HACK. Not sure how to add this with the @terse/webpack DSL
@@ -67,9 +76,11 @@ export const webBuilder = (env, options) => ( // eslint-disable-line
    * Files required this way will be hashed into the build automatically by webpack
    */
   .plugin('copy-webpack-plugin', [{
-    from: 'robots.txt'
+    from: frontend.join('src/assets/robots.txt'),
+    to: frontend.join('dist')
   }, {
-    from: frontend.join('src/assets/images/favicon.ico.png')
+    from: frontend.join('src/assets/images/favicon.ico.png'),
+    to: frontend.join('dist/images')
   }])
 
   // ignore auto-lazy loaded moment-locales
@@ -152,4 +163,8 @@ const saveManifest = {
       project.fsx.outputJsonSync(`${compiler.outputPath}/assets-manifest.json`, modules)
     })
   }
+}
+
+const dllBundler = () => {
+
 }

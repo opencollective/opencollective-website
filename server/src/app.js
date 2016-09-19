@@ -20,6 +20,7 @@ const app = express();
 app.set('views', SERVER_VIEWS_PATH)
 app.set('static root', FRONTEND_DIST_PATH)
 app.set('widgetModulePath', join(FRONTEND_DIST_PATH, 'universal', 'widget.js'))
+app.set('ssrMiddlewarePath', join(FRONTEND_DIST_PATH, 'universal', 'middleware.js'))
 
 app.staticPath = (...args) => join(FRONTEND_DIST_PATH, ...args)
 

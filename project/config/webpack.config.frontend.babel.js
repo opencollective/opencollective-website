@@ -14,12 +14,6 @@ export default (options = {}, {project, paths}) => (
 
     .modules(paths.src)
 
-    // Run everything through eslint first
-    .preLoader('eslint', '.js', {
-      include: [paths.src],
-      exclude: [/node_modules/],
-      loader: 'eslint'
-    })
 
     /**
      * COMMON LOADERS
@@ -91,7 +85,7 @@ const production = (project, paths, builder) => {
     }))
 
     .loader('file', ['.eot', '.svg', '.ttf', '.woff', '.woff2'], {
-      loader: 'url-loader?name=[path][name].[hash].[ext]&limit=8192',
+      loader: 'url-loader?name=[name].[hash].[ext]&limit=8192',
       include: [
         project.paths.frontend.join('src/assets')
       ],
@@ -154,7 +148,7 @@ const development = (project, paths, builder) => {
     })
 
     .loader('file', ['.eot', '.svg', '.ttf', '.woff', '.woff2'], {
-      loader: 'url-loader?name=[path][name].[ext]&limit=8192',
+      loader: 'url-loader?name=[name].[ext]&limit=8192',
       include: [
         project.paths.frontend.join('src/assets')
       ],
