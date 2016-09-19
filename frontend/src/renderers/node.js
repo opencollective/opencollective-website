@@ -18,17 +18,24 @@ const toUrl = (req) => {
   return url
 }
 
-export const create = (store) => (req) => {
+export const create = (store, logger) => (req) => {
   const url = toUrl(req)
+
+  logger = logger || ((noop) => noop)
+
+  logger(`Handling request for URL`, url)
 
   return new Promise((resolve, reject) => {
     store.dispatch(match(url, (error, redirectLocation, routerState) => {
+      logger(`Matched URL. isError: ${ typeof error !== 'undefined'} redirect: ${ redirectLocation }`)
+
       if (error) {
         reject(error)
       } else if (redirectLocation) {
         resolve({redirectLocation})
       } else if (!routerState) { // 404
         resolve({notFound: true})
+      } else {
         store.dispatch(hydrate({
           group: req.group,
           subscriptions: req.subscriptions,
