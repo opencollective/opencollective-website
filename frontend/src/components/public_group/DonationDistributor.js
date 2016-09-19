@@ -7,8 +7,8 @@ import StripeCheckout from 'react-stripe-checkout';
 import AsyncButton from '../AsyncButton';
 import DonationDistributorItem from './DonationDistributorItem';
 
-const RADIO_ON = '/static/images/radio-btn-on.svg';
-const RADIO_OFF = '/static/images/radio-btn-off.svg';
+const RADIO_ON = $assets.image('radio-btn-on.svg');
+const RADIO_OFF = $assets.image('radio-btn-off.svg');
 const CC_FIXED_FEE = 0.30;
 const CC_RELATIVE_FEE = 2.9/100;
 

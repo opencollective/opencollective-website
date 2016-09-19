@@ -47,13 +47,6 @@ export default (options = {}, {project, paths}) => (
     .plugin('webpack.DefinePlugin', EXPOSE_ENV)
 
     /**
-     * Copy our static assets to the build folder
-     */
-    .plugin('copy-webpack-plugin', [{
-      from: paths.assets
-    }])
-
-    /**
      * Define some variables automatically in our build
      */
     .plugin('webpack.DefinePlugin', {

@@ -12,7 +12,7 @@ export default class ActivityItem extends Component {
     donation: {},
     user: {
       name: 'Anonymous',
-      avatar: '/static/images/default_avatar.svg'
+      avatar: $assets.image('default_avatar.svg')
     }
   };
 

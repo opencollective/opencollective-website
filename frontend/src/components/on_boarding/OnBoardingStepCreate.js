@@ -40,7 +40,7 @@ export default class OnBoardingStepCreate extends React.Component {
                   label="Select collective image"
                   uploadImage={uploadImage}
                   i18n={i18n}
-                  presets={['/static/images/repo.svg', '/static/images/code.svg', '/static/images/rocket.svg']}
+                  presets={[$assets.image('rocket.svg')]}
                 />
               </div>
             </div>

@@ -1,6 +1,6 @@
 export default [
-  '/static/images/users/avatar-01.svg',
-  '/static/images/users/avatar-02.svg',
-  '/static/images/users/avatar-03.svg',
-  '/static/images/users/avatar-04.svg'
+  $assets.image('users/avatar-01.svg'),
+  $assets.image('users/avatar-02.svg'),
+  $assets.image('users/avatar-03.svg'),
+  $assets.image('users/avatar-04.svg')
 ];

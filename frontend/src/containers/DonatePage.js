@@ -74,7 +74,7 @@ export class DonatePage extends Component {
       <div className='DonatePage'>
         <LoginTopBar />
         <Notification />
-        <div className='DonatePage-logo' style={{backgroundImage: `url(${group.logo ? group.logo : '/static/images/rocket.svg'})`}}></div>
+        <div className='DonatePage-logo' style={{backgroundImage: `url(${group.logo ? group.logo : $assets.image('rocket.svg')})`}}></div>
         <div className='DonatePage-line1'>Hi we are <b>{ group.name }</b> with your support we can</div>
         {group.mission ? <div className='DonatePage-line2'>{ group.mission }</div> : null}
         {group.website ? <a className='DonatePage-line3' href={group.website}>{group.website}</a> : null}

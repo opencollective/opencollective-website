@@ -6,6 +6,8 @@ import mapValues from 'lodash/mapValues'
 // HACK Some webpack plugins rely on process.cwd() / some resolve relative to the config file.
 process.chdir(__dirname)
 
+const { server, frontend } = project.paths
+
 // Entry point when using Webpack CLI or webpack-dev-server CLI
 export default (env, options = {}) => {
   const builder = options.target === 'node'
@@ -27,7 +29,8 @@ export default (env, options = {}) => {
     context: __dirname,
     devServer: {
       info: false,
-      stats: 'normal'
+      stats: 'normal',
+      headers: { "Access-Control-Allow-Origin": "*" }
     }
   }
 }
@@ -42,7 +45,7 @@ export const webBuilder = () => (
 
     // We may need to use extract text loader here in development if we want the css to be output as a file
     // however currently i don't think that would be hot reloadable. the downside of not doing it is the
-    // initial page load in dev does not have CSS in the head tag; only when the JS is loaded 
+    // initial page load in dev does not have CSS in the head tag; only when the JS is loaded
     widget: 'src/css/widget.css',
     main: 'src/css/main.css'
   }))
@@ -54,6 +57,20 @@ export const webBuilder = () => (
   })
 
   .alias('joi', 'joi-browser')
+
+  /**
+   * TODO: Review this logic
+   * We don't need to copy over the assets which are referenced
+   * in our CSS. Any assets or images referenced in react can be
+   * required, and a URL will be returned references that file in the build.
+   * Files required this way will be hashed into the build automatically by webpack
+   */
+  .plugin('copy-webpack-plugin', [{
+    from: 'robots.txt'
+  }, {
+    from: frontend.join('src/assets/images/favicon.ico.png'),
+    to: project.paths.join('server/dist')
+  }])
 
   // ignore auto-lazy loaded moment-locales
   .plugin('webpack.IgnorePlugin', /^\.\/locale$/, /moment$/)

@@ -19,9 +19,23 @@ export default (options = {}, {paths}) => (
       loader: 'json!yaml'
     })
 
+    // This ends up using the file loader which just returns a path
+    .loader('images', ['.jpg','.png','.gif'], {
+      include: [project.paths.frontend.assets],
+      loader: loaders.assets.imageLoader('production', {
+        progressive:true,
+        optimizationLevel: 7,
+        interlaced: false,
+        pngquant:{
+          quality: "65-90",
+          speed: 4
+        }
+      })
+    })
+
     // Tell webpack not to bundle our package dependencies
     .externals(passThroughNodeModules({
-      pkg: require(paths.join('package.json'))
+      pkg: require(project.paths.join('package.json'))
     }))
 
     // Also don't bundle any of our sibling projects
@@ -73,6 +87,10 @@ export default (options = {}, {paths}) => (
     })
 
     .when('production', (builder) => (builder
+      .loader('svg', '.svg', {
+        name: 'file-loader?name=[name].[hash].[ext]'
+      })
+
       .loader('babel', '.js', loaders.scripts.babelLoader({
         exclude: [
           /node_modules/,
@@ -88,6 +106,11 @@ export default (options = {}, {paths}) => (
 
     // In development we use a few different babel-presets and babel-loader options
     .when('development', (builder) => (builder
+
+      .loader('svg', '.svg', {
+        name: 'file-loader?name=[name].[ext]'
+      })
+      
       .loader('babel', '.js', loaders.scripts.babelHotLoader({
         hot: wantsHMR,
         exclude: [

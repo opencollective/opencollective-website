@@ -5,22 +5,22 @@ import _ from 'lodash';
 const REG_VALID_URL = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
 const REG_VALID_TWITTER_USERNAME = /^@?([a-zA-Z0-9_]{1,15})$/;
 const PRESET_AVATARS = [
-  '/static/images/users/icon-avatar-placeholder.svg',
-  '/static/images/users/avatar-02.svg',
-  '/static/images/users/avatar-03.svg',
-  '/static/images/users/avatar-04.svg',
+  $assets.image('users/icon-avatar-placeholder.svg'),
+  $assets.image('users/avatar-02.svg'),
+  $assets.image('users/avatar-03.svg'),
+  $assets.image('users/avatar-04.svg'),
 ];
-const UPLOAD_AVATAR = '/static/images/users/upload-default.svg';
-const UPLOAD_AVATAR_HOVER = '/static/images/users/upload-hover.svg';
-const UPLOAD_AVATAR_ACTIVE = '/static/images/users/upload-pressed.svg';
+const UPLOAD_AVATAR = $assets.image('users/upload-default.svg');
+const UPLOAD_AVATAR_HOVER = $assets.image('users/upload-hover.svg');
+const UPLOAD_AVATAR_ACTIVE = $assets.image('users/upload-pressed.svg');
 const KNOWN_SOURCES = {
-  'facebook': '/static/images/users/facebook-badge.svg',
-  'twitter': '/static/images/users/twitter-badge.svg',
-  'google': '/static/images/users/google-badge.svg',
-  'github': '/static/images/users/github-badge.svg',
-  'gravatar': '/static/images/users/gravatar-badge.svg',
-  'angelist': '/static/images/users/angelist-badge.svg',
-  'aboutme': '/static/images/users/aboutme-badge.svg',
+  'facebook': $assets.image('users/facebook-badge.svg'),
+  'twitter': $assets.image('users/twitter-badge.svg'),
+  'google': $assets.image('users/google-badge.svg'),
+  'github': $assets.image('users/github-badge.svg'),
+  'gravatar': $assets.image('users/gravatar-badge.svg'),
+  'angelist': $assets.image('users/angelist-badge.svg'),
+  'aboutme': $assets.image('users/aboutme-badge.svg'),
 }
 
 export default class ImagePicker extends Component {

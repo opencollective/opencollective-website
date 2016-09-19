@@ -1,3 +1,4 @@
+import 'expose?$assets!./assets/paths' // eslint-disable-line
 import createStore from './store/node'
 import ssr from './renderers/node'
 import Routes from './routes';
