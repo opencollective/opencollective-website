@@ -1,6 +1,6 @@
 import project from '../project'
 
-const { server } = project.paths
+const { server, frontend } = project.paths
 
 // Enabling HMR Requires either of these opt in
 const wantsHMR = process.env.ENABLE_HMR || process.argv.indexOf('--hot')
@@ -19,6 +19,9 @@ export default () => {
 
   // Instead of webpack's non-descript integer ids for our modules
   .plugin('webpack.NamedModulesPlugin')
+  .plugin('webpack.ProvidePlugin', {
+    '$assets': frontend.join('src/assets/paths.js')
+  })
   .plugin('copy-webpack-plugin', [{
     from: server.join('src/views'),
     to: server.join('dist/views')

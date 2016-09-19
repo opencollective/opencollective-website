@@ -1,7 +1,8 @@
 import sizeOf from 'image-size';
 import config from 'config';
 import request from 'request';
-import filterCollection from '../../../frontend/src/lib/filter_collection';
+import filter from 'lodash/filter';
+import values from 'lodash/values';
 import _ from 'lodash';
 import Promise from 'bluebird';
 import utils from '../lib/utils';
@@ -290,3 +291,7 @@ export default {
     res.redirect(redirectUrl);
   }
 };
+
+
+const filterCollection = (collection, validator) =>
+  filter(values(collection), validator);
