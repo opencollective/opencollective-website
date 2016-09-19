@@ -39,6 +39,7 @@ node_modules
 # Build
 server/dist/
 frontend/dist/
+.repl-history
 
 # test artifacts
 output/

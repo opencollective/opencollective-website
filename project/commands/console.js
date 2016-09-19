@@ -1,3 +1,5 @@
+import { join, parse } from 'path'
+import findCache from 'find-cache-dir'
 
 export const info = {
   command: 'console',
@@ -13,6 +15,8 @@ export function execute (options = {}, context = {}) {
   const { project } = context
   const cli = project.cli
 
+  const universal = project.paths.join('server/dist/universal')
+
   cli.banner()
 
   cli.print()
@@ -20,62 +24,57 @@ export function execute (options = {}, context = {}) {
   cli.print(`\nThe following commands are available by default to help you.\n`, 2)
 
   cli.paddedList({
-    store: 'Creates an instance of the redux store',
     project: 'Get access to the project metadata store',
-    renderer: 'Get an instance of the universal renderer',
-    copy: 'Get access to the project i18n strings',
-    dist: 'Get info about the builds'
+    universal: 'Access the universal distribution modules',
+    server: 'Access the built server module',
+    stats: 'Access the build stats metadata'
   })
 
   cli.print('\n')
 
-  require('../repl')({}, {
+  require('../repl')({
+    historyFile: join(process.cwd(), '.repl-history')
+  }, {
     project,
 
-    get store() {
-      return require(
-        project.paths.join('server/dist/store')
-      )
+    get universal() {
+      return gateway(project, project.paths.frontend.join('dist/universal'))
     },
 
-    get renderer() {
-      return require(
-        project.paths.join('server/dist/store/renderers/website')
-      )
+    get server () {
+      return gateway(project, project.paths.server.output)
     },
 
-    get copy() {
-      return require(
-        project.paths.join('copy/dist').default
-      )
+    get stats() {
+      return gateway(project, project.join('stats'))
     }
 
-  }, (replServer) => {
-    if (project.command.options.compiler) {
-      const compiler = replServer.context.compiler = project.compiler(project.command.options.compiler)
-
-      compiler.start().then(result => {
-        replServer.context.result = result
-      })
-
-      if (project.command.options.hot) {
-        replServer.context.watcher = compiler.watch({
-          aggregateTimeout: 2000,
-          poll: false
-        }, didReceiveUpdate)
+  }, (err, replServer) => {
+    if (!err) {
+      replServer.commands['reload'] = {
+        help: 'Reload the module cache',
+        action: function () {
+          Object.keys(require.cache).filter(
+            id => id.startsWith(process.cwd())
+          ).forEach(id => delete require.cache[id])
+          }
       }
     }
   })
 }
 
-const didReceiveUpdate = (err, stats) => {
+const gateway = (project, folder) =>
+  project.fsx.readdirSync(folder)
+    .reduce((acc, file) => {
+      const path = parse(file)
 
-}
+      if (path.ext.match(/\.js/)) {
+        Object.assign(acc, {
+          get [path.name]() {
+            return require(file)
+          }
+        })
+      }
 
-export function help (options = {}, context = {}) {
-
-}
-
-export function validate (options = {}, context = {}) {
-
-}
+      return acc
+    }, {})

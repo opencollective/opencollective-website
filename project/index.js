@@ -67,7 +67,7 @@ const project = {
   getCompiler(sub, env = process.env.NODE_ENV || 'development', options = {}) {
     const config = project.paths.join(`${sub}/webpack.config.babel.js`)
     return webpack(
-      require(config)(env, options)
+      es6(require(config))(env, options)
     )
   },
 
@@ -174,3 +174,5 @@ module.exports = project
 if (require.main === module) {
   require('./cli').start(project)
 }
+
+const es6 = (mod) => mod.default ? mod.default : mod
