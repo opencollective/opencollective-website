@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import formatCurrency from '../../lib/format_currency';
 import filterCollection from '../../lib/filter_collection';
-import values from 'lodash/values';
 import roles from '../../constants/roles';
 import fetch from 'isomorphic-fetch';
 
@@ -24,7 +23,7 @@ export function exportMembers(authenticatedUser, group) {
     const filename = `${date}-${group.slug}-members.csv`;
     exportFile('text/plain;charset=utf-8', filename, csv);
   });
-};
+}
 
 export default class PublicGroupHero extends Component {
 
