@@ -15,8 +15,6 @@ export function execute (options = {}, context = {}) {
   const { project } = context
   const cli = project.cli
 
-  const universal = project.paths.join('server/dist/universal')
-
   cli.banner()
 
   cli.print()
@@ -46,7 +44,7 @@ export function execute (options = {}, context = {}) {
     },
 
     get stats() {
-      return gateway(project, project.join('stats'))
+      return gateway(project, project.paths.join('stats'))
     }
 
   }, (err, replServer) => {
@@ -71,7 +69,7 @@ const gateway = (project, folder) =>
       if (path.ext.match(/\.js/)) {
         Object.assign(acc, {
           get [path.name]() {
-            return require(file)
+            return require(`${folder}/${path.name}${path.ext}`)
           }
         })
       }

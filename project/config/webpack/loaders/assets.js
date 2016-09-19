@@ -1,6 +1,6 @@
 export function imageLoader(environment, settings = {}) {
   if (environment !== 'production') {
-    return ['file-loader?name=[name].[ext]']
+    return ['file-loader?name=[path][name].[ext]']
   }
 
   const imageOptimizations = {
@@ -15,7 +15,7 @@ export function imageLoader(environment, settings = {}) {
   }
 
   return [
-    'file-loader?name=[name].[hash].[ext]',
+    'file-loader?name=[path][name].[hash].[ext]',
     `image-webpack?${JSON.stringify(imageOptimizations)}`
   ]
 }

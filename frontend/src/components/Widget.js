@@ -4,6 +4,8 @@ import TransactionItem from './TransactionItem';
 import UsersList from './UsersList';
 import Currency from './Currency';
 
+import '../css/widget.css'
+
 /**
  * When the server renders the widget it passes in the i18n reference
  * as a string type. We convert it to the i18n object we expect.

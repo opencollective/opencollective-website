@@ -116,22 +116,22 @@
   box-sizing: border-box;
   width: 30px;
   height: 30px;
-  background-image: url($assets.image('edit-circle.svg'));
+  background-image: url(require('../assets/images/edit-circle.svg'));
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   margin: auto;
   &.EditButton--Text {
-    background-image: url($assets.image('edit-circle.svg'));
+    background-image: url(require('../assets/images/edit-circle.svg'));
   }
   &.EditButton--Upload {
-    background-image: url($assets.image('upload-circle.svg'));
+    background-image: url(require('../assets/images/upload-circle.svg'));
   }
   &.EditButton--Image {
-    background-image: url($assets.image('photo-circle.svg'));
+    background-image: url(require('../assets/images/photo-circle.svg'));
   }
   &.EditButton--Link {
-    background-image: url($assets.image('link-circle.svg'));
+    background-image: url(require('../assets/images/link-circle.svg'));
   }
 }
 

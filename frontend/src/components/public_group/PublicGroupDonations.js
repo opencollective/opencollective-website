@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router';
 import ActivityItem from '../../components/ActivityItem';
 
-// eslint-disable-next-line
-const img = (id) => $assets.image(`collectives/${id}.jpg`)
+const emptyState = require('../../assets/images/collectives/activities-empty-state-image.jpg')
+const emptyState2x = require('../../assets/images/collectives/activities-empty-state-image@2x.jpg')
 
 export default class PublicGroupDonations extends React.Component {
   render() {
@@ -15,13 +15,11 @@ export default class PublicGroupDonations extends React.Component {
       itemsToShow = 3
     } = this.props;
 
+
     const emptyState = (
       <div className='center'>
         <div className='PublicGroup-emptyState-image flex items-center justify-center'>
-          <img width='134' height='120'
-            src={img('activities-expenses-empty-state-image.jpg')}
-            srcSet={`${img('activities-expenses-empty-state-image@2x')} 2x`} />
-          
+          <img width='134' height='120' src={emptyState} srcSet={`${emptyState2x} 2x`} />
         </div>
         <p className='h3 -fw-bold'>{i18n.getString('activitiesPlaceholderTitle')}</p>
         <p className='h5 muted'>{i18n.getString('activitiesPlaceholderText')}</p>

@@ -3,5 +3,9 @@
   "plugins": [
     "add-module-exports",
     "lodash"
+  ],
+  "ignore": [
+   "frontend/dist",
+   "server/dist"
   ]
 }

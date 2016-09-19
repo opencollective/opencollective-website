@@ -14,6 +14,13 @@ export default (options = {}, {project, paths}) => (
 
     .modules(paths.src)
 
+    // Run everything through eslint first
+    .preLoader('eslint', '.js', {
+      include: [paths.src],
+      exclude: [/node_modules/],
+      loader: 'eslint'
+    })
+
     /**
      * COMMON LOADERS
      *
@@ -24,10 +31,6 @@ export default (options = {}, {project, paths}) => (
       loader: 'json!yaml'
     })
 
-    .loader('file', ['.eot','.svg','.ttf','.woff','.woff2'], {
-      include: [paths.assets],
-      exclude: [/node_modules/]
-    })
 
     // Load vendor CSS from node_modules, no need to process with postcss
     .loader('css', '.css', {
@@ -87,6 +90,14 @@ const production = (project, paths, builder) => {
       exclude: [/node_modules/]
     }))
 
+    .loader('file', ['.eot', '.svg', '.ttf', '.woff', '.woff2'], {
+      loader: 'url-loader?name=[path][name].[hash].[ext]&limit=8192',
+      include: [
+        project.paths.frontend.join('src/assets')
+      ],
+      exclude: [/node_modules/]
+    })
+
     // Run our images through the image optimizing loaders
     .loader('images', ['.jpg','.png','.gif'], {
       include: [paths.assets],
@@ -140,6 +151,14 @@ const development = (project, paths, builder) => {
         paths.join('src', 'css')
       ],
       exclude:[/node_modules/]
+    })
+
+    .loader('file', ['.eot', '.svg', '.ttf', '.woff', '.woff2'], {
+      loader: 'url-loader?name=[path][name].[ext]&limit=8192',
+      include: [
+        project.paths.frontend.join('src/assets')
+      ],
+      exclude: [/node_modules/]
     })
 
     .loader('images', ['.jpg','.png','.gif'], {

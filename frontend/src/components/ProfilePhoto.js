@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 
 const ProfilePhoto = ({url, spinner, hasBorder=false}) => {
 
-  const backgroundImage = url ? `https://res.cloudinary.com/opencollective/image/fetch/h_128/${encodeURIComponent(url)}` : $assets.image('default_avatar.svg');
+  const backgroundImage = url ? `https://res.cloudinary.com/opencollective/image/fetch/h_128/${encodeURIComponent(url)}` : require('../assets/images/default_avatar.svg');
 
   const border = hasBorder ? {
     border: '3px solid white',

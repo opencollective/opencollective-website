@@ -41,6 +41,14 @@ export default (options = {}, {paths}) => (
     // Also don't bundle any of our sibling projects
     .externals(project.paths.frontend.context)
 
+    .loader('file', ['.eot', '.svg', '.ttf', '.woff', '.woff2'], {
+      loader: 'url-loader?name=[path][name].[ext]&limit=8192',
+      include: [
+        project.paths.frontend.join('src/assets')
+      ],
+      exclude: [/node_modules/]
+    })
+
     // Tells webpack to leave these alone
     .node({
       __dirname: false,
@@ -86,11 +94,11 @@ export default (options = {}, {paths}) => (
       raw: true
     })
 
-    .when('production', (builder) => (builder
-      .loader('svg', '.svg', {
-        name: 'file-loader?name=[name].[hash].[ext]'
-      })
+    .loader('css', ['.css'], {
+      loader: 'null'
+    })
 
+    .when('production', (builder) => (builder
       .loader('babel', '.js', loaders.scripts.babelLoader({
         exclude: [
           /node_modules/,
@@ -106,11 +114,6 @@ export default (options = {}, {paths}) => (
 
     // In development we use a few different babel-presets and babel-loader options
     .when('development', (builder) => (builder
-
-      .loader('svg', '.svg', {
-        name: 'file-loader?name=[name].[ext]'
-      })
-      
       .loader('babel', '.js', loaders.scripts.babelHotLoader({
         hot: wantsHMR,
         exclude: [

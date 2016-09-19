@@ -7,8 +7,13 @@ import StripeCheckout from 'react-stripe-checkout';
 import AsyncButton from '../AsyncButton';
 import DonationDistributorItem from './DonationDistributorItem';
 
-const RADIO_ON = $assets.image('radio-btn-on.svg');
-const RADIO_OFF = $assets.image('radio-btn-off.svg');
+// TODO THESE ASSETS ARE MISSING?
+//const RADIO_ON = require('../../assets/images/radio-btn-on.svg');
+//const RADIO_OFF = require('../../assets/images/radio-btn-off.svg');
+
+const RADIO_ON = require('../../assets/images/star.svg');
+const RADIO_OFF = require('../../assets/images/star.svg');
+
 const CC_FIXED_FEE = 0.30;
 const CC_RELATIVE_FEE = 2.9/100;
 
@@ -25,7 +30,7 @@ export default class DonationDistributor extends Component {
     group: PropTypes.object.isRequired,
     method: PropTypes.oneOf(['paypal', 'stripe']),
     optionalCommission: PropTypes.bool,
-    skipModal: PropTypes.bool,
+    skipModal: PropTypes.bool
   }
 
   static defaultProps = {
@@ -242,7 +247,7 @@ export default class DonationDistributor extends Component {
             options: {
               paypal: true,
               distribution
-            },
+            }
           })}
           >
           {label}
@@ -258,7 +263,7 @@ export default class DonationDistributor extends Component {
             token,
             options: {
               distribution
-            },
+            }
           })}
           stripeKey={stripeKey}
           name={group.name}

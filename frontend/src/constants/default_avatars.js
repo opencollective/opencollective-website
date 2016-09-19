@@ -1,6 +1,6 @@
 export default [
-  $assets.image('users/avatar-01.svg'),
-  $assets.image('users/avatar-02.svg'),
-  $assets.image('users/avatar-03.svg'),
-  $assets.image('users/avatar-04.svg')
+  require('../assets/images/users/avatar-01.svg'),
+  require('../assets/images/users/avatar-02.svg'),
+  require('../assets/images/users/avatar-03.svg'),
+  require('../assets/images/users/avatar-04.svg')
 ];

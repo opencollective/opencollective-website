@@ -40,6 +40,7 @@ node_modules
 server/dist/
 frontend/dist/
 .repl-history
+stats/*.json
 
 # test artifacts
 output/

@@ -91,16 +91,19 @@ clean-server:
 generate-stats: generate-server-stats generate-frontend-stats generate-universal-stats
 
 generate-frontend-stats:
+	@mkdir -p stats
 	@echo Generating Webpack Stats profile of Frontend $(NODE_ENV) build
 	@webpack --config frontend/webpack.config.babel.js \
 		--target web --profile --json > stats/frontend.$(NODE_ENV).stats.json
 
 generate-server-stats:
+	@mkdir -p stats
 	@echo Generating Webpack Stats profile of Server $(NODE_ENV) build
 	@webpack --config server/webpack.config.babel.js \
 		--target node --profile --json > stats/server.$(NODE_ENV).stats.json
 
 generate-universal-stats:
+	@mkdir -p stats
 	@echo Generating Webpack Stats profile of Universal $(NODE_ENV) build
 	@webpack --config frontend/webpack.config.babel.js \
 		--target node --profile --json > stats/universal.$(NODE_ENV).stats.json

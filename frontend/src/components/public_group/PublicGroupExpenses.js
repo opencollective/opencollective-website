@@ -2,9 +2,6 @@ import React from 'react';
 import { Link } from 'react-router';
 import ExpenseItem from '../../components/ExpenseItem';
 
-// eslint-disable-next-line
-const img = (id) => $assets.image(`collectives/${id}.jpg`)
-
 export default class PublicGroupExpenses extends React.Component {
   render() {
     const {
@@ -20,8 +17,8 @@ export default class PublicGroupExpenses extends React.Component {
         <div className='PublicGroup-emptyState-image flex items-center justify-center'>
 
           <img width='111' height='151'
-            src={img('expenses-empty-state-image.jpg')}
-            srcSet={`${img('expenses-empty-state-image@2x')} 2x`}/>
+            src={require('../../assets/images/collectives/expenses-empty-state-image.jpg')}
+            srcSet={`${require('../../assets/images/collectives/expenses-empty-state-image@2x.jpg')} 2x`}/>
 
         </div>
         <p className='h3 -fw-bold'>{i18n.getString('expensesPlaceholderTitle')}</p>

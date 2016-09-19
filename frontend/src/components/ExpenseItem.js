@@ -38,7 +38,7 @@ ExpenseItem.defaultProps = {
   expense: {},
   user: {
     name: 'Anonymous',
-    avatar: $assets.image('default_avatar.svg')
+    avatar: require('../assets/images/default_avatar.svg')
   }
 };
 

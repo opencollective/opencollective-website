@@ -10,9 +10,13 @@ const { server, frontend } = project.paths
 
 // Entry point when using Webpack CLI or webpack-dev-server CLI
 export default (env, options = {}) => {
+  if (env === 'dll') {
+    return dllBundler(env, options)
+  }
+
   const builder = options.target === 'node'
-    ? nodeBuilder(options)
-    : webBuilder(options)
+    ? nodeBuilder(env, options)
+    : webBuilder(env, options)
 
   builder.context(__dirname)
 
@@ -22,6 +26,8 @@ export default (env, options = {}) => {
   if (process.env.NODE_ENV === 'production' && options.target !== 'node') {
     config.plugins.push( new plugins.ExtractTextPlugin('[name].css') )
   }
+
+  config.plugins.push(saveManifest)
 
   return {
     postcss: postcss,
@@ -35,20 +41,15 @@ export default (env, options = {}) => {
   }
 }
 
-export const webBuilder = () => (
+export const webBuilder = (env, options) => ( // eslint-disable-line
   project.getWebpackBase('web', {
     paths: project.paths.frontend
   })
 
-  .entry(prepare({
-    bundle: 'src/index.web.js',
-
-    // We may need to use extract text loader here in development if we want the css to be output as a file
-    // however currently i don't think that would be hot reloadable. the downside of not doing it is the
-    // initial page load in dev does not have CSS in the head tag; only when the JS is loaded
-    widget: 'src/css/widget.css',
-    main: 'src/css/main.css'
-  }))
+  .entry({
+    App: project.paths.frontend.join('src/index.web.js'),
+    Widget: project.paths.frontend.join('src/components/Widget.js')
+  }, __dirname)
 
   .output({
     path: project.paths.frontend.output,
@@ -68,18 +69,19 @@ export const webBuilder = () => (
   .plugin('copy-webpack-plugin', [{
     from: 'robots.txt'
   }, {
-    from: frontend.join('src/assets/images/favicon.ico.png'),
-    to: project.paths.join('server/dist')
+    from: frontend.join('src/assets/images/favicon.ico.png')
   }])
 
   // ignore auto-lazy loaded moment-locales
   .plugin('webpack.IgnorePlugin', /^\.\/locale$/, /moment$/)
 
-  .when('development', (builder) => builder.plugin('webpack.NoErrorsPlugin'))
+  .when('development', (builder) => builder
+    .plugin('webpack.NoErrorsPlugin')
+  )
 
 )
 
-export const nodeBuilder = () => (
+export const nodeBuilder = (env, options) => ( // eslint-disable-line
    project.getWebpackBase('node', {
      paths: project.paths.frontend
    })
@@ -135,3 +137,19 @@ const prepare = (entryPoints) => (
 )
 
 const abs = (p) => project.paths.frontend.join(p)
+
+const saveManifest = {
+  apply: function(compiler) {
+    compiler.plugin('done', (stats) => {
+      const json = stats.toJson()
+      const modules = json.modules.filter(mod => mod.assets.length > 0)
+        .map(mod => ({
+          id: mod.id,
+          name: mod.name,
+          asset: mod.assets.shift()
+        }))
+
+      project.fsx.outputJsonSync(`${compiler.outputPath}/assets-manifest.json`, modules)
+    })
+  }
+}

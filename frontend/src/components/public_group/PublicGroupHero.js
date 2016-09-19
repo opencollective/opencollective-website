@@ -5,7 +5,7 @@ import filterCollection from '../../lib/filter_collection';
 
 import LoginTopBar from '../../containers/LoginTopBar';
 
-const DEFAULT_BACKGROUND_IMAGE = $assets.image('collectives/default-header-bg.jpg');
+const DEFAULT_BACKGROUND_IMAGE = require('../../assets/images/collectives/default-header-bg.jpg');
 
 export default class PublicGroupHero extends Component {
 

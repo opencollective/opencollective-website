@@ -133,6 +133,7 @@
     "node-emoji": "1.4.1",
     "nodemon": "1.9.2",
     "normalizr": "2.2.1",
+    "null-loader": "^0.1.1",
     "postcss-cssnext": "2.8.0",
     "postcss-discard-comments": "2.0.4",
     "postcss-import": "8.1.0",

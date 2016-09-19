@@ -19,9 +19,6 @@ export default () => {
 
   // Instead of webpack's non-descript integer ids for our modules
   .plugin('webpack.NamedModulesPlugin')
-  .plugin('webpack.ProvidePlugin', {
-    '$assets': frontend.join('src/assets/paths.js')
-  })
   .plugin('copy-webpack-plugin', [{
     from: server.join('src/views'),
     to: server.join('dist/views')

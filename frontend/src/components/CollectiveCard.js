@@ -3,11 +3,11 @@ import React, {Component, PropTypes} from 'react';
 import formatCurrency from '../lib/format_currency';
 
 /* eslint-disable */
-const DEFAULT_BG = $assets.image('collectives/default-header-bg.jpg');
+const DEFAULT_BG = require('../assets/images/collectives/default-header-bg.jpg');
 const DEFAULT_LOGOS = [
-  $assets.image('code.svg'),
-  $assets.image('rocket.svg'),
-  $assets.image('repo.svg')
+  require('../assets/images/code.svg'),
+  require('../assets/images/rocket.svg'),
+  require('../assets/images/repo.svg')
 ];
 /* eslint-enable */
 
