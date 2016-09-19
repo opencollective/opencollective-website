@@ -33,7 +33,7 @@ export default (env, options = {}) => {
 
   // HACK. Not sure how to add this with the @terse/webpack DSL
   if (process.env.NODE_ENV === 'production' && options.target !== 'node') {
-    config.plugins.push( new plugins.ExtractTextPlugin('[name].css') )
+    config.plugins.push( new plugins.ExtractTextPlugin('css/[name].css') )
   }
 
   config.plugins.push(saveManifest)
@@ -56,13 +56,13 @@ export const webBuilder = (env, options) => ( // eslint-disable-line
   })
 
   .entry({
-    App: project.paths.frontend.join('src/index.web.js'),
-    Widget: project.paths.frontend.join('src/components/Widget.js')
+    bundle: project.paths.frontend.join('src/index.web.js'),
+    widget: project.paths.frontend.join('src/components/Widget.js')
   }, __dirname)
 
   .output({
     path: project.paths.frontend.output,
-    filename: '[name].js',
+    filename: 'js/[name].js',
     publicPath: '/static/'
   })
 

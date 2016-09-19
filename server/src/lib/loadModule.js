@@ -1,1 +1,5 @@
-export default (pathToModule) => __webpack_require__(pathToModule) // eslint-disable-line
+const req = __non_webpack_require__
+export default (pathToModule) => {
+  const result = req(pathToModule) // eslint-disable-line
+  return result.default ? result.default : result
+}

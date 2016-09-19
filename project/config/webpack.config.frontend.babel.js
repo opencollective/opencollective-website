@@ -64,7 +64,7 @@ export default (options = {}, {project, paths}) => (
 )
 
 const production = (project, paths, builder) => {
-  const { loader } = plugins.helpers.styleExtractor({name:'[name].css'})
+  const { loader } = plugins.helpers.styleExtractor({name:'css/[name].css'})
 
   const prod = builder
     .loader('babel', '.js', loaders.scripts.babelLoader({
@@ -85,11 +85,17 @@ const production = (project, paths, builder) => {
     }))
 
     .loader('file', ['.eot', '.svg', '.ttf', '.woff', '.woff2'], {
-      loader: 'url-loader?name=[name].[hash].[ext]&limit=8192',
+      loader: 'url-loader?name=fonts/[name].[ext]&limit=8192',
       include: [
-        project.paths.frontend.join('src/assets')
-      ],
-      exclude: [/node_modules/]
+        project.paths.frontend.join('src/assets/fonts')
+      ]
+    })
+
+    .loader('svg-files', ['.svg'], {
+      loader: 'url-loader?name=images/[name].[ext]?limit=8192',
+      include: [
+        project.paths.frontend.join('src/assets/images')
+      ]
     })
 
     // Run our images through the image optimizing loaders
@@ -148,11 +154,17 @@ const development = (project, paths, builder) => {
     })
 
     .loader('file', ['.eot', '.svg', '.ttf', '.woff', '.woff2'], {
-      loader: 'url-loader?name=[name].[ext]&limit=8192',
+      loader: 'url-loader?name=fonts/[name].[ext]&limit=8192',
       include: [
-        project.paths.frontend.join('src/assets')
-      ],
-      exclude: [/node_modules/]
+        project.paths.frontend.join('src/assets/fonts')
+      ]
+    })
+
+    .loader('svg-files', ['.svg'], {
+      loader: 'url-loader?name=images/[name].[ext]?limit=8192',
+      include: [
+        project.paths.frontend.join('src/assets/images')
+      ]
     })
 
     .loader('images', ['.jpg','.png','.gif'], {
