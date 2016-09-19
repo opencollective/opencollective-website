@@ -1,5 +1,5 @@
 server/dist/
 frontend/dist/
+test/
 node_modules/
 project/
-
