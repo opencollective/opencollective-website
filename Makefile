@@ -11,6 +11,11 @@ start-server-hot: build-frontend
 	@NODE_CONFIG_DIR=$(NODE_CONFIG_DIR) ENABLE_HMR=true \
 		node server/dist
 
+start-frontend-hot:
+	@NODE_CONFIG_DIR=$(NODE_CONFIG_DIR) ENABLE_HMR=true \
+		webpack-dashboard -- webpack-dev-server --hot --inline
+		--config ./frontend/webpack.config.babel.js --target web
+
 start-server:
 	@echo Starting Server
 	@NODE_CONFIG_DIR=$(NODE_CONFIG_DIR) node server/dist

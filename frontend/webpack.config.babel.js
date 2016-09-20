@@ -2,11 +2,13 @@ import project from '../project' // eslint-disable-line
 import postcss from '../project/config/postcss'
 import plugins from '../project/config/webpack/plugins/core'
 import mapValues from 'lodash/mapValues'
+import DashboardPlugin from 'webpack-dashboard/plugin'
 
 // HACK Some webpack plugins rely on process.cwd() / some resolve relative to the config file.
 process.chdir(__dirname)
 
-const { server, frontend } = project.paths
+const paths = project.paths
+const { frontend } = paths
 
 // Entry point when using Webpack CLI or webpack-dev-server CLI
 export default (env, options = {}) => {
@@ -20,10 +22,10 @@ export default (env, options = {}) => {
 
   builder.context(__dirname)
 
-  if (process.env.RUN_LINTER) {
+  if (process.env.USE_ESLINT) {
     // Run everything through eslint first
     builder.preLoader('eslint', '.js', {
-      include: [paths.src],
+      include: [frontend.src],
       exclude: [/node_modules/],
       loader: 'eslint'
     })
@@ -37,6 +39,8 @@ export default (env, options = {}) => {
   }
 
   config.plugins.push(saveManifest)
+
+  config.plugins.push(new DashboardPlugin())
 
   return {
     postcss: postcss,
