@@ -6,7 +6,7 @@ import * as constants from '../../constants/groups';
  */
 
 export default (id, payment, options={}) => {
-  const url = `/groups/${id}/payments/${options.paypal ? 'paypal' : ''}`;
+  const url = `/groups/${id}/donations/${options.paypal ? 'paypal' : ''}`;
 
   return dispatch => {
     dispatch(request(id, payment));
