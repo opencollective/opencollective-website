@@ -18,6 +18,7 @@ import About from './containers/About';
 import AddGroup from './containers/AddGroup';
 import EditCollective from './containers/EditCollective';
 import Response from './containers/Response';
+import NotFoundPage from './containers/NotFoundPage';
 
 import { requireAuthentication } from './components/AuthenticatedComponent';
 
@@ -47,5 +48,6 @@ export default (
     <Route path="/:slug/:type(donations|expenses)" component={Transactions} />
     <Route path="/:slug/donate/:amount" component={DonatePage} />
     <Route path="/:slug/donate/:amount/:interval" component={DonatePage} />
+    <Route path="*" component={NotFoundPage} />
   </Route>
 );

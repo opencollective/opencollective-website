@@ -5,22 +5,22 @@ import _ from 'lodash';
 const REG_VALID_URL = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
 const REG_VALID_TWITTER_USERNAME = /^@?([a-zA-Z0-9_]{1,15})$/;
 const PRESET_AVATARS = [
-  '/static/images/users/icon-avatar-placeholder.svg',
-  '/static/images/users/avatar-02.svg',
-  '/static/images/users/avatar-03.svg',
-  '/static/images/users/avatar-04.svg',
+  require('../assets/images/users/icon-avatar-placeholder.svg'),
+  require('../assets/images/users/avatar-02.svg'),
+  require('../assets/images/users/avatar-03.svg'),
+  require('../assets/images/users/avatar-04.svg')
 ];
-const UPLOAD_AVATAR = '/static/images/users/upload-default.svg';
-const UPLOAD_AVATAR_HOVER = '/static/images/users/upload-hover.svg';
-const UPLOAD_AVATAR_ACTIVE = '/static/images/users/upload-pressed.svg';
+const UPLOAD_AVATAR = require('../assets/images/users/upload-default.svg');
+const UPLOAD_AVATAR_HOVER = require('../assets/images/users/upload-hover.svg');
+const UPLOAD_AVATAR_ACTIVE = require('../assets/images/users/upload-pressed.svg');
 const KNOWN_SOURCES = {
-  'facebook': '/static/images/users/facebook-badge.svg',
-  'twitter': '/static/images/users/twitter-badge.svg',
-  'google': '/static/images/users/google-badge.svg',
-  'github': '/static/images/users/github-badge.svg',
-  'gravatar': '/static/images/users/gravatar-badge.svg',
-  'angelist': '/static/images/users/angelist-badge.svg',
-  'aboutme': '/static/images/users/aboutme-badge.svg',
+  'facebook': require('../assets/images/users/facebook-badge.svg'),
+  'twitter': require('../assets/images/users/twitter-badge.svg'),
+  'google': require('../assets/images/users/google-badge.svg'),
+  'github': require('../assets/images/users/github-badge.svg'),
+  'gravatar': require('../assets/images/users/gravatar-badge.svg'),
+  'angelist': require('../assets/images/users/angelist-badge.svg'),
+  'aboutme': require('../assets/images/users/aboutme-badge.svg')
 }
 
 export default class ImagePicker extends Component {

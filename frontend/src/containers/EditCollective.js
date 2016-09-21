@@ -27,9 +27,9 @@ import ImagePicker from '../components/ImagePicker';
 import Input from '../components/Input';
 
 const PRESET_LOGOS = [
-  '/static/images/rocket.svg',
-  '/static/images/code.svg',
-  '/static/images/repo.svg',
+  require('../assets/images/rocket.svg'),
+  require('../assets/images/code.svg'),
+  require('../assets/images/repo.svg'),
 ];
 
 const highlights = [ {
@@ -194,7 +194,7 @@ export class EditCollective extends Component {
     const group = {
       name: fields['name'] || ' ',
       backgroundImage: fields['backgroundImage'],
-      logo: fields['logo'] || '/static/images/rocket.svg',
+      logo: fields['logo'] || require('../assets/images/rocket.svg'),
       mission: fields.mission,
       description: fields.description,
       longDescription: fields.longDescription,

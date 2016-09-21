@@ -5,11 +5,24 @@ import compression from 'compression';
 import pkg from '../../package.json'; // eslint-disable-line
 import routes from './routes';
 import views from './views';
+import { join } from 'path'
+
+const {
+  FRONTEND_DIST_PATH = join(process.cwd(), 'frontend', 'dist'),
+  SERVER_VIEWS_PATH = join(__dirname, 'views')
+} = process.env
 
 /**
  * Express app
  */
 const app = express();
+
+app.set('views', SERVER_VIEWS_PATH)
+app.set('static root', FRONTEND_DIST_PATH)
+app.set('widgetModulePath', join(FRONTEND_DIST_PATH, 'universal', 'widget.js'))
+app.set('ssrMiddlewarePath', join(FRONTEND_DIST_PATH, 'universal', 'middleware.js'))
+
+app.staticPath = (...args) => join(FRONTEND_DIST_PATH, ...args)
 
 /**
  * Locals for the templates
@@ -32,7 +45,10 @@ app.use(compression());
 /**
  * Handlebars template engine
  */
-views(app);
+views(app, {
+  viewsPath: `${__dirname}/views` // we have to set this here because webpack
+});
+
 routes(app);
 
 /**

@@ -1,17 +1,25 @@
 import React from 'react';
-
+import i18n from '../lib/i18n' // eslint-disable-line
 import TransactionItem from './TransactionItem';
 import UsersList from './UsersList';
 import Currency from './Currency';
 
-export default ({
-  options,
-  group,
-  transactions,
-  users,
-  i18n,
-  href
-}) => {
+import '../css/widget.css'
+
+/**
+ * When the server renders the widget it passes in the i18n reference
+ * as a string type. We convert it to the i18n object we expect.
+ */
+const normalize = (props = {}) => {
+  if (typeof props.i18n === 'string') {
+    props.i18n = i18n(props.i18n)
+  }
+
+  return props
+}
+
+export default (props = {}) => {
+  const { options, group, transactions, users, i18n, href } = normalize(props)
 
   return (
     <div className='Widget'>
@@ -56,5 +64,5 @@ export default ({
         </a>
       )}
     </div>
-  );
+  )
 }

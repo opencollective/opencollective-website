@@ -2,11 +2,11 @@ import React, {Component, PropTypes} from 'react';
 
 import formatCurrency from '../lib/format_currency';
 
-const DEFAULT_BG = '/static/images/collectives/default-header-bg.jpg';
+const DEFAULT_BG = require('../assets/images/collectives/default-header-bg.jpg');
 const DEFAULT_LOGOS = [
-  '/static/images/code.svg',
-  '/static/images/rocket.svg',
-  '/static/images/repo.svg',
+  require('../assets/images/code.svg'),
+  require('../assets/images/rocket.svg'),
+  require('../assets/images/repo.svg'),
 ];
 
 export default class SponsoredCard extends Component {

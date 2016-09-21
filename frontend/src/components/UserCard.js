@@ -6,7 +6,7 @@ export default class UserCard extends Component {
 
   static defaultProps = {
     user: {
-      avatar: '/static/images/default_avatar.svg',
+      avatar: require('../assets/images/default_avatar.svg'),
       name: '',
       role: '',
       tier: '',

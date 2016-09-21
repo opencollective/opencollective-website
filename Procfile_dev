@@ -1,5 +1,5 @@
-web: npm run watch:server
-js: npm run watch:js
-css: gulp watch:css
-assets: gulp watch:assets
+server: npm run start
+frontend: npm run watch:frontend
+server_code:  npm run watch:server
+universal: npm run watch:universal
 svg: gulp watch:svg

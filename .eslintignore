@@ -1,3 +1,5 @@
 server/dist/
-frontend/dist/js/*.js
+frontend/dist/
+test/
 node_modules/
+project/

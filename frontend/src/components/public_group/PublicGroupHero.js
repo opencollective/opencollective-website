@@ -8,7 +8,7 @@ import fetch from 'isomorphic-fetch';
 import LoginTopBar from '../../containers/LoginTopBar';
 import exportFile from '../../lib/export_file';
 
-const DEFAULT_BACKGROUND_IMAGE = '/static/images/collectives/default-header-bg.jpg';
+const DEFAULT_BACKGROUND_IMAGE = require('../../assets/images/collectives/default-header-bg.jpg');
 
 export function exportMembers(authenticatedUser, group) {
   const accessToken = localStorage.getItem('accessToken');

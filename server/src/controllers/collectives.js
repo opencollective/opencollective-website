@@ -2,14 +2,20 @@ import React from 'react';
 import config from 'config';
 import { renderToString } from 'react-dom/server';
 import api from '../lib/api';
-import Widget from '../../../frontend/src/components/Widget';
-import i18n from '../../../frontend/src/lib/i18n';
+import loadModule from '../lib/loadModule'
+import { join } from 'path'
+
+const {
+  FRONTEND_DIST_PATH = join(process.cwd(), 'frontend', 'dist')
+} = process.env
 
 /**
  * Show the widget of a collective
  */
 const widget = (req, res, next) => {
   const { group } = req;
+
+  const Widget = loadModule(`${FRONTEND_DIST_PATH}/widget.js`)
 
   Promise.all([
     api.get(`/groups/${group.slug}/transactions?per_page=3`),
@@ -24,7 +30,7 @@ const widget = (req, res, next) => {
         backers: (req.query.backers !== 'false')
       },
       group,
-      i18n: i18n('en'),
+      i18n: 'en',
       transactions,
       users,
       href: `${config.host.website}/${group.slug}`

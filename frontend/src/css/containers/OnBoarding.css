@@ -11,7 +11,7 @@
 .OnBoarding
 {
   font-family: Montserrat, sans-serif;
-  background-image: url(../images/onboarding-bg.svg);
+  background-image: url(~assets/images/onboarding-bg.svg);
   background-repeat: no-repeat;
   background-position: center 30px;
   background-size: 840px 600px;

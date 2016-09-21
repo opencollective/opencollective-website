@@ -1,0 +1,5 @@
+export ExternalNodeModules from 'webpack-node-externals'
+export WebpackShellPlugin from 'webpack-shell-plugin'
+export HtmlWebpackPlugin from 'html-webpack-plugin'
+export FriendlyErrorsPlugin from 'friendly-errors-webpack-plugin'
+export AssetManifestPlugin from './asset-manifest'

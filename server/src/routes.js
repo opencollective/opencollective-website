@@ -1,7 +1,6 @@
 import mw from './middlewares';
 import serverStatus from 'express-server-status';
 import favicon from 'serve-favicon';
-import path from 'path';
 import express from 'express';
 import request from 'request';
 import robots from 'robots.txt';
@@ -22,20 +21,10 @@ export default (app) => {
    */
   app.use('/status', serverStatus(app));
 
-  /**
-   * Favicon
-   */
-  app.use(favicon(path.join(__dirname, '/../../frontend/dist/images/favicon.ico.png')));
+  app.use(favicon(app.staticPath('images', 'favicon.ico.png')))
+  app.use(robots(app.staticPath('robots.txt')));
 
-  /**
-   * Static folder
-   */
-  app.use('/static', express.static(path.join(__dirname, `../../frontend/dist`), { maxAge: '1d' }));
-
-  /**
-   * GET /robots.txt
-   */
-  app.use(robots(path.join(__dirname, '../../frontend/dist/robots.txt')));
+  app.use('/static', express.static(app.staticPath('.'), { maxAge: '1d' }));
 
   /**
    * Pipe the requests before the middlewares, the piping will only work with raw

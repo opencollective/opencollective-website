@@ -15,9 +15,11 @@ export default class PublicGroupExpenses extends React.Component {
     const emptyState = (
       <div className='center'>
         <div className='PublicGroup-emptyState-image flex items-center justify-center'>
+
           <img width='111' height='151'
-            src='/static/images/collectives/expenses-empty-state-image.jpg'
-            srcSet='/static/images/collectives/expenses-empty-state-image@2x.jpg 2x'/>
+            src={require('../../assets/images/collectives/expenses-empty-state-image.jpg')}
+            srcSet={`${require('../../assets/images/collectives/expenses-empty-state-image@2x.jpg')} 2x`}/>
+
         </div>
         <p className='h3 -fw-bold'>{i18n.getString('expensesPlaceholderTitle')}</p>
         <p className='h5 muted mb3'>{i18n.getString('expensesPlaceholderText')}</p>

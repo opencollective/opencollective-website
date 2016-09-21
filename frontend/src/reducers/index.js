@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import { routerStateReducer as router } from 'redux-router';
 
 import form from './form';
 import github from './github';
@@ -15,6 +14,7 @@ import homepage from './homepage';
 import discover from './discover';
 import app from './app';
 import connectedAccounts from './connectedAccounts';
+import router from './router'
 
 export default combineReducers({
   form,
