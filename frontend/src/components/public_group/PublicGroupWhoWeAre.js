@@ -17,7 +17,7 @@ export default class PublicGroupWhoWeAre extends Component {
 
           {group.website && (
             <div className='PublicGroupWhoWeAre-website'>
-              <a ref='PublicGroupWhoWeAre-website' href={ group.website } className='px3 -btn -green -btn-outline -btn-small -ttu -ff-sec -fw-bold'>{ displayUrl(group.website) }</a>
+              <a ref='PublicGroupWhoWeAre-website' href={ group.website } target='_blank' className='px3 -btn -green -btn-outline -btn-small -ttu -ff-sec -fw-bold'>{ displayUrl(group.website) }</a>
             </div>
           )}
 
