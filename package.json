@@ -7,7 +7,34 @@
   },
   "scripts": {
     "start": "NODE_CONFIG_DIR=./server/config node server/dist",
+    "prestart": "npm run build",
+
     "dev": "WEBSITE_PORT=3000 nf start -j Procfile_dev",
+
+    "build": "npm run clean && npm run cachedir && npm run build:all",
+    "build:all": "npm run build:frontend && npm run build:universal && npm run build:server",
+
+    "build:svg": "gulp build:svg",
+    "prebuild:frontend": "npm run clean:frontend && npm run build:svg",
+    "build:frontend": "webpack --config frontend/webpack.config.babel.js --target web --colors --hide-modules --records-path ./node_modules/.cache/opencollective-website/frontend-records",
+
+    "prebuild:universal": "npm run clean:universal",
+    "build:universal": "webpack --config frontend/webpack.config.babel.js --target node --colors --hide-modules --records-path ./node_modules/.cache/opencollective-website/frontend-records",
+
+    "prebuild:server": "npm run clean:server",
+    "build:server": "webpack --config server/webpack.config.babel.js --target node --colors --hide-modules --records-path ./node_modules/.cache/opencollective-website/server-records",
+    "postbuild:server": "cp -r server/src/views server/dist",
+
+    "cachedir": "mkdirp ./node_modules/.cache/opencollective-website",
+    "clean": "npm run clean:frontend && npm run clean:server && npm run clean:universal",
+    "clean:frontend": "rimraf frontend/dist/fonts frontend/dist/svg frontend/dist/images frontend/dist/*.*",
+    "clean:server": "rimraf server/dist",
+    "clean:universal": "rimraf frontend/dist/universal",
+
+    "watch:server": "webpack --config server/webpack.config.babel.js --target node --watch --hot",
+    "watch:universal": "webpack --config frontend/webpack.config.babel.js --target node --watch --hot",
+    "watch:frontend": "webpack-dev-server --config ./frontend/webpack.config.babel.js --hot --inline --output-public-path='http://localhost:8080/static/' --content-base ./frontend/dist --hot-only",
+
     "hint": "eslint '**/*.js' --quiet",
     "pretest": "npm run hint",
     "test": "npm run test:server && npm run test:unit",
@@ -17,13 +44,8 @@
     "test:e2e": "npm run test:e2e:exec api:run website:run website:testE2E",
     "test:e2e:exec": "npm run rexec:api test_e2e.sh",
     "nightwatch": "NODE_CONFIG_DIR=./server/config ./node_modules/nightwatch/bin/nightwatch --config nightwatch.json",
-    "build": "make build",
-    "build:server": "make build-server",
-    "build:frontend": "make build-frontend",
-    "watch:js": "make build-frontend-watch",
-    "watch:server": "make build-server-watch",
     "watch:test": "mocha test/unit/ --opts test/unit/mocha.opts --watch",
-    "bootstrap": "bash scripts/postinstall.sh",
+    "postinstall": "bash scripts/postinstall.sh",
     "git:clean": "git branch --merged | grep -v \\* | grep -v master | grep -v dev | xargs -n 1 git branch -d",
     "deploy:staging": "bash -x scripts/deploy.sh staging",
     "deploy:production": "bash -x scripts/deploy.sh production",

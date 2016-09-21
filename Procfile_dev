@@ -1,4 +1,5 @@
-frontend: make build-frontend-watch
-server: make build-server-webpack-watch
-universal: make build-universal-watch
+server: npm run start
+frontend: npm run watch:frontend
+server_code:  npm run watch:server
+universal: npm run watch:universal
 svg: gulp watch:svg
