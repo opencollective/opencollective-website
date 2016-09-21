@@ -2,15 +2,44 @@ import React, { Component } from 'react';
 
 import formatCurrency from '../../lib/format_currency';
 import filterCollection from '../../lib/filter_collection';
+import roles from '../../constants/roles';
+import fetch from 'isomorphic-fetch';
 
 import LoginTopBar from '../../containers/LoginTopBar';
+import exportFile from '../../lib/export_file';
 
 const DEFAULT_BACKGROUND_IMAGE = '/static/images/collectives/default-header-bg.jpg';
 
+export function exportMembers(authenticatedUser, group) {
+  const accessToken = localStorage.getItem('accessToken');
+  const headers = { authorization: `Bearer ${accessToken}`};
+  return fetch(`/api/groups/${group.slug}/users.csv`, { headers })
+    .then(response => response.text())
+    .then(csv => {
+    const d = new Date;
+    const mm = d.getMonth() + 1;
+    const dd = d.getDate();
+    const date =  [d.getFullYear(), (mm < 10) ? `0${mm}` : mm, (dd < 10) ? `0${dd}` : dd].join('');
+    const filename = `${date}-${group.slug}-members.csv`;
+    exportFile('text/plain;charset=utf-8', filename, csv);
+  });
+}
+
 export default class PublicGroupHero extends Component {
 
+  canEdit() {
+    const { session, group } = this.props;
+
+    if (!session.isAuthenticated) return false;
+
+    const usersByRole = group.usersByRole || {};
+    group.members = usersByRole[roles.MEMBER] || [];
+    const admin = group.members.find(u => (u.id === session.user.id));
+    return (!!admin);
+  }
+
   render() {
-    const { group, i18n } = this.props;
+    const { group, i18n, session } = this.props;
     const collectiveBg = group.backgroundImage || DEFAULT_BACKGROUND_IMAGE;
     return (
       <section className='PublicGroupHero relative px2 bg-black bg-cover white' style={{backgroundImage: `url(${collectiveBg})`}}>
@@ -46,6 +75,11 @@ export default class PublicGroupHero extends Component {
               <li className='inline-block'>
                 <a href='#members-wall' className='block px2 py3 white -ff-sec -fw-bold'>{ i18n.getString('menuMembersWall') }</a>
               </li>
+              { this.canEdit() &&
+                <li className='inline-block'>
+                  <a href='#exportMembers' className='block px2 py3 white -ff-sec -fw-bold' onClick={ exportMembers.bind(this, session.user, group) } >Export members.csv</a>
+                </li>
+              }
             </ul>
           </nav>
         </div>
