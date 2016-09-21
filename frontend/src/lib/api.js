@@ -1,4 +1,6 @@
-import fetch from 'isomorphic-fetch';
+// This is automatically injected via the Webpack.ProvidePlugin
+// import fetch from 'isomorphic-fetch';
+
 import { normalize } from 'normalizr';
 import extend from 'lodash/extend';
 import queryString from 'query-string';
@@ -36,7 +38,7 @@ export function getThirdParty(endpoint, options={}) {
 export function postJSON(endpoint, body, options={}) {
   let headers = {
       Accept: 'application/json',
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     };
 
   if (options.headers) {
@@ -48,7 +50,7 @@ export function postJSON(endpoint, body, options={}) {
   return fetch(url(endpoint), {
     method: 'post',
     headers,
-    body: JSON.stringify(body),
+    body: JSON.stringify(body)
   })
   .then(checkStatus);
 }
@@ -62,9 +64,9 @@ export function putJSON(endpoint, body) {
     method: 'put',
     headers: addAuthTokenToHeader({
       Accept: 'application/json',
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     }),
-    body: JSON.stringify(body),
+    body: JSON.stringify(body)
   })
   .then(checkStatus);
 }
@@ -77,7 +79,7 @@ export function post(endpoint, body, options={}) {
   return fetch(url(endpoint), {
     headers: addAuthTokenToHeader(options.headers),
     method: 'post',
-    body,
+    body
   })
   .then(checkStatus);
 }
@@ -139,6 +141,6 @@ function addAuthTokenToHeader(obj) {
   if (!accessToken) return obj;
   return {
     Authorization: `Bearer ${accessToken}`,
-    ...obj,
+    ...obj
   };
 }

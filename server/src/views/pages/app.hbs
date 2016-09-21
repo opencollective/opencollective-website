@@ -16,7 +16,7 @@
     <meta name="twitter:description" content="{{meta.description}}" />
     <meta name="twitter:image" content="{{meta.image}}" />
     <link rel="shortcut icon" type="image/png" href="/static/images/favicon.ico.png"/>
-    <link rel="stylesheet" type="text/css" href="{{{ cachebust '/css/main.css' }}}">
+    <link rel="stylesheet" type="text/css" href="{{{ cachebust '/bundle.css' }}}">
     <title>{{meta.title}}</title>
   </head>
   <body>
@@ -27,7 +27,7 @@
     <script>
         window.__INITIAL_STATE__ = {{{initialState}}}
     </script>
-    <script src="{{{ cachebust '/js/bundle.js' }}}"></script>
+    <script src="{{{ cachebust '/bundle.js' }}}"></script>
 
     {{> google_analytics}}
   </body>

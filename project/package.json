@@ -1,0 +1,21 @@
+{
+  "name": "opencollective-project-tools",
+  "private": "true",
+  "license": "MIT",
+  "version": "1.0.0",
+  "description": "the project blueprint tool provides shared tooling for dev, test, relese, analytics, and other types of activity for all of the open collective projects.",
+  "main": "index.js",
+  "bin": {
+    "ocdev-cli": "./cli/bin"
+  },
+  "author": "Jon Soeder <jon@chicago.com> (https://twitter.com/soederpop)",
+  "dependencies": {
+    "colors": "^1.1.2",
+    "commander": "^2.9.0",
+    "figlet": "^1.1.2",
+    "fs-extra": "^0.30.0",
+    "node-emoji": "^1.4.1",
+    "pretty-cli": "0.0.14",
+    "lodash": "4.15.0"
+  }
+}

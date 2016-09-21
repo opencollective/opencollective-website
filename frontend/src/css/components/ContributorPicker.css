@@ -99,7 +99,7 @@
 		font-size: 16px;
 		border: none;
 		/*border-bottom: 1px solid #e1e9ed;*/
-		background-image: url(/static/images/search.svg);
+		background-image: url(~assets/images/search.svg);
 		background-repeat: no-repeat;
 		background-size: 20px;
 		background-position: 25px center;

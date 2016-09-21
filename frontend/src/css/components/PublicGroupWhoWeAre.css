@@ -21,7 +21,7 @@
     margin: 0 auto;
     padding-top: 216px;
     padding-top: 13.5rem;
-    background-image: url(/static/images/collectives/logo-placeholder.png);
+    background-image: url(~assets/images/collectives/logo-placeholder.png);
     background-size: 41.3125rem 26.1875rem;
     background-position: 50% 0;
     .PublicGroupWhoWeAre-title {
@@ -31,14 +31,6 @@
       margin: 0;
       font-weight: 700;
       font-family: Montserrat,sans-serif;
-    }
-    .Collectives-title {
-      margin-top: 3rem;
-      font-size: 22px;
-      color: #494b4d;
-      text-align: center;
-      letter-spacing: 1px;
-      padding: 0 15px;
     }
     .PublicGroupWhoWeAre-subtitle {
       font-family: montserratlight;

@@ -11,7 +11,7 @@ export default function homepage(state={}, action={}) {
     case HYDRATE: {
       if (action.data.homepage) {
         const { homepage } = action.data;
-        return merge({}, state, {...homepage});
+        return merge({}, state, homepage)
       }
       return state;
     }

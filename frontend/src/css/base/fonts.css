@@ -6,23 +6,23 @@
 
 @font-face {
   font-family: 'opencollective';
-  src:url('/static/fonts/opencollective/opencollective.eot');
-  src:url('/static/fonts/opencollective/opencollective.eot?#iefix') format('embedded-opentype'),
-    url('/static/fonts/opencollective/opencollective.woff') format('woff'),
-    url('/static/fonts/opencollective/opencollective.ttf') format('truetype'),
-    url('/static/fonts/opencollective/opencollective.svg#opencollective') format('svg');
+    src:url('~assets/fonts/opencollective/opencollective.eot');
+  src:url('~assets/fonts/opencollective/opencollective.eot?#iefix') format('embedded-opentype'),
+    url('~assets/fonts/opencollective/opencollective.woff') format('woff'),
+    url('~assets/fonts/opencollective/opencollective.ttf') format('truetype'),
+    url('~assets/fonts/opencollective/opencollective.svg#opencollective') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'montserratlight';
-  src: url('/static/fonts/montserrat/montserrat-light-webfont.eot');
-  src: url('/static/fonts/montserrat/montserrat-light-webfont.eot?#iefix') format('embedded-opentype'),
-    url('/static/fonts/montserrat/montserrat-light-webfont.woff2') format('woff2'),
-    url('/static/fonts/montserrat/montserrat-light-webfont.woff') format('woff'),
-    url('/static/fonts/montserrat/montserrat-light-webfont.ttf') format('truetype'),
-    url('/static/fonts/montserrat/montserrat-light-webfont.svg#montserratlight') format('svg');
+  src: url('~assets/fonts/montserrat/montserrat-light-webfont.eot');
+  src: url('~assets/fonts/montserrat/montserrat-light-webfont.eot?#iefix') format('embedded-opentype'),
+    url('~assets/fonts/montserrat/montserrat-light-webfont.woff2') format('woff2'),
+    url('~assets/fonts/montserrat/montserrat-light-webfont.woff') format('woff'),
+    url('~assets/fonts/montserrat/montserrat-light-webfont.ttf') format('truetype'),
+    url('~assets/fonts/montserrat/montserrat-light-webfont.svg#montserratlight') format('svg');
   font-weight: normal;
   font-style: normal;
 }

@@ -1,21 +1,9 @@
-import config from 'config';
-import path from 'path';
-import bust from 'cache-bust';
+const wantsHMR = process.env.ENABLE_HMR || process.argv.indexOf('--hot') >= 0
 
-const dir = path.resolve(__dirname, '../../../../frontend/dist/');
-
-const cache = {};
-
+// We no longer need to manually use the cache-bust helper since webpack
+// automatically hashes our filenames for us in production
 export default (file) => {
-  if (!config.cacheBust) {
-    return `/static${file}`;
-  }
-
-  if (!cache[file]) {
-    // make it a relative path so it hits the static middleware
-    console.log("BUSTING: ", dir + file);
-    cache[file] = bust(dir + file, {remove: true}).replace(dir, '/static');
-  }
-
-  return cache[file];
+  return wantsHMR && process.env.NODE_ENV === 'development'
+    ? `http://localhost:8080/static${file}`
+    : `/static${file}`
 };
