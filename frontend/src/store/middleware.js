@@ -10,8 +10,8 @@ if (process.env.NODE_ENV === 'production') {
   };
 }
 
-//const logger = createLogger(options);
+const logger = createLogger(options);
 
-const middleware = [thunk];
+const middleware = [logger, thunk];
 
 export default middleware;

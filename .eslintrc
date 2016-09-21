@@ -9,6 +9,10 @@
     ],
     "rules": {
         "no-console": 0,
-        "mocha/no-exclusive-tests": "error"
+        "mocha/no-exclusive-tests": "error",
+        "no-unused-vars": ["error", {
+          "vars": "local",
+          "args": "none"
+        }]
     }
 }

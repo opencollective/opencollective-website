@@ -2,7 +2,9 @@ import project from '../project' // eslint-disable-line
 import postcss from '../project/config/postcss'
 import plugins from '../project/config/webpack/plugins/core'
 import mapValues from 'lodash/mapValues'
-import DashboardPlugin from 'webpack-dashboard/plugin'
+
+// DISABLED for now, provides a nicer view of the webpack build status
+// import DashboardPlugin from 'webpack-dashboard/plugin'
 
 // HACK Some webpack plugins rely on process.cwd() / some resolve relative to the config file.
 process.chdir(__dirname)
@@ -40,7 +42,7 @@ export default (env, options = {}) => {
 
   config.plugins.push(saveManifest)
 
-  config.plugins.push(new DashboardPlugin())
+  // config.plugins.push(new DashboardPlugin())
 
   return {
     postcss: postcss,

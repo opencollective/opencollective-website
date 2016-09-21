@@ -1,6 +1,6 @@
-import project from '../project'
+import project from '../project' // eslint-disable-line
 
-const { server, frontend } = project.paths
+const { server } = project.paths
 
 // Enabling HMR Requires either of these opt in
 const wantsHMR = process.env.ENABLE_HMR || process.argv.indexOf('--hot')

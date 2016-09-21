@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import ActivityItem from '../../components/ActivityItem';
 
-const emptyState = require('../../assets/images/collectives/activities-empty-state-image.jpg')
+const emptyState = require('../../assets/images/collectives/activities-empty-state-image.jpg') // eslint-disable-line
 const emptyState2x = require('../../assets/images/collectives/activities-empty-state-image@2x.jpg')
 
 export default class PublicGroupDonations extends React.Component {

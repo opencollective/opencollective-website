@@ -1,7 +1,6 @@
 import mw from './middlewares';
 import serverStatus from 'express-server-status';
 import favicon from 'serve-favicon';
-import path from 'path';
 import express from 'express';
 import request from 'request';
 import robots from 'robots.txt';
