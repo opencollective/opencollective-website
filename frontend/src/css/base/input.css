@@ -8,7 +8,7 @@ input::-webkit-input-placeholder, input::-moz-placeholder, input:-ms-input-place
 /**
  * hide ugly gray gradient
  */
-select, input {
+select, input, textarea {
   -webkit-appearance: none;
 }
 
