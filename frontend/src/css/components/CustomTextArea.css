@@ -1,10 +1,8 @@
-.CustomTextArea
-{
+.CustomTextArea {
   position: relative;
   display: inline-block;
 
-  .CustomTextArea-textarea
-  {
+  .CustomTextArea-textarea {
     margin: 0;
     box-sizing: border-box;
     width: 100%;
@@ -20,8 +18,7 @@
     letter-spacing: .5px;
   }
 
-  .CustomTextArea-placeholder
-  {
+  .CustomTextArea-placeholder {
     position: absolute;
     left: 0;
     right: 0;
@@ -36,6 +33,7 @@
     font-size: 16px;
     color: #ced5d9;
     cursor: text;
+    background: none;
   }
 
   .CustomTextArea-counter
