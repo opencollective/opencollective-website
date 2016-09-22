@@ -39,6 +39,7 @@
 @import './containers/OnBoarding.css';
 @import './containers/ProfilePage.css';
 @import './containers/Response.css';
+@import './containers/Settings.css';
 @import './containers/SubmitExpense.css';
 @import './containers/Subscriptions.css';
 
