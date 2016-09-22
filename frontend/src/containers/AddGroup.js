@@ -16,9 +16,6 @@ import validateSchema from '../actions/form/validate_schema';
 
 import groupSchema from '../joi_schemas/group';
 
-
-const MEMBER = 'MEMBER';
-
 export class AddGroup extends Component {
 
   constructor(props) {
@@ -220,7 +217,7 @@ export class AddGroup extends Component {
   }
 
   addUser() {
-        const {
+    const {
       appendGroupForm,
       groupForm
     } = this.props;
@@ -229,7 +226,7 @@ export class AddGroup extends Component {
     users.push({});
     const attributes = { users };
     appendGroupForm(attributes);
-  };
+  }
 
   create() {
     const { groupForm, validateSchema, createGroup, utmSource, notify } = this.props;
