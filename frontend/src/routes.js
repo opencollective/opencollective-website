@@ -39,7 +39,6 @@ export default (
     {/* Leaving github/apply routes for existing links */}
     <Route path="/github/apply/:token" component={OnBoarding} />
     <Route path="/github/apply" component={OnBoarding} />
-    <Route path="/:slug/:tier" component={GroupTierList} />
     <Route path="/:slug/connected-accounts" component={ConnectedAccounts} />
     <Route path="/:slug/connect/:provider" component={ConnectAuthProviderButton} />
     <Route path="/:slug/edit-twitter" component={EditTwitter} />
@@ -49,5 +48,6 @@ export default (
     <Route path="/:slug/:type(donations|expenses)" component={Transactions} />
     <Route path="/:slug/donate/:amount" component={DonatePage} />
     <Route path="/:slug/donate/:amount/:interval" component={DonatePage} />
+    <Route path="/:slug/:tier" component={GroupTierList} />
   </Route>
 );
