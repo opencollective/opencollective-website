@@ -10,12 +10,12 @@ export default (options) => ({
     name: 'opencollective-website'
   }),
 
-  presets: resolvePaths([
+  presets: demodularize(resolvePaths([
     "babel-preset-es2015",
     "babel-preset-stage-0",
     "babel-preset-react",
     (options.hot ? "babel-preset-react-hmre" : null)
-  ]),
+  ])),
 
   plugins: resolvePaths([
     "babel-plugin-add-module-exports",
@@ -28,3 +28,12 @@ export default (options) => ({
 
 const resolvePaths = (shortNames) =>
   compact(shortNames).map(require.resolve)
+
+// disables the commonjs modules transform from babel. only useful in webpack
+const demodularize = (list) => {
+  list[0] = [list[0], {
+    modules: false
+  }]
+
+  return list
+}

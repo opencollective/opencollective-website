@@ -140,7 +140,10 @@ const development = (project, paths, builder) => {
   const dev = builder
     .loader('babel', '.js', loaders.scripts.babelHotLoader({
       hot: (process.argv.indexOf('--hot') >= 0 || process.env.ENABLE_HMR),
-      include: [paths.src],
+      include: [
+        paths.src,
+        project.paths.join('test')
+      ],
       exclude: [/node_modules/]
     }))
 

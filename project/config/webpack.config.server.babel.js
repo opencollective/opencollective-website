@@ -123,7 +123,8 @@ export default (options = {}, {paths}) => (
         ],
         include: [
           project.paths.server.src,
-          project.paths.frontend.src
+          project.paths.frontend.src,
+          project.paths.join('test')
         ]
       }))
     ))

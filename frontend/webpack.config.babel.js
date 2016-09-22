@@ -40,7 +40,10 @@ export default (env, options = {}) => {
     config.plugins.push( new plugins.ExtractTextPlugin('css/[name].css') )
   }
 
-  config.plugins.push(saveManifest)
+  // In test we disable this
+  if (options.saveManifest !== false) {
+    config.plugins.push(saveManifest)
+  }
 
   // config.plugins.push(new DashboardPlugin())
 
