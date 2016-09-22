@@ -9,7 +9,7 @@ import Leaderboard from './containers/Leaderboard';
 import OnBoarding from './containers/OnBoarding';
 import Login from './containers/Login';
 import ConnectedAccounts from './components/ConnectedAccounts';
-import ConnectAuthProviderButton from './components/ConnectAuthProviderButton';
+import ConnectProvider from './containers/ConnectProvider';
 import EditTwitter from './components/EditTwitter';
 import HomePage from './containers/HomePage';
 import Faq from './containers/Faq';
@@ -39,7 +39,7 @@ export default (
     <Route path="/github/apply/:token" component={OnBoarding} />
     <Route path="/github/apply" component={OnBoarding} />
     <Route path="/:slug/connected-accounts" component={ConnectedAccounts} />
-    <Route path="/:slug/connect/:provider" component={ConnectAuthProviderButton} />
+    <Route path="/:slug/connect/:provider" component={ConnectProvider} />
     <Route path="/:slug/edit-twitter" component={EditTwitter} />
     <Route path="/:slug/edit" component={EditCollective} />
     <Route path="/:slug" component={PublicGroup} />

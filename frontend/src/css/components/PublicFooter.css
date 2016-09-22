@@ -3,6 +3,9 @@
   .left {
     padding-top: 28px;
   }
+  ul {
+    white-space: pre;
+  }
 }
 
 .PublicFooter-menuItem {
