@@ -16,9 +16,6 @@ import validateSchema from '../actions/form/validate_schema';
 
 import groupSchema from '../joi_schemas/group';
 
-
-const MEMBER = 'MEMBER';
-
 export class AddGroup extends Component {
 
   constructor(props) {
@@ -45,12 +42,47 @@ export class AddGroup extends Component {
       logo,
       image,
       tags,
-      users1,
-      users2,
-      users3,
-      users4,
-      users5
+      users
     } = groupForm.attributes;
+
+
+    const generateUserForm = (index) => {
+
+      const updateUserAttribute = (index, name, value) => {
+        const attributes = { users: {} };
+        attributes.users[index] = {};
+        attributes.users[index][name] = value;
+        attributes.users[index]['role'] = 'MEMBER';
+        appendGroupForm(attributes);
+      };
+
+      const editFieldForm = (attribute, placeholder) => {
+        return (
+          <div>
+            <div className='AddGroup-label'>{attribute}</div>
+            <Input
+              name={attribute}
+              value={users[index][attribute]}
+              onChange={(value) => updateUserAttribute(index, attribute, value)}
+              maxLength={50}
+              placeholder={placeholder} />
+          </div>
+        );
+      }
+
+      return (
+        <div className='flex flex-row' key={`addUser${index}`}>
+          {editFieldForm('firstName', 'Charlie')}
+          {editFieldForm('lastName', 'Chaplin')}
+          {editFieldForm('email', 'charlie@chaps.com')}
+          {editFieldForm('twitterHandle', 'charliechaps')}
+          {editFieldForm('avatar', 'http://userinfo.com/image.png')}
+        </div>
+      );
+    }
+
+    const addUsersForm = [];
+    users.forEach((item, index) => addUsersForm.push(generateUserForm(index)));
 
     return (
       <div className='Login'>
@@ -171,201 +203,9 @@ export class AddGroup extends Component {
               <div className='sm-col-10 order-1 content-center'>
                 <div className='flex-auto'>
                   <div className='flex flex-column'>
-                    <div className='flex flex-row'>
-                      <div>
-                        <div className='AddGroup-label'>Name</div>
-                        <Input
-                          name='name'
-                          value={users1.name}
-                          onChange={(value) => appendGroupForm({users1: {name: value, email: users1.email, twitterHandle: users1.twitterHandle, avatar: users1.avatar}})}
-                          maxLength={50}
-                          placeholder='Charlie Chaplin'/>
-                      </div>
-                      <div>
-                        <div className='AddGroup-label'>Email</div>
-                         <Input
-                          name='email'
-                          value={users1.email}
-                          onChange={(value) => appendGroupForm({users1: {name: users1.name, email: value, twitterHandle: users1.twitterHandle, avatar: users1.avatar}})}
-                          maxLength={50}
-                          placeholder='charlie@chaps.com'/>
-                      </div>
-                      <div>
-                        <div className='AddGroup-label'>Twitterhandle</div>
-                         <Input
-                          name='twitterHandle'
-                          value={users1.twitterHandle}
-                          onChange={(value) => appendGroupForm({users1: {name: users1.name, email: users1.email, twitterHandle: value, avatar: users1.avatar}})}
-                          maxLength={50}
-                          placeholder='charliechaps'/>
-                      </div>
-                      <div>
-                        <div className='AddGroup-label'>Avatar</div>
-                         <Input
-                          name='avatar'
-                          value={users1.avatar}
-                          onChange={(value) => appendGroupForm({users1: {name: users1.name, email: users1.email, twitterHandle: users1.twitterHandle, avatar: value}})}
-                          maxLength={255}
-                          placeholder='http://userinfo.com/image.png'/>
-                      </div>
-                    </div>
-
-                    <div className='flex flex-row'>
-                      <div>
-                        <div className='AddGroup-label'>Name</div>
-                        <Input
-                          name='name'
-                          value={users2.name}
-                          onChange={(value) => appendGroupForm({users2: {name: value, email: users2.email, twitterHandle: users2.twitterHandle, avatar: users2.avatar}})}
-                          maxLength={50}
-                          placeholder='Charlie Chaplin'/>
-                      </div>
-                      <div>
-                        <div className='AddGroup-label'>Email</div>
-                         <Input
-                          name='email'
-                          value={users2.email}
-                          onChange={(value) => appendGroupForm({users2: {name: users2.name, email: value, twitterHandle: users2.twitterHandle, avatar: users2.avatar}})}
-                          maxLength={50}
-                          placeholder='charlie@chaps.com'/>
-                      </div>
-                      <div>
-                        <div className='AddGroup-label'>Twitterhandle</div>
-                         <Input
-                          name='twitterHandle'
-                          value={users2.twitterHandle}
-                          onChange={(value) => appendGroupForm({users2: {name: users2.name, email: users2.email, twitterHandle: value, avatar: users2.avatar}})}
-                          maxLength={50}
-                          placeholder='charliechaps'/>
-                      </div>
-                      <div>
-                        <div className='AddGroup-label'>Avatar</div>
-                         <Input
-                          name='avatar'
-                          value={users2.avatar}
-                          onChange={(value) => appendGroupForm({users2: {name: users2.name, email: users2.email, twitterHandle: users2.twitterHandle, avatar: value}})}
-                          maxLength={255}
-                          placeholder='http://userinfo.com/image.png'/>
-                      </div>
-                    </div>
-
-                    <div className='flex flex-row'>
-                      <div>
-                        <div className='AddGroup-label'>Name</div>
-                        <Input
-                          name='name'
-                          value={users3.name}
-                          onChange={(value) => appendGroupForm({users3: {name: value, email: users3.email, twitterHandle: users3.twitterHandle, avatar: users3.avatar}})}
-                          maxLength={50}
-                          placeholder='Charlie Chaplin'/>
-                      </div>
-                      <div>
-                        <div className='AddGroup-label'>Email</div>
-                         <Input
-                          name='email'
-                          value={users3.email}
-                          onChange={(value) => appendGroupForm({users3: {name: users3.name, email: value, twitterHandle: users3.twitterHandle, avatar: users3.avatar}})}
-                          maxLength={50}
-                          placeholder='charlie@chaps.com'/>
-                      </div>
-                      <div>
-                        <div className='AddGroup-label'>Twitterhandle</div>
-                         <Input
-                          name='twitterHandle'
-                          value={users3.twitterHandle}
-                          onChange={(value) => appendGroupForm({users3: {name: users3.name, email: users3.email, twitterHandle: value, avatar: users3.avatar}})}
-                          maxLength={50}
-                          placeholder='charliechaps'/>
-                      </div>
-                      <div>
-                        <div className='AddGroup-label'>Avatar</div>
-                         <Input
-                          name='avatar'
-                          value={users3.avatar}
-                          onChange={(value) => appendGroupForm({users3: {name: users3.name, email: users3.email, twitterHandle: users3.twitterHandle, avatar: value}})}
-                          maxLength={255}
-                          placeholder='http://userinfo.com/image.png'/>
-                      </div>
-                    </div>
-
-                    <div className='flex flex-row'>
-                      <div>
-                        <div className='AddGroup-label'>Name</div>
-                        <Input
-                          name='name'
-                          value={users4.name}
-                          onChange={(value) => appendGroupForm({users4: {name: value, email: users4.email, twitterHandle: users4.twitterHandle, avatar: users4.avatar}})}
-                          maxLength={50}
-                          placeholder='Charlie Chaplin'/>
-                      </div>
-                      <div>
-                        <div className='AddGroup-label'>Email</div>
-                         <Input
-                          name='email'
-                          value={users4.email}
-                          onChange={(value) => appendGroupForm({users4: {name: users4.name, email: value, twitterHandle: users4.twitterHandle, avatar: users4.avatar}})}
-                          maxLength={50}
-                          placeholder='charlie@chaps.com'/>
-                      </div>
-                      <div>
-                        <div className='AddGroup-label'>Twitterhandle</div>
-                         <Input
-                          name='twitterHandle'
-                          value={users4.twitterHandle}
-                          onChange={(value) => appendGroupForm({users4: {name: users4.name, email: users4.email, twitterHandle: value, avatar: users4.avatar}})}
-                          maxLength={50}
-                          placeholder='charliechaps'/>
-                      </div>
-                      <div>
-                        <div className='AddGroup-label'>Avatar</div>
-                         <Input
-                          name='avatar'
-                          value={users4.avatar}
-                          onChange={(value) => appendGroupForm({users4: {name: users4.name, email: users4.email, twitterHandle: users4.twitterHandle, avatar: value}})}
-                          maxLength={255}
-                          placeholder='http://userinfo.com/image.png'/>
-                      </div>
-                    </div>
-
-                    <div className='flex flex-row'>
-                      <div>
-                        <div className='AddGroup-label'>Name</div>
-                        <Input
-                          name='name'
-                          value={users5.name}
-                          onChange={(value) => appendGroupForm({users5: {name: value, email: users5.email, twitterHandle: users5.twitterHandle, avatar: users5.avatar}})}
-                          maxLength={50}
-                          placeholder='Charlie Chaplin'/>
-                      </div>
-                      <div>
-                        <div className='AddGroup-label'>Email</div>
-                         <Input
-                          name='email'
-                          value={users5.email}
-                          onChange={(value) => appendGroupForm({users5: {name: users5.name, email: value, twitterHandle: users5.twitterHandle, avatar: users5.avatar}})}
-                          maxLength={50}
-                          placeholder='charlie@chaps.com'/>
-                      </div>
-                      <div>
-                        <div className='AddGroup-label'>Twitterhandle</div>
-                         <Input
-                          name='twitterHandle'
-                          value={users5.twitterHandle}
-                          onChange={(value) => appendGroupForm({users5: {name: users5.name, email: users5.email, twitterHandle: value, avatar: users5.avatar}})}
-                          maxLength={50}
-                          placeholder='charliechaps'/>
-                      </div>
-                      <div>
-                        <div className='AddGroup-label'>Avatar</div>
-                         <Input
-                          name='avatar'
-                          value={users5.avatar}
-                          onChange={(value) => appendGroupForm({users5: {name: users5.name, email: users5.email, twitterHandle: users5.twitterHandle, avatar: value}})}
-                          maxLength={255}
-                          placeholder='http://userinfo.com/image.png'/>
-                      </div>
-                    </div>
+                    {addUsersForm}
                   </div>
+                  <div className={`AddGroup-Button`} onClick={this.addUser.bind(this)}>Add user</div>
                 </div>
               </div>
               <div className={`AddGroup-Button`} onClick={ this.createRef }>create!</div>
@@ -374,6 +214,18 @@ export class AddGroup extends Component {
         <PublicFooter/>
       </div>
     );
+  }
+
+  addUser() {
+    const {
+      appendGroupForm,
+      groupForm
+    } = this.props;
+
+    const users = groupForm.attributes.users;
+    users.push({});
+    const attributes = { users };
+    appendGroupForm(attributes);
   }
 
   create() {
@@ -394,12 +246,7 @@ export class AddGroup extends Component {
         utmSource
       },
       tags: attr.tags && attr.tags.split(',').map(x => x.trim()),
-      users: [
-        Object.assign({}, attr.users1, {role: MEMBER}),
-        Object.assign({}, attr.users2, {role: MEMBER}),
-        Object.assign({}, attr.users3, {role: MEMBER}),
-        Object.assign({}, attr.users4, {role: MEMBER}),
-        Object.assign({}, attr.users5, {role: MEMBER})],
+      users: attr.users,
       isPublic: true,
       currency: attr.currency
     };

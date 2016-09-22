@@ -139,14 +139,18 @@ function github(state=githubInitialState, action={}) {
  * Group form reducer
  */
 
+const users = [];
+for (let i = 0; i<5;i++)
+  users[i] = {};
+
 const groupInitialState = {
-  attributes: { users1: {}, users2: {}, users3: {}, users4: {}, users5: {}}
+  attributes: { users: [ {} ] }
 };
 
 function addgroup(state=groupInitialState, action={}) {
   switch (action.type) {
     case constants.APPEND_GROUP_FORM:
-      return merge({}, state, { attributes: action.attributes });
+      return merge({}, state, { attributes: merge({}, state.attributes, action.attributes) });
     default:
       return state;
   }
