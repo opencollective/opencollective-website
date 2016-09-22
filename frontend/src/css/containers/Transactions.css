@@ -83,8 +83,9 @@ body {
 		margin: auto;
 		margin-top: 40px;
 		box-sizing: border-box;
-		width: 350px;
+		max-width: 350px;
 		height: 55px;
+		width: 100%;
 		border-radius: 100px;
 		line-height: 1.75;
 	}
