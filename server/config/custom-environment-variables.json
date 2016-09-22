@@ -16,5 +16,9 @@
   "twitter": {
     "testUsername": "TWITTER_TEST_USERNAME",
     "testPassword": "TWITTER_TEST_PASSWORD"
+  },
+  "meetup": {
+    "testEmail": "MEETUP_TEST_EMAIL",
+    "testPassword": "MEETUP_TEST_PASSWORD"
   }
 }
