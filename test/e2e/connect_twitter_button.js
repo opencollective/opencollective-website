@@ -8,7 +8,7 @@ module.exports = {
   beforeEach: (client) => resetDb(client)
     .url(`${config.host.website}/testcollective/connect/twitter`)
     .waitForElementVisible('body', 1000)
-    .assert.containsText('body', 'Connect to twitter'),
+    .assert.containsText('body', 'CONNECT TO TWITTER'),
 
   'Redirects to Twitter after clicking connect': (client) => {
 
