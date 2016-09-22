@@ -15,6 +15,14 @@
     height: 80px;
   }
 
+  .-joinUsAndMembersWall {
+    padding-left: 16px;
+    padding-left: 1rem;
+    padding-right: 16px;
+    padding-right: 1rem;
+    background-color: rgb(249, 250, 250);
+  }
+
   .PublicGroupHero-content .-btn-big.-bg-green,
   .PublicGroupHero-content p.h6,
   .PublicGroupHero-content svg,
@@ -132,6 +140,12 @@
   }
   &.EditButton--Link {
     background-image: url('/static/images/link-circle.svg');
+  }
+  &.EditButton--NewUser {
+    background-image: url('/static/images/add-user.svg');
+    width: 40px;
+    height: 40px;
+    right: 15px !important;
   }
 }
 
@@ -256,6 +270,43 @@
   top: 0;
   bottom: 0;
   margin: auto;
+  &.-createOrUpdate{
+    height: 600px;
+    .Input {
+      margin: 20px 0;
+      height: 40px;
+      input {
+        border-radius: 5px;
+        background-color: #ffffff;
+        box-shadow: inset 0 3px 0 0 rgba(0, 0, 0, 0.05);
+        border: solid 1px rgba(48, 50, 51, 0.2);
+        padding: 10px 15px;
+      }
+    }
+    .OnBoardingButton {
+      margin-top: 20px;
+    }
+    .-radio-group {
+      text-align: left;
+      vertical-align: top;
+      input[type="radio"] {
+        vertical-align: top;
+        float: none;
+        margin: 0;
+        margin-right: 5px;
+      }
+      span {
+        vertical-align: top;
+        font-family: Lato;
+        font-size: 14px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        color: #1a1a1a;
+        margin-right: 10px;
+      }
+    }
+  }
   .OnBoardingButton {
     margin-top: 40px;
     width: 100%;
@@ -358,8 +409,70 @@
 }
 
 .EditCog {
+  position: absolute;
   width: 30px;
   height: 30px;
   background-color: #ffffff;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+  border-radius: 100%;
+  cursor: pointer;
+  background-image: url(/static/images/gear.svg);
+  background-size: 20px;
+  background-position: center;
+  background-repeat: no-repeat;
+  .EditCog-Menu {
+    z-index: 999999;
+    position: absolute;
+    width: 70px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.25);
+    bottom: 140%;
+    left: -17.5px;
+    font-family: Lato;
+    font-size: 14px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    text-align: center;
+    color: #919699;
+    &:after, &:before {
+      top: 100%;
+      left: 50%;
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+    }
+    &:after {
+      border-color: transparent;
+      border-top-color: #fff;
+      border-width: 6px;
+      margin-left: -6px;
+    }
+    &:before {
+      border-color: transparent;
+      border-top-color: rgba(0, 0, 0, 0.15);
+      border-width: 7px;
+      margin-left: -7px;
+    }
+    ul {
+      padding: 0;
+      list-style: none;
+      text-align: left;
+      margin: 0;
+      li {
+        padding: 7px 11px;
+        &:not(:first-child) {
+          border-top: 1px solid #e6e6e6;
+        }
+        &:hover {
+          cursor: pointer;
+          color: #46b0ed;
+        }
+      }
+    }
+  }
 }
