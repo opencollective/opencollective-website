@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 
 import formatCurrency from '../../lib/format_currency';
 import filterCollection from '../../lib/filter_collection';
-import roles from '../../constants/roles';
 import fetch from 'isomorphic-fetch';
 
 import LoginTopBar from '../../containers/LoginTopBar';
 import exportFile from '../../lib/export_file';
+import {canEditGroup} from '../../lib/admin';
 
 const DEFAULT_BACKGROUND_IMAGE = '/static/images/collectives/default-header-bg.jpg';
 
@@ -26,17 +26,6 @@ export function exportMembers(authenticatedUser, group) {
 }
 
 export default class PublicGroupHero extends Component {
-
-  canEdit() {
-    const { session, group } = this.props;
-
-    if (!session.isAuthenticated) return false;
-
-    const usersByRole = group.usersByRole || {};
-    group.members = usersByRole[roles.MEMBER] || [];
-    const admin = group.members.find(u => (u.id === session.user.id));
-    return (!!admin);
-  }
 
   render() {
     const { group, i18n, session } = this.props;
@@ -75,7 +64,7 @@ export default class PublicGroupHero extends Component {
               <li className='inline-block'>
                 <a href='#members-wall' className='block px2 py3 white -ff-sec -fw-bold'>{ i18n.getString('menuMembersWall') }</a>
               </li>
-              { this.canEdit() &&
+              { canEditGroup(session, group) &&
                 <li className='inline-block'>
                   <a href='#exportMembers' className='block px2 py3 white -ff-sec -fw-bold' onClick={ exportMembers.bind(this, session.user, group) } >Export members.csv</a>
                 </li>

@@ -180,7 +180,7 @@ export default class ImagePicker extends Component {
   lookupSocialMediaAvatars(website, twitter) {
     const { profileForm, newUser, getSocialMediaAvatars, uploadOptionFirst } = this.props;
     const defaultPresetIndex = uploadOptionFirst ? 1 : 0;
-
+console.log("lookup", website, twitter)
     if (!this.state.isLoading) {
       this.setState({isLoading: true});
     }
@@ -232,5 +232,6 @@ export default class ImagePicker extends Component {
 }
 
 ImagePicker.propTypes = {
-  i18n: PropTypes.func.isRequired
+  i18n: PropTypes.func.isRequired,
+  src: PropTypes.string
 };
