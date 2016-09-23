@@ -1,0 +1,28 @@
+.ConnectProvider {
+  background-color: rgb(245, 246, 247);
+  height: 100%;
+  .ConnectProvider-container {
+    padding: 0 15px;
+  }
+  .LoginTopBar {
+    background: white;
+  }
+  .PublicFooter {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  .connectAccountBtn {
+    display: block;
+    margin: auto;
+    margin-top: 140px;
+    box-sizing: border-box;
+    max-width: 350px;
+    height: 55px;
+    width: 100%;
+    border-radius: 100px;
+    line-height: 1.75;
+    background-color: rgb(128, 216, 35);
+  }
+}

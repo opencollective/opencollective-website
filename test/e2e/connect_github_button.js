@@ -8,7 +8,7 @@ module.exports = {
   beforeEach: (client) => resetDb(client)
     .url(`${config.host.website}/testcollective/connect/github`)
     .waitForElementVisible('body', 1000)
-    .assert.containsText('body', 'Connect to github'),
+    .assert.containsText('body', 'CONNECT TO GITHUB'),
 
   'Redirects to Github after clicking connect': (client) => {
 
