@@ -5,6 +5,7 @@ import { pushState } from 'redux-router';
 import fetchUser from '../actions/users/fetch_by_id';
 import logout from '../actions/session/logout';
 import decodeJWT from '../actions/session/decode_jwt';
+import {canEditGroup} from '../lib/admin';
 
 export class LoginTopBar extends Component {
 
@@ -26,6 +27,10 @@ export class LoginTopBar extends Component {
   }
 
   renderProfileMenu() {
+    const {
+      session = {},
+      group = {}
+    } = this.props;
 
     return (
       <div className='LoginTopBarProfileMenu' onClick={(e) => e.nativeEvent.stopImmediatePropagation()}>
@@ -37,7 +42,7 @@ export class LoginTopBar extends Component {
           </div>
           <ul>
             <li><a href='#' onClick={this.onClickSubscriptions.bind(this)}>Subscriptions</a></li>
-            <li><a href='https://app.opencollective.com/'>App</a></li>
+            {canEditGroup(session, group) && <li><a href='#' onClick={this.onClickEditGroup.bind(this)}>Edit collective</a></li>}
           </ul>
         </div>
         <div>
@@ -117,6 +122,13 @@ export class LoginTopBar extends Component {
 
   onClickSubscriptions(e) {
     this.props.pushState(null, '/subscriptions')
+    this.toggleProfileMenu(e);
+  }
+
+  onClickEditGroup(e) {
+    const { group } = this.props;
+
+    this.props.pushState(null, `/${group.name}/edit`);
     this.toggleProfileMenu(e);
   }
 }

@@ -33,7 +33,7 @@ export default class PublicGroupHero extends Component {
     return (
       <section className='PublicGroupHero relative px2 bg-black bg-cover white' style={{backgroundImage: `url(${collectiveBg})`}}>
         <div className='container relative center'>
-          <LoginTopBar loginRedirectTo={ `/${ group.slug }` } />
+          <LoginTopBar loginRedirectTo={ `/${ group.slug }` } group={group} session={session} />
           <div className='PublicGroupHero-content'>
             {group.logo && (
               <div ref='PublicGroupHero-logo' className='PublicGroupHero-logo mb3 bg-contain' style={{backgroundImage: `url(${ group.logo })`}}></div>
