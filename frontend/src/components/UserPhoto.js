@@ -1,19 +1,12 @@
 import React from 'react';
 import getAvatarByNumber from '../lib/avatar_by_number';
+import ImagePicker from '../components/ImagePicker';
 
 const cloudinaryUrl = (url) => {
   return `https://res.cloudinary.com/opencollective/image/fetch/h_128/${encodeURIComponent(url)}`;
 };
 
 export default class UserPhoto extends React.Component {
-  static propTypes = {
-    user: React.PropTypes.object,
-    addBadge: React.PropTypes.bool
-  };
-
-  static defaultProps = {
-    addBadge: false
-  };
 
   componentDidMount() {
     const { user } = this.props;
@@ -32,8 +25,14 @@ export default class UserPhoto extends React.Component {
     this.state = {avatar: ''};
   }
 
+  updateAvatar(avatar) {
+    console.log("Updating avatar", avatar);
+    const { onChange } = this.props;
+    if (onChange) onChange(avatar);
+  }
+
   render() {
-    const { className, user, addBadge, onMouseEnter, onMouseLeave, customBadgeSize, customBadge } = this.props;
+    const { className, user, editable, addBadge, onMouseEnter, onMouseLeave, customBadgeSize, customBadge } = this.props;
     const avatar = (!this.state.avatar || this.state.avatar.indexOf('/static/') === 0) ? this.state.avatar : cloudinaryUrl(this.state.avatar);
     const styles = {
       backgroundImage: `url(${avatar})`
@@ -41,7 +40,17 @@ export default class UserPhoto extends React.Component {
 
     return (
       <div className={`UserPhoto bg-no-repeat bg-center relative ${user.tier} ${className} ${avatar ? 'UserPhoto--loaded' : ''} `} onMouseEnter={ onMouseEnter } onMouseLeave={ onMouseLeave }>
-        <div className='width-100 height-100 bg-contain bg-no-repeat bg-center' style={styles}></div>
+        {editable ? (
+          <ImagePicker
+            twitter={user.twitterHandle}
+            email={user.email}
+            website={user.website}
+            src={user.avatar}
+            className="avatar"
+            handleChange={avatar => this.updateAvatar(avatar).bind(this)}
+            {...this.props} // Pass uploadImage Action from `PublicGroup` container
+          />          
+        ) : (<div className='width-100 height-100 bg-contain bg-no-repeat bg-center' style={styles}></div>)}
         {addBadge ? (
           <div className='UserPhoto-badge absolute bg-white'>
             <svg className='block -green' width={`${customBadgeSize ? customBadgeSize : '14'}`} height={`${customBadgeSize ? customBadgeSize : '14'}`}>
@@ -53,3 +62,15 @@ export default class UserPhoto extends React.Component {
     );
   }
 }
+
+UserPhoto.propTypes = {
+  user: React.PropTypes.object,
+  editable: React.PropTypes.bool,
+  onChange: React.PropTypes.func,
+  i18n: React.PropTypes.object,
+  addBadge: React.PropTypes.bool
+};
+
+UserPhoto.defaultProps = {
+  addBadge: false
+};

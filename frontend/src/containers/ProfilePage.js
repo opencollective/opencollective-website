@@ -10,6 +10,7 @@ import PublicFooter from '../components/PublicFooter';
 import CollectiveCard from '../components/CollectiveCard';
 import SponsoredCard from '../components/SponsoredCard';
 import Markdown from '../components/Markdown';
+import { canEditUser } from '../lib/admin';
 
 export class ProfilePage extends Component {
   constructor(props) {
@@ -19,7 +20,7 @@ export class ProfilePage extends Component {
 
   render() {
 
-    const { profile, i18n } = this.props;
+    const { session, profile, i18n } = this.props;
 
     const belongsTo = filterCollection(profile.groups, { role: 'MEMBER' });
     const backing = filterCollection(profile.groups, { role: 'BACKER' });
@@ -34,7 +35,13 @@ export class ProfilePage extends Component {
     return (
       <div className='ProfilePage'>
         <LoginTopBar />
-        <UserPhoto user={{ avatar: profile.avatar }} addBadge={!profile.isOrganization} className={`mx-auto ${profile.isOrganization ? 'organization' : ''}`} />
+        <UserPhoto 
+          editable={canEditUser(session, profile)} 
+          user={{ avatar: profile.avatar }} 
+          addBadge={!profile.isOrganization} 
+          className={`mx-auto ${profile.isOrganization ? 'organization' : ''}`} 
+          {...this.props} 
+        />
         {!profile.isOrganization && <div className="line1">Hello I'm</div>}
         {profile.isOrganization && <div className="line1">Hello We are</div>}
         <div className="line2">{profile.name}</div>
@@ -119,8 +126,11 @@ export class ProfilePage extends Component {
 
 export default connect(mapStateToProps, {})(ProfilePage);
 
-function mapStateToProps() {
+function mapStateToProps({
+  session
+}) {
   return {
-    i18n: i18n('en')
+    i18n: i18n('en'),
+    session
   };
 }
