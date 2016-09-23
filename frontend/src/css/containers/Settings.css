@@ -34,9 +34,12 @@
         border-radius: 5px;
         cursor: pointer;
         text-transform: capitalize;
+        line-height: 1.75;
         &.SettingsNavItem--active {
           background: white;
           cursor: default;
+          color: black;
+          line-height: 1.75;
         }
       }
     }
@@ -54,6 +57,9 @@
   font-family: Montserrat, sans-serif;
   .CustomInput {
     min-width: 300px;
+  }
+  .CustomSelect {
+    min-width: 130px;
   }
   .SettingsPageH1 {
     font-weight: bold;
@@ -74,6 +80,7 @@
       left: 0px;
       top: -16px;
       padding-right: 40px;
+      color: black;
     }
   }
   p, .SettingsPageP {
