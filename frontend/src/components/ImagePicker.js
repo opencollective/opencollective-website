@@ -27,20 +27,29 @@ export default class ImagePicker extends Component {
 
   constructor(props) {
     super(props);
-    this.blacklist = [];
-    this.presets = this.props.presets || PRESET_AVATARS;
-    this.options = this.presets.map(src => {
-      return {source: 'preset', src};
-    });
+    const {
+      src,
+      presets
+    } = this.props;
 
-    if (props.src) {
-      this.options[0].src = props.src;
-      this.options[0].source = 'default';
+    this.blacklist = [];
+    this.presets = presets || PRESET_AVATARS;
+    this.images = [];
+
+    if (src) {
+      this.images.push({
+        src,
+        source: 'default'
+      });
     }
 
-    this.options[props.uploadOptionFirst ? 'unshift' : 'push']({
+    this.images.push({
       source: 'upload',
       src: UPLOAD_AVATAR
+    });
+
+    this.presets.map(src => {
+      this.images.push({source: 'preset', src});
     });
 
     this.state = {
@@ -54,16 +63,27 @@ export default class ImagePicker extends Component {
   }
 
   render() {
-    const {className='avatar', label='Choose a Profile Image'} = this.props;
-    const {isLoading, currentIndex, hover, pressed} = this.state;
-    const { options } = this;
-    const currentOption = options[currentIndex];
-    const hasMultipleOptions = options.length > 1;
-    let currentSrc =  currentOption.src;
+    const {
+      className='avatar',
+      label='Choose a Profile Image',
+      i18n
+    } = this.props;
 
-    // Update Hover/Press images for upload option
-    if (hover && currentOption.source === 'upload' &&
-      currentOption.src.indexOf('/static') === 0) {
+    const {
+      isLoading,
+      currentIndex,
+      hover,
+      pressed
+    } = this.state;
+
+    const { images } = this;
+    const currentImage = images[currentIndex];
+    const hasMultipleOptions = images.length > 1;
+    let currentSrc =  currentImage.src;
+
+    // Update Hover/Press images for upload avatar
+    if (hover && currentImage.source === 'upload' &&
+      currentImage.src.indexOf('/static') === 0) {
       currentSrc = (pressed) ? UPLOAD_AVATAR_ACTIVE : UPLOAD_AVATAR_HOVER;
     }
 
@@ -73,23 +93,23 @@ export default class ImagePicker extends Component {
           <div className="loader"></div>
         </div>
         <div className="ImagePicker-label">{label}</div>
-        {hasMultipleOptions && <div className={this.prevIsPossible() ? 'ImagePicker-prev active' : 'ImagePicker-prev'} onClick={this.prev.bind(this)}></div>}
-        <div className='ImagePicker-preview' onClick={() => this.avatarClick.call(this, currentOption)} onMouseOver={() => this.setState({'hover': true})} onMouseOut={() => this.setState({'hover': false, pressed: false})} onMouseDown={() => this.setState({'pressed': true})} onMouseUp={() => this.setState({'pressed': false})}>
+        {hasMultipleOptions && <div className={`ImagePicker-prev ImagePicker-editControl ${this.prevIsPossible() ? 'active' : ''}`} onClick={this.prev.bind(this)}></div>}
+        <div className='ImagePicker-preview' onClick={() => this.avatarClick.call(this, currentImage)} onMouseOver={() => this.setState({'hover': true})} onMouseOut={() => this.setState({'hover': false, pressed: false})} onMouseDown={() => this.setState({'pressed': true})} onMouseUp={() => this.setState({'pressed': false})}>
           <img src={currentSrc} onError={this.onImageError.bind(this)} />
         </div>
-        <div className='ImagePicker-source-badge' style={{display : (KNOWN_SOURCES[currentOption.source] ? 'block' : 'none')}}>
-          <img src={KNOWN_SOURCES[currentOption.source]}/>
+        <div className='ImagePicker-source-badge' style={{display : (KNOWN_SOURCES[currentImage.source] ? 'block' : 'none')}}>
+          <img src={KNOWN_SOURCES[currentImage.source]}/>
         </div>
-        {hasMultipleOptions && <div className={this.nextIsPossible() ? 'ImagePicker-next active' : 'ImagePicker-next'} onClick={this.next.bind(this)}></div>}
-        <ul className='ImagePicker-dot-list'>
-          {hasMultipleOptions && options.map(
-            option => {
-              return <li key={option.source + option.src} onClick={() => this.select.call(this, option)} className={option === options[currentIndex] ? 'selected' : ''}></li>;
+        {hasMultipleOptions && <div className={`ImagePicker-next ImagePicker-editControl ${this.nextIsPossible() ? 'active' : ''}`} onClick={this.next.bind(this)}></div>}
+        <ul className='ImagePicker-dot-list ImagePicker-editControl'>
+          {hasMultipleOptions && images.map(
+            avatar => {
+              return <li key={avatar.source + avatar.src} onClick={() => this.select.call(this, avatar)} className={avatar === images[currentIndex] ? 'selected' : ''}></li>;
             }
           )}
         </ul>
         <div className="ImageUpload-container">
-          <ImageUpload ref="ImageUpload" isUploading={false} onFinished={this.onUploadFinished.bind(this)} {...this.props} />
+          <ImageUpload ref="ImageUpload" uploadImage={this.props.uploadImage} onUploading={this.onUploading.bind(this)} onFinished={this.onUploadFinished.bind(this)} i18n={i18n} />
         </div>
       </div>
     );
@@ -116,14 +136,14 @@ export default class ImagePicker extends Component {
   }
 
   onImageError() {
-    const currentOption = this.options[this.state.currentIndex];
-    if (this.blacklist.indexOf(currentOption.src) === -1) {
-      this.blacklist.push(currentOption.src);
+    const currentImage = this.images[this.state.currentIndex];
+    if (this.blacklist.indexOf(currentImage.src) === -1) {
+      this.blacklist.push(currentImage.src);
     }
 
-    this.options.splice(this.state.currentIndex, 1);
+    this.images.splice(this.state.currentIndex, 1);
 
-    if (!this.options[this.state.currentIndex]) {
+    if (!this.images[this.state.currentIndex]) {
       this.setState({currentIndex: 0}, this.thereWasAChange);
     } else {
       this.forceUpdate(this.thereWasAChange);
@@ -131,12 +151,13 @@ export default class ImagePicker extends Component {
   }
 
   thereWasAChange() {
-    const currentOption = this.options[this.state.currentIndex];
-    this.props.handleChange(currentOption.src !== UPLOAD_AVATAR ? currentOption.src : this.presets[0]);
+    const currentImage = this.images[this.state.currentIndex];
+    if (currentImage.src !== UPLOAD_AVATAR)
+      this.props.handleChange(currentImage.src);
   }
 
   nextIsPossible() {
-    return this.state.currentIndex < this.options.length - 1;
+    return this.state.currentIndex < this.images.length - 1;
   }
 
   prevIsPossible() {
@@ -145,7 +166,7 @@ export default class ImagePicker extends Component {
 
   select(option) {
     if (this.state.isLoading) return;
-    this.setState({currentIndex: this.options.indexOf(option)}, this.thereWasAChange);
+    this.setState({currentIndex: this.images.indexOf(option)}, this.thereWasAChange);
   }
 
   next() {
@@ -168,30 +189,44 @@ export default class ImagePicker extends Component {
     }
   }
 
+  onUploading() {
+    this.setState({isLoading: true});
+  }
+
   onUploadFinished(result) {
+    this.setState({isLoading: false});
     if (result) {
-      const uploadOption = this.options.reduce((prev, curr) => prev.source === 'upload' ? prev : curr);
+      const uploadOption = this.images.reduce((prev, curr) => prev.source === 'upload' ? prev : curr);
       uploadOption.src = result.url;
-      this.setState({currentIndex: this.options.indexOf(uploadOption)});
+      this.setState({currentIndex: this.images.indexOf(uploadOption)});
       this.thereWasAChange();
     }
   }
 
   lookupSocialMediaAvatars(website, twitter) {
-    const { profileForm, newUser, getSocialMediaAvatars, uploadOptionFirst } = this.props;
-    const defaultPresetIndex = uploadOptionFirst ? 1 : 0;
 
+    if (!website && !twitter) return;
+
+    const {
+      profileForm,
+      newUser,
+      getSocialMediaAvatars,
+      uploadOptionFirst
+    } = this.props;
+
+    if (!getSocialMediaAvatars) return;
+    const defaultPresetIndex = uploadOptionFirst ? 1 : 0;
     if (!this.state.isLoading) {
       this.setState({isLoading: true});
     }
 
     getSocialMediaAvatars(newUser.id, {website, twitterHandle: twitter, name: profileForm.name})
     .then((response) => {
-      const currentOption = this.options[this.state.currentIndex];
+      const currentImage = this.images[this.state.currentIndex];
       const results = response.json.filter((option) => this.blacklist.indexOf(option.src) === -1 );
       const newResults = results.filter((option) => {
         let alreadyExists = false;
-        this.options.forEach((opt) => {
+        this.images.forEach((opt) => {
           if (opt.src === option.src) {
             alreadyExists = true;
           }
@@ -201,28 +236,28 @@ export default class ImagePicker extends Component {
       let isFirstTime = false;
 
       newResults.forEach(result => {
-        const existingOption = this.options.filter((option) => {
+        const existingOption = this.images.filter((option) => {
           return option.source === result.source
         })[0];
         if (existingOption) {
           existingOption.src = result.src;
         } else {
-          if (this.options[defaultPresetIndex].source === 'preset') {
+          if (this.images[defaultPresetIndex].source === 'preset') {
             if (defaultPresetIndex) {
-              this.options.splice(defaultPresetIndex, 1);
-              this.options.splice(0, 0, result);
+              this.images.splice(defaultPresetIndex, 1);
+              this.images.splice(0, 0, result);
             } else {
-              this.options[defaultPresetIndex].source = result.source;
-              this.options[defaultPresetIndex].src = result.src;
+              this.images[defaultPresetIndex].source = result.source;
+              this.images[defaultPresetIndex].src = result.src;
             }
             isFirstTime = true;
           } else {
-            this.options.splice(0, 0, result);
+            this.images.splice(0, 0, result);
           }
         }
       });
 
-      this.setState({currentIndex: isFirstTime ? 0 : this.options.indexOf(currentOption), isLoading: false}, this.thereWasAChange);
+      this.setState({currentIndex: isFirstTime ? 0 : this.images.indexOf(currentImage), isLoading: false}, this.thereWasAChange);
     })
     .catch((error) => {
       console.error(error);
@@ -232,5 +267,6 @@ export default class ImagePicker extends Component {
 }
 
 ImagePicker.propTypes = {
-  i18n: PropTypes.func.isRequired
+  i18n: PropTypes.object.isRequired,
+  src: PropTypes.string
 };
