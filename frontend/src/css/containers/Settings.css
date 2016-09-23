@@ -1,3 +1,56 @@
 .Settings {
-  
+  background-color: #f3f3f3;
+  .LoginTopBar {
+    background-color: white;
+  }
+  .Settings-container {
+    .SettingsHead {
+      height: 220px;
+      background: limegreen;
+      margin-bottom: 40px;
+    }
+    .SettingsNav {
+      width: 230px;
+      height: 400px;
+      background: ruby;
+      margin-left: 90px;
+      margin-right: 20px;
+      .SettingsNavItem {
+        font-family: Lato;
+        font-size: 20px;
+        color: #787d80;
+        height: 40px;
+        margin-bottom: 20px;
+      }
+    }
+  }
+}
+
+.SettingsPage {
+  background: white;
+  margin-right: 90px;
+  box-shadow: 0 1px 3px 0 rgba(45, 77, 97, 0.2);
+  padding: 40px;
+  font-family: Montserrat, sans-serif;
+  .SettingsPageH1 {
+    font-weight: bold;
+    font-size: 24px;
+    color: black;
+  }
+  .SettingsPageHr {
+    position: relative;
+    height: 1px;
+    background: #cccccc;
+    margin: 50px 0;
+    div {
+      display: inline-block;
+      font-family: montserratlight, sans-serif;
+      font-size: 20px;
+      background: white;
+      position: absolute;
+      left: 0px;
+      top: -16px;
+      padding-right: 40px;
+    }
+  }
 }
