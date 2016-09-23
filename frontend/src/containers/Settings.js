@@ -4,12 +4,33 @@ import { connect } from 'react-redux';
 import i18n from '../lib/i18n';
 
 import LoginTopBar from '../containers/LoginTopBar';
-import PublicFooter from '../components/PublicFooter';
+
 import Grid, { Column } from '../components/Grid';
+import PublicFooter from '../components/PublicFooter';
+
+import SettingsBanking from '../components/settings/SettingsBanking';
+import SettingsGeneral from '../components/settings/SettingsGeneral';
+import SettingsMailing from '../components/settings/SettingsMailing';
+import SettingsSocialIntegration from '../components/settings/SettingsSocialIntegration';
+
+const SETTINGS_PAGES = [
+  'general',
+  'social integrations',
+  'mailing',
+  'banking',
+];
 
 export class Settings extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentPage: SETTINGS_PAGES[0]
+    };
+  }
+
   render() {
-    // const { params }  = this.props;
+    const { currentPage }  = this.state;
     return (
       <div className='Settings'>
         <LoginTopBar />
@@ -17,26 +38,27 @@ export class Settings extends Component {
           <div className='SettingsHead'></div>
           <Grid flex>
             <Column>
+              <div className='SettingsNavHeader'>Collective Settings</div>
               <div className='SettingsNav'>
-                <div className='SettingsNavItem'>General</div>
-                <div className='SettingsNavItem'>Social Integrations</div>
-                <div className='SettingsNavItem'>Mailing</div>
-                <div className='SettingsNavItem'>Banking</div>
+                {SETTINGS_PAGES.map(pageName => {
+                  return (
+                    <div
+                      className={`SettingsNavItem ${currentPage === pageName ? 'SettingsNavItem--active' : ''}`}
+                      onClick={() => this.setState({currentPage: pageName})}
+                      >{pageName}</div>
+                  )
+                })}
               </div>
             </Column>
             <Column auto>
               <div className='SettingsPage'>
-                <div className='SettingsPageH1'>General</div>
-                <div className='SettingsPageHr'>
-                  <div>PayPal</div>
-                </div>
-                
+                {currentPage === 'general' && <SettingsGeneral />}
+                {currentPage === 'social integrations' && <SettingsSocialIntegration />}
+                {currentPage === 'banking' && <SettingsBanking />}
+                {currentPage === 'mailing' && <SettingsMailing />}
               </div>
             </Column>
           </Grid>
-
-
-        Settings
         </div>
         <PublicFooter />
       </div>

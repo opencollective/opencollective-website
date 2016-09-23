@@ -1,0 +1,11 @@
+import React, { Component } from 'react';
+
+export default class SettingsBanking extends Component 
+  render() {
+    return (
+      <div className='SettingsBanking'>
+        SettingsBanking
+      </div>
+    )
+  }
+}

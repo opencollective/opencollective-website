@@ -1,17 +1,9 @@
-.CustomTextArea {
+.CustomInput {
   position: relative;
-  display: flex;
+  display: inline-block;
 
-  .CustomTextArea-prepend {
-    padding: 0.5rem 0.25rem;
-  }
-  .CustomTextArea-field {
-    flex: 1;
-    position: relative;
-  }
-  .CustomTextArea-textarea {
+  .CustomInput-input {
     margin: 0;
-    padding: 0.5rem;
     box-sizing: border-box;
     width: 100%;
     height: 100%;
@@ -24,26 +16,28 @@
     color: #667985;
     border: none;
     letter-spacing: .5px;
+    padding: 11px 12px;
   }
 
-  .CustomTextArea-placeholder {
+  .CustomInput-placeholder {
     position: absolute;
     left: 0;
     right: 0;
     top: 0;
-    bottom: 10px;
-    overflow: hidden;
+    bottom: 0;
     font-size: 19.2px;
     font-size: 1.2rem;
-    padding: 0.5rem;
+    padding: 8px 12px;
     font-family: Lato;
+    font-style: italic;
     font-size: 16px;
     color: #ced5d9;
+    color: #babdbf;
     cursor: text;
     background: none;
   }
 
-  .CustomTextArea-counter {
+  .CustomInput-counter {
     position: absolute;
     right: 0;
     bottom: 0;
@@ -52,8 +46,4 @@
     font-size: 12px;
     padding: 10px 8px;
   }
-}
-
-.CustomTextArea-has-scrollbar .CustomTextArea-counter {
-  right: 16px;
 }

@@ -9,6 +9,14 @@
       background: limegreen;
       margin-bottom: 40px;
     }
+    .SettingsNavHeader {
+      text-transform: uppercase;
+      font-size: 16px;
+      color: black;
+      font-family: Montserrat, sans-serif;
+      margin-bottom: 30px;
+      margin-left: 90px;
+    }
     .SettingsNav {
       width: 230px;
       height: 400px;
@@ -16,13 +24,25 @@
       margin-left: 90px;
       margin-right: 20px;
       .SettingsNavItem {
+        box-sizing: border-box;
         font-family: Lato;
         font-size: 20px;
         color: #787d80;
         height: 40px;
         margin-bottom: 20px;
+        padding: 2px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        text-transform: capitalize;
+        &.SettingsNavItem--active {
+          background: white;
+          cursor: default;
+        }
       }
     }
+  }
+  .PublicFooter {
+    margin-top: 40px;
   }
 }
 
@@ -32,6 +52,9 @@
   box-shadow: 0 1px 3px 0 rgba(45, 77, 97, 0.2);
   padding: 40px;
   font-family: Montserrat, sans-serif;
+  .CustomInput {
+    min-width: 300px;
+  }
   .SettingsPageH1 {
     font-weight: bold;
     font-size: 24px;
@@ -51,6 +74,25 @@
       left: 0px;
       top: -16px;
       padding-right: 40px;
+    }
+  }
+  p, .SettingsPageP {
+    font-family: Lato;
+    font-size: 16px;
+    line-height: 1.4;
+    color: #787d80;
+  }
+  .SettingsPageButton {
+    width: 190px;
+    height: 40px;
+    border-radius: 100px;
+    background-color: #46b0ed;
+    color: white;
+    text-align: center;
+    line-height: 2.55;
+    &:hover {
+      cursor: pointer;
+      opacity: .9;
     }
   }
 }
