@@ -203,7 +203,6 @@ export class PublicGroup extends Component {
 
   componentWillMount() {
     const {
-      group,
       paypalIsDone,
       hasFullAccount,
       slug,
