@@ -9,7 +9,7 @@ import filterCollection from '../lib/filter_collection';
 import i18n from '../lib/i18n';
 import profileSchema from '../joi_schemas/profile';
 import roles from '../constants/roles';
-import {canEditGroup} from '../lib/admin';
+import { canEditGroup } from '../lib/admin';
 
 import appendDonationForm from '../actions/form/append_donation';
 import appendProfileForm from '../actions/form/append_profile';
@@ -38,6 +38,7 @@ import PublicGroupSignupV2 from '../components/public_group/PublicGroupSignupV2'
 import PublicGroupThanksV2 from '../components/public_group/PublicGroupThanksV2';
 import PublicGroupWhoWeAre from '../components/public_group/PublicGroupWhoWeAre';
 import PublicGroupWhyJoin from '../components/public_group/PublicGroupWhyJoin';
+import PublicGroupApplyToManageFunds from '../components/public_group/PublicGroupApplyToManageFunds';
 
 import PublicFooter from '../components/PublicFooter';
 import RelatedGroups from '../components/RelatedGroups';
@@ -109,7 +110,8 @@ export class PublicGroup extends Component {
       donations,
       expenses,
       group,
-      hasHost
+      hasHost,
+      canEditGroup
     } = this.props;
 
     // `false` if there are no `group.data.githubContributors`
@@ -129,20 +131,21 @@ export class PublicGroup extends Component {
 
         {contributors && <PublicGroupContributors contributors={ contributors } />}
 
-        {group.slug !== 'opensource' && <PublicGroupWhyJoin group={ group } expenses={ expenses } {...this.props} />}
+        {group.slug !== 'opensource' && hasHost && <PublicGroupWhyJoin group={ group } expenses={ expenses } {...this.props} />}
 
         <div className='bg-light-gray px2'>
           {hasHost && <PublicGroupJoinUs {...this.props} donateToGroup={this.donateToGroupRef} {...this.props} />}
+          {!hasHost && canEditGroup && <PublicGroupApplyToManageFunds {...this.props} />}
           <PublicGroupMembersWall group={group} {...this.props} />
         </div>
         {hasHost &&
-        <PublicGroupExpensesAndActivity
-          group={ group }
-          expenses={ expenses }
-          donations={ donations }
-          itemsToShow={ NUM_TRANSACTIONS_TO_SHOW }
-          {...this.props} />
-        }
+          <PublicGroupExpensesAndActivity
+            group={ group }
+            expenses={ expenses }
+            donations={ donations }
+            itemsToShow={ NUM_TRANSACTIONS_TO_SHOW }
+            {...this.props} /> }
+
         <section id='related-groups' className='px2'>
           <RelatedGroups groupList={ group.related } {...this.props} />
         </section>

@@ -5,6 +5,7 @@
     "allActivities": "All donations",
     "amount": "Amount",
     "annualIncome": "Annual Income",
+    "applyButtonText": "Apply Now",
     "approved": "approved",
     "and": "and",
     "backer": "backer",
@@ -52,6 +53,7 @@
     "joinAndFulfil": "Join us and help us fulfill our mission",
     "latestActivities": "Latest donations",
     "latestExpenses": "Our latest expenses",
+    "manageMoneyTitle": "Want to raise money?",
     "member": "member",
     "members": "members",
     "membersWallText": "Proud members and sponsors support this collective and allow us to keep going towards our mission. We would not be here if it weren’t for these amazing people. Thank you so much.",
@@ -99,6 +101,7 @@
     "twitter": "Twitter",
     "uploadReceipt": "Upload receipt (photo or PDF)",
     "vat": "VAT",
+    "wantToRaiseMoneyText": "With Open Collective, it's easy to raise money from individuals and sponsors. You can even charge membership fees. \n\nIt's easy to spend the money you raise. Just submit a receipt and you'll get reimbursed via PayPal.",
     "weAre": "We are",
     "WeAreProudSupporters": "We are proud supporters of these collectives",
     "website": "Website",
@@ -426,7 +429,7 @@
     "yearly": "Annualmente",
     "youDeciceDistributeYour": "Tu decidi come distribuire il tuo"
   },
-  
+
   "wwcode": {
     "backer": "supporter",
     "becomeMemberText": "With your support, you’ll help fund this catalytic movement. Donations directly support our programs and global development, ensuring that even more women have the opportunity to excel in tech careers. Funds will be responsibly managed, and everyone can see how they are being spent!",
