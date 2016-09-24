@@ -37,7 +37,6 @@ export class LoginTopBar extends Component {
           </div>
           <ul>
             <li><a href='#' onClick={this.onClickSubscriptions.bind(this)}>Subscriptions</a></li>
-            <li><a href='https://app.opencollective.com/'>App</a></li>
           </ul>
         </div>
         <div>

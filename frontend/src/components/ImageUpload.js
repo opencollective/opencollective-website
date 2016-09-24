@@ -54,7 +54,7 @@ class ImageUpload extends Component {
   }
 
   handleChange() {
-    const { onFinished, uploadImage } = this.props;
+    const { onUploading, onFinished, uploadImage } = this.props;
     const file = ReactDOM.findDOMNode(this.refs.file).files[0];
 
     const formData = new FormData();
@@ -64,6 +64,8 @@ class ImageUpload extends Component {
       file,
       isUploading: true
     });
+
+    if (onUploading) onUploading();
 
     uploadImage(formData)
     .then(res => onFinished(res.response))
@@ -81,10 +83,10 @@ class ImageUpload extends Component {
 }
 
 ImageUpload.propTypes = {
+  onUploading: PropTypes.func,
   onFinished: PropTypes.func.isRequired,
   uploadImage: PropTypes.func.isRequired,
-  isUploading: PropTypes.bool.isRequired,
-  i18n: PropTypes.func.isRequired,
+  i18n: PropTypes.object.isRequired,
   value: PropTypes.string,
 };
 
