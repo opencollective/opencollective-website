@@ -26,7 +26,6 @@ export default class UserPhoto extends React.Component {
   }
 
   updateAvatar(avatar) {
-    console.log("Updating avatar", avatar);
     const { onChange } = this.props;
     if (onChange) onChange(avatar);
   }
