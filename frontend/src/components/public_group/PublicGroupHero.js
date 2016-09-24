@@ -6,7 +6,6 @@ import fetch from 'isomorphic-fetch';
 
 import LoginTopBar from '../../containers/LoginTopBar';
 import exportFile from '../../lib/export_file';
-import {canEditGroup} from '../../lib/admin';
 
 const DEFAULT_BACKGROUND_IMAGE = '/static/images/collectives/default-header-bg.jpg';
 
@@ -28,7 +27,7 @@ export function exportMembers(authenticatedUser, group) {
 export default class PublicGroupHero extends Component {
 
   render() {
-    const { group, i18n, session } = this.props;
+    const { group, i18n, session, hasHost, canEditGroup } = this.props;
     const collectiveBg = group.backgroundImage || DEFAULT_BACKGROUND_IMAGE;
     return (
       <section className='PublicGroupHero relative px2 bg-black bg-cover white' style={{backgroundImage: `url(${collectiveBg})`}}>
@@ -58,13 +57,14 @@ export default class PublicGroupHero extends Component {
               <li className='inline-block'>
                 <a href='#why-join' className='block px2 py3 white -ff-sec -fw-bold'>{ i18n.getString('menuWhy') }</a>
               </li>
+              {hasHost &&
               <li className='inline-block'>
                 <a href='#expenses-and-activity' className='block px2 py3 white -ff-sec -fw-bold'>{ i18n.getString('menuExpensesAndActivities') }</a>
-              </li>
+              </li> }
               <li className='inline-block'>
                 <a href='#members-wall' className='block px2 py3 white -ff-sec -fw-bold'>{ i18n.getString('menuMembersWall') }</a>
               </li>
-              { canEditGroup(session, group) &&
+              { canEditGroup &&
                 <li className='inline-block'>
                   <a href='#exportMembers' className='block px2 py3 white -ff-sec -fw-bold' onClick={ exportMembers.bind(this, session.user, group) } >Export members.csv</a>
                 </li>

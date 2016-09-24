@@ -9,6 +9,7 @@ import filterCollection from '../lib/filter_collection';
 import i18n from '../lib/i18n';
 import profileSchema from '../joi_schemas/profile';
 import roles from '../constants/roles';
+import {canEditGroup} from '../lib/admin';
 
 import appendDonationForm from '../actions/form/append_donation';
 import appendProfileForm from '../actions/form/append_profile';
@@ -111,6 +112,7 @@ export class PublicGroup extends Component {
       donations,
       expenses,
       group,
+      hasHost
     } = this.props;
 
     // `false` if there are no `group.data.githubContributors`
@@ -135,15 +137,17 @@ export class PublicGroup extends Component {
         {group.slug !== 'opensource' && <PublicGroupWhyJoin group={ group } expenses={ expenses } {...this.props} />}
 
         <div className='bg-light-gray px2'>
-          <PublicGroupJoinUs {...this.props} donateToGroup={this.donateToGroupRef} {...this.props} />
+          {hasHost && <PublicGroupJoinUs {...this.props} donateToGroup={this.donateToGroupRef} {...this.props} />}
           <PublicGroupMembersWall group={group} {...this.props} />
         </div>
+        {hasHost &&
         <PublicGroupExpensesAndActivity
           group={ group }
           expenses={ expenses }
           donations={ donations }
           itemsToShow={ NUM_TRANSACTIONS_TO_SHOW }
           {...this.props} />
+        }
         <section id='related-groups' className='px2'>
           <RelatedGroups groupList={ group.related } {...this.props} />
         </section>
@@ -371,7 +375,6 @@ function mapStateToProps({
     donations: take(sortBy(donations, txn => txn.createdAt).reverse(), NUM_TRANSACTIONS_TO_SHOW),
     expenses: take(sortBy(expenses, exp => exp.createdAt).reverse(), NUM_TRANSACTIONS_TO_SHOW),
     inProgress: groups.donateInProgress,
-    // shareUrl: window.location.href,
     profileForm: form.profile,
     donationForm: form.donation,
     showUserForm: users.showUserForm || false,
@@ -383,6 +386,8 @@ function mapStateToProps({
     i18n: i18n(group.settings.lang || 'en'),
     slug: router.params.slug,
     loadData: app.rendered,
-    isSupercollective: group.isSupercollective
+    isSupercollective: group.isSupercollective,
+    hasHost: group.hosts.length === 0 ? false : true,
+    canEditGroup: canEditGroup(session, group)
   };
 }
