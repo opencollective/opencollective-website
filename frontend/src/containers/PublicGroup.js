@@ -26,7 +26,6 @@ import uploadImage from '../actions/images/upload';
 import validateSchema from '../actions/form/validate_schema';
 
 import Notification from './Notification';
-import ProfilePage from './ProfilePage';
 
 import PublicGroupContributors from '../components/public_group/PublicGroupContributors';
 import PublicGroupExpensesAndActivity from '../components/public_group/PublicGroupExpensesAndActivity';
@@ -37,7 +36,6 @@ import PublicGroupOpenSourceCTA from '../components/public_group/PublicGroupOpen
 import PublicGroupPending from '../components/public_group/PublicGroupPending';
 import PublicGroupSignupV2 from '../components/public_group/PublicGroupSignupV2';
 import PublicGroupThanksV2 from '../components/public_group/PublicGroupThanksV2';
-
 import PublicGroupWhoWeAre from '../components/public_group/PublicGroupWhoWeAre';
 import PublicGroupWhyJoin from '../components/public_group/PublicGroupWhyJoin';
 
@@ -75,7 +73,6 @@ const DEFAULT_GROUP_TIERS = [{
   interval: 'monthly',
   button: 'Become a backer'
 }];
-const isUserProfile = (group) => Boolean(group.username);
 // Formats results for `ContributorList` component
 // Sorts results, giving precedence to `core` Boolean first, then Number of `commits`
 const formatGithubContributors = (githubContributors) => {
@@ -120,8 +117,6 @@ export class PublicGroup extends Component {
 
     if (group.settings.pending) {
       return <PublicGroupPending group={ group } donateToGroup={ this.donateToGroupRef } {...this.props} />
-    } else if (isUserProfile(group)) {
-      return <ProfilePage profile={ group } />
     }
 
     return (
@@ -198,14 +193,12 @@ export class PublicGroup extends Component {
       fetchGroup
     } = this.props;
 
-    if (!isUserProfile(group)) {
-      return Promise.all([
-        fetchGroup(group.id),
-        fetchTransactions(group.id, FETCH_DONATIONS_OPTIONS),
-        fetchTransactions(group.id, FETCH_EXPENSES_OPTIONS),
-        fetchUsers(group.id)
-      ])
-    }
+    return Promise.all([
+      fetchGroup(group.id),
+      fetchTransactions(group.id, FETCH_DONATIONS_OPTIONS),
+      fetchTransactions(group.id, FETCH_EXPENSES_OPTIONS),
+      fetchUsers(group.id)
+    ])
   }
 
   componentWillMount() {
@@ -226,7 +219,7 @@ export class PublicGroup extends Component {
       });
     }
 
-    if (!isUserProfile(group) && loadData) {
+    if (loadData) {
       fetchProfile(slug);
     }
   }

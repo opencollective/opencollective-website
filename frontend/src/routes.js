@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router';
 
-import PublicGroup from './containers/PublicGroup';
+import PublicPage from './containers/PublicPage';
 import Subscriptions from './containers/Subscriptions';
 import Transactions from './containers/Transactions';
 import DonatePage from './containers/DonatePage';
@@ -42,7 +42,7 @@ export default (
     <Route path="/:slug/connect/:provider" component={ConnectProvider} />
     <Route path="/:slug/edit-twitter" component={EditTwitter} />
     <Route path="/:slug/edit" component={EditCollective} />
-    <Route path="/:slug" component={PublicGroup} />
+    <Route path="/:slug" component={PublicPage} />
     <Route path="/:slug/expenses/new" component={Transactions} />
     <Route path="/:slug/:type(donations|expenses)" component={Transactions} />
     <Route path="/:slug/donate/:amount" component={DonatePage} />
