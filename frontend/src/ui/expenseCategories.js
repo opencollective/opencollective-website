@@ -12,14 +12,37 @@ export default function(groupid) {
     case 2:
     case 3:
     case 4:
+    case 10:
+    case 12:
+    case 13:
+    case 14:
+    case 15:
+    case 47:
+    case 48:
+    case 51:
+    case 59:
+    case 195:
+    case 241:
       categories = [
+        'Conference',
         'Donation',
-        'Event Refreshments',
-        'Event Travel',
-        'Event Prizes',
-        'Event Facilities',
-        'Network supplies',
-        'Other Program Expense'
+        'Fees',
+        'Fireside Chat',
+        'Global Development',
+        'Hack Night', 
+        'Hackathon',
+        'Leadership Development',
+        'Leadership Supplies',
+        'Lightning Talks',
+        'Scholarship',
+        'Speaker Series', 
+        'Sponsorship',
+        'Tech Panel',
+        'Transaction Fees',
+        'Study Group',
+        'Workshop',
+        'Other WWCode Event',
+        'Other'
       ];
       break;
     case 6: // laprimaire
@@ -56,6 +79,24 @@ export default function(groupid) {
         'Oficina',
         'Otros',
         'Servicios Digitales'
+      ];
+      break;
+    case 245: // analizebasilicata
+      categories = [
+        'Comunicazioni',
+        'Disign',
+        'Donazione',
+        'Progettazione',
+        'Accantonamento',
+        'Cibo & bevande',
+        'Marketing',
+        'Legale',
+        'Forniture & materiali',
+        'Viaggio',
+        'Squadra',
+        'Ufficio',
+        'Altro',
+        'Servizi web'
       ];
       break;
     default:
