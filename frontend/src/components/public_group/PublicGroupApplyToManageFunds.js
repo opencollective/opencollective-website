@@ -8,7 +8,9 @@ export default class PublicGroupApplyToManageFunds extends React.Component {
       i18n
     } = this.props;
 
-    const mailToLink = `mailto:info@opencollective.com?subject=${group.name} wants to manage money on Open Collective!&body=Hi there!%0D%0A%0D%0AWe want to find out more about managing money for ${group.name}. Please let us know what we need to do to enable public donations and expenses.%0D%0A%0D%0AThanks!`.replace(/ /g, "%20");
+    const subject = `${group.name} wants to manage money on Open Collective!`;
+    const body = `Hi there!\n\nWe want to find out more about managing money for ${group.name}. Please let us know what we need to do to enable public donations and expenses.\n\nThanks!`;
+    const mailToLink = `mailto:info@opencollective.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
     return (
       <section id='apply-for-funds' className='bg-black white'>
