@@ -4,7 +4,6 @@ import omit from 'lodash/omit';
 
 import errorDetail from '../lib/error_detail';
 import * as constants from '../constants/form';
-import * as groupConstants from '../constants/groups';
 
 /**
  * Validate generic joi schema
