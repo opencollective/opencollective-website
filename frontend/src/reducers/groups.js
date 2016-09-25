@@ -61,10 +61,6 @@ export default function groups(state={}, action={}) {
         leaderboard: action.json
       });
 
-    case constants.UPDATE_GROUP_SUCCESS:
-      window.location = `/${action.group.slug}`;
-      return state;
-
     case constants.GROUP_TAGS_SUCCESS:
         return merge({}, state, {
           tags: action.json

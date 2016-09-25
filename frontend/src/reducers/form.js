@@ -4,6 +4,7 @@ import omit from 'lodash/omit';
 
 import errorDetail from '../lib/error_detail';
 import * as constants from '../constants/form';
+import * as groupConstants from '../constants/groups';
 
 /**
  * Validate generic joi schema
@@ -136,7 +137,7 @@ function github(state=githubInitialState, action={}) {
 }
 
 /**
- * Group form reducer
+ * Add group form reducer
  */
 
 const users = [];
@@ -151,6 +152,26 @@ function addgroup(state=groupInitialState, action={}) {
   switch (action.type) {
     case constants.APPEND_GROUP_FORM:
       return merge({}, state, { attributes: merge({}, state.attributes, action.attributes) });
+    default:
+      return state;
+  }
+}
+
+/**
+ * Edit group form reducer
+ */
+
+const editGroupInitialState = {
+  attributes: { },
+  inProgress: false
+};
+
+function editGroup(state=editGroupInitialState, action={}) {
+  switch (action.type) {
+    case constants.APPEND_EDIT_GROUP_FORM:
+      return merge({}, state, {attributes: action.attributes, inProgress: true});
+    case constants.CANCEL_EDIT_GROUP_FORM:
+      return editGroupInitialState;
     default:
       return state;
   }
@@ -181,5 +202,6 @@ export default combineReducers({
   schema,
   github,
   addgroup,
+  editGroup,
   twitter
 });
