@@ -6,10 +6,8 @@ import fetch from 'isomorphic-fetch';
 import LoginTopBar from '../containers/LoginTopBar';
 import Notification from '../containers/Notification';
 
-import CustomTextArea from '../components/CustomTextArea';
 import Input from '../components/CustomTextArea';
 import PublicFooter from '../components/PublicFooter';
-import Select from '../components/Select';
 import Confirmation from '../components/Confirmation';
 
 import editNewCollectiveForm from '../actions/form/edit_new_collective';
