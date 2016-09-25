@@ -15,9 +15,8 @@ export class LoginTopBar extends Component {
     };
   }
 
-  const showCreateBtn = false;
-
   renderLinks() {
+    const showCreateBtn = false;
     return (
       <ul className='LoginTopBar-Links'>
         {showCreateBtn && <li><a className='LoginTopBarButton' href='/create'>create a collective</a></li>}
