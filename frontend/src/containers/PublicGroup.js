@@ -146,9 +146,10 @@ export class PublicGroup extends Component {
             itemsToShow={ NUM_TRANSACTIONS_TO_SHOW }
             {...this.props} /> }
 
-        <section id='related-groups' className='px2'>
-          <RelatedGroups groupList={ group.related } {...this.props} />
-        </section>
+        {hasHost &&
+          <section id='related-groups' className='px2'>
+            <RelatedGroups groupList={ group.related } {...this.props} />
+          </section> }
         <PublicFooter />
         {this.renderDonationFlow()}
       </div>
