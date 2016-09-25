@@ -25,7 +25,7 @@
   }
   .PublicGroupHero-content {
     padding: 8rem 0 6rem;
-  } 
+  }
   .PublicGroupHero-logo {
     width: 240px;
     height: 160px;
@@ -45,20 +45,20 @@
       opacity: .8;
     }
   }
-  .PublicGroupHero-backer-statistics {
+  .PublicGroupHero-contributor-statistics {
     width: 300px;
     margin: auto;
   }
-  .PublicGroupHero-backer-count-text {
+  .PublicGroupHero-contributor-count-text {
     font-family: Lato;
-    font-size: 13px;
+    font-size: 18px;
     line-height: 1.5;
     color: #ffffff;
     b {
       font-size: 14px;
     }
   }
-  .PublicGroupHero-backer-yearly-budget {
+  .PublicGroupHero-contributor-count {
     margin-top: 14px;
     margin-bottom: 44px;
     .-character {

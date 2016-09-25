@@ -9,6 +9,7 @@ import filterCollection from '../lib/filter_collection';
 import i18n from '../lib/i18n';
 import profileSchema from '../joi_schemas/profile';
 import roles from '../constants/roles';
+import { canEditGroup } from '../lib/admin';
 
 import appendDonationForm from '../actions/form/append_donation';
 import appendProfileForm from '../actions/form/append_profile';
@@ -25,7 +26,6 @@ import uploadImage from '../actions/images/upload';
 import validateSchema from '../actions/form/validate_schema';
 
 import Notification from './Notification';
-import ProfilePage from './ProfilePage';
 
 import PublicGroupContributors from '../components/public_group/PublicGroupContributors';
 import PublicGroupExpensesAndActivity from '../components/public_group/PublicGroupExpensesAndActivity';
@@ -36,9 +36,9 @@ import PublicGroupOpenSourceCTA from '../components/public_group/PublicGroupOpen
 import PublicGroupPending from '../components/public_group/PublicGroupPending';
 import PublicGroupSignupV2 from '../components/public_group/PublicGroupSignupV2';
 import PublicGroupThanksV2 from '../components/public_group/PublicGroupThanksV2';
-
 import PublicGroupWhoWeAre from '../components/public_group/PublicGroupWhoWeAre';
 import PublicGroupWhyJoin from '../components/public_group/PublicGroupWhyJoin';
+import PublicGroupApplyToManageFunds from '../components/public_group/PublicGroupApplyToManageFunds';
 
 import PublicFooter from '../components/PublicFooter';
 import RelatedGroups from '../components/RelatedGroups';
@@ -74,7 +74,6 @@ const DEFAULT_GROUP_TIERS = [{
   interval: 'monthly',
   button: 'Become a backer'
 }];
-const isUserProfile = (group) => Boolean(group.username);
 // Formats results for `ContributorList` component
 // Sorts results, giving precedence to `core` Boolean first, then Number of `commits`
 const formatGithubContributors = (githubContributors) => {
@@ -111,6 +110,8 @@ export class PublicGroup extends Component {
       donations,
       expenses,
       group,
+      hasHost,
+      canEditGroup
     } = this.props;
 
     // `false` if there are no `group.data.githubContributors`
@@ -118,8 +119,6 @@ export class PublicGroup extends Component {
 
     if (group.settings.pending) {
       return <PublicGroupPending group={ group } donateToGroup={ this.donateToGroupRef } {...this.props} />
-    } else if (isUserProfile(group)) {
-      return <ProfilePage profile={ group } />
     }
 
     return (
@@ -132,21 +131,25 @@ export class PublicGroup extends Component {
 
         {contributors && <PublicGroupContributors contributors={ contributors } />}
 
-        {group.slug !== 'opensource' && <PublicGroupWhyJoin group={ group } expenses={ expenses } {...this.props} />}
+        {group.slug !== 'opensource' && hasHost && <PublicGroupWhyJoin group={ group } expenses={ expenses } {...this.props} />}
 
         <div className='bg-light-gray px2'>
-          <PublicGroupJoinUs {...this.props} donateToGroup={this.donateToGroupRef} {...this.props} />
+          {hasHost && <PublicGroupJoinUs {...this.props} donateToGroup={this.donateToGroupRef} {...this.props} />}
+          {!hasHost && canEditGroup && <PublicGroupApplyToManageFunds {...this.props} />}
           <PublicGroupMembersWall group={group} {...this.props} />
         </div>
-        <PublicGroupExpensesAndActivity
-          group={ group }
-          expenses={ expenses }
-          donations={ donations }
-          itemsToShow={ NUM_TRANSACTIONS_TO_SHOW }
-          {...this.props} />
-        <section id='related-groups' className='px2'>
-          <RelatedGroups groupList={ group.related } {...this.props} />
-        </section>
+        {hasHost &&
+          <PublicGroupExpensesAndActivity
+            group={ group }
+            expenses={ expenses }
+            donations={ donations }
+            itemsToShow={ NUM_TRANSACTIONS_TO_SHOW }
+            {...this.props} /> }
+
+        {hasHost &&
+          <section id='related-groups' className='px2'>
+            <RelatedGroups groupList={ group.related } {...this.props} />
+          </section> }
         <PublicFooter />
         {this.renderDonationFlow()}
       </div>
@@ -194,19 +197,16 @@ export class PublicGroup extends Component {
       fetchGroup
     } = this.props;
 
-    if (!isUserProfile(group)) {
-      return Promise.all([
-        fetchGroup(group.id),
-        fetchTransactions(group.id, FETCH_DONATIONS_OPTIONS),
-        fetchTransactions(group.id, FETCH_EXPENSES_OPTIONS),
-        fetchUsers(group.id)
-      ])
-    }
+    return Promise.all([
+      fetchGroup(group.id),
+      fetchTransactions(group.id, FETCH_DONATIONS_OPTIONS),
+      fetchTransactions(group.id, FETCH_EXPENSES_OPTIONS),
+      fetchUsers(group.id)
+    ])
   }
 
   componentWillMount() {
     const {
-      group,
       paypalIsDone,
       hasFullAccount,
       slug,
@@ -222,7 +222,7 @@ export class PublicGroup extends Component {
       });
     }
 
-    if (!isUserProfile(group) && loadData) {
+    if (loadData) {
       fetchProfile(slug);
     }
   }
@@ -371,7 +371,6 @@ function mapStateToProps({
     donations: take(sortBy(donations, txn => txn.createdAt).reverse(), NUM_TRANSACTIONS_TO_SHOW),
     expenses: take(sortBy(expenses, exp => exp.createdAt).reverse(), NUM_TRANSACTIONS_TO_SHOW),
     inProgress: groups.donateInProgress,
-    // shareUrl: window.location.href,
     profileForm: form.profile,
     donationForm: form.donation,
     showUserForm: users.showUserForm || false,
@@ -383,6 +382,8 @@ function mapStateToProps({
     i18n: i18n(group.settings.lang || 'en'),
     slug: router.params.slug,
     loadData: app.rendered,
-    isSupercollective: group.isSupercollective
+    isSupercollective: group.isSupercollective,
+    hasHost: group.hosts.length === 0 ? false : true,
+    canEditGroup: canEditGroup(session, group)
   };
 }
