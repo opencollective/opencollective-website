@@ -10,14 +10,14 @@ import Input from '../components/CustomTextArea';
 import PublicFooter from '../components/PublicFooter';
 import Confirmation from '../components/Confirmation';
 
-import editNewCollectiveForm from '../actions/form/edit_new_collective';
+import appendGroupForm from '../actions/form/append_group';
 import createGroup from '../actions/groups/create';
 import notify from '../actions/notification/notify';
 import validateSchema from '../actions/form/validate_schema';
 
-import groupSchema from '../joi_schemas/group';
+import newGroupSchema from '../joi_schemas/newGroup';
 
-export class NewCollective extends Component {
+export class NewGroup extends Component {
 
   constructor(props) {
     super(props);
@@ -30,8 +30,8 @@ export class NewCollective extends Component {
 
   render() {
     const {
-      editNewCollectiveForm,
-      newCollectiveForm,
+      appendGroupForm,
+      newGroupForm,
       pushState
     } = this.props;
 
@@ -48,20 +48,20 @@ export class NewCollective extends Component {
       description,
       whyJoin, // we should rename that column to `needs`
       users
-    } = newCollectiveForm.attributes;      
+    } = newGroupForm.attributes;
 
-    const collectiveTypes = new Map();
-    collectiveTypes.set('meetup',{ 
-      label: 'Meetup Group', 
+    const groupTypes = new Map();
+    groupTypes.set('meetup',{
+      label: 'Meetup Group',
       placeholders: {
         name: 'Consciousness Hacking SF',
         slug: 'chsf',
         mission: 'We are on a mission to explore and develop new technologies for psychological, emotional and spiritual flourishing.',
         description: "Consciousness Hacking is an inside-out perspective on how technology can serve us by changing our relationship to the world, rather than the world itself. Meetings will feature insightful talks, community building, and support for new ideas and concepts. Consciousness Hacking​ is an ​open exploration of how science and technology can support radically modern approaches to spirituality and human flourishing.​ We do this through a global network of communities, events, digital media and projects.​",
         whyJoin: 'We need more people to join the community and attend our events. We are also looking for volunteers to help us organize our meetups.'
-      } 
+      }
     });
-    collectiveTypes.set('opensource', {
+    groupTypes.set('opensource', {
       label: 'OpenSource Project',
       placeholders: {
         name: 'MochaJS',
@@ -71,19 +71,19 @@ export class NewCollective extends Component {
         whyJoin: 'We are looking for maintainers to help us deal with the large number of issues and pull requests. We also welcome financial contributions.'
       }
     });
-    collectiveTypes.set('pta', {
+    groupTypes.set('pta', {
       label: 'Parent Teacher Association'
     });
-    collectiveTypes.set('studentclub', {
+    groupTypes.set('studentclub', {
       label: 'Student Club'
     });
-    collectiveTypes.set('movement', {
+    groupTypes.set('movement', {
       label: 'Movement'
     });
-    collectiveTypes.set('association', {
+    groupTypes.set('association', {
       label: 'Association'
     });
-    collectiveTypes.set('default', {
+    groupTypes.set('default', {
       label: 'Other',
       placeholders: {
         name: 'The Mindful Collective',
@@ -95,27 +95,21 @@ export class NewCollective extends Component {
       }
     });
 
-    // // For testing:
-    // if (!newCollectiveForm.attributes.slug) {
-    //   Object.assign(newCollectiveForm.attributes, collectiveTypes.get('default').placeholders);
-    //   delete newCollectiveForm.attributes.email;
-    // }
-
     const getPlaceholder = (attr) => {
-      const placeholders = collectiveTypes.get(tags || 'default').placeholders || {};
-      return placeholders[attr] || collectiveTypes.get('default').placeholders[attr];
+      const placeholders = groupTypes.get(tags || 'default').placeholders || {};
+      return placeholders[attr] || groupTypes.get('default').placeholders[attr];
     };
 
-    const collectiveTypeBtns = [];
-    collectiveTypes.forEach((value, key) => {
+    const groupTypeBtns = [];
+    groupTypes.forEach((value, key) => {
       const selected = (key === tags) ? 'selected' : '';
-      collectiveTypeBtns.push(<button className={`CollectiveTypeBtn ${selected}`} onClick={() => editNewCollectiveForm({tags:key})}>{value.label}</button>);
+      groupTypeBtns.push(<button className={`GroupTypeBtn ${selected}`} onClick={() => appendGroupForm({tags:key})}>{value.label}</button>);
     });
 
     if (tags === 'opensource')
       return pushState(null, '/opensource/apply');
 
-    const showCollectiveTypes = (!showConfirmation);
+    const showGroupTypes = (!showConfirmation);
     const showFormDetails = (tags && !showConfirmation);
 
     const validateSlug = (slug) => {
@@ -130,37 +124,37 @@ export class NewCollective extends Component {
       <div>
         <Notification {...this.props} />
         <LoginTopBar />
-        <div className='NewCollective'>
+        <div className='NewGroup'>
           <h1>Create a new collective</h1>
-          {showCollectiveTypes &&
-            <div className='NewCollective-PickType NewCollective-question'>
+          {showGroupTypes &&
+            <div className='NewGroup-PickType NewGroup-question'>
               <label>What is your collective for?</label>
-              <div className='CollectiveTypeBtns'>
-                { collectiveTypeBtns }
+              <div className='GroupTypeBtns'>
+                { groupTypeBtns }
               </div>
             </div>
           }
 
-          {showFormDetails && 
-            <div className="NewCollective-details">
-              <div className='NewCollective-question NewCollective-name'>
+          {showFormDetails &&
+            <div className="NewGroup-details">
+              <div className='NewGroup-question NewGroup-name'>
                 <label>What is your collective name?</label>
                 <Input
                   name='name'
                   value={name}
-                  onChange={(value) => editNewCollectiveForm({name: value})}
+                  onChange={(value) => appendGroupForm({name: value})}
                   maxLength={128}
                   rows={1}
                   placeholder={getPlaceholder('name')}/>
               </div>
 
-              <div className='NewCollective-question NewCollective-slug'>
+              <div className='NewGroup-question NewGroup-slug'>
                 <label>What URL would you like to have?</label>
                 <Input
                   name='slug'
                   prepend='https://opencollective.com/'
                   value={slug}
-                  onChange={(value) => editNewCollectiveForm({slug: value})}
+                  onChange={(value) => appendGroupForm({slug: value})}
                   onBlur={validateSlug}
                   maxLength={32}
                   rows={1}
@@ -168,46 +162,46 @@ export class NewCollective extends Component {
                 { !slugAvailable && <span className='validationError'>This URL is not available :-(</span>}
               </div>
 
-              <div className='NewCollective-question NewCollective-mission'>
+              <div className='NewGroup-question NewGroup-mission'>
                 <label>What is your collective's mission?</label>
                 <Input
                   name='mission'
                   value={mission}
-                  onChange={(value) => editNewCollectiveForm({mission: value})}
+                  onChange={(value) => appendGroupForm({mission: value})}
                   maxLength={100}
                   rows={2}
                   placeholder={getPlaceholder('mission')}/>
               </div>
 
-              <div className='NewCollective-question NewCollective-description'>
+              <div className='NewGroup-question NewGroup-description'>
                 <label>How are you going to do that? Why should people join?<br />
                 Tell us more (you can always edit later)</label>
                 <Input
                   name='description'
                   value={description}
-                  onChange={(value) => editNewCollectiveForm({description: value})}
+                  onChange={(value) => appendGroupForm({description: value})}
                   maxLength={512}
                   rows={5}
                   placeholder={getPlaceholder('description')} />
               </div>
 
-              <div className='NewCollective-question NewCollective-whyJoin'>
+              <div className='NewGroup-question NewGroup-whyJoin'>
                 <label>What do you need help with? How can people contribute to your mission?</label>
                 <Input
                   name='whyJoin'
                   value={whyJoin}
-                  onChange={(value) => editNewCollectiveForm({whyJoin: value})}
+                  onChange={(value) => appendGroupForm({whyJoin: value})}
                   maxLength={256}
                   rows={4}
                   placeholder={getPlaceholder('whyJoin')} />
               </div>
 
-              <div className='NewCollective-question NewCollective-email'>
+              <div className='NewGroup-question NewGroup-email'>
                 <label>What is your personal email?</label>
                 <Input
                   email='email'
                   value={users[0].email}
-                  onChange={(value) => editNewCollectiveForm({users: [{email: value}]})}
+                  onChange={(value) => appendGroupForm({users: [{email: value, role: 'MEMBER'}]})}
                   maxLength={128}
                   rows={1}
                   placeholder={getPlaceholder('email')}/>
@@ -233,8 +227,8 @@ export class NewCollective extends Component {
   }
 
   create() {
-    const { newCollectiveForm, validateSchema, createGroup, utmSource, notify } = this.props;
-    const attr = newCollectiveForm.attributes;
+    const { newGroupForm, validateSchema, createGroup, utmSource, notify } = this.props;
+    const attr = newGroupForm.attributes;
     const group = {
       name: attr.name,
       slug: attr.slug,
@@ -250,7 +244,7 @@ export class NewCollective extends Component {
       isPublic: true
     };
 
-    return validateSchema(group, groupSchema)
+    return validateSchema(group, newGroupSchema)
       .then(() => createGroup(group))
       .then(() => this.setState({showConfirmation: true}))
       .catch(({message}) => notify('error', message));
@@ -259,12 +253,12 @@ export class NewCollective extends Component {
 }
 
 export default connect(mapStateToProps, {
-  editNewCollectiveForm,
+  appendGroupForm,
   pushState,
   notify,
   createGroup,
   validateSchema
-})(NewCollective);
+})(NewGroup);
 
 export function mapStateToProps({router, form}) {
 
@@ -272,7 +266,7 @@ export function mapStateToProps({router, form}) {
   const utmSource = query.utm_source;
 
   return {
-    newCollectiveForm: form.NewCollective,
+    newGroupForm: form.addgroup,
     utmSource
   };
 }

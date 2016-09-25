@@ -1,19 +1,19 @@
-.NewCollective {
+.NewGroup {
   max-width: 900px;
   margin: 0 auto;
   padding: 20px;
-  .NewCollective-question {
+  .NewGroup-question {
     margin: 20px 0 10px 0;
     label {
       margin: 20px 0 10px 0;
     }
   }
-  .CollectiveTypeBtns {
+  .GroupTypeBtns {
     overflow: hidden;
     width: 100%;
     max-width: 700px;
   }
-  .CollectiveTypeBtn {
+  .GroupTypeBtn {
     float: left;
     margin: 10px 10px 10px 0px;
     width: 150px;
@@ -32,7 +32,7 @@
     width: 100%;
     max-width: 35rem;
   }
-  .NewCollective-slug {
+  .NewGroup-slug {
     .validationError {
       color:red;
       padding-left: 208px;

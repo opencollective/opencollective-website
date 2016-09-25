@@ -193,10 +193,6 @@ export default combineReducers({
   schema,
   github,
   addgroup,
-<<<<<<< HEAD
   editGroup,
-=======
-  NewCollective,
->>>>>>> master
   twitter
 });
