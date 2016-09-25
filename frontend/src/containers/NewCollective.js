@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { pushState } from 'redux-router';
+import fetch from 'isomorphic-fetch';
 
 import LoginTopBar from '../containers/LoginTopBar';
 import Notification from '../containers/Notification';
@@ -23,7 +24,10 @@ export class NewCollective extends Component {
   constructor(props) {
     super(props);
     this.createRef = this.create.bind(this);
-    this.state = { showConfirmation: false };
+    this.state = {
+      slugAvailable: true,
+      showConfirmation: false
+    };
   }
 
   render() {
@@ -34,6 +38,7 @@ export class NewCollective extends Component {
     } = this.props;
 
     const {
+      slugAvailable,
       showConfirmation
     } = this.state;
 
@@ -86,7 +91,7 @@ export class NewCollective extends Component {
         name: 'The Mindful Collective',
         slug: 'mindfulcollective',
         mission: 'We are on a mission to bring mindfulness to our city',
-        description: 'Every week, we orgnanize a public sitting in silence. We invite everyone to come meditate with us. We are also giving a meditation class to the public school in our city.',
+        description: 'Every week, we organize a public sitting in silence. We invite everyone to come meditate with us. We are also giving a meditation class to the public school in our city.',
         whyJoin: 'We are looking for public school teachers who could open the door of their classroom. We are also looking for financial help to cover our expenses (printing posters, transportation, ...)',
         email: 'sn.goenka@dharma.org'
       }
@@ -114,6 +119,14 @@ export class NewCollective extends Component {
 
     const showCollectiveTypes = (!showConfirmation);
     const showFormDetails = (tags && !showConfirmation);
+
+    const validateSlug = (slug) => {
+      fetch(`/api/profile/${slug}`)
+        .then(response => {
+          this.setState( { slugAvailable: !(response.status === 200) })
+        })
+        .catch();
+    }
 
     return (
       <div>
@@ -150,13 +163,15 @@ export class NewCollective extends Component {
                   prepend='https://opencollective.com/'
                   value={slug}
                   onChange={(value) => editNewCollectiveForm({slug: value})}
+                  onBlur={validateSlug}
                   maxLength={32}
                   rows={1}
                   placeholder={getPlaceholder('slug')}/>
+                { !slugAvailable && <span className='validationError'>This URL is not available :-(</span>}
               </div>
 
               <div className='NewCollective-question NewCollective-mission'>
-                <label>What is your collective mission?</label>
+                <label>What is your collective's mission?</label>
                 <Input
                   name='mission'
                   value={mission}
@@ -201,7 +216,7 @@ export class NewCollective extends Component {
               </div>
 
             <center>
-              <div className={`center AddGroup-Button`} onClick={ this.createRef }>create your collective</div>
+              <div className={`center AddGroup-Button ${slugAvailable ? '' : 'disabled'}`} onClick={ this.createRef }>create your collective</div>
             </center>
             </div>
           }
