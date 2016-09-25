@@ -27,8 +27,7 @@ export default class UserCard extends Component {
   render() {
     const { className = '', user, i18n } = this.props;
 
-    const twitterUrl = (user.twitterHandle) ? `https://twitter.com/${user.twitterHandle}` : '';
-    const href = (user.website || twitterUrl);
+    const href = `https://opencollective.com/${user.username}`;
 
     const roleLabel = (user.tier || user.role).toLowerCase();
     const addBadge = (roleLabel !== 'sponsor' && roleLabel !== 'member');

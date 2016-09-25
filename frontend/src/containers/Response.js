@@ -5,6 +5,7 @@ import i18n from '../lib/i18n';
 
 import LoginTopBar from '../containers/LoginTopBar';
 import PublicFooter from '../components/PublicFooter';
+import Confirmation from '../components/Confirmation';
 
 export class Response extends Component {
   render() {
@@ -28,12 +29,10 @@ export class Response extends Component {
     return (
       <div className='Response'>
         <LoginTopBar />
-        <div className='Response-container'>
-          <img className='image' src={imageUrl}/>
-          <div className='title'>{title}</div>
-          {description && <div className='description'>{description}</div>}
-          <a className='green-link' href={linkUrl}>{linkLabel}</a>
-        </div>
+        <Confirmation image={imageUrl} link={linkLabel} href={linkUrl}>
+          <h1>{title}</h1>
+          {description && <p>{description}</p>}
+        </Confirmation>
         <PublicFooter />
       </div>
     )

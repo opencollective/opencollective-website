@@ -139,16 +139,7 @@ function github(state=githubInitialState, action={}) {
 /**
  * Add group form reducer
  */
-
-const users = [];
-for (let i = 0; i<5;i++)
-  users[i] = {};
-
-const groupInitialState = {
-  attributes: { users: [ {} ] }
-};
-
-function addgroup(state=groupInitialState, action={}) {
+function addgroup(state={ attributes: { users: [ {} ]} }, action={}) {
   switch (action.type) {
     case constants.APPEND_GROUP_FORM:
       return merge({}, state, { attributes: merge({}, state.attributes, action.attributes) });
@@ -202,6 +193,10 @@ export default combineReducers({
   schema,
   github,
   addgroup,
+<<<<<<< HEAD
   editGroup,
+=======
+  NewCollective,
+>>>>>>> master
   twitter
 });

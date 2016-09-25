@@ -79,6 +79,7 @@ export default (app) => {
   app.get('/about', mw.ga, mw.addTitle('About'), render);
   app.get('/discover/:tag?', mw.ga, mw.addTitle('Discover'), render);
   app.get('/faq', mw.ga, mw.addTitle('Answers'), render);
+  app.get('/create', mw.ga, mw.addTitle('Create a new collective'), render);
   app.get('/addgroup', mw.ga, mw.addTitle('Create a new group'), render);
   app.get('/login/:token', mw.ga, mw.addTitle('Open Collective'), render);
   app.get('/login', mw.ga, mw.addTitle('Open Collective Login'), render);
