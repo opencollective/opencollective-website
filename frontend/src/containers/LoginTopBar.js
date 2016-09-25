@@ -16,10 +16,10 @@ export class LoginTopBar extends Component {
   }
 
   renderLinks() {
+    const showCreateBtn = false;
     return (
       <ul className='LoginTopBar-Links'>
-        <li><a className='LoginTopBarButton' href='/#apply'>start a collective</a></li>
-        <li><a className='LoginTopBarLink' href='/#howitworks'>How it works</a></li>
+        {showCreateBtn && <li><a className='LoginTopBarButton' href='/create'>create a collective</a></li>}
         <li><a className='LoginTopBarLink' href='/discover'>Discover</a></li>
       </ul>
     )

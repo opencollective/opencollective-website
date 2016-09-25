@@ -1,0 +1,44 @@
+.NewCollective {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  .NewCollective-question {
+    margin: 20px 0 10px 0;
+    label {
+      margin: 20px 0 10px 0;
+    }
+  }
+  .CollectiveTypeBtns {
+    overflow: hidden;
+    width: 100%;
+    max-width: 700px;
+  }
+  .CollectiveTypeBtn {
+    float: left;
+    margin: 10px 10px 10px 0px;
+    width: 150px;
+    height: 100px;
+    border: none;
+    border-radius: 10px;
+    outline:none;
+    color: white;
+    background: rgb(183,210,245);
+    &.selected {
+      background: rgb(63,175,240);
+      color: white;
+    }
+  }
+  .CustomTextArea {
+    width: 100%;
+    max-width: 35rem;
+  }
+  .NewCollective-slug {
+    .validationError {
+      color:red;
+      padding-left: 208px;
+    }
+  }
+  .AddGroup-Button {
+    margin-top: 30px;
+  }
+}

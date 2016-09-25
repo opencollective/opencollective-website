@@ -1,9 +1,17 @@
 .CustomTextArea {
   position: relative;
-  display: inline-block;
+  display: flex;
 
+  .CustomTextArea-prepend {
+    padding: 0.5rem 0.25rem;
+  }
+  .CustomTextArea-field {
+    flex: 1;
+    position: relative;
+  }
   .CustomTextArea-textarea {
     margin: 0;
+    padding: 0.5rem;
     box-sizing: border-box;
     width: 100%;
     height: 100%;
@@ -23,13 +31,12 @@
     left: 0;
     right: 0;
     top: 0;
-    bottom: 0;
+    bottom: 10px;
+    overflow: hidden;
     font-size: 19.2px;
     font-size: 1.2rem;
-    padding: 16px;
-    padding: 1rem;
+    padding: 0.5rem;
     font-family: Lato;
-    font-style: italic;
     font-size: 16px;
     color: #ced5d9;
     cursor: text;

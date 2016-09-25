@@ -22,7 +22,7 @@ export default class OnBoardingHeader extends React.Component {
         </a>
         {!active && 
           <div className='-nav'>
-            <a href="https://opencollective.com/#apply">start a collective</a>
+            <a href="https://opencollective.com/create">create a collective</a>
             <a href="https://app.opencollective.com/github/apply?next=/opencollective">login</a>
           </div>
         }
