@@ -28,13 +28,13 @@ export class Subscriptions extends Component {
           {!subscriptions.length ? (
             <div className='block-container center'>
               <p> Looks like you aren't contributing right now. Let's fix it!</p>
-              <p> Visit our <a href='https://www.opencollective.com/leaderboard'>Leaderboard</a> to find more collectives to support. </p>
+              <p> Visit our <a href='/leaderboard'>Leaderboard</a> to find more collectives to support. </p>
             </div>
           ) : null}
           {subscriptions.length ? subscriptions.map(subscription => {
-            return (<SubscriptionItem 
-              key={subscription.id} 
-              subscription={subscription} 
+            return (<SubscriptionItem
+              key={subscription.id}
+              subscription={subscription}
               onCancel={cancel.bind(this)}
               onClickImage={() => pushState(null, `/${subscription.Transactions[0].Group.slug}`)}
               {...this.props} />
@@ -42,7 +42,7 @@ export class Subscriptions extends Component {
           }) : null}
           {subscriptions.length ? (
             <div className='block-container center'>
-              <p> Visit our <a href='https://www.opencollective.com/leaderboard'>Leaderboard</a> to find more collectives to support! </p>
+              <p> Visit our <a href='/leaderboard'>Leaderboard</a> to find more collectives to support! </p>
             </div>
           ) : null}
         </div>
