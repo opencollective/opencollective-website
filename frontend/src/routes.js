@@ -16,7 +16,7 @@ import Faq from './containers/Faq';
 import Discover from './containers/Discover';
 import About from './containers/About';
 import AddGroup from './containers/AddGroup';
-import NewCollective from './containers/NewCollective';
+import NewGroup from './containers/NewGroup';
 import EditCollective from './containers/EditCollective';
 import Response from './containers/Response';
 
@@ -29,7 +29,7 @@ export default (
     <Route path="/about" component={About} />
     <Route path="/faq" component={Faq} />
     <Route path="/discover(/:tag)" component={Discover} />
-    <Route path="/create" component={NewCollective} />
+    <Route path="/create" component={NewGroup} />
     <Route path="/addgroup" component={requireAuthentication(AddGroup)} />
     <Route path="/login/:token" component={Login} />
     <Route path="/login" component={Login} />,

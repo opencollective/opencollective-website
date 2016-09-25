@@ -136,7 +136,7 @@ function github(state=githubInitialState, action={}) {
 }
 
 /**
- * Group form reducer
+ * Add group form reducer
  */
 function addgroup(state={ attributes: { users: [ {} ]} }, action={}) {
   switch (action.type) {
@@ -148,12 +148,20 @@ function addgroup(state={ attributes: { users: [ {} ]} }, action={}) {
 }
 
 /**
- * Edit new collective form reducer
+ * Edit group form reducer
  */
-function NewCollective(state={ attributes: { users: [ {} ]} }, action={}) {
+
+const editGroupInitialState = {
+  attributes: { },
+  inProgress: false
+};
+
+function editGroup(state=editGroupInitialState, action={}) {
   switch (action.type) {
-    case constants.EDIT_COLLECTIVE_FORM:
-      return merge({}, state, { attributes: merge({}, state.attributes, action.attributes)});
+    case constants.APPEND_EDIT_GROUP_FORM:
+      return merge({}, state, {attributes: action.attributes, inProgress: true});
+    case constants.CANCEL_EDIT_GROUP_FORM:
+      return editGroupInitialState;
     default:
       return state;
   }
@@ -184,6 +192,6 @@ export default combineReducers({
   schema,
   github,
   addgroup,
-  NewCollective,
+  editGroup,
   twitter
 });

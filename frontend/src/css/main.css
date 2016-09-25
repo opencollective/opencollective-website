@@ -37,7 +37,7 @@
 @import './containers/HomePage.css';
 @import './containers/Leaderboard.css';
 @import './containers/Login.css';
-@import './containers/NewCollective.css';
+@import './containers/NewGroup.css';
 @import './containers/OnBoarding.css';
 @import './containers/ProfilePage.css';
 @import './containers/PublicGroup.css';
@@ -56,6 +56,7 @@
 @import './components/Checkbox.css';
 @import './components/CollectiveCard.css';
 @import './components/Confirmation.css';
+@import './components/ContentEditable.css';
 @import './components/ContributorList.css';
 @import './components/ContributorPicker.css';
 @import './components/Currency.css';

@@ -14,7 +14,7 @@ import createGroup from '../actions/groups/create';
 import notify from '../actions/notification/notify';
 import validateSchema from '../actions/form/validate_schema';
 
-import groupSchema from '../joi_schemas/group';
+import groupSchema from '../joi_schemas/newGroup';
 
 export class AddGroup extends Component {
 

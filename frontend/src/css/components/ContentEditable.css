@@ -1,0 +1,10 @@
+[contenteditable=true]:empty:before{
+  content: attr(placeholder);
+  font-style: italic;
+  display: block; /* For Firefox */
+}
+
+span.editing {
+  min-width: 20px;
+  display: inline-block;
+}
