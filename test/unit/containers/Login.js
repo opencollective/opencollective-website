@@ -86,10 +86,11 @@ describe('containers/Login', () => {
         sendNewLoginToken: noop,
         token: 'token_abc'
       };
+      const setState = chai.spy(noop);
 
-      sendNewToken.call({props})
+      sendNewToken.call({props,setState})
         .then(() => {
-          expect(props.notify).to.have.been.called.with('success');
+          expect(setState).to.have.been.called.with({showConfirmation: true});
           done();
         });
     })
