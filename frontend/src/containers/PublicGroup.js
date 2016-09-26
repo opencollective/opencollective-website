@@ -306,7 +306,7 @@ export function saveNewUser() {
       const nameTokens = userData.name.split(' ');
       userData.firstName = nameTokens.shift();
       userData.lastName = nameTokens.join(' ');
-      updateUser(newUser.id, userData)
+      return updateUser(newUser.id, userData);
     })
     .then(() => this.setState({
       showUserForm: false,
