@@ -30,7 +30,8 @@ export default class PublicGroupHero extends Component {
     const { group, i18n, session, hasHost, canEditGroup } = this.props;
     const collectiveBg = resizeImage(group.backgroundImage,1024) || DEFAULT_BACKGROUND_IMAGE;
     return (
-      <section className='PublicGroupHero relative px2 bg-black bg-cover white' style={{backgroundImage: `url(${collectiveBg})`}}>
+      <section className='PublicGroupHero relative px2 bg-black bg-cover white'>
+        <div className='backgroundImage' style={{backgroundImage: `url(${collectiveBg})`}} />
         <div className='container relative center'>
           <LoginTopBar loginRedirectTo={ `/${ group.slug }` } />
           <div className='PublicGroupHero-content'>
