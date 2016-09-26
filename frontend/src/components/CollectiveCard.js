@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 
 import formatCurrency from '../lib/format_currency';
+import { resizeImage } from '../lib/utils';
 
 const DEFAULT_BG = '/static/images/collectives/default-header-bg.jpg';
 const DEFAULT_LOGOS = [
@@ -97,7 +98,7 @@ export default class CollectiveCard extends Component {
         <a href={publicUrl}>
           <div>
             <div className='CollectiveCard-head'>
-              <div className='CollectiveCard-background' style={{backgroundImage: `url(${backgroundImage || DEFAULT_BG})`}}>
+              <div className='CollectiveCard-background' style={{backgroundImage: `url(${resizeImage(backgroundImage, 320) || DEFAULT_BG})`}}>
                 <div className='CollectiveCard-image' style={{backgroundImage: `url(${logo || DEFAULT_LOGOS[key%DEFAULT_LOGOS.length]})`}}></div>
               </div>
             </div>

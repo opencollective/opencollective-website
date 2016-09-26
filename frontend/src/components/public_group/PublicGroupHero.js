@@ -4,6 +4,7 @@ import fetch from 'isomorphic-fetch';
 
 import LoginTopBar from '../../containers/LoginTopBar';
 import exportFile from '../../lib/export_file';
+import { resizeImage } from '../../lib/utils';
 
 const DEFAULT_BACKGROUND_IMAGE = '/static/images/collectives/default-header-bg.jpg';
 
@@ -27,9 +28,19 @@ export default class PublicGroupHero extends Component {
 
   render() {
     const { group, i18n, session, hasHost, canEditGroup } = this.props;
-    const collectiveBg = group.backgroundImage || DEFAULT_BACKGROUND_IMAGE;
+
+    // We can override the default style for the cover image of a group in `group.settings`
+    // e.g. 
+    // - to remove default blur: { "style": { "coverImage": { "filter": "none" }}}
+    // - to make the background monochrome*: { "style": {"coverImage": {"filter":"brightness(50%) sepia(1) hue-rotate(132deg) saturate(103.2%) brightness(91.2%);" }}}
+    // * see http://stackoverflow.com/questions/29037023/how-to-calculate-required-hue-rotate-to-generate-specific-colour
+    group.settings.style = group.settings.style || {};
+    const coverImage = resizeImage(group.backgroundImage,1024) || DEFAULT_BACKGROUND_IMAGE;
+    const coverImageStyle = Object.assign({}, { filter: "blur(4px)", backgroundImage: `url(${coverImage})` }, group.settings.style.coverImage);
+
     return (
-      <section className='PublicGroupHero relative px2 bg-black bg-cover white' style={{backgroundImage: `url(${collectiveBg})`}}>
+      <section className='PublicGroupHero relative px2 bg-black bg-cover white'>
+        <div className='coverImage' style={coverImageStyle} />
         <div className='container relative center'>
           <LoginTopBar loginRedirectTo={ `/${ group.slug }` } />
           <div className='PublicGroupHero-content'>
