@@ -86,7 +86,7 @@ export default function(groupid) {
         'Comunicazioni',
         'Disign',
         'Donazione',
-        'Progettazione',
+        'Sviluppo software',
         'Accantonamento',
         'Cibo & bevande',
         'Marketing',
