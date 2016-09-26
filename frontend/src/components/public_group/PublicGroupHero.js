@@ -4,6 +4,7 @@ import fetch from 'isomorphic-fetch';
 
 import LoginTopBar from '../../containers/LoginTopBar';
 import exportFile from '../../lib/export_file';
+import { resizeImage } from '../../lib/utils';
 
 const DEFAULT_BACKGROUND_IMAGE = '/static/images/collectives/default-header-bg.jpg';
 
@@ -27,7 +28,7 @@ export default class PublicGroupHero extends Component {
 
   render() {
     const { group, i18n, session, hasHost, canEditGroup } = this.props;
-    const collectiveBg = group.backgroundImage || DEFAULT_BACKGROUND_IMAGE;
+    const collectiveBg = resizeImage(group.backgroundImage,1024) || DEFAULT_BACKGROUND_IMAGE;
     return (
       <section className='PublicGroupHero relative px2 bg-black bg-cover white' style={{backgroundImage: `url(${collectiveBg})`}}>
         <div className='container relative center'>
