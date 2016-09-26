@@ -37,7 +37,7 @@ export default class PublicGroupWhyJoin extends React.Component {
 
               {(expenses.length > 0) && (
                 <div className='pt1 mt3 mb2'>
-                  <a href='#expenses-and-activity' className='-btn -btn-outline -border-green -btn-small -ff-sec -fw-bold -ttu -wsnw'>{i18n.getString('howWeSpend')}</a>
+                  <a href='#budget' className='-btn -btn-outline -border-green -btn-small -ff-sec -fw-bold -ttu -wsnw'>{i18n.getString('howWeSpend')}</a>
                 </div>
               )}
             </div>
