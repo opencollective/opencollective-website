@@ -4,10 +4,12 @@ import { connect } from 'react-redux';
 import sortBy from 'lodash/sortBy';
 import take from 'lodash/take';
 import values from 'lodash/values';
+import merge from 'lodash/merge';
 
 import filterCollection from '../lib/filter_collection';
 import i18n from '../lib/i18n';
 import profileSchema from '../joi_schemas/profile';
+import editGroupSchema from '../joi_schemas/editGroup';
 import roles from '../constants/roles';
 import { canEditGroup } from '../lib/admin';
 
@@ -24,6 +26,9 @@ import notify from '../actions/notification/notify';
 import updateUser from '../actions/users/update';
 import uploadImage from '../actions/images/upload';
 import validateSchema from '../actions/form/validate_schema';
+import updateGroup from '../actions/groups/update';
+import appendEditGroupForm from '../actions/form/append_edit_group';
+import cancelEditGroupForm from '../actions/form/cancel_edit_group';
 
 import Notification from './Notification';
 
@@ -39,6 +44,8 @@ import PublicGroupThanksV2 from '../components/public_group/PublicGroupThanksV2'
 import PublicGroupWhoWeAre from '../components/public_group/PublicGroupWhoWeAre';
 import PublicGroupWhyJoin from '../components/public_group/PublicGroupWhyJoin';
 import PublicGroupApplyToManageFunds from '../components/public_group/PublicGroupApplyToManageFunds';
+
+import EditTopBar from '../components/edit_collective/EditCollectiveTopBar';
 
 import PublicFooter from '../components/PublicFooter';
 import RelatedGroups from '../components/RelatedGroups';
@@ -103,6 +110,8 @@ export class PublicGroup extends Component {
     this.donateToGroupRef = donateToGroup.bind(this);
     this.closeDonationFlowRef = this.closeDonationFlow.bind(this);
     this.saveNewUserRef = saveNewUser.bind(this);
+    this.saveGroupRef = saveGroup.bind(this);
+    this.cancelGroupEditsRef = onCancelGroupEdits.bind(this);
   }
 
   render() {
@@ -111,7 +120,8 @@ export class PublicGroup extends Component {
       expenses,
       group,
       hasHost,
-      canEditGroup
+      canEditGroup,
+      editingInProgress
     } = this.props;
 
     // `false` if there are no `group.data.githubContributors`
@@ -124,6 +134,7 @@ export class PublicGroup extends Component {
     return (
       <div className={`PublicGroup ${ group.slug }`}>
         <Notification />
+        {editingInProgress && <EditTopBar onSave={ this.saveGroupRef } onCancel={ this.cancelGroupEditsRef }/>}
         <PublicGroupHero group={ group } {...this.props} />
         <PublicGroupWhoWeAre group={ group } {...this.props} />
 
@@ -316,6 +327,36 @@ export function saveNewUser() {
     .catch(({message}) => notify('error', message));
 }
 
+export function saveGroup() {
+  const {
+    group,
+    updateGroup,
+    groupForm,
+    slug,
+    fetchProfile,
+    cancelEditGroupForm,
+    notify,
+    // groupSchema,
+    // validateSchema
+  } = this.props;
+
+  return validateSchema(groupForm.attributes, editGroupSchema)
+    .then(() => updateGroup(group.id, groupForm.attributes))
+    .then(() => merge(group, groupForm.attributes)) // this is to prevent ui from temporarily reverting to old text
+    .then(() => cancelEditGroupForm()) // clear out this form to prevent data issues on another page.
+    .then(() => fetchProfile(slug))
+    .then(() => notify('success', 'Group updated'))
+    .catch(({message}) => notify('error', message));
+}
+
+export function onCancelGroupEdits() {
+  const {
+    cancelEditGroupForm
+  } = this.props;
+
+  cancelEditGroupForm();
+}
+
 export default connect(mapStateToProps, {
   donate,
   uploadImage,
@@ -329,7 +370,10 @@ export default connect(mapStateToProps, {
   validateSchema,
   decodeJWT,
   appendDonationForm,
-  fetchProfile
+  fetchProfile,
+  updateGroup,
+  appendEditGroupForm,
+  cancelEditGroupForm
 })(PublicGroup);
 
 function mapStateToProps({
@@ -380,6 +424,7 @@ function mapStateToProps({
     profileForm: form.profile,
     donationForm: form.donation,
     showUserForm: users.showUserForm || false,
+    groupForm: form.editGroup,
     saveInProgress: users.updateInProgress,
     isAuthenticated: session.isAuthenticated,
     paypalIsDone: query.status === 'payment_success' && !!newUserId,
@@ -390,6 +435,7 @@ function mapStateToProps({
     loadData: app.rendered,
     isSupercollective: group.isSupercollective,
     hasHost: group.hosts.length === 0 ? false : true,
-    canEditGroup: canEditGroup(session, group)
+    canEditGroup: canEditGroup(session, group),
+    editingInProgress: form.editGroup.inProgress
   };
 }

@@ -23,6 +23,10 @@
     "creditCard": "Credit Card",
     "customAmount": "Tweak the amount",
     "date": "Date",
+    "defaultDescription": "Enter a short description...",
+    "defaultLongDescription": "Detailed description of your collective",
+    "defaultMission": "change the world...",
+    "defaultName": "...",
     "defaultTierButton": "Become a backer",
     "defaultTierDescription": "Your donation will help us continue our activities. Thank you for your support.",
     "description": "Description",
@@ -323,7 +327,7 @@
     "yearly": "por año",
     "youDeciceDistributeYour": "Decide como distribuir"
   },
-  
+
    "it": {
     "activitiesPlaceholderText": "Condividi questa pagina per trovare sostenitori e finanziatori che vogliano supportare il tuo collettivo!",
     "activitiesPlaceholderTitle": "Le donazioni verranno visualizzate qui",
