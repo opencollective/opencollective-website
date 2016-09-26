@@ -76,7 +76,7 @@ export default class PublicGroupHero extends Component {
                 <a href='#members-wall' className='block white -ff-sec -fw-bold'>{ i18n.getString('menuMembersWall') }</a>
               </li>
               { canEditGroup &&
-                <li className='inline-block'>
+                <li className='inline-block xs-hide'>
                   <a href='#exportMembers' className='block white -ff-sec -fw-bold' onClick={ exportMembers.bind(this, session.user, group) } >Export members.csv</a>
                 </li>
               }
@@ -99,7 +99,7 @@ export default class PublicGroupHero extends Component {
        <div className='PublicGroupHero-contributor-statistics'>
             <div className='PublicGroupHero-contributor-count'>
               {group.backersCount.toString().split('').map((character, index) => {
-                return <span key={ index } className={ /[^0-9]/.test(character) ? '-character' : '-digit' }>{ character }</span>
+                return <span key={ index } className='PublicGroupHero-contributor-count-number'>{ character }</span>
               })} <div className='PublicGroupHero-contributor-count-text'>{ contributorText }</div>
             </div>
       </div>

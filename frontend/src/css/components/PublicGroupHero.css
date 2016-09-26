@@ -60,6 +60,10 @@
     width: 300px;
     margin: auto;
   }
+  .PublicGroupHero-contributor-count-number {
+    font-weight: bold;
+    font-size: 2rem;
+  }
   .PublicGroupHero-contributor-count-text {
     font-family: Lato;
     font-size: 18px;
