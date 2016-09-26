@@ -78,6 +78,7 @@ export default class UserPhoto extends React.Component {
 UserPhoto.propTypes = {
   user: React.PropTypes.object,
   editable: React.PropTypes.bool,
+  uploadImage: React.PropTypes.func, // if editable true, we need to pass a function to upload the image
   onChange: React.PropTypes.func,
   i18n: React.PropTypes.object,
   addBadge: React.PropTypes.bool
