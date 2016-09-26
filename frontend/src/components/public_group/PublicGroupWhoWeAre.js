@@ -4,16 +4,41 @@ import Markdown from '../../components/Markdown';
 import RelatedGroups from '../../components/RelatedGroups';
 import UserCard from '../../components/UserCard';
 import { displayUrl } from '../../components/DisplayUrl';
+import ContentEditable from '../../components/ContentEditable';
 
 export default class PublicGroupWhoWeAre extends Component {
   render() {
-    const { group, i18n, isSupercollective } = this.props;
+    const { group, i18n, isSupercollective, canEditGroup, appendEditGroupForm, groupForm } = this.props;
     const title = i18n.getString('coreContributors');
+
+    const {
+      name,
+      description,
+      longDescription
+    } = groupForm.attributes;
+
     return (
       <section id='who-we-are' className='PublicGroupWhoWeAre PublicGroupIntro'>
         <div className='PublicGroupIntro-container PublicGroupWhoWeAre-container'>
-          <h2 className='PublicGroupWhoWeAre-title'>{ i18n.getString('weAre') } { group.name }</h2>
-          <h3 ref='PublicGroupWhoWeAre-description' className='PublicGroupWhoWeAre-subtitle'>{ group.description }</h3>
+          <h2 className='PublicGroupWhoWeAre-title'>{ `${i18n.getString('weAre')} ` }
+            <ContentEditable
+              tagName='span'
+              className='ContentEditable-name editing'
+              html={ (name === '' || name) ? name : group.name }
+              disabled={ !canEditGroup }
+              onChange={ event => appendEditGroupForm({name: event.target.value}) }
+              placeholder={i18n.getString('defaultName')} />
+
+          </h2>
+
+          <h3 ref='PublicGroupWhoWeAre-description' className='PublicGroupWhoWeAre-subtitle'>
+            <ContentEditable
+              className='ContentEditable-description'
+              html={ (description === '' || description) ? description : group.description }
+              disabled={ !canEditGroup }
+              onChange={ event => appendEditGroupForm({description: event.target.value}) }
+              placeholder={i18n.getString('defaultDescription')} />
+          </h3>
 
           {group.website && (
             <div className='PublicGroupWhoWeAre-website'>
@@ -21,9 +46,17 @@ export default class PublicGroupWhoWeAre extends Component {
             </div>
           )}
 
-          <div ref='PublicGroupWhoWeAre-longDescription' className='PublicGroupWhoWeAre-long-description'>
-            {group.longDescription && (
+          <div ref='PublicGroupWhoWeAre-longDescription' className={`PublicGroupWhoWeAre-long-description`}>
+            {group.longDescription && !canEditGroup && (
               <Markdown className='PublicGroup-quoteText left-align' value={ group.longDescription } />
+            )}
+            {group.longDescription && canEditGroup && (
+              <ContentEditable
+                className='ContentEditable-long-description'
+                html={ (longDescription === '' || longDescription) ? longDescription : group.longDescription }
+                disabled={ !canEditGroup }
+                onChange={ event => appendEditGroupForm({longDescription: event.target.value}) }
+                placeholder={i18n.getString('defaultLongDescription')} />
             )}
           </div>
 

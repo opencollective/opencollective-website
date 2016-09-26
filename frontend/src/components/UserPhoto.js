@@ -41,7 +41,8 @@ export default class UserPhoto extends React.Component {
       customBadgeSize,
       customBadge,
       uploadImage,
-      i18n
+      i18n,
+      presets
     } = this.props;
     const avatar = (!this.state.avatar || this.state.avatar.indexOf('/static/') === 0) ? this.state.avatar : cloudinaryUrl(this.state.avatar);
     const styles = {
@@ -56,6 +57,7 @@ export default class UserPhoto extends React.Component {
           handleChange={avatar => this.updateAvatar(avatar)}
           uploadImage={uploadImage}
           i18n={i18n}
+          presets={presets}
         />
       )
     }

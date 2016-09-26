@@ -11,8 +11,8 @@ const EditCollectiveTopBar = (props) => (
       </svg>
     </div>
     <div className='EditCollective-TopBar-buttons'>
-      <div className={`EditCollective-TopBar-Button ${ !props.canPublish ? '-disabled' : '' }`} onClick={ props.onPublish }>Save Changes</div>
-      <a href='.'><div className='EditCollective-TopBar-Button trans'>Exit Edit Mode</div></a>
+      <div className='EditCollective-TopBar-Button' onClick={ props.onSave }>Save Changes</div>
+      <div className='EditCollective-TopBar-Button trans' onClick={ props.onCancel }>Cancel</div>
     </div>
   </div>
 );
