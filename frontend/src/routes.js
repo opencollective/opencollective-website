@@ -18,6 +18,7 @@ import About from './containers/About';
 import AddGroup from './containers/AddGroup';
 import NewGroup from './containers/NewGroup';
 import EditCollective from './containers/EditCollective';
+import GroupTierList from './containers/GroupTierList';
 import Response from './containers/Response';
 
 import { requireAuthentication } from './components/AuthenticatedComponent';
@@ -49,5 +50,6 @@ export default (
     <Route path="/:slug/:type(donations|expenses)" component={Transactions} />
     <Route path="/:slug/donate/:amount" component={DonatePage} />
     <Route path="/:slug/donate/:amount/:interval" component={DonatePage} />
+    <Route path="/:slug/:tier" component={GroupTierList} />
   </Route>
 );
