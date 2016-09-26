@@ -58,26 +58,26 @@ export default class PublicGroupHero extends Component {
           </div>
         </div>
 
-        <div ref='PublicGroupHero-backgroundImage' className='PublicGroupHero-menu absolute left-0 right-0 bottom-0 xs-hide'>
+        <div ref='PublicGroupHero-backgroundImage' className='PublicGroupHero-menu absolute left-0 right-0 bottom-0'>
           <nav>
             <ul className='list-reset m0 -ttu center'>
               <li className='inline-block'>
-                <a href='#who-we-are' className='block px2 py3 white -ff-sec -fw-bold'>{ i18n.getString('menuWho') }</a>
+                <a href='#who-we-are' className='block white -ff-sec -fw-bold'>{ i18n.getString('menuWho') }</a>
               </li>
               {hasHost &&
                 <li className='inline-block'>
-                  <a href='#why-join' className='block px2 py3 white -ff-sec -fw-bold'>{ i18n.getString('menuWhy') }</a>
+                  <a href='#why-join' className='block white -ff-sec -fw-bold'>{ i18n.getString('menuWhy') }</a>
                 </li> }
               {hasHost &&
                 <li className='inline-block'>
-                  <a href='#expenses-and-activity' className='block px2 py3 white -ff-sec -fw-bold'>{ i18n.getString('menuExpensesAndActivities') }</a>
+                  <a href='#budget' className='block white -ff-sec -fw-bold'>{ i18n.getString('menuBudget') }</a>
                 </li> }
               <li className='inline-block'>
-                <a href='#members-wall' className='block px2 py3 white -ff-sec -fw-bold'>{ i18n.getString('menuMembersWall') }</a>
+                <a href='#members-wall' className='block white -ff-sec -fw-bold'>{ i18n.getString('menuMembersWall') }</a>
               </li>
               { canEditGroup &&
-                <li className='inline-block'>
-                  <a href='#exportMembers' className='block px2 py3 white -ff-sec -fw-bold' onClick={ exportMembers.bind(this, session.user, group) } >Export members.csv</a>
+                <li className='inline-block xs-hide'>
+                  <a href='#exportMembers' className='block white -ff-sec -fw-bold' onClick={ exportMembers.bind(this, session.user, group) } >Export members.csv</a>
                 </li>
               }
             </ul>
@@ -99,7 +99,7 @@ export default class PublicGroupHero extends Component {
        <div className='PublicGroupHero-contributor-statistics'>
             <div className='PublicGroupHero-contributor-count'>
               {group.backersCount.toString().split('').map((character, index) => {
-                return <span key={ index } className={ /[^0-9]/.test(character) ? '-character' : '-digit' }>{ character }</span>
+                return <span key={ index } className='PublicGroupHero-contributor-count-number'>{ character }</span>
               })} <div className='PublicGroupHero-contributor-count-text'>{ contributorText }</div>
             </div>
       </div>
