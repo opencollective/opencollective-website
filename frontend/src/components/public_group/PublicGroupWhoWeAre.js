@@ -43,7 +43,7 @@ export default class PublicGroupWhoWeAre extends Component {
           {isSupercollective ? (
             <div>
               <div className='Collectives-title mt0 mb2 -ff-sec -fw-light'>
-                {i18n.getString('WeAreProudSupporters')}
+                {i18n.getString('DiscoverOurCollectives', { tag: group.settings.superCollectiveTag})}
               </div>
               <RelatedGroups title={' '} groupList={ group.superCollectiveData } {...this.props} />
             </div>

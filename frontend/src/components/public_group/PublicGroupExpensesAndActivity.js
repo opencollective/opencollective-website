@@ -4,7 +4,7 @@ import PublicGroupDonations from './PublicGroupDonations';
 import PublicGroupExpenses from './PublicGroupExpenses';
 
 export default props => (
-  <section id='expenses-and-activity' className='px2'>
+  <section id='budget' className='px2'>
     <div className='container'>
       <div className='PublicGroup-transactions clearfix md-flex'>
         <PublicGroupExpenses {...props} />

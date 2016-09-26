@@ -5,8 +5,12 @@ export default (lang) => {
   lang = lang || 'en';
   moment.locale(lang);
   return {
-    getString: (strid) => {
-      return strings[lang][strid] || strings['en'][strid];
+    getString: (strid, replacements = {}) => {
+      let str = strings[lang][strid] || strings['en'][strid];
+      for (const key of Object.keys(replacements)) {
+        str = str.replace(`$${key}`, replacements[key] || '');
+      }
+      return str;
     },
     moment
   };
