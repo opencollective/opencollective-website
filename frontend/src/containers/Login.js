@@ -15,11 +15,12 @@ import storeToken from '../actions/session/store_token';
 import decodeJWT from '../actions/session/decode_jwt';
 
 import validate from '../actions/form/validate_schema';
+import Confirmation from '../components/Confirmation';
 
 export class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { showConfirmation: false };
   }
 
   render() {
@@ -27,14 +28,17 @@ export class Login extends Component {
       <div className='Login'>
         <Notification {...this.props} />
         <LoginTopBar />
-        <div className='Login-container'>
-          <div className='Login-box'>
-            <div className='Login-quote'>
-              <h2> Login to Open Collective </h2>
+        {this.state.showConfirmation && <Confirmation><h1>Email sent!</h1><p>Click on the link provided in the email to be logged in.</p></Confirmation>}
+        {!this.state.showConfirmation &&
+          <div className='Login-container'>
+            <div className='Login-box'>
+              <div className='Login-quote'>
+                <h2> Login to Open Collective </h2>
+              </div>
+              <LoginEmailForm onClick={sendNewToken.bind(this)} {...this.props} />
             </div>
-            <LoginEmailForm onClick={sendNewToken.bind(this)} {...this.props} />
           </div>
-        </div>
+        }
         <PublicFooter/>
       </div>
     );
@@ -64,7 +68,9 @@ export function sendNewToken(email, redirect) {
   } = this.props;
 
   return sendNewLoginToken(email, redirect)
-  .then(() => notify('success', 'Email sent'))
+  .then(() => {
+    this.setState({showConfirmation: true})
+  })
   .catch(({message}) => notify('error', message));
 }
 
