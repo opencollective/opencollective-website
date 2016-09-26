@@ -251,7 +251,7 @@ export class AddGroup extends Component {
       currency: attr.currency
     };
 
-    return validateSchema(groupForm.attributes, groupSchema)
+    return validateSchema(group, groupSchema)
       .then(() => createGroup(group))
       .then(() => this.setState({showConfirmation: true}))
       .then(() => notify('success', `${group.name} has been created. Refresh page to create a new group.`))
