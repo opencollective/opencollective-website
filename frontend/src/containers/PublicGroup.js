@@ -336,8 +336,7 @@ export function saveGroup() {
     fetchProfile,
     cancelEditGroupForm,
     notify,
-    // groupSchema,
-    // validateSchema
+    validateSchema
   } = this.props;
 
   return validateSchema(groupForm.attributes, editGroupSchema)

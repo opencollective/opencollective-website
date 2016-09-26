@@ -6,7 +6,7 @@ const schema = Joi.alternatives().try(
     logo: Joi.string().uri().allow('').label('Logo url'),
     mission: Joi.string().max(100).label('Mission'),
     description: Joi.string().max(255).label('Short description'),
-    longDescription: Joi.string().max(1000).label('Full description'),
+    longDescription: Joi.string().label('Full description')
   })
 );
 
