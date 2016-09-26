@@ -25,6 +25,7 @@
       display: inline-block;
       min-width: 200px;
       list-style: none;
+      text-align: right;
       margin: 0;
       li {
         display: inline-block;
