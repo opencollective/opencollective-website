@@ -301,7 +301,13 @@ export function saveNewUser() {
   } = this.props;
 
   return validateSchema(profileForm.attributes, profileSchema)
-    .then(() => updateUser(newUser.id, profileForm.attributes))
+    .then(() => {
+      const userData = Object.assign({}, profileForm.attributes);
+      const nameTokens = userData.name.split(' ');
+      userData.firstName = nameTokens.shift();
+      userData.lastName = nameTokens.join(' ');
+      return updateUser(newUser.id, userData);
+    })
     .then(() => this.setState({
       showUserForm: false,
       showThankYouMessage: true
