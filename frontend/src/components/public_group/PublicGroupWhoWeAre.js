@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import Markdown from '../../components/Markdown';
 import RelatedGroups from '../../components/RelatedGroups';
 import UserCard from '../../components/UserCard';
 import { displayUrl } from '../../components/DisplayUrl';
@@ -47,13 +46,11 @@ export default class PublicGroupWhoWeAre extends Component {
           )}
 
           <div ref='PublicGroupWhoWeAre-longDescription' className={`PublicGroupWhoWeAre-long-description`}>
-            {group.longDescription && !canEditGroup && (
-              <Markdown className='PublicGroup-quoteText left-align' value={ group.longDescription } />
-            )}
-            {group.longDescription && canEditGroup && (
+            {group.longDescription && (
               <ContentEditable
                 className='ContentEditable-long-description'
                 html={ (longDescription === '' || longDescription) ? longDescription : group.longDescription }
+                format='markdown'
                 disabled={ !canEditGroup }
                 onChange={ event => appendEditGroupForm({longDescription: event.target.value}) }
                 placeholder={i18n.getString('defaultLongDescription')} />
