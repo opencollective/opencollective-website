@@ -26,6 +26,7 @@ export class LoginTopBar extends Component {
   }
 
   renderProfileMenu() {
+    const { user } = this.props;
 
     return (
       <div className='LoginTopBarProfileMenu' onClick={(e) => e.nativeEvent.stopImmediatePropagation()}>
@@ -44,6 +45,9 @@ export class LoginTopBar extends Component {
             <span>my account</span>
             <div className='-dash'></div>
           </div>
+          <ul>
+            <li><a href={`/${user.username}`}>Profile</a></li>
+          </ul>
           <ul>
             <li><a className='-blue' href='#' onClick={this.onClickLogout.bind(this)}>Logout</a></li>
           </ul>
