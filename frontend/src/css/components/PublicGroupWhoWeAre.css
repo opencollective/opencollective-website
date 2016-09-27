@@ -65,6 +65,9 @@
       margin: 0 auto;
       max-width: 768px;
       max-width: 48rem;
+      h1 {
+        padding-top: 3rem;
+      }
     }
   }
 }
