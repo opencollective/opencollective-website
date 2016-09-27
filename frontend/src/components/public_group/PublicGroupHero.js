@@ -33,7 +33,7 @@ export default class PublicGroupHero extends Component {
     const titles = Object.keys(processMarkdown(group.longDescription));
 
     const getAnchor = (title) => {
-      return title.toLowerCase().replace(/[^a-z0-9]/gi,'')
+      return title.toLowerCase().replace(' ','-').replace(/[^a-z0-9\-]/gi,'')
     }
 
     // We can override the default style for the cover image of a group in `group.settings`
