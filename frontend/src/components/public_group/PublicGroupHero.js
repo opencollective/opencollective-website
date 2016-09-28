@@ -7,6 +7,10 @@ import exportFile from '../../lib/export_file';
 import { resizeImage } from '../../lib/utils';
 import processMarkdown from '../../lib/process_markdown';
 
+import ContentEditable from '../../components/ContentEditable';
+import UserPhoto from '../../components/UserPhoto';
+
+
 const DEFAULT_BACKGROUND_IMAGE = '/static/images/collectives/default-header-bg.jpg';
 
 export function exportMembers(authenticatedUser, group) {
@@ -28,7 +32,7 @@ export function exportMembers(authenticatedUser, group) {
 export default class PublicGroupHero extends Component {
 
   render() {
-    const { group, i18n, session, hasHost, canEditGroup } = this.props;
+    const { group, i18n, session, hasHost, canEditGroup, groupForm, appendEditGroupForm} = this.props;
 
     const titles = Object.keys(processMarkdown(group.longDescription));
 
@@ -37,7 +41,7 @@ export default class PublicGroupHero extends Component {
     }
 
     // We can override the default style for the cover image of a group in `group.settings`
-    // e.g. 
+    // e.g.
     // - to remove default blur: { "style": { "coverImage": { "filter": "none" }}}
     // - to make the background monochrome*: { "style": {"coverImage": {"filter":"brightness(50%) sepia(1) hue-rotate(132deg) saturate(103.2%) brightness(91.2%);" }}}
     // * see http://stackoverflow.com/questions/29037023/how-to-calculate-required-hue-rotate-to-generate-specific-colour
@@ -51,11 +55,30 @@ export default class PublicGroupHero extends Component {
         <div className='container relative center'>
           <LoginTopBar loginRedirectTo={ `/${ group.slug }` } />
           <div className='PublicGroupHero-content'>
-            {group.logo && (
-              <div ref='PublicGroupHero-logo' className='PublicGroupHero-logo mb3 bg-contain' style={{backgroundImage: `url(${ group.logo })`}}></div>
-            )}
-            <p ref='PublicGroupHero-name' className='PublicGroup-font-20 mt0 mb2'>{ i18n.getString('hiThisIs') } <a href={ group.website }>{ group.name }</a> { i18n.getString('openCollective') }.</p>
-            <h1 ref='PublicGroupHero-mission' className='PublicGroupHero-mission max-width-3 mx-auto mt0 mb3 white -ff-sec'>{ i18n.getString('missionTo') } { group.mission }</h1>
+            <UserPhoto
+              editable={canEditGroup}
+              onChange={logo => {
+                if (logo !== group.logo)
+                  return appendEditGroupForm({logo})
+              }}
+              user={{ avatar: groupForm.attributes.logo || group.logo }}
+              className='PublicGroupHero-logo mb3 bg-contain'
+              presets={[]}
+              {...this.props} />
+
+            <p ref='PublicGroupHero-name' className='PublicGroup-font-20 mt0 mb2'>{ i18n.getString('hiThisIs') }
+              <a href={ group.website }> { group.name }</a> { i18n.getString('openCollective') }.
+            </p>
+            <h1 ref='PublicGroupHero-mission' className='PublicGroupHero-mission max-width-3 mx-auto mt0 mb3 white -ff-sec'>
+              { `${i18n.getString('missionTo')} `}
+              <ContentEditable
+                tagName='span'
+                className='ContentEditable-mission editing'
+                html={ (groupForm.attributes.mission === '' || groupForm.attributes.mission) ? groupForm.attributes.mission : group.mission }
+                disabled={!canEditGroup}
+                onChange={event => appendEditGroupForm({mission: event.target.value})}
+                placeholder={i18n.getString('defaultMission')}/>
+            </h1>
             <a href='#support' className='mb3 -btn -btn-big -bg-green -ttu -ff-sec -fw-bold'>{ i18n.getString('bePart') }</a>
             { this.renderContributorCount() }
             <p className='h6'>{ i18n.getString('scrollDown') }</p>
