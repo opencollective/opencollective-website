@@ -25,18 +25,26 @@ export class Settings extends Component {
   constructor(props) {
     super(props);
     const urlHash = this.getUrlHash();
+    const { settings, currency }  = group;
+    console.log('group', group);
     this.state = {
-      currentPage: SETTINGS_PAGES.indexOf(urlHash) !== 0 ? urlHash : SETTINGS_PAGES[0]
+      currentPage: SETTINGS_PAGES.indexOf(urlHash) !== 0 ? urlHash : SETTINGS_PAGES[0],
+      lang: settings.lang,
+      currency: currency,
     };
   }
 
   render() {
     const { currentPage }  = this.state;
+    const { group }  = this.props;
+    const { settings, currency }  = group;
     return (
       <div className='Settings'>
         <LoginTopBar />
         <div className='Settings-container'>
-          <div className='SettingsHead'></div>
+          <div className='SettingsHead' style={{backgroundImage: `url(${group.backgroundImage})`}}>
+            <div className='SettingsHeadLogo' style={{backgroundImage: `url(${group.logo})`}}></div>
+          </div>
           <Grid flex>
             <Column>
               <div className='SettingsNavHeader'>Collective Settings</div>
@@ -80,8 +88,10 @@ export class Settings extends Component {
 
 export default connect(mapStateToProps, {})(Settings);
 
-function mapStateToProps() {
+function mapStateToProps({ groups }) {
+  const group = groups[ Object.keys(groups)[0] ]; // groups is a object with a single numberic key
   return {
+    group,
     i18n: i18n('en')
   }
 }
