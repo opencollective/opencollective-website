@@ -14,6 +14,8 @@
  */
 export default function processMarkdown(text) {
 
+  if (!text) return { intro: '' };
+
   const lines = text.split('\n');
 
   const body = {};
