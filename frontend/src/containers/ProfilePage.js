@@ -11,6 +11,7 @@ import CollectiveCard from '../components/CollectiveCard';
 import SponsoredCard from '../components/SponsoredCard';
 import Markdown from '../components/Markdown';
 import { canEditUser } from '../lib/admin';
+import ContentEditable from '../components/ContentEditable';
 
 import uploadImage from '../actions/images/upload';
 import updateUser from '../actions/users/update';
@@ -23,7 +24,7 @@ export class ProfilePage extends Component {
 
   render() {
 
-    const { updateUser, session, profile, i18n } = this.props;
+    const { updateUser, profile, i18n, canEditUser } = this.props;
 
     const belongsTo = filterCollection(profile.groups, { role: 'MEMBER' });
     const backing = filterCollection(profile.groups, { role: 'BACKER' });
@@ -39,7 +40,7 @@ export class ProfilePage extends Component {
       <div className='ProfilePage'>
         <LoginTopBar />
         <UserPhoto
-          editable={canEditUser(session, profile)}
+          editable={canEditUser}
           onChange={(avatar) => updateUser(profile.id, {avatar})}
           user={{ avatar: profile.avatar }}
           addBadge={!profile.isOrganization}
@@ -48,11 +49,32 @@ export class ProfilePage extends Component {
         />
         {!profile.isOrganization && <div className="line1">Hello I'm</div>}
         {profile.isOrganization && <div className="line1">Hello We are</div>}
-        <div className="line2">{profile.name}</div>
-        <div className="line3">{profile.description}</div>
+
+        <ContentEditable
+              className='line2 ContentEditable-description'
+              html={profile.name }
+              disabled={ !canEditUser }
+              onChange={ event => updateUser(profile.id, {name: event.target.value}) }
+              placeholder={i18n.getString('defaultDescription')} />
+
+        <ContentEditable
+              className='line3 ContentEditable-description'
+              html={profile.description }
+              format='markdown'
+              disabled={ !canEditUser }
+              onChange={ event => updateUser(profile.id, {description: event.target.value}) }
+              placeholder={i18n.getString('defaultDescription')} />
+
         {profile.longDescription && (
-          <Markdown className='line3 longDescription' value={profile.longDescription} />
+          <ContentEditable
+            className='line3 longDescription ContentEditable-long-description'
+            html={ profile.longDescription }
+            format='markdown'
+            disabled={ !canEditUser }
+            onChange={ event => updateUser(profile.id, {longDescription: event.target.value}) }
+            placeholder={i18n.getString('defaultLongDescription')} />
         )}
+
         {belongsTo.length ? (
             <section>
               <div className="lineA">{i18n.getString('proudMember')}</div>
@@ -134,10 +156,11 @@ export default connect(mapStateToProps, {
 })(ProfilePage);
 
 function mapStateToProps({
-  session
+  session,
+  profile = {}
 }) {
   return {
     i18n: i18n('en'),
-    session
+    canEditUser: canEditUser(session, profile)
   };
 }

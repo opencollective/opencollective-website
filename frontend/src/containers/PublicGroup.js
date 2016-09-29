@@ -314,9 +314,6 @@ export function saveNewUser() {
   return validateSchema(profileForm.attributes, profileSchema)
     .then(() => {
       const userData = Object.assign({}, profileForm.attributes);
-      const nameTokens = userData.name.split(' ');
-      userData.firstName = nameTokens.shift();
-      userData.lastName = nameTokens.join(' ');
       return updateUser(newUser.id, userData);
     })
     .then(() => this.setState({
