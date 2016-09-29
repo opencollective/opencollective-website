@@ -5,6 +5,7 @@ import fetch from 'isomorphic-fetch';
 import LoginTopBar from '../../containers/LoginTopBar';
 import exportFile from '../../lib/export_file';
 import { resizeImage } from '../../lib/utils';
+import processMarkdown from '../../lib/process_markdown';
 
 import ContentEditable from '../../components/ContentEditable';
 import UserPhoto from '../../components/UserPhoto';
@@ -32,6 +33,12 @@ export default class PublicGroupHero extends Component {
 
   render() {
     const { group, i18n, session, hasHost, canEditGroup, groupForm, appendEditGroupForm} = this.props;
+
+    const titles = Object.keys(processMarkdown(group.longDescription));
+
+    const getAnchor = (title) => {
+      return title.toLowerCase().replace(' ','-').replace(/[^a-z0-9\-]/gi,'')
+    }
 
     // We can override the default style for the cover image of a group in `group.settings`
     // e.g.
@@ -84,19 +91,18 @@ export default class PublicGroupHero extends Component {
         <div ref='PublicGroupHero-backgroundImage' className='PublicGroupHero-menu absolute left-0 right-0 bottom-0'>
           <nav>
             <ul className='list-reset m0 -ttu center'>
-              <li className='inline-block'>
-                <a href='#who-we-are' className='block white -ff-sec -fw-bold'>{ i18n.getString('menuWho') }</a>
-              </li>
+              {titles.map(title =>
+                <li className='inline-block'>
+                  <a href={`#${getAnchor(title)}`} className='block white -ff-sec -fw-bold'>{ title }</a>
+                </li>
+              )}
               {hasHost &&
                 <li className='inline-block'>
-                  <a href='#why-join' className='block white -ff-sec -fw-bold'>{ i18n.getString('menuWhy') }</a>
-                </li> }
-              {hasHost &&
-                <li className='inline-block'>
-                  <a href='#budget' className='block white -ff-sec -fw-bold'>{ i18n.getString('menuBudget') }</a>
-                </li> }
+                  <a href='#support' className='block white -ff-sec -fw-bold'>{ i18n.getString('menuSupportUs') }</a>
+                </li>
+              }
               <li className='inline-block'>
-                <a href='#members-wall' className='block white -ff-sec -fw-bold'>{ i18n.getString('menuMembersWall') }</a>
+                <a href='#budget' className='block white -ff-sec -fw-bold'>{ i18n.getString('menuBudget') }</a>
               </li>
               { canEditGroup &&
                 <li className='inline-block xs-hide'>
