@@ -61,10 +61,35 @@
   .CustomSelect {
     min-width: 130px;
   }
+  .CustomTextArea {
+    width: 100%;
+    margin-top: 20px;
+    height: 370px;
+  }
+  .Checkbox {
+    vertical-align: middle;
+  }
+  .SettingsPageLabel {
+    display: inline-block;
+    color: #1a1a1a;
+    font-family: Lato, sans-serif;
+    font-size: 16px;
+    vertical-align: middle;
+    margin-left: 5px;
+  }
   .SettingsPageH1 {
     font-weight: bold;
     font-size: 24px;
     color: black;
+  }
+  .SettingsPageLead {
+    font-family: Lato;
+    font-size: 20px;
+    color: #303233;
+    i {
+      color: #cccccc;
+      margin-left: 20px;
+    }
   }
   .SettingsPageHr {
     position: relative;
@@ -97,7 +122,11 @@
     color: white;
     text-align: center;
     line-height: 2.55;
-    &:hover {
+    &.SettingsPageButton--disabled {
+      background: #cbcbcb;
+      color: white;
+    }
+    &:not(.SettingsPageButton--disabled):hover {
       cursor: pointer;
       opacity: .9;
     }

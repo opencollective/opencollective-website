@@ -24,8 +24,9 @@ export class Settings extends Component {
 
   constructor(props) {
     super(props);
+    const urlHash = this.getUrlHash();
     this.state = {
-      currentPage: SETTINGS_PAGES[0]
+      currentPage: SETTINGS_PAGES.indexOf(urlHash) !== 0 ? urlHash : SETTINGS_PAGES[0]
     };
   }
 
@@ -44,7 +45,10 @@ export class Settings extends Component {
                   return (
                     <div
                       className={`SettingsNavItem ${currentPage === pageName ? 'SettingsNavItem--active' : ''}`}
-                      onClick={() => this.setState({currentPage: pageName})}
+                      onClick={() => {
+                        this.setState({currentPage: pageName});
+                        this.setUrlHash(pageName);
+                      }}
                       >{pageName}</div>
                   )
                 })}
@@ -63,6 +67,14 @@ export class Settings extends Component {
         <PublicFooter />
       </div>
     )
+  }
+
+  getUrlHash() {
+    return this.props.location.hash ? this.props.location.hash.substr(1) : '';
+  }
+
+  setUrlHash(name) {
+    window.location.hash=name;
   }
 }
 
