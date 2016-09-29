@@ -1,15 +1,15 @@
 /**
  * This breaks down a markdown text into multiple pages
- * @PRE: 
+ * @PRE:
  *   intro text
  *   # title1
  *   Hello
  *   # title2
  *   World
- * @POST: { 
- *  intro: "intro text", 
- *  title1: "Hello", 
- *  title2: "World" 
+ * @POST: {
+ *  intro: "intro text",
+ *  title1: "Hello",
+ *  title2: "World"
  * }
  */
 export default function processMarkdown(text) {
