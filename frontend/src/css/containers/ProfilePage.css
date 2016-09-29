@@ -6,7 +6,7 @@
   background-size: 800px 600px;
 
   .LoginTopBar {
-    margin-bottom: 50px;
+    margin-bottom: 40px;
   }
 
   .OnBoardingHeader {
@@ -14,6 +14,7 @@
   }
 
   .UserPhoto {
+    padding: 10px 0px;
     width: 128px;
     width: 8rem;
     height: 128px;
