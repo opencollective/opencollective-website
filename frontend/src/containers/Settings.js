@@ -66,10 +66,10 @@ export class Settings extends Component {
             </Column>
             <Column auto>
               <div className='SettingsPage'>
-                {currentPage === 'general' && <SettingsGeneral currency={currency} language={settings.lang} onSave={console.log.bind(console)}/>}
+                {currentPage === 'general' && <SettingsGeneral currency={currency} language={settings.lang} onSave={console.log.bind(console)} />}
                 {currentPage === 'social integrations' && <SettingsSocialIntegration />}
-                {currentPage === 'banking' && <SettingsBanking />}
-                {currentPage === 'mailing' && <SettingsMailing />}
+                {currentPage === 'banking' && <SettingsBanking onSave={console.log.bind(console)} />}
+                {currentPage === 'mailing' && <SettingsMailing onSave={console.log.bind(console)} />}
               </div>
             </Column>
           </Grid>

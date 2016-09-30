@@ -44,7 +44,6 @@ export default class SettingsMailing extends Component {
   onSave() {
     const {markdown} = this.state;
     const {onSave} = this.props;
-    console.log('markdown')
     onSave({markdown});
   }
 }

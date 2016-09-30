@@ -74,6 +74,10 @@
   font-family: Montserrat, sans-serif;
   .CustomInput {
     min-width: 300px;
+    height: 44px;
+    .CustomInput-input {
+      height: 44px;
+    }
   }
   .CustomSelect {
     min-width: 130px;
