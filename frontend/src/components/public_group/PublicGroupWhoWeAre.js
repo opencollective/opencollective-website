@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import RelatedGroups from '../../components/RelatedGroups';
-import UserCard from '../../components/UserCard';
 import { displayUrl } from '../../components/DisplayUrl';
 import ContentEditable from '../../components/ContentEditable';
 

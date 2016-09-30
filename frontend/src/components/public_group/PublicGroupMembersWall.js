@@ -13,7 +13,7 @@ export default class PublicGroupMembersWall extends React.Component {
         {filterCollection(group.backers, {tier: tier.name}).map((user, j) => <UserCard ref={`UserCard-${j}`} user={user} key={j} className='m1' i18n={i18n} />)}
       </div>)
     ));
-  };
+  }
 
   _printMembers() {
     const { group, i18n } = this.props;
