@@ -26,9 +26,8 @@ export class Settings extends Component {
     super(props);
     const urlHash = this.getUrlHash();
     const { settings, currency }  = props.group;
-    console.log('group', props.group);
     this.state = {
-      currentPage: SETTINGS_PAGES.indexOf(urlHash) !== 0 ? urlHash : SETTINGS_PAGES[0],
+      currentPage: SETTINGS_PAGES.indexOf(urlHash) !== -1 ? urlHash : SETTINGS_PAGES[0],
       lang: settings.lang,
       currency: currency,
     };
@@ -52,6 +51,7 @@ export class Settings extends Component {
                 {SETTINGS_PAGES.map(pageName => {
                   return (
                     <div
+                      key={pageName}
                       className={`SettingsNavItem ${currentPage === pageName ? 'SettingsNavItem--active' : ''}`}
                       onClick={() => {
                         this.setState({currentPage: pageName});
@@ -64,7 +64,7 @@ export class Settings extends Component {
             </Column>
             <Column auto>
               <div className='SettingsPage'>
-                {currentPage === 'general' && <SettingsGeneral />}
+                {currentPage === 'general' && <SettingsGeneral currency={currency} language={settings.lang} onSave={console.log.bind(console)}/>}
                 {currentPage === 'social integrations' && <SettingsSocialIntegration />}
                 {currentPage === 'banking' && <SettingsBanking />}
                 {currentPage === 'mailing' && <SettingsMailing />}
@@ -78,7 +78,7 @@ export class Settings extends Component {
   }
 
   getUrlHash() {
-    return this.props.location.hash ? this.props.location.hash.substr(1) : '';
+    return this.props.location.hash ? this.props.location.hash.substr(1).trim() : '';
   }
 
   setUrlHash(name) {
