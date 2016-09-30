@@ -17,7 +17,7 @@ export default class PublicGroupWhoWeAre extends Component {
     } = groupForm.attributes;
 
     return (
-      <section id='who-we-are' className='PublicGroupWhoWeAre PublicGroupIntro'>
+      <section id='intro' className='PublicGroupWhoWeAre PublicGroupIntro'>
         <div className='PublicGroupIntro-container PublicGroupWhoWeAre-container'>
           <h2 className='PublicGroupWhoWeAre-title'>{ `${i18n.getString('weAre')} ` }
             <ContentEditable

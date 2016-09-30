@@ -96,6 +96,11 @@ export default class PublicGroupHero extends Component {
                   <a href={`#${getAnchor(title)}`} className='block white -ff-sec -fw-bold'>{ title }</a>
                 </li>
               )}
+              {group.whyJoin &&
+                <li className='inline-block'>
+                  <a href={`#why-join`} className='block white -ff-sec -fw-bold'>{ i18n.getString('menuWhy') }</a>
+                </li>
+              }
               {hasHost &&
                 <li className='inline-block'>
                   <a href='#support' className='block white -ff-sec -fw-bold'>{ i18n.getString('menuSupportUs') }</a>

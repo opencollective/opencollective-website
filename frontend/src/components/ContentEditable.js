@@ -11,7 +11,7 @@ export default class ContentEditable extends React.Component {
   }
 
   render() {
-    const { format, tagName, html, ...props } = this.props;
+    const { format, tagName, html = '', ...props } = this.props;
 
     if (format === 'markdown' && this.props.disabled)
       return (<Markdown {...props} value={html} />);
@@ -24,7 +24,7 @@ export default class ContentEditable extends React.Component {
         onInput: this.emitChange,
         onBlur: this.props.onBlur || this.emitChange,
         contentEditable: !this.props.disabled,
-        dangerouslySetInnerHTML: {__html: html}
+        dangerouslySetInnerHTML: {__html: html.replace(/\n/g, '<br />\n')}
       },
       this.props.children);
   }
@@ -44,10 +44,14 @@ export default class ContentEditable extends React.Component {
   }
 
   componentDidUpdate() {
-    if ( this.htmlEl && this.props.html !== this.htmlEl.innerHTML ) {
+    const { 
+      html = ''
+    } = this.props;
+
+    if ( this.htmlEl && html !== this.htmlEl.innerHTML ) {
       // Perhaps React (whose VDOM gets outdated because we often prevent
       // rerendering) did not update the DOM. So we update it manually now.
-      this.htmlEl.innerHTML = this.props.html;
+      this.htmlEl.innerHTML = html.replace(/\n/g,'<br />\n');
     }
   }
 

@@ -45,6 +45,9 @@
     background-color: transparent;
     border: none;
     box-shadow: none;
+    & > div {
+      border-radius: 0;
+    }
   }
 
   .ImagePicker-container {

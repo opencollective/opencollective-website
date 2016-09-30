@@ -67,7 +67,7 @@ app.use((err, req, res, next) => {
     message: process.env.NODE_ENV === 'production' ? 'We couldn\'t find that page :(' : `Error ${err.code}: ${err.message}`,
     stack: process.env.NODE_ENV === 'production' ? '' : err.stack,
     options: {
-      showGA: config.GoogleAnalytics.active
+      showGA: config.GoogleAnalytics && config.GoogleAnalytics.active
     }
   });
 });
