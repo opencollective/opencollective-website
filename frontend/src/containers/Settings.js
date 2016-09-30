@@ -25,8 +25,8 @@ export class Settings extends Component {
   constructor(props) {
     super(props);
     const urlHash = this.getUrlHash();
-    const { settings, currency }  = group;
-    console.log('group', group);
+    const { settings, currency }  = props.group;
+    console.log('group', props.group);
     this.state = {
       currentPage: SETTINGS_PAGES.indexOf(urlHash) !== 0 ? urlHash : SETTINGS_PAGES[0],
       lang: settings.lang,

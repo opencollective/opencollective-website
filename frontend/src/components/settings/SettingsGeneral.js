@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 
 import CustomSelect from '../CustomSelect';
 
+const onChange = (value) => {
+  console.log('onChange', value);
+};
+
 export default class SettingsGeneral extends Component {
   render() {
     return (
@@ -10,15 +14,15 @@ export default class SettingsGeneral extends Component {
         <div className='SettingsPageHr'>
           <div>Language</div>
         </div>
-        <CustomSelect>
-          <option>English</option>
-          <option>French</option>
-          <option>Spanish</option>
+        <CustomSelect onChange={onChange}>
+          <option value='en'>English</option>
+          <option value='fr'>French</option>
+          <option value='es'>Spanish</option>
         </CustomSelect>
         <div className='SettingsPageHr'>
           <div>Currency</div>
         </div>
-        <CustomSelect>
+        <CustomSelect onChange={onChange}>
           <option>USD</option>
           <option>EUR</option>
           <option>MXN</option>
