@@ -28,8 +28,6 @@ export default function(groupid) {
     case 261:
     case 262:
     case 263:
-    case 262:
-    case 262:
     case 266:
     case 267:
     case 268:
@@ -54,7 +52,6 @@ export default function(groupid) {
     case 287:
     case 288:
     case 289:
-    case 290:
     case 290:
     case 292:
     case 293:
