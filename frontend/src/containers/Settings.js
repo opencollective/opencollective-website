@@ -24,10 +24,12 @@ export class Settings extends Component {
 
   constructor(props) {
     super(props);
-    const urlHash = this.getUrlHash();
     const { settings, currency }  = props.group;
+    const urlHash = this.getUrlHash();
+    const validUrlHash = SETTINGS_PAGES.indexOf(urlHash) !== -1;
+    if (!validUrlHash) this.setUrlHash(SETTINGS_PAGES[0]);
     this.state = {
-      currentPage: SETTINGS_PAGES.indexOf(urlHash) !== -1 ? urlHash : SETTINGS_PAGES[0],
+      currentPage: validUrlHash ? urlHash : SETTINGS_PAGES[0],
       lang: settings.lang,
       currency: currency,
     };
@@ -78,11 +80,11 @@ export class Settings extends Component {
   }
 
   getUrlHash() {
-    return this.props.location.hash ? this.props.location.hash.substr(1).trim() : '';
+    return this.props.location.hash ? this.props.location.hash.substr(1).trim().toLowerCase().replace('-', ' ') : '';
   }
 
   setUrlHash(name) {
-    window.location.hash=name;
+    window.location.hash = name.replace(' ', '-');
   }
 }
 
