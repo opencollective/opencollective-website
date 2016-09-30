@@ -8,7 +8,6 @@ import ContentEditable from '../../components/ContentEditable';
 export default class PublicGroupWhoWeAre extends Component {
   render() {
     const { group, i18n, isSupercollective, canEditGroup, appendEditGroupForm, groupForm } = this.props;
-    const title = i18n.getString('coreContributors');
 
     const {
       name,
@@ -56,19 +55,6 @@ export default class PublicGroupWhoWeAre extends Component {
                 placeholder={i18n.getString('defaultLongDescription')} />
             )}
           </div>
-
-          {group.members.length ? (
-            <div className='PublicGroup-members pt4'>
-              <h3 className='PublicGroup-subtitle mt0 mb2 -ff-sec -fw-light'>{ title }</h3>
-              <div ref='PublicGroupWhoWeAre-members' className='flex flex-wrap justify-center'>
-                {group.members.map((user, index) => {
-                  if (group.slug === 'opensource') user.tier = 'collective';
-                  return <UserCard ref={`UserCard-${ index }`}  user={ user } key={ index } className='m1' i18n={ i18n } />
-                  })
-                }
-              </div>
-            </div>
-          ) : null}
 
           {isSupercollective ? (
             <div>
