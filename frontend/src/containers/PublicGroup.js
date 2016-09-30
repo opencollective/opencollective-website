@@ -90,6 +90,7 @@ const formatGithubContributors = (githubContributors) => {
       core: false,
       name: username,
       avatar: `https://avatars.githubusercontent.com/${ username }?s=64`,
+      href: `https://github.com/${username}`,
       stats: {
         c: commits,
         a: null,
@@ -121,11 +122,9 @@ export class PublicGroup extends Component {
       group,
       hasHost,
       canEditGroup,
-      editingInProgress
+      editingInProgress,
+      i18n
     } = this.props;
-
-    // `false` if there are no `group.data.githubContributors`
-    const contributors = (group.data && group.data.githubContributors) && formatGithubContributors(group.data.githubContributors);
 
     if (group.settings.pending) {
       return <PublicGroupPending group={ group } donateToGroup={ this.donateToGroupRef } {...this.props} />
@@ -140,14 +139,14 @@ export class PublicGroup extends Component {
 
         {group.slug === 'opensource' && <PublicGroupOpenSourceCTA />}
 
-        {contributors && <PublicGroupContributors contributors={ contributors } />}
+        <PublicGroupMembersWall group={group} {...this.props} />
+        {group.contributors && <PublicGroupContributors contributors={ group.contributors } i18n={i18n} />}
 
         {group.slug !== 'opensource' && hasHost && <PublicGroupWhyJoin group={ group } expenses={ expenses } {...this.props} />}
 
         <div className='bg-light-gray px2'>
           {hasHost && <PublicGroupJoinUs {...this.props} donateToGroup={this.donateToGroupRef} {...this.props} />}
           {!hasHost && canEditGroup && <PublicGroupApplyToManageFunds {...this.props} />}
-          <PublicGroupMembersWall group={group} {...this.props} />
         </div>
         {hasHost &&
           <PublicGroupExpensesAndActivity
@@ -401,6 +400,10 @@ function mapStateToProps({
   group.hosts = usersByRole[roles.HOST] || [];
   group.members = usersByRole[roles.MEMBER] || [];
   group.backers = usersByRole[roles.BACKER] || [];
+
+  // `false` if there are no `group.data.githubContributors`
+  group.contributors = (group.data && group.data.githubContributors) && formatGithubContributors(group.data.githubContributors);
+
   group.host = group.hosts[0] || {};
   group.backersCount = group.backers.length;
   group.transactions = filterCollection(transactions, { GroupId: group.id });

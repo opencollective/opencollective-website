@@ -45,8 +45,12 @@ export default class UserPhoto extends React.Component {
       presets
     } = this.props;
     const avatar = (!this.state.avatar || this.state.avatar.indexOf('/static/') === 0) ? this.state.avatar : cloudinaryUrl(this.state.avatar);
+    const width = this.props.width;
+    const height = this.props.height || width;
     const styles = {
-      backgroundImage: `url(${avatar})`
+      backgroundImage: `url(${avatar})`,
+      width,
+      height
     };
 
     if (editable) {
@@ -83,6 +87,8 @@ UserPhoto.propTypes = {
   uploadImage: React.PropTypes.func, // if editable true, we need to pass a function to upload the image
   onChange: React.PropTypes.func,
   i18n: React.PropTypes.object,
+  width: React.PropTypes.int,
+  height: React.PropTypes.int,
   addBadge: React.PropTypes.bool
 };
 

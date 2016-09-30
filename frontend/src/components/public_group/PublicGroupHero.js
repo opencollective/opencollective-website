@@ -124,10 +124,12 @@ export default class PublicGroupHero extends Component {
       contributorText = `${contributorText}s`;
     }
 
-    return group.backersCount > 0 && (
+    const totContributors = group.contributors.length + group.backersCount;
+
+    return totContributors > 0 && (
        <div className='PublicGroupHero-contributor-statistics'>
             <div className='PublicGroupHero-contributor-count'>
-              {group.backersCount.toString().split('').map((character, index) => {
+              {totContributors.toString().split('').map((character, index) => {
                 return <span key={ index } className='PublicGroupHero-contributor-count-number'>{ character }</span>
               })} <div className='PublicGroupHero-contributor-count-text'>{ contributorText }</div>
             </div>
