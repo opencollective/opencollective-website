@@ -35,7 +35,7 @@ export default class PublicGroupMembersWall extends React.Component {
         <div className='PublicGroupBackers container center relative'>
           <div className='container'>
             <h2 className='PublicGroup-title m0 -ff-sec -fw-bold'>{i18n.getString('membersWallTitle')}</h2>
-            <p className='PublicGroup-font-17 max-width-3 mx-auto mb3'>{i18n.getString('MembersWallText')}</p>
+            <p className='PublicGroup-font-17 max-width-3 mx-auto mb3'>{i18n.getString('membersWallText')}</p>
             {this._printMembers()}
             {this._printTiersList()}
           </div>

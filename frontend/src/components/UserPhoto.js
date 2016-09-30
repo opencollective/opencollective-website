@@ -87,8 +87,8 @@ UserPhoto.propTypes = {
   uploadImage: React.PropTypes.func, // if editable true, we need to pass a function to upload the image
   onChange: React.PropTypes.func,
   i18n: React.PropTypes.object,
-  width: React.PropTypes.int,
-  height: React.PropTypes.int,
+  width: React.PropTypes.number,
+  height: React.PropTypes.number,
   addBadge: React.PropTypes.bool
 };
 

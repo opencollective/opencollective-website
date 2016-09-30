@@ -401,8 +401,8 @@ function mapStateToProps({
   group.members = usersByRole[roles.MEMBER] || [];
   group.backers = usersByRole[roles.BACKER] || [];
 
-  // `false` if there are no `group.data.githubContributors`
-  group.contributors = (group.data && group.data.githubContributors) && formatGithubContributors(group.data.githubContributors);
+  group.contributors = (group.data && group.data.githubContributors) ? formatGithubContributors(group.data.githubContributors) : [];
+  group.contributorsCount = group.contributors.length;
 
   group.host = group.hosts[0] || {};
   group.backersCount = group.backers.length;

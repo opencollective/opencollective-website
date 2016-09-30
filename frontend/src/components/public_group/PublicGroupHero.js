@@ -124,7 +124,7 @@ export default class PublicGroupHero extends Component {
       contributorText = `${contributorText}s`;
     }
 
-    const totContributors = group.contributors.length + group.backersCount;
+    const totContributors = group.contributorsCount + group.backersCount;
 
     return totContributors > 0 && (
        <div className='PublicGroupHero-contributor-statistics'>
