@@ -13,13 +13,13 @@ export class LoginTopBar extends Component {
     this.state = {
       showProfileMenu: false
     };
+    this.showCreateBtn = false;
   }
 
   renderLinks() {
-    const showCreateBtn = false;
     return (
       <ul className='LoginTopBar-Links'>
-        {showCreateBtn && <li><a className='LoginTopBarButton' href='/create'>create a collective</a></li>}
+        {this.showCreateBtn && <li><a className='LoginTopBarButton' href='/create'>create a collective</a></li>}
         <li><a className='LoginTopBarLink' href='/discover'>Discover</a></li>
       </ul>
     )
@@ -31,12 +31,13 @@ export class LoginTopBar extends Component {
     return (
       <div className='LoginTopBarProfileMenu' onClick={(e) => e.nativeEvent.stopImmediatePropagation()}>
         <div>
-          {this.renderLinks()}
           <div className='LoginTopBarProfileMenuHeading'>
             <span>collectives</span>
             <div className='-dash'></div>
           </div>
           <ul>
+          {this.showCreateBtn && <li><a href='/create'>create a collective</a></li>}
+            <li><a href='/discover'>Discover</a></li>
             <li><a href='#' onClick={this.onClickSubscriptions.bind(this)}>Subscriptions</a></li>
           </ul>
         </div>
