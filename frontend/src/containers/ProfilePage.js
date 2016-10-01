@@ -154,7 +154,7 @@ export default connect(mapStateToProps, {
   updateUser
 })(ProfilePage);
 
-function mapStateToProps({}) {
+function mapStateToProps() {
   return {
     i18n: i18n('en')
   };
