@@ -11,11 +11,13 @@ export default class ContentEditable extends React.Component {
   }
 
   render() {
-    const { disabled, className, format, tagName, html = '', ...props } = this.props;
+    const { disabled, format, className, tagName, ...props } = this.props;
 
     if (format === 'markdown' && disabled) {
       return (<Markdown {...this.props} value={html} />);
-    }    
+    }
+
+    const html = this.props.html || '';
 
     return React.createElement(
       tagName || 'div',

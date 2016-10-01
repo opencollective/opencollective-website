@@ -10,7 +10,6 @@ import PublicFooter from '../components/PublicFooter';
 import CollectiveCard from '../components/CollectiveCard';
 import SponsoredCard from '../components/SponsoredCard';
 import Markdown from '../components/Markdown';
-import { canEditUser } from '../lib/admin';
 import ContentEditable from '../components/ContentEditable';
 
 import uploadImage from '../actions/images/upload';
@@ -24,7 +23,7 @@ export class ProfilePage extends Component {
 
   render() {
 
-    const { updateUser, profile, i18n, canEditUser } = this.props;
+    const { updateUser, profile, i18n } = this.props;
 
     const belongsTo = filterCollection(profile.groups, { role: 'MEMBER' });
     const backing = filterCollection(profile.groups, { role: 'BACKER' });
@@ -40,7 +39,7 @@ export class ProfilePage extends Component {
       <div className='ProfilePage'>
         <LoginTopBar />
         <UserPhoto
-          editable={canEditUser}
+          editable={profile.canEditUser}
           onChange={(avatar) => updateUser(profile.id, {avatar})}
           user={{ avatar: profile.avatar }}
           addBadge={!profile.isOrganization}
@@ -53,7 +52,7 @@ export class ProfilePage extends Component {
         <ContentEditable
               className='line2 ContentEditable-description'
               html={profile.name }
-              disabled={ !canEditUser }
+              disabled={ !profile.canEditUser }
               onChange={ event => updateUser(profile.id, {name: event.target.value}) }
               placeholder={i18n.getString('defaultDescription')} />
 
@@ -61,7 +60,7 @@ export class ProfilePage extends Component {
               className='line3 ContentEditable-description'
               html={profile.description }
               format='markdown'
-              disabled={ !canEditUser }
+              disabled={ !profile.canEditUser }
               onChange={ event => updateUser(profile.id, {description: event.target.value}) }
               placeholder={i18n.getString('defaultDescription')}
               style={{textAlign: 'center'}} />
@@ -71,7 +70,7 @@ export class ProfilePage extends Component {
             className='line3 longDescription ContentEditable-long-description'
             html={ profile.longDescription }
             format='markdown'
-            disabled={ !canEditUser }
+            disabled={ !profile.canEditUser }
             onChange={ event => updateUser(profile.id, {longDescription: event.target.value}) }
             placeholder={i18n.getString('defaultLongDescription')} />
         )}
@@ -156,12 +155,8 @@ export default connect(mapStateToProps, {
   updateUser
 })(ProfilePage);
 
-function mapStateToProps({
-  session,
-  profile = {}
-}) {
+function mapStateToProps() {
   return {
-    i18n: i18n('en'),
-    canEditUser: canEditUser(session, profile)
+    i18n: i18n('en')
   };
 }
