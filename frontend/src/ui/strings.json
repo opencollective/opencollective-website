@@ -23,6 +23,10 @@
     "creditCard": "Credit Card",
     "customAmount": "Tweak the amount",
     "date": "Date",
+    "defaultDescription": "Enter a short description...",
+    "defaultLongDescription": "Detailed description of your collective",
+    "defaultMission": "change the world...",
+    "defaultName": "...",
     "defaultTierButton": "Become a backer",
     "defaultTierDescription": "Your donation will help us continue our activities. Thank you for your support.",
     "description": "Description",
@@ -61,7 +65,7 @@
     "membersWallTitle": "This is possible thanks to you.",
     "menuBudget": "Budget",
     "menuMembersWall": "Members",
-    "menuWho": "Who we are",
+    "menuSupportUs": "Support us",
     "menuWhy": "Why join?",
     "missionTo": "We are on a mission to",
     "month": "month",
@@ -168,8 +172,8 @@
     "membersWallText": "Vos contributions financières nous permettent de continuer à poursuivre notre mission. Merci!",
     "membersWallTitle": "Ceci est possible grâce à vous.",
     "menuBudget": "Budget",
-    "menuMembersWall": "Mur des supporters",
-    "menuWho": "Qui sommes-nous?",
+    "menuMembersWall": "Membres",
+    "menuSupportUs": "Supportez-nous",
     "menuWhy": "Pourquoi nous rejoindre?",
     "missionTo": "Notre mission est de",
     "month": "mois",
@@ -276,7 +280,7 @@
     "membersWallTitle": "Esto es posible gracias a ti",
     "menuBudget": "Gastos y actividades",
     "menuMembersWall": "Muro de aportantes",
-    "menuWho": "¿Quiénes somos?",
+    "menuSupportUs": "",
     "menuWhy": "¿Por qué sumarse?",
     "missionTo": "Nuestra misión es",
     "month": "mes",
@@ -323,7 +327,7 @@
     "yearly": "por año",
     "youDeciceDistributeYour": "Decide como distribuir"
   },
-  
+
    "it": {
     "activitiesPlaceholderText": "Condividi questa pagina per trovare sostenitori e finanziatori che vogliano supportare il tuo collettivo!",
     "activitiesPlaceholderTitle": "Le donazioni verranno visualizzate qui",
@@ -383,7 +387,7 @@
     "membersWallTitle": "Questo è possibile grazie a te.",
     "menuBudget": "Spese e Attività",
     "menuMembersWall": "Muro dei Membri",
-    "menuWho": "Chi siamo",
+    "menuSupportUs": "",
     "menuWhy": "Perché unirti a noi?",
     "missionTo": "Siamo in missione per",
     "month": "mese",
@@ -470,5 +474,8 @@
     "helpUsContinueOurActivities": "With your support, you will help more people get to the polling stations on November 8th to cast their vote.",
     "becomeMemberTitle": "Why Pay for Rides?",
     "bePart": "Pay for rides!"
+  },
+  "wpsfo":{
+    "helpUsContinueOurActivities": "With your support, you’ll help build the local WordPress community! All funds are processed by OpenCollective and are managed through Exygy’s fiscal sponsorship"
   }
 }

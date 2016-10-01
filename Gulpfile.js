@@ -7,7 +7,6 @@ const svgSprite = require('gulp-svg-sprite');
 const SRC_DIR = 'frontend/src';
 const DIST_DIR = 'frontend/dist';
 
-process.env.NODE_CONFIG_DIR = "./server/config";
 const config = require('config');
 const request = require('request');
 

@@ -23,6 +23,45 @@ export default function(groupid) {
     case 59:
     case 195:
     case 241:
+    case 259:
+    case 260:
+    case 261:
+    case 262:
+    case 263:
+    case 266:
+    case 267:
+    case 268:
+    case 269:
+    case 270:
+    case 271:
+    case 272:
+    case 273:
+    case 274:
+    case 275:
+    case 276:
+    case 277:
+    case 278:
+    case 279:
+    case 280:
+    case 281:
+    case 282:
+    case 283:
+    case 284:
+    case 285:
+    case 286:
+    case 287:
+    case 288:
+    case 289:
+    case 290:
+    case 292:
+    case 293:
+    case 294:
+    case 295:
+    case 297:
+    case 298:
+    case 299:
+    case 300:
+    case 301:
       categories = [
         'Conference',
         'Donation',

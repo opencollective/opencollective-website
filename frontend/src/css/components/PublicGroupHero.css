@@ -32,14 +32,73 @@
   .PublicGroupHero-content {
     padding: 8rem 0 6rem;
   }
-  .PublicGroupHero-logo {
+
+  .UserPhoto {
     width: 240px;
+    width: 15rem;
     height: 160px;
+    height: 10rem;
     margin: auto;
     margin-bottom: 32px;
     background-repeat: no-repeat;
     background-position: center;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    & > div {
+      border-radius: 0;
+    }
   }
+
+  .ImagePicker-container {
+    width: 240px;
+    height: 160px;
+    margin: 0 auto 30px;
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+    .ImagePicker-loader {
+      border-radius: 100%;
+      width: 100px;
+      height: 100px;
+      top: 5px;
+      left: 25px;
+      > div {
+        margin: 45px auto;
+      }
+    }
+    .ImagePicker-loader {
+      top: 30px;
+      left: 72px;
+    }
+    .ImagePicker-preview, .ImagePicker-preview img {
+      width: 140px;
+      height: 140px;
+    }
+    .ImagePicker-editControl {
+      display: none;
+      &.ImagePicker-prev {
+        left: 5px;
+      }
+      &.ImagePicker-next {
+        right: 5px;
+      }
+    }
+    .ImagePicker-dot-list {
+      bottom: -10px;
+    }
+
+    .ImagePicker-label {
+      display: none;
+    }
+
+    &:hover {
+      .ImagePicker-editControl {
+        display: block;
+      }
+    }
+  }
+
   .PublicGroupHero-mission {
     line-height: 2.5rem;
     letter-spacing: -.5px;
