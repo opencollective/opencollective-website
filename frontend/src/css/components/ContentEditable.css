@@ -8,3 +8,21 @@ span.editing {
   min-width: 20px;
   display: inline-block;
 }
+
+.ContentEditable {
+  border: 1px dotted transparent;
+  &.ContentEditable--enabled:hover {
+    background: white;
+    color: black;
+    border: 1px dotted black;
+  }
+  &.ContentEditable--enabled:focus {
+    background: white;
+    color: black;
+    border: 1px dotted black; 
+  }
+}
+
+.ContentEditable-description p {
+  text-align: center;
+}

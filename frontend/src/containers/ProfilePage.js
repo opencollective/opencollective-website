@@ -62,7 +62,8 @@ export class ProfilePage extends Component {
               format='markdown'
               disabled={ !profile.canEditUser }
               onChange={ event => updateUser(profile.id, {description: event.target.value}) }
-              placeholder={i18n.getString('defaultDescription')} />
+              placeholder={i18n.getString('defaultDescription')}
+              style={{textAlign: 'center'}} />
 
         {profile.longDescription && (
           <ContentEditable

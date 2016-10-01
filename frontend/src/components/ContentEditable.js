@@ -11,7 +11,7 @@ export default class ContentEditable extends React.Component {
   }
 
   render() {
-    const { disabled, format, tagName, ...props } = this.props;
+    const { disabled, format, className, tagName, ...props } = this.props;
 
     if (format === 'markdown' && disabled) {
       return (<Markdown {...this.props} value={html} />);
@@ -23,10 +23,11 @@ export default class ContentEditable extends React.Component {
       tagName || 'div',
       {
         ...props,
+        className: `ContentEditable ${!disabled ? 'ContentEditable--enabled' : ''} ${className}`,
         ref: (e) => this.htmlEl = e,
         onInput: this.emitChange,
         onBlur: this.props.onBlur || this.emitChange,
-        contentEditable: !this.props.disabled,
+        contentEditable: !disabled,
         dangerouslySetInnerHTML: {__html: html.replace(/\n/g, '<br />\n')}
       },
       this.props.children);
