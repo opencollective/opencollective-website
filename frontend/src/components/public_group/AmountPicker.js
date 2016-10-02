@@ -23,6 +23,14 @@ export default class AmountPicker extends React.Component {
       {id: group.id, name: group.name, logo: group.logo},
     ];
 
+    // xdamman: 
+    // When the PublicGroup container is displayed after a pushState (e.g. after login)
+    // it tries to render this component before the group.currency is loaded.
+    // Once that variable is set, the child component <DonationDistributor /> doesn't update.
+    // As a result, the backer tier shows a disabled button
+    // This fixes this bug. But I'm not happy with it.
+    if (!currency) return (<div />);
+
     return (
       <div>
         {tier.presets && (

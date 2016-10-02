@@ -33,7 +33,6 @@ export default class PublicGroupHero extends Component {
 
   render() {
     const { group, i18n, session, hasHost, canEditGroup, groupForm, appendEditGroupForm} = this.props;
-
     const titles = Object.keys(processMarkdown(group.longDescription));
 
     const getAnchor = (title) => {
@@ -55,16 +54,18 @@ export default class PublicGroupHero extends Component {
         <div className='container relative center'>
           <LoginTopBar loginRedirectTo={ `/${ group.slug }` } />
           <div className='PublicGroupHero-content'>
-            <UserPhoto
-              editable={canEditGroup}
-              onChange={logo => {
-                if (logo !== group.logo)
-                  return appendEditGroupForm({logo})
-              }}
-              user={{ avatar: groupForm.attributes.logo || group.logo }}
-              className='PublicGroupHero-logo mb3 bg-contain'
-              presets={[]}
-              {...this.props} />
+            {group.logo &&
+              <UserPhoto
+                editable={canEditGroup}
+                onChange={logo => {
+                  if (logo !== group.logo)
+                    return appendEditGroupForm({logo})
+                }}
+                user={{ avatar: groupForm.attributes.logo || group.logo }}
+                className='PublicGroupHero-logo mb3 bg-contain'
+                presets={[]}
+                {...this.props} />
+            }
 
             <p ref='PublicGroupHero-name' className='PublicGroup-font-20 mt0 mb2'>{ i18n.getString('hiThisIs') }
               <a href={ group.website }> { group.name }</a> { i18n.getString('openCollective') }.

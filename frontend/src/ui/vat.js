@@ -1,16 +1,12 @@
 /**
  * Static data the for the transaction form
  */
-
-export default function(groupid) {
-  if (typeof groupid == "string")
-    groupid = parseInt(groupid, 10);
-
+export default function(slug) {
   let vat = false;
-  switch (groupid) {
-    case 6: // laprimaire
-    case 73: // nuitdebout
-    case 24: // lesbarbares
+  switch (slug) {
+    case 'laprimaire':
+    case 'nuitbout':
+    case 'lesbarbares':
       vat = true;
       break;
 

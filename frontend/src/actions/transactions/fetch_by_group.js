@@ -3,33 +3,32 @@ import Schemas from '../../lib/schemas';
 import * as constants from '../../constants/transactions';
 
 /**
- * Fetch multiple transactions in a group
+ * Fetch transactions from a group
  */
-
-export default (groupid, options={}) => {
+export default (slug, options={}) => {
   return dispatch => {
-    dispatch(request(groupid));
+    dispatch(request(slug));
     const endpoint = options.donation ? 'transactions' : 'expenses';
-    return get(`/groups/${groupid}/${endpoint}`, {
+    return get(`/groups/${slug}/${endpoint}`, {
       schema: Schemas.TRANSACTION_ARRAY,
       params: options || {}
     })
-    .then(json => dispatch(success(groupid, json)))
+    .then(json => dispatch(success(slug, json)))
     .catch(error => dispatch(failure(error)));
   };
 };
 
-function request(groupid) {
+function request(slug) {
   return {
     type: constants.TRANSACTIONS_REQUEST,
-    groupid
+    slug
   };
 }
 
-export function success(groupid, json) {
+export function success(slug, json) {
   return {
     type: constants.TRANSACTIONS_SUCCESS,
-    groupid,
+    slug,
     transactions: json.transactions,
   };
 }

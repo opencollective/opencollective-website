@@ -103,9 +103,9 @@ export class Transactions extends Component {
       [type]: true
     };
 
-    fetchTransactions(group.id, options);
+    fetchTransactions(group.slug, options);
 
-    fetchUsers(group.id);
+    fetchUsers(group.slug);
   }
 
   componentDidMount() {
