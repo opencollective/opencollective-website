@@ -27,8 +27,8 @@ describe('groups/fetch_by_slug', () => {
     store.dispatch(fetchBySlug(group.slug))
     .then(() => {
       const [request, success] = store.getActions();
-      expect(request).toEqual({ type: constants.GROUP_REQUEST, id: 1 });
-      expect(success).toEqual({ type: constants.GROUP_SUCCESS, id: 1, groups: { 'testgroup' : group} });
+      expect(request).toEqual({ type: constants.GROUP_REQUEST, slug: group.slug });
+      expect(success).toEqual({ type: constants.GROUP_SUCCESS, slug: group.slug, groups: { [group.slug] : group} });
       done();
     })
     .catch(done)
@@ -44,10 +44,10 @@ describe('groups/fetch_by_slug', () => {
     store.dispatch(fetchBySlug(group.slug))
     .then(() => {
       const [request, failure] = store.getActions();
-      expect(request).toEqual({ type: constants.GROUP_REQUEST, id: 1 });
+      expect(request).toEqual({ type: constants.GROUP_REQUEST, slug: group.slug });
       expect(failure.type).toEqual(constants.GROUP_FAILURE);
-      expect(failure.id).toEqual(1);
-      expect(failure.error.message).toContain('request to http://localhost:3000/api/groups/1 failed');
+      expect(failure.slug).toEqual(group.slug);
+      expect(failure.error.message).toContain(`request to http://localhost:3000/api/groups/${group.slug} failed`);
       done();
     })
     .catch(done)
