@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 
 import sortBy from 'lodash/sortBy';
 import take from 'lodash/take';
-import values from 'lodash/values';
 import merge from 'lodash/merge';
 
 import filterCollection from '../lib/filter_collection';

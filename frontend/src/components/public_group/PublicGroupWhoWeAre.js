@@ -49,7 +49,7 @@ export default class PublicGroupWhoWeAre extends Component {
             {group.longDescription && (
               <ContentEditable
                 className='ContentEditable-long-description'
-                html={group.longDescription}
+                html={ (longDescription === '' || longDescription) ? longDescription : group.longDescription }
                 format='markdown'
                 disabled={ !canEditGroup }
                 onChange={ event => appendEditGroupForm({longDescription: event.target.value}) }
