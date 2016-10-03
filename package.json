@@ -43,8 +43,6 @@
     "deploy:production": "bash -x scripts/deploy.sh production",
     "rexec:api": "bash scripts/remote_exec_api.sh",
     "install:debs": "npm run rexec:api install_apt_get_debs.sh",
-
-    // temporarily added here until tests are running smoothly
     "testserver": "mocha-webpack --webpack-config server/webpack.config.test.js \"test/server/*.js\"",
     "testfrontend": "mocha-webpack --webpack-config frontend/webpack.config.test.js \"../test/unit/**/*.js\""
   },
