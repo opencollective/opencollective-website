@@ -9,7 +9,6 @@ const { API_ROOT } = env;
 /**
  * Get request
  */
-
 export function get(endpoint, options={}) {
   const { schema, params } = options;
 
@@ -32,7 +31,6 @@ export function getThirdParty(endpoint, options={}) {
 /**
  * POST json request
  */
-
 export function postJSON(endpoint, body, options={}) {
   let headers = {
       Accept: 'application/json',
@@ -56,7 +54,6 @@ export function postJSON(endpoint, body, options={}) {
 /**
  * PUT json request
  */
-
 export function putJSON(endpoint, body) {
   return fetch(url(endpoint), {
     method: 'put',
@@ -72,7 +69,6 @@ export function putJSON(endpoint, body) {
 /**
  * POST request
  */
-
 export function post(endpoint, body, options={}) {
   return fetch(url(endpoint), {
     headers: addAuthTokenToHeader(options.headers),
@@ -85,7 +81,6 @@ export function post(endpoint, body, options={}) {
 /**
  * DELETE request
  */
-
 export function del(endpoint) {
   return fetch(url(endpoint), {
     headers: addAuthTokenToHeader(),
@@ -97,7 +92,6 @@ export function del(endpoint) {
 /**
  * Build url to the api
  */
-
 function url(endpoint, params) {
   const query = queryString.stringify(params);
 
@@ -117,7 +111,6 @@ function urlThirdParty(endpoint, params) {
  * The Promise returned from fetch() won't reject on HTTP error status. We
  * need to throw an error ourselves.
  */
-
 export function checkStatus(response) {
   const { status } = response;
 

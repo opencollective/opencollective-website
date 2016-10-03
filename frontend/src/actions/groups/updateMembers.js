@@ -4,14 +4,13 @@ import * as constants from '../../constants/groups';
 /**
  * Update group members
  */
-
-export default (groupid, group) => {
-  const url = `/groups/${groupid}/members`;
+export default (slug, group) => {
+  const url = `/groups/${slug}/members`;
 
   return dispatch => {
-    dispatch(request(groupid, group));
+    dispatch(request(slug, group));
     return putJSON(url, {group})
-      .then(json => dispatch(success(groupid, json)))
+      .then(json => dispatch(success(slug, json)))
       .catch(error => {
         dispatch(failure(error));
         throw new Error(error.message);
@@ -19,18 +18,18 @@ export default (groupid, group) => {
   };
 };
 
-function request(groupid, group) {
+function request(slug, group) {
   return {
     type: constants.UPDATE_GROUP_MEMBERS_REQUEST,
-    groupid,
+    slug,
     group
   };
 }
 
-function success(groupid, group) {
+function success(slug, group) {
   return {
     type: constants.UPDATE_GROUP_MEMBERS_SUCCESS,
-    groupid,
+    slug,
     group
   };
 }

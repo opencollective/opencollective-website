@@ -6,35 +6,35 @@ import * as constants from '../../constants/groups';
  * Fetch one group
  */
 
-export default (id) => {
+export default (slug) => {
   return dispatch => {
-    dispatch(request(id));
+    dispatch(request(slug));
 
-    return get(`/groups/${id}`, { schema: Schemas.GROUP })
-    .then(json => dispatch(success(id, json)))
-    .catch(error => dispatch(failure(id, error)));
+    return get(`/groups/${slug}`, { schema: Schemas.GROUP })
+    .then(json => dispatch(success(slug, json)))
+    .catch(error => dispatch(failure(slug, error)));
   };
 };
 
-function request(id) {
+function request(slug) {
   return {
     type: constants.GROUP_REQUEST,
-    id
+    slug
   };
 }
 
-export function success(id, json) {
+export function success(slug, json) {
   return {
     type: constants.GROUP_SUCCESS,
-    id,
+    slug,
     groups: json.groups
   };
 }
 
-function failure(id, error) {
+function failure(slug, error) {
   return {
     type: constants.GROUP_FAILURE,
-    id,
+    slug,
     error
   };
 }

@@ -14,37 +14,37 @@ describe('transactions/fetch_by_group actions', () => {
       id: 2,
       amount: 999
     };
-    const groupid = 1;
+    const slug = 'testgroup';
 
     nock(env.API_ROOT)
-      .get(`/groups/${groupid}/expenses`)
+      .get(`/groups/${slug}/expenses`)
       .reply(200, [transaction]);
 
     const store = mockStore({});
 
-    store.dispatch(fetchByGroup(groupid))
+    store.dispatch(fetchByGroup(slug))
     .then(() => {
       const [request, success] = store.getActions();
-      expect(request).toEqual({ type: constants.TRANSACTIONS_REQUEST, groupid })
-      expect(success).toEqual({ type: constants.TRANSACTIONS_SUCCESS, groupid, transactions: { 2: transaction } })
+      expect(request).toEqual({ type: constants.TRANSACTIONS_REQUEST, slug })
+      expect(success).toEqual({ type: constants.TRANSACTIONS_SUCCESS, slug, transactions: { 2: transaction } })
       done();
     })
     .catch(done)
   });
 
   it('creates TRANSACTIONS_FAILURE if it fails', (done) => {
-    const groupid = 1;
+    const slug = 1;
 
     nock(env.API_ROOT)
-      .get(`/groups/${groupid}/expenses`)
+      .get(`/groups/${slug}/expenses`)
       .replyWithError('');
 
     const store = mockStore({});
 
-    store.dispatch(fetchByGroup(groupid))
+    store.dispatch(fetchByGroup(slug))
     .then(() => {
       const [request, failure] = store.getActions();
-      expect(request).toEqual({ type: constants.TRANSACTIONS_REQUEST, groupid });
+      expect(request).toEqual({ type: constants.TRANSACTIONS_REQUEST, slug });
       expect(failure.type).toEqual(constants.TRANSACTIONS_FAILURE);
       expect(failure.error.message).toContain('request to http://localhost:3000/api/groups/1/expenses failed');
       done();

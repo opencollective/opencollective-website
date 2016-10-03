@@ -4,7 +4,7 @@ import { Schema, arrayOf } from 'normalizr';
  * Schemas
  */
 
-const GroupSchema = new Schema('groups');
+const GroupSchema = new Schema('groups', { idAttribute: 'slug' });
 const TransactionSchema = new Schema('transactions');
 const UserSchema = new Schema('users');
 const CardSchema = new Schema('cards');

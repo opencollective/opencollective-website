@@ -32,7 +32,7 @@ describe('groups reducer', () => {
       id: 2,
       role: 'BACKER'
     };
-    const groupid = 9;
+    const slug = 'testgroup';
 
     const state = reducer(undefined, {
       type: FETCH_USERS_BY_GROUP_SUCCESS,
@@ -40,11 +40,11 @@ describe('groups reducer', () => {
         1: member,
         2: backer
       },
-      groupid
+      slug
     });
 
     expect(state).toEqual({
-      [groupid]: {
+      [slug]: {
         usersByRole: {
           MEMBER: [member],
           BACKER: [backer]

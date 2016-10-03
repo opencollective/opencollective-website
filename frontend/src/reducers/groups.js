@@ -12,7 +12,7 @@ export default function groups(state={}, action={}) {
     case HYDRATE:
       if (action.data.group) {
         return merge({}, state, {
-          [action.data.group.id]: action.data.group
+          [action.data.group.slug]: action.data.group
         });
       } else if (action.data.leaderboard) {
         return merge({}, state, {
@@ -35,7 +35,7 @@ export default function groups(state={}, action={}) {
       const users = values(action.users);
 
       return merge({}, state, {
-        [action.groupid]: {
+        [action.slug]: {
           usersByRole: groupBy(users, 'role')
         }
       });

@@ -5,31 +5,30 @@ import * as constants from '../../constants/transactions';
 /**
  * Fetch one transaction in a group
  */
-
-export default (groupid, transactionid) => {
+export default (slug, transactionid) => {
   return dispatch => {
-    dispatch(request(groupid, transactionid));
+    dispatch(request(slug, transactionid));
 
-    return get(`/groups/${groupid}/transactions/${transactionid}`, {
+    return get(`/groups/${slug}/transactions/${transactionid}`, {
       schema: Schemas.TRANSACTION
     })
-    .then(json => dispatch(success(groupid, transactionid, json)))
+    .then(json => dispatch(success(slug, transactionid, json)))
     .catch(error => dispatch(failure(error)));
   };
 };
 
-function request(groupid, transactionid) {
+function request(slug, transactionid) {
   return {
     type: constants.TRANSACTION_REQUEST,
-    groupid,
+    slug,
     transactionid
   };
 }
 
-function success(groupid, transactionid, json) {
+function success(slug, transactionid, json) {
   return {
     type: constants.TRANSACTION_SUCCESS,
-    groupid,
+    slug,
     transactionid,
     transactions: json.transactions,
   };

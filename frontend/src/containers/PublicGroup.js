@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 
 import sortBy from 'lodash/sortBy';
 import take from 'lodash/take';
-import values from 'lodash/values';
 import merge from 'lodash/merge';
 
 import filterCollection from '../lib/filter_collection';
@@ -17,7 +16,7 @@ import appendDonationForm from '../actions/form/append_donation';
 import appendProfileForm from '../actions/form/append_profile';
 import decodeJWT from '../actions/session/decode_jwt';
 import donate from '../actions/groups/donate';
-import fetchGroup from '../actions/groups/fetch_by_id';
+import fetchGroup from '../actions/groups/fetch_by_slug';
 import fetchProfile from '../actions/profile/fetch_by_slug';
 import fetchTransactions from '../actions/transactions/fetch_by_group';
 import fetchUsers from '../actions/users/fetch_by_group';
@@ -201,28 +200,28 @@ export class PublicGroup extends Component {
   }
 
   componentDidMount() {
+    const promises = [];
     const {
+      slug,
+      transactions,
       group,
       fetchTransactions,
       fetchUsers,
       fetchGroup
     } = this.props;
 
-    return Promise.all([
-      fetchGroup(group.id),
-      fetchTransactions(group.id, FETCH_DONATIONS_OPTIONS),
-      fetchTransactions(group.id, FETCH_EXPENSES_OPTIONS),
-      fetchUsers(group.id)
-    ])
+    if (!group.name) promises.push(fetchGroup(slug));
+    if (!group.usersByRole) promises.push(fetchUsers(slug));
+    if (!transactions) promises.push(fetchTransactions(slug, FETCH_DONATIONS_OPTIONS));
+    if (!transactions) promises.push(fetchTransactions(slug, FETCH_EXPENSES_OPTIONS));
+
+    Promise.all(promises).then();
   }
 
   componentWillMount() {
     const {
       paypalIsDone,
       hasFullAccount,
-      slug,
-      fetchProfile,
-      loadData
     } = this.props;
 
     if (paypalIsDone) {
@@ -231,10 +230,6 @@ export class PublicGroup extends Component {
         showUserForm: !hasFullAccount,
         showThankYouMessage: hasFullAccount
       });
-    }
-
-    if (loadData) {
-      fetchProfile(slug);
     }
   }
 
@@ -248,16 +243,17 @@ export class PublicGroup extends Component {
   // Used after a donation
   refreshData() {
     const {
-      group,
-      fetchGroup,
+      slug,
+      fetchProfile,
       fetchUsers,
       fetchTransactions
     } = this.props;
 
     return Promise.all([
-      fetchGroup(group.id),
-      fetchUsers(group.id),
-      fetchTransactions(group.id, FETCH_DONATIONS_OPTIONS)
+      fetchProfile(slug),
+      fetchTransactions(slug, FETCH_DONATIONS_OPTIONS),
+      fetchTransactions(slug, FETCH_EXPENSES_OPTIONS),
+      fetchUsers(slug)
     ]);
   }
 }
@@ -265,8 +261,8 @@ export class PublicGroup extends Component {
 export function donateToGroup({amount, frequency, currency, token, options}) {
   const {
     notify,
+    slug,
     donate,
-    group
   } = this.props;
 
   const payment = {
@@ -283,7 +279,7 @@ export function donateToGroup({amount, frequency, currency, token, options}) {
     payment.interval = 'year';
   }
 
-  return donate(group.id, payment, options)
+  return donate(slug, payment, options)
     .then(() => {
       // Paypal will redirect to this page and we will refresh at that moment.
       // A Stripe donation on the other hand is immediate after the request:
@@ -307,7 +303,7 @@ export function saveNewUser() {
     profileForm,
     validateSchema,
     notify,
-    group,
+    slug,
     fetchUsers
   } = this.props;
 
@@ -320,7 +316,7 @@ export function saveNewUser() {
       showUserForm: false,
       showThankYouMessage: true
     }))
-    .then(() => fetchUsers(group.id))
+    .then(() => fetchUsers(slug))
     .catch(({message}) => notify('error', message));
 }
 
@@ -337,7 +333,7 @@ export function saveGroup() {
   } = this.props;
 
   return validateSchema(groupForm.attributes, editGroupSchema)
-    .then(() => updateGroup(group.id, groupForm.attributes))
+    .then(() => updateGroup(slug, groupForm.attributes))
     .then(() => merge(group, groupForm.attributes)) // this is to prevent ui from temporarily reverting to old text
     .then(() => cancelEditGroupForm()) // clear out this form to prevent data issues on another page.
     .then(() => fetchProfile(slug))
@@ -382,6 +378,8 @@ function mapStateToProps({
   app
 }) {
   const { query } = router.location;
+  const slug = router.params.slug;
+
   const newUserId = query.userid;
   const paypalUser = {
     id: query.userid,
@@ -389,8 +387,7 @@ function mapStateToProps({
   };
 
   const newUser = users.newUser || paypalUser;
-
-  const group = values(groups)[0] || {stripeAccount: {}}; // to refactor to allow only one group
+  const group = groups[slug] || {stripeAccount: {}}; // to refactor to allow only one group
   const usersByRole = group.usersByRole || {};
 
   /* @xdamman:
@@ -406,6 +403,9 @@ function mapStateToProps({
   group.transactions = filterCollection(transactions, { GroupId: group.id });
   group.tiers = group.tiers || DEFAULT_GROUP_TIERS;
   group.settings = group.settings || DEFAULT_GROUP_SETTINGS;
+
+  if (group.name && window.document) 
+    document.title = `${group.name} is on Open Collective`;
 
   const donations = transactions.isDonation;
   const expenses = transactions.isExpense;
@@ -427,7 +427,7 @@ function mapStateToProps({
     newUser,
     hasFullAccount: newUser.hasFullAccount || false,
     i18n: i18n(group.settings.lang || 'en'),
-    slug: router.params.slug,
+    slug,
     loadData: app.rendered,
     isSupercollective: group.isSupercollective,
     hasHost: group.hosts.length === 0 ? false : true,

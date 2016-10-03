@@ -27,6 +27,7 @@ const setup = () => {
 
   const group = {
     id: 1,
+    slug: 'testgroup',
     currency: 'MXN',
     host: { name: 'WWCode', website: 'http://womenwhocode.com' }
   };
@@ -53,8 +54,8 @@ describe('PublicGroup container', () => {
     const { actions, group, setState, refreshData, token } = setup();
     const { currency } = group;
 
-    const donate = chai.spy((groupid, payment) => {
-      expect(groupid).to.be.equal(1);
+    const donate = chai.spy((slug, payment) => {
+      expect(slug).to.be.equal(group.slug);
       expect(payment.currency).to.be.equal('MXN');
       expect(payment.email).to.be.equal(token.email);
       expect(payment.amount).to.be.equal(10);
@@ -66,6 +67,7 @@ describe('PublicGroup container', () => {
       ...actions,
       donate,
       group,
+      slug: group.slug,
       currency
     };
 
@@ -88,8 +90,8 @@ describe('PublicGroup container', () => {
   it('should donate with subscription to the group', (done) => {
     const { actions, group, setState, refreshData, token } = setup();
 
-    const donate = chai.spy((groupid, payment) => {
-      expect(groupid).to.be.equal(1);
+    const donate = chai.spy((slug, payment) => {
+      expect(slug).to.be.equal(group.slug);
       expect(payment.interval).to.be.equal('month');
       expect(payment.stripeToken).to.be.equal(token.id);
       expect(payment.email).to.be.equal(token.email);
@@ -102,6 +104,7 @@ describe('PublicGroup container', () => {
       ...actions,
       donate,
       group,
+      slug: group.slug,
       frequency: 'monthly'
     };
 

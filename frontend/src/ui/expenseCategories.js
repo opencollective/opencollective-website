@@ -1,67 +1,16 @@
 /**
  * Static data the for the expense form
  */
-
-export default function(groupid) {
-  if (typeof groupid == "string")
-    groupid = parseInt(groupid, 10);
+export default function(slug = '') {
 
   let categories = [];
-  switch (groupid) {
+  let base_slug = slug;
+  if (slug.match(/^wwcode/))
+    base_slug = 'wwcode';
+
+  switch (base_slug) {
     // Women Who Code
-    case 2:
-    case 3:
-    case 4:
-    case 10:
-    case 12:
-    case 13:
-    case 14:
-    case 15:
-    case 47:
-    case 48:
-    case 51:
-    case 59:
-    case 195:
-    case 241:
-    case 259:
-    case 260:
-    case 261:
-    case 262:
-    case 263:
-    case 266:
-    case 267:
-    case 268:
-    case 269:
-    case 270:
-    case 271:
-    case 272:
-    case 273:
-    case 274:
-    case 275:
-    case 276:
-    case 277:
-    case 278:
-    case 279:
-    case 280:
-    case 281:
-    case 282:
-    case 283:
-    case 284:
-    case 285:
-    case 286:
-    case 287:
-    case 288:
-    case 289:
-    case 290:
-    case 292:
-    case 293:
-    case 294:
-    case 295:
-    case 297:
-    case 298:
-    case 299:
-    case 300:
-    case 301:
+    case 'wwcode':
       categories = [
         'Conference',
         'Donation',
@@ -84,9 +33,9 @@ export default function(groupid) {
         'Other'
       ];
       break;
-    case 6: // laprimaire
-    case 73: // nuitdebout
-    case 24: // lesbarbares
+    case 'laprimaire': // laprimaire
+    case 'nuitdebout': // nuitdebout
+    case 'lesbarbares': // lesbarbares
       categories = [
         'Admin',
         'Autre',
@@ -102,7 +51,7 @@ export default function(groupid) {
         'Transport'
       ];
        break;
-    case 114: // partidodigital
+    case 'partidodigital':
       categories = [
         'Comunicación',
         'Diseño',
@@ -120,7 +69,7 @@ export default function(groupid) {
         'Servicios Digitales'
       ];
       break;
-    case 245: // analizebasilicata
+    case 'analizebasilicata':
       categories = [
         'Comunicazioni',
         'Disign',

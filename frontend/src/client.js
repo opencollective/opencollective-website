@@ -12,10 +12,12 @@ import reduxMiddleware from './redux_middleware';
 import decodeJWT from './actions/session/decode_jwt';
 import initialRender from './actions/app/initial_render';
 
-const store = compose(
+const store = createStore(reducers, window.__INITIAL_STATE__, compose(
   reduxReactRouter({ createHistory, routes }),
-  applyMiddleware(...reduxMiddleware)
-)(createStore)(reducers, window.__INITIAL_STATE__);
+  applyMiddleware(...reduxMiddleware),
+  window.devToolsExtension ? window.devToolsExtension() : f => f
+));
+
 
 // Decode token if stored in localStorage
 store.dispatch(decodeJWT());

@@ -5,13 +5,13 @@ import * as constants from '../../constants/groups';
  * Update group settings
  */
 
-export default (groupid, group) => {
-  const url = `/groups/${groupid}/settings`;
+export default (slug, group) => {
+  const url = `/groups/${slug}/settings`;
 
   return dispatch => {
-    dispatch(request(groupid, group));
+    dispatch(request(slug, group));
     return putJSON(url, {group})
-      .then(json => dispatch(success(groupid, json)))
+      .then(json => dispatch(success(slug, json)))
       .catch(error => {
         dispatch(failure(error));
         throw new Error(error.message);
@@ -19,18 +19,18 @@ export default (groupid, group) => {
   };
 };
 
-function request(groupid, group) {
+function request(slug, group) {
   return {
     type: constants.UPDATE_GROUP_REQUEST,
-    groupid,
+    slug,
     group
   };
 }
 
-function success(groupid, group) {
+function success(slug, group) {
   return {
     type: constants.UPDATE_GROUP_SUCCESS,
-    groupid,
+    slug,
     group
   };
 }
