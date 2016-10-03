@@ -183,10 +183,7 @@ export class PublicGroup extends Component {
   }
 
   componentDidMount() {
-    const promises = [];
     const {
-      slug,
-      transactions,
       group,
       fetchExpenses,
       fetchDonations,
@@ -229,7 +226,6 @@ export class PublicGroup extends Component {
       fetchProfile,
       fetchUsers,
       fetchExpenses,
-      fetchDonations
     } = this.props;
 
     fetchProfile(group.slug);
@@ -278,12 +274,12 @@ export function donateToGroup({amount, frequency, currency, token, options}) {
 
 export function saveNewUser() {
  const {
+    group,
     newUser,
     updateUser,
     profileForm,
     validateSchema,
     notify,
-    slug,
     fetchUsers
   } = this.props;
 
