@@ -1,13 +1,11 @@
 import React from 'react';
 
-import TransactionItem from './TransactionItem';
 import UsersList from './UsersList';
 import Currency from './Currency';
 
 export default ({
   options,
   group,
-  transactions,
   users,
   i18n,
   href
@@ -29,17 +27,6 @@ export default ({
           <div className='Widget-label'>Funds Raised</div>
         </div>
       )}
-
-      {options.transactions && (
-        <h2>Latest transactions</h2>
-      )}
-      {options.transactions && transactions.map(t => (
-        <TransactionItem
-          key={t.id}
-          transaction={t}
-          i18n={i18n}
-          user={users.find(({id}) => id === t.UserId)} />
-      ))}
 
       {options.backers && (
         <div className='Widget-backers'>

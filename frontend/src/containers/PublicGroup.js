@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import sortBy from 'lodash/sortBy';
-import take from 'lodash/take';
 import merge from 'lodash/merge';
 
 import filterCollection from '../lib/filter_collection';
@@ -18,7 +16,8 @@ import decodeJWT from '../actions/session/decode_jwt';
 import donate from '../actions/groups/donate';
 import fetchGroup from '../actions/groups/fetch_by_slug';
 import fetchProfile from '../actions/profile/fetch_by_slug';
-import fetchTransactions from '../actions/transactions/fetch_by_group';
+import fetchExpenses from '../actions/expenses/fetch_by_group';
+import fetchDonations from '../actions/donations/fetch_by_group';
 import fetchUsers from '../actions/users/fetch_by_group';
 import getSocialMediaAvatars from '../actions/users/get_social_media_avatars';
 import notify from '../actions/notification/notify';
@@ -51,19 +50,7 @@ import RelatedGroups from '../components/RelatedGroups';
 
 // Number of expenses and revenue items to show on the public page
 const NUM_TRANSACTIONS_TO_SHOW = 3;
-const FETCH_DONATIONS_OPTIONS = {
-  per_page: NUM_TRANSACTIONS_TO_SHOW,
-  sort: 'createdAt',
-  direction: 'desc',
-  donation: true
-};
-const FETCH_EXPENSES_OPTIONS = {
-  per_page: NUM_TRANSACTIONS_TO_SHOW,
-  sort: 'createdAt',
-  direction: 'desc',
-  exclude: 'fees',
-  expense: true
-};
+
 const DEFAULT_GROUP_SETTINGS = {
   lang: 'en',
   formatCurrency: {
@@ -115,8 +102,6 @@ export class PublicGroup extends Component {
 
   render() {
     const {
-      donations,
-      expenses,
       group,
       hasHost,
       canEditGroup,
@@ -141,7 +126,7 @@ export class PublicGroup extends Component {
 
         {contributors && <PublicGroupContributors contributors={ contributors } />}
 
-        {group.slug !== 'opensource' && hasHost && <PublicGroupWhyJoin group={ group } expenses={ expenses } {...this.props} />}
+        {group.slug !== 'opensource' && hasHost && <PublicGroupWhyJoin group={ group } {...this.props} />}
 
         <div className='bg-light-gray px2'>
           {hasHost && <PublicGroupJoinUs {...this.props} donateToGroup={this.donateToGroupRef} {...this.props} />}
@@ -151,8 +136,6 @@ export class PublicGroup extends Component {
         {hasHost &&
           <PublicGroupExpensesAndActivity
             group={ group }
-            expenses={ expenses }
-            donations={ donations }
             itemsToShow={ NUM_TRANSACTIONS_TO_SHOW }
             {...this.props} /> }
 
@@ -200,22 +183,18 @@ export class PublicGroup extends Component {
   }
 
   componentDidMount() {
-    const promises = [];
     const {
-      slug,
-      transactions,
       group,
-      fetchTransactions,
+      fetchExpenses,
+      fetchDonations,
       fetchUsers,
       fetchGroup
     } = this.props;
 
-    if (!group.name) promises.push(fetchGroup(slug));
-    if (!group.usersByRole) promises.push(fetchUsers(slug));
-    if (!transactions) promises.push(fetchTransactions(slug, FETCH_DONATIONS_OPTIONS));
-    if (!transactions) promises.push(fetchTransactions(slug, FETCH_EXPENSES_OPTIONS));
-
-    Promise.all(promises).then();
+    if (!group.name) fetchGroup(group.slug);
+    if (!group.usersByRole) fetchUsers(group.slug);
+    if (!group.expenses || group.expenses.length === 0) fetchExpenses(group.slug);
+    if (!group.donations || group.donations.length === 0) fetchDonations(group.slug);
   }
 
   componentWillMount() {
@@ -243,17 +222,18 @@ export class PublicGroup extends Component {
   // Used after a donation
   refreshData() {
     const {
-      slug,
+      group,
       fetchProfile,
       fetchUsers,
-      fetchTransactions
+      fetchExpenses,
+      fetchDonations
     } = this.props;
 
     return Promise.all([
-      fetchProfile(slug),
-      fetchTransactions(slug, FETCH_DONATIONS_OPTIONS),
-      fetchTransactions(slug, FETCH_EXPENSES_OPTIONS),
-      fetchUsers(slug)
+      fetchProfile(group.slug),
+      fetchExpenses(group.slug),
+      fetchDonations(group.slug),
+      fetchUsers(group.slug)
     ]);
   }
 }
@@ -261,7 +241,7 @@ export class PublicGroup extends Component {
 export function donateToGroup({amount, frequency, currency, token, options}) {
   const {
     notify,
-    slug,
+    group,
     donate,
   } = this.props;
 
@@ -279,7 +259,7 @@ export function donateToGroup({amount, frequency, currency, token, options}) {
     payment.interval = 'year';
   }
 
-  return donate(slug, payment, options)
+  return donate(group.slug, payment, options)
     .then(() => {
       // Paypal will redirect to this page and we will refresh at that moment.
       // A Stripe donation on the other hand is immediate after the request:
@@ -303,7 +283,7 @@ export function saveNewUser() {
     profileForm,
     validateSchema,
     notify,
-    slug,
+    group,
     fetchUsers
   } = this.props;
 
@@ -316,7 +296,7 @@ export function saveNewUser() {
       showUserForm: false,
       showThankYouMessage: true
     }))
-    .then(() => fetchUsers(slug))
+    .then(() => fetchUsers(group.slug))
     .catch(({message}) => notify('error', message));
 }
 
@@ -325,7 +305,6 @@ export function saveGroup() {
     group,
     updateGroup,
     groupForm,
-    slug,
     fetchProfile,
     cancelEditGroupForm,
     notify,
@@ -333,10 +312,10 @@ export function saveGroup() {
   } = this.props;
 
   return validateSchema(groupForm.attributes, editGroupSchema)
-    .then(() => updateGroup(slug, groupForm.attributes))
+    .then(() => updateGroup(group.slug, groupForm.attributes))
     .then(() => merge(group, groupForm.attributes)) // this is to prevent ui from temporarily reverting to old text
     .then(() => cancelEditGroupForm()) // clear out this form to prevent data issues on another page.
-    .then(() => fetchProfile(slug))
+    .then(() => fetchProfile(group.slug))
     .then(() => notify('success', 'Group updated'))
     .catch(({message}) => notify('error', message));
 }
@@ -353,7 +332,8 @@ export default connect(mapStateToProps, {
   donate,
   uploadImage,
   notify,
-  fetchTransactions,
+  fetchExpenses,
+  fetchDonations,
   fetchUsers,
   fetchGroup,
   appendProfileForm,
@@ -371,7 +351,8 @@ export default connect(mapStateToProps, {
 function mapStateToProps({
   groups,
   form,
-  transactions,
+  donations,
+  expenses,
   users,
   session,
   router,
@@ -387,7 +368,7 @@ function mapStateToProps({
   };
 
   const newUser = users.newUser || paypalUser;
-  const group = groups[slug] || {stripeAccount: {}}; // to refactor to allow only one group
+  const group = groups[slug] || {slug, stripeAccount: {}}; // to refactor to allow only one group
   const usersByRole = group.usersByRole || {};
 
   /* @xdamman:
@@ -400,22 +381,18 @@ function mapStateToProps({
   group.backers = usersByRole[roles.BACKER] || [];
   group.host = group.hosts[0] || {};
   group.backersCount = group.backers.length;
-  group.transactions = filterCollection(transactions, { GroupId: group.id });
+  group.donations = filterCollection(donations, { GroupId: group.id });
+  group.expenses = filterCollection(expenses, { GroupId: group.id });
   group.tiers = group.tiers || DEFAULT_GROUP_TIERS;
   group.settings = group.settings || DEFAULT_GROUP_SETTINGS;
 
   if (group.name && window.document) 
     document.title = `${group.name} is on Open Collective`;
 
-  const donations = transactions.isDonation;
-  const expenses = transactions.isExpense;
-
   return {
     group,
     users,
     session,
-    donations: take(sortBy(donations, txn => txn.createdAt).reverse(), NUM_TRANSACTIONS_TO_SHOW),
-    expenses: take(sortBy(expenses, exp => exp.createdAt).reverse(), NUM_TRANSACTIONS_TO_SHOW),
     inProgress: groups.donateInProgress,
     profileForm: form.profile,
     donationForm: form.donation,
@@ -427,7 +404,6 @@ function mapStateToProps({
     newUser,
     hasFullAccount: newUser.hasFullAccount || false,
     i18n: i18n(group.settings.lang || 'en'),
-    slug,
     loadData: app.rendered,
     isSupercollective: group.isSupercollective,
     hasHost: group.hosts.length === 0 ? false : true,
