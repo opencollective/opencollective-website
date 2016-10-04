@@ -51,3 +51,6 @@ bin
 
 # JetBrains
 *.iml
+
+# tmp
+.tmp/
