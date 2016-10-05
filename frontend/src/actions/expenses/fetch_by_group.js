@@ -4,7 +4,7 @@ import * as constants from '../../constants/expenses';
 
 const FETCH_EXPENSES_OPTIONS = {
   per_page: 3,
-  sort: 'createdAt',
+  sort: 'incurredAt',
   direction: 'desc',
   exclude: 'fees'
 };
@@ -16,7 +16,6 @@ export default (slug) => {
   return dispatch => {
     dispatch(request(slug));
     return get(`/groups/${slug}/expenses`, {
-      schema: Schemas.EXPENSE_ARRAY,
       params: FETCH_EXPENSES_OPTIONS
     })
     .then(json => dispatch(success(slug, json)))
@@ -35,7 +34,7 @@ export function success(slug, json) {
   return {
     type: constants.EXPENSES_SUCCESS,
     slug,
-    expenses: json.expenses,
+    expenses: json,
   };
 }
 

@@ -33,7 +33,6 @@ export class Transactions extends Component {
   render() {
     const { users, i18n, group, type, user } = this.props;
     const { showSubmitExpense } = this.state;
-    console.log("type: ", type, "group[type]:", group[type]);
     const items = group[type];
     if (!items) return (<div />);
     const hasItems = Boolean(items.length);
@@ -95,10 +94,11 @@ export class Transactions extends Component {
   componentWillMount() {
     const {
       group,
+      users,
+      type,
       fetchExpenses,
       fetchDonations,
-      fetchUsers,
-      type
+      fetchUsers
     } = this.props;
 
     const options = {
@@ -107,9 +107,18 @@ export class Transactions extends Component {
       [type]: true
     };
 
-    fetchExpenses(group.slug, options);
-    fetchDonations(group.slug, options);
-    fetchUsers(group.slug);
+    switch (type) {
+      case 'expenses':
+        if (!group.expenses || group.expenses.length === 0)
+          fetchExpenses(group.slug, options);
+        break;
+
+      case 'donations':
+        if (!group.donations || group.donations.length === 0)
+          fetchDonations(group.slug, options);
+        break;
+    }
+    if (users.length === 0) fetchUsers(group.slug);
   }
 
   componentDidMount() {
@@ -136,8 +145,8 @@ function mapStateToProps({
   const slug = router.params.slug;
   const type = router.params.type || 'expenses'; // `expenses` or `donations`
   const group = groups[slug] || {slug}; // to refactor to allow only one group
-  group.donations = filterCollection(donations, { GroupId: group.id }).reverse();
-  group.expenses = filterCollection(expenses, { GroupId: group.id }).reverse();
+  group.donations = filterCollection(donations, { GroupId: group.id });
+  group.expenses = filterCollection(expenses, { GroupId: group.id });
 
   group.settings = group.settings || { lang: 'en' };
   return {

@@ -15,7 +15,6 @@ export default (slug, params = FETCH_DONATIONS_OPTIONS) => {
   return dispatch => {
     dispatch(request(slug, params));
     return get(`/groups/${slug}/donations`, {
-      schema: Schemas.DONATION_ARRAY,
       params
     })
     .then(json => dispatch(success(slug, json)))
@@ -35,7 +34,7 @@ export function success(slug, json) {
   return {
     type: constants.DONATIONS_SUCCESS,
     slug,
-    donations: json.donations,
+    donations: json,
   };
 }
 
