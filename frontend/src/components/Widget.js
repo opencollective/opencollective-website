@@ -23,7 +23,7 @@ export default ({
 
           <div className='Widget-balance'>
             <Currency
-              value={group.balance}
+              value={group.balance/100}
               currency={group.currency} />
           </div>
           <div className='Widget-label'>Funds Raised</div>
