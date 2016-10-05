@@ -136,8 +136,8 @@ function mapStateToProps({
   const slug = router.params.slug;
   const type = router.params.type || 'expenses'; // `expenses` or `donations`
   const group = groups[slug] || {slug}; // to refactor to allow only one group
-  group.donations = filterCollection(donations, { GroupId: group.id });
-  group.expenses = filterCollection(expenses, { GroupId: group.id });
+  group.donations = filterCollection(donations, { GroupId: group.id }).reverse();
+  group.expenses = filterCollection(expenses, { GroupId: group.id }).reverse();
 
   group.settings = group.settings || { lang: 'en' };
   return {
