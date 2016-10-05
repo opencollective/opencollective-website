@@ -1,5 +1,4 @@
 import { get } from '../../lib/api';
-import Schemas from '../../lib/schemas';
 import * as constants from '../../constants/donations';
 
 const FETCH_DONATIONS_OPTIONS = {
