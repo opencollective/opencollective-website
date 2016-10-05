@@ -5,7 +5,7 @@ import filterCollection from '../lib/filter_collection';
 
 import LoginTopBar from '../containers/LoginTopBar';
 import ExpenseItem from '../components/ExpenseItem';
-import DonationItem from '../components/DonationItem';
+import TransactionItem from '../components/TransactionItem';
 import Button from '../components/Button';
 import Icon from '../components/Icon';
 import Currency from '../components/Currency';
@@ -16,7 +16,7 @@ import i18n from '../lib/i18n';
 
 import fetchUsers from '../actions/users/fetch_by_group';
 import fetchExpenses from '../actions/expenses/fetch_by_group';
-import fetchDonations from '../actions/donations/fetch_by_group';
+import fetchTransactions from '../actions/transactions/fetch_by_group';
 import decodeJWT from '../actions/session/decode_jwt';
 
 export class Transactions extends Component {
@@ -71,7 +71,7 @@ export class Transactions extends Component {
                 if (type === 'expenses') {
                   return <ExpenseItem key={item.id} expense={item} i18n={i18n} user={users[item.UserId]} precision={2} />;
                 } else {
-                  return <DonationItem key={item.id} donation={item} i18n={i18n} user={users[item.UserId]} precision={2} />;
+                  return <TransactionItem key={item.id} transaction={item} i18n={i18n} user={users[item.UserId]} precision={2} />;
                 }
               })}
             </div>
@@ -97,14 +97,14 @@ export class Transactions extends Component {
       users,
       type,
       fetchExpenses,
-      fetchDonations,
+      fetchTransactions,
       fetchUsers
     } = this.props;
 
     const options = {
       sort: 'createdAt',
       direction: 'desc',
-      [type]: true
+      type: (type === 'expenses') ? type : 'transactions'
     };
 
     switch (type) {
@@ -115,7 +115,7 @@ export class Transactions extends Component {
 
       case 'donations':
         if (!group.donations || group.donations.length === 0)
-          fetchDonations(group.slug, options);
+          fetchTransactions(group.slug, options);
         break;
     }
     if (users.length === 0) fetchUsers(group.slug);
@@ -129,7 +129,7 @@ export class Transactions extends Component {
 
 export default connect(mapStateToProps, {
   fetchExpenses,
-  fetchDonations,
+  fetchTransactions,
   fetchUsers,
   decodeJWT
 })(Transactions);
@@ -137,15 +137,16 @@ export default connect(mapStateToProps, {
 function mapStateToProps({
   session,
   groups,
-  donations,
+  transactions,
   expenses,
   users,
   router
 }) {
   const slug = router.params.slug;
-  const type = router.params.type || 'expenses'; // `expenses` or `donations`
+  const type = router.params.type || 'expenses'; // `expenses` or `donations` -> should be `revenue` to be more accurate
+
   const group = groups[slug] || {slug}; // to refactor to allow only one group
-  group.donations = filterCollection(donations, { GroupId: group.id });
+  group.donations = transactions.donations;
   group.expenses = filterCollection(expenses, { GroupId: group.id });
 
   group.settings = group.settings || { lang: 'en' };

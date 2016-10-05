@@ -1,5 +1,4 @@
 import { get } from '../../lib/api';
-import Schemas from '../../lib/schemas';
 import * as constants from '../../constants/transactions';
 
 /**
@@ -7,10 +6,8 @@ import * as constants from '../../constants/transactions';
  */
 export default (slug, options={}) => {
   return dispatch => {
-    dispatch(request(slug));
-    const endpoint = options.donation ? 'transactions' : 'expenses';
-    return get(`/groups/${slug}/${endpoint}`, {
-      schema: Schemas.TRANSACTION_ARRAY,
+    dispatch(request(slug, options));
+    return get(`/groups/${slug}/${options.type || 'transactions'}`, {
       params: options || {}
     })
     .then(json => dispatch(success(slug, json)))
@@ -18,9 +15,10 @@ export default (slug, options={}) => {
   };
 };
 
-function request(slug) {
+function request(slug, options) {
   return {
     type: constants.TRANSACTIONS_REQUEST,
+    options,
     slug
   };
 }
@@ -29,7 +27,7 @@ export function success(slug, json) {
   return {
     type: constants.TRANSACTIONS_SUCCESS,
     slug,
-    transactions: json.transactions,
+    transactions: json,
   };
 }
 
