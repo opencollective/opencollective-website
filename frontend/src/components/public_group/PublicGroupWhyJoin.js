@@ -8,8 +8,7 @@ export default class PublicGroupWhyJoin extends React.Component {
   render() {
     const {
       group,
-      i18n,
-      expenses
+      i18n
     } = this.props;
 
     const whyJoinText = group.whyJoin || i18n.getString('becomeMemberText');
@@ -35,7 +34,7 @@ export default class PublicGroupWhyJoin extends React.Component {
                 value={ formatCurrency(group.balance/100, group.currency, { precision: 0 }) }
                 className='flex-auto pr2' />
 
-              {(expenses.length > 0) && (
+              {(group.expenses.length > 0) && (
                 <div className='pt1 mt3 mb2'>
                   <a href='#budget' className='-btn -btn-outline -border-green -btn-small -ff-sec -fw-bold -ttu -wsnw'>{i18n.getString('howWeSpend')}</a>
                 </div>
