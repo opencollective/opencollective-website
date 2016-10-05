@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
-import values from 'lodash/values';
-import sortBy from 'lodash/sortBy';
+import filterCollection from '../lib/filter_collection';
 
 import LoginTopBar from '../containers/LoginTopBar';
 import ExpenseItem from '../components/ExpenseItem';
-import TransactionItem from '../components/TransactionItem';
+import DonationItem from '../components/DonationItem';
 import Button from '../components/Button';
 import Icon from '../components/Icon';
 import Currency from '../components/Currency';
@@ -16,7 +15,8 @@ import SubmitExpense from '../containers/SubmitExpense';
 import i18n from '../lib/i18n';
 
 import fetchUsers from '../actions/users/fetch_by_group';
-import fetchTransactions from '../actions/transactions/fetch_by_group';
+import fetchExpenses from '../actions/expenses/fetch_by_group';
+import fetchDonations from '../actions/donations/fetch_by_group';
 import decodeJWT from '../actions/session/decode_jwt';
 
 export class Transactions extends Component {
@@ -31,9 +31,11 @@ export class Transactions extends Component {
   }
 
   render() {
-    const { transactions, users, i18n, group, type, user } = this.props;
+    const { users, i18n, group, type, user } = this.props;
     const { showSubmitExpense } = this.state;
-    const hasExistingTransactions = Boolean(transactions.length);
+    const items = group[type];
+    if (!items) return (<div />);
+    const hasItems = Boolean(items.length);
     return (
      <div className='Transactions'>
         <LoginTopBar />
@@ -51,31 +53,31 @@ export class Transactions extends Component {
           </div>
         </div>
 
-        {type === 'expense' && showSubmitExpense && (
+        {type === 'expenses' && showSubmitExpense && (
           <div className='Transactions-container' style={{marginTop: '0'}}>
             <SubmitExpense onCancel={this.toggleAddExpense.bind(this)} user={user} />
           </div>
         )}
-        {(!showSubmitExpense && type === 'expense') && (
+        {(!showSubmitExpense && type === 'expenses') && (
           <div className='Transactions-container padding40' style={{marginTop: '0'}}>
             <Button onClick={this.toggleAddExpense.bind(this)} label='Submit Expense' id='submitExpenseBtn' />
           </div>
         )}
-        {hasExistingTransactions &&
+        {hasItems &&
           <div className='Transactions-container padding40 expenses-container'>
-            <div className='line1'>latest {`${type}s`}</div>
+            <div className='line1'>latest {type}</div>
             <div className='-list'>
-              {transactions.map(tx => {
-                if (type === 'expense') {
-                  return <ExpenseItem key={tx.id} expense={tx} i18n={i18n} user={users[tx.UserId]} precision={2} />;
+              {items.map(item => {
+                if (type === 'expenses') {
+                  return <ExpenseItem key={item.id} expense={item} i18n={i18n} user={users[item.UserId]} precision={2} />;
                 } else {
-                  return <TransactionItem key={tx.id} transaction={tx} i18n={i18n} user={users[tx.UserId]} precision={2} />;
+                  return <DonationItem key={item.id} donation={item} i18n={i18n} user={users[item.UserId]} precision={2} />;
                 }
               })}
             </div>
           </div>
         }
-        {!hasExistingTransactions && (
+        {!hasItems && (
           <div className='Transactions-container padding40 expenses-container -empty-state' style={{height: '140px'}}>
             <Icon type='expense' />
             <div className='line1 inline'>
@@ -92,9 +94,11 @@ export class Transactions extends Component {
   componentWillMount() {
     const {
       group,
-      fetchTransactions,
-      fetchUsers,
-      type
+      users,
+      type,
+      fetchExpenses,
+      fetchDonations,
+      fetchUsers
     } = this.props;
 
     const options = {
@@ -103,9 +107,18 @@ export class Transactions extends Component {
       [type]: true
     };
 
-    fetchTransactions(group.slug, options);
+    switch (type) {
+      case 'expenses':
+        if (!group.expenses || group.expenses.length === 0)
+          fetchExpenses(group.slug, options);
+        break;
 
-    fetchUsers(group.slug);
+      case 'donations':
+        if (!group.donations || group.donations.length === 0)
+          fetchDonations(group.slug, options);
+        break;
+    }
+    if (users.length === 0) fetchUsers(group.slug);
   }
 
   componentDidMount() {
@@ -115,7 +128,8 @@ export class Transactions extends Component {
 }
 
 export default connect(mapStateToProps, {
-  fetchTransactions,
+  fetchExpenses,
+  fetchDonations,
   fetchUsers,
   decodeJWT
 })(Transactions);
@@ -123,19 +137,21 @@ export default connect(mapStateToProps, {
 function mapStateToProps({
   session,
   groups,
-  transactions,
+  donations,
+  expenses,
   users,
   router
 }) {
-  const type = (router.params.type) ? router.params.type.slice(0,-1) : 'expense'; // remove trailing s for the API call
-  const group = values(groups)[0] || {}; // to refactor to allow only one group
-  const list = (type === 'donation') ? transactions.isDonation : transactions.isExpense;
+  const slug = router.params.slug;
+  const type = router.params.type || 'expenses'; // `expenses` or `donations`
+  const group = groups[slug] || {slug}; // to refactor to allow only one group
+  group.donations = filterCollection(donations, { GroupId: group.id });
+  group.expenses = filterCollection(expenses, { GroupId: group.id });
 
   group.settings = group.settings || { lang: 'en' };
   return {
     session,
     group,
-    transactions: sortBy(list, txn => txn.incurredAt || txn.createdAt).reverse(),
     router,
     users,
     i18n: i18n(group.settings.lang),
