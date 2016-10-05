@@ -12,7 +12,6 @@ export default function transactions(state={
     case constants.TRANSACTION_SUCCESS: {
       const {transactions} = action;
       const transactionsArr = values(transactions);
-      console.log("transactionsArr", transactionsArr);
       return merge({}, state, transactions, {
         donations: transactionsArr.filter(t => t.isDonation),
         expenses: transactionsArr.filter(t => t.incurredAt)
