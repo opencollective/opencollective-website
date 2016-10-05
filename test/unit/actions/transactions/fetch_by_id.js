@@ -33,7 +33,7 @@ describe('transactions/fetch_by_id', () => {
         type: constants.TRANSACTION_SUCCESS,
         slug,
         transactionid,
-        transactions: { 2: transaction }
+        transactions: transaction
       });
 
       done();
