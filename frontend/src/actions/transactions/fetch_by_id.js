@@ -1,5 +1,4 @@
 import { get } from '../../lib/api';
-import Schemas from '../../lib/schemas';
 import * as constants from '../../constants/transactions';
 
 /**
@@ -9,9 +8,7 @@ export default (slug, transactionid) => {
   return dispatch => {
     dispatch(request(slug, transactionid));
 
-    return get(`/groups/${slug}/transactions/${transactionid}`, {
-      schema: Schemas.TRANSACTION
-    })
+    return get(`/groups/${slug}/transactions/${transactionid}`)
     .then(json => dispatch(success(slug, transactionid, json)))
     .catch(error => dispatch(failure(error)));
   };
@@ -30,7 +27,7 @@ function success(slug, transactionid, json) {
     type: constants.TRANSACTION_SUCCESS,
     slug,
     transactionid,
-    transactions: json.transactions,
+    transactions: json,
   };
 }
 

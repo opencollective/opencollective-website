@@ -8,6 +8,7 @@ import fetchByGroup from '../../../../frontend/src/actions/transactions/fetch_by
 describe('transactions/fetch_by_group actions', () => {
 
   afterEach(() => nock.cleanAll());
+  const options = {};
 
   it('creates TRANSACTIONS_SUCCESS if it fetches successfully', (done) => {
     const transaction = {
@@ -17,7 +18,7 @@ describe('transactions/fetch_by_group actions', () => {
     const slug = 'testgroup';
 
     nock(env.API_ROOT)
-      .get(`/groups/${slug}/expenses`)
+      .get(`/groups/${slug}/transactions`)
       .reply(200, [transaction]);
 
     const store = mockStore({});
@@ -25,8 +26,8 @@ describe('transactions/fetch_by_group actions', () => {
     store.dispatch(fetchByGroup(slug))
     .then(() => {
       const [request, success] = store.getActions();
-      expect(request).toEqual({ type: constants.TRANSACTIONS_REQUEST, slug })
-      expect(success).toEqual({ type: constants.TRANSACTIONS_SUCCESS, slug, transactions: { 2: transaction } })
+      expect(request).toEqual({ type: constants.TRANSACTIONS_REQUEST, slug, options })
+      expect(success).toEqual({ type: constants.TRANSACTIONS_SUCCESS, slug, transactions: [ transaction ] })
       done();
     })
     .catch(done)
@@ -36,7 +37,7 @@ describe('transactions/fetch_by_group actions', () => {
     const slug = 1;
 
     nock(env.API_ROOT)
-      .get(`/groups/${slug}/expenses`)
+      .get(`/groups/${slug}/transactions`)
       .replyWithError('');
 
     const store = mockStore({});
@@ -44,9 +45,9 @@ describe('transactions/fetch_by_group actions', () => {
     store.dispatch(fetchByGroup(slug))
     .then(() => {
       const [request, failure] = store.getActions();
-      expect(request).toEqual({ type: constants.TRANSACTIONS_REQUEST, slug });
+      expect(request).toEqual({ type: constants.TRANSACTIONS_REQUEST, slug, options });
       expect(failure.type).toEqual(constants.TRANSACTIONS_FAILURE);
-      expect(failure.error.message).toContain('request to http://localhost:3000/api/groups/1/expenses failed');
+      expect(failure.error.message).toContain('request to http://localhost:3000/api/groups/1/transactions failed');
       done();
     })
     .catch(done)

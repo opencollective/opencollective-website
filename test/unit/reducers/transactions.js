@@ -20,8 +20,8 @@ describe('transactions reducer', () => {
 
     expect(state).toEqual({
       ...transactions,
-      isDonation: [],
-      isExpense: []
+      donations: [],
+      expenses: []
     });
   });
 
@@ -37,8 +37,8 @@ describe('transactions reducer', () => {
 
     expect(state).toEqual({
       ...transactions,
-      isDonation: [],
-      isExpense: []
+      donations: [],
+      expenses: []
     });
   });
 
