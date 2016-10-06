@@ -27,7 +27,7 @@ describe('transactions/fetch_by_group actions', () => {
     .then(() => {
       const [request, success] = store.getActions();
       expect(request).toEqual({ type: constants.TRANSACTIONS_REQUEST, slug, options })
-      expect(success).toEqual({ type: constants.TRANSACTIONS_SUCCESS, slug, transactions: { 2: transaction } })
+      expect(success).toEqual({ type: constants.TRANSACTIONS_SUCCESS, slug, transactions: [ transaction ] })
       done();
     })
     .catch(done)
@@ -47,7 +47,7 @@ describe('transactions/fetch_by_group actions', () => {
       const [request, failure] = store.getActions();
       expect(request).toEqual({ type: constants.TRANSACTIONS_REQUEST, slug, options });
       expect(failure.type).toEqual(constants.TRANSACTIONS_FAILURE);
-      expect(failure.error.message).toContain('request to http://localhost:3000/api/groups/1/expenses failed');
+      expect(failure.error.message).toContain('request to http://localhost:3000/api/groups/1/transactions failed');
       done();
     })
     .catch(done)
