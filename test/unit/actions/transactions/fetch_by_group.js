@@ -18,7 +18,7 @@ describe('transactions/fetch_by_group actions', () => {
     const slug = 'testgroup';
 
     nock(env.API_ROOT)
-      .get(`/groups/${slug}/expenses`)
+      .get(`/groups/${slug}/transactions`)
       .reply(200, [transaction]);
 
     const store = mockStore({});
@@ -37,7 +37,7 @@ describe('transactions/fetch_by_group actions', () => {
     const slug = 1;
 
     nock(env.API_ROOT)
-      .get(`/groups/${slug}/expenses`)
+      .get(`/groups/${slug}/transactions`)
       .replyWithError('');
 
     const store = mockStore({});
