@@ -6,7 +6,6 @@ import Currency from './Currency';
 export default ({
   options,
   group,
-  users,
   i18n,
   href
 }) => {
@@ -31,7 +30,7 @@ export default ({
       {options.backers && (
         <div className='Widget-backers'>
           <h2>Meet our backers</h2>
-          <UsersList users={users} i18n={i18n} />
+          <UsersList users={group.backers} i18n={i18n} />
         </div>
       )}
 

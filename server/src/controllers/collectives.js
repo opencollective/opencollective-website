@@ -4,6 +4,7 @@ import { renderToString } from 'react-dom/server';
 import api from '../lib/api';
 import Widget from '../../../frontend/src/components/Widget';
 import i18n from '../../../frontend/src/lib/i18n';
+import filterCollection from '../../../frontend/src/lib/filter_collection';
 
 /**
  * Show the widget of a collective
@@ -16,6 +17,9 @@ const widget = (req, res, next) => {
     api.get(`/groups/${group.slug}/users`)
   ])
   .then(([transactions, users]) => {
+
+    group.backers = filterCollection(users, { role: 'BACKER' });
+
     const props = {
       options: {
         header: (req.query.header !== 'false'),
@@ -26,7 +30,6 @@ const widget = (req, res, next) => {
       group,
       i18n: i18n('en'),
       transactions,
-      users,
       href: `${config.host.website}/${group.slug}`
     };
 
