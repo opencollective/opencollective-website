@@ -1,5 +1,4 @@
 import React from 'react';
-import Markdown from '../components/Markdown';
 
 // Taken from `react-contenteditable` module
 
