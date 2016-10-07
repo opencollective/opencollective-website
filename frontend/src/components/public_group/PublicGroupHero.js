@@ -9,7 +9,6 @@ import processMarkdown from '../../lib/process_markdown';
 
 import ContentEditable from '../../components/ContentEditable';
 import UserPhoto from '../../components/UserPhoto';
-import filterCollection from '../../lib/filter_collection';
 import formatCurrency from '../../lib/format_currency';
 
 const DEFAULT_BACKGROUND_IMAGE = '/static/images/collectives/default-header-bg.jpg';
