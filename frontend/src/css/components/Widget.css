@@ -1,11 +1,6 @@
 .Widget {
-  background: white;
-  margin: 1rem;
+  background: transparent;
   padding: 1rem;
-  background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(255,255,255,1) 85%,rgba(255,255,255,0) 100%);
-  -webkit-box-shadow: 0 0 2px 0 rgba(0,0,0,.2);
-  box-shadow: 0 0 2px 0 rgba(0,0,0,.2);
-  border-top: 3px solid var(--gray);
 }
 
 .Widget-header {
@@ -29,5 +24,7 @@
 }
 
 .Widget-button {
+  margin: 0 auto;
+  margin: 2rem 0rem 1rem 0rem;
   background: var(--green);
 }
