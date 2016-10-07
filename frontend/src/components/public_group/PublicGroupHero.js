@@ -9,7 +9,8 @@ import processMarkdown from '../../lib/process_markdown';
 
 import ContentEditable from '../../components/ContentEditable';
 import UserPhoto from '../../components/UserPhoto';
-
+import filterCollection from '../../lib/filter_collection';
+import formatCurrency from '../../lib/format_currency';
 
 const DEFAULT_BACKGROUND_IMAGE = '/static/images/collectives/default-header-bg.jpg';
 
@@ -81,7 +82,7 @@ export default class PublicGroupHero extends Component {
                 placeholder={i18n.getString('defaultMission')}/>
             </h1>
             <a href='#support' className='mb3 -btn -btn-big -bg-green -ttu -ff-sec -fw-bold'>{ i18n.getString('bePart') }</a>
-            { this.renderContributorCount() }
+            {this.renderHeroStatistics()}
             <p className='h6'>{ i18n.getString('scrollDown') }</p>
             <svg width='14' height='9'>
               <use xlinkHref='#svg-arrow-down' stroke='#fff'/>
@@ -139,5 +140,45 @@ export default class PublicGroupHero extends Component {
             </div>
       </div>
           )
+  }
+
+  renderHeroStatistics() {
+    const { group, i18n } = this.props;
+    const yearlyIncome = group.yearlyIncome / 100;
+    const formattedYearlyIncome = yearlyIncome && formatCurrency(yearlyIncome, group.currency, { compact: true, precision: 0 });
+
+    let tierCountString;
+    const tierCountStringArray = group.tiers.slice()
+      .sort((tierA, tierB) => tierB.range[0] - tierA.range[0])
+      .map(tier => {
+        const count = filterCollection(group.backers, {tier: tier.name}).length;
+        return (count) ? `${count} ${count === 1 ? tier.name : `${tier.name}s`}` : '';
+      })
+      .filter(x => x);
+
+    if (tierCountStringArray.length > 1) {
+      if (tierCountStringArray.length > 2) {
+        const lastCountString = tierCountStringArray.pop();
+        tierCountString = `${tierCountStringArray.join(', ')} ${i18n.getString('and')} ${lastCountString}`
+      } else {
+        tierCountString = tierCountStringArray.join(` ${i18n.getString('and')} `);
+      }
+    } else {
+      tierCountString = tierCountStringArray[0];
+    }
+    return (tierCountString &&
+      <div className='PublicGroupHero-backer-statistics'>
+        <div className='PublicGroupHero-backer-count-text'>
+          {i18n.getString('weHave')} {tierCountString}
+          {yearlyIncome > 0 && ` ${i18n.getString('thatProvideYearlyBudget')}`}
+        </div>
+        {yearlyIncome > 0 && (
+            <div className='PublicGroupHero-backer-yearly-budget'>
+              {formattedYearlyIncome.split('').map((character) => <span className={/[^0-9]/.test(character) ? '-character' : '-digit'}>{character}</span>)}
+            </div>
+          )
+        }
+      </div>
+    )
   }
 }
