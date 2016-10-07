@@ -1,5 +1,4 @@
 import React from 'react';
-import Markdown from '../components/Markdown';
 
 // Taken from `react-contenteditable` module
 
@@ -11,13 +10,9 @@ export default class ContentEditable extends React.Component {
   }
 
   render() {
-    const { disabled, format, className, tagName, ...props } = this.props;
+    const { disabled, className, tagName, ...props } = this.props;
 
     const html = this.props.html || '';
-
-    if (format === 'markdown' && disabled) {
-      return (<Markdown {...this.props} value={html} />);
-    }
 
     return React.createElement(
       tagName || 'div',
@@ -48,7 +43,7 @@ export default class ContentEditable extends React.Component {
   }
 
   componentDidUpdate() {
-    const { 
+    const {
       html = ''
     } = this.props;
 
