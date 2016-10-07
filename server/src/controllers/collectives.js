@@ -4,6 +4,7 @@ import { renderToString } from 'react-dom/server';
 import api from '../lib/api';
 import Widget from '../../../frontend/src/components/Widget';
 import i18n from '../../../frontend/src/lib/i18n';
+import { BACKER } from '../../../frontend/src/constants/roles';
 
 /**
  * Show the widget of a collective
@@ -26,7 +27,7 @@ const widget = (req, res, next) => {
       group,
       i18n: i18n('en'),
       transactions,
-      users,
+      users: users.filter(u => u.role === BACKER),
       href: `${config.host.website}/${group.slug}`
     };
 
