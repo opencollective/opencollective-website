@@ -116,7 +116,7 @@
     }
   }
   .PublicGroupHero-backer-statistics {
-    width: 300px;
+    width: 200px;
     margin: auto;
   }
   .PublicGroupHero-backer-count-number {
@@ -125,7 +125,7 @@
   }
   .PublicGroupHero-backer-count-text {
     font-family: Lato;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1.5;
     color: #ffffff;
     b {

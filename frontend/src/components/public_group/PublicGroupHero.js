@@ -9,7 +9,6 @@ import processMarkdown from '../../lib/process_markdown';
 
 import ContentEditable from '../../components/ContentEditable';
 import UserPhoto from '../../components/UserPhoto';
-import filterCollection from '../../lib/filter_collection';
 import formatCurrency from '../../lib/format_currency';
 
 const DEFAULT_BACKGROUND_IMAGE = '/static/images/collectives/default-header-bg.jpg';
@@ -147,30 +146,15 @@ export default class PublicGroupHero extends Component {
     const yearlyIncome = group.yearlyIncome / 100;
     const formattedYearlyIncome = yearlyIncome && formatCurrency(yearlyIncome, group.currency, { compact: true, precision: 0 });
 
-    let tierCountString;
-    const tierCountStringArray = group.tiers.slice()
-      .sort((tierA, tierB) => tierB.range[0] - tierA.range[0])
-      .map(tier => {
-        const count = filterCollection(group.backers, {tier: tier.name}).length;
-        return (count) ? `${count} ${count === 1 ? tier.name : `${tier.name}s`}` : '';
-      })
-      .filter(x => x);
+    const totalMembers = group.contributorsCount + group.backersCount;
+    const counterString = ` ${totalMembers} ${i18n.getString('contributors')} ${i18n.getString('and')}`;
 
-    if (tierCountStringArray.length > 1) {
-      if (tierCountStringArray.length > 2) {
-        const lastCountString = tierCountStringArray.pop();
-        tierCountString = `${tierCountStringArray.join(', ')} ${i18n.getString('and')} ${lastCountString}`
-      } else {
-        tierCountString = tierCountStringArray.join(` ${i18n.getString('and')} `);
-      }
-    } else {
-      tierCountString = tierCountStringArray[0];
-    }
-    return (tierCountString &&
+    return (
       <div className='PublicGroupHero-backer-statistics'>
         <div className='PublicGroupHero-backer-count-text'>
-          {i18n.getString('weHave')} {tierCountString}
-          {yearlyIncome > 0 && ` ${i18n.getString('thatProvideYearlyBudget')}`}
+          {i18n.getString('weHave')}
+          {counterString}
+          {yearlyIncome > 0 && ` ${i18n.getString('aYearlyBudgetOf')}`}
         </div>
         {yearlyIncome > 0 && (
             <div className='PublicGroupHero-backer-yearly-budget'>
