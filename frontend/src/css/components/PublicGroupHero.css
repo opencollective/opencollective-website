@@ -115,24 +115,24 @@
       opacity: .8;
     }
   }
-  .PublicGroupHero-contributor-statistics {
-    width: 300px;
+  .PublicGroupHero-backer-statistics {
+    width: 200px;
     margin: auto;
   }
-  .PublicGroupHero-contributor-count-number {
+  .PublicGroupHero-backer-count-number {
     font-weight: bold;
     font-size: 2rem;
   }
-  .PublicGroupHero-contributor-count-text {
+  .PublicGroupHero-backer-count-text {
     font-family: Lato;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1.5;
     color: #ffffff;
     b {
       font-size: 14px;
     }
   }
-  .PublicGroupHero-contributor-count {
+  .PublicGroupHero-backer-yearly-budget {
     margin-top: 14px;
     margin-bottom: 44px;
     .-character {

@@ -377,6 +377,10 @@ function mapStateToProps({
   group.backers = usersByRole[roles.BACKER] || [];
   group.host = group.hosts[0] || {};
   group.backersCount = group.backers.length;
+
+  group.contributors = (group.data && group.data.githubContributors) ? formatGithubContributors(group.data.githubContributors) : [];
+  group.contributorsCount = group.contributors.length;
+
   group.donations = filterCollection(donations, { GroupId: group.id });
   group.expenses = filterCollection(expenses, { GroupId: group.id });
   group.tiers = group.tiers || DEFAULT_GROUP_TIERS;
