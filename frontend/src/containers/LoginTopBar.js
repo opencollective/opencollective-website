@@ -13,13 +13,12 @@ export class LoginTopBar extends Component {
     this.state = {
       showProfileMenu: false
     };
-    this.showCreateBtn = false;
   }
 
   renderLinks() {
     return (
       <ul className='LoginTopBar-Links'>
-        {this.showCreateBtn && <li><a className='LoginTopBarButton' href='/create'>create a collective</a></li>}
+        <li><a className='LoginTopBarButton' href='/create'>create a collective</a></li>
         <li><a className='LoginTopBarLink' href='/discover'>Discover</a></li>
       </ul>
     )
@@ -36,7 +35,7 @@ export class LoginTopBar extends Component {
             <div className='-dash'></div>
           </div>
           <ul>
-          {this.showCreateBtn && <li><a href='/create'>create a collective</a></li>}
+          <li><a href='/create'>create a collective</a></li>
             <li><a href='/discover'>Discover</a></li>
             <li><a href='#' onClick={this.onClickSubscriptions.bind(this)}>Subscriptions</a></li>
           </ul>
