@@ -30,7 +30,7 @@ const widget = (req, res, next) => {
       group,
       i18n: i18n('en'),
       transactions,
-      href: `${config.host.website}/${group.slug}`
+      href: `${config.host.website}/${group.slug}#support`
     };
 
     const html = renderToString(<Widget {...props} />);
