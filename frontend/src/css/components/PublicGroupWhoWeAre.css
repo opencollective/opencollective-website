@@ -68,6 +68,12 @@
       h1 {
         padding-top: 3rem;
       }
+      .CustomTextArea {
+        textarea {
+          width: 100%;
+        }
+      }
+
     }
   }
 }
