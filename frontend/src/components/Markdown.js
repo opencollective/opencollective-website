@@ -17,13 +17,14 @@ export default class Markdown extends Component {
       value,
       className,
       onChange,
-      i18n
+      i18n,
+      canEdit
     } = this.props;
 
     if (!this.state.editMode) {
       return (
         <div
-          className={className}
+          className={ `${className} ${canEdit ? 'ContentEditable ContentEditable--enabled': ''}` }
           dangerouslySetInnerHTML={ this.rawMarkup(value)}
           onClick={ this.onClick } />
       );
