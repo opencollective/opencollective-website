@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { Sticky } from 'react-sticky';
+
 import fetch from 'isomorphic-fetch';
 
 import LoginTopBar from '../../containers/LoginTopBar';
@@ -85,7 +87,7 @@ export default class PublicGroupHero extends Component {
           </div>
         </div>
 
-        <div ref='PublicGroupHero-backgroundImage' className='PublicGroupHero-menu absolute left-0 right-0 bottom-0'>
+        <Sticky stickyStyle={{width:'100%',left:0}} ref='PublicGroupHero-backgroundImage' className='PublicGroupHero-menu absolute left-0 right-0 bottom-0'>
           <nav>
             <ul className='list-reset m0 -ttu center'>
               {titles.map(title =>
@@ -113,7 +115,7 @@ export default class PublicGroupHero extends Component {
               }
             </ul>
           </nav>
-        </div>
+        </Sticky>
       </section>
     );
   }

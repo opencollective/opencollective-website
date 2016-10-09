@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { StickyContainer } from 'react-sticky';
+
 import merge from 'lodash/merge';
 
 import filterCollection from '../lib/filter_collection';
@@ -109,33 +111,35 @@ export class PublicGroup extends Component {
     return (
       <div className={`PublicGroup ${ group.slug }`}>
         <Notification />
-        {editingInProgress && <EditTopBar onSave={ this.saveGroupRef } onCancel={ this.cancelGroupEditsRef }/>}
-        <PublicGroupHero group={ group } {...this.props} />
-        <PublicGroupWhoWeAre group={ group } {...this.props} />
+        <StickyContainer>
+          {editingInProgress && <EditTopBar onSave={ this.saveGroupRef } onCancel={ this.cancelGroupEditsRef }/>}
+          <PublicGroupHero group={ group } {...this.props} />
+          <PublicGroupWhoWeAre group={ group } {...this.props} />
 
-        {group.slug === 'opensource' && <PublicGroupOpenSourceCTA />}
+          {group.slug === 'opensource' && <PublicGroupOpenSourceCTA />}
 
-        {group.members.length > 0 && <PublicGroupMembersWall group={group} {...this.props} />}
-        {group.contributors && <PublicGroupContributors contributors={ group.contributors } i18n={i18n} />}
+          {group.members.length > 0 && <PublicGroupMembersWall group={group} {...this.props} />}
+          {group.contributors && <PublicGroupContributors contributors={ group.contributors } i18n={i18n} />}
 
-        {hasHost && group.whyJoin && <PublicGroupWhyJoin group={ group } {...this.props} />}
+          {hasHost && group.whyJoin && <PublicGroupWhyJoin group={ group } {...this.props} />}
 
-        <div className='bg-light-gray px2'>
-          {hasHost && <PublicGroupJoinUs {...this.props} donateToGroup={this.donateToGroupRef} {...this.props} />}
-          {!hasHost && canEditGroup && <PublicGroupApplyToManageFunds {...this.props} />}
-        </div>
-        {hasHost &&
-          <PublicGroupExpensesAndActivity
-            group={ group }
-            itemsToShow={ NUM_TRANSACTIONS_TO_SHOW }
-            {...this.props} /> }
+          <div className='bg-light-gray px2'>
+            {hasHost && <PublicGroupJoinUs {...this.props} donateToGroup={this.donateToGroupRef} {...this.props} />}
+            {!hasHost && canEditGroup && <PublicGroupApplyToManageFunds {...this.props} />}
+          </div>
+          {hasHost &&
+            <PublicGroupExpensesAndActivity
+              group={ group }
+              itemsToShow={ NUM_TRANSACTIONS_TO_SHOW }
+              {...this.props} /> }
 
-        {hasHost &&
-          <section id='related-groups' className='px2'>
-            <RelatedGroups groupList={ group.related } {...this.props} />
-          </section> }
-        <PublicFooter />
-        {this.renderDonationFlow()}
+          {hasHost &&
+            <section id='related-groups' className='px2'>
+              <RelatedGroups groupList={ group.related } {...this.props} />
+            </section> }
+          <PublicFooter />
+          {this.renderDonationFlow()}
+        </StickyContainer>
       </div>
     )
   }
