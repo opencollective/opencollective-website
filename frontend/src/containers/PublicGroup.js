@@ -58,15 +58,7 @@ const DEFAULT_GROUP_SETTINGS = {
     precision: 2
   }
 };
-const DEFAULT_GROUP_TIERS = [{
-  name: 'backer',
-  title: 'Backers',
-  description: 'Support us with a monthly donation and help us continue our activities.',
-  presets: [1, 5, 10, 50, 100],
-  range: [1, 1000000],
-  interval: 'monthly',
-  button: 'Become a backer'
-}];
+
 // Formats results for `ContributorList` component
 // Sorts results, giving precedence to `core` Boolean first, then Number of `commits`
 const formatGithubContributors = (githubContributors) => {
@@ -123,10 +115,10 @@ export class PublicGroup extends Component {
 
         {group.slug === 'opensource' && <PublicGroupOpenSourceCTA />}
 
-        <PublicGroupMembersWall group={group} {...this.props} />
+        {group.members.length > 0 && <PublicGroupMembersWall group={group} {...this.props} />}
         {group.contributors && <PublicGroupContributors contributors={ group.contributors } i18n={i18n} />}
 
-        {group.slug !== 'opensource' && hasHost && <PublicGroupWhyJoin group={ group } {...this.props} />}
+        {hasHost && group.whyJoin && <PublicGroupWhyJoin group={ group } {...this.props} />}
 
         <div className='bg-light-gray px2'>
           {hasHost && <PublicGroupJoinUs {...this.props} donateToGroup={this.donateToGroupRef} {...this.props} />}
@@ -386,7 +378,6 @@ function mapStateToProps({
 
   group.donations = filterCollection(donations, { GroupId: group.id });
   group.expenses = filterCollection(expenses, { GroupId: group.id });
-  group.tiers = group.tiers || DEFAULT_GROUP_TIERS;
   group.settings = group.settings || DEFAULT_GROUP_SETTINGS;
 
   if (group.name && window.document) 

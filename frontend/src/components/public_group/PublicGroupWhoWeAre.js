@@ -44,7 +44,7 @@ export default class PublicGroupWhoWeAre extends Component {
             </div>
           )}
 
-          <div ref='PublicGroupWhoWeAre-longDescription' className='PublicGroupWhoWeAre-long-description'>
+          <div ref='PublicGroupWhoWeAre-longDescription' className='PublicGroup-markdown'>
             <Markdown
               value={ (longDescription === '' || longDescription) ? longDescription : group.longDescription }
               canEdit={ canEditGroup }

@@ -23,6 +23,8 @@ export default class PublicGroupJoinUs extends React.Component {
   render() {
     const { group, i18n } = this.props;
 
+    if (!group.tiers) return (<div />);
+
     return (
       <section id='join-us'>
         <div id='support'></div>
