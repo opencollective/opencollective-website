@@ -23,6 +23,8 @@ export default class ContributorList extends React.Component {
   const { contributors, i18n } = this.props;
   const { hovercard } = this.state;
 
+  if (contributors.length === 0) return (<div />);
+
   return (
     <div className='PublicGroup-os-contrib-container'>
       <div className='line1' >+{ contributors.length } {i18n.getString('contributorsOnGithub')}</div>

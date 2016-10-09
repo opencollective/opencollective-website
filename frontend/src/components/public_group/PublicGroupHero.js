@@ -149,6 +149,9 @@ export default class PublicGroupHero extends Component {
     const formattedYearlyIncome = yearlyIncome && formatCurrency(yearlyIncome, group.currency, { compact: true, precision: 0 });
 
     const totalMembers = group.contributorsCount + group.backersCount;
+
+    if (totalMembers === 0) return;
+
     const counterString = ` ${totalMembers} ${i18n.getString('contributors')} ${i18n.getString('and')}`;
 
     return (

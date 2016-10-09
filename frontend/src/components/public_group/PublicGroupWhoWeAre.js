@@ -52,14 +52,14 @@ export default class PublicGroupWhoWeAre extends Component {
               {...this.props} />
           </div>
 
-          {isSupercollective ? (
+          {isSupercollective  && group.superCollectiveData.length > 0 &&
             <div>
               <div className='Collectives-title mt0 mb2 -ff-sec -fw-light'>
                 {i18n.getString('DiscoverOurCollectives', { tag: group.settings.superCollectiveTag})}
               </div>
               <RelatedGroups title={' '} groupList={ group.superCollectiveData } {...this.props} />
             </div>
-            ) : null}
+          }
         </div>
       </section>
     );
