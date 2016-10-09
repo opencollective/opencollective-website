@@ -7,6 +7,8 @@ import groups from './groups';
 import users from './users';
 import notification from './notification';
 import transactions from './transactions';
+import expenses from './expenses';
+import donations from './donations';
 import session from './session';
 import subscriptions from './subscriptions';
 import images from './images';
@@ -24,6 +26,8 @@ export default combineReducers({
   session,
   subscriptions,
   transactions,
+  expenses,
+  donations,
   users,
   router,
   homepage,

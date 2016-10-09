@@ -9,7 +9,7 @@ import processMarkdown from '../../lib/process_markdown';
 
 import ContentEditable from '../../components/ContentEditable';
 import UserPhoto from '../../components/UserPhoto';
-
+import formatCurrency from '../../lib/format_currency';
 
 const DEFAULT_BACKGROUND_IMAGE = '/static/images/collectives/default-header-bg.jpg';
 
@@ -33,7 +33,6 @@ export default class PublicGroupHero extends Component {
 
   render() {
     const { group, i18n, session, hasHost, canEditGroup, groupForm, appendEditGroupForm} = this.props;
-
     const titles = Object.keys(processMarkdown(group.longDescription));
 
     const getAnchor = (title) => {
@@ -55,16 +54,18 @@ export default class PublicGroupHero extends Component {
         <div className='container relative center'>
           <LoginTopBar loginRedirectTo={ `/${ group.slug }` } />
           <div className='PublicGroupHero-content'>
-            <UserPhoto
-              editable={canEditGroup}
-              onChange={logo => {
-                if (logo !== group.logo)
-                  return appendEditGroupForm({logo})
-              }}
-              user={{ avatar: groupForm.attributes.logo || group.logo }}
-              className='PublicGroupHero-logo mb3 bg-contain'
-              presets={[]}
-              {...this.props} />
+            {group.logo &&
+              <UserPhoto
+                editable={canEditGroup}
+                onChange={logo => {
+                  if (logo !== group.logo)
+                    return appendEditGroupForm({logo})
+                }}
+                user={{ avatar: groupForm.attributes.logo || group.logo }}
+                className='PublicGroupHero-logo mb3 bg-contain'
+                presets={[]}
+                {...this.props} />
+            }
 
             <p ref='PublicGroupHero-name' className='PublicGroup-font-20 mt0 mb2'>{ i18n.getString('hiThisIs') }
               <a href={ group.website }> { group.name }</a> { i18n.getString('openCollective') }.
@@ -80,7 +81,7 @@ export default class PublicGroupHero extends Component {
                 placeholder={i18n.getString('defaultMission')}/>
             </h1>
             <a href='#support' className='mb3 -btn -btn-big -bg-green -ttu -ff-sec -fw-bold'>{ i18n.getString('bePart') }</a>
-            { this.renderContributorCount() }
+            {this.renderHeroStatistics()}
             <p className='h6'>{ i18n.getString('scrollDown') }</p>
             <svg width='14' height='9'>
               <use xlinkHref='#svg-arrow-down' stroke='#fff'/>
@@ -96,6 +97,11 @@ export default class PublicGroupHero extends Component {
                   <a href={`#${getAnchor(title)}`} className='block white -ff-sec -fw-bold'>{ title }</a>
                 </li>
               )}
+              {group.whyJoin &&
+                <li className='inline-block'>
+                  <a href={`#why-join`} className='block white -ff-sec -fw-bold'>{ i18n.getString('menuWhy') }</a>
+                </li>
+              }
               {hasHost &&
                 <li className='inline-block'>
                   <a href='#support' className='block white -ff-sec -fw-bold'>{ i18n.getString('menuSupportUs') }</a>
@@ -135,5 +141,30 @@ export default class PublicGroupHero extends Component {
             </div>
       </div>
           )
+  }
+
+  renderHeroStatistics() {
+    const { group, i18n } = this.props;
+    const yearlyIncome = group.yearlyIncome / 100;
+    const formattedYearlyIncome = yearlyIncome && formatCurrency(yearlyIncome, group.currency, { compact: true, precision: 0 });
+
+    const totalMembers = group.contributorsCount + group.backersCount;
+    const counterString = ` ${totalMembers} ${i18n.getString('contributors')} ${i18n.getString('and')}`;
+
+    return (
+      <div className='PublicGroupHero-backer-statistics'>
+        <div className='PublicGroupHero-backer-count-text'>
+          {i18n.getString('weHave')}
+          {counterString}
+          {yearlyIncome > 0 && ` ${i18n.getString('aYearlyBudgetOf')}`}
+        </div>
+        {yearlyIncome > 0 && (
+            <div className='PublicGroupHero-backer-yearly-budget'>
+              {formattedYearlyIncome.split('').map((character) => <span className={/[^0-9]/.test(character) ? '-character' : '-digit'}>{character}</span>)}
+            </div>
+          )
+        }
+      </div>
+    )
   }
 }

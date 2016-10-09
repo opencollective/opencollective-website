@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import RelatedGroups from '../../components/RelatedGroups';
 import { displayUrl } from '../../components/DisplayUrl';
 import ContentEditable from '../../components/ContentEditable';
+import Markdown from '../../components/Markdown';
 
 export default class PublicGroupWhoWeAre extends Component {
   render() {
@@ -15,7 +16,7 @@ export default class PublicGroupWhoWeAre extends Component {
     } = groupForm.attributes;
 
     return (
-      <section id='who-we-are' className='PublicGroupWhoWeAre PublicGroupIntro'>
+      <section id='intro' className='PublicGroupWhoWeAre PublicGroupIntro'>
         <div className='PublicGroupIntro-container PublicGroupWhoWeAre-container'>
           <h2 className='PublicGroupWhoWeAre-title'>{ `${i18n.getString('weAre')} ` }
             <ContentEditable
@@ -43,16 +44,12 @@ export default class PublicGroupWhoWeAre extends Component {
             </div>
           )}
 
-          <div ref='PublicGroupWhoWeAre-longDescription' className={`PublicGroupWhoWeAre-long-description`}>
-            {group.longDescription && (
-              <ContentEditable
-                className='ContentEditable-long-description'
-                html={ (longDescription === '' || longDescription) ? longDescription : group.longDescription }
-                format='markdown'
-                disabled={ !canEditGroup }
-                onChange={ event => appendEditGroupForm({longDescription: event.target.value}) }
-                placeholder={i18n.getString('defaultLongDescription')} />
-            )}
+          <div ref='PublicGroupWhoWeAre-longDescription' className='PublicGroupWhoWeAre-long-description'>
+            <Markdown
+              value={ (longDescription === '' || longDescription) ? longDescription : group.longDescription }
+              canEdit={ canEditGroup }
+              onChange = { longDescription => appendEditGroupForm({ longDescription })}
+              {...this.props} />
           </div>
 
           {isSupercollective ? (

@@ -13,16 +13,18 @@
 }
 
 .UsersList-name {
-  padding-top: calc(var(--spacing) / 2);
+  padding: .2rem 0rem;
   font-weight: bold;
   font-size: 0.9rem;
-  height: 1rem;
+  height: 1.2rem;
   overflow: hidden;
   margin: 0 auto;
 }
 
 .UsersList-tier {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
+  line-height: 1.1rem;
+  color: var(--dark-grey);
 }
 
 .UsersList-amount {

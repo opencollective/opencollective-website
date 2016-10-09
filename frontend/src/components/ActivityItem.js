@@ -23,11 +23,11 @@ export default class ActivityItem extends Component {
         <UserPhoto user={user} className='mt1' />
         <div className='ActivityItem-bubble relative flex-auto border bg-white ml2 p2'>
           <div className='flex'>
-            <p className='h5 flex-auto m0'>{donation.description}</p>
+            <p className='h5 flex-auto m0'>{donation.title}</p>
             <span className='h6 muted'>{donation.createdAt && i18n.moment(donation.createdAt).fromNow()}</span>
           </div>
           <p className='h3 mb0 mt2 -ff-sec -fw-bold'>
-            <Currency value={donation.amount} currency={donation.currency} colorify={false} />
+            <Currency value={donation.amount/100} currency={donation.currency} colorify={false} />
           </p>
         </div>
       </div>

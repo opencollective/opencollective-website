@@ -4,7 +4,7 @@ import moment from 'moment';
 import ProfilePhoto from './ProfilePhoto';
 import Currency from './Currency';
 
-export default ({transaction, user, precision=0}) => {
+export default ({donation, user, precision=0}) => {
 
   return (
     <div className='TransactionItem'>
@@ -14,14 +14,14 @@ export default ({transaction, user, precision=0}) => {
 
       <div className='TransactionItem-info'>
         <div className='TransactionItem-amount'>
-          <Currency value={getAmount(transaction)} currency={transaction.currency} precision={precision}/>
+          <Currency value={getAmount(donation)} currency={donation.currency} precision={precision}/>
         </div>
         <div className='TransactionItem-description'>
-          {transaction.title || transaction.description}
+          {donation.title || donation.description}
         </div>
 
         <div className='TransactionItem-created'>
-          {transaction.createdAt && moment(transaction.createdAt).fromNow()}
+          {donation.createdAt && moment(donation.createdAt).fromNow()}
         </div>
 
       </div>
@@ -29,6 +29,6 @@ export default ({transaction, user, precision=0}) => {
   );
 }
 
-function getAmount(transaction) {
-  return transaction.amount;
+function getAmount(donation) {
+  return donation.amount;
 }

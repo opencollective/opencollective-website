@@ -54,8 +54,7 @@
     .PublicGroupWhoWeAre-website {
       color: var(--light-blue);
       font-size: 1rem;
-      padding-top: 16px;
-      padding-top: 1rem;
+      margin: 1rem 0;
     }
     .PublicGroupWhoWeAre-long-description {
       font-size: 15px;
@@ -65,9 +64,16 @@
       margin: 0 auto;
       max-width: 768px;
       max-width: 48rem;
+      text-align: left;
       h1 {
         padding-top: 3rem;
       }
+      .CustomTextArea {
+        textarea {
+          width: 100%;
+        }
+      }
+
     }
   }
 }

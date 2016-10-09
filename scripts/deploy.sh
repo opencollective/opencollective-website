@@ -34,6 +34,9 @@ push_to_repo() {
   # get the latest from_branch
   get_latest_branch $from_branch
 
+  # clean local branches that have been merged
+  npm run git:clean
+
   if [ $patch = "1" ]
   then
     npm version patch

@@ -10,7 +10,21 @@ export default class CustomTextArea extends Component {
   }
 
   render() {
-    const { disabled, onBlur = () => {}, onChange, className, placeholder, prepend, value, maxLength, rows, cols, resize, name } = this.props;
+    const {
+      disabled,
+      onBlur,
+      onChange,
+      className,
+      placeholder,
+      prepend,
+      value,
+      maxLength,
+      rows,
+      cols,
+      resize,
+      name
+    } = this.props;
+
     const { hasScrollbar } = this.state;
     return (
       <div className={`CustomTextArea ${className} ${disabled ? 'CustomTextArea--disabled' : ''} ${hasScrollbar ? 'CustomTextArea-has-scrollbar' : ''}`}>
@@ -48,6 +62,12 @@ export default class CustomTextArea extends Component {
     const element = this.refs.textarea;
     this.setState({hasScrollbar: element.clientHeight < element.scrollHeight})
   }
+
+  componentDidMount() {
+    if (this.props.setFocus) {
+      this.refs.textarea.focus();
+    }
+  }
 }
 
 CustomTextArea.propTypes = {
@@ -69,5 +89,7 @@ CustomTextArea.defaultProps = {
   disabled: false,
   placeholder: '',
   resize: 'none',
-  value: ''
+  value: '',
+  onBlur: () => {},
+  setFocus: false
 }

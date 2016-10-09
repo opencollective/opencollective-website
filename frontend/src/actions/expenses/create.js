@@ -5,13 +5,13 @@ import * as constants from '../../constants/expenses';
  * Create an expense
  */
 
-export default (groupid, expense) => {
-  const url = `/groups/${groupid}/expenses/`;
+export default (slug, expense) => {
+  const url = `/groups/${slug}/expenses/`;
 
   return dispatch => {
-    dispatch(request(groupid, expense));
+    dispatch(request(slug, expense));
     return postJSON(url, {expense})
-      .then(json => dispatch(success(groupid, json)))
+      .then(json => dispatch(success(slug, json)))
       .catch(error => {
         dispatch(failure(error));
         throw new Error(error.message);
@@ -19,22 +19,22 @@ export default (groupid, expense) => {
   };
 };
 
-function request(groupid, expense) {
+function request(slug, expense) {
   return {
     type: constants.CREATE_EXPENSE_REQUEST,
-    groupid,
+    slug,
     expense
   };
 }
 
-function success(groupid, expense) {
+function success(slug, expense) {
   const expenses = {
     [expense.id]: expense
   };
 
   return {
     type: constants.CREATE_EXPENSE_SUCCESS,
-    groupid,
+    slug,
     expenses
   };
 }

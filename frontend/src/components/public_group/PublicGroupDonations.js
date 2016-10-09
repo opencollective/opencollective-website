@@ -5,7 +5,6 @@ import ActivityItem from '../../components/ActivityItem';
 export default class PublicGroupDonations extends React.Component {
   render() {
     const {
-      donations,
       users,
       group,
       i18n,
@@ -29,11 +28,11 @@ export default class PublicGroupDonations extends React.Component {
         <div className='border-bottom border-gray pb2 mb3'>
           <h2 className='PublicGroup-title m0 -ff-sec -fw-bold'>{i18n.getString('latestActivities')}</h2>
         </div>
-        {(donations.length === 0) && emptyState}
+        {(group.donations.length === 0) && emptyState}
         <div className='PublicGroup-transactions-list'>
-          {donations.map(donation => <ActivityItem key={`pgd_${donation.id}`} donation={donation} user={users[donation.UserId]} className='mb2' i18n={i18n} />)}
+          {group.donations.map(donation => <ActivityItem key={`pgd_${donation.id}`} donation={donation} user={users[donation.UserId]} className='mb2' i18n={i18n} />)}
         </div>
-        {(donations.length >= itemsToShow) && (
+        {(group.donations.length >= itemsToShow) && (
           <div className='center pt2'>
             <Link className='-btn -btn-medium -btn-outline -border-green -ttu -ff-sec -fw-bold' to={`/${group.slug}/donations`}>
               {i18n.getString('allActivities')}

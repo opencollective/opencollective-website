@@ -1,6 +1,6 @@
 {
   "name": "opencollective-website",
-  "version": "0.1.177",
+  "version": "0.1.184",
   "engines": {
     "node": "6.2.2",
     "npm": "3.9.5"
@@ -12,22 +12,22 @@
     ]
   },
   "scripts": {
-    "start": "NODE_CONFIG_DIR=./server/config node server/dist",
+    "start": "node server/dist",
     "dev": "npm run build && WEBSITE_PORT=3000 nf start -j Procfile_dev",
     "hint": "eslint '**/*.js' --quiet",
     "pretest": "npm run hint",
     "test": "npm run test:server && npm run test:unit",
-    "test:server": "NODE_CONFIG_DIR=./server/config mocha --opts test/unit/mocha.opts test/server",
-    "test:unit": "NODE_CONFIG_DIR=./server/config mocha test/unit/ --opts test/unit/mocha.opts --reporter-options mochaFile=$(bash scripts/test_output_dir.sh junit)/junit.xml",
+    "test:server": "mocha --opts test/unit/mocha.opts test/server",
+    "test:unit": "mocha test/unit/ --opts test/unit/mocha.opts --reporter-options mochaFile=$(bash scripts/test_output_dir.sh junit)/junit.xml",
     "posttest": "npm run test:e2e",
     "test:e2e": "npm run test:e2e:exec api:run website:run website:testE2E",
     "test:e2e:exec": "npm run rexec:api test_e2e.sh",
-    "nightwatch": "NODE_CONFIG_DIR=./server/config ./node_modules/nightwatch/bin/nightwatch --config nightwatch.json",
+    "nightwatch": "./node_modules/nightwatch/bin/nightwatch --config nightwatch.json",
     "build": "gulp build && npm run build:server && npm run build:frontend",
     "build:server": "rm -rf server/dist && mkdir server/dist && babel -D ./server/src -d ./server/dist",
     "build:frontend": "mkdir -p frontend/dist/js && browserify frontend/src/client.js | uglifyjs -cm --screw-ie8 > frontend/dist/js/bundle.js ",
     "watch:js": "mkdir -p frontend/dist/js && watchify frontend/src/client.js -o frontend/dist/js/bundle.js -dv",
-    "watch:server": "NODE_CONFIG_DIR=./server/config nodemon -e js,hbs -w server/src -w frontend/src",
+    "watch:server": "nodemon -e js,hbs -w server/src -w frontend/src",
     "watch:test": "mocha test/unit/ --opts test/unit/mocha.opts --watch",
     "postinstall": "bash scripts/postinstall.sh",
     "git:clean": "git branch --merged | grep -v \\* | grep -v master | grep -v dev | xargs -n 1 git branch -d",

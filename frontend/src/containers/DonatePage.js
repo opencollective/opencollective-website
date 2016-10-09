@@ -15,7 +15,7 @@ import PublicGroupSignup from '../components/public_group/PublicGroupSignupV2';
 import Tiers from '../components/Tiers';
 import getTier from '../lib/tiers';
 
-import fetchGroup from '../actions/groups/fetch_by_id';
+import fetchGroup from '../actions/groups/fetch_by_slug';
 import fetchUsers from '../actions/users/fetch_by_group';
 import donate from '../actions/groups/donate';
 import notify from '../actions/notification/notify';
@@ -91,9 +91,8 @@ export class DonatePage extends Component {
       fetchGroup
     } = this.props;
 
-    fetchGroup(group.id);
-
-    fetchUsers(group.id);
+    fetchGroup(group.slug);
+    fetchUsers(group.slug);
   }
 
   componentDidMount() {

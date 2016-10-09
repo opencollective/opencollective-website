@@ -2,29 +2,28 @@ import { get } from '../../lib/api';
 import * as constants from '../../constants/users';
 
 /**
- * Fetch multiple users in a group
+ * Fetch users from a group
  */
-
-export default (groupid) => {
+export default (slug) => {
   return dispatch => {
-    dispatch(request(groupid));
-    return get(`/groups/${groupid}/users`)
-    .then(json => dispatch(success(groupid, json)))
+    dispatch(request(slug));
+    return get(`/groups/${slug}/users`)
+    .then(json => dispatch(success(slug, json)))
     .catch(error => dispatch(failure(error)));
   };
 };
 
-function request(groupid) {
+function request(slug) {
   return {
     type: constants.FETCH_USERS_BY_GROUP_REQUEST,
-    groupid
+    slug
   };
 }
 
-function success(groupid, json) {
+function success(slug, json) {
   return {
     type: constants.FETCH_USERS_BY_GROUP_SUCCESS,
-    groupid,
+    slug,
     users: json
   };
 }

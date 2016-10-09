@@ -19,7 +19,7 @@ import i18n from '../lib/i18n';
 import roles from '../constants/roles';
 import PublicGroupThanks from '../components/PublicGroupThanks';
 
-import fetchGroup from '../actions/groups/fetch_by_id';
+import fetchGroup from '../actions/groups/fetch_by_slug';
 import notify from '../actions/notification/notify';
 import resetNotifications from '../actions/notification/reset';
 import decodeJWT from '../actions/session/decode_jwt';
@@ -62,7 +62,7 @@ export class SubmitExpense extends Component {
       fetchGroup
     } = this.props;
 
-    fetchGroup(group.id);
+    fetchGroup(group.slug);
 
   }
 
@@ -94,7 +94,7 @@ export function createExpenseFn() {
       // TODO should be specified by user
       currency: group.currency
     };
-    return createExpense(group.id, newExpense);
+    return createExpense(group.slug, newExpense);
   })
   .then(() => {
     window.scrollTo(0, 0);
@@ -143,8 +143,8 @@ function mapStateToProps({form, notification, images, groups}) {
     group,
     notification,
     expense,
-    categories: categories(group.id),
-    enableVAT: vats(group.id),
+    categories: categories(group.slug),
+    enableVAT: vats(group.slug),
     isUploading: images.isUploading || false,
     i18n: i18n(group.settings.lang || 'en')
   };
