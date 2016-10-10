@@ -479,7 +479,8 @@
     "membersWallText":"Your support allows us to keep going towards our mission. Thank you so much."
   },
   "railsgirlsatl": {
-    "coreContributors": "Rails Girls Board"
+    "coreContributors": "Rails Girls Board",
+    "contributor": "Board Member"
   },
   "freeridetovote":{
     "helpUsContinueOurActivities": "With your support, you will help more people get to the polling stations on November 8th to cast their vote.",
