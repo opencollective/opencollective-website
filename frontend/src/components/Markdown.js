@@ -35,12 +35,13 @@ export default class Markdown extends Component {
       return (
         <div>
           { this.sections_array.map(section =>
-            <div
-              className={`${className} section`}
-              id={formatAnchor(section.title)}
-              dangerouslySetInnerHTML={ this.rawMarkup(section.markdown)}
-              onClick={ this.onClick } />)
-          }
+            <div className='section' id={formatAnchor(section.title)}>
+              <div
+                className={`${className} container`}
+                dangerouslySetInnerHTML={ this.rawMarkup(section.markdown)}
+                onClick={ this.onClick } />
+            </div>
+          )}
         </div>);
     } else {
       return (

@@ -466,8 +466,12 @@
 
 .PublicGroup .section {
   padding: 1rem;
+  .container {
+    max-width: 768px;
+    margin: 0 auto;
+  }
 }
 
-.PublicGroup .section:nth-child(odd) {
+.PublicGroup .section:nth-child(even) {
   background-color:var(--light-gray);
 }

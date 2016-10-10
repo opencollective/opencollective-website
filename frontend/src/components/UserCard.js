@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import UserPhoto from './UserPhoto';
+import { formatAnchor } from '../lib/utils';
 
 export default class UserCard extends Component {
   static propTypes = { user: PropTypes.object };
@@ -29,7 +30,7 @@ export default class UserCard extends Component {
 
     const href = `https://opencollective.com/${user.username}`;
 
-    const roleLabel = (user.tier || user.role).toLowerCase();
+    const roleLabel = formatAnchor(user.tier || user.role);
     const addBadge = (roleLabel !== 'sponsor' && roleLabel !== 'member');
 
     return (
