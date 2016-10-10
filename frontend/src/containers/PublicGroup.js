@@ -389,6 +389,7 @@ function mapStateToProps({
   group.backgroundImage = processedMarkdown.params.cover || group.backgroundImage;
   group.logo = processedMarkdown.params.logo || group.logo;
   group.mission = processedMarkdown.params.mission || group.mission;
+  group.website = processedMarkdown.params.website || group.website;
 
   let button;
   if (processedMarkdown.params.button) {
