@@ -37,6 +37,7 @@ export default class Tiers extends Component {
     const stripeDescription =  `${formatCurrency(amount, currency, group.settings.formatCurrency)} ${frequencyHuman}`;
     const button = tier.button || `${i18n.getString('donate')} ${stripeDescription}`;
     const cancellationDisclaimer = (frequency !== 'one-time') ? i18n.getString('cancelAnytime') : "";
+    const description = tier.description || i18n.getString(`${tier.name}Description`);
 
     return (
       <div className='Tier' id={tier.name} key={`tier-${tier.name}`}>
@@ -44,7 +45,7 @@ export default class Tiers extends Component {
           {filterUsersByTier(group.backers, tier.name).map((user, index) => <UserCard user={user} key={index} className='m1' i18n={i18n} />)}
         </div>
 
-        <p>{tier.description}</p>
+        <p>{description}</p>
 
         {tier.presets && (
           <div>
@@ -107,12 +108,9 @@ export default class Tiers extends Component {
 
     const tiers = this.props.tiers || [{
         name: 'backer',
-        title: "Backers",
-        description: this.props.i18n.getString('defaultTierDescription'),
-        presets: [1, 5, 10, 50, 100],
-        range: [1, 1000000],
-        interval: 'monthly',
-        button: this.props.i18n.getString("defaultTierButton")
+        presets: [2, 5, 10, 50, 100],
+        range: [2, 1000000],
+        interval: 'monthly'
       }];
 
     return (

@@ -4,6 +4,7 @@ import AmountPicker from '../../components/public_group/AmountPicker';
 export default class PublicGroupJoinUs extends React.Component {
   _showTier(tier, index) {
     const { donateToGroup, i18n } = this.props;
+    const description = tier.description || i18n.getString(`${tier.name}Description`);
 
     return (
       <div className='md-col-6 col-12 px3 pb4 mb4 border-box flex' key={`${tier.name}_${index}`}>
@@ -12,7 +13,7 @@ export default class PublicGroupJoinUs extends React.Component {
             <span className='bg-light-gray px2 -fw-ultra-bold'>{i18n.getString('becomeA')} {tier.name}</span>
           </h3>
           <p className='PublicGroupJoinUs-tier-box-description h5 mt0 mb3 px3 flex justify-center items-center'>
-            {tier.description}
+            {description}
           </p>
           <AmountPicker tier={tier} onToken={donateToGroup.bind(this)} {...this.props}/>
         </div>
