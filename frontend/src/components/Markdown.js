@@ -13,11 +13,11 @@ export default class Markdown extends Component {
       editMode: false
     };
 
-    const sections = processMarkdown(this.props.value);
+    const { sections } = processMarkdown(this.props.value);
     this.sections_array = [];
     for (const title in sections) {
       const section = sections[title];
-      this.sections_array.push({title, markdown:`# ${title}\n\n${section}`});
+      this.sections_array.push({title, markdown:`${title !== 'intro' ? `# ${title}` : ''}\n\n${section}`});
     }
   }
 
@@ -26,8 +26,7 @@ export default class Markdown extends Component {
       value,
       className,
       onChange,
-      i18n,
-      canEdit
+      i18n
     } = this.props;
 
     if (!this.state.editMode) {

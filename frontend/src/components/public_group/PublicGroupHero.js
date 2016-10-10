@@ -35,7 +35,8 @@ export default class PublicGroupHero extends Component {
 
   render() {
     const { group, i18n, session, hasHost, canEditGroup, groupForm, appendEditGroupForm} = this.props;
-    const titles = Object.keys(processMarkdown(group.longDescription));
+    const { sections } = processMarkdown(group.longDescription);
+    const titles = Object.keys(sections);
 
     // We can override the default style for the cover image of a group in `group.settings`
     // e.g.
@@ -78,7 +79,7 @@ export default class PublicGroupHero extends Component {
                 onChange={event => appendEditGroupForm({mission: event.target.value})}
                 placeholder={i18n.getString('defaultMission')}/>
             </h1>
-            <a href='#support' className='mb3 -btn -btn-big -bg-green -ttu -ff-sec -fw-bold'>{ i18n.getString('bePart') }</a>
+            <a href={group.button.href} className='mb3 -btn -btn-big -bg-green -ttu -ff-sec -fw-bold'>{ group.button.label }</a>
             {this.renderHeroStatistics()}
             <p className='h6'>{ i18n.getString('scrollDown') }</p>
             <svg width='14' height='9'>

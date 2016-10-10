@@ -6,11 +6,12 @@ import { StickyContainer } from 'react-sticky';
 import merge from 'lodash/merge';
 
 import filterCollection from '../lib/filter_collection';
-import i18n from '../lib/i18n';
+import i18nlib from '../lib/i18n';
 import profileSchema from '../joi_schemas/profile';
 import editGroupSchema from '../joi_schemas/editGroup';
 import roles from '../constants/roles';
 import { canEditGroup } from '../lib/admin';
+import processMarkdown from '../lib/process_markdown';
 
 import appendDonationForm from '../actions/form/append_donation';
 import appendProfileForm from '../actions/form/append_profile';
@@ -384,6 +385,20 @@ function mapStateToProps({
   group.expenses = filterCollection(expenses, { GroupId: group.id });
   group.settings = group.settings || DEFAULT_GROUP_SETTINGS;
 
+  const processedMarkdown = processMarkdown(group.longDescription);
+  group.backgroundImage = processedMarkdown.params.cover || group.backgroundImage;
+  group.logo = processedMarkdown.params.logo || group.logo;
+  group.mission = processedMarkdown.params.mission || group.mission;
+
+  let button;
+  if (processedMarkdown.params.button) {
+    const tokens = processedMarkdown.params.button.match(/\[(.+)\]\((.+)\)/i);
+    button = { label: tokens[1], href: tokens[2] };
+  }
+
+  const i18n = i18nlib(group.settings.lang || 'en');
+  group.button = button || { label: i18n.getString('bePart'), href: '#support' };
+
   if (group.name && window.document) 
     document.title = `${group.name} is on Open Collective`;
 
@@ -401,7 +416,7 @@ function mapStateToProps({
     paypalIsDone: query.status === 'payment_success' && !!newUserId,
     newUser,
     hasFullAccount: newUser.hasFullAccount || false,
-    i18n: i18n(group.settings.lang || 'en'),
+    i18n,
     loadData: app.rendered,
     isSupercollective: group.isSupercollective,
     hasHost: group.hosts.length === 0 ? false : true,
