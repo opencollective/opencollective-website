@@ -1,0 +1,40 @@
+.GroupStatsHeader-backer-statistics {
+  width: 200px;
+  margin: auto;
+}
+.GroupStatsHeader-backer-count-number {
+  font-weight: bold;
+  font-size: 2rem;
+}
+.GroupStatsHeader-backer-count-text {
+  font-family: Lato;
+  font-size: 16px;
+  line-height: 1.5;
+  b {
+    font-size: 14px;
+  }
+}
+.GroupStatsHeader-backer-yearly-budget {
+  margin-top: 14px;
+  margin-bottom: 44px;
+  .-character {
+    font-family: Lato;
+    font-size: 22px;
+    font-weight: bold;
+    margin: 1px;
+  }
+  .-digit {
+    display: inline-block;
+    width: 20px;
+    height: 28px;
+    border-radius: 3px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border: solid 1px #000000;
+    font-family: Lato;
+    font-size: 22px;
+    color: #ffffff;
+    font-weight: bold;
+    line-height: 1.25;
+    margin: 1px;
+  }
+}

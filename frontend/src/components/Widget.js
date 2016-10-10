@@ -2,6 +2,7 @@ import React from 'react';
 
 import UsersList from './UsersList';
 import Currency from './Currency';
+import GroupStatsHeader from './GroupStatsHeader';
 
 export default ({
   options,
@@ -18,11 +19,8 @@ export default ({
           <h1>{group.name}</h1>
           <p>{group.description}</p>
 
-          <div className='Widget-balance'>
-            <Currency
-              value={group.balance/100}
-              currency={group.currency} />
-          </div>
+          <GroupStatsHeader group={group} i18n={i18n} />
+
           <div className='Widget-label'>Funds Raised</div>
         </div>
       )}

@@ -11,7 +11,7 @@ import processMarkdown from '../../lib/process_markdown';
 
 import ContentEditable from '../../components/ContentEditable';
 import UserPhoto from '../../components/UserPhoto';
-import formatCurrency from '../../lib/format_currency';
+import GroupStatsHeader from '../../components/GroupStatsHeader';
 
 const DEFAULT_BACKGROUND_IMAGE = '/static/images/collectives/default-header-bg.jpg';
 
@@ -80,7 +80,7 @@ export default class PublicGroupHero extends Component {
                 placeholder={i18n.getString('defaultMission')}/>
             </h1>
             <a href={group.button.href} className='mb3 -btn -btn-big -bg-green -ttu -ff-sec -fw-bold'>{ group.button.label }</a>
-            {this.renderHeroStatistics()}
+            <GroupStatsHeader group={group} i18n={i18n} />
             <p className='h6'>{ i18n.getString('scrollDown') }</p>
             <svg width='14' height='9'>
               <use xlinkHref='#svg-arrow-down' stroke='#fff'/>
@@ -142,31 +142,4 @@ export default class PublicGroupHero extends Component {
           )
   }
 
-  renderHeroStatistics() {
-    const { group, i18n } = this.props;
-    const yearlyIncome = group.yearlyIncome / 100;
-    const formattedYearlyIncome = yearlyIncome && formatCurrency(yearlyIncome, group.currency, { compact: true, precision: 0 });
-
-    const totalMembers = group.contributorsCount + group.backersCount;
-
-    if (totalMembers === 0) return;
-
-    const counterString = ` ${totalMembers} ${i18n.getString('contributors')} ${i18n.getString('and')}`;
-
-    return (
-      <div className='PublicGroupHero-backer-statistics'>
-        <div className='PublicGroupHero-backer-count-text'>
-          {i18n.getString('weHave')}
-          {counterString}
-          {yearlyIncome > 0 && ` ${i18n.getString('aYearlyBudgetOf')}`}
-        </div>
-        {yearlyIncome > 0 && (
-            <div className='PublicGroupHero-backer-yearly-budget'>
-              {formattedYearlyIncome.split('').map((character) => <span className={/[^0-9]/.test(character) ? '-character' : '-digit'}>{character}</span>)}
-            </div>
-          )
-        }
-      </div>
-    )
-  }
 }

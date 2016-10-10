@@ -71,6 +71,7 @@
 @import './components/ExpenseItem.css';
 @import './components/Field.css';
 @import './components/Grid.css';
+@import './components/GroupStatsHeader.css';
 @import './components/Icon.css';
 @import './components/ImagePicker.css';
 @import './components/ImageUpload.css';
