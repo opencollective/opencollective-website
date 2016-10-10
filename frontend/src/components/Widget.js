@@ -1,7 +1,6 @@
 import React from 'react';
 
 import UsersList from './UsersList';
-import Currency from './Currency';
 import GroupStatsHeader from './GroupStatsHeader';
 
 export default ({
