@@ -109,7 +109,7 @@ export default class PublicGroupHero extends Component {
               <li className='inline-block'>
                 <a href='#budget' className='block white -ff-sec -fw-bold'>{ i18n.getString('menuBudget') }</a>
               </li>
-              { canEditGroup &&
+              { group.backersCount > 0 && canEditGroup &&
                 <li className='inline-block xs-hide'>
                   <a href='#exportMembers' className='block white -ff-sec -fw-bold' onClick={ exportMembers.bind(this, session.user, group) } >Export members.csv</a>
                 </li>
