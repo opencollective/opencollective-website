@@ -1,31 +1,52 @@
 /**
  * This breaks down a markdown text into multiple pages
  * @PRE:
+ *   param1: value1
+ *   param2: value2
+ * 
  *   intro text
+ * 
  *   # title1
  *   Hello
  *   # title2
  *   World
  * @POST: {
- *  intro: "intro text",
- *  title1: "Hello",
- *  title2: "World"
+ *  sections: {
+ *    intro: "intro text",
+ *    title1: "Hello",
+ *    title2: "World"
+ *  },
+ *  params: {
+ *    "param1": "value1",
+ *    "param2": "value2"
+ *  }
  * }
  */
 export default function processMarkdown(text) {
 
-  if (!text) return { intro: '' };
+  const body = { sections: {}, params: {} };
+  if (!text) {
+    body.sections = { intro: '' };
+    return body;
+  }
 
-  const lines = text.split('\n');
+  const lines = text.trim().split('\n');
 
-  const body = {};
   let currentTitle = 'intro';
+  let isHeader = true;
   let paragraph = [];
   lines.forEach((line) => {
-    if (line.length <= 20) {
-      const match = line.match(/^# *([^#]{2,20})/i);
+    if (isHeader && line.match(/^[a-z]+:.+/i)) {
+      const tokens = line.match(/([^:]+):(.+)/);
+      body.params[tokens[1]] = tokens[2].trim();
+      return;
+    } else {
+      isHeader = false;
+    }
+    if (line.length <= 30) {
+      const match = line.match(/^# *([^#]{2,30})/i);
       if (match) {
-        body[currentTitle] = paragraph.join('\n').trim();
+        body.sections[currentTitle] = paragraph.join('\n').trim();
         currentTitle = match[1];
         paragraph = [];
         return;
@@ -33,7 +54,7 @@ export default function processMarkdown(text) {
     }
     paragraph.push(line);
   });
-  body[currentTitle] = paragraph.join('\n').trim();
+  body.sections[currentTitle] = paragraph.join('\n').trim();
 
   return body;
 }

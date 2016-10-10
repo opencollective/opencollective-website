@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import LoginTopBar from '../../containers/LoginTopBar';
 
 import BackerCard from './BackerCard';
-import ContributorList from './ContributorList';
+import PublicGroupContributors from './PublicGroupContributors';
 
 import UserCard from '../UserCard';
 import PublicFooter from '../PublicFooter';
@@ -92,7 +92,7 @@ export default class PublicGroupPending extends Component {
           <div className='line6'>We are the contributors of this collective nice to meet you.</div>
           <div className='PublicGroup-contrib-container'>
             <div className='line1' >Contributors</div>
-            <ContributorList contributors={ contributors } />
+            <PublicGroupContributors contributors={ contributors } />
           </div>
         </div>
       )

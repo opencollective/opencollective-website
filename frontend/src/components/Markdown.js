@@ -1,6 +1,8 @@
 import React, { PropTypes, Component } from 'react';
 import marked from 'marked';
 import CustomTextArea from './CustomTextArea';
+import processMarkdown from '../lib/process_markdown';
+import { formatAnchor } from '../lib/utils';
 
 export default class Markdown extends Component {
   constructor(props) {
@@ -10,6 +12,13 @@ export default class Markdown extends Component {
     this.state = {
       editMode: false
     };
+
+    const { sections } = processMarkdown(this.props.value);
+    this.sections_array = [];
+    for (const title in sections) {
+      const section = sections[title];
+      this.sections_array.push({title, markdown:`${title !== 'intro' ? `# ${title}` : ''}\n\n${section}`});
+    }
   }
 
   render() {
@@ -17,17 +26,22 @@ export default class Markdown extends Component {
       value,
       className,
       onChange,
-      i18n,
-      canEdit
+      i18n
     } = this.props;
 
     if (!this.state.editMode) {
+
+      // we split it into multiple sections
       return (
-        <div
-          className={ `${className} ${canEdit ? 'ContentEditable ContentEditable--enabled': ''}` }
-          dangerouslySetInnerHTML={ this.rawMarkup(value)}
-          onClick={ this.onClick } />
-      );
+        <div>
+          { this.sections_array.map(section =>
+            <div
+              className={`${className} section`}
+              id={formatAnchor(section.title)}
+              dangerouslySetInnerHTML={ this.rawMarkup(section.markdown)}
+              onClick={ this.onClick } />)
+          }
+        </div>);
     } else {
       return (
         <CustomTextArea

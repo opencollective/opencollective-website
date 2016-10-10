@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 
+import { Sticky } from 'react-sticky';
+
 import fetch from 'isomorphic-fetch';
 
 import LoginTopBar from '../../containers/LoginTopBar';
 import exportFile from '../../lib/export_file';
-import { resizeImage } from '../../lib/utils';
+import { resizeImage, formatAnchor } from '../../lib/utils';
 import processMarkdown from '../../lib/process_markdown';
 
 import ContentEditable from '../../components/ContentEditable';
 import UserPhoto from '../../components/UserPhoto';
-import formatCurrency from '../../lib/format_currency';
+import GroupStatsHeader from '../../components/GroupStatsHeader';
 
 const DEFAULT_BACKGROUND_IMAGE = '/static/images/collectives/default-header-bg.jpg';
 
@@ -33,11 +35,8 @@ export default class PublicGroupHero extends Component {
 
   render() {
     const { group, i18n, session, hasHost, canEditGroup, groupForm, appendEditGroupForm} = this.props;
-    const titles = Object.keys(processMarkdown(group.longDescription));
-
-    const getAnchor = (title) => {
-      return title.toLowerCase().replace(' ','-').replace(/[^a-z0-9\-]/gi,'')
-    }
+    const { sections } = processMarkdown(group.longDescription);
+    const titles = Object.keys(sections);
 
     // We can override the default style for the cover image of a group in `group.settings`
     // e.g.
@@ -80,8 +79,8 @@ export default class PublicGroupHero extends Component {
                 onChange={event => appendEditGroupForm({mission: event.target.value})}
                 placeholder={i18n.getString('defaultMission')}/>
             </h1>
-            <a href='#support' className='mb3 -btn -btn-big -bg-green -ttu -ff-sec -fw-bold'>{ i18n.getString('bePart') }</a>
-            {this.renderHeroStatistics()}
+            <a href={group.button.href} className='mb3 -btn -btn-big -bg-green -ttu -ff-sec -fw-bold'>{ group.button.label }</a>
+            <GroupStatsHeader group={group} i18n={i18n} />
             <p className='h6'>{ i18n.getString('scrollDown') }</p>
             <svg width='14' height='9'>
               <use xlinkHref='#svg-arrow-down' stroke='#fff'/>
@@ -89,12 +88,12 @@ export default class PublicGroupHero extends Component {
           </div>
         </div>
 
-        <div ref='PublicGroupHero-backgroundImage' className='PublicGroupHero-menu absolute left-0 right-0 bottom-0'>
+        <Sticky stickyStyle={{width:'100%',left:0}} ref='PublicGroupHero-backgroundImage' className='PublicGroupHero-menu absolute left-0 right-0 bottom-0'>
           <nav>
             <ul className='list-reset m0 -ttu center'>
               {titles.map(title =>
                 <li className='inline-block'>
-                  <a href={`#${getAnchor(title)}`} className='block white -ff-sec -fw-bold'>{ title }</a>
+                  <a href={`#${formatAnchor(title)}`} className='block white -ff-sec -fw-bold'>{ title }</a>
                 </li>
               )}
               {group.whyJoin &&
@@ -102,7 +101,7 @@ export default class PublicGroupHero extends Component {
                   <a href={`#why-join`} className='block white -ff-sec -fw-bold'>{ i18n.getString('menuWhy') }</a>
                 </li>
               }
-              {hasHost &&
+              {hasHost && group.tiers &&
                 <li className='inline-block'>
                   <a href='#support' className='block white -ff-sec -fw-bold'>{ i18n.getString('menuSupportUs') }</a>
                 </li>
@@ -110,14 +109,14 @@ export default class PublicGroupHero extends Component {
               <li className='inline-block'>
                 <a href='#budget' className='block white -ff-sec -fw-bold'>{ i18n.getString('menuBudget') }</a>
               </li>
-              { canEditGroup &&
+              { group.backersCount > 0 && canEditGroup &&
                 <li className='inline-block xs-hide'>
                   <a href='#exportMembers' className='block white -ff-sec -fw-bold' onClick={ exportMembers.bind(this, session.user, group) } >Export members.csv</a>
                 </li>
               }
             </ul>
           </nav>
-        </div>
+        </Sticky>
       </section>
     );
   }
@@ -130,10 +129,12 @@ export default class PublicGroupHero extends Component {
       contributorText = `${contributorText}s`;
     }
 
-    return group.backersCount > 0 && (
+    const totContributors = group.contributorsCount + group.backersCount;
+
+    return totContributors > 0 && (
        <div className='PublicGroupHero-contributor-statistics'>
             <div className='PublicGroupHero-contributor-count'>
-              {group.backersCount.toString().split('').map((character, index) => {
+              {totContributors.toString().split('').map((character, index) => {
                 return <span key={ index } className='PublicGroupHero-contributor-count-number'>{ character }</span>
               })} <div className='PublicGroupHero-contributor-count-text'>{ contributorText }</div>
             </div>
@@ -141,28 +142,4 @@ export default class PublicGroupHero extends Component {
           )
   }
 
-  renderHeroStatistics() {
-    const { group, i18n } = this.props;
-    const yearlyIncome = group.yearlyIncome / 100;
-    const formattedYearlyIncome = yearlyIncome && formatCurrency(yearlyIncome, group.currency, { compact: true, precision: 0 });
-
-    const totalMembers = group.contributorsCount + group.backersCount;
-    const counterString = ` ${totalMembers} ${i18n.getString('contributors')} ${i18n.getString('and')}`;
-
-    return (
-      <div className='PublicGroupHero-backer-statistics'>
-        <div className='PublicGroupHero-backer-count-text'>
-          {i18n.getString('weHave')}
-          {counterString}
-          {yearlyIncome > 0 && ` ${i18n.getString('aYearlyBudgetOf')}`}
-        </div>
-        {yearlyIncome > 0 && (
-            <div className='PublicGroupHero-backer-yearly-budget'>
-              {formattedYearlyIncome.split('').map((character) => <span className={/[^0-9]/.test(character) ? '-character' : '-digit'}>{character}</span>)}
-            </div>
-          )
-        }
-      </div>
-    )
-  }
 }

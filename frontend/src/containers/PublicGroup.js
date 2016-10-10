@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { StickyContainer } from 'react-sticky';
+
 import merge from 'lodash/merge';
 
 import filterCollection from '../lib/filter_collection';
-import i18n from '../lib/i18n';
+import i18nlib from '../lib/i18n';
 import profileSchema from '../joi_schemas/profile';
 import editGroupSchema from '../joi_schemas/editGroup';
 import roles from '../constants/roles';
 import { canEditGroup } from '../lib/admin';
+import processMarkdown from '../lib/process_markdown';
 
 import appendDonationForm from '../actions/form/append_donation';
 import appendProfileForm from '../actions/form/append_profile';
@@ -58,15 +61,7 @@ const DEFAULT_GROUP_SETTINGS = {
     precision: 2
   }
 };
-const DEFAULT_GROUP_TIERS = [{
-  name: 'backer',
-  title: 'Backers',
-  description: 'Support us with a monthly donation and help us continue our activities.',
-  presets: [1, 5, 10, 50, 100],
-  range: [1, 1000000],
-  interval: 'monthly',
-  button: 'Become a backer'
-}];
+
 // Formats results for `ContributorList` component
 // Sorts results, giving precedence to `core` Boolean first, then Number of `commits`
 const formatGithubContributors = (githubContributors) => {
@@ -76,6 +71,7 @@ const formatGithubContributors = (githubContributors) => {
       core: false,
       name: username,
       avatar: `https://avatars.githubusercontent.com/${ username }?s=64`,
+      href: `https://github.com/${username}`,
       stats: {
         c: commits,
         a: null,
@@ -105,11 +101,9 @@ export class PublicGroup extends Component {
       group,
       hasHost,
       canEditGroup,
-      editingInProgress
+      editingInProgress,
+      i18n
     } = this.props;
-
-    // `false` if there are no `group.data.githubContributors`
-    const contributors = (group.data && group.data.githubContributors) && formatGithubContributors(group.data.githubContributors);
 
     if (group.settings.pending) {
       return <PublicGroupPending group={ group } donateToGroup={ this.donateToGroupRef } {...this.props} />
@@ -118,33 +112,35 @@ export class PublicGroup extends Component {
     return (
       <div className={`PublicGroup ${ group.slug }`}>
         <Notification />
-        {editingInProgress && <EditTopBar onSave={ this.saveGroupRef } onCancel={ this.cancelGroupEditsRef }/>}
-        <PublicGroupHero group={ group } {...this.props} />
-        <PublicGroupWhoWeAre group={ group } {...this.props} />
+        <StickyContainer>
+          {editingInProgress && <EditTopBar onSave={ this.saveGroupRef } onCancel={ this.cancelGroupEditsRef }/>}
+          <PublicGroupHero group={ group } {...this.props} />
+          <PublicGroupWhoWeAre group={ group } {...this.props} />
 
-        {group.slug === 'opensource' && <PublicGroupOpenSourceCTA />}
+          {group.slug === 'opensource' && <PublicGroupOpenSourceCTA />}
 
-        {contributors && <PublicGroupContributors contributors={ contributors } />}
+          {group.members.length > 0 && <PublicGroupMembersWall group={group} {...this.props} />}
+          {group.contributors && <PublicGroupContributors contributors={ group.contributors } i18n={i18n} />}
 
-        {group.slug !== 'opensource' && hasHost && <PublicGroupWhyJoin group={ group } {...this.props} />}
+          {hasHost && group.whyJoin && <PublicGroupWhyJoin group={ group } {...this.props} />}
 
-        <div className='bg-light-gray px2'>
-          {hasHost && <PublicGroupJoinUs {...this.props} donateToGroup={this.donateToGroupRef} {...this.props} />}
-          {!hasHost && canEditGroup && <PublicGroupApplyToManageFunds {...this.props} />}
-          <PublicGroupMembersWall group={group} {...this.props} />
-        </div>
-        {hasHost &&
-          <PublicGroupExpensesAndActivity
-            group={ group }
-            itemsToShow={ NUM_TRANSACTIONS_TO_SHOW }
-            {...this.props} /> }
+          <div className='bg-light-gray px2'>
+            {hasHost && <PublicGroupJoinUs {...this.props} donateToGroup={this.donateToGroupRef} {...this.props} />}
+            {!hasHost && canEditGroup && <PublicGroupApplyToManageFunds {...this.props} />}
+          </div>
+          {hasHost &&
+            <PublicGroupExpensesAndActivity
+              group={ group }
+              itemsToShow={ NUM_TRANSACTIONS_TO_SHOW }
+              {...this.props} /> }
 
-        {hasHost &&
-          <section id='related-groups' className='px2'>
-            <RelatedGroups groupList={ group.related } {...this.props} />
-          </section> }
-        <PublicFooter />
-        {this.renderDonationFlow()}
+          {hasHost &&
+            <section id='related-groups' className='px2'>
+              <RelatedGroups groupList={ group.related } {...this.props} />
+            </section> }
+          <PublicFooter />
+          {this.renderDonationFlow()}
+        </StickyContainer>
       </div>
     )
   }
@@ -375,6 +371,10 @@ function mapStateToProps({
   group.hosts = usersByRole[roles.HOST] || [];
   group.members = usersByRole[roles.MEMBER] || [];
   group.backers = usersByRole[roles.BACKER] || [];
+
+  group.contributors = (group.data && group.data.githubContributors) ? formatGithubContributors(group.data.githubContributors) : [];
+  group.contributorsCount = group.contributors.length;
+
   group.host = group.hosts[0] || {};
   group.backersCount = group.backers.length;
 
@@ -383,8 +383,22 @@ function mapStateToProps({
 
   group.donations = filterCollection(donations, { GroupId: group.id });
   group.expenses = filterCollection(expenses, { GroupId: group.id });
-  group.tiers = group.tiers || DEFAULT_GROUP_TIERS;
   group.settings = group.settings || DEFAULT_GROUP_SETTINGS;
+
+  const processedMarkdown = processMarkdown(group.longDescription);
+  group.backgroundImage = processedMarkdown.params.cover || group.backgroundImage;
+  group.logo = processedMarkdown.params.logo || group.logo;
+  group.mission = processedMarkdown.params.mission || group.mission;
+  group.website = processedMarkdown.params.website || group.website;
+
+  let button;
+  if (processedMarkdown.params.button) {
+    const tokens = processedMarkdown.params.button.match(/\[(.+)\]\((.+)\)/i);
+    button = { label: tokens[1], href: tokens[2] };
+  }
+
+  const i18n = i18nlib(group.settings.lang || 'en');
+  group.button = button || { label: i18n.getString('bePart'), href: '#support' };
 
   if (group.name && window.document) 
     document.title = `${group.name} is on Open Collective`;
@@ -403,7 +417,7 @@ function mapStateToProps({
     paypalIsDone: query.status === 'payment_success' && !!newUserId,
     newUser,
     hasFullAccount: newUser.hasFullAccount || false,
-    i18n: i18n(group.settings.lang || 'en'),
+    i18n,
     loadData: app.rendered,
     isSupercollective: group.isSupercollective,
     hasHost: group.hosts.length === 0 ? false : true,

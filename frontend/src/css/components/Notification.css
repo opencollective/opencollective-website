@@ -6,7 +6,7 @@
   left: 0;
   right: 0;
   text-align: left;
-  z-index: 100;
+  z-index: 10001;
   opacity: 0.65;
 }
 

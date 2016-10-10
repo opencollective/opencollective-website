@@ -1,16 +1,5 @@
 .PublicGroupWhoWeAre {
   position: relative;
-  padding: 0 15px;
-  background-color: var(--light-gray);
-  &:before {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    height: 100%;
-    background-image: linear-gradient(#fff, var(--light-gray));
-  }
   .PublicGroupWhoWeAre-container {
     position: relative;
     padding-top: 6.25rem;
@@ -56,7 +45,7 @@
       font-size: 1rem;
       margin: 1rem 0;
     }
-    .PublicGroupWhoWeAre-long-description {
+    .PublicGroup-markdown {
       font-size: 15px;
       font-size: .9375rem;
       line-height: 27.008px;
@@ -66,7 +55,17 @@
       max-width: 48rem;
       text-align: left;
       h1 {
-        padding-top: 3rem;
+        margin-top: 3rem;
+        margin-bottom: 2rem;
+      }
+      h2 {
+        margin-bottom: 0.5rem;
+      }
+      h3 { 
+        margin-bottom: 0;
+      }
+      p {
+        margin-top: 0;
       }
       .CustomTextArea {
         textarea {

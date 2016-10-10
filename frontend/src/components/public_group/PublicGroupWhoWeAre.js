@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import RelatedGroups from '../../components/RelatedGroups';
-import UserCard from '../../components/UserCard';
 import { displayUrl } from '../../components/DisplayUrl';
 import ContentEditable from '../../components/ContentEditable';
 import Markdown from '../../components/Markdown';
@@ -9,7 +8,6 @@ import Markdown from '../../components/Markdown';
 export default class PublicGroupWhoWeAre extends Component {
   render() {
     const { group, i18n, isSupercollective, canEditGroup, appendEditGroupForm, groupForm } = this.props;
-    const title = i18n.getString('coreContributors');
 
     const {
       name,
@@ -46,7 +44,7 @@ export default class PublicGroupWhoWeAre extends Component {
             </div>
           )}
 
-          <div ref='PublicGroupWhoWeAre-longDescription' className='PublicGroupWhoWeAre-long-description'>
+          <div ref='PublicGroupWhoWeAre-longDescription' className='PublicGroup-markdown'>
             <Markdown
               value={ (longDescription === '' || longDescription) ? longDescription : group.longDescription }
               canEdit={ canEditGroup }
@@ -54,27 +52,14 @@ export default class PublicGroupWhoWeAre extends Component {
               {...this.props} />
           </div>
 
-          {group.members.length ? (
-            <div className='PublicGroup-members pt4'>
-              <h3 className='PublicGroup-subtitle mt0 mb2 -ff-sec -fw-light'>{ title }</h3>
-              <div ref='PublicGroupWhoWeAre-members' className='flex flex-wrap justify-center'>
-                {group.members.map((user, index) => {
-                  if (group.slug === 'opensource') user.tier = 'collective';
-                  return <UserCard ref={`UserCard-${ index }`}  user={ user } key={ index } className='m1' i18n={ i18n } />
-                  })
-                }
-              </div>
-            </div>
-          ) : null}
-
-          {isSupercollective ? (
+          {isSupercollective  && group.superCollectiveData.length > 0 &&
             <div>
               <div className='Collectives-title mt0 mb2 -ff-sec -fw-light'>
                 {i18n.getString('DiscoverOurCollectives', { tag: group.settings.superCollectiveTag})}
               </div>
               <RelatedGroups title={' '} groupList={ group.superCollectiveData } {...this.props} />
             </div>
-            ) : null}
+          }
         </div>
       </section>
     );

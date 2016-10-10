@@ -126,7 +126,6 @@
   right: 0;
   bottom: 0;
   height: 15rem;
-  background-image: linear-gradient(var(--light-gray), #fff);
 }
 
 .PublicGroupBackers {
@@ -275,9 +274,8 @@
 
 .PublicGroup-os-contrib-container {
   text-align: center;
-  padding-top: 20px;
-  padding-bottom: 100px;
-  background-color: #F9FAFA;
+  padding: 40px 0px;
+  background-color:var(--light-gray);
   .line1 {
     font-family: montserratlight;
     font-size: 22px;
@@ -464,4 +462,12 @@
 
 .PublicFooter {
   margin-top: 20px;
+}
+
+.PublicGroup .section {
+  padding: 1rem;
+}
+
+.PublicGroup .section:nth-child(odd) {
+  background-color:var(--light-gray);
 }
