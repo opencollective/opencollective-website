@@ -9,12 +9,16 @@ const cloudinaryUrl = (url) => {
 export default class UserPhoto extends React.Component {
 
   componentDidMount() {
-    const { user } = this.props;
+    const { user, fallbackOnError } = this.props;
     if (user.avatar) {
-      const image = new Image();
-      image.onerror = () => this.setState({avatar: getAvatarByNumber(user.id)});
-      image.onload = () => this.setState({avatar: user.avatar});
-      image.src = user.avatar;
+      if (fallbackOnError) {
+        const image = new Image();
+        image.onerror = () => this.setState({avatar: getAvatarByNumber(user.id)});
+        image.onload = () => this.setState({avatar: user.avatar});
+        image.src = user.avatar;
+      } else {
+        this.setState({avatar: user.avatar});
+      }
     } else {
       this.setState({avatar: getAvatarByNumber(user.id)});
     }
@@ -89,9 +93,11 @@ UserPhoto.propTypes = {
   i18n: React.PropTypes.object,
   width: React.PropTypes.number,
   height: React.PropTypes.number,
-  addBadge: React.PropTypes.bool
+  addBadge: React.PropTypes.bool,
+  fallbackOnError: React.PropTypes.bool
 };
 
 UserPhoto.defaultProps = {
-  addBadge: false
+  addBadge: false,
+  fallbackOnError: true
 };
