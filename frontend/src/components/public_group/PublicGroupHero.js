@@ -81,10 +81,12 @@ export default class PublicGroupHero extends Component {
             </h1>
             <a href={group.button.href} className='mb3 -btn -btn-big -bg-green -ttu -ff-sec -fw-bold'>{ group.button.label }</a>
             <GroupStatsHeader group={group} i18n={i18n} />
-            <p className='h6'>{ i18n.getString('scrollDown') }</p>
-            <svg width='14' height='9'>
-              <use xlinkHref='#svg-arrow-down' stroke='#fff'/>
-            </svg>
+            <div className='scrollDown'>
+              <p className='h6'>{ i18n.getString('scrollDown') }</p>
+              <svg width='14' height='9'>
+                <use xlinkHref='#svg-arrow-down' stroke='#fff'/>
+              </svg>
+            </div>
           </div>
         </div>
 

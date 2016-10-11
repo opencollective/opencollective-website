@@ -124,4 +124,7 @@
       color: white;
     }
   }
+  .scrollDown {
+    margin-top: 3rem;
+  }
 }
