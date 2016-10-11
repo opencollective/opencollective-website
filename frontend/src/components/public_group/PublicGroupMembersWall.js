@@ -19,7 +19,7 @@ export default class PublicGroupMembersWall extends React.Component {
             <p className='PublicGroup-font-17 max-width-3 mx-auto mb3'>{i18n.getString('membersWallText')}</p>
             <div className='PublicGroupWhoWeAre-contributors' className='flex flex-wrap justify-center'>
               {this._showCards(group.members)}
-              {this._showCards(filterCollection(group.backers, { tier: 'backer' }))}
+              {this._showCards(group.backers.filter(b => b.tier !== 'sponsor'))}
             </div>
             <div className='PublicGroupWhoWeAre-sponsors' className='flex flex-wrap justify-center'>
               {this._showCards(filterCollection(group.backers, { tier: 'sponsor' }))}
