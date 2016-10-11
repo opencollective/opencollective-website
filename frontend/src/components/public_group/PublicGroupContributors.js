@@ -81,6 +81,7 @@ export default class ContributorList extends React.Component {
                   user={{avatar: contributor.avatar}}
                   addBadge={contributor.core}
                   width={this.avatarWidth}
+                  fallbackOnError={false}
                   onMouseEnter={() => this.setHoverCard(contributor.name)}
                   onMouseLeave={() => this.setHoverCard()}
                 />
