@@ -15,8 +15,7 @@
   }
 }
 .GroupStatsHeader-backer-yearly-budget {
-  margin-top: 14px;
-  margin-bottom: 44px;
+  margin: 1rem 0px;
   .-character {
     font-family: Lato;
     font-size: 22px;

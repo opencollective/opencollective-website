@@ -23,8 +23,23 @@
   font-weight: bold;
 }
 
+.Widget-donate {
+  width: 100%;
+  position: -webkit-sticky;
+  top: 0;
+  margin: 1rem 0;
+  padding: 0.5rem 0;
+  background: rgba(255,255,255,0.8);
+}
+
 .Widget-button {
-  margin: 0 auto;
-  margin: 2rem 0rem 1rem 0rem;
+  width: 100%;
+  padding: 0.5rem 0;
   background: var(--green);
+  border-radius: 2rem;
+}
+
+.Widget-backers {
+  margin: 2rem 0;
+  text-align: center;
 }
