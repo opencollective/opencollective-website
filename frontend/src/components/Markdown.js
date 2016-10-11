@@ -26,22 +26,32 @@ export default class Markdown extends Component {
       value,
       className,
       onChange,
+      splitIntoSections,
       i18n
     } = this.props;
 
     if (!this.state.editMode) {
-
-      // we split it into multiple sections
-      return (
-        <div>
-          { this.sections_array.map(section =>
-            <div
-              className={`${className} section`}
-              id={formatAnchor(section.title)}
-              dangerouslySetInnerHTML={ this.rawMarkup(section.markdown)}
-              onClick={ this.onClick } />)
-          }
-        </div>);
+      if (splitIntoSections) {
+        // we split it into multiple sections
+        return (
+          <div>
+            { this.sections_array.map(section =>
+              <div className='section' id={formatAnchor(section.title)}>
+                <div
+                  className={`${className} container`}
+                  dangerouslySetInnerHTML={ this.rawMarkup(section.markdown)}
+                  onClick={ this.onClick } />
+              </div>
+            )}
+          </div>);
+      } else {
+        return (
+          <div
+            className={`${className} container`}
+            dangerouslySetInnerHTML={ this.rawMarkup(value)}
+            onClick={ this.onClick } />
+        );
+      }
     } else {
       return (
         <CustomTextArea
@@ -79,12 +89,14 @@ export default class Markdown extends Component {
 Markdown.propTypes = {
   value: PropTypes.string.isRequired,
   className: PropTypes.string,
-  canEdit: PropTypes.boolean
+  canEdit: PropTypes.boolean,
+  splitIntoSections: PropTypes.boolean
 };
 
 Markdown.defaultProps = {
   value: '',
   className: '',
   canEdit: false,
+  splitIntoSections: false,
   onChange: () => {}
 };

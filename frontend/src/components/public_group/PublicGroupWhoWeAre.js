@@ -48,6 +48,7 @@ export default class PublicGroupWhoWeAre extends Component {
             <Markdown
               value={ (longDescription === '' || longDescription) ? longDescription : group.longDescription }
               canEdit={ canEditGroup }
+              splitIntoSections={true}
               onChange = { longDescription => appendEditGroupForm({ longDescription })}
               {...this.props} />
           </div>
