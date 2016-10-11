@@ -4,6 +4,7 @@ import * as constants from '../../constants/donations';
 const FETCH_DONATIONS_OPTIONS = {
   per_page: 3,
   sort: 'createdAt',
+  donation: true,
   direction: 'desc'
 };
 
@@ -13,7 +14,7 @@ const FETCH_DONATIONS_OPTIONS = {
 export default (slug, params = FETCH_DONATIONS_OPTIONS) => {
   return dispatch => {
     dispatch(request(slug, params));
-    return get(`/groups/${slug}/donations`, {
+    return get(`/groups/${slug}/transactions`, {
       params
     })
     .then(json => dispatch(success(slug, json)))
