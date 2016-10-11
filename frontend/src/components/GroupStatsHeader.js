@@ -10,14 +10,13 @@ export default class GroupStatsHeader extends Component {
 
   render() {
     const { group, i18n } = this.props;
-    group.contributorsCount = (group.data && group.data.githubContributors) ? Object.keys(group.data.githubContributors).length : [];
+    group.contributorsCount = (group.data && group.data.githubContributors) ? Object.keys(group.data.githubContributors).length : 0;
 
     const yearlyIncome = group.yearlyIncome / 100;
     const formattedYearlyIncome = yearlyIncome && formatCurrency(yearlyIncome, group.currency, { compact: true, precision: 0 });
 
     const totalMembers = group.contributorsCount + group.backers.length;
-
-    if (totalMembers === 0) return;
+    if (totalMembers === 0) return (<div />);
 
     const counterString = ` ${totalMembers} ${i18n.getString('contributors')} ${i18n.getString('and')}`;
 
