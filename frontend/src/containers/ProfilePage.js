@@ -51,28 +51,28 @@ export class ProfilePage extends Component {
 
         <ContentEditable
               className='line2 ContentEditable-description'
-              html={profile.name }
+              html={profile.name}
               disabled={ !profile.canEditUser }
               onChange={ event => updateUser(profile.id, {name: event.target.value}) }
               placeholder={i18n.getString('defaultDescription')} />
 
         <ContentEditable
               className='line3 ContentEditable-description'
-              html={profile.description }
+              html={profile.description}
               format='markdown'
               disabled={ !profile.canEditUser }
               onChange={ event => updateUser(profile.id, {description: event.target.value}) }
               placeholder={i18n.getString('defaultDescription')}
               style={{textAlign: 'center'}} />
 
-        {profile.longDescription && (
-          <ContentEditable
-            className='line3 longDescription ContentEditable-long-description'
-            html={ profile.longDescription }
-            format='markdown'
-            disabled={ !profile.canEditUser }
-            onChange={ event => updateUser(profile.id, {longDescription: event.target.value}) }
-            placeholder={i18n.getString('defaultLongDescription')} />
+        {(profile.longDescription || profile.canEditUser) && (
+            <Markdown
+              value={profile.longDescription}
+              canEdit={profile.canEditUser}
+              onChange={longDescription => updateUser(profile.id, { longDescription })}
+              className='line3 longDescription ContentEditable-long-description'
+              placeholder={i18n.getString('defaultProfileLongDescription')}
+              />
         )}
 
         {belongsTo.length ? (
