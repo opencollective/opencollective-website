@@ -36,6 +36,7 @@ export default function groups(state={}, action={}) {
 
       return merge({}, state, {
         [action.slug]: {
+          users,
           usersByRole: groupBy(users, 'role')
         }
       });
