@@ -43,13 +43,10 @@ describe('groups reducer', () => {
       slug
     });
 
-    expect(state).toEqual({
-      [slug]: {
-        usersByRole: {
-          MEMBER: [member],
-          BACKER: [backer]
-        }
-      }
+    expect(state[slug].users).toEqual([member, backer]);
+    expect(state[slug].usersByRole).toEqual({
+      MEMBER: [member],
+      BACKER: [backer]
     });
   });
 });
