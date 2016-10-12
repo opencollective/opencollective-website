@@ -12,6 +12,11 @@ select, input, textarea {
   -webkit-appearance: none;
 }
 
+input[type="checkbox"] {
+  -webkit-appearance: checkbox;
+  margin-right: 0.5rem;
+}
+
 /** Add all the magic for the radio buttons **/
 input[type="radio"] {
   -webkit-appearance: none;

@@ -232,6 +232,7 @@ export class AddGroup extends Component {
     const { groupForm, validateSchema, createGroup, utmSource, notify } = this.props;
     const attr = groupForm.attributes;
     const group = {
+      tos: true,
       name: attr.name,
       slug: attr.slug,
       mission: attr.mission,
@@ -247,7 +248,6 @@ export class AddGroup extends Component {
       },
       tags: attr.tags && attr.tags.split(',').map(x => x.trim()),
       users: attr.users,
-      isPublic: true,
       currency: attr.currency
     };
 

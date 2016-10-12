@@ -207,6 +207,13 @@ export class NewGroup extends Component {
                   placeholder={getPlaceholder('email')}/>
               </div>
 
+              <div className='NewGroup-question NewGroup-email'>
+                <label>
+                  <input type="checkbox" onChange={(event) => appendGroupForm({tos: event.target.checked})} />
+                  By clicking here you agree to the <a href="https://docs.google.com/document/d/1-hajYd7coL05z2LTCOKXTYzXqNp40kPuw0z66kEIY5Y/pub">terms of service</a>
+                </label>
+              </div>
+
             <center>
               <div className={`center AddGroup-Button ${slugAvailable ? '' : 'disabled'}`} onClick={ this.createRef }>create your collective</div>
             </center>
@@ -230,6 +237,7 @@ export class NewGroup extends Component {
     const { newGroupForm, validateSchema, createGroup, utmSource, notify } = this.props;
     const attr = newGroupForm.attributes;
     const group = {
+      tos: attr.tos,
       name: attr.name,
       slug: attr.slug,
       mission: attr.mission,
@@ -240,8 +248,7 @@ export class NewGroup extends Component {
         utmSource
       },
       tags: attr.tags && attr.tags.split(',').map(x => x.trim()),
-      users: attr.users,
-      isPublic: true
+      users: attr.users
     };
 
     return validateSchema(group, newGroupSchema)
