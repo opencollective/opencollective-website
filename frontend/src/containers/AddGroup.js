@@ -158,14 +158,6 @@ export class AddGroup extends Component {
                         maxLength={100}
                         placeholder='create a community for women to build their ideas'/>
 
-                      <div className='AddGroup-label'>Describe your project briefly (short description) </div>
-                      <CustomTextArea
-                        name='description'
-                        value={description}
-                        onChange={(value) => appendGroupForm({description: value})}
-                        maxLength={255}
-                        placeholder='We enable learning rails in atlanta. duh.'/>
-
                       <div className='AddGroup-label'>Full description of your project</div>
                       <CustomTextArea
                         name='long description'
@@ -226,7 +218,6 @@ export class AddGroup extends Component {
       name: attr.name,
       slug: attr.slug,
       mission: attr.mission,
-      description: attr.description,
       longDescription: attr.longDescription,
       logo: attr.logo,
       image: attr.image,
