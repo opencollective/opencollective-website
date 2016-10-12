@@ -36,9 +36,7 @@ export class AddGroup extends Component {
       website,
       video,
       mission,
-      description,
       longDescription,
-      whyJoin,
       logo,
       image,
       tags,
@@ -176,14 +174,6 @@ export class AddGroup extends Component {
                         maxLength={1000}
                         placeholder='We enable learning rails in atlanta. duh.'/>
 
-                      <div className='AddGroup-label'>Why join?</div>
-                      <CustomTextArea
-                        name='why join'
-                        value={whyJoin}
-                        onChange={(value) => appendGroupForm({whyJoin: value})}
-                        maxLength={1000}
-                        placeholder='to support us'/>
-
                       <div className='AddGroup-label'>Tag your project (comma-separated list)</div>
                       <CustomTextArea
                         name='tags'
@@ -241,7 +231,7 @@ export class AddGroup extends Component {
       logo: attr.logo,
       image: attr.image,
       website: attr.website,
-      whyJoin: attr.whyJoin,
+      contribute: attr.contribute,
       video: attr.video,
       data: {
         utmSource
