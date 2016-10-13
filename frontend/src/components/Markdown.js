@@ -37,7 +37,7 @@ export default class Markdown extends Component {
     const placeholderClass = (value) ? '' : 'placeholder';
 
     if (!this.state.editMode) {
-      const content = (value) ? value : placeholder;
+      const content = (value && value.trim() !== '') ? value : placeholder;
       if (splitIntoSections) {
         const sections = this.splitIntoSections(content);
         // we split it into multiple sections
@@ -70,9 +70,9 @@ export default class Markdown extends Component {
           className={`ContentEditable ${className} ${placeholderClass}`}
           value={ content }
           placeholder={ placeholder || i18n.getString('defaultLongDescription') }
-          onChange={ (v) => { console.log("new changed value: ", v); onChange(v); } }
-          onBlur = { this.onBlur }
-          setFocus = { true } />
+          onChange={ onChange }
+          onBlur={ this.onBlur }
+          setFocus={ true } />
         )
     }
   }
