@@ -52,7 +52,7 @@ export class HomePage extends Component {
             </svg>
           </div>
           <div className='subtitle'>organizing the Internet generation</div>
-          <div className='heading'>We all have something to contribute.</div>
+          <div className='heading'>Collect & disburse money in full transparency</div>
         </section>
         <section className='HomePageInfo' id='howitworks'>
           <div className='heading'>What is an open collective?</div>
