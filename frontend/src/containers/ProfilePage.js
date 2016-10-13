@@ -23,8 +23,7 @@ export class ProfilePage extends Component {
 
   render() {
 
-    const { updateUser, profile, i18n } = this.props;
-
+    const { updateUser, profile, i18n, profileForm } = this.props;
     const belongsTo = filterCollection(profile.groups, { role: 'MEMBER' });
     const backing = filterCollection(profile.groups, { role: 'BACKER' });
     const isEmpty = belongsTo.length === backing.length && backing.length === 0;
@@ -52,24 +51,27 @@ export class ProfilePage extends Component {
         <ContentEditable
               className='line2 ContentEditable-description'
               html={profile.name}
-              disabled={ !profile.canEditUser }
-              onChange={ event => updateUser(profile.id, {name: event.target.value}) }
+              disabled={!profile.canEditUser}
+              onChange={event => updateUser(profile.id, {name: event.target.value})}
               placeholder={i18n.getString('defaultDescription')} />
 
         <ContentEditable
               className='line3 ContentEditable-description'
               html={profile.description}
               format='markdown'
-              disabled={ !profile.canEditUser }
-              onChange={ event => updateUser(profile.id, {description: event.target.value}) }
+              disabled={!profile.canEditUser}
+              onChange={event => updateUser(profile.id, {description: event.target.value})}
               placeholder={i18n.getString('defaultDescription')}
               style={{textAlign: 'center'}} />
 
         {(profile.longDescription || profile.canEditUser) && (
             <Markdown
-              value={profile.longDescription}
+              value={ (profileForm.longDescription === '' || profileForm.longDescription) ? profileForm.longDescription : profile.longDescription }
               canEdit={profile.canEditUser}
-              onChange={longDescription => updateUser(profile.id, { longDescription })}
+              onChange={longDescription => {
+                profileForm.longDescription = longDescription;
+                updateUser(profile.id, { longDescription });
+              }}
               className='line3 longDescription ContentEditable-long-description'
               placeholder={i18n.getString('defaultProfileLongDescription')}
               />
@@ -155,8 +157,12 @@ export default connect(mapStateToProps, {
   updateUser
 })(ProfilePage);
 
-function mapStateToProps() {
+function mapStateToProps({form}) {
+
+  const profileForm = form.profile.attributes;
+
   return {
-    i18n: i18n('en')
+    i18n: i18n('en'),
+    profileForm
   };
 }
