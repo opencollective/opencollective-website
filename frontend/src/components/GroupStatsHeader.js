@@ -20,14 +20,14 @@ export default class GroupStatsHeader extends Component {
 
     const plural = totalMembers > 1 ? 's' : '';
 
-    const counterString = ` ${totalMembers} ${i18n.getString(`contributor${plural}`)} ${i18n.getString('and')}`;
+    const counterString = ` ${totalMembers} ${i18n.getString(`contributor${plural}`)}`;
 
     return (
       <div className='GroupStatsHeader-backer-statistics'>
         <div className='GroupStatsHeader-backer-count-text'>
           {i18n.getString('weHave')}
           {counterString}
-          {yearlyIncome > 0 && ` ${i18n.getString('aYearlyBudgetOf')}`}
+          {yearlyIncome > 0 && ` ${i18n.getString('and')} ${i18n.getString('aYearlyBudgetOf')}`}
         </div>
         {yearlyIncome > 0 && (
             <div className='GroupStatsHeader-backer-yearly-budget'>
