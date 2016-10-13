@@ -21,6 +21,10 @@ span.editing {
     color: black;
     border: 1px dotted black; 
   }
+  &.placeholder {
+    font-style: italic;
+    color: var(--dark-gray);
+  }
 }
 
 .ContentEditable-description p {

@@ -23,7 +23,7 @@ export default class ContentEditable extends React.Component {
         onInput: this.emitChange,
         onBlur: this.props.onBlur || this.emitChange,
         contentEditable: !disabled,
-        dangerouslySetInnerHTML: {__html: html.replace(/\n/g, '<br />\n')}
+        dangerouslySetInnerHTML: {__html: html.replace(/\n|<br>|<\/?div>/g,'')}
       },
       this.props.children);
   }
@@ -50,7 +50,7 @@ export default class ContentEditable extends React.Component {
     if ( this.htmlEl && html !== this.htmlEl.innerHTML ) {
       // Perhaps React (whose VDOM gets outdated because we often prevent
       // rerendering) did not update the DOM. So we update it manually now.
-      this.htmlEl.innerHTML = html.replace(/\n/g,'<br />\n');
+      this.htmlEl.innerHTML = html.replace(/\n|<br>|<\/?div>/g,'');
     }
   }
 

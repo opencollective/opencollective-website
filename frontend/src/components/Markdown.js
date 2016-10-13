@@ -34,9 +34,10 @@ export default class Markdown extends Component {
       i18n
     } = this.props;
 
-    const content = value || placeholder;
+    const placeholderClass = (value) ? '' : 'placeholder';
 
     if (!this.state.editMode) {
+      const content = (value && value.trim() !== '') ? value : placeholder;
       if (splitIntoSections) {
         const sections = this.splitIntoSections(content);
         // we split it into multiple sections
@@ -45,7 +46,7 @@ export default class Markdown extends Component {
             { sections.map(section =>
               <div className='section' id={formatAnchor(section.title)}>
                 <div
-                  className={`${className} container`}
+                  className={`${className} container ${placeholderClass}`}
                   dangerouslySetInnerHTML={ this.rawMarkup(section.markdown)}
                   onClick={ this.onClick } />
               </div>
@@ -54,23 +55,24 @@ export default class Markdown extends Component {
       } else {
         return (
           <div
-            className={`${className} container`}
+            className={`ContentEditable ${className} container ${placeholderClass}`}
             dangerouslySetInnerHTML={ this.rawMarkup(content)}
             onClick={ this.onClick } />
         );
       }
     } else {
+      const content = (value === '' || value) ? value : placeholder;
       return (
         <CustomTextArea
           ref='markdownCustomTextArea'
           rows={ (content.length/60 + (content.match(/\n/g) || []).length) || 4 }
           resize='vertical'
-          className={`ContentEditable-long-description ${className}`}
+          className={`ContentEditable ${className} ${placeholderClass}`}
           value={ content }
           placeholder={ placeholder || i18n.getString('defaultLongDescription') }
           onChange={ onChange }
-          onBlur = { this.onBlur }
-          setFocus = { true } />
+          onBlur={ this.onBlur }
+          setFocus={ true } />
         )
     }
   }
