@@ -36,9 +36,7 @@ export class AddGroup extends Component {
       website,
       video,
       mission,
-      description,
       longDescription,
-      whyJoin,
       logo,
       image,
       tags,
@@ -160,14 +158,6 @@ export class AddGroup extends Component {
                         maxLength={100}
                         placeholder='create a community for women to build their ideas'/>
 
-                      <div className='AddGroup-label'>Describe your project briefly (short description) </div>
-                      <CustomTextArea
-                        name='description'
-                        value={description}
-                        onChange={(value) => appendGroupForm({description: value})}
-                        maxLength={255}
-                        placeholder='We enable learning rails in atlanta. duh.'/>
-
                       <div className='AddGroup-label'>Full description of your project</div>
                       <CustomTextArea
                         name='long description'
@@ -175,14 +165,6 @@ export class AddGroup extends Component {
                         onChange={(value) => appendGroupForm({longDescription: value})}
                         maxLength={1000}
                         placeholder='We enable learning rails in atlanta. duh.'/>
-
-                      <div className='AddGroup-label'>Why join?</div>
-                      <CustomTextArea
-                        name='why join'
-                        value={whyJoin}
-                        onChange={(value) => appendGroupForm({whyJoin: value})}
-                        maxLength={1000}
-                        placeholder='to support us'/>
 
                       <div className='AddGroup-label'>Tag your project (comma-separated list)</div>
                       <CustomTextArea
@@ -232,22 +214,21 @@ export class AddGroup extends Component {
     const { groupForm, validateSchema, createGroup, utmSource, notify } = this.props;
     const attr = groupForm.attributes;
     const group = {
+      tos: true,
       name: attr.name,
       slug: attr.slug,
       mission: attr.mission,
-      description: attr.description,
       longDescription: attr.longDescription,
       logo: attr.logo,
       image: attr.image,
       website: attr.website,
-      whyJoin: attr.whyJoin,
+      contribute: attr.contribute,
       video: attr.video,
       data: {
         utmSource
       },
       tags: attr.tags && attr.tags.split(',').map(x => x.trim()),
       users: attr.users,
-      isPublic: true,
       currency: attr.currency
     };
 

@@ -46,7 +46,7 @@ export class NewGroup extends Component {
       slug,
       mission,
       description,
-      whyJoin, // we should rename that column to `needs`
+      contribute, // longDescription = description + contribute
       users
     } = newGroupForm.attributes;
 
@@ -58,7 +58,7 @@ export class NewGroup extends Component {
         slug: 'chsf',
         mission: 'We are on a mission to explore and develop new technologies for psychological, emotional and spiritual flourishing.',
         description: "Consciousness Hacking is an inside-out perspective on how technology can serve us by changing our relationship to the world, rather than the world itself. Meetings will feature insightful talks, community building, and support for new ideas and concepts. Consciousness Hacking​ is an ​open exploration of how science and technology can support radically modern approaches to spirituality and human flourishing.​ We do this through a global network of communities, events, digital media and projects.​",
-        whyJoin: 'We need more people to join the community and attend our events. We are also looking for volunteers to help us organize our meetups.'
+        contribute: 'We need more people to join the community and attend our events. We are also looking for volunteers to help us organize our meetups.'
       }
     });
     groupTypes.set('opensource', {
@@ -68,7 +68,7 @@ export class NewGroup extends Component {
         slug: 'mochajs',
         mission: 'We are on a mission to make asynchronous testing simple and fun.',
         description: 'Mocha is a feature-rich JavaScript test framework running on Node.js and the browser, making asynchronous testing simple and fun. Mocha tests run serially, allowing for flexible and accurate reporting, while mapping uncaught exceptions to the correct test cases.',
-        whyJoin: 'We are looking for maintainers to help us deal with the large number of issues and pull requests. We also welcome financial contributions.'
+        contribute: 'We are looking for maintainers to help us deal with the large number of issues and pull requests. We also welcome financial contributions.'
       }
     });
     groupTypes.set('pta', {
@@ -90,7 +90,7 @@ export class NewGroup extends Component {
         slug: 'mindfulcollective',
         mission: 'We are on a mission to bring mindfulness to our city',
         description: 'Every week, we organize a public sitting in silence. We invite everyone to come meditate with us. We are also giving a meditation class to the public school in our city.',
-        whyJoin: 'We are looking for public school teachers who could open the door of their classroom. We are also looking for financial help to cover our expenses (printing posters, transportation, ...)',
+        contribute: 'We are looking for public school teachers who could open the door of their classroom. We are also looking for financial help to cover our expenses (printing posters, transportation, ...)',
         email: 'sn.goenka@dharma.org'
       }
     });
@@ -185,15 +185,15 @@ export class NewGroup extends Component {
                   placeholder={getPlaceholder('description')} />
               </div>
 
-              <div className='NewGroup-question NewGroup-whyJoin'>
+              <div className='NewGroup-question NewGroup-contribute'>
                 <label>What do you need help with? How can people contribute to your mission?</label>
                 <Input
-                  name='whyJoin'
-                  value={whyJoin}
-                  onChange={(value) => appendGroupForm({whyJoin: value})}
+                  name='contribute'
+                  value={contribute}
+                  onChange={(value) => appendGroupForm({contribute: value})}
                   maxLength={256}
                   rows={4}
-                  placeholder={getPlaceholder('whyJoin')} />
+                  placeholder={getPlaceholder('contribute')} />
               </div>
 
               <div className='NewGroup-question NewGroup-email'>
@@ -205,6 +205,13 @@ export class NewGroup extends Component {
                   maxLength={128}
                   rows={1}
                   placeholder={getPlaceholder('email')}/>
+              </div>
+
+              <div className='NewGroup-question NewGroup-email'>
+                <label>
+                  <input type="checkbox" onChange={(event) => appendGroupForm({tos: event.target.checked})} />
+                  By clicking here you agree to the <a href="https://docs.google.com/document/d/1-hajYd7coL05z2LTCOKXTYzXqNp40kPuw0z66kEIY5Y/pub">terms of service</a>
+                </label>
               </div>
 
             <center>
@@ -229,19 +236,19 @@ export class NewGroup extends Component {
   create() {
     const { newGroupForm, validateSchema, createGroup, utmSource, notify } = this.props;
     const attr = newGroupForm.attributes;
+
     const group = {
+      tos: attr.tos,
       name: attr.name,
       slug: attr.slug,
       mission: attr.mission,
-      description: attr.description,
+      longDescription: attr.contribute ? `${attr.description}\n\n# Contribute\n\n${attr.contribute}` : attr.description,
       website: attr.website,
-      whyJoin: attr.needs,
       data: {
         utmSource
       },
       tags: attr.tags && attr.tags.split(',').map(x => x.trim()),
-      users: attr.users,
-      isPublic: true
+      users: attr.users
     };
 
     return validateSchema(group, newGroupSchema)
