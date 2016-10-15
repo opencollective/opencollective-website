@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Promise from 'bluebird';
 
 import { StickyContainer } from 'react-sticky';
 
@@ -224,9 +225,11 @@ export class PublicGroup extends Component {
       fetchExpenses,
     } = this.props;
 
-    fetchProfile(group.slug);
-    fetchExpenses(group.slug);
-    fetchUsers(group.slug);
+    return Promise.all([
+      fetchProfile(group.slug),
+      fetchExpenses(group.slug),
+      fetchUsers(group.slug)
+      ])
   }
 }
 
@@ -400,7 +403,7 @@ function mapStateToProps({
   const i18n = i18nlib(group.settings.lang || 'en');
   group.button = button || { label: i18n.getString('bePart'), href: '#support' };
 
-  if (group.name && window.document) 
+  if (group.name && window.document)
     document.title = `${group.name} is on Open Collective`;
 
   return {
