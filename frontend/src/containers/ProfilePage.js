@@ -44,7 +44,7 @@ export class ProfilePage extends Component {
 
   render() {
 
-    const { updateUser, profile, i18n, profileForm } = this.props;
+    const { profile, i18n, profileForm } = this.props;
     const belongsTo = filterCollection(profile.groups, { role: 'MEMBER' });
     const backing = filterCollection(profile.groups, { role: 'BACKER' });
     const isEmpty = belongsTo.length === backing.length && backing.length === 0;
