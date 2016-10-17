@@ -11,14 +11,35 @@ import CollectiveCard from '../components/CollectiveCard';
 import SponsoredCard from '../components/SponsoredCard';
 import Markdown from '../components/Markdown';
 import ContentEditable from '../components/ContentEditable';
+import notify from '../actions/notification/notify';
+import Notification from './Notification';
 
 import uploadImage from '../actions/images/upload';
 import updateUser from '../actions/users/update';
+import validateSchema from '../actions/form/validate_schema';
+import profileSchema from '../joi_schemas/profile';
+import appendProfileForm from '../actions/form/append_profile';
 
 export class ProfilePage extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+  }
+
+  saveUser(attribute) {
+  const {
+      profile,
+      updateUser,
+      profileForm,
+      validateSchema,
+      appendProfileForm,
+      notify,
+    } = this.props;
+    appendProfileForm(attribute);
+    console.log("Validating ",profileForm.attributes, profileForm, attribute);
+    return validateSchema(profileForm.attributes, profileSchema)
+      .then(() => updateUser(profile.id, attribute))
+      .catch(({message}) => notify('error', message));
   }
 
   render() {
@@ -36,10 +57,11 @@ export class ProfilePage extends Component {
 
     return (
       <div className='ProfilePage'>
+        <Notification {...this.props} autoclose/>
         <LoginTopBar />
         <UserPhoto
           editable={profile.canEditUser}
-          onChange={(avatar) => updateUser(profile.id, {avatar})}
+          onChange={(avatar) => this.saveUser({avatar})}
           user={{ avatar: profile.avatar }}
           addBadge={!profile.isOrganization}
           className={`mx-auto ${profile.isOrganization ? 'organization' : ''}`}
@@ -52,7 +74,7 @@ export class ProfilePage extends Component {
               className='line2 ContentEditable-description'
               html={profile.name}
               disabled={!profile.canEditUser}
-              onChange={event => updateUser(profile.id, {name: event.target.value})}
+              onChange={event => this.saveUser({name: event.target.value})}
               placeholder={i18n.getString('defaultDescription')} />
 
         <ContentEditable
@@ -60,18 +82,15 @@ export class ProfilePage extends Component {
               html={profile.description}
               format='markdown'
               disabled={!profile.canEditUser}
-              onChange={event => updateUser(profile.id, {description: event.target.value})}
+              onChange={event => this.saveUser({description: event.target.value})}
               placeholder={i18n.getString('defaultDescription')}
               style={{textAlign: 'center'}} />
 
         {(profile.longDescription || profile.canEditUser) && (
             <Markdown
-              value={ (profileForm.longDescription === '' || profileForm.longDescription) ? profileForm.longDescription : profile.longDescription }
+              value={ (profileForm.attributes.longDescription === '' || profileForm.attributes.longDescription) ? profileForm.attributes.longDescription : profile.longDescription }
               canEdit={profile.canEditUser}
-              onChange={longDescription => {
-                profileForm.longDescription = longDescription;
-                updateUser(profile.id, { longDescription });
-              }}
+              onChange={longDescription => this.saveUser({ longDescription }) }
               className='line3 longDescription ContentEditable-long-description'
               placeholder={i18n.getString('defaultProfileLongDescription')}
               />
@@ -154,12 +173,15 @@ export class ProfilePage extends Component {
 
 export default connect(mapStateToProps, {
   uploadImage,
+  validateSchema,
+  appendProfileForm,
+  notify,
   updateUser
 })(ProfilePage);
 
 function mapStateToProps({form}) {
 
-  const profileForm = form.profile.attributes;
+  const profileForm = form.profile;
 
   return {
     i18n: i18n('en'),
