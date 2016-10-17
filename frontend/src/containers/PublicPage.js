@@ -5,6 +5,7 @@ import values from 'lodash/values';
 
 import ProfilePage from './ProfilePage';
 import PublicGroup from './PublicGroup';
+import Collective from './Collective'
 import { canEditUser } from '../lib/admin';
 
 export class PublicPage extends Component {
@@ -14,6 +15,8 @@ export class PublicPage extends Component {
       profile.canEditUser = canEditUser(this.props.session, profile)
 
       return <ProfilePage profile={ profile } />
+    } else if (this.props.showNewCollectivePage) {
+      return <Collective />
     } else {
       return <PublicGroup />
     }
@@ -22,12 +25,13 @@ export class PublicPage extends Component {
 
 export default connect(mapStateToProps , {})(PublicPage);
 
-export function mapStateToProps({groups, session}) {
+export function mapStateToProps({groups, session, router}) {
   const group = values(groups)[0] || {};
 
   return {
     group,
     session,
-    isUserProfile: Boolean(group.username)
+    isUserProfile: Boolean(group.username),
+    showNewCollectivePage: router.location.query.new === '1',
   };
 }
