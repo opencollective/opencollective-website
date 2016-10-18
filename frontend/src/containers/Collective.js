@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { StickyContainer } from 'react-sticky';
+import { createStructuredSelector } from 'reselect';
 
 // Our libraries
 import { canEditGroup } from '../lib/admin';
@@ -16,13 +17,18 @@ import PublicFooter from '../components/PublicFooter';
 // Actions
 import appendEditCollectiveForm from '../actions/form/append_edit_collective';
 
-const DEFAULT_COLLECTIVE_SETTINGS = {
-  lang: 'en',
-  formatCurrency: {
-    compact: false,
-    precision: 2
-  }
-};
+// Selectors
+import {
+  getSlugSelector,
+  getCollectiveSelector,
+  getCollectiveSettingsSelector,
+  getI18nSelector,
+  canEditGroupSelector
+} from '../selectors/collectives';
+import {
+  getEditCollectiveFormSelector
+} from '../selectors/form';
+
 
 export class Collective extends Component {
   render() {
@@ -43,25 +49,15 @@ export class Collective extends Component {
   }
 }
 
+const mapStateToProps = createStructuredSelector({
+    slug: getSlugSelector,
+    collective: getCollectiveSelector,
+    canEditCollective: canEditGroupSelector,
+    collectiveForm: getEditCollectiveFormSelector,
+    //hasHost: !(collective.hosts.length === 0),
+    i18n: getI18nSelector,
+  });
+
 export default connect(mapStateToProps, {
-
+  appendEditCollectiveForm
 })(Collective);
-
-function mapStateToProps({
-  collectives,
-  form,
-  router,
-  session,
-}) {
-
-  const slug = router.params.slug.toLowerCase();
-  const collective = collectives[slug] || {};
-  collective.settings = collective.settings || DEFAULT_COLLECTIVE_SETTINGS;
-
-  return {
-    canEditCollective: canEditGroup(session, collective),
-    collective,
-    collectiveForm: form.editCollective,
-    i18n: i18nLib(collective.settings.lang || 'en'),
-  };
-}

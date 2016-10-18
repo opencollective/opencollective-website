@@ -2,6 +2,11 @@
   max-width: 44rem;
 }
 
+/* For new collective page */
+.gulpjs .CollectiveHero-mission {
+  max-width: 44rem;
+}
+
 .gulpjs .PublicGroup-font-20 a {
   color: #fff;
   border-bottom: 1px solid #fff;

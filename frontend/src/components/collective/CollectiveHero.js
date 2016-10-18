@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import { Sticky } from 'react-sticky';
 
@@ -28,11 +28,11 @@ export default class CollectiveHero extends Component {
     const coverImageStyle = Object.assign({}, { filter: "blur(4px)", backgroundImage: `url(${coverImage})` }, collective.settings.style.coverImage);
 
     return (
-      <section className='PublicGroupHero relative px2 bg-black bg-cover white'>
+      <section className='CollectiveHero relative px2 bg-black bg-cover white'>
         <div className='coverImage' style={coverImageStyle} />
         <div className='container relative center'>
           <LoginTopBar loginRedirectTo={ `/${ collective.slug }` } />
-          <div className='PublicGroupHero-content'>
+          <div className='CollectiveHero-content'>
             {collective.logo &&
               <UserPhoto
                 editable={canEditCollective}
@@ -41,15 +41,15 @@ export default class CollectiveHero extends Component {
                     return appendEditCollectiveForm({logo})
                 }}
                 user={{ avatar: collectiveForm.attributes.logo || collective.logo }}
-                className='PublicGroupHero-logo mb3 bg-contain'
+                className='CollectiveHero-logo mb3 bg-contain'
                 presets={[]}
                 {...this.props} />
             }
 
-            <p ref='PublicGroupHero-name' className='PublicGroup-font-20 mt0 mb2'>{ i18n.getString('hiThisIs') }
+            <p ref='CollectiveHero-name' className='Collective-font-20 mt0 mb2'>{ i18n.getString('hiThisIs') }
               <a href={ collective.website }> { collective.name }</a> { i18n.getString('openCollective') }.
             </p>
-            <h1 ref='PublicGroupHero-mission' className='PublicGroupHero-mission max-width-3 mx-auto mt0 mb3 white -ff-sec'>
+            <h1 ref='CollectiveHero-mission' className='CollectiveHero-mission max-width-3 mx-auto mt0 mb3 white -ff-sec'>
               { `${i18n.getString('missionTo')} `}
               <ContentEditable
                 tagName='span'
@@ -70,7 +70,7 @@ export default class CollectiveHero extends Component {
           </div>
         </div>
 
-        <Sticky stickyStyle={{width:'100%',left:0}} ref='PublicGroupHero-backgroundImage' className='PublicGroupHero-menu absolute left-0 right-0 bottom-0'>
+        <Sticky stickyStyle={{width:'100%',left:0}} ref='CollectiveHero-backgroundImage' className='CollectiveHero-menu absolute left-0 right-0 bottom-0'>
           <nav>
             <ul className='list-reset m0 -ttu center'>
               {hasHost && collective.tiers &&
@@ -88,3 +88,13 @@ export default class CollectiveHero extends Component {
     );
   }
 }
+
+
+CollectiveHero.propTypes = {
+  collective: PropTypes.object.isRequired,
+  i18n: PropTypes.object.isRequired,
+  collectiveForm: PropTypes.object.isRequired,
+  appendEditCollectiveForm: PropTypes.object.isRequired,
+  hasHost: PropTypes.boolean,
+  canEditCollective: PropTypes.boolean,
+};
