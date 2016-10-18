@@ -29,6 +29,7 @@
 
 @import './containers/About.css';
 @import './containers/AddGroup.css';
+@import './containers/Collective.css';
 @import './containers/ConnectProvider.css';
 @import './containers/Discover.css';
 @import './containers/DonatePage.css';
@@ -55,6 +56,7 @@
 @import './components/BackerCard.css';
 @import './components/Button.css';
 @import './components/Checkbox.css';
+@import './components/CollectiveAboutUs.css';
 @import './components/CollectiveCard.css';
 @import './components/CollectiveHero.css';
 @import './components/Confirmation.css';

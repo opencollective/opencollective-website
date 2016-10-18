@@ -16,7 +16,7 @@ const DEFAULT_BACKGROUND_IMAGE = '/static/images/collectives/default-header-bg.j
 export default class CollectiveHero extends Component {
 
   render() {
-    const { collective, i18n, hasHost, canEditCollective, collectiveForm, appendEditCollectiveForm} = this.props;
+    const { collective, i18n, hasHost, canEditCollective, editCollectiveForm, appendEditCollectiveForm} = this.props;
 
     // We can override the default style for the cover image of a collective in `collective.settings`
     // e.g.
@@ -40,7 +40,7 @@ export default class CollectiveHero extends Component {
                   if (logo !== collective.logo)
                     return appendEditCollectiveForm({logo})
                 }}
-                user={{ avatar: collectiveForm.attributes.logo || collective.logo }}
+                user={{ avatar: editCollectiveForm.logo || collective.logo }}
                 className='CollectiveHero-logo mb3 bg-contain'
                 presets={[]}
                 {...this.props} />
@@ -54,7 +54,7 @@ export default class CollectiveHero extends Component {
               <ContentEditable
                 tagName='span'
                 className='ContentEditable-mission editing'
-                html={ (collectiveForm.attributes.mission === '' || collectiveForm.attributes.mission) ? collectiveForm.attributes.mission : collective.mission }
+                html={ (editCollectiveForm.mission === '' || editCollectiveForm.mission) ? editCollectiveForm.mission : collective.mission }
                 disabled={!canEditCollective}
                 onChange={event => appendEditCollectiveForm({mission: event.target.value})}
                 placeholder={i18n.getString('defaultMission')}/>
@@ -93,8 +93,8 @@ export default class CollectiveHero extends Component {
 CollectiveHero.propTypes = {
   collective: PropTypes.object.isRequired,
   i18n: PropTypes.object.isRequired,
-  collectiveForm: PropTypes.object.isRequired,
-  appendEditCollectiveForm: PropTypes.object.isRequired,
-  hasHost: PropTypes.boolean,
-  canEditCollective: PropTypes.boolean,
+  editCollectiveForm: PropTypes.object.isRequired,
+  appendEditCollectiveForm: PropTypes.func.isRequired,
+  hasHost: PropTypes.bool,
+  canEditCollective: PropTypes.bool,
 };

@@ -1,7 +1,10 @@
 import { createSelector } from 'reselect';
 
+import { getSlugSelector } from './router';
+import { getAuthenticatedUserSelector } from './session';
+
 import i18nLib from '../lib/i18n';
-import { canEditGroup } from '../lib/admin';
+import roles from '../constants/roles';
 
 const DEFAULT_COLLECTIVE_SETTINGS = {
   lang: 'en',
@@ -11,17 +14,10 @@ const DEFAULT_COLLECTIVE_SETTINGS = {
   }
 };
 
-const getRouterSelector = (state) => state.router;
+/*
+ * Collective selectors
+ */
 const getCollectivesSelector = (state) => state.collectives;
-const getSessionSelector = (state) => state.session;
-
-const getParamsSelector = createSelector(
-  getRouterSelector,
-  (router) => router.params || {});
-
-export const getSlugSelector = createSelector(
-  getParamsSelector,
-  (params) => params.slug ? params.slug.toLowerCase() : '');
 
 export const getCollectiveSelector = createSelector(
   [ getSlugSelector, getCollectivesSelector ],
@@ -31,10 +27,50 @@ export const getCollectiveSettingsSelector = createSelector(
   getCollectiveSelector,
   (collective) => collective.settings || DEFAULT_COLLECTIVE_SETTINGS);
 
+const getCollectiveUsersByRoleSelector = createSelector(
+  getCollectiveSelector,
+  (collective) => collective.usersByRole || {});
+
+export const getCollectiveHostSelector = createSelector(
+  getCollectiveUsersByRoleSelector,
+  (usersByRole) => usersByRole[roles.HOST] || []);
+
+export const getCollectiveMembersSelector = createSelector(
+  getCollectiveUsersByRoleSelector,
+  (usersByRole) => usersByRole[roles.MEMBER] || []);
+
+export const getCollectiveBackersSelector = createSelector(
+  getCollectiveUsersByRoleSelector,
+  (usersByRole) => usersByRole[roles.BACKER] || []);
+
+export const hasHostSelector = createSelector(
+  getCollectiveHostSelector,
+  (host) => host.length === 0 ? false : true);
+
+export const getPopulatedCollectiveSelector = createSelector(
+  [ getCollectiveSelector,
+    getCollectiveSettingsSelector,
+    getCollectiveHostSelector,
+    getCollectiveMembersSelector,
+    getCollectiveBackersSelector ],
+    (collective, settings, host, members, backers) =>
+      Object.assign(
+        {},
+        collective,
+        settings,
+        { host },
+        { members },
+        { backers })
+    );
+
+/*
+ * Other selectors
+ */
+
 export const getI18nSelector = createSelector(
   getCollectiveSettingsSelector,
   (settings) => i18nLib(settings.lang || 'en'));
 
-export const canEditGroupSelector = createSelector(
-  [ getSessionSelector, getCollectiveSelector ],
-  (session, collective) => canEditGroup(session, collective));
+export const canEditCollectiveSelector = createSelector(
+  [ getAuthenticatedUserSelector, getCollectiveMembersSelector ],
+  (authenticatedUser, members) => !!members.find(u => u.id === authenticatedUser.id));
