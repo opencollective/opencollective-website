@@ -73,13 +73,14 @@ export default class CollectiveHero extends Component {
         <Sticky stickyStyle={{width:'100%',left:0}} ref='CollectiveHero-backgroundImage' className='CollectiveHero-menu absolute left-0 right-0 bottom-0'>
           <nav>
             <ul className='list-reset m0 -ttu center'>
-              {hasHost && collective.tiers &&
-                <li className='inline-block'>
-                  <a href='#support' className='block white -ff-sec -fw-bold'>{ i18n.getString('menuSupportUs') }</a>
-                </li>
-              }
               <li className='inline-block'>
                 <a href='#budget' className='block white -ff-sec -fw-bold'>{ i18n.getString('menuBudget') }</a>
+              </li>
+              <li className='inline-block'>
+                <a href='#about_us' className='block white -ff-sec -fw-bold'>{ i18n.getString('menuAboutUs') }</a>
+              </li>
+              <li className='inline-block'>
+                <a href='#contributors' className='block white -ff-sec -fw-bold'>{ i18n.getString('contributors') }</a>
               </li>
             </ul>
           </nav>

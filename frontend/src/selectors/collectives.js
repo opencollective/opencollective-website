@@ -5,6 +5,7 @@ import { getAuthenticatedUserSelector } from './session';
 
 import i18nLib from '../lib/i18n';
 import roles from '../constants/roles';
+import { formatGithubContributors } from '../lib/github';
 
 const DEFAULT_COLLECTIVE_SETTINGS = {
   lang: 'en',
@@ -47,20 +48,32 @@ export const hasHostSelector = createSelector(
   getCollectiveHostSelector,
   (host) => host.length === 0 ? false : true);
 
+export const getCollectiveDataSelector = createSelector(
+  getCollectiveSelector,
+  (collective) => collective.data || {});
+
+export const getCollectiveContributorsSelector = createSelector(
+  getCollectiveDataSelector,
+  (data) => data.githubContributors ? formatGithubContributors(data.githubContributors) : []);
+
 export const getPopulatedCollectiveSelector = createSelector(
   [ getCollectiveSelector,
     getCollectiveSettingsSelector,
     getCollectiveHostSelector,
     getCollectiveMembersSelector,
-    getCollectiveBackersSelector ],
-    (collective, settings, host, members, backers) =>
+    getCollectiveBackersSelector,
+    getCollectiveContributorsSelector ],
+    (collective, settings, host, members, backers, contributors) =>
       Object.assign(
         {},
         collective,
         settings,
         { host },
         { members },
-        { backers })
+        { backers },
+        { backersCount: backers.length },
+        { contributors },
+        { contributorsCount: contributors.length })
     );
 
 /*

@@ -9,16 +9,18 @@ import Notification from './Notification';
 
 // Components
 import CollectiveAboutUs from '../components/collective/CollectiveAboutUs';
+import CollectiveContributorMosaic from '../components/collective/CollectiveContributorMosaic';
 import CollectiveHero from '../components/collective/CollectiveHero';
 import CollectiveLedger from '../components/collective/CollectiveLedger';
-import CollectiveMembersWall from '../components/collective/CollectiveMembersWall';
+import CollectiveMembers from '../components/collective/CollectiveMembers';
 import EditTopBar from '../components/EditTopBar';
 import PublicFooter from '../components/PublicFooter';
 
 // Actions
 import appendEditCollectiveForm from '../actions/form/append_edit_collective';
 import cancelEditCollectiveForm from '../actions/form/cancel_edit_collective';
-import fetchCollective from '../actions/groups/fetch_by_slug'; // TODO: change to collective
+import fetchExpenses from '../actions/expenses/fetch_by_group'; // TODO: change to collective
+import fetchDonations from '../actions/donations/fetch_by_group'; // TODO: change to collective
 import fetchProfile from '../actions/profile/fetch_by_slug';
 import fetchUsers from '../actions/users/fetch_by_group'; // TODO: change to collective
 import notify from '../actions/notification/notify';
@@ -49,7 +51,8 @@ export class Collective extends Component {
     const {
       collective,
       editCollectiveInProgress,
-      cancelEditCollectiveForm
+      cancelEditCollectiveForm,
+      i18n
     } = this.props;
 
     return (
@@ -60,10 +63,10 @@ export class Collective extends Component {
           {editCollectiveInProgress && <EditTopBar onSave={ saveGroup.bind(this) } onCancel={ cancelEditCollectiveForm }/>}
 
           <CollectiveHero {...this.props} />
-          {false && <CollectiveLedger {...this.props} />}
+          <CollectiveLedger {...this.props} />
           <CollectiveAboutUs {...this.props} />
-          {false && <CollectiveMembersWall {...this.props} />}
-
+          <CollectiveMembers {...this.props} />
+          <CollectiveContributorMosaic contributors={ collective.contributors } i18n={i18n}/>
           <PublicFooter />
         </StickyContainer>
       </div>
@@ -73,16 +76,19 @@ export class Collective extends Component {
   componentDidMount() {
     const {
       collective,
-      fetchCollective,
+      fetchProfile,
       fetchUsers,
+      fetchExpenses,
+      fetchDonations
     } = this.props;
 
-    if (!collective.name) {
-      fetchCollective(collective.slug);
+    if (!collective.name) { // useful when not server-side rendered
+      fetchProfile(collective.slug);
     }
-    if (!collective.usersByRole) {
-      fetchUsers(collective.slug);
-    }
+    Promise.all([
+      fetchUsers(collective.slug),
+      fetchExpenses(collective.slug),
+      fetchDonations(collective.slug)]);
   }
 
   componentWillMount() {
@@ -134,6 +140,8 @@ const mapStateToProps = createStructuredSelector({
 export default connect(mapStateToProps, {
   appendEditCollectiveForm,
   cancelEditCollectiveForm,
+  fetchExpenses,
+  fetchDonations,
   fetchProfile,
   fetchUsers,
   notify,
