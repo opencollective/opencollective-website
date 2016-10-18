@@ -118,13 +118,7 @@
       opacity: .8;
     }
   }
-  .GroupStatsHeader-backer-count-text {
-    color: white;
-    -character {
-      color: white;
-    }
-  }
   .scrollDown {
-    margin-top: 3rem;
+    margin-top: 2rem;
   }
 }

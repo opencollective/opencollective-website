@@ -104,6 +104,7 @@
 @import './components/TransactionItem.css';
 @import './components/TransactionStatus.css';
 @import './components/UserCard.css';
+@import './components/UserAvatarRow.css';
 @import './components/UsersList.css';
 @import './components/UserPhoto.css';
 @import './components/Widget.css';

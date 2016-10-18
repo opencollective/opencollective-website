@@ -1,0 +1,32 @@
+.UserAvatarRow {
+  padding-bottom: 1.5rem;
+}
+
+.UserAvatarRow-shots {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-block;
+  height: 40px;
+  border-radius: 5px;
+  vertical-align: middle;
+  margin-right: 0;
+  padding: 6px 0px 6px 11px;
+}
+
+.UserAvatarRow-avatar {
+  display: inline-block;
+  width: 26px;
+  height: 26px;
+  background-color: #fdfdfd;
+  vertical-align: middle;
+  border-radius: 100%;
+  overflow: hidden;
+  background-size: contain;
+  margin-right: 5px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.UserAvatarRow .UserAvatarRowCount {
+  font-size: 18px;
+}

@@ -9,7 +9,7 @@ import { resizeImage, formatAnchor } from '../../lib/utils';
 
 import ContentEditable from '../../components/ContentEditable';
 import UserPhoto from '../../components/UserPhoto';
-import GroupStatsHeader from '../../components/GroupStatsHeader';
+import UserAvatarRow from '../../components/UserAvatarRow';
 
 const DEFAULT_BACKGROUND_IMAGE = '/static/images/collectives/default-header-bg.jpg';
 
@@ -50,7 +50,6 @@ export default class CollectiveHero extends Component {
               <a href={ collective.website }> { collective.name }</a> { i18n.getString('openCollective') }.
             </p>
             <h1 ref='CollectiveHero-mission' className='CollectiveHero-mission max-width-3 mx-auto mt0 mb3 white -ff-sec'>
-              { `${i18n.getString('missionTo')} `}
               <ContentEditable
                 tagName='span'
                 className='ContentEditable-mission editing'
@@ -59,8 +58,9 @@ export default class CollectiveHero extends Component {
                 onChange={event => appendEditCollectiveForm({mission: event.target.value})}
                 placeholder={i18n.getString('defaultMission')}/>
             </h1>
-            <a href='#support' className='mb3 -btn -btn-big -bg-green -ttu -ff-sec -fw-bold'>{ i18n.getString('bePart') }</a>
-            <GroupStatsHeader group={ collective } i18n={ i18n } />
+            <UserAvatarRow members={ collective.members } backers={ collective.backers } />
+            <a href='#budget' className='mb3 -btn -btn-big -bg-green -ttu -ff-sec -fw-bold'>{ i18n.getString('bePart') }</a>
+
             <div className='scrollDown'>
               <p className='h6'>{ i18n.getString('scrollDown') }</p>
               <svg width='14' height='9'>
