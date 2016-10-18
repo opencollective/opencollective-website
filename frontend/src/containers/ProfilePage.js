@@ -36,7 +36,6 @@ export class ProfilePage extends Component {
       notify,
     } = this.props;
     appendProfileForm(attribute);
-    console.log("Validating ",profileForm.attributes, profileForm, attribute);
     return validateSchema(profileForm.attributes, profileSchema)
       .then(() => updateUser(profile.id, attribute))
       .catch(({message}) => notify('error', message));
