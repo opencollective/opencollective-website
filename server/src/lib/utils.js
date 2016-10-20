@@ -18,7 +18,9 @@ export default {
     if (height) size += `h_${height},`;
     if (size === '') size = 'w_320';
 
-    const queryurl = query || `/${size}c_fill,f_jpg/`;
+    const format = (src.match(/\.png$/)) ? 'png' : 'jpg';
+
+    const queryurl = query || `/${size}c_fill,f_${format}/`;
 
     return `http://res.cloudinary.com/opencollective/image/fetch${queryurl}${encodeURIComponent(src)}`;
   },
