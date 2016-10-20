@@ -49,7 +49,7 @@ export default (app) => {
     const query = req.query.query;
 
     const url = getCloudinaryUrl(req.query.src, { width, height, query });
-console.log("Fetching", url);
+
     req
       .pipe(request(url, { followRedirect: false }))
       .pipe(res);
