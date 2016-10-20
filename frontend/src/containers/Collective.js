@@ -30,11 +30,8 @@ import validateSchema from '../actions/form/validate_schema';
 // Selectors
 import {
   canEditCollectiveSelector,
-  getCollectiveSelector,
-  getCollectiveSettingsSelector,
   getI18nSelector,
   getPopulatedCollectiveSelector,
-  getSlugSelector,
   hasHostSelector } from '../selectors/collectives';
 import {
   getEditCollectiveFormAttrSelector,
@@ -60,7 +57,7 @@ export class Collective extends Component {
         <Notification />
         <StickyContainer>
 
-          {editCollectiveInProgress && <EditTopBar onSave={ saveGroup.bind(this) } onCancel={ cancelEditCollectiveForm }/>}
+          {editCollectiveInProgress && <EditTopBar onSave={ saveCollective.bind(this) } onCancel={ cancelEditCollectiveForm }/>}
 
           <CollectiveHero {...this.props} />
           <CollectiveLedger {...this.props} />
@@ -97,7 +94,7 @@ export class Collective extends Component {
 
 }
 
-export function saveGroup() {
+export function saveCollective() {
   const {
     collective,
     updateCollective,
@@ -112,8 +109,8 @@ export function saveGroup() {
     .then(() => updateCollective(collective.slug, editCollectiveForm.attributes))
     .then(() => merge(collective, editCollectiveForm.attributes)) // this is to prevent ui from temporarily reverting to old text
     .then(() => cancelEditCollectiveForm()) // clear out this form to prevent data issues on another page.
-    .then(() => fetchProfile(group.slug))
-    .then(() => notify('success', 'Group updated'))
+    .then(() => fetchProfile(collective.slug))
+    .then(() => notify('success', 'Collective updated'))
     .catch(({message}) => notify('error', message));
 }
 

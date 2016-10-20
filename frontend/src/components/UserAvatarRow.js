@@ -9,13 +9,10 @@ export default class UserAvatarRow extends Component {
   render() {
     const {
       backers,
-      members,
-      link
+      members
     } = this.props;
 
-    // TODO: remove duplicates
     const users = unionBy(members, backers, 'username');
-    //const users = members.concat(backers);
     console.log(users);
     const usersToShow = users.filter(u => u.avatar ? true : false).slice(MAX_SHOWING);
     if (users.length === 0 || usersToShow.length === 0 ) {

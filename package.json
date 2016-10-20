@@ -118,7 +118,7 @@
     "chai-spies": "0.7.1",
     "chromedriver": "2.21.2",
     "dotenv": "2.0.0",
-    "eslint": "3.6.1",
+    "eslint": "3.8.1",
     "eslint-config-opencollective": "1.1.6",
     "expect": "1.18.0",
     "foreman": "1.4.1",

@@ -2,10 +2,8 @@ import React, { Component, PropTypes } from 'react';
 
 import { Sticky } from 'react-sticky';
 
-import fetch from 'isomorphic-fetch';
-
 import LoginTopBar from '../../containers/LoginTopBar';
-import { resizeImage, formatAnchor } from '../../lib/utils';
+import { resizeImage } from '../../lib/utils';
 
 import ContentEditable from '../../components/ContentEditable';
 import UserPhoto from '../../components/UserPhoto';
@@ -16,7 +14,7 @@ const DEFAULT_BACKGROUND_IMAGE = '/static/images/collectives/default-header-bg.j
 export default class CollectiveHero extends Component {
 
   render() {
-    const { collective, i18n, hasHost, canEditCollective, editCollectiveForm, appendEditCollectiveForm} = this.props;
+    const { collective, i18n, canEditCollective, editCollectiveForm, appendEditCollectiveForm} = this.props;
 
     // We can override the default style for the cover image of a collective in `collective.settings`
     // e.g.

@@ -2,8 +2,6 @@ import merge from 'lodash/merge';
 import values from 'lodash/values';
 import groupBy from 'lodash/groupBy';
 
-import { fromJS } from 'immutable';
-
 import { HYDRATE } from '../constants/session';
 // import * as constants from '../constants/collectives'; TODO: re-enable
 import * as constants from '../constants/groups'; // TODO: remove
@@ -17,7 +15,7 @@ const DEFAULT_COLLECTIVE_SETTINGS = {
   }
 };
 
-const initialState = {} //fromJS({});
+const initialState = {}
 
 export default function collectives(state = initialState, action={}) {
   switch (action.type) {
@@ -27,12 +25,7 @@ export default function collectives(state = initialState, action={}) {
         return merge({}, state, {
           [action.data.collective.slug]: merge({}, {settings: DEFAULT_COLLECTIVE_SETTINGS}, action.data.collective)
         });
-        /*
-        return state
-          .set(action.data.collective.slug, action.data.collective)
-          //.updateIn([action.data.collective.slug, 'settings'], action.data.collective.settings || DEFAULT_COLLECTIVE_SETTINGS)
-          //.updateIn([action.data.collective.slug, 'settings', 'lang'], action.data.collective.settings.lang || 'en');
-        */
+
       }
       return state;
 

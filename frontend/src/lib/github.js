@@ -16,4 +16,4 @@ export function formatGithubContributors(githubContributors) {
       }
     }
   }).sort((A, B) => (B.core * Number.MAX_SAFE_INTEGER + B.stats.c) - (A.core * Number.MAX_SAFE_INTEGER + A.stats.c));
-};
+}
