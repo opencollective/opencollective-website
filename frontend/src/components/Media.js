@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { resizeImage } from '../lib/utils';
 import YoutubeVideo from './YoutubeVideo';
 
 export default ({group}) => {
@@ -11,7 +11,7 @@ export default ({group}) => {
     );
   } else if (group.image) {
     const extension = group.image.split('.').pop().toLowerCase();
-    const image = (extension === 'svg') ? group.image : `https://res.cloudinary.com/opencollective/image/fetch/w_720/${encodeURIComponent(group.image)}`;
+    const image = (extension === 'svg') ? group.image : resizeImage(group.image, { width: 720 });
     const styles = {
       backgroundImage: `url(${image})`,
     }

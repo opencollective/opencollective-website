@@ -15,7 +15,7 @@ export default ({
     <div className='Widget'>
         {options.header && (
           <div className='Widget-header'>
-            <img src={resizeImage(group.logo, 200)} />
+            <img src={resizeImage(group.logo, { width: 200 })} />
             <h1>{group.name}</h1>
             <p>{group.description}</p>
             <GroupStatsHeader group={group} i18n={i18n} />

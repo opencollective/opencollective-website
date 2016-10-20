@@ -98,7 +98,7 @@ export default class CollectiveCard extends Component {
         <a href={publicUrl}>
           <div>
             <div className='CollectiveCard-head'>
-              <div className='CollectiveCard-background' style={{backgroundImage: `url(${resizeImage(backgroundImage, 320) || DEFAULT_BG})`}}>
+              <div className='CollectiveCard-background' style={{backgroundImage: `url(${resizeImage(backgroundImage, { width: 320 }) || DEFAULT_BG})`}}>
                 <div className='CollectiveCard-image' style={{backgroundImage: `url(${logo || DEFAULT_LOGOS[key%DEFAULT_LOGOS.length]})`}}></div>
               </div>
             </div>

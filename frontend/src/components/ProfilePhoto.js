@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react';
+import { resizeImage } from '../lib/utils';
 
 const ProfilePhoto = ({url, spinner, hasBorder=false}) => {
 
-  const backgroundImage = url ? `https://res.cloudinary.com/opencollective/image/fetch/h_128/${encodeURIComponent(url)}` : '/static/images/default_avatar.svg';
+  const backgroundImage = url ? resizeImage(url, { height: 128 }) : '/static/images/default_avatar.svg';
 
   const border = hasBorder ? {
     border: '3px solid white',
