@@ -1,10 +1,7 @@
 import React from 'react';
 import getAvatarByNumber from '../lib/avatar_by_number';
 import ImagePicker from '../components/ImagePicker';
-
-const cloudinaryUrl = (url) => {
-  return `https://res.cloudinary.com/opencollective/image/fetch/h_128/${encodeURIComponent(url)}`;
-};
+import { resizeImage } from '../lib/utils';
 
 export default class UserPhoto extends React.Component {
 
@@ -48,7 +45,9 @@ export default class UserPhoto extends React.Component {
       i18n,
       presets
     } = this.props;
-    const avatar = (!this.state.avatar || this.state.avatar.indexOf('/static/') === 0) ? this.state.avatar : cloudinaryUrl(this.state.avatar);
+    // @xdamman: /!\ this is generating a lot of requests to fetch the avatar because render() is often executed!
+    // that's probably why we were using so much bandwidth from cloudinary!
+    const avatar = (!this.state.avatar || this.state.avatar.indexOf('/static/') === 0) ? this.state.avatar : resizeImage(this.state.avatar, { width: 128 });
     const width = this.props.width;
     const height = this.props.height || width;
     const styles = {

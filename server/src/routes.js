@@ -8,6 +8,7 @@ import robots from 'robots.txt';
 import * as controllers from './controllers';
 import apiUrl from './utils/api_url';
 import render from './lib/render';
+import { getCloudinaryUrl } from './lib/utils';
 
 export default (app) => {
 
@@ -38,18 +39,34 @@ export default (app) => {
   app.use(robots(path.join(__dirname, '../../frontend/dist/robots.txt')));
 
   /**
+   * Proxy all images so that we can serve them from the opencollective.com domain
+   * and we can cache them at cloudflare level (to reduce bandwidth at cloudinary level)
+   * Format: /proxy/images?src=:encoded_url&width=:width
+   */
+  app.get('/proxy/images', (req, res) => {
+    const width = req.query.width;
+    const height = req.query.height;
+    const query = req.query.query;
+
+    const url = getCloudinaryUrl(req.query.src, { width, height, query });
+console.log("Fetching", url);
+    req
+      .pipe(request(url, { followRedirect: false }))
+      .pipe(res);
+  });
+
+  /**
    * Pipe the requests before the middlewares, the piping will only work with raw
    * data
    * More infos: https://github.com/request/request/issues/1664#issuecomment-117721025
    */
-
   app.all('/api/*', (req, res) => {
     req
       .pipe(request(apiUrl(req.url), { followRedirect: false }))
       .pipe(res);
   });
 
-/**
+  /**
   * Email Subscription
   */
   app.get('/services/email/unsubscribe', mw.ga, controllers.unsubscribe, render);

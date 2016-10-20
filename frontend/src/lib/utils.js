@@ -1,6 +1,13 @@
-export function resizeImage(imageUrl, width) {
-        if (!imageUrl) return null;
-        return `http://res.cloudinary.com/opencollective/image/fetch/w_${width},c_fill,f_jpg/${encodeURIComponent(imageUrl)}`;
+export function resizeImage(imageUrl, { width, height, query }) {
+  if (!imageUrl) return null;
+  let queryurl = '';
+  if (query) {
+    queryurl = encodeURIComponent(query);
+  } else {
+    if (width) queryurl += `&width=${width}`;
+    if (height) queryurl += `&height=${height}`;
+  }
+  return `/proxy/images/?src=${encodeURIComponent(imageUrl)}${queryurl}`;
 }
 
 export function formatAnchor(title) {

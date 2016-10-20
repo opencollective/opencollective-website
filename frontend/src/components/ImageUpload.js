@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import isFunction from 'lodash/isFunction';
+import { resizeImage } from '../lib/utils';
 
 class ImageUpload extends Component {
 
@@ -40,7 +41,7 @@ class ImageUpload extends Component {
 
     if (value) {
       className = 'imagePreview';
-      imgsrc = `http://res.cloudinary.com/opencollective/image/fetch/w_335,c_fill,f_jpg/${encodeURIComponent(value)}`;
+      imgsrc = resizeImage(value, { width: 335 });
       label = (value.match(/\.pdf$/)) ? file.name : '';
     }
 

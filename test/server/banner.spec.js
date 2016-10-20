@@ -9,7 +9,6 @@ import app from '../../server/src/index';
 import shieldIONock from '../data/shields.io.nock';
 
 mocks.backers = mocks.users.filter(u => u.tier == 'backer')
-
 describe("avatar", () => {
   let sandbox;
   beforeEach(() => {
