@@ -1,9 +1,43 @@
+if (!Array.prototype.find) {
+  Object.defineProperty(Array.prototype, "find", {
+    value: function(predicate) {
+     'use strict';
+     if (this == null) {
+       throw new TypeError('Array.prototype.find called on null or undefined');
+     }
+     if (typeof predicate !== 'function') {
+       throw new TypeError('predicate must be a function');
+     }
+     var list = Object(this);
+     var length = list.length >>> 0;
+     var thisArg = arguments[1];
+     var value;
+
+     for (var i = 0; i < length; i++) {
+       value = list[i];
+       if (predicate.call(thisArg, value, i, list)) {
+         return value;
+       }
+     }
+     return undefined;
+    }
+  });
+}
+
+const scriptsNodesArray = [].slice.call(document.querySelectorAll("script"));
+const regex = new RegExp("{{config.host.website}}".replace(/^https?:\/\//, ''),'i');
+const anchor = scriptsNodesArray.find(s => s.getAttribute('src').match(regex));
+
+const styles = window.getComputedStyle(anchor.parentNode, null);
+const width = anchor.parentNode.getBoundingClientRect().width - parseInt(styles.paddingLeft, 10) - parseInt(styles.paddingRight, 10);
+
+const header = ({{header}}) ? `<h1>This is possible thanks to you<h1><h2>This project is possible thanks to our backers and sponsors</h2>` : '';
+
 var html = `
   <center>
-    <h1>This is possible thanks to you<h1>
-    <h2>This project is possible thanks to our backers and sponsors</h2>
-    <object type="image/svg+xml" data="https://opencollective.com/{{slug}}/sponsors.svg"></object><br />
-    <object type="image/svg+xml" data="https://opencollective.com/{{slug}}/backers.svg"></object>
+    ${header}
+    <object type="image/svg+xml" data="https://opencollective.com/{{slug}}/sponsors.svg?width=${width}"></object><br />
+    <object type="image/svg+xml" data="https://opencollective.com/{{slug}}/backers.svg?width=${width}"></object>
   </center>
 `;
 
@@ -11,4 +45,4 @@ var e = document.createElement('div');
 e.id = 'opencollective-banner';
 e.innerHTML = html;
 
-document.body.appendChild(e);
+anchor.parentNode.insertBefore(e, anchor);
