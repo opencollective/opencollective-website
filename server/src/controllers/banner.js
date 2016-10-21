@@ -54,6 +54,8 @@ export default {
     res.type('application/javascript');
     res.render('bannerjs', {
       layout: false,
+      config,
+      header: (req.query.header !== 'false'),
       slug
     })
   },
