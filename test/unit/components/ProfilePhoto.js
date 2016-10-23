@@ -11,7 +11,7 @@ describe('ProfilePhoto component', () => {
   it('should render an image if provided', () => {
     const url = 'image.jpg';
     const element = ProfilePhoto({ url });
-    expect(element.props.style.backgroundImage).to.be.equal(`url(https://res.cloudinary.com/opencollective/image/fetch/h_128/${url})`);
+    expect(element.props.style.backgroundImage).to.be.equal(`url(/proxy/images/?src=${url}&height=128)`);
   });
 
 });

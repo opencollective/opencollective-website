@@ -54,6 +54,8 @@ export default {
     res.type('application/javascript');
     res.render('bannerjs', {
       layout: false,
+      config,
+      header: (req.query.header !== 'false'),
       slug
     })
   },
@@ -84,11 +86,10 @@ export default {
 
     let imageUrl = "/static/images/user.svg";
     if (user.avatar && user.avatar.substr(0,1) !== '/') {
-      const avatarEncoded = encodeURIComponent(user.avatar);
       if (!tier.match(/sponsor/)) {
-        imageUrl = `https://res.cloudinary.com/opencollective/image/fetch/c_thumb,g_face,h_${maxHeight},r_max,w_${maxHeight},bo_3px_solid_white/c_thumb,h_${maxHeight},r_max,w_${maxHeight},bo_2px_solid_rgb:66C71A/e_trim/f_auto/${avatarEncoded}`;
+        imageUrl = utils.getCloudinaryUrl(user.avatar, { query: `/c_thumb,g_face,h_${maxHeight},r_max,w_${maxHeight},bo_3px_solid_white/c_thumb,h_${maxHeight},r_max,w_${maxHeight},bo_2px_solid_rgb:66C71A/e_trim/f_auto/` });
       } else {
-        imageUrl = `https://res.cloudinary.com/opencollective/image/fetch/h_${maxHeight}/${avatarEncoded}`;
+        imageUrl = utils.getCloudinaryUrl(user.avatar, { height: maxHeight });
       }
     }
 
@@ -179,11 +180,12 @@ export default {
 
     const promises = [];
     for (let i = 0 ; i < count ; i++) {
-      if (users[i].avatar) {
+      let avatar = users[i].avatar;
+      if (avatar) {
         if (!tier.match(/sponsor/)) {
-          users[i].avatar = `https://res.cloudinary.com/opencollective/image/fetch/c_thumb,g_face,h_${avatarHeight*2},r_max,w_${avatarHeight*2},bo_3px_solid_white/c_thumb,h_${avatarHeight*2},r_max,w_${avatarHeight*2},bo_2px_solid_rgb:66C71A/e_trim/f_auto/${encodeURIComponent(users[i].avatar)}`;
+          avatar = utils.getCloudinaryUrl(avatar, { query: `/c_thumb,g_face,h_${avatarHeight*2},r_max,w_${avatarHeight*2},bo_3px_solid_white/c_thumb,h_${avatarHeight*2},r_max,w_${avatarHeight*2},bo_2px_solid_rgb:66C71A/e_trim/f_auto/` });
         }
-        const options = {url: users[i].avatar, encoding: null};
+        const options = {url: avatar, encoding: null};
         promises.push(requestPromise(options));
       }
     }

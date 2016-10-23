@@ -25,7 +25,7 @@ const schema = Joi.alternatives().try(
     tags: Joi.array().items(Joi.string()).label('Tags'),
     users: Joi.array().items(user),
     tos: Joi.boolean().label('please approve the terms of service').required()
-  })
+  }).unknown()
 );
 
 export default schema;

@@ -185,7 +185,7 @@ describe("banner", () => {
         res.body = { contentLength: Number(res.headers['content-length']) };
       })
       .expect({
-        contentLength: 13109
+        contentLength: 29380
       })
       .expect(200, done);
   });
@@ -200,7 +200,7 @@ describe("banner", () => {
         res.body = { firstLine };
       })
       .expect({
-        firstLine: '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="168" height="104">'
+        firstLine: '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="420" height="104">'
       })
       .expect(200, done);
   });
@@ -215,7 +215,7 @@ describe("banner", () => {
         res.body = { firstLine };
       })
       .expect({
-        firstLine: '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="74">'
+        firstLine: '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="212">'
       })
       .expect(200, done);
   });
@@ -227,7 +227,7 @@ describe("banner", () => {
       .expect(res => {
         const svg = new Buffer(res.body).toString('utf8');
         const links = svg.match(/<a([^>]+)>/g);
-        res.body = { links };
+        res.body = { links: links.filter(l => l.match(/julianmotz.com/)) };
       })
       .expect({
         links: [
