@@ -62,7 +62,7 @@ export class AddGroup extends Component {
               name={attribute}
               value={users[index][attribute]}
               onChange={(value) => updateUserAttribute(index, attribute, value)}
-              maxLength={50}
+              maxLength={250}
               placeholder={placeholder} />
           </div>
         );
