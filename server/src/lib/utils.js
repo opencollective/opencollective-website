@@ -9,7 +9,8 @@ export default {
 
   getCloudinaryUrl: (src, { width, height, query }) => {
 
-    if (src.match(/cloudinary.com/)) {
+    // We don't try to resize animated gif or images already processed by cloudinary
+    if (src.match(/cloudinary.com/) || src.match(/\.gif$/)) {
       return src;
     }
 
