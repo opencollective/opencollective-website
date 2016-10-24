@@ -22,7 +22,7 @@ export default class CollectiveHero extends Component {
     // - to make the background monochrome*: { "style": {"coverImage": {"filter":"brightness(50%) sepia(1) hue-rotate(132deg) saturate(103.2%) brightness(91.2%);" }}}
     // * see http://stackoverflow.com/questions/29037023/how-to-calculate-required-hue-rotate-to-generate-specific-colour
     collective.settings.style = collective.settings.style || {};
-    const coverImage = resizeImage(collective.backgroundImage,1024) || DEFAULT_BACKGROUND_IMAGE;
+    const coverImage = resizeImage(collective.backgroundImage, { width: 1024 }) || DEFAULT_BACKGROUND_IMAGE;
     const coverImageStyle = Object.assign({}, { filter: "blur(4px)", backgroundImage: `url(${coverImage})` }, collective.settings.style.coverImage);
 
     return (
@@ -94,6 +94,5 @@ CollectiveHero.propTypes = {
   i18n: PropTypes.object.isRequired,
   editCollectiveForm: PropTypes.object.isRequired,
   appendEditCollectiveForm: PropTypes.func.isRequired,
-  hasHost: PropTypes.bool,
   canEditCollective: PropTypes.bool,
 };

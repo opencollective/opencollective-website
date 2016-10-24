@@ -22,7 +22,7 @@ export default {
 
     const queryurl = query || `/${size}c_fill,f_${format}/`;
 
-    return `http://res.cloudinary.com/opencollective/image/fetch${queryurl}${encodeURIComponent(src)}`;
+    return `https://res.cloudinary.com/opencollective/image/fetch${queryurl}${encodeURIComponent(src)}`;
   },
 
   /**

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import filterCollection from '../../lib/filter_collection';
 import UserCard from '../../components/UserCard';
 
@@ -29,4 +29,9 @@ export default class CollectiveMembers extends React.Component {
       </section>
     );
   }
+}
+
+CollectiveMembers.propTypes = {
+  collective: PropTypes.object.isRequired,
+  i18n: PropTypes.object.isRequired
 }
