@@ -3,7 +3,7 @@ import AmountPicker from '../../components/public_group/AmountPicker';
 
 export default class CollectiveDonate extends React.Component {
   _showTier(tier, index) {
-    const { donate, i18n, collective } = this.props;
+    const { donateToCollective, i18n, collective } = this.props;
     const description = tier.description || i18n.getString(`${tier.name}Description`);
 
     return (
@@ -15,7 +15,7 @@ export default class CollectiveDonate extends React.Component {
           <p className='CollectiveDonate-tier-box-description h5 mt0 mb3 px3 flex justify-center items-center'>
             {description}
           </p>
-          <AmountPicker tier={tier} onToken={donate.bind(this)} group={ collective } {...this.props}/>
+          <AmountPicker tier={tier} onToken={donateToCollective.bind(this)} group={ collective } {...this.props}/>
         </div>
       </div>
     );

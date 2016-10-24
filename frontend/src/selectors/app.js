@@ -4,4 +4,4 @@ const getAppSelector = (state) => state.app;
 
 export const getAppRenderedSelector = createSelector(
   getAppSelector,
-  (app) => app.rendered);
+  (app) => app.rendered || false);

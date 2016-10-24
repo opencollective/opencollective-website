@@ -71,11 +71,11 @@ export class Collective extends Component {
 
           {editCollectiveInProgress && <EditTopBar onSave={ saveCollective.bind(this) } onCancel={ cancelEditCollectiveForm }/>}
 
-          <CollectiveHero collective={ collective } i18n={ i18n } {...this.props} />
-          <CollectiveLedger collective={ collective } i18n={ i18n } donate={ donateToCollective.bind(this) } {...this.props} />
-          <CollectiveAboutUs collective={ collective } i18n={ i18n } {...this.props} />
+          <CollectiveHero {...this.props} />
+          <CollectiveLedger donateToCollective={ donateToCollective.bind(this) } {...this.props} />
+          <CollectiveAboutUs {...this.props} />
           <CollectiveMembers collective={ collective } i18n={ i18n } />
-          <CollectiveContributorMosaic contributors={ collective.contributors } i18n={i18n}/>
+          <CollectiveContributorMosaic contributors={ collective.contributors } i18n={ i18n } />
           <PublicFooter />
         </StickyContainer>
       </div>
@@ -88,10 +88,11 @@ export class Collective extends Component {
       fetchProfile,
       fetchUsers,
       fetchPendingExpenses,
-      fetchTransactions
+      fetchTransactions,
+      loadData
     } = this.props;
 
-    if (!collective.name) { // useful when not server-side rendered
+    if (loadData) { // useful when not server-side rendered
       fetchProfile(collective.slug);
     }
     Promise.all([
