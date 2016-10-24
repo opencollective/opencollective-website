@@ -472,6 +472,11 @@
   }
 }
 
+.PublicGroup-markdown .ContentEditable {
+  max-width: 788px;
+  margin: 0 auto;
+}
+
 .PublicGroup .section:nth-child(even) {
   background-color:var(--light-gray);
 }

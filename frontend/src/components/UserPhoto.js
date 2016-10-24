@@ -47,7 +47,7 @@ export default class UserPhoto extends React.Component {
     } = this.props;
     // @xdamman: /!\ this is generating a lot of requests to fetch the avatar because render() is often executed!
     // that's probably why we were using so much bandwidth from cloudinary!
-    const avatar = (!this.state.avatar || this.state.avatar.indexOf('/static/') === 0) ? this.state.avatar : resizeImage(this.state.avatar, { width: 128 });
+    const avatar = (!this.state.avatar || this.state.avatar.indexOf('/static/') === 0) ? this.state.avatar : resizeImage(this.state.avatar, { width: 480 });
     const width = this.props.width;
     const height = this.props.height || width;
     const styles = {
