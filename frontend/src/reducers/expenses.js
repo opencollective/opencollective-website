@@ -3,6 +3,7 @@ import * as constants from '../constants/expenses';
 
 export default function expenses(state={}, action={}) {
   switch (action.type) {
+    case constants.PENDING_EXPENSES_SUCCESS:
     case constants.EXPENSES_SUCCESS:
     case constants.EXPENSE_SUCCESS: {
       const {expenses} = action;

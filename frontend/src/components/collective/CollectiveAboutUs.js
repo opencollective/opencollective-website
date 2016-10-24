@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import ContentEditable from '../../components/ContentEditable';
 import Markdown from '../../components/Markdown';
@@ -38,4 +38,12 @@ export default class CollectiveAboutUs extends Component {
       </section>
     );
   }
+}
+
+CollectiveAboutUs.propTypes = {
+  collective: PropTypes.object.isRequired,
+  i18n: PropTypes.object.isRequired,
+  canEditCollective: PropTypes.bool.isRequired, 
+  appendEditCollectiveForm: PropTypes.func.isRequired,
+  editCollectiveForm: PropTypes.object.isRequired
 }

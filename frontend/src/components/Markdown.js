@@ -98,9 +98,9 @@ export default class Markdown extends Component {
 Markdown.propTypes = {
   value: PropTypes.string.isRequired,
   className: PropTypes.string,
-  canEdit: PropTypes.boolean,
+  canEdit: PropTypes.bool,
   placeholder: PropTypes.string,
-  splitIntoSections: PropTypes.boolean
+  splitIntoSections: PropTypes.bool
 };
 
 Markdown.defaultProps = {

@@ -4,8 +4,13 @@ import { getSlugSelector } from './router';
 import { getAuthenticatedUserSelector } from './session';
 
 import i18nLib from '../lib/i18n';
-import roles from '../constants/roles';
+import filterCollection from '../lib/filter_collection';
 import { formatGithubContributors } from '../lib/github';
+
+import { getExpensesSelector } from './expenses';
+import { getTransactionsSelector } from './transactions';
+
+import roles from '../constants/roles';
 
 const DEFAULT_COLLECTIVE_SETTINGS = {
   lang: 'en',
@@ -62,8 +67,10 @@ export const getPopulatedCollectiveSelector = createSelector(
     getCollectiveHostSelector,
     getCollectiveMembersSelector,
     getCollectiveBackersSelector,
-    getCollectiveContributorsSelector ],
-    (collective, settings, host, members, backers, contributors) =>
+    getCollectiveContributorsSelector,
+    getExpensesSelector,
+    getTransactionsSelector ],
+    (collective, settings, host, members, backers, contributors, expenses, transactions) =>
       Object.assign(
         {},
         collective,
@@ -73,8 +80,10 @@ export const getPopulatedCollectiveSelector = createSelector(
         { backers },
         { backersCount: backers.length },
         { contributors },
-        { contributorsCount: contributors.length })
-    );
+        { contributorsCount: contributors.length },
+        { expenses: filterCollection(expenses, { GroupId: collective.id })},
+        { transactions: filterCollection(transactions, {GroupId: collective.id })},
+    ));
 
 /*
  * Other selectors

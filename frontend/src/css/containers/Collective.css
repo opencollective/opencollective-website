@@ -69,7 +69,7 @@
   font-size: 1rem;
 }
 
-/* WHY JOIN */
+/* WHY Donate */
 .Collective-image-placeholder {
   background: url('/static/images/media-placeholder.svg') no-repeat;
   background-position: center center;
@@ -87,31 +87,30 @@
   padding-bottom: 56.25%; /* 16:9 */
 }
 
-.Collective-summary
-{
+.Collective-summary {
   padding: 54px;
 }
 
 /* JOIN US */
-.CollectiveJoin-container {
+.CollectiveDonate-container {
   padding-top: 6.25rem;
 }
 
-.CollectiveJoinUs-tier-box-inner {
+.CollectiveDonate-tier-box-inner {
   border-width: 2px;
   border-radius: 6px;
   padding-bottom: 30px;
 }
 
-.CollectiveJoinUs-tier-box-title {
+.CollectiveDonate-tier-box-title {
   margin-top: -1em;
 }
 
-.CollectiveJoinUs-tier-box-description {
+.CollectiveDonate-tier-box-description {
   min-height: calc(1.38rem * 3);
 }
 
-.CollectiveJoin-container .Button {
+.CollectiveDonate-container .Button {
   margin: auto;
   font-weight: normal;
   border-radius: 100px;

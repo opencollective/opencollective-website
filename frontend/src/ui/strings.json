@@ -88,6 +88,7 @@
     "paid": "paid",
     "pay": "Pay",
     "pending": "pending",
+    "pendingExpenses": "Pending expenses",
     "payoutMethods-alreadyReimbursed": "Already reimbursed",
     "payoutMethods-other": "Other (please provide instructions)",
     "paypalEmail": "PayPal Email",
