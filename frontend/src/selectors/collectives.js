@@ -33,6 +33,14 @@ export const getCollectiveSettingsSelector = createSelector(
   getCollectiveSelector,
   (collective) => collective.settings || DEFAULT_COLLECTIVE_SETTINGS);
 
+export const getStripeAccountSelector = createSelector(
+  getCollectiveSelector,
+  (collective) => collective.stripeAccount || {});
+
+export const getStripePublishableKeySelector = createSelector(
+  getStripeAccountSelector,
+  (stripeAccount) => stripeAccount.stripePublishableKey);
+
 const getCollectiveUsersByRoleSelector = createSelector(
   getCollectiveSelector,
   (collective) => collective.usersByRole || {});
@@ -50,8 +58,8 @@ export const getCollectiveBackersSelector = createSelector(
   (usersByRole) => usersByRole[roles.BACKER] || []);
 
 export const hasHostSelector = createSelector(
-  getCollectiveHostSelector,
-  (host) => host.length === 0 ? false : true);
+  [getCollectiveHostSelector, getStripePublishableKeySelector],
+  (host, publishableKey) => host.length === 1 && publishableKey ? true : false);
 
 export const getCollectiveDataSelector = createSelector(
   getCollectiveSelector,
