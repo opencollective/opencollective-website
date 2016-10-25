@@ -12,7 +12,7 @@ const user = Joi.object().keys({
 const schema = Joi.alternatives().try(
   Joi.object().keys({
     name: Joi.string().label('Collective name').required(),
-    slug: Joi.string().regex(/^[a-z1-9-_]+$/, 'alpha numeric with dash or underscore').label('URL').required(),
+    slug: Joi.string().regex(/^[a-z1-9-_]+$/i, 'alpha numeric with dash or underscore').label('URL').required(),
     currency: Joi.string().label('Currency'),
     website: Joi.string().uri().allow('').label('Website url'),
     video: Joi.string().uri().allow('').label('Video url'),

@@ -55,7 +55,7 @@ export class NewGroup extends Component {
       label: 'Meetup Group',
       placeholders: {
         name: 'Consciousness Hacking SF',
-        slug: 'chsf',
+        slug: 'ConsciousnessHackingSF',
         mission: 'We are on a mission to explore and develop new technologies for psychological, emotional and spiritual flourishing.',
         description: "Consciousness Hacking is an inside-out perspective on how technology can serve us by changing our relationship to the world, rather than the world itself. Meetings will feature insightful talks, community building, and support for new ideas and concepts. Consciousness Hacking​ is an ​open exploration of how science and technology can support radically modern approaches to spirituality and human flourishing.​ We do this through a global network of communities, events, digital media and projects.​",
         contribute: 'We need more people to join the community and attend our events. We are also looking for volunteers to help us organize our meetups.'
