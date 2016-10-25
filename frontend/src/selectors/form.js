@@ -22,4 +22,16 @@ export const getEditCollectiveInProgressSelector = createSelector(
  */
 export const getDonationFormSelector = createSelector(
 	getFormSelector,
-	(form) => form.donation)
+	(form) => form.donation);
+
+/*
+ * Profile form selector
+ */
+
+export const getProfileFormSelector = createSelector(
+	getFormSelector,
+	(form) => form.profile);
+
+export const getProfileFormAttrSelector = createSelector(
+	getProfileFormSelector,
+	(profileForm) => profileForm.attributes);
