@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
+import RelatedGroups from '../RelatedGroups';
+
 export default class CollectivePostDonationThanks extends Component {
 
   constructor(props) {
@@ -28,6 +30,9 @@ export default class CollectivePostDonationThanks extends Component {
             <button onClick={::this.tweet} className='px3 -btn -green -btn-outline -btn-small -ttu -ff-sec -fw-bold'>Tweet this!</button>
           </div>
         </div>
+        <section className='pt4 center'>
+          <RelatedGroups title={i18n.getString('checkOutOtherSimilarCollectives')} groupList={collective.related} {...this.props} />
+        </section>
         <div className="CollectiveThanks center pt3" onClick={ closeDonationFlow }>
           <a href='#'> Return to the collective page </a>
         </div>

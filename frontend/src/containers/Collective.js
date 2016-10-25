@@ -28,6 +28,7 @@ import fetchPendingExpenses from '../actions/expenses/fetch_pending_by_collectiv
 import fetchTransactions from '../actions/transactions/fetch_by_collective';
 import fetchProfile from '../actions/profile/fetch_by_slug';
 import fetchUsers from '../actions/users/fetch_by_group'; // TODO: change to collective
+import getSocialMediaAvatars from '../actions/users/get_social_media_avatars';
 import notify from '../actions/notification/notify';
 import updateCollective from '../actions/groups/update'; // TODO: change to collective
 import updateUser from '../actions/users/update';
@@ -234,7 +235,7 @@ const mapStateToProps = createStructuredSelector({
     newUser: getNewUserSelector,
     updateInProgress: getUpdateInProgressSelector,
 
-    // Editing props
+    // editing props
     canEditCollective: canEditCollectiveSelector,
     editCollectiveForm: getEditCollectiveFormAttrSelector,
     editCollectiveInProgress: getEditCollectiveInProgressSelector,
@@ -258,6 +259,7 @@ export default connect(mapStateToProps, {
   fetchTransactions,
   fetchProfile,
   fetchUsers,
+  getSocialMediaAvatars,
   notify,
   updateCollective,
   updateUser,

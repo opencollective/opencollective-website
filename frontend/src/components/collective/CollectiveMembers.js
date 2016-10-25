@@ -12,7 +12,7 @@ export default class CollectiveMembers extends React.Component {
   render() {
     const { i18n, collective } = this.props;
     return (
-      <section id='members' className='Collective-MembersWall relative'>
+      <section id='contributors' className='Collective-MembersWall relative'>
         <div className='CollectiveBackers container center relative'>
           <div className='container'>
             <h2 className='Collective-title m0 -ff-sec -fw-bold'>{i18n.getString('membersWallTitle')}</h2>
