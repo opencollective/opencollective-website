@@ -26,7 +26,7 @@ if (!Array.prototype.find) {
 
 const scriptsNodesArray = [].slice.call(document.querySelectorAll("script"));
 const regex = new RegExp("{{config.host.website}}".replace(/^https?:\/\//, ''),'i');
-const anchor = scriptsNodesArray.find(s => s.getAttribute('src').match(regex));
+const anchor = scriptsNodesArray.find(s => s.getAttribute('src') && s.getAttribute('src').match(regex));
 
 const styles = window.getComputedStyle(anchor.parentNode, null);
 const width = anchor.parentNode.getBoundingClientRect().width - parseInt(styles.paddingLeft, 10) - parseInt(styles.paddingRight, 10);
