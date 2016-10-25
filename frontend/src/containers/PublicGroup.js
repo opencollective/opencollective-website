@@ -52,6 +52,8 @@ import EditTopBar from '../components/edit_collective/EditCollectiveTopBar';
 import PublicFooter from '../components/PublicFooter';
 import RelatedGroups from '../components/RelatedGroups';
 
+import { getGroupCustomStyles } from '../lib/utils';
+
 // Number of expenses and revenue items to show on the public page
 const NUM_TRANSACTIONS_TO_SHOW = 3;
 
@@ -393,7 +395,8 @@ function mapStateToProps({
   group.logo = processedMarkdown.params.logo || group.logo;
   group.mission = processedMarkdown.params.mission || group.mission;
   group.website = processedMarkdown.params.website || group.website;
-
+  group.settings.style = getGroupCustomStyles(group); 
+  
   let button;
   if (processedMarkdown.params.button) {
     const tokens = processedMarkdown.params.button.match(/\[(.+)\]\((.+)\)/i);

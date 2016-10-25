@@ -19,7 +19,7 @@ const RelatedGroups = ({
             {groupList.map(group => <CollectiveCard
               key={group.id}
               i18n={i18n}
-              {...group}
+              group={group}
             />)}
 		</div>
 		</div>
