@@ -181,11 +181,11 @@
   padding-bottom: 20px;
 }
 
-.CollectiveSignupV2-title {
+.CollectiveSignup-title {
   font-size: 2.25rem;
 }
 
-.CollectiveSignupV2 .Field {
+.CollectiveSignup .Field {
   width: 100%;
   font-size: 15px;
   height: 40px;
@@ -195,14 +195,14 @@
   background: white;
   box-shadow: inset 0 1px 0 rgba(0,0,0,.1);
 }
-.CollectiveSignupV2 .Field {
+.CollectiveSignup .Field {
   color: var(--darkest-gray);
   padding-left: 32px;
   background-repeat: no-repeat;
   background-size: 16px;
   background-position: 9px center;
 }
-.CollectiveSignupV2 {
+.CollectiveSignup {
   .-name {
     .Field {
       background-image: url(/static/images/user-icon.svg);
@@ -221,18 +221,18 @@
     }
   }
 }
-.CollectiveSignupV2 .Field:hover,
-.CollectiveSignupV2 .Field:hover::-webkit-input-placeholder {
+.CollectiveSignup .Field:hover,
+.CollectiveSignup .Field:hover::-webkit-input-placeholder {
   border-color: #75CC1F;
   color: currentColor;
 }
-.CollectiveSignupV2 .Field:focus {
+.CollectiveSignup .Field:focus {
   border-color: #75CC1F;
   box-shadow: 0 0 0 1px #75CC1F;
   color: currentColor;
 }
 
-.CollectiveThanksV2-icon {
+.CollectiveThanks-icon {
   fill: #5CAAE2;
   color: #75CC1F;
 }

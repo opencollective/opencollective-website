@@ -13,12 +13,15 @@ import CollectiveContributorMosaic from '../components/collective/CollectiveCont
 import CollectiveHero from '../components/collective/CollectiveHero';
 import CollectiveLedger from '../components/collective/CollectiveLedger';
 import CollectiveMembers from '../components/collective/CollectiveMembers';
+import CollectivePostDonationThanks from '../components/collective/CollectivePostDonationThanks';
+import CollectivePostDonationUserSignup from '../components/collective/CollectivePostDonationUserSignup';
 import EditTopBar from '../components/EditTopBar';
 import PublicFooter from '../components/PublicFooter';
 
 // Actions
 import appendDonationForm from '../actions/form/append_donation';
 import appendEditCollectiveForm from '../actions/form/append_edit_collective';
+import appendProfileForm from '../actions/form/append_profile';
 import cancelEditCollectiveForm from '../actions/form/cancel_edit_collective';
 import donate from '../actions/groups/donate'; // TODO: change to collective
 import fetchPendingExpenses from '../actions/expenses/fetch_pending_by_collective';
@@ -27,6 +30,7 @@ import fetchProfile from '../actions/profile/fetch_by_slug';
 import fetchUsers from '../actions/users/fetch_by_group'; // TODO: change to collective
 import notify from '../actions/notification/notify';
 import updateCollective from '../actions/groups/update'; // TODO: change to collective
+import updateUser from '../actions/users/update';
 import validateSchema from '../actions/form/validate_schema';
 
 // Selectors
@@ -38,12 +42,18 @@ import {
 import {
   getEditCollectiveFormAttrSelector,
   getEditCollectiveInProgressSelector,
-  getDonationFormSelector } from '../selectors/form';
+  getDonationFormSelector,
+  getProfileFormAttrSelector } from '../selectors/form';
 import { getAppRenderedSelector } from '../selectors/app';
-import { getUsersSelector } from '../selectors/users';
+import { 
+  getUsersSelector,
+  getNewUserSelector,
+  getUpdateInProgressSelector } from '../selectors/users';
+import { isSessionAuthenticatedSelector } from '../selectors/session';
 
 // Schemas
 import editCollectiveSchema from '../joi_schemas/editCollective';
+import profileSchema from '../joi_schemas/profile';
 
 
 export class Collective extends Component {
@@ -69,13 +79,20 @@ export class Collective extends Component {
         <Notification />
         <StickyContainer>
 
-          {editCollectiveInProgress && <EditTopBar onSave={ saveCollective.bind(this) } onCancel={ cancelEditCollectiveForm }/>}
+          {editCollectiveInProgress && 
+            <EditTopBar onSave={ saveCollective.bind(this) } onCancel={ cancelEditCollectiveForm }/>}
 
-          <CollectiveHero {...this.props} />
-          <CollectiveLedger donateToCollective={ donateToCollective.bind(this) } {...this.props} />
-          <CollectiveAboutUs {...this.props} />
+          <CollectiveHero { ...this.props } />
+          <CollectiveLedger donateToCollective={ donateToCollective.bind(this) } { ...this.props } />
+          <CollectiveAboutUs { ...this.props } />
           <CollectiveMembers collective={ collective } i18n={ i18n } />
           <CollectiveContributorMosaic contributors={ collective.contributors } i18n={ i18n } />
+          
+          {this.state.showThankYouMessage && 
+            <CollectivePostDonationThanks closeDonationFlow={ ::this.closeDonationFlow } { ...this.props } />}
+          {this.state.showUserForm && 
+            <CollectivePostDonationUserSignup closeDonationFlow={ ::this.closeDonationFlow } save={ saveNewUser.bind(this) } { ...this.props } />}
+
           <PublicFooter />
         </StickyContainer>
       </div>
@@ -86,27 +103,44 @@ export class Collective extends Component {
     const {
       collective,
       fetchProfile,
-      fetchUsers,
-      fetchPendingExpenses,
-      fetchTransactions,
       loadData
     } = this.props;
 
     if (loadData) { // useful when not server-side rendered
       fetchProfile(collective.slug);
     }
-    Promise.all([
+    this.refreshData();
+  }
+
+  componentWillMount() {
+  }
+    
+  closeDonationFlow() {
+    return this.refreshData()
+      .then(() => this.setState({
+                    showThankYouMessage: false,
+                    showUserForm: false }));
+    
+  }
+
+  refreshData() {
+    const { 
+      collective,
+      fetchUsers,
+      fetchPendingExpenses,
+      fetchTransactions
+    } = this.props;
+
+    return Promise.all([
       fetchUsers(collective.slug),
       fetchPendingExpenses(collective.slug),
       fetchTransactions(collective.slug)]);
   }
-
-  componentWillMount() {
-
-  }
-
 }
 
+/*
+ * Save changes to a collective
+ */
 export function saveCollective() {
   const {
     collective,
@@ -127,6 +161,9 @@ export function saveCollective() {
     .catch(({message}) => notify('error', message));
 }
 
+/*
+ * Receive donation to a collective
+ */
 export function donateToCollective({amount, frequency, currency, token, options}) {
   const {
     notify,
@@ -162,9 +199,28 @@ export function donateToCollective({amount, frequency, currency, token, options}
     .catch((err) => notify('error', err.message));
 }
 
-Collective.propTypes = {
-  // TODO: list all proptypes
-  collective: PropTypes.object,
+/*
+ * Save user profile info post-donation
+ */
+export function saveNewUser() {
+ const {
+    collective,
+    newUser,
+    updateUser,
+    profileForm,
+    validateSchema,
+    notify,
+    fetchUsers
+  } = this.props;
+
+  return validateSchema(profileForm, profileSchema)
+    .then(() => updateUser(newUser.id, Object.assign({}, profileForm)))
+    .then(() => this.setState({
+      showUserForm: false,
+      showThankYouMessage: true
+    }))
+    .then(() => fetchUsers(collective.slug))
+    .catch(({message}) => notify('error', message));
 }
 
 const mapStateToProps = createStructuredSelector({
@@ -174,6 +230,9 @@ const mapStateToProps = createStructuredSelector({
 
     // donation props
     donationForm: getDonationFormSelector,
+    profileForm: getProfileFormAttrSelector,
+    newUser: getNewUserSelector,
+    updateInProgress: getUpdateInProgressSelector,
 
     // Editing props
     canEditCollective: canEditCollectiveSelector,
@@ -181,16 +240,18 @@ const mapStateToProps = createStructuredSelector({
     editCollectiveInProgress: getEditCollectiveInProgressSelector,
 
     // other props
+    isAuthenticated: isSessionAuthenticatedSelector,
     i18n: getI18nSelector,
     loadData: getAppRenderedSelector,
     users: getUsersSelector
 
-    // TODO: handle paypal donations
+    // TODO: add paypal props
   });
 
 export default connect(mapStateToProps, {
   appendDonationForm,
   appendEditCollectiveForm,
+  appendProfileForm,
   cancelEditCollectiveForm,
   donate,
   fetchPendingExpenses,
@@ -199,5 +260,12 @@ export default connect(mapStateToProps, {
   fetchUsers,
   notify,
   updateCollective,
-  validateSchema,
+  updateUser,
+  validateSchema
 })(Collective);
+
+
+Collective.propTypes = {
+  // TODO: list all proptypes
+  collective: PropTypes.object.isRequired,
+}

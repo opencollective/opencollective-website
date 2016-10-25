@@ -142,6 +142,16 @@
     }
   }
 
+  .CollectiveThanks {
+    .tweet {
+      margin: 20px 0px;
+      textarea {
+        width: 90%;
+        height: 6.5rem;
+      }
+    }
+  }
+
 /* For the subscription page */
 
 }

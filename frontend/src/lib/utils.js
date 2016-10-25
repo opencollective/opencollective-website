@@ -13,3 +13,25 @@ export function resizeImage(imageUrl, { width, height, query }) {
 export function formatAnchor(title) {
   return title.toLowerCase().replace(' ','-').replace(/[^a-z0-9\-]/gi,'')
 }
+
+/**
+* Currently, `Joi.string().uri()` Joi is used to validate the website uri.
+* Unfortunately, a valid URI includes its schema/protocol, so the following urls
+* will always be invalid: `facebook.com/xdamman` & `github.com/xdamman`.
+*
+* Its a shame, since it is what most internet users will want to type.
+* This functions patches a `http://` protocol if it is missing.
+*
+* @ref https://en.wikipedia.org/wiki/Uniform_Resource_Identifier#Syntax
+*/
+export function fixURI(weburl) {
+  weburl = weburl.trim();
+  if (weburl && weburl.length > 4 && weburl.indexOf('.') !== -1) {
+    if (weburl.indexOf('http') !== 0) {
+      const matches = /(^(https?)?(:)?(\/*)?)(.*)$/i.exec(weburl);
+      weburl = `http://${matches[matches.length - 1]}`; // get w.e is after schema and leading slashes.
+    }
+  }
+
+  return weburl;
+}
