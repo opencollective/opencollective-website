@@ -102,7 +102,7 @@ export class ProfilePage extends Component {
                 key={index}
                 i18n={i18n}
                 isCollectiveOnProfile={true}
-                {...group}
+                group={group}
                 />
               )}
             </section>
@@ -126,10 +126,10 @@ export class ProfilePage extends Component {
                       />
                     )
                   } else {
-                    return <CollectiveCard key={index} i18n={i18n} isCollectiveOnProfile={true} {...group} />
+                    return <CollectiveCard key={index} i18n={i18n} isCollectiveOnProfile={true} group={group} />
                   }
                 } else {
-                  return <CollectiveCard key={index} i18n={i18n} isCollectiveOnProfile={true} {...group} />
+                  return <CollectiveCard key={index} i18n={i18n} isCollectiveOnProfile={true} group={group} />
                 }
               })}
             </section>
