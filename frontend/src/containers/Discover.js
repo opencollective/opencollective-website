@@ -78,7 +78,7 @@ export class Discover extends Component {
               </div>
             </div>
             <div className='Discover-results'>
-              {collectives.map(collective => <CollectiveCard key={collective.id} i18n={i18n} {...collective} />)}
+              {collectives.map(collective => <CollectiveCard key={collective.id} i18n={i18n} group={collective} />)}
             </div>
           </div>
           <PublicFooter />

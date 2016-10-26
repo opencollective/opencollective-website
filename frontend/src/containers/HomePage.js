@@ -82,7 +82,7 @@ export class HomePage extends Component {
             {opensource.map(group => <CollectiveCard
               key={group.id}
               i18n={i18n}
-              {...group}
+              group={group}
             />)}
             <a href='/opensource' className='seemore'>See more collectives</a>
           </div>
@@ -100,7 +100,7 @@ export class HomePage extends Component {
             {meetup.map(group => <CollectiveCard
               key={group.id}
               i18n={i18n}
-              {...group}
+              group={group}
             />)}
             <a href='/discover?show=meetup' className='seemore'>See more meetups</a>
           </div>
@@ -119,7 +119,7 @@ export class HomePage extends Component {
               i18n={i18n}
               publicUrl={`/${sponsor.username}`}
               isSponsor={true}
-              {...sponsor}
+              group={sponsor}
             />)}
           </div>
           <div className='cta'>
