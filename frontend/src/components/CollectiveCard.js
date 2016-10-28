@@ -43,7 +43,7 @@ export default class CollectiveCard extends Component {
   }
 
   mapSponsorsCardProps() {
-    const { collectives, totalDonations, currency } = this.props;
+    const { collectives, totalDonations, currency } = this.props.group;
 
     const stats = [
       {
@@ -60,7 +60,7 @@ export default class CollectiveCard extends Component {
   }
 
   render() {
-    const { i18n, key, group } = this.props;
+    const { i18n, key, group, isSponsor } = this.props;
 
     const {
       backgroundImage,
@@ -69,7 +69,6 @@ export default class CollectiveCard extends Component {
       description,
       mission,
       publicUrl,
-      isSponsor,
       isCollectiveOnProfile
     } = this.props.group;
 
