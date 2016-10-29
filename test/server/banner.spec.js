@@ -135,7 +135,7 @@ describe("redirect", () => {
   it(`redirects to the website of the backer and keeps pre-existing utm tracking data`, (done) => {
     request(app)
       .get('/yeoman/backers/3/website')
-      .expect('Location', `https://www.julianmotz.com/?utm_campaign=opensource&utm_medium=github&utm_source=oc`)
+      .expect('Location', `http://apple.com/?utm_campaign=opensource&utm_medium=github&utm_source=oc`)
       .expect(302, done);
   });
 
@@ -185,7 +185,7 @@ describe("banner", () => {
         res.body = { contentLength: Number(res.headers['content-length']) };
       })
       .expect({
-        contentLength: 29380
+        contentLength: 16350
       })
       .expect(200, done);
   });
@@ -227,11 +227,11 @@ describe("banner", () => {
       .expect(res => {
         const svg = new Buffer(res.body).toString('utf8');
         const links = svg.match(/<a([^>]+)>/g);
-        res.body = { links: links.filter(l => l.match(/julianmotz.com/)) };
+        res.body = { links: links.filter(l => l.match(/apple.com/)) };
       })
       .expect({
         links: [
-          '<a xlink:href="https://www.julianmotz.com?utm_source=oc&amp;utm_campaign=opensource" target="_blank">'
+          '<a xlink:href="http://apple.com?utm_source=oc&amp;utm_campaign=opensource" target="_blank">'
         ]
       })
       .expect(200, done);
