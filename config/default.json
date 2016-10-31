@@ -14,5 +14,8 @@
   "GoogleAnalytics": {
     "active": false,
     "account": ""
+  },
+  "expressperf": {
+    "api_key": "xxxx"
   }
 }
