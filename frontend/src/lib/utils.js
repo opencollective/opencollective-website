@@ -29,6 +29,7 @@ export function formatAnchor(title) {
 
 export function getGroupCustomStyles(group) {
   const styles = merge({}, DEFAULT_GROUP_STYLES);
+  if (!group) return styles;
   if (group.backgroundImage) {
     styles.hero.cover.backgroundImage = `url(${resizeImage(group.backgroundImage, { width: 1024 })})`;
   }
