@@ -33,10 +33,12 @@
     padding: 8rem 0 6rem;
   }
 
+  .PublicGroupHero-logo {
+    height: 10rem;
+  }
+
   .UserPhoto {
-    width: 240px;
     width: 15rem;
-    height: 160px;
     height: 10rem;
     margin: auto;
     margin-bottom: 32px;
