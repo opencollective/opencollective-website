@@ -7,14 +7,6 @@ import { HYDRATE } from '../constants/session';
 import * as constants from '../constants/groups'; // TODO: remove
 import { FETCH_USERS_BY_GROUP_SUCCESS } from '../constants/users';
 
-const DEFAULT_COLLECTIVE_SETTINGS = {
-  lang: 'en',
-  formatCurrency: {
-    compact: false,
-    precision: 2
-  }
-};
-
 const initialState = {}
 
 export default function collectives(state = initialState, action={}) {
@@ -23,7 +15,7 @@ export default function collectives(state = initialState, action={}) {
     case HYDRATE:
       if (action.data.collective) {
         return merge({}, state, {
-          [action.data.collective.slug]: merge({}, {settings: DEFAULT_COLLECTIVE_SETTINGS}, action.data.collective)
+          [action.data.collective.slug]: merge({}, action.data.collective)
         });
 
       }
@@ -32,12 +24,6 @@ export default function collectives(state = initialState, action={}) {
     case constants.GROUP_SUCCESS:
       return merge({}, state, action.groups);
 
-    // 8: {
-    //   usersByRoles: {
-    //    HOST: [{id:...}]
-    //
-    //  }
-    // }
     case FETCH_USERS_BY_GROUP_SUCCESS: {
       const users = values(action.users);
 

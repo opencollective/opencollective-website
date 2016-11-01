@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 const EditTopBar = (props) => (
   <div className='EditCollective-TopBar'>
@@ -18,3 +18,8 @@ const EditTopBar = (props) => (
 );
 
 export default EditTopBar;
+
+EditTopBar.propTypes = {
+  onSave: PropTypes.func,
+  onCancel: PropTypes.func
+}

@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import merge from 'lodash/merge';
 
 import { getSlugSelector } from './router';
 import { getAuthenticatedUserSelector } from './session';
@@ -6,6 +7,7 @@ import { getAuthenticatedUserSelector } from './session';
 import i18nLib from '../lib/i18n';
 import filterCollection from '../lib/filter_collection';
 import { formatGithubContributors } from '../lib/github';
+import { resizeImage } from '../lib/utils'
 
 import { getExpensesSelector } from './expenses';
 import { getTransactionsSelector } from './transactions';
@@ -17,6 +19,16 @@ const DEFAULT_COLLECTIVE_SETTINGS = {
   formatCurrency: {
     compact: false,
     precision: 2
+  },
+  style: {
+    hero: { 
+      cover: { 
+        filter: "blur(4px)",
+        transform: "scale(1.06)",
+        backgroundImage: "url('/static/images/collectives/default-header-bg.jpg')"
+      }, 
+      a: {}
+    }
   }
 };
 
@@ -27,11 +39,18 @@ const getCollectivesSelector = (state) => state.collectives;
 
 export const getCollectiveSelector = createSelector(
   [ getSlugSelector, getCollectivesSelector ],
-  (slug, collectives) => collectives[slug]);
+  (slug, collectives) => collectives[slug] || {});
 
 export const getCollectiveSettingsSelector = createSelector(
   getCollectiveSelector,
-  (collective) => collective.settings || DEFAULT_COLLECTIVE_SETTINGS);
+  (collective) => {
+    const settings = merge({}, collective.settings, DEFAULT_COLLECTIVE_SETTINGS);
+
+    if (collective.backgroundImage) {
+      settings.style.hero.cover.backgroundImage = `url(${resizeImage(collective.backgroundImage, { width: 1024 })})`;
+    }
+    return settings;
+  });
 
 export const getStripeAccountSelector = createSelector(
   getCollectiveSelector,
@@ -82,7 +101,7 @@ export const getPopulatedCollectiveSelector = createSelector(
       Object.assign(
         {},
         collective,
-        settings,
+        { settings },
         { host },
         { members },
         { backers },

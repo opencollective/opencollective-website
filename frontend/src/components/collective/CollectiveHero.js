@@ -9,29 +9,18 @@ import ContentEditable from '../../components/ContentEditable';
 import UserPhoto from '../../components/UserPhoto';
 import UserAvatarRow from '../../components/UserAvatarRow';
 
-const DEFAULT_BACKGROUND_IMAGE = '/static/images/collectives/default-header-bg.jpg';
-
 export default class CollectiveHero extends Component {
 
   render() {
     const { collective, i18n, canEditCollective, editCollectiveForm, appendEditCollectiveForm} = this.props;
 
-    // We can override the default style for the cover image of a collective in `collective.settings`
-    // e.g.
-    // - to remove default blur: { "style": { "coverImage": { "filter": "none" }}}
-    // - to make the background monochrome*: { "style": {"coverImage": {"filter":"brightness(50%) sepia(1) hue-rotate(132deg) saturate(103.2%) brightness(91.2%);" }}}
-    // * see http://stackoverflow.com/questions/29037023/how-to-calculate-required-hue-rotate-to-generate-specific-colour
-    collective.settings.style = collective.settings.style || {};
-    const coverImage = resizeImage(collective.backgroundImage, { width: 1024 }) || DEFAULT_BACKGROUND_IMAGE;
-    const coverImageStyle = Object.assign({}, { filter: "blur(4px)", backgroundImage: `url(${coverImage})` }, collective.settings.style.coverImage);
-
     return (
       <section className='CollectiveHero relative px2 bg-black bg-cover white'>
-        <div className='coverImage' style={coverImageStyle} />
+        <div className='coverImage' style={collective.settings.style.hero.cover} />
         <div className='container relative center'>
           <LoginTopBar loginRedirectTo={ `/${ collective.slug }` } />
           <div className='CollectiveHero-content'>
-            {collective.logo && canEditGroup && 
+            {collective.logo && canEditCollective && 
               <UserPhoto
                 editable={canEditCollective}
                 onChange={logo => {
@@ -44,12 +33,12 @@ export default class CollectiveHero extends Component {
                 {...this.props} />
             }
 
-            {collective.logo && !canEditGroup &&
-              <img src={resizeImage(group.logo, { height: 320 })} className='CollectiveHero-logo mb3 bg-contain' />
+            {collective.logo && !canEditCollective &&
+              <img src={resizeImage(collective.logo, { height: 320 })} className='CollectiveHero-logo mb3 bg-contain' />
             }
 
             <p ref='CollectiveHero-name' className='Collective-font-20 mt0 mb2'>{ i18n.getString('hiThisIs') }
-              <a href={ collective.website }> { collective.name }</a> { i18n.getString('openCollective') }.
+              <a href={ collective.website } style={ collective.settings.style.hero.a }> { collective.name }</a> { i18n.getString('openCollective') }.
             </p>
             <h1 ref='CollectiveHero-mission' className='CollectiveHero-mission max-width-3 mx-auto mt0 mb3 white -ff-sec'>
               <ContentEditable
