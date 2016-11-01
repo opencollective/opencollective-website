@@ -106,6 +106,11 @@ export default class PublicGroupHero extends Component {
                   <a href='#support' className='block white -ff-sec -fw-bold'>{ i18n.getString('menuSupportUs') }</a>
                 </li>
               }
+              {(group.contributorsCount > 0) &&
+                <li className='inline-block'>
+                  <a href='#contributors' className='block white -ff-sec -fw-bold'>{ i18n.getString('contributors') }</a>
+                </li>
+              }
               <li className='inline-block'>
                 <a href='#budget' className='block white -ff-sec -fw-bold'>{ i18n.getString('menuBudget') }</a>
               </li>
