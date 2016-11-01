@@ -31,7 +31,7 @@ export default class CollectiveHero extends Component {
         <div className='container relative center'>
           <LoginTopBar loginRedirectTo={ `/${ collective.slug }` } />
           <div className='CollectiveHero-content'>
-            {collective.logo &&
+            {collective.logo && canEditGroup && 
               <UserPhoto
                 editable={canEditCollective}
                 onChange={logo => {
@@ -42,6 +42,10 @@ export default class CollectiveHero extends Component {
                 className='CollectiveHero-logo mb3 bg-contain'
                 presets={[]}
                 {...this.props} />
+            }
+
+            {collective.logo && !canEditGroup &&
+              <img src={resizeImage(group.logo, { height: 320 })} className='CollectiveHero-logo mb3 bg-contain' />
             }
 
             <p ref='CollectiveHero-name' className='Collective-font-20 mt0 mb2'>{ i18n.getString('hiThisIs') }
