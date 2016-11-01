@@ -472,6 +472,11 @@
   }
 }
 
+.PublicGroup-markdown img {
+  max-width: 768px;
+  margin: 1rem 0;
+}
+
 .PublicGroup-markdown .ContentEditable {
   max-width: 788px;
   margin: 0 auto;

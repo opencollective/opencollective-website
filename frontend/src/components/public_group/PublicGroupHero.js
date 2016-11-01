@@ -6,7 +6,7 @@ import fetch from 'isomorphic-fetch';
 
 import LoginTopBar from '../../containers/LoginTopBar';
 import exportFile from '../../lib/export_file';
-import { formatAnchor } from '../../lib/utils';
+import { formatAnchor, resizeImage } from '../../lib/utils';
 import processMarkdown from '../../lib/process_markdown';
 
 import ContentEditable from '../../components/ContentEditable';
@@ -48,7 +48,7 @@ export default class PublicGroupHero extends Component {
         <div className='container relative center'>
           <LoginTopBar loginRedirectTo={ `/${ group.slug }` } />
           <div className='PublicGroupHero-content'>
-            {group.logo &&
+            {group.logo && canEditGroup &&
               <UserPhoto
                 editable={canEditGroup}
                 onChange={logo => {
@@ -59,6 +59,9 @@ export default class PublicGroupHero extends Component {
                 className='PublicGroupHero-logo mb3 bg-contain'
                 presets={[]}
                 {...this.props} />
+            }
+            {group.logo && !canEditGroup &&
+              <img src={resizeImage(group.logo, { height: 320 })} className='PublicGroupHero-logo mb3 bg-contain' />
             }
 
             <p ref='PublicGroupHero-name' className='PublicGroup-font-20 mt0 mb2'>{ i18n.getString('hiThisIs') }
