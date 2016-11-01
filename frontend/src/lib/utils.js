@@ -1,3 +1,16 @@
+import merge from 'lodash/merge';
+
+const DEFAULT_GROUP_STYLES = { 
+  hero: { 
+    cover: { 
+      filter: "blur(4px)",
+      transform: "scale(1.06)",
+      backgroundImage: "url('/static/images/collectives/default-header-bg.jpg')"
+    }, 
+    a: {}
+  }
+};
+
 export function resizeImage(imageUrl, { width, height, query }) {
   if (!imageUrl) return null;
   let queryurl = '';
@@ -34,4 +47,13 @@ export function fixURI(weburl) {
   }
 
   return weburl;
+}
+
+export function getGroupCustomStyles(group) {
+  const styles = merge({}, DEFAULT_GROUP_STYLES);
+  if (!group) return styles;
+  if (group.backgroundImage) {
+    styles.hero.cover.backgroundImage = `url(${resizeImage(group.backgroundImage, { width: 1024 })})`;
+  }
+  return merge({}, styles, group.settings.style);
 }

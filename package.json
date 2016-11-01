@@ -1,6 +1,6 @@
 {
   "name": "opencollective-website",
-  "version": "0.1.199",
+  "version": "0.1.203",
   "engines": {
     "node": "6.2.2",
     "npm": "3.9.5"
@@ -65,6 +65,7 @@
     "eslint-plugin-react": "6.2.0",
     "express": "4.13.4",
     "express-hbs": "0.8.4",
+    "express-perf": "1.11.1",
     "express-server-status": "1.0.3",
     "express-session": "1.13.0",
     "gulp": "3.9.1",
@@ -118,7 +119,7 @@
     "chai-spies": "0.7.1",
     "chromedriver": "2.21.2",
     "dotenv": "2.0.0",
-    "eslint": "3.8.1",
+    "eslint": "3.6.1",
     "eslint-config-opencollective": "1.1.6",
     "expect": "1.18.0",
     "foreman": "1.4.1",

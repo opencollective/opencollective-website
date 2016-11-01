@@ -52,6 +52,8 @@ import EditTopBar from '../components/edit_collective/EditCollectiveTopBar';
 import PublicFooter from '../components/PublicFooter';
 import RelatedGroups from '../components/RelatedGroups';
 
+import { getGroupCustomStyles } from '../lib/utils';
+
 // Number of expenses and revenue items to show on the public page
 const NUM_TRANSACTIONS_TO_SHOW = 3;
 
@@ -374,15 +376,9 @@ function mapStateToProps({
   group.hosts = usersByRole[roles.HOST] || [];
   group.members = usersByRole[roles.MEMBER] || [];
   group.backers = usersByRole[roles.BACKER] || [];
-
   group.contributors = (group.data && group.data.githubContributors) ? formatGithubContributors(group.data.githubContributors) : [];
-  group.contributorsCount = group.contributors.length;
 
   group.host = group.hosts[0] || {};
-  group.backersCount = group.backers.length;
-
-  group.contributors = (group.data && group.data.githubContributors) ? formatGithubContributors(group.data.githubContributors) : [];
-  group.contributorsCount = group.contributors.length;
 
   group.donations = filterCollection(donations, { GroupId: group.id });
   group.expenses = filterCollection(expenses, { GroupId: group.id });
@@ -393,7 +389,8 @@ function mapStateToProps({
   group.logo = processedMarkdown.params.logo || group.logo;
   group.mission = processedMarkdown.params.mission || group.mission;
   group.website = processedMarkdown.params.website || group.website;
-
+  group.settings.style = getGroupCustomStyles(group); 
+  
   let button;
   if (processedMarkdown.params.button) {
     const tokens = processedMarkdown.params.button.match(/\[(.+)\]\((.+)\)/i);

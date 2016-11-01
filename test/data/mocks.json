@@ -78,26 +78,26 @@
         "website": ""
     },
     {
-        "avatar": "https://d1ts43dypk8bqh.cloudfront.net/v1/avatars/e9a79f3f-9231-489e-b23e-7ad5935d0a0b",
+        "avatar": "https://opencollective.com/static/images/users/avatar-01.svg",
         "createdAt": "2016-02-03T02:07:55.287Z",
         "id": 84,
-        "name": "Steven Phillips",
+        "name": "David Smith",
         "role": "BACKER",
         "tier": "backer",
         "totalDonations": 1,
-        "twitterHandle": "elimisteve",
+        "twitterHandle": "dsmithtest",
         "website": ""
     },
     {
-        "avatar": "https://d1ts43dypk8bqh.cloudfront.net/v1/avatars/6371417c-2d99-4753-9b1a-31c258b48f47",
+        "avatar": "https://opencollective.com/static/images/users/avatar-02.svg",
         "createdAt": null,
         "id": 103,
-        "name": "Julian Motz",
+        "name": "John  Appleseed",
         "role": "BACKER",
         "tier": "backer",
         "totalDonations": 1,
         "twitterHandle": null,
-        "website": "https://www.julianmotz.com?utm_source=oc&utm_campaign=opensource"
+        "website": "http://apple.com?utm_source=oc&utm_campaign=opensource"
     }
   ]
 }

@@ -6,14 +6,12 @@ import fetch from 'isomorphic-fetch';
 
 import LoginTopBar from '../../containers/LoginTopBar';
 import exportFile from '../../lib/export_file';
-import { resizeImage, formatAnchor } from '../../lib/utils';
+import { formatAnchor, resizeImage } from '../../lib/utils';
 import processMarkdown from '../../lib/process_markdown';
 
 import ContentEditable from '../../components/ContentEditable';
 import UserPhoto from '../../components/UserPhoto';
 import GroupStatsHeader from '../../components/GroupStatsHeader';
-
-const DEFAULT_BACKGROUND_IMAGE = '/static/images/collectives/default-header-bg.jpg';
 
 export function exportMembers(authenticatedUser, group) {
   const accessToken = localStorage.getItem('accessToken');
@@ -43,17 +41,14 @@ export default class PublicGroupHero extends Component {
     // - to remove default blur: { "style": { "coverImage": { "filter": "none" }}}
     // - to make the background monochrome*: { "style": {"coverImage": {"filter":"brightness(50%) sepia(1) hue-rotate(132deg) saturate(103.2%) brightness(91.2%);" }}}
     // * see http://stackoverflow.com/questions/29037023/how-to-calculate-required-hue-rotate-to-generate-specific-colour
-    group.settings.style = group.settings.style || {};
-    const coverImage = resizeImage(group.backgroundImage, { width: 1024 }) || DEFAULT_BACKGROUND_IMAGE;
-    const coverImageStyle = Object.assign({}, { filter: "blur(4px)", backgroundImage: `url(${coverImage})` }, group.settings.style.coverImage);
 
     return (
       <section className='PublicGroupHero relative px2 bg-black bg-cover white'>
-        <div className='coverImage' style={coverImageStyle} />
+        <div className='coverImage' style={group.settings.style.hero.cover} />
         <div className='container relative center'>
           <LoginTopBar loginRedirectTo={ `/${ group.slug }` } />
           <div className='PublicGroupHero-content'>
-            {group.logo &&
+            {group.logo && canEditGroup &&
               <UserPhoto
                 editable={canEditGroup}
                 onChange={logo => {
@@ -65,9 +60,12 @@ export default class PublicGroupHero extends Component {
                 presets={[]}
                 {...this.props} />
             }
+            {group.logo && !canEditGroup &&
+              <img src={resizeImage(group.logo, { height: 320 })} className='PublicGroupHero-logo mb3 bg-contain' />
+            }
 
             <p ref='PublicGroupHero-name' className='PublicGroup-font-20 mt0 mb2'>{ i18n.getString('hiThisIs') }
-              <a href={ group.website }> { group.name }</a> { i18n.getString('openCollective') }.
+              <a href={ group.website } style={group.settings.style.hero.a}> { group.name }</a> { i18n.getString('openCollective') }.
             </p>
             <h1 ref='PublicGroupHero-mission' className='PublicGroupHero-mission max-width-3 mx-auto mt0 mb3 white -ff-sec'>
               { `${i18n.getString('missionTo')} `}
@@ -106,6 +104,11 @@ export default class PublicGroupHero extends Component {
               {hasHost && group.tiers &&
                 <li className='inline-block'>
                   <a href='#support' className='block white -ff-sec -fw-bold'>{ i18n.getString('menuSupportUs') }</a>
+                </li>
+              }
+              {(group.contributorsCount > 0) &&
+                <li className='inline-block'>
+                  <a href='#contributors' className='block white -ff-sec -fw-bold'>{ i18n.getString('contributors') }</a>
                 </li>
               }
               <li className='inline-block'>

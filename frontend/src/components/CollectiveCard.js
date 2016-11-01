@@ -1,9 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 
 import formatCurrency from '../lib/format_currency';
-import { resizeImage } from '../lib/utils';
+import { resizeImage, getGroupCustomStyles } from '../lib/utils';
 
-const DEFAULT_BG = '/static/images/collectives/default-header-bg.jpg';
 const DEFAULT_LOGOS = [
   '/static/images/code.svg',
   '/static/images/rocket.svg',
@@ -17,41 +16,34 @@ export default class CollectiveCard extends Component {
   }
 
   mapCollectiveCardProps() {
-    const {
-      contributorsCount,
-      membersCount,
-      backersAndSponsorsCount,
-      yearlyIncome,
-      currency,
-      i18n
-    } = this.props;
+    const { i18n, group } = this.props;
 
     const stats = [];
-    if (contributorsCount)
-      stats.push({ label: i18n.getString('coreContributors'), value: contributorsCount});
-    else if (membersCount) {
-      stats.push({ label: i18n.getString('members'), value: membersCount });
+    if (group.contributorsCount)
+      stats.push({ label: i18n.getString('coreContributors'), value: group.contributorsCount});
+    else if (group.membersCount) {
+      stats.push({ label: i18n.getString('members'), value: group.membersCount });
     }
 
-    if (backersAndSponsorsCount) {
-      stats.push({ label: i18n.getString('backers'), value: backersAndSponsorsCount });
+    if (group.backersAndSponsorsCount) {
+      stats.push({ label: i18n.getString('backers'), value: group.backersAndSponsorsCount });
     }
 
-    stats.push({ label: i18n.getString('annualIncome'), value: formatCurrency(yearlyIncome/100, currency, { compact: true, precision: 0 }) });
+    stats.push({ label: i18n.getString('annualIncome'), value: formatCurrency(group.yearlyIncome/100, group.currency, { compact: true, precision: 0 }) });
     return stats;
   }
 
   mapCollectiveCardOnProfileProps() {
-    const { backersCount, sponsorsCount, yearlyIncome, currency, i18n } = this.props;
+    const { group, i18n } = this.props;
     const stats = [];
-    stats.push({label: i18n.getString('backers'), value: backersCount});
-    stats.push({label: i18n.getString('sponsors'), value: sponsorsCount});
-    stats.push({label: i18n.getString('annualIncome'), value: formatCurrency(yearlyIncome/100, currency, { compact: true, precision: 0 })});
+    stats.push({label: i18n.getString('backers'), value: group.backersCount});
+    stats.push({label: i18n.getString('sponsors'), value: group.sponsorsCount});
+    stats.push({label: i18n.getString('annualIncome'), value: formatCurrency(group.yearlyIncome/100, group.currency, { compact: true, precision: 0 })});
     return stats;
   }
 
   mapSponsorsCardProps() {
-    const { collectives, totalDonations, currency } = this.props;
+    const { collectives, totalDonations, currency } = this.props.group;
 
     const stats = [
       {
@@ -68,18 +60,17 @@ export default class CollectiveCard extends Component {
   }
 
   render() {
+    const { i18n, key, group, isSponsor } = this.props;
+
     const {
-      key,
       backgroundImage,
       logo,
       name,
       description,
       mission,
       publicUrl,
-      i18n,
-      isSponsor,
       isCollectiveOnProfile
-    } = this.props;
+    } = this.props.group;
 
     let stats = [];
     let className = '';
@@ -93,14 +84,19 @@ export default class CollectiveCard extends Component {
       stats = this.mapCollectiveCardProps();
     }
 
+    group.settings = group.settings || {};
+    group.settings.style = getGroupCustomStyles(group);
+    if (backgroundImage) {
+      group.settings.style.hero.cover.backgroundImage = `url(${resizeImage(backgroundImage, { width: 320 })})`;
+    }
+
     return (
       <div className={`CollectiveCard ${className}`}>
         <a href={publicUrl}>
           <div>
             <div className='CollectiveCard-head'>
-              <div className='CollectiveCard-background' style={{backgroundImage: `url(${resizeImage(backgroundImage, { width: 320 }) || DEFAULT_BG})`}}>
-                <div className='CollectiveCard-image' style={{backgroundImage: `url(${logo || DEFAULT_LOGOS[key%DEFAULT_LOGOS.length]})`}}></div>
-              </div>
+              <div className='CollectiveCard-background' style={group.settings.style.hero.cover}></div>
+              <div className='CollectiveCard-image' style={{backgroundImage: `url(${logo || DEFAULT_LOGOS[key%DEFAULT_LOGOS.length]})`}}></div>
             </div>
             <div className='CollectiveCard-body'>
               <div className='CollectiveCard-name'>{name}</div>
