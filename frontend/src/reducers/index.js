@@ -4,6 +4,7 @@ import { routerStateReducer as router } from 'redux-router';
 import form from './form';
 import github from './github';
 import groups from './groups';
+import collectives from './collectives';
 import users from './users';
 import notification from './notification';
 import transactions from './transactions';
@@ -33,5 +34,6 @@ export default combineReducers({
   homepage,
   discover,
   app,
-  connectedAccounts
+  connectedAccounts,
+  collectives,
 });

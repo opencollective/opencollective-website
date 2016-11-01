@@ -168,6 +168,26 @@ function editGroup(state=editGroupInitialState, action={}) {
 }
 
 /**
+ * Edit collective form reducer
+ */
+
+const editCollectiveInitialState = {
+  attributes: { },
+  inProgress: false
+};
+
+function editCollective(state=editCollectiveInitialState, action={}) {
+  switch (action.type) {
+    case constants.APPEND_EDIT_COLLECTIVE_FORM:
+      return merge({}, state, {attributes: action.attributes, inProgress: true});
+    case constants.CANCEL_EDIT_COLLECTIVE_FORM:
+      return editCollectiveInitialState;
+    default:
+      return state;
+  }
+}
+
+/**
  * Twitter config form
  */
 const twitterInitialState = {
@@ -193,5 +213,6 @@ export default combineReducers({
   github,
   addgroup,
   editGroup,
+  editCollective,
   twitter
 });

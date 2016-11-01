@@ -29,6 +29,7 @@
 
 @import './containers/About.css';
 @import './containers/AddGroup.css';
+@import './containers/Collective.css';
 @import './containers/ConnectProvider.css';
 @import './containers/Discover.css';
 @import './containers/DonatePage.css';
@@ -55,7 +56,9 @@
 @import './components/BackerCard.css';
 @import './components/Button.css';
 @import './components/Checkbox.css';
+@import './components/CollectiveAboutUs.css';
 @import './components/CollectiveCard.css';
+@import './components/CollectiveHero.css';
 @import './components/Confirmation.css';
 @import './components/ContentEditable.css';
 @import './components/ContributorList.css';
@@ -101,6 +104,7 @@
 @import './components/TransactionItem.css';
 @import './components/TransactionStatus.css';
 @import './components/UserCard.css';
+@import './components/UserAvatarRow.css';
 @import './components/UsersList.css';
 @import './components/UserPhoto.css';
 @import './components/Widget.css';

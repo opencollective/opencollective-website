@@ -89,6 +89,17 @@
     letter-spacing: -.5px;
   }
 
+  /* For new collective page */
+  .CollectiveHero-content {
+    /* line-height: 2.5rem; */
+    padding: 8rem 0 3rem;
+  }
+
+  .CollectiveHero-mission {
+    line-height: 2.5rem;
+    letter-spacing: -.5px;
+  }
+
   /* For the subscription page */
   .Subscription-logo {
     height: 50px;
@@ -122,6 +133,16 @@
   }
 
   .PublicGroupThanksV2 {
+    .tweet {
+      margin: 20px 0px;
+      textarea {
+        width: 90%;
+        height: 6.5rem;
+      }
+    }
+  }
+
+  .CollectiveThanks {
     .tweet {
       margin: 20px 0px;
       textarea {
