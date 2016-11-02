@@ -268,9 +268,12 @@ export default {
     }
 
     const user = users[position] || {};
-    user.twitter = user.twitterHandle ? `https://twitter.com/${user.twitterHandle}` : null;
+    let redirectUrl = `${config.host.website}/${user.username}`;
+    if (tier.match(/sponsor/)) {
+      user.twitter = user.twitterHandle ? `https://twitter.com/${user.twitterHandle}` : null;
+      redirectUrl =  user.website || user.twitter || `${config.host.website}/${user.username}`;
+    }
 
-    let redirectUrl =  user.website || user.twitter || `${config.host.website}/${slug}`;
     if (position === users.length) {
       redirectUrl = `${config.host.website}/${slug}#support`;
     }
