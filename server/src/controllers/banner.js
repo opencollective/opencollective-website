@@ -63,11 +63,10 @@ export default {
   avatar: (req, res) => {
     const tier = req.params.tier || '';
     const tierSingular = tier.replace(/s$/,'');
-    const users = filterUsersByTier(req.users, tierSingular);
+    const users = filterUsersByTier(req.users, tierSingular).filter(u => u.avatar && !u.avatar.match(/^\//));
     const position = parseInt(req.params.position, 10);
     const user = (position < users.length) ?  users[position] : {};
     const format = req.params.format || 'svg';
-
     let maxHeight;
 
     if (req.query.avatarHeight) {
@@ -167,7 +166,7 @@ export default {
     const imageWidth = Number(req.query.width) || 0;
     const imageHeight = Number(req.query.height) || 0;
     const avatarHeight = Number(req.query.avatarHeight) || 64;
-    let users = filterUsersByTier(req.users, tier.replace(/s$/,''));
+    let users = filterUsersByTier(req.users, tier.replace(/s$/,'')).filter(u => u.avatar && !u.avatar.match(/^\//));
     const count = Math.min(limit, users.length);
     const showBtn = (req.query.button === 'false') ? false : true;
     const { order } = req.query;
@@ -260,9 +259,8 @@ export default {
   },
 
   redirect: (req, res) => {
-    const { tier } = req.params;
-    const users = filterUsersByTier(req.users, tier.replace(/s$/,''));
-    const { slug } = req.params;
+    const { tier, slug } = req.params;
+    const users = filterUsersByTier(req.users, tier.replace(/s$/,'')).filter(u => u.avatar && !u.avatar.match(/^\//));
     const position = parseInt(req.params.position, 10);
 
     if (position > users.length) {
