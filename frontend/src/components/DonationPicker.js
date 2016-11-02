@@ -29,7 +29,7 @@ export default ({value, currency, frequency, presets, onChange, showCurrencyPick
       amountLabel = i18n.getString('other');
     } else {
       amountValue = presetLabel;
-      amountLabel = (<Currency value={amountValue} currency={currency} precision={0} colorify={false} />);
+      amountLabel = (<Currency value={amountValue*100} currency={currency} precision={0} colorify={false} />);
     }
 
     return (

@@ -25,7 +25,7 @@ export default class SponsoredCard extends Component {
       tier,
     } = this.props;
 
-    const formattedAmount = formatCurrency(amount, currency, { compact: true, precision: 0 });
+    const formattedAmount = formatCurrency(amount*100, currency, { compact: true, precision: 0 });
 
     return (
       <div className={`SponsoredCard ${className}`}>

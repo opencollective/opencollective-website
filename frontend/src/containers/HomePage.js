@@ -39,7 +39,7 @@ export class HomePage extends Component {
     const sponsors = homepage.sponsors ? homepage.sponsors : [];
 
     const totalCollectives = homepage.stats ? homepage.stats.totalCollectives : 0;
-    const totalDonations = homepage.stats ? homepage.stats.totalDonations : 0;
+    const totalAnnualBudget = homepage.stats ? homepage.stats.totalAnnualBudget : 0;
     const totalDonors = homepage.stats ? homepage.stats.totalDonors : 0;
 
     return (
@@ -146,9 +146,9 @@ export class HomePage extends Component {
               </div>
               <div className='col sm-col-6 md-col-4'>
                 <div className='-graphic -fluid'>
-                  <div className='-value'>{formatCurrency(totalDonations, currency, { compact: true, precision: 0 })}</div>
+                  <div className='-value'>{formatCurrency(totalAnnualBudget, currency, { compact: true, precision: 0 })}</div>
                 </div>
-                <div className='-heading'>Funds collected</div>
+                <div className='-heading'>Total annual budget</div>
               </div>
             </div>
           </div>

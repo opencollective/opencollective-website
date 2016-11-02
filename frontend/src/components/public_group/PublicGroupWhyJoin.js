@@ -31,7 +31,7 @@ export default class PublicGroupWhyJoin extends React.Component {
             </div>
             <div className='PublicGroup-metricContainer flex pt4'>
               <Metric label={i18n.getString('fundsAvailable')}
-                value={ formatCurrency(group.balance/100, group.currency, { precision: 0 }) }
+                value={ formatCurrency(group.balance, group.currency, { precision: 0 }) }
                 className='flex-auto pr2' />
 
               {(group.expenses.length > 0) && (

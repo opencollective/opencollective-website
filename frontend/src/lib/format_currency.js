@@ -27,7 +27,7 @@ export default (
   Numbro.culture(lang);
 
   // remove the negative sign from the value
-  const number = Numbro(value);
+  const number = Numbro(value/100);
   let formatted = (options.precision === 0) ? number.format('$0,0') : number.format('$0,0.00');
 
   if (!options.compact) {
