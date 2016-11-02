@@ -35,7 +35,6 @@ export default class Tiers extends Component {
 
     const frequencyHuman = frequency === 'one-time' ? '' : `${i18n.getString('per')} ${i18n.getString(frequency.replace(/ly$/,''))}`;
     const stripeDescription =  `${formatCurrency((amount * 100), currency, group.settings.formatCurrency)} ${frequencyHuman}`;
-    console.log("stripeDescription", stripeDescription, "amount", amount);
     const button = tier.button || `${i18n.getString('donate')} ${stripeDescription}`;
     const cancellationDisclaimer = (frequency !== 'one-time') ? i18n.getString('cancelAnytime') : "";
     const description = tier.description || i18n.getString(`${tier.name}Description`);
