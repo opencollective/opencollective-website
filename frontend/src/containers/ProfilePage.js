@@ -112,22 +112,18 @@ export class ProfilePage extends Component {
             <section style={{paddingBottom: '20px'}}>
               <div className="lineA">{profile.isOrganization ? i18n.getString('WeAreProudSupporters') : i18n.getString('IamAProudSupporter')}</div>
               {backing.map((group, index) => {
-                if (profile.isOrganization) {
-                  // When sponsored amount & tier exists the `SponsoredCard` will be rendered
-                  if (group.sponsoredAmount && group.sponsoredTier) {
-                    return (
-                      <SponsoredCard
-                        key={index}
-                        i18n={i18n}
-                        isCollectiveOnProfile={true}
-                        {...group}
-                        amount={group.sponsoredAmount}
-                        tier={group.sponsoredTier}
-                      />
-                    )
-                  } else {
-                    return <CollectiveCard key={index} i18n={i18n} isCollectiveOnProfile={true} group={group} />
-                  }
+                // When sponsored amount & tier exists the `SponsoredCard` will be rendered
+                if (group.myTier) {
+                  return (
+                    <SponsoredCard
+                      key={index}
+                      i18n={i18n}
+                      isCollectiveOnProfile={true}
+                      {...group}
+                      amount={group.myTotalDonations}
+                      tier={group.myTier}
+                    />
+                  )
                 } else {
                   return <CollectiveCard key={index} i18n={i18n} isCollectiveOnProfile={true} group={group} />
                 }
