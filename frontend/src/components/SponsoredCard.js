@@ -40,7 +40,7 @@ export default class SponsoredCard extends Component {
               <div className='SponsoredCard-name'>{ name }</div>
             </div>
             <div className='SponsoredCard-footer'>
-              <div className='SponsoredCard-type'>{ tier.title }</div>
+              <div className='SponsoredCard-type'>{ tier }</div>
               <div className='SponsoredCard-amount'>{`${formattedAmount} ${interval}`}</div>
             </div>
           </div>
