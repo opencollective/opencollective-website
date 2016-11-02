@@ -30,7 +30,7 @@ export default class CollectiveTransactions extends React.Component {
         </div>
         {(collective.transactions.length === 0) && emptyState}
         <div className='Collective-transactions-list'>
-          {collective.transactions.slice(0,5).map(transaction => <ActivityItem key={`pgd_${transaction.id}`} donation={transaction} user={users[transaction.UserId]} className='mb2' i18n={i18n} />)}
+          {collective.transactions.slice(0, itemsToShow).map(transaction => <ActivityItem key={`pgd_${transaction.id}`} donation={transaction} user={users[transaction.UserId]} className='mb2' i18n={i18n} />)}
         </div>
         {(collective.transactions.length >= itemsToShow) && (
           <div className='center pt2'>

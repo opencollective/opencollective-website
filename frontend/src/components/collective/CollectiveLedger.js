@@ -33,4 +33,5 @@ CollectiveLedger.propTypes = {
   hasHost: PropTypes.bool.isRequired,
   users: PropTypes.object,
   donate: PropTypes.func,
+  itemsToShow: PropTypes.number
 };
