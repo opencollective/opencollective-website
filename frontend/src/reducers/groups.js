@@ -14,11 +14,7 @@ export default function groups(state={}, action={}) {
         return merge({}, state, {
           [action.data.group.slug]: action.data.group
         });
-      } else if (action.data.leaderboard) {
-        return merge({}, state, {
-          leaderboard: action.data.leaderboard
-        });
-      }
+      } 
       return state;
 
     case constants.PROFILE_SUCCESS:
@@ -55,11 +51,6 @@ export default function groups(state={}, action={}) {
       return merge({}, state, {
         donateInProgress: false,
         error: action.error
-      });
-
-    case constants.GET_LEADERBOARD_SUCCESS:
-      return merge({}, state, {
-        leaderboard: action.json
       });
 
     case constants.GROUP_TAGS_SUCCESS:

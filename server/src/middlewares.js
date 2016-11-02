@@ -58,18 +58,6 @@ const extractGithubUsernameFromToken = (req, res, next) => {
 };
 
 /**
- * Fetch leaderboard
- */
-const fetchLeaderboard = (req, res, next) => {
-    api
-      .get(`/leaderboard`)
-      .then((groups) => {
-        req.leaderboard = groups;
-      })
-      .then(next);
-};
-
-/**
  *
  */
 const cache = (maxAge = 60) => {
@@ -196,7 +184,6 @@ export default {
   fetchGroupBySlug,
   extractGithubUsernameFromToken,
   fetchActiveUsers,
-  fetchLeaderboard,
   ga,
   handleUncaughtError
 }

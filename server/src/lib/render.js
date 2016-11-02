@@ -39,7 +39,6 @@ export default (req, res, next) => {
         group: req.collective || req.group,
         collective: req.collective,
         subscriptions: req.subscriptions,
-        leaderboard: req.leaderboard,
         connectedAccount: req.connectedAccount,
         homepage: req.homepage
       }));
