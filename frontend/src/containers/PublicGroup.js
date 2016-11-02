@@ -47,7 +47,7 @@ import PublicGroupWhoWeAre from '../components/public_group/PublicGroupWhoWeAre'
 import PublicGroupWhyJoin from '../components/public_group/PublicGroupWhyJoin';
 import PublicGroupApplyToManageFunds from '../components/public_group/PublicGroupApplyToManageFunds';
 
-import EditTopBar from '../components/edit_collective/EditCollectiveTopBar';
+import EditTopBar from '../components/EditTopBar';
 
 import PublicFooter from '../components/PublicFooter';
 import RelatedGroups from '../components/RelatedGroups';

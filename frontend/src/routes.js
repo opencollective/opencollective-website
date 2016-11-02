@@ -17,7 +17,6 @@ import Discover from './containers/Discover';
 import About from './containers/About';
 import AddGroup from './containers/AddGroup';
 import NewGroup from './containers/NewGroup';
-import EditCollective from './containers/EditCollective';
 import GroupTierList from './containers/GroupTierList';
 import Response from './containers/Response';
 
@@ -44,7 +43,6 @@ export default (
     <Route path="/:slug/connected-accounts" component={ConnectedAccounts} />
     <Route path="/:slug/connect/:provider" component={ConnectProvider} />
     <Route path="/:slug/edit-twitter" component={EditTwitter} />
-    <Route path="/:slug/edit" component={EditCollective} />
     <Route path="/:slug" component={PublicPage} />
     <Route path="/:slug/expenses/new" component={Transactions} />
     <Route path="/:slug/:type(donations|expenses)" component={Transactions} />
