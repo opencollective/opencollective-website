@@ -28,7 +28,7 @@ export class Subscriptions extends Component {
           {!subscriptions.length ? (
             <div className='block-container center'>
               <p> Looks like you aren't contributing right now. Let's fix it!</p>
-              <p> Visit our <a href='/leaderboard'>Leaderboard</a> to find more collectives to support. </p>
+              <p> <a href='/discover'>Discover</a> more collectives to support. </p>
             </div>
           ) : null}
           {subscriptions.length ? subscriptions.map(subscription => {
@@ -42,7 +42,7 @@ export class Subscriptions extends Component {
           }) : null}
           {subscriptions.length ? (
             <div className='block-container center'>
-              <p> Visit our <a href='/leaderboard'>Leaderboard</a> to find more collectives to support! </p>
+              <p> <a href='/discover'>Discover</a> more collectives to support. </p>
             </div>
           ) : null}
         </div>

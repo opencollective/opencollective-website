@@ -5,7 +5,6 @@ import PublicPage from './containers/PublicPage';
 import Subscriptions from './containers/Subscriptions';
 import Transactions from './containers/Transactions';
 import DonatePage from './containers/DonatePage';
-import Leaderboard from './containers/Leaderboard';
 import OnBoarding from './containers/OnBoarding';
 import Login from './containers/Login';
 import ConnectedAccounts from './components/ConnectedAccounts';
@@ -35,7 +34,6 @@ export default (
     <Route path="/login/:token" component={Login} />
     <Route path="/login" component={Login} />,
     <Route path="/subscriptions" component={requireAuthentication(Subscriptions)} />
-    <Route path="/leaderboard" component={Leaderboard} />
     <Route path="/opensource/apply/:token" component={OnBoarding} />
     <Route path="/opensource/apply" component={OnBoarding} />
     {/* Leaving github/apply routes for existing links */}
