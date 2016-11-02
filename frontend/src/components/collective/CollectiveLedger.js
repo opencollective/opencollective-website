@@ -12,19 +12,15 @@ export default class CollectiveLedger extends Component {
     return (
       <section id='budget' className='px2'>
         <div className='CollectiveLedger clearfix md-flex'>
-          {hasHost &&
-          <div className='CollectiveLedgerDonate'>
-            <CollectiveDonate {...this.props } />
-          </div> }
           <div className='CollectiveLedgerItems'>
             <div className='CollectiveLedgerAvailableFunds'>
-              <h2 className='Collective-title m0 -ff-sec -fw-bold'>{i18n.getString('fundsAvailable')}</h2>
-              <Currency value={ collective.balance/100 } currency={ collective.currency } precision={0} />
+              <h4 className='Collective-title m0 -ff-sec -fw-bold'>{i18n.getString('fundsAvailable')}</h4>
+              <h3> <Currency value={ collective.balance/100 } currency={ collective.currency } precision={0} /></h3>
             </div>
             <CollectivePendingExpenses {...this.props} />
             <CollectiveTransactions {...this.props} />
           </div>
-
+          {hasHost && <CollectiveDonate {...this.props } />}
         </div>
       </section>
     );

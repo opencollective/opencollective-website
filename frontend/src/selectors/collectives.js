@@ -24,7 +24,6 @@ const DEFAULT_COLLECTIVE_SETTINGS = {
     hero: { 
       cover: { 
         filter: "blur(4px)",
-        transform: "scale(1.06)",
         backgroundImage: "url('/static/images/collectives/default-header-bg.jpg')"
       }, 
       a: {}
