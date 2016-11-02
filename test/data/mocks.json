@@ -53,7 +53,7 @@
         "tier": "sponsor",
         "totalDonations": 100,
         "twitterHandle": "opencollect",
-        "website": "https://opencollective.com"
+        "website": "https://digitalocean.com?utm_campaign=opensource&utm_medium=github&utm_source=oc"
     },
     {
         "avatar": "https://pbs.twimg.com/profile_images/693913286555869186/jMoeGBOJ.jpg",
@@ -67,7 +67,7 @@
         "website": null
     },
     {
-        "avatar": "",
+        "avatar": "https://pbs.twimg.com/profile_images/535488349339803648/1DhSH-6C.jpeg",
         "createdAt": "2016-02-18T02:36:50.640Z",
         "id": 107,
         "name": "Chris Vasquez",
@@ -86,6 +86,7 @@
         "tier": "backer",
         "totalDonations": 1,
         "twitterHandle": "dsmithtest",
+        "username": "dsmithtest",
         "website": ""
     },
     {

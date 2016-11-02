@@ -12,8 +12,8 @@ export default class PublicGroupMembersWall extends React.Component {
   }
 
   _showCards(users) {
-    const { i18n } = this.props;
-    if (users.length < 50) {
+    const { i18n, group } = this.props;
+    if (!group.isSupercollective || users.length < 50) {
       return users.map((user, j) => (<UserCard ref={`UserCard-${j}`} user={user} key={j} className='m1' i18n={i18n} />));
     } else {
       return <span/>;
