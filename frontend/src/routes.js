@@ -7,6 +7,7 @@ import Transactions from './containers/Transactions';
 import DonatePage from './containers/DonatePage';
 import OnBoarding from './containers/OnBoarding';
 import Login from './containers/Login';
+import Ledger from './containers/Ledger';
 import ConnectedAccounts from './components/ConnectedAccounts';
 import ConnectProvider from './containers/ConnectProvider';
 import EditTwitter from './components/EditTwitter';
@@ -44,6 +45,7 @@ export default (
     <Route path="/:slug/edit-twitter" component={EditTwitter} />
     <Route path="/:slug/edit" component={EditCollective} />
     <Route path="/:slug" component={PublicPage} />
+    <Route path="/:slug/transactions" component={Ledger} />
     <Route path="/:slug/expenses/new" component={Transactions} />
     <Route path="/:slug/:type(donations|expenses)" component={Transactions} />
     <Route path="/:slug/donate/:amount" component={DonatePage} />

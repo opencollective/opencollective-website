@@ -12,9 +12,9 @@ export default class CollectivePendingExpenses extends React.Component {
     } = this.props;
 
     return (
-      <div className='CollectivePendingExpenses col col-12 px2 mb3'>
+      <div className='CollectivePendingExpenses col col-12 mb3'>
         <div className='clearfix border-bottom border-gray pb2 mb3'>
-          <h2 className='Collective-title left m0 -ff-sec -fw-bold'>{i18n.getString('pendingExpenses')}</h2>
+          <h4 className='Collective-title left m0 -ff-sec -fw-bold'>{i18n.getString('pendingExpenses')}</h4>
           <Link className='right mt1 -btn -btn-micro -btn-outline -border-green -ff-sec -fw-bold -ttu' to={`/${collective.slug}/expenses/new`}>{i18n.getString('submitExpense')}</Link>
         </div>
         <div className='Collective-transactions-list'>

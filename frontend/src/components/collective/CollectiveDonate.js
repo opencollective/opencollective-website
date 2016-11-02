@@ -29,10 +29,10 @@ export default class CollectiveDonate extends React.Component {
     return (
       <section id='join-us'>
         <div id='support'></div>
-        <div className='CollectiveDonate-container container center'>
+        <div className='CollectiveDonate-container px2 container center'>
           <h2 className='Collective-title m0 pb2 -ff-sec -fw-bold'>{i18n.getString('joinAndFulfil')}</h2>
-          <p className='Collective-font-17 m0 pb2'>{i18n.getString('helpUsContinueOurActivities')}</p>
-          <div className='flex justify-center clearfix max-width-4 mx-auto pt3'>
+          <p className='Collective-font-17 m0 pb2 px2'>{i18n.getString('helpUsContinueOurActivities')}</p>
+          <div className='justify-center clearfix max-width-4 mx-auto pt3'>
             {collective.tiers.map(::this._showTier)}
           </div>
         </div>

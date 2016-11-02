@@ -29,7 +29,10 @@
 }
 
 
-
+/* Collective ledger */
+.CollectiveLedger {
+  padding-top: 3rem;
+}
 
 
 
@@ -69,33 +72,7 @@
   font-size: 1rem;
 }
 
-/* WHY Donate */
-.Collective-image-placeholder {
-  background: url('/static/images/media-placeholder.svg') no-repeat;
-  background-position: center center;
-  width: 300px;
-  height: 300px;
-  max-width: 100%;
-  margin: auto;
-}
-
-.CollectiveWhyJoin {
-  min-height: 400px;
-}
-
-.Collective-Media-container {
-  padding-bottom: 56.25%; /* 16:9 */
-}
-
-.Collective-summary {
-  padding: 54px;
-}
-
 /* JOIN US */
-.CollectiveDonate-container {
-  padding-top: 6.25rem;
-}
-
 .CollectiveDonate-tier-box-inner {
   border-width: 2px;
   border-radius: 6px;
