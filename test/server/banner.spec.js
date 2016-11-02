@@ -5,6 +5,7 @@ import sizeOf from 'image-size';
 
 import api from '../../server/src/lib/api';
 import app from '../../server/src/index';
+import config from 'config';
 
 import shieldIONock from '../data/shields.io.nock';
 
@@ -48,13 +49,6 @@ describe("avatar", () => {
       .get('/yeoman/backers/0/avatar.jpg')
       .expect('content-type', 'image/jpeg')
       .expect(200, done);
-  });
-
-  it("redirects to the placeholder avatar url if no avatar for the backer", (done) => {
-    request(app)
-      .get('/yeoman/backers/1/avatar')
-      .expect('Location', '/static/images/user.svg')
-      .expect(302, done);
   });
 
   it("redirects to 'become a backer' placeholder", (done) => {
@@ -125,24 +119,17 @@ describe("redirect", () => {
       .expect(404, done);
   });
 
-  it("redirects to opencollective.com/:slug if no website or twitter for the backer at that position", (done) => {
+  it(`redirects to the website of the sponsor and keeps pre-existing utm tracking data`, (done) => {
     request(app)
-      .get('/yeoman/backers/1/website')
-      .expect('Location', 'http://localhost:3000/yeoman?utm_campaign=yeoman&utm_medium=github&utm_source=opencollective')
+      .get('/yeoman/sponsors/0/website')
+      .expect('Location', `https://digitalocean.com/?utm_campaign=opensource&utm_medium=github&utm_source=oc`)
       .expect(302, done);
   });
 
-  it(`redirects to the website of the backer and keeps pre-existing utm tracking data`, (done) => {
-    request(app)
-      .get('/yeoman/backers/3/website')
-      .expect('Location', `http://apple.com/?utm_campaign=opensource&utm_medium=github&utm_source=oc`)
-      .expect(302, done);
-  });
-
-  it(`redirects to the twitter of the backer (@${mocks.backers[2].twitterHandle})`, (done) => {
+  it(`redirects to profile of the backer (@${mocks.backers[2].twitterHandle})`, (done) => {
     request(app)
       .get('/yeoman/backers/2/website')
-      .expect('Location', `https://twitter.com/${mocks.backers[2].twitterHandle}?utm_campaign=yeoman&utm_medium=github&utm_source=opencollective`)
+      .expect('Location', `${config.host.website}/${mocks.backers[2].twitterHandle}?utm_campaign=yeoman&utm_medium=github&utm_source=opencollective`)
       .expect(302, done);
   });
 
@@ -171,7 +158,7 @@ describe("banner", () => {
         res.body = { firstLine };
       })
       .expect({
-        firstLine: '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="345" height="74">'
+        firstLine: '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="414" height="74">'
       })
       .expect(200, done);
   });
@@ -185,7 +172,7 @@ describe("banner", () => {
         res.body = { contentLength: Number(res.headers['content-length']) };
       })
       .expect({
-        contentLength: 16350
+        contentLength: 25518
       })
       .expect(200, done);
   });
@@ -200,7 +187,7 @@ describe("banner", () => {
         res.body = { firstLine };
       })
       .expect({
-        firstLine: '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="420" height="104">'
+        firstLine: '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="504" height="104">'
       })
       .expect(200, done);
   });
