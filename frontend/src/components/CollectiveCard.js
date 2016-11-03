@@ -29,7 +29,7 @@ export default class CollectiveCard extends Component {
       stats.push({ label: i18n.getString('backers'), value: group.backersAndSponsorsCount });
     }
 
-    stats.push({ label: i18n.getString('annualIncome'), value: formatCurrency(group.yearlyIncome/100, group.currency, { compact: true, precision: 0 }) });
+    stats.push({ label: i18n.getString('annualIncome'), value: formatCurrency(group.yearlyIncome, group.currency, { compact: true, precision: 0 }) });
     return stats;
   }
 
@@ -38,7 +38,7 @@ export default class CollectiveCard extends Component {
     const stats = [];
     stats.push({label: i18n.getString('backers'), value: group.backersCount});
     stats.push({label: i18n.getString('sponsors'), value: group.sponsorsCount});
-    stats.push({label: i18n.getString('annualIncome'), value: formatCurrency(group.yearlyIncome/100, group.currency, { compact: true, precision: 0 })});
+    stats.push({label: i18n.getString('annualIncome'), value: formatCurrency(group.yearlyIncome, group.currency, { compact: true, precision: 0 })});
     return stats;
   }
 
@@ -66,9 +66,8 @@ export default class CollectiveCard extends Component {
       backgroundImage,
       logo,
       name,
-      description,
-      mission,
-      publicUrl,
+      slug,
+      username,
       isCollectiveOnProfile
     } = this.props.group;
 
@@ -90,9 +89,12 @@ export default class CollectiveCard extends Component {
       group.settings.style.hero.cover.backgroundImage = `url(${resizeImage(backgroundImage, { width: 320 })})`;
     }
 
+    const url = `/${slug||username}`;
+    const description = group.mission ? `${i18n.getString('missionTo')} ${group.mission}` : group.description;
+
     return (
       <div className={`CollectiveCard ${className}`}>
-        <a href={publicUrl}>
+        <a href={url}>
           <div>
             <div className='CollectiveCard-head'>
               <div className='CollectiveCard-background' style={group.settings.style.hero.cover}></div>
@@ -100,7 +102,7 @@ export default class CollectiveCard extends Component {
             </div>
             <div className='CollectiveCard-body'>
               <div className='CollectiveCard-name'>{name}</div>
-              <div className='CollectiveCard-description'>{i18n.getString('missionTo')} {mission || description}</div>
+              <div className='CollectiveCard-description'>{description}</div>
             </div>
             <div className='CollectiveCard-footer'>
               <div className='clearfix mt2'>

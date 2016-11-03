@@ -12,7 +12,7 @@ export default class GroupStatsHeader extends Component {
     const { group, i18n } = this.props;
     group.usersCount = (group.users) ? group.users.length - 1 : group.backersCount;
 
-    const yearlyIncome = group.yearlyIncome / 100;
+    const yearlyIncome = group.yearlyIncome;
     const formattedYearlyIncome = yearlyIncome && formatCurrency(yearlyIncome, group.currency, { compact: true, precision: 0 });
 
     const totalMembers = group.contributorsCount + group.usersCount;

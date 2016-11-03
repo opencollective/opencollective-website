@@ -384,7 +384,7 @@ export default class DonationDistributor extends Component {
       const feeDescription = processingFee ? `(+\u00A0${formattedProcessingFee}\u00A0payment\u00A0processing\u00A0fees)` : '';
       return `${formattedAmount} ${frequencyHuman} ${feeDescription}`;
     } else {
-      const formattedAmount = formatCurrency(chargeAmount, currency, { compact: false });
+      const formattedAmount = formatCurrency(chargeAmount * 100, currency, { compact: false });
       return `${formattedAmount} ${frequencyHuman}`;
     }
   }

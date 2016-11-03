@@ -20,7 +20,7 @@ export default class SubscriptionItem extends Component {
     const { currency } = subscription;
     const { interval } = subscription;
     const { isActive } = subscription;
-    const formattedAmount = formatCurrency(amount, currency, {compact: true});
+    const formattedAmount = formatCurrency(amount*100, currency, {compact: true});
     const formattedInterval = `${interval[0].toUpperCase()}${interval.substr(1)}ly`;
     const formattedCreatedAt = isActive ? `${i18n.getString('since')} ${moment(createdAt).format('MMM, YYYY')}`: 'Inactive';
     const { Transactions } = subscription;
