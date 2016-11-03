@@ -24,6 +24,7 @@
     padding: 0 15px;
   }
   .DonatePage-line2 {
+    max-width: 900px;
     font-family: Montserrat;
     font-size: 36px;
     font-weight: 700;

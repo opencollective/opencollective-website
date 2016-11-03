@@ -77,9 +77,35 @@ export default class Markdown extends Component {
     }
   }
 
+  processHTML(html) {
+    let lines = html.split('\n');
+    lines = lines.map(line => {
+      let videoid;
+      if (line.match(/^<p><a .*https?:\/\/youtu.be.*<\/a><\/p>$/))
+        videoid = line.match(/youtu.be\/([^\/\?]+)/)[1];
+      else if (line.match(/^<p><a .*https?:\/\/(www\.)?youtube\.com.*<\/a><\/p>$/))
+        videoid = line.match(/watch\?v=([^&]*)/)[1];
+
+      if (videoid) {
+        line = `<div class='video'>
+          <iframe
+            width=560
+            height=315
+            src="https://www.youtube.com/embed/${videoid}"
+            frameborder='0'
+            allowFullScreen>
+          </iframe>
+        </div>`;
+      }
+      return line;
+    });
+    return lines.join('\n');
+  }
+
   rawMarkup(text) {
     const rawMarkup = (text) ? marked(text, {sanitize: true}) : '';
-    return { __html: rawMarkup };
+
+    return { __html: this.processHTML(rawMarkup) };
   }
 
   onClick() {
