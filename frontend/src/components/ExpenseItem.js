@@ -20,7 +20,7 @@ const ExpenseItem = ({ className = '', expense, user, i18n }) => {
         <p className='h6 m0 muted'>{i18n.getString('submittedBy')} {user && user.name}</p>
         <div className='mt2'>
           <span className='h3 -ff-sec -fw-bold'>
-            <Currency value={expense.amount/100} currency={expense.currency} colorify={false} />
+            <Currency value={expense.amount} currency={expense.currency} colorify={false} />
           </span>
           <span className='ExpenseStatus border align-middle ml1 muted -fw-bold -ttu'>{i18n.getString(expense.status.toLowerCase())}</span>
         </div>
