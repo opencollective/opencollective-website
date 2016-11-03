@@ -66,8 +66,7 @@ export default class CollectiveCard extends Component {
       backgroundImage,
       logo,
       name,
-      slug,
-      username,
+      publicUrl,
       isCollectiveOnProfile
     } = this.props.group;
 
@@ -89,12 +88,11 @@ export default class CollectiveCard extends Component {
       group.settings.style.hero.cover.backgroundImage = `url(${resizeImage(backgroundImage, { width: 320 })})`;
     }
 
-    const url = `/${slug||username}`;
     const description = group.mission ? `${i18n.getString('missionTo')} ${group.mission}` : group.description;
 
     return (
       <div className={`CollectiveCard ${className}`}>
-        <a href={url}>
+        <a href={publicUrl}>
           <div>
             <div className='CollectiveCard-head'>
               <div className='CollectiveCard-background' style={group.settings.style.hero.cover}></div>
