@@ -65,7 +65,7 @@
     "eslint-plugin-react": "6.2.0",
     "express": "4.13.4",
     "express-hbs": "0.8.4",
-    "express-perf": "1.11.1",
+    "express-perf": "1.11.2",
     "express-server-status": "1.0.3",
     "express-session": "1.13.0",
     "gulp": "3.9.1",
