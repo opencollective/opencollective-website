@@ -477,6 +477,13 @@
   margin: 1rem 0;
 }
 
+.PublicGroup-markdown .video {
+  text-align: center;
+  iframe {
+    border: none;
+  }
+}
+
 .PublicGroup-markdown .ContentEditable {
   max-width: 788px;
   margin: 0 auto;
