@@ -11,11 +11,11 @@ const FETCH_EXPENSES_OPTIONS = {
 /**
  * Fetch expenses from a group
  */
-export default (slug) => {
+export default (slug, options = FETCH_EXPENSES_OPTIONS) => {
   return dispatch => {
     dispatch(request(slug));
     return get(`/groups/${slug}/expenses`, {
-      params: FETCH_EXPENSES_OPTIONS
+      params: options
     })
     .then(json => dispatch(success(slug, json)))
     .catch(error => dispatch(failure(error)));

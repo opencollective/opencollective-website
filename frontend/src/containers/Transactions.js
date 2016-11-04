@@ -47,7 +47,7 @@ export class Transactions extends Component {
           </div>
           <div className='info-block'>
             <div className='info-block-value'>
-              <Currency value={group.balance/100} currency={group.currency} precision={2} />
+              <Currency value={group.balance} currency={group.currency} precision={2} />
             </div>
             <div className='info-block-label'>funds</div>
           </div>
@@ -104,7 +104,8 @@ export class Transactions extends Component {
     const options = {
       sort: 'createdAt',
       direction: 'desc',
-      type: (type === 'expenses') ? type : 'transactions'
+      type: (type === 'expenses') ? type : 'transactions',
+      per_page: 100
     };
 
     switch (type) {
