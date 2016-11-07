@@ -30,7 +30,7 @@ const UnpaidExpenseItem = ({
         <p className='h5 mt0 mb1'>{expense.title || expense.category}</p>
         <p className='h6 m0 muted'>{i18n.getString('submittedBy')} {user && user.name}</p>
         <div className='mt2'>
-          <span className='h3 -ff-sec -fw-bold'>
+          <span className='h3 -ff-sec'>
             <Currency value={expense.amount} currency={expense.currency} colorify={false} />
           </span>
           <span className='ExpenseStatus border align-middle ml1 muted -fw-bold -ttu'>{i18n.getString(expense.status.toLowerCase())}</span>

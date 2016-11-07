@@ -1,24 +1,25 @@
 import React from 'react';
 import { Route } from 'react-router';
 
-import PublicPage from './containers/PublicPage';
-import Subscriptions from './containers/Subscriptions';
-import Transactions from './containers/Transactions';
-import DonatePage from './containers/DonatePage';
-import OnBoarding from './containers/OnBoarding';
-import Login from './containers/Login';
-import Ledger from './containers/Ledger';
-import ConnectedAccounts from './components/ConnectedAccounts';
-import ConnectProvider from './containers/ConnectProvider';
-import EditTwitter from './components/EditTwitter';
-import HomePage from './containers/HomePage';
-import Faq from './containers/Faq';
-import Discover from './containers/Discover';
 import About from './containers/About';
 import AddGroup from './containers/AddGroup';
-import NewGroup from './containers/NewGroup';
+import ConnectedAccounts from './components/ConnectedAccounts';
+import ConnectProvider from './containers/ConnectProvider';
+import Discover from './containers/Discover';
+import DonatePage from './containers/DonatePage';
+import EditTwitter from './components/EditTwitter';
+import Expenses from './containers/Expenses';
+import Faq from './containers/Faq';
 import GroupTierList from './containers/GroupTierList';
+import HomePage from './containers/HomePage';
+import Ledger from './containers/Ledger';
+import Login from './containers/Login';
+import NewGroup from './containers/NewGroup';
+import OnBoarding from './containers/OnBoarding';
+import PublicPage from './containers/PublicPage';
 import Response from './containers/Response';
+import Subscriptions from './containers/Subscriptions';
+import Transactions from './containers/Transactions';
 
 import { requireAuthentication } from './components/AuthenticatedComponent';
 
@@ -44,6 +45,8 @@ export default (
     <Route path="/:slug/edit-twitter" component={EditTwitter} />
     <Route path="/:slug" component={PublicPage} />
     <Route path="/:slug/transactions" component={Ledger} />
+    {/* TODO: rename to 'expenses' when we remove old route */}
+    <Route path="/:slug/all_expenses" component={Expenses} />
     <Route path="/:slug/expenses/new" component={Transactions} />
     <Route path="/:slug/:type(donations|expenses)" component={Transactions} />
     <Route path="/:slug/donate/:amount" component={DonatePage} />

@@ -13,24 +13,33 @@ export default class CollectivePendingExpenses extends React.Component {
       showMoreButton: false,
       showAllButton: false
     }
+    this.state = Object.assign({}, this.state, this.getStateBasedOnProps(this.props));
   }
 
   componentWillReceiveProps(nextProps){
-    this.updateState(nextProps);
+    this.setState(this.getStateBasedOnProps(nextProps));
   }
 
-  updateState(currentProps) {
+  getStateBasedOnProps(currentProps) {
     const expenses = currentProps.collective.expenses;
     const itemsToShow = this.state.itemsToShow;
-    // Enable showMore button when there are more than default expenses
-    this.setState({showMoreButton: expenses.length > this.state.itemsToShow});
-    // Enable showAll button when showMore has been clicked once
-    this.setState({showAllButton: expenses.length > itemsToShow && itemsToShow > DEFAULT_EXPENSES_TO_SHOW});
+    return {
+      // Enable showMore button when there are more than default expenses
+      showMoreButton: expenses.length > this.state.itemsToShow,
+      // Enable showAll button when showMore has been clicked once
+      showAllButton: itemsToShow > DEFAULT_EXPENSES_TO_SHOW
+    }
   }
 
   showMore(){
-    this.setState({itemsToShow: this.state.itemsToShow+DEFAULT_EXPENSES_TO_SHOW});
-    this.setState({showAllButton: this.props.collective.expenses.length > this.state.itemsToShow + DEFAULT_EXPENSES_TO_SHOW})
+    const { expenses } = this.props.collective;
+    const { itemsToShow } = this.state;
+
+    this.setState({
+      itemsToShow: itemsToShow + DEFAULT_EXPENSES_TO_SHOW,
+      showMoreButton: expenses.length > itemsToShow + DEFAULT_EXPENSES_TO_SHOW,
+      showAllButton: expenses.length > itemsToShow + DEFAULT_EXPENSES_TO_SHOW
+    });
   }
 
   render() {

@@ -26,7 +26,7 @@ export default class CollectiveActivityItem extends Component {
             <p className='h5 m0 left truncate flex-auto' title={ transaction.title || transaction.description }>
               { transaction.title || transaction.description }
             </p>
-            <p className='h4 m0 nowrap right-align'>
+            <p className='h4 m0 ml1 nowrap right-align -ff-sec'>
               <Currency value={transaction.amount * 100} currency={transaction.currency} />
             </p>
           </div>

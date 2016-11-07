@@ -18,9 +18,11 @@ export default class CollectiveLedger extends Component {
             {hasHost && <CollectiveDonate {...this.props } />}  
           </div>
           <div className='CollectiveLedger-activity max-width-1'>
-            <div className='CollectiveLedgerAvailableFunds clearfix border-bottom border-gray pb2 mb3'>
-              <h3 className='Collective-title m0 -fw-bold'>{i18n.getString('fundsAvailable')}: 
-              <Currency value={ collective.balance/100 } currency={ collective.currency } precision={0} /></h3>  
+            <div className='CollectiveLedgerAvailableFunds clearfix border-bottom border-gray pb2 mb3 flex justify-between'>
+              <h3 className='Collective-title m0 -fw-bold flex-auto'>{i18n.getString('fundsAvailable')}: </h3>
+              <p className='h3 m0 -ff-sec right-align'> 
+                <Currency value={ collective.balance } currency={ collective.currency } precision={0} />
+              </p>
             </div>
             <CollectiveTransactions {...this.props} />
           </div>

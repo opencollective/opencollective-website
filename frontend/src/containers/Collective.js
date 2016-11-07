@@ -282,8 +282,6 @@ const mapStateToProps = createStructuredSelector({
     i18n: getI18nSelector,
     loadData: getAppRenderedSelector,
     users: getUsersSelector
-
-    // TODO: add paypal props
   });
 
 export default connect(mapStateToProps, {
