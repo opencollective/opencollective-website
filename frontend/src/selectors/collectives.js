@@ -65,7 +65,7 @@ const getCollectiveUsersByRoleSelector = createSelector(
 
 export const getCollectiveHostSelector = createSelector(
   getCollectiveUsersByRoleSelector,
-  (usersByRole) => usersByRole[roles.HOST] || []);
+  (usersByRole) => usersByRole[roles.HOST] && usersByRole[roles.HOST].length > 0 ? usersByRole[roles.HOST][0] : null);
 
 export const getCollectiveMembersSelector = createSelector(
   getCollectiveUsersByRoleSelector,
@@ -77,7 +77,7 @@ export const getCollectiveBackersSelector = createSelector(
 
 export const hasHostSelector = createSelector(
   [getCollectiveHostSelector, getStripePublishableKeySelector],
-  (host, publishableKey) => host.length === 1 && publishableKey ? true : false);
+  (host, publishableKey) => host && publishableKey ? true : false);
 
 export const getCollectiveDataSelector = createSelector(
   getCollectiveSelector,
@@ -119,6 +119,11 @@ export const getI18nSelector = createSelector(
   getCollectiveSettingsSelector,
   (settings) => i18nLib(settings.lang || 'en'));
 
+export const isHostOfCollectiveSelector = createSelector(
+  [ getAuthenticatedUserSelector, getCollectiveHostSelector ],
+  (authenticatedUser, host) => host && authenticatedUser && authenticatedUser.id === host.id);
+
 export const canEditCollectiveSelector = createSelector(
-  [ getAuthenticatedUserSelector, getCollectiveMembersSelector ],
-  (authenticatedUser, members) => !!members.find(u => u.id === authenticatedUser.id));
+  [ getAuthenticatedUserSelector, getCollectiveMembersSelector, isHostOfCollectiveSelector ],
+  (authenticatedUser, members, isHost) => isHost || (authenticatedUser && !!members.find(u => u.id === authenticatedUser.id)));
+

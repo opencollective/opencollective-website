@@ -55,6 +55,7 @@
 @import './components/Button.css';
 @import './components/Checkbox.css';
 @import './components/CollectiveAboutUs.css';
+@import './components/CollectiveActivityItem.css';
 @import './components/CollectiveCard.css';
 @import './components/CollectiveHero.css';
 @import './components/Confirmation.css';
@@ -101,6 +102,7 @@
 @import './components/SubscriptionItem.css';
 @import './components/TransactionItem.css';
 @import './components/TransactionStatus.css';
+@import './components/UnpaidExpenseItem.css';
 @import './components/UserCard.css';
 @import './components/UserAvatarRow.css';
 @import './components/UsersList.css';

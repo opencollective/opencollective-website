@@ -6,7 +6,7 @@
 }
 
 .Collective-title {
-  font-size: 1.75rem;
+  font-size: 1.25rem;
 }
 
 .Collective-subtitle {
@@ -32,6 +32,18 @@
 /* Collective ledger */
 .CollectiveLedger {
   padding-top: 3rem;
+}
+
+.CollectiveLedger-title {
+  font-size: 1.5rem;
+}
+
+.CollectiveLedgerAvailableFunds .Currency {
+  float: right;
+}
+
+.CollectiveLedger-activity {
+  max-width: 18rem;
 }
 
 
@@ -112,7 +124,7 @@
 
 /* EXPENSES AND DONATIONS */
 .Collective-transactions {
-  padding: 6.25rem 0;
+  /* padding: 6.25rem 0;*/
 }
 
 .Collective-emptyState {

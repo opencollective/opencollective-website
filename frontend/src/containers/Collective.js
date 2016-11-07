@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { StickyContainer } from 'react-sticky';
 import { createStructuredSelector } from 'reselect';
 import merge from 'lodash/merge';
+import { pushState } from 'redux-router';
+
 
 // Containers
 import Notification from './Notification';
@@ -22,6 +24,7 @@ import PublicFooter from '../components/PublicFooter';
 import appendDonationForm from '../actions/form/append_donation';
 import appendEditCollectiveForm from '../actions/form/append_edit_collective';
 import appendProfileForm from '../actions/form/append_profile';
+import approveExpense from '../actions/expenses/approve';
 import cancelEditCollectiveForm from '../actions/form/cancel_edit_collective';
 import donate from '../actions/groups/donate'; // TODO: change to collective
 import fetchPendingExpenses from '../actions/expenses/fetch_pending_by_collective';
@@ -30,6 +33,7 @@ import fetchProfile from '../actions/profile/fetch_by_slug';
 import fetchUsers from '../actions/users/fetch_by_group'; // TODO: change to collective
 import getSocialMediaAvatars from '../actions/users/get_social_media_avatars';
 import notify from '../actions/notification/notify';
+import payExpense from '../actions/expenses/pay';
 import updateCollective from '../actions/groups/update'; // TODO: change to collective
 import updateUser from '../actions/users/update';
 import validateSchema from '../actions/form/validate_schema';
@@ -39,6 +43,7 @@ import {
   canEditCollectiveSelector,
   getI18nSelector,
   getPopulatedCollectiveSelector,
+  isHostOfCollectiveSelector,
   hasHostSelector } from '../selectors/collectives';
 import {
   getEditCollectiveFormAttrSelector,
@@ -84,7 +89,12 @@ export class Collective extends Component {
             <EditTopBar onSave={ saveCollective.bind(this) } onCancel={ cancelEditCollectiveForm }/>}
 
           <CollectiveHero { ...this.props } />
-          <CollectiveLedger donateToCollective={ donateToCollective.bind(this) } { ...this.props } />
+          <CollectiveLedger 
+            onDonate={ donateToCollective.bind(this) } 
+            onApprove={ approveExp.bind(this) }
+            onPay={ payExp.bind(this) } 
+            { ...this.props } />
+
           <CollectiveAboutUs { ...this.props } />
           <CollectiveMembers collective={ collective } i18n={ i18n } />
           <CollectiveContributorMosaic contributors={ collective.contributors } i18n={ i18n } />
@@ -187,16 +197,10 @@ export function donateToCollective({amount, frequency, currency, token, options}
   }
 
   return donate(collective.slug, payment, options)
-    .then(() => {
-      // Paypal will redirect to this page and we will refresh at that moment.
-      // A Stripe donation on the other hand is immediate after the request:
-      if (!(options && options.paypal)) {
-        this.setState({
-          showUserForm: !this.props.hasFullAccount,
-          showThankYouMessage: this.props.hasFullAccount
-        });
-      }
-    })
+    .then(() => this.setState({
+        showUserForm: !this.props.hasFullAccount,
+        showThankYouMessage: this.props.hasFullAccount
+      }))
     .catch((err) => notify('error', err.message));
 }
 
@@ -224,6 +228,38 @@ export function saveNewUser() {
     .catch(({message}) => notify('error', message));
 }
 
+/*
+ * Approve expense
+ */
+export function approveExp(expenseId) {
+  const {
+    collective,
+    approveExpense,
+    fetchPendingExpenses
+  } = this.props;
+
+  return approveExpense(collective.id, expenseId)
+    .then(() => fetchPendingExpenses(collective.slug))
+    .catch(({message}) => notify('error', message));
+}
+
+/*
+ * Pay expense
+ */
+export function payExp(expenseId) {
+  const {
+    collective,
+    payExpense,
+    fetchPendingExpenses,
+    fetchTransactions
+  } = this.props;
+
+  return payExpense(collective.id, expenseId)
+    .then(() => fetchPendingExpenses(collective.slug))
+    .then(() => fetchTransactions(collective.slug))
+    .catch(({message}) => notify('error', message));
+}
+
 const mapStateToProps = createStructuredSelector({
     // collective props
     collective: getPopulatedCollectiveSelector,
@@ -239,6 +275,7 @@ const mapStateToProps = createStructuredSelector({
     canEditCollective: canEditCollectiveSelector,
     editCollectiveForm: getEditCollectiveFormAttrSelector,
     editCollectiveInProgress: getEditCollectiveInProgressSelector,
+    isHost: isHostOfCollectiveSelector,
 
     // other props
     isAuthenticated: isSessionAuthenticatedSelector,
@@ -253,6 +290,7 @@ export default connect(mapStateToProps, {
   appendDonationForm,
   appendEditCollectiveForm,
   appendProfileForm,
+  approveExpense,
   cancelEditCollectiveForm,
   donate,
   fetchPendingExpenses,
@@ -261,6 +299,8 @@ export default connect(mapStateToProps, {
   fetchUsers,
   getSocialMediaAvatars,
   notify,
+  payExpense,
+  pushState,
   updateCollective,
   updateUser,
   validateSchema
