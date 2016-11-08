@@ -128,6 +128,10 @@ export default {
     } else {
       req
         .pipe(request(imageUrl))
+        .on('error', (e) => {
+          console.error("error proxying ", imageUrl, e);
+          res.status(500).send(e);
+        })
         .on('response', (res) => {
           res.headers['Cache-Control'] = 'public, max-age=300';
         })
