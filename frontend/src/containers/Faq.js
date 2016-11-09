@@ -30,25 +30,25 @@ export class Faq extends Component {
           <h3>What is an Open Collective?</h3>
           <p>An Open Collective is a group of people with a shared mission that operates in full transparency. Everyone can see how they receive or spend money.</p>
 
-          <h3>What can I do with OpenCollective?</h3>
+          <h3>What can I do with Open Collective?</h3>
           <ul>
             <li>Set up a page to collect membership fees or donations (<a href="https://opencollective.com/RailsGirlsAtl">like this one</a>)</li>
             <li>Let your members submit expenses and reimburse them with a click (<a href="https://opencollective.com/RailsGirlsAtl/expenses/new">example</a>)</li>
             <li>Give everyone visibility on your budget (<a href="https://opencollective.com/RailsGirlsAtl#budget">example</a>)</li>
           </ul>
-          <p>If you have an organization, you can use OpenCollective to empower local chapters to raise money locally and have their own budget. See <a href="#organizations">OpenCollective For Organizations</a>.</p>
+          <p>If you have an organization, you can use Open Collective to empower local chapters to raise money locally and have their own budget. See <a href="#organizations">Open Collective For Organizations</a>.</p>
 
-          <h3>What is OpenCollective good for?</h3>
-          <p>OpenCollective is perfect for any side project that is not for profit. Side projects should be fun. You shouldn't have to worry about creating and maintaining a legal entity, doing bookkeeping, etc. as soon as you need to collect money to reimburse your expenses. OpenCollective is ideal for meetups, open source projects, parent associations, neighborhood associations, clubs, unions, movements, non-profits, business incubators, etc.</p>
+          <h3>What is Open Collective good for?</h3>
+          <p>Open Collective is perfect for any side project that is not for profit. Side projects should be fun. You shouldn't have to worry about creating and maintaining a legal entity, doing bookkeeping, etc. as soon as you need to collect money to reimburse your expenses. Open Collective is ideal for meetups, open source projects, parent associations, neighborhood associations, clubs, unions, movements, non-profits, business incubators, etc.</p>
 
-          <h3>Why should I use OpenCollective?</h3>
-          <p>Open Collective makes it easy to be transparent about your finances. We help you collect money <em>recurringly</em> for your group. Think about funding an ongoing open source software, collecting dues for a parent association or charge a monthly fee for your food coop. Once you have the money on OpenCollective, it’s easy to spend it and everyone can see how it’s being spent. We believe that financial transparency in a group will create stronger and more efficient collaboration among people.</p>
+          <h3>Why should I use Open Collective?</h3>
+          <p>Open Collective makes it easy to be transparent about your finances. We help you collect money <em>recurringly</em> for your group. Think about funding an ongoing open source software, collecting dues for a parent association or charge a monthly fee for your food coop. Once you have the money on Open Collective, it’s easy to spend it and everyone can see how it’s being spent. We believe that financial transparency in a group will create stronger and more efficient collaboration among people.</p>
 
           <h3>How is that different from other crowdfunding platforms?</h3>
           <p>Two major differences:</p>
           <ul>
-            <li>OpenCollective helps you raise money recurringly (e.g. monthly) to finance the activities of your group. That way, you can plan your future activities against your anticipated monthly budget.</li>
-            <li>OpenCollective allows (and encourages) full transparency and accountability of the money raised. Other platforms hand over the money without showing to the backers how their money is used. On OpenCollective, in order to use the money, you submit an expense for everyone to see. We believe transparency leads to healthier organizations.</li>
+            <li>Open Collective helps you raise money recurringly (e.g. monthly) to finance the activities of your group. That way, you can plan your future activities against your anticipated monthly budget.</li>
+            <li>Open Collective allows (and encourages) full transparency and accountability of the money raised. Other platforms hand over the money without showing to the backers how their money is used. On Open Collective, in order to use the money, you submit an expense for everyone to see. We believe transparency leads to healthier organizations.</li>
           </ul>
 
           <h3>How does it work?</h3>
@@ -57,11 +57,11 @@ export class Faq extends Component {
           <h3>How much does it cost?</h3>
           <p>Open Collective takes 10% + credit card fees (usually 3% + $0.30/transaction) of the money raised by the collective for managing their bookkeeping, taxes, and the admin of reimbursing their expenses. We share this commission with the fiscal sponsor (legal owner of the bank account that holds the money on behalf of the collective).</p>
 
-          <h3 id="organizations">What is OpenCollective For Organizations?</h3>
-          <p>OpenCollective for Organizations allows you to empower local chapters to raise money and have their own budget without having to open a separate bank account. No more asking a local sponsor to directly pay for the pizzas! See how <a href="https://opencollective.com/wwcode">Women Who Code uses Open Collective</a>.</p>
+          <h3 id="organizations">What is Open Collective For Organizations?</h3>
+          <p>Open Collective for Organizations allows you to empower local chapters to raise money and have their own budget without having to open a separate bank account. No more asking a local sponsor to directly pay for the pizzas! See how <a href="https://opencollective.com/wwcode">Women Who Code uses Open Collective</a>.</p>
 
           <h4 sstyle="margin-left:40px">How does it work?</h4>
-          <p sstyle="margin-left:40px">OpenCollective sits on top of the Stripe and PayPal account of your organization. It creates virtual groups for each of your chapters. Each have their own dedicated page and independent budget (see for example <a href="https://opencollective.com/wwcodeaustin">Women Who Code Austin</a>). This empowers them to raise money on their own (and you can opt in to keep a percentage for the main organization). Legally speaking, this is the equivalent of acting as a "Fiscal Sponsor".</p>
+          <p sstyle="margin-left:40px">Open Collective sits on top of the Stripe and PayPal account of your organization. It creates virtual groups for each of your chapters. Each have their own dedicated page and independent budget (see for example <a href="https://opencollective.com/wwcodeaustin">Women Who Code Austin</a>). This empowers them to raise money on their own (and you can opt in to keep a percentage for the main organization). Legally speaking, this is the equivalent of acting as a "Fiscal Sponsor".</p>
 
           <h4 sstyle="margin-left:40px">How much does Open collective for Organizations cost?</h4>
           <p sstyle="margin-left:40px">We are currently in private beta. Contact hello@opencollective.com and we'll work with you.</p>
@@ -144,7 +144,7 @@ export class Faq extends Component {
 
           <p>I experienced it first hand when I lead the <a href="http://startupmanifesto.be">Startup Manifesto in Belgium</a>. A grassroots movement to come up with recommendations to the government to “make it suck less” for startups in Belgium. At some point, we wanted to print stickers for a conference but we didn’t have money. Plenty of people were willing to support our cause and make a donation. But in order to accept that money, we would have to create a bank account, which requires first to create a legal entity. We had better things to do. Not to mention that the money would have been collected in a black box where all supporters would have zero visibility. That was against our values. So we just gave up on the idea of collecting money. And <a href="https://twitter.com/xdamman/status/575744358592475136">an existing organization simply paid the stickers for us</a>.</p>
 
-          <p>That’s why I’m building OpenCollective.<br />
+          <p>That’s why I’m building Open Collective.<br />
             I want to empower people to do things together with money. I want to empower people to go build the organizations, movements, associations and institutions of tomorrow in a bottom-up fashion where transparency is built in by design.</p>
 
             <p>– <a href="https://twitter.com/xdamman">Xavier</a>, founder</p>
