@@ -51,8 +51,8 @@ export class HomePage extends Component {
               <use xlinkHref='#svg-logotype' fill='#303233'/>
             </svg>
           </div>
-          <div className='subtitle'>organizing the Internet generation</div>
-          <div className='heading'>We all have something to contribute.</div>
+          <div className='subtitle'>A new form of association, transparent by design</div>
+          <div className='heading'>Open your finances to your community</div>
         </section>
         <section className='HomePageInfo' id='howitworks'>
           <div className='heading'>What is an open collective?</div>
@@ -148,7 +148,7 @@ export class HomePage extends Component {
                 <div className='-graphic -fluid'>
                   <div className='-value'>{formatCurrency(totalAnnualBudget, currency, { compact: true, precision: 0 })}</div>
                 </div>
-                <div className='-heading'>Total annual budget</div>
+                <div className='-heading'>Annual budget</div>
               </div>
             </div>
           </div>

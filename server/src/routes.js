@@ -52,6 +52,10 @@ export default (app) => {
 
     req
       .pipe(request(url, { followRedirect: false }))
+      .on('error', (e) => {
+        console.error("error proxying ", url, e);
+        res.status(500).send(e);
+      })
       .pipe(res);
   });
 
@@ -63,6 +67,10 @@ export default (app) => {
   app.all('/api/*', (req, res) => {
     req
       .pipe(request(apiUrl(req.url), { followRedirect: false }))
+      .on('error', (e) => {
+        console.error("error calling api", apiUrl(req.url), e);
+        res.status(500).send(e);
+      })
       .pipe(res);
   });
 

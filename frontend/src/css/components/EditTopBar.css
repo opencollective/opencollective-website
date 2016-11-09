@@ -1,0 +1,57 @@
+.EditCollective-TopBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  background-color: rgba(0, 0, 0, 0.65);
+  z-index: 99999;
+  padding: 19px 70px 0px;
+  box-sizing: border-box;
+  .EditCollective-TopBar-brand {
+    display: inline-block;
+  } 
+  .EditCollective-TopBar-buttons {
+    display: inline-block;
+    float: right;
+    .EditCollective-TopBar-Button {
+      margin-left: 20px;
+      box-sizing: border-box;
+      display: inline-block;
+      width: 115px;
+      height: 28px;
+      border-radius: 100px;
+      font-family: Montserrat;
+      font-size: 12px;
+      font-weight: bold;
+      color: #ffffff;
+      text-align: center;
+      line-height: 2;
+      &.-disabled {
+        cursor: default;
+        opacity: 0.4;
+      }
+      &:not(.trans) {
+        background-color: #75cc1f;
+        border: solid 2px #75cc1f;
+      }
+      &.trans {
+        opacity: 0.6;
+        border-radius: 100px;
+        border: solid 2px #ffffff;
+      }
+      &:not(.-disabled):hover {
+        opacity: .9;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+@media (max-width: 701px) {
+  .EditCollective-TopBar {
+    .-logo-text {
+      display: none;
+    }
+  }
+}

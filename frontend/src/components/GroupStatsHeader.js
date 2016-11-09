@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import _ from 'lodash';
 
 import formatCurrency from '../lib/format_currency';
 
@@ -10,7 +11,7 @@ export default class GroupStatsHeader extends Component {
 
   render() {
     const { group, i18n } = this.props;
-    group.usersCount = (group.users) ? group.users.length - 1 : group.backersCount;
+    group.usersCount = (group.users) ? _.uniqBy(group.users, 'id').length - 1 : group.backersCount;
 
     const yearlyIncome = group.yearlyIncome;
     const formattedYearlyIncome = yearlyIncome && formatCurrency(yearlyIncome, group.currency, { compact: true, precision: 0 });
