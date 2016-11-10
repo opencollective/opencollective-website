@@ -5,13 +5,13 @@ import * as constants from '../../constants/expenses';
  * Approve a expense in a group
  */
 
-export default (groupid, expenseid) => {
-  const url = `/groups/${groupid}/expenses/${expenseid}/approve`;
+export default (collectiveId, expenseId) => {
+  const url = `/groups/${collectiveId}/expenses/${expenseId}/approve`;
 
   return dispatch => {
-    dispatch(request(groupid, expenseid));
+    dispatch(request(collectiveId, expenseId));
     return postJSON(url, {approved: true})
-      .then(json => dispatch(success(groupid, expenseid, json)))
+      .then(json => dispatch(success(collectiveId, expenseId, json)))
       .catch(error => {
         dispatch(failure(error));
         throw new Error(error.message);
@@ -19,19 +19,19 @@ export default (groupid, expenseid) => {
   };
 };
 
-function request(groupid, expenseid) {
+function request(collectiveId, expenseId) {
   return {
     type: constants.APPROVE_EXPENSE_REQUEST,
-    groupid,
-    expenseid
+    collectiveId,
+    expenseId
   };
 }
 
-function success(groupid, expenseid, json) {
+function success(collectiveId, expenseId, json) {
   return {
     type: constants.APPROVE_EXPENSE_SUCCESS,
-    groupid,
-    expenseid,
+    collectiveId,
+    expenseId,
     response: json,
   };
 }

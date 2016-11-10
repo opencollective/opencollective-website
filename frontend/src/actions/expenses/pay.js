@@ -5,13 +5,13 @@ import * as constants from '../../constants/expenses';
  * Pay a expense
  */
 
-export default (groupid, expenseid) => {
-  const url = `/groups/${groupid}/expenses/${expenseid}/pay`;
+export default (collectiveId, expenseId) => {
+  const url = `/groups/${collectiveId}/expenses/${expenseId}/pay`;
 
   return dispatch => {
-    dispatch(request(groupid, expenseid));
+    dispatch(request(collectiveId, expenseId));
     return postJSON(url, { service: 'paypal' })
-      .then(json => dispatch(success(groupid, expenseid, json)))
+      .then(json => dispatch(success(collectiveId, expenseId, json)))
       .catch(error => {
         dispatch(failure(error));
         throw new Error(error.message);
@@ -19,19 +19,19 @@ export default (groupid, expenseid) => {
   };
 };
 
-function request(groupid, expenseid) {
+function request(collectiveId, expenseId) {
   return {
     type: constants.PAY_EXPENSE_REQUEST,
-    groupid,
-    expenseid
+    collectiveId,
+    expenseId
   };
 }
 
-function success(groupid, expenseid, json) {
+function success(collectiveId, expenseId, json) {
   return {
     type: constants.PAY_EXPENSE_SUCCESS,
-    groupid,
-    expenseid,
+    collectiveId,
+    expenseId,
     json
   };
 }

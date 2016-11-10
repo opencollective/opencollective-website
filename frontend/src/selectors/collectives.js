@@ -9,7 +9,7 @@ import filterCollection from '../lib/filter_collection';
 import { formatGithubContributors } from '../lib/github';
 import { resizeImage } from '../lib/utils'
 
-import { getExpensesSelector } from './expenses';
+import { getUnpaidExpensesSelector } from './expenses';
 import { getTransactionsSelector } from './transactions';
 
 import roles from '../constants/roles';
@@ -94,7 +94,7 @@ export const getPopulatedCollectiveSelector = createSelector(
     getCollectiveMembersSelector,
     getCollectiveBackersSelector,
     getCollectiveContributorsSelector,
-    getExpensesSelector,
+    getUnpaidExpensesSelector,
     getTransactionsSelector ],
     (collective, settings, host, members, backers, contributors, expenses, transactions) =>
       Object.assign(

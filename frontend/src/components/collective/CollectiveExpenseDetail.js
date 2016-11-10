@@ -6,6 +6,9 @@ import { EXPENSE_STATUS } from '../../constants/expenses';
 
 import Currency from '../../components/Currency';
 import ReceiptPreview from '../../components/ReceiptPreview';
+import ApproveButton from '../../components/ApproveButton';
+import RejectButton from '../../components/RejectButton';
+import PayButton from '../../components/PayButton';
 
 
 const CollectiveExpenseDetail = ({ 
@@ -17,7 +20,10 @@ const CollectiveExpenseDetail = ({
   onReject,
   onPay,
   isHost,
-  authenticatedUser
+  authenticatedUser,
+  approveInProgress,
+  rejectInProgress,
+  payInProgress
 }) => {
 
   // compute permissions
@@ -27,8 +33,10 @@ const CollectiveExpenseDetail = ({
 
   // compute which actions to show
   const showApprove = canApproveOrReject && expense.status === EXPENSE_STATUS.PENDING;
-  const showReject = canApproveOrReject && (expense.status === EXPENSE_STATUS.PENDING || expense.status === EXPENSE_STATUS.APPROVED)
+  const showReject = canApproveOrReject && expense.status === EXPENSE_STATUS.PENDING;
   const showPay = canPay && expense.status === EXPENSE_STATUS.APPROVED;
+
+  const updateInProgress = approveInProgress[expense.id] || rejectInProgress[expense.id] || payInProgress[expense.id];
 
   let src, srcSet, href;
 
@@ -72,14 +80,24 @@ const CollectiveExpenseDetail = ({
 
       <div className='ExpenseDetail-actions flex justify-center'>
         {showApprove && 
-          <span className='ExpenseAction align-middle ml1 muted -fw-bold -ttu' onClick={() => onApprove(expense.id)}> Approve </span> }
+          <ApproveButton
+            disabled={updateInProgress}
+            approveExp={onApprove.bind(null, expense.id)}
+            inProgress={approveInProgress[expense.id]}
+            i18n={i18n} />}
+        {showReject && 
+          <RejectButton
+            disabled={updateInProgress}
+            rejectExp={onReject.bind(null, expense.id)}
+            inProgress={rejectInProgress[expense.id]}
+            i18n={i18n} />}
         {showPay && 
-          <span className='ExpenseAction align-middle ml1 muted -fw-bold -ttu' onClick={() => onPay(expense.id)}> Pay </span> }
-        {showReject &&
-          <span className='ExpenseAction align-middle ml1 muted -fw-bold -ttu' onClick={() => onReject(expense.id)}> Reject </span> }
-
+          <PayButton
+            disabled={updateInProgress}
+            payExp={onPay.bind(null, expense.id)}
+            inProgress={payInProgress[expense.id]}
+            i18n={i18n} />}
       </div>
-
     </div>
     )
 };

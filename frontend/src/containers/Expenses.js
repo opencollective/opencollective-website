@@ -33,6 +33,10 @@ import {
 import { 
   isSessionAuthenticatedSelector,
   getAuthenticatedUserSelector } from '../selectors/session';
+import {
+  getApproveInProgressSelector,
+  getRejectInProgressSelector,
+  getPayInProgressSelector } from '../selectors/expenses';
 
 
 export class Expenses extends Component {
@@ -40,10 +44,6 @@ export class Expenses extends Component {
   render() {
     const { 
       collective, 
-      i18n, 
-      canEditCollective, 
-      isHost,
-      authenticatedUser
     } = this.props;
     
     return (
@@ -57,14 +57,11 @@ export class Expenses extends Component {
               key={expense.id}
               collective={ collective }
               expense={ expense }
-              i18n={ i18n }
-              canEditCollective={ canEditCollective }
-              isHost={ isHost }
-              authenticatedUser={ authenticatedUser }
               onApprove={approveExp.bind(this)}
               onReject={rejectExp.bind(this)}
               onPay={payExp.bind(this)}
               onUpdate={updateExp.bind(this)}
+              {...this.props}
               />)}
         <PublicFooter />
       </div>
@@ -162,6 +159,10 @@ const mapStateToProps = createStructuredSelector({
     authenticatedUser: getAuthenticatedUserSelector,
     isAuthenticated: isSessionAuthenticatedSelector,
     isHost: isHostOfCollectiveSelector,
+
+    approveInProgress: getApproveInProgressSelector,
+    rejectInProgress: getRejectInProgressSelector,
+    payInProgress: getPayInProgressSelector,
 
     i18n: getI18nSelector,
     loadData: getAppRenderedSelector,
