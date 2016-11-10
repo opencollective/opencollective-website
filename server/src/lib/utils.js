@@ -20,7 +20,7 @@ export default {
     let size = '';
     if (width) size += `w_${width},`;
     if (height) size += `h_${height},`;
-    if (size === '') size = 'w_320';
+    if (size === '') size = 'w_320,';
 
     const format = (src.match(/\.png$/)) ? 'png' : 'jpg';
 
