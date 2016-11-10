@@ -1,0 +1,114 @@
+.Mosaic {
+	position: relative;
+	min-height: 140px;
+	width: 100%;
+	max-width: 1000px;
+	margin: 1rem auto;
+	box-sizing: border-box;
+}
+
+.Mosaic-container {
+	position: relative;
+	overflow: hidden;
+}
+
+.Mosaic-item {
+	position: relative;
+	display: inline-block;
+	float: left;
+	> a .UserPhoto {
+		background-color: transparent;
+		border: none;
+		box-shadow: none;
+		width: auto;
+		height: auto;
+		&:hover {
+			cursor: pointer;
+		}
+		div {
+			border-radius: 0;
+		}
+	}
+}
+
+.Mosaic-HoverCard {
+	box-sizing: border-box;
+	position: absolute;
+	z-index: 999;
+	min-width: 210px;
+	height: 200px;
+	border-radius: 5px;
+	background-color: white;
+	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.25);
+	top: -200px;
+	left: -90px;
+	padding-top: 20px;
+	padding-bottom: 25px;
+	padding-left: 10px;
+	padding-right: 10px;
+
+	&:after, &:before {
+		top: 100%;
+		left: 50%;
+		border: solid transparent;
+		content: '';
+		height: 0;
+		width: 0;
+		position: absolute;
+		pointer-events: none;
+	}
+
+	&:after {
+		border-color: rgba(136, 183, 213, 0);
+		border-top-color: #fff;
+		border-width: 4px;
+		margin-left: -4px;
+	}
+	&:before {
+		border-color: rgba(0, 0, 0, 0);
+		border-top-color: rgba(0, 0, 0, 0.15);
+		border-width: 5px;
+		margin-left: -5px;
+	}
+
+	.UserPhoto {
+		margin: 10px auto;
+	}
+}
+
+.HoverCard-name {
+	font-family: Montserrat;
+	font-size: 17px;
+	color: #46b0ed;
+	font-weight: bold;
+}
+
+.HoverCard-tier {
+  min-height: 13px;
+  font-family: Montserrat;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: #75cc1f;
+  text-transform: uppercase;
+}
+
+.HoverCard-since {
+  font-family: Lato;
+  font-size: 14px;
+  color: #919699;
+}
+
+.HoverCard-stats {
+	font-family: Lato;
+	font-size: 12px;
+	color: #bbc1c4;
+	margin-top: 6px;
+	.-add {
+		color: rgb(110, 202, 64);
+	}
+	.-del {
+		color: rgb(195, 49, 7);
+	}
+}
+

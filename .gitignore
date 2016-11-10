@@ -1,6 +1,7 @@
 .env
 
 .DS_Store
+yarn.lock
 .idea/
 
 # Visual Studio Code
