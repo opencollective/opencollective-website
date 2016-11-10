@@ -8,7 +8,7 @@ export default class CollectiveTransactions extends React.Component {
       users,
       collective,
       i18n,
-      itemsToShow = 10
+      itemsToShow = 5
     } = this.props;
 
     const emptyState = (

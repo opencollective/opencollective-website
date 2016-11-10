@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
 import UnpaidExpenseItem from './UnpaidExpenseItem';
-import ExpenseItem from '../../components/ExpenseItem';
 
 const DEFAULT_EXPENSES_TO_SHOW = 3;
 
@@ -60,9 +59,18 @@ export default class CollectivePendingExpenses extends React.Component {
       showAllButton
     } = this.state
 
-    if (collective.expenses.length === 0) {
-      return (<div/>);
-    }
+    const emptyState = (
+      <div className='center'>
+        <div className='PublicGroup-emptyState-image flex items-center justify-center'>
+          <img width='111' height='151'
+            src='/static/images/collectives/expenses-empty-state-image.jpg'
+            srcSet='/static/images/collectives/expenses-empty-state-image@2x.jpg 2x'/>
+        </div>
+        <p className='h3 -fw-bold'>{i18n.getString('expensesPlaceholderTitle')}</p>
+        <p className='h5 muted mb3'>{i18n.getString('expensesPlaceholderText')}</p>
+        <Link className='-btn -btn-medium -btn-outline -border-green -ff-sec -fw-bold -ttu' to={`/${collective.slug}/expenses/new`}>{i18n.getString('submitExpense')}</Link>
+      </div>
+    );
 
     return (
       <div className='CollectivePendingExpenses col col-12 mb3'>
@@ -70,17 +78,20 @@ export default class CollectivePendingExpenses extends React.Component {
           <h4 className='Collective-title left m0 -fw-bold'>{i18n.getString('unpaidExpenses')}</h4>
           <Link className='right mt1 -btn -btn-micro -btn-outline -border-green -fw-bold -ttu' to={`/${collective.slug}/expenses/new`}>{i18n.getString('submitExpense')}</Link>
         </div>
+        {collective.expenses.length === 0 && emptyState}
+
         <div className='Collective-transactions-list'>
           {collective.expenses
             .slice(0, itemsToShow)
             .map(expense => 
-              <ExpenseItem 
+              <UnpaidExpenseItem 
                 key={`cl_${expense.id}`} 
                 expense={expense} 
                 user={users[expense.UserId]} 
                 className='mb2' 
                 i18n={i18n} 
                 canEditCollective={ canEditCollective }
+                collective={collective}
                 onApprove={ onApprove }
                 onPay={ onPay }
                 isHost={ isHost } />)}

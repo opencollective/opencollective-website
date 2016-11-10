@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default ({href, src, label=''}) => {
+export default ({href, src, srcSet, label=''}) => {
   
   if (src.match(/\.pdf$/)) {
     src = '/static/images/mime-pdf.png';
@@ -9,7 +9,7 @@ export default ({href, src, label=''}) => {
   return (
     <a href={href}>
       <div>
-        <img src={src} />
+        <img src={src} srcSet={srcSet}/>
         <label>{label}</label>
       </div>
     </a>

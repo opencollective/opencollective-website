@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import { StickyContainer } from 'react-sticky';
 import { createStructuredSelector } from 'reselect';
 import merge from 'lodash/merge';
-import { pushState } from 'redux-router';
-
 
 // Containers
 import Notification from './Notification';
@@ -12,6 +10,7 @@ import Notification from './Notification';
 // Components
 import CollectiveAboutUs from '../components/collective/CollectiveAboutUs';
 import CollectiveContributorMosaic from '../components/collective/CollectiveContributorMosaic';
+import CollectiveDonate from '../components/collective/CollectiveDonate';
 import CollectiveHero from '../components/collective/CollectiveHero';
 import CollectiveLedger from '../components/collective/CollectiveLedger';
 import CollectiveMembers from '../components/collective/CollectiveMembers';
@@ -24,7 +23,6 @@ import PublicFooter from '../components/PublicFooter';
 import appendDonationForm from '../actions/form/append_donation';
 import appendEditCollectiveForm from '../actions/form/append_edit_collective';
 import appendProfileForm from '../actions/form/append_profile';
-import approveExpense from '../actions/expenses/approve';
 import cancelEditCollectiveForm from '../actions/form/cancel_edit_collective';
 import donate from '../actions/groups/donate'; // TODO: change to collective
 import fetchPendingExpenses from '../actions/expenses/fetch_pending_by_collective';
@@ -33,7 +31,6 @@ import fetchProfile from '../actions/profile/fetch_by_slug';
 import fetchUsers from '../actions/users/fetch_by_group'; // TODO: change to collective
 import getSocialMediaAvatars from '../actions/users/get_social_media_avatars';
 import notify from '../actions/notification/notify';
-import payExpense from '../actions/expenses/pay';
 import updateCollective from '../actions/groups/update'; // TODO: change to collective
 import updateUser from '../actions/users/update';
 import validateSchema from '../actions/form/validate_schema';
@@ -77,7 +74,8 @@ export class Collective extends Component {
       collective,
       editCollectiveInProgress,
       cancelEditCollectiveForm,
-      i18n
+      i18n,
+      hasHost
     } = this.props;
 
     return (
@@ -89,11 +87,9 @@ export class Collective extends Component {
             <EditTopBar onSave={ saveCollective.bind(this) } onCancel={ cancelEditCollectiveForm }/>}
 
           <CollectiveHero { ...this.props } />
-          <CollectiveLedger 
-            onDonate={ donateToCollective.bind(this) } 
-            onApprove={ approveExp.bind(this) }
-            onPay={ payExp.bind(this) } 
-            { ...this.props } />
+          <CollectiveLedger { ...this.props } />
+
+          {hasHost && <CollectiveDonate onDonate={ donateToCollective.bind(this) } { ...this.props }/>}
 
           <CollectiveAboutUs { ...this.props } />
           <CollectiveMembers collective={ collective } i18n={ i18n } />
@@ -228,38 +224,6 @@ export function saveNewUser() {
     .catch(({message}) => notify('error', message));
 }
 
-/*
- * Approve expense
- */
-export function approveExp(expenseId) {
-  const {
-    collective,
-    approveExpense,
-    fetchPendingExpenses
-  } = this.props;
-
-  return approveExpense(collective.id, expenseId)
-    .then(() => fetchPendingExpenses(collective.slug))
-    .catch(({message}) => notify('error', message));
-}
-
-/*
- * Pay expense
- */
-export function payExp(expenseId) {
-  const {
-    collective,
-    payExpense,
-    fetchPendingExpenses,
-    fetchTransactions
-  } = this.props;
-
-  return payExpense(collective.id, expenseId)
-    .then(() => fetchPendingExpenses(collective.slug))
-    .then(() => fetchTransactions(collective.slug))
-    .catch(({message}) => notify('error', message));
-}
-
 const mapStateToProps = createStructuredSelector({
     // collective props
     collective: getPopulatedCollectiveSelector,
@@ -288,7 +252,6 @@ export default connect(mapStateToProps, {
   appendDonationForm,
   appendEditCollectiveForm,
   appendProfileForm,
-  approveExpense,
   cancelEditCollectiveForm,
   donate,
   fetchPendingExpenses,
@@ -297,8 +260,6 @@ export default connect(mapStateToProps, {
   fetchUsers,
   getSocialMediaAvatars,
   notify,
-  payExpense,
-  pushState,
   updateCollective,
   updateUser,
   validateSchema

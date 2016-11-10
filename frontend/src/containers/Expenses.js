@@ -7,16 +7,18 @@ import Notification from './Notification';
 import LoginTopBar from './LoginTopBar';
 
 // components
-import CollectiveLedger from '../components/collective/CollectiveLedger';
 import CollectiveExpenseDetail from '../components/collective/CollectiveExpenseDetail';
 import PublicFooter from '../components/PublicFooter';
 
 // actions
+import approveExpense from '../actions/expenses/approve';
 import fetchPendingExpenses from '../actions/expenses/fetch_pending_by_collective';
 import fetchTransactions from '../actions/transactions/fetch_by_collective';
 import fetchProfile from '../actions/profile/fetch_by_slug';
 import fetchUsers from '../actions/users/fetch_by_group'; // TODO: change to collective
 import notify from '../actions/notification/notify';
+import payExpense from '../actions/expenses/pay';
+import rejectExpense from '../actions/expenses/reject';
 import validateSchema from '../actions/form/validate_schema';
 
 // Selectors
@@ -28,13 +30,22 @@ import {
 import { getAppRenderedSelector } from '../selectors/app';
 import { 
   getUsersSelector } from '../selectors/users';
-import { isSessionAuthenticatedSelector } from '../selectors/session';
+import { 
+  isSessionAuthenticatedSelector,
+  getAuthenticatedUserSelector } from '../selectors/session';
 
 
 export class Expenses extends Component {
 
   render() {
-    const { collective, i18n, canEditCollective, isHost } = this.props;
+    const { 
+      collective, 
+      i18n, 
+      canEditCollective, 
+      isHost,
+      authenticatedUser
+    } = this.props;
+    
     return (
       <div className='Collective'>
         <LoginTopBar />
@@ -49,6 +60,11 @@ export class Expenses extends Component {
               i18n={ i18n }
               canEditCollective={ canEditCollective }
               isHost={ isHost }
+              authenticatedUser={ authenticatedUser }
+              onApprove={approveExp.bind(this)}
+              onReject={rejectExp.bind(this)}
+              onPay={payExp.bind(this)}
+              onUpdate={updateExp.bind(this)}
               />)}
         <PublicFooter />
       </div>
@@ -76,24 +92,91 @@ export class Expenses extends Component {
   }
 }
 
+/*
+ * Approve expense
+ */
+export function approveExp(expenseId) {
+  const {
+    collective,
+    approveExpense,
+    fetchPendingExpenses
+  } = this.props;
+
+  return approveExpense(collective.id, expenseId)
+    .then(() => fetchPendingExpenses(collective.slug))
+    .catch(({message}) => notify('error', message));
+}
+
+/*
+ * Reject expense
+ */
+export function rejectExp(expenseId) {
+  const {
+    collective,
+    rejectExpense,
+    fetchPendingExpenses
+  } = this.props;
+
+  return rejectExpense(collective.id, expenseId)
+    .then(() => fetchPendingExpenses(collective.slug))
+    .catch(({message}) => notify('error', message));
+}
+
+/*
+ * Pay expense
+ */
+export function payExp(expenseId) {
+  const {
+    collective,
+    payExpense,
+    fetchPendingExpenses,
+    fetchTransactions
+  } = this.props;
+
+  return payExpense(collective.id, expenseId)
+    .then(() => fetchPendingExpenses(collective.slug))
+    .then(() => fetchTransactions(collective.slug))
+    .catch(({message}) => notify('error', message));
+}
+
+/*
+ * Update expense
+ */
+export function updateExp(expenseId) {
+  const {
+    collective,
+    approveExpense,
+    fetchPendingExpenses
+  } = this.props;
+
+  return approveExpense(collective.id, expenseId)
+    .then(() => fetchPendingExpenses(collective.slug))
+    .catch(({message}) => notify('error', message));
+}
+
 const mapStateToProps = createStructuredSelector({
     // collective props
     collective: getPopulatedCollectiveSelector,
 
     canEditCollective: canEditCollectiveSelector,
+    authenticatedUser: getAuthenticatedUserSelector,
     isAuthenticated: isSessionAuthenticatedSelector,
     isHost: isHostOfCollectiveSelector,
+
     i18n: getI18nSelector,
     loadData: getAppRenderedSelector,
     users: getUsersSelector
   });
 
 export default connect(mapStateToProps, {
+  approveExpense,
   fetchPendingExpenses,
   fetchTransactions,
   fetchProfile,
   fetchUsers,
   notify,
+  payExpense,
+  rejectExpense,
   validateSchema
 })(Expenses);
 

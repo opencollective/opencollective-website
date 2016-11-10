@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
-import EXPENSE_ICONS from '../../constants/expense_icons';
+import { Link } from 'react-router';
+
 import Currency from '../Currency';
 import { EXPENSE_STATUS } from '../../constants/expenses';
 
@@ -8,11 +9,12 @@ const UnpaidExpenseItem = ({
   expense, 
   user, 
   i18n, 
-  canEditCollective, 
-  onApprove,
-  onPay,
+  canEditCollective,
+  collective,
   isHost
 }) => {
+
+  const canApprove = canEditCollective || isHost;
   
   return (
     <div className={`UnpaidExpenseItem flex flex-column overflow-hidden border p2 ${className}`}>
@@ -23,17 +25,21 @@ const UnpaidExpenseItem = ({
       <div className='h3 -ff-sec'>
         <Currency value={expense.amount} currency={expense.currency} colorify={false} />
       </div>
-      <div className='-ff-sec border-top flex'>
-        {!canEditCollective && expense.status === EXPENSE_STATUS.PENDING && 
-          <span className='ml1 muted -fw-bold -ttu'> Awaiting approval </span>}
-        {canEditCollective && expense.status === EXPENSE_STATUS.PENDING && 
-          <span className='ExpenseAction align-middle ml1 muted -fw-bold -ttu' onClick={() => onApprove(expense.id)}> Approve/Reject </span> }
-        {!isHost && expense.status === EXPENSE_STATUS.APPROVED && 
-          <span className='ExpenseAction align-middle ml1 muted -fw-bold -ttu'> Awaiting payment </span> }
+      <Link to={`${collective.slug}/all_expenses`}>
+        <div className='-ff-sec border-top flex'>
+          {canApprove && expense.status === EXPENSE_STATUS.PENDING && 
+            <span className='ExpenseAction align-middle ml1 muted -fw-bold -ttu'> Approve/Reject > </span> }
+            
+          {!canApprove && expense.status === EXPENSE_STATUS.PENDING && 
+            <span className='ml1 muted -fw-bold -ttu'> Awaiting approval </span>}
+          
+          {!isHost && expense.status === EXPENSE_STATUS.APPROVED && 
+            <span className='ExpenseAction align-middle ml1 muted -fw-bold -ttu'> Awaiting payment </span> }
 
-        {isHost && expense.status === EXPENSE_STATUS.APPROVED && 
-          <span className='ExpenseAction align-middle ml1 muted -fw-bold -ttu' onClick={() => onPay(expense.id)}> Pay </span> }
-      </div>
+          {isHost && expense.status === EXPENSE_STATUS.APPROVED && 
+            <span className='ExpenseAction align-middle ml1 muted -fw-bold -ttu'> Pay </span> }
+        </div>
+      </Link>
     </div>
   );
 };
