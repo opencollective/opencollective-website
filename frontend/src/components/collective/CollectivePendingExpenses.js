@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import UnpaidExpenseItem from './UnpaidExpenseItem';
+import ExpenseItem from '../../components/ExpenseItem';
 
 const DEFAULT_EXPENSES_TO_SHOW = 3;
 
@@ -73,7 +74,7 @@ export default class CollectivePendingExpenses extends React.Component {
           {collective.expenses
             .slice(0, itemsToShow)
             .map(expense => 
-              <UnpaidExpenseItem 
+              <ExpenseItem 
                 key={`cl_${expense.id}`} 
                 expense={expense} 
                 user={users[expense.UserId]} 
