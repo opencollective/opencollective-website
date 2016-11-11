@@ -1,8 +1,8 @@
 .Mosaic {
 	position: relative;
 	min-height: 140px;
-	width: 100%;
 	max-width: 1000px;
+	width: 100%;
 	margin: 1rem auto;
 	box-sizing: border-box;
 }
@@ -10,6 +10,7 @@
 .Mosaic-container {
 	position: relative;
 	overflow: hidden;
+	display: inline-block;
 }
 
 .Mosaic-item {

@@ -6,7 +6,8 @@ export function formatGithubContributors(githubContributors) {
     const commits = githubContributors[username];
     return {
       core: false,
-      name: username,
+      username,
+      tier: 'contributor',
       avatar: `https://avatars.githubusercontent.com/${ username }?s=64`,
       href: `https://github.com/${username}`,
       stats: {

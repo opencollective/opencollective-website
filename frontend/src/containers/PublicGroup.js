@@ -72,8 +72,9 @@ const formatGithubContributors = (githubContributors) => {
     const commits = githubContributors[username];
     return {
       core: false,
-      name: username,
-      avatar: `https://avatars.githubusercontent.com/${ username }?s=64`,
+      username,
+      tier: 'contributor',
+      avatar: `https://avatars.githubusercontent.com/${username}?s=64`,
       href: `https://github.com/${username}`,
       stats: {
         c: commits,
@@ -123,7 +124,7 @@ export class PublicGroup extends Component {
           {group.slug === 'opensource' && <PublicGroupOpenSourceCTA />}
 
           {group.members.length > 0 && <PublicGroupMembersWall group={group} {...this.props} />}
-          {group.contributors && <PublicGroupContributors contributors={ group.contributors } i18n={i18n} />}
+          {group.contributors && <PublicGroupContributors group={group} i18n={i18n} />}
 
           {hasHost && group.whyJoin && <PublicGroupWhyJoin group={ group } {...this.props} />}
 

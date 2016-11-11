@@ -2,6 +2,7 @@ import mocks from '../data/mocks.json'; // eslint-disable-line
 import request from 'supertest';
 import sinon from 'sinon';
 import sizeOf from 'image-size';
+import { expect } from 'chai';
 
 import api from '../../server/src/lib/api';
 import app from '../../server/src/index';
@@ -158,7 +159,7 @@ describe("banner", () => {
         res.body = { firstLine };
       })
       .expect({
-        firstLine: '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="414" height="74">'
+        firstLine: '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="281" height="74">'
       })
       .expect(200, done);
   });
@@ -172,7 +173,7 @@ describe("banner", () => {
         res.body = { contentLength: Number(res.headers['content-length']) };
       })
       .expect({
-        contentLength: 25518
+        contentLength: 20921
       })
       .expect(200, done);
   });
@@ -187,7 +188,7 @@ describe("banner", () => {
         res.body = { firstLine };
       })
       .expect({
-        firstLine: '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="504" height="104">'
+        firstLine: '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="356" height="104">'
       })
       .expect(200, done);
   });
@@ -202,25 +203,20 @@ describe("banner", () => {
         res.body = { firstLine };
       })
       .expect({
-        firstLine: '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="212">'
+        firstLine: '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="143">'
       })
       .expect(200, done);
   });
 
-  it('has target blank on the links', done => {
+  it('has target blank on the links', (done) => {
     request(app)
       .get('/yeoman/backers.svg')
       .expect('content-type', 'image/svg+xml; charset=utf-8')
-      .expect(res => {
+      .expect(200)
+      .end((err, res) => {
         const svg = new Buffer(res.body).toString('utf8');
-        const links = svg.match(/<a([^>]+)>/g);
-        res.body = { links: links.filter(l => l.match(/apple.com/)) };
+        expect(svg).to.contain(`target="_blank"`);
+        done();
       })
-      .expect({
-        links: [
-          '<a xlink:href="http://apple.com?utm_source=oc&amp;utm_campaign=opensource" target="_blank">'
-        ]
-      })
-      .expect(200, done);
   });
 })

@@ -3,16 +3,33 @@ import api from './lib/api';
 import expressSession from 'express-session';
 import ua from 'universal-analytics';
 import filterCollection from '../../frontend/src/lib/filter_collection';
+import { filterUsers } from './lib/utils';
 
 /**
  * Fetch users by slug
  */
 const fetchActiveUsers = (options) => {
   return (req, res, next) => {
-    api
-      .get(`/groups/${req.params.slug}/users?filter=active`, options)
+
+    const filters = {
+      tier: req.params.tier,
+      exclude: req.query.exclude,
+      requireAvatar: req.query.requireAvatar !== 'false' // by default, we skip users without avatar
+    };
+
+    let fetchUsers;
+    switch (filters.tier) {
+      case 'contributors':
+        fetchUsers = api.get(`/groups/${req.params.slug.toLowerCase()}/`).then(group => group.data.githubContributors);
+        break;
+      default:
+        fetchUsers = api.get(`/groups/${req.params.slug}/users?filter=active`, options);
+        break;
+    }
+
+    fetchUsers
       .then((users) => {
-        req.users = users;
+        req.users = filterUsers(users, filters);
       })
       .then(next)
       .catch(next); // make sure we return 404 if group doesn't exist
@@ -182,6 +199,7 @@ export default {
   addTitle,
   cache,
   fetchGroupBySlug,
+  filterUsers,
   extractGithubUsernameFromToken,
   fetchActiveUsers,
   ga,
