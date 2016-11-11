@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 // Containers
 import Notification from './Notification';
@@ -47,22 +48,27 @@ export class Expenses extends Component {
     } = this.props;
     
     return (
-      <div className='Collective'>
+      <div>
         <LoginTopBar />
         <Notification />
-        <h2> {collective.name} </h2>
-        {collective.expenses
-          .map(expense => 
-            <CollectiveExpenseDetail 
-              key={expense.id}
-              collective={ collective }
-              expense={ expense }
-              onApprove={approveExp.bind(this)}
-              onReject={rejectExp.bind(this)}
-              onPay={payExp.bind(this)}
-              onUpdate={updateExp.bind(this)}
-              {...this.props}
-              />)}
+        <div className='bg-gray pt2'>
+          <h2 className='center'> Unpaid expenses for <Link to={`/${collective.slug}`}> {collective.name} </Link> </h2>
+          
+          <div className='flex flex-column justify-center bg-gray'>
+            {collective.expenses
+              .map(expense => 
+                <CollectiveExpenseDetail 
+                  key={expense.id}
+                  collective={ collective }
+                  expense={ expense }
+                  onApprove={approveExp.bind(this)}
+                  onReject={rejectExp.bind(this)}
+                  onPay={payExp.bind(this)}
+                  onUpdate={updateExp.bind(this)}
+                  {...this.props}
+                  />)}
+          </div>
+        </div>
         <PublicFooter />
       </div>
     );

@@ -52,11 +52,11 @@ const CollectiveExpenseDetail = ({
   
  
   return (
-    <div className='ExpenseDetail mb2 flex flex-column'>
+    <div className='CollectiveExpenseDetail mx-auto mb2 flex flex-column bg-white col-6 border-white rounded'>
 
-      <div className='ExpenseDetail-top flex'>
+      <div className='CollectiveExpenseDetail-top flex'>
       
-        <div className='ExpenseDetail-image max-width-1'>
+        <div className='CollectiveExpenseDetail-image max-width-1'>
           <ReceiptPreview
             src={src}
             srcSet={srcSet}
@@ -64,9 +64,9 @@ const CollectiveExpenseDetail = ({
           />
         </div>
 
-        <div className='ExpenseDetail-info flex flex-column'>
+        <div className='CollectiveExpenseDetail-info flex flex-column'>
           <span className=''>{ expense.title }</span>
-           <div className='ExpenseDetail-category'>
+           <div className='CollectiveExpenseDetail-category'>
             {expense.category}
           </div>
           <p className='h3'>
@@ -78,7 +78,7 @@ const CollectiveExpenseDetail = ({
         </div>
       </div>
 
-      <div className='ExpenseDetail-actions flex justify-center'>
+      <div className='CollectiveExpenseDetail-actions flex justify-center'>
         {showApprove && 
           <ApproveButton
             disabled={updateInProgress}

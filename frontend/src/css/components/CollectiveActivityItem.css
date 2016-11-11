@@ -4,25 +4,3 @@
   min-width: 2rem;
   box-shadow: 0 0 0 1px var(--gray);
 }
-
-/*
-.CollectiveActivityItem-bubble::before,
-.CollectiveActivityItem-bubble::after {
-  content: '';
-  position: absolute;
-  top: 1rem;
-  border-width: 7px;
-  border-style: solid;
-  border-color: transparent;
-}
-
-.CollectiveActivityItem-bubble::before {
-  left: -15px;
-  border-right-color: rgba(48,50,51,.2);
-}
-
-.CollectiveActivityItem-bubble::after {
-  left: -14px;
-  border-right-color: #FFFFFF;
-}
-*/

@@ -26,18 +26,20 @@ const UnpaidExpenseItem = ({
         <Currency value={expense.amount} currency={expense.currency} colorify={false} />
       </div>
       <Link to={`${collective.slug}/all_expenses`}>
-        <div className='-ff-sec border-top flex'>
+        <div className='-ff-sec border-top flex justify-end'>
           {canApprove && expense.status === EXPENSE_STATUS.PENDING && 
             <span className='ExpenseAction align-middle ml1 muted -fw-bold -ttu'> Approve/Reject > </span> }
             
           {!canApprove && expense.status === EXPENSE_STATUS.PENDING && 
-            <span className='ml1 muted -fw-bold -ttu'> Awaiting approval </span>}
-          
-          {!isHost && expense.status === EXPENSE_STATUS.APPROVED && 
-            <span className='ExpenseAction align-middle ml1 muted -fw-bold -ttu'> Awaiting payment </span> }
+            <span className='ml1 muted -fw-bold'> Awaiting approval </span>}
 
           {isHost && expense.status === EXPENSE_STATUS.APPROVED && 
-            <span className='ExpenseAction align-middle ml1 muted -fw-bold -ttu'> Pay </span> }
+            <span className='ExpenseAction align-middle ml1 muted -fw-bold -ttu'> Pay > </span> }
+
+          {!isHost && expense.status === EXPENSE_STATUS.APPROVED && 
+            <span className='ExpenseAction align-middle ml1 muted -fw-bold'> Awaiting payment </span> }
+
+
         </div>
       </Link>
     </div>

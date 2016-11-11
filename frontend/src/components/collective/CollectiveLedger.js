@@ -18,7 +18,7 @@ export default class CollectiveLedger extends Component {
             <div className='CollectiveLedgerAvailableFunds clearfix border-bottom border-gray pb2 mb3 flex justify-between'>
               <h3 className='Collective-title m0 -fw-bold flex-auto'>{i18n.getString('fundsAvailable')}: </h3>
               <p className='h3 m0 -ff-sec right-align'> 
-                <Currency value={ collective.balance } currency={ collective.currency } />
+                <Currency value={ collective.balance } currency={ collective.currency } precision={ 2 } />
               </p>
             </div>
             <CollectiveTransactions {...this.props} />

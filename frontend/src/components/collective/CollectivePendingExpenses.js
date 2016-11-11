@@ -10,8 +10,7 @@ export default class CollectivePendingExpenses extends React.Component {
 
     this.state = {
       itemsToShow: DEFAULT_EXPENSES_TO_SHOW,
-      showMoreButton: false,
-      showAllButton: false
+      showMoreButton: false
     }
     this.state = Object.assign({}, this.state, this.getStateBasedOnProps(this.props));
   }
@@ -24,10 +23,7 @@ export default class CollectivePendingExpenses extends React.Component {
     const expenses = currentProps.collective.expenses;
     const itemsToShow = this.state.itemsToShow;
     return {
-      // Enable showMore button when there are more than default expenses
-      showMoreButton: expenses.length > this.state.itemsToShow,
-      // Enable showAll button when showMore has been clicked once
-      showAllButton: itemsToShow > DEFAULT_EXPENSES_TO_SHOW
+      showMoreButton: expenses.length > itemsToShow,
     }
   }
 
@@ -38,7 +34,6 @@ export default class CollectivePendingExpenses extends React.Component {
     this.setState({
       itemsToShow: itemsToShow + DEFAULT_EXPENSES_TO_SHOW,
       showMoreButton: expenses.length > itemsToShow + DEFAULT_EXPENSES_TO_SHOW,
-      showAllButton: expenses.length > itemsToShow + DEFAULT_EXPENSES_TO_SHOW
     });
   }
 
@@ -100,7 +95,7 @@ export default class CollectivePendingExpenses extends React.Component {
         { showMoreButton && 
           <span className='-btn -btn-medium -btn-outline -border-green -ttu -fw-bold' onClick={ ::this.showMore }> {i18n.getString('showMore')} </span> }
 
-        { showAllButton && (
+        { collective.expenses.length > 0 && (
           <span className='right'>
             <Link className='-btn -btn-medium -btn-outline -border-green -ttu -fw-bold' to={`/${collective.slug}/expenses`}>
               {i18n.getString('seeAll')} >
