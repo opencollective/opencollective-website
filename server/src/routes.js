@@ -52,6 +52,10 @@ export default (app) => {
 
     req
       .pipe(request(url, { followRedirect: false }))
+      .on('error', (e) => {
+        console.error("error proxying ", url, e);
+        res.status(500).send(e);
+      })
       .pipe(res);
   });
 
@@ -63,6 +67,10 @@ export default (app) => {
   app.all('/api/*', (req, res) => {
     req
       .pipe(request(apiUrl(req.url), { followRedirect: false }))
+      .on('error', (e) => {
+        console.error("error calling api", apiUrl(req.url), e);
+        res.status(500).send(e);
+      })
       .pipe(res);
   });
 
@@ -92,7 +100,7 @@ export default (app) => {
    * When we refactor PublicGroup to fetch the group in the container, we can remove
    * the explicit routes and just do `app.use(render)`
    */
-  app.get('/', mw.ga, mw.addTitle('OpenCollective - Collect and disburse money transparently'), controllers.homepage, render);
+  app.get('/', mw.ga, mw.addTitle('OpenCollective - A New Form of Association, Transparent by Design'), controllers.homepage, render);
   app.get('/about', mw.ga, mw.addTitle('About'), render);
   app.get('/discover/:tag?', mw.ga, mw.addTitle('Discover'), render);
   app.get('/faq', mw.ga, mw.addTitle('Answers'), render);

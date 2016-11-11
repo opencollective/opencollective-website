@@ -112,7 +112,7 @@ export class HomePage extends Component {
         <MailChimpInputSection mcListId='14d6233180' />
         <section className='HomePageSponsors blue-gradient' id='sponsors'>
           <div className='heading'>Sponsors</div>
-          <div className='subheading'>Collectives do amazing things for their communities thanks to these awesome sponsors.</div>
+          <div className='subheading'>Great companies support great collectives with ❤️</div>
           <div className='cards'>
             {sponsors.map(sponsor => <CollectiveCard
               key={sponsor.id}
@@ -123,7 +123,7 @@ export class HomePage extends Component {
             />)}
           </div>
           <div className='cta'>
-            <div className='text'>Become a sponsor and reach out to the right communities</div>
+            <div className='text'>Become a sponsor and support your community</div>
             <div className='button color-green' onClick={() => this.setState({showSponsorMailInput: !showSponsorMailInput})}>become a sponsor</div>
           </div>
         </section>

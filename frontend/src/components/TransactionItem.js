@@ -30,5 +30,5 @@ export default ({transaction, user, precision=0}) => {
 }
 
 function getAmount(transaction) {
-  return transaction.amount;
+  return transaction.amount * 100;
 }
