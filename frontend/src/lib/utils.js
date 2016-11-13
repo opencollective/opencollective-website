@@ -57,3 +57,16 @@ export function getGroupCustomStyles(group) {
   }
   return merge({}, styles, group.settings.style);
 }
+
+// Hack because react-router doesn't scroll
+export function scrollToExpense() {
+  const hash = window.location.hash;
+  if (window.location.hash) {
+    const element = document.querySelector(hash);
+    if (element) {
+      element.scrollIntoView();
+    }
+  } else {
+   window.scrollTo(0, 0);
+  }
+}

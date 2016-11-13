@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router';
+
+import ExpenseEmptyState from '../ExpenseEmptyState';
 import UnpaidExpenseItem from './UnpaidExpenseItem';
+
 
 const DEFAULT_EXPENSES_TO_SHOW = 3;
 
@@ -42,38 +45,28 @@ export default class CollectivePendingExpenses extends React.Component {
       users,
       collective,
       i18n,
-      canEditCollective,
-      onApprove,
-      onPay,
-      isHost
+      push
     } = this.props;
 
     const {
       itemsToShow,
-      showMoreButton,
-      showAllButton
+      showMoreButton
     } = this.state
 
-    const emptyState = (
-      <div className='center'>
-        <div className='PublicGroup-emptyState-image flex items-center justify-center'>
-          <img width='111' height='151'
-            src='/static/images/collectives/expenses-empty-state-image.jpg'
-            srcSet='/static/images/collectives/expenses-empty-state-image@2x.jpg 2x'/>
-        </div>
-        <p className='h3 -fw-bold'>{i18n.getString('expensesPlaceholderTitle')}</p>
-        <p className='h5 muted mb3'>{i18n.getString('expensesPlaceholderText')}</p>
-        <Link className='-btn -btn-medium -btn-outline -border-green -ff-sec -fw-bold -ttu' to={`/${collective.slug}/expenses/new`}>{i18n.getString('submitExpense')}</Link>
-      </div>
-    );
 
     return (
       <div className='CollectivePendingExpenses col col-12 mb3'>
         <div className='clearfix border-bottom border-gray pb2 mb3'>
           <h4 className='Collective-title left m0 -fw-bold'>{i18n.getString('unpaidExpenses')}</h4>
-          <Link className='right mt1 -btn -btn-micro -btn-outline -border-green -fw-bold -ttu' to={`/${collective.slug}/expenses/new`}>{i18n.getString('submitExpense')}</Link>
+          <Link className='right mt1 -btn -btn-micro -btn-outline -border-green -fw-bold -ttu' 
+            to={`/${collective.slug}/expenses/new`}>
+            {i18n.getString('submitExpense')}
+          </Link>
         </div>
-        {collective.expenses.length === 0 && emptyState}
+        {collective.expenses.length === 0 && 
+          <div>
+            <ExpenseEmptyState i18n={i18n} />
+          </div>}
 
         <div className='Collective-transactions-list'>
           {collective.expenses
@@ -85,11 +78,8 @@ export default class CollectivePendingExpenses extends React.Component {
                 user={users[expense.UserId]} 
                 className='mb2' 
                 i18n={i18n} 
-                canEditCollective={ canEditCollective }
                 collective={collective}
-                onApprove={ onApprove }
-                onPay={ onPay }
-                isHost={ isHost } />)}
+                push={ push } />)}
         </div>
         <div className='flex justify-around'>
         { showMoreButton && 

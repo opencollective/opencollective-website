@@ -1,0 +1,101 @@
+body {
+	overflow-x: hidden;
+}
+
+.Ledger {
+	background-color: rgb(245, 246, 247);
+	.LoginTopBar {
+		background-color: white;
+	}
+	.ExpenseItem {
+		margin-bottom: 20px;
+	}
+	.Ledger-container {
+		box-sizing: border-box;
+		max-width: 770px;
+		margin: auto;
+		margin-top: 30px;
+		margin-bottom: 30px;
+		background-color: #fff;
+		&.-empty-state {
+			.Icon {
+				vertical-align: middle;
+				margin-right: 20px;
+				height: 64px;
+				display: inline-block;
+				&:before {
+					font-size: 64px;
+				}
+			}
+			.line1 {
+				color: rgba(0, 0, 0, 0.4);
+			}
+		}
+		&.expenses-container {
+			.-list {
+				padding-top: 40px;
+			}
+		}
+		.PublicGroupThanks {
+			padding: 20px;
+		}
+		.ExpenseForm {
+			padding-top: 30px;
+		}
+	}
+	.padding40 {
+		padding: 40px;
+		.line1 {
+			height: 17px;
+			font-family: Montserrat;
+			font-size: 14px;
+			font-weight: normal;
+			color: #363636;
+			text-transform: uppercase;
+		}
+		.expenses-container {
+			margin-top: 30px;
+		}
+		.info-block {
+			vertical-align: top;
+			display: inline-block;
+			min-width: 160px; 
+			height: 45px;
+			margin-top: 20px;
+			.info-block-value {
+				font-family: Montserrat;
+				font-size: 24px;
+				font-weight: normal;
+				color: #313131;
+				line-height: 1.25;
+			}
+			.info-block-label {
+				font-family: Lato;
+				font-size: 10px;
+				font-weight: bold;
+				color: #b3b3b3;
+				text-transform: uppercase;
+			}
+		}
+	}
+	.Button {
+		display: block;
+		margin: auto;
+		margin-top: 40px;
+		box-sizing: border-box;
+		max-width: 350px;
+		height: 55px;
+		width: 100%;
+		border-radius: 100px;
+		line-height: 1.75;
+	}
+}
+
+@media (max-width: 818px) {
+	.Ledger .Ledger-container {
+		margin: 10px;
+		&:nth-child(2) {
+			border-bottom: 1px solid #e2e2e2;
+		}
+	}
+}

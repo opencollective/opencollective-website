@@ -1,9 +1,13 @@
 .CollectiveExpenseDetail {
-  box-shadow: 0 1px 3px rgba(46, 77, 97,.2);
+  box-shadow: 0 1px 3px;
 }
 
 .CollectiveExpenseDetail-image img {
 	max-width: 240px;
 	max-height: 240px;
+}
+
+.CollectiveExpenseDetail .help {
+	margin-left: 4px;
 }
 

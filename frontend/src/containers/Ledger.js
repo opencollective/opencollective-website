@@ -3,10 +3,12 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 
 // Containers
+import LoginTopBar from './LoginTopBar';
 import Notification from './Notification';
 
 // components
 import CollectiveLedger from '../components/collective/CollectiveLedger';
+import Currency from '../components/Currency';
 import PublicFooter from '../components/PublicFooter';
 
 // actions
@@ -32,9 +34,24 @@ export class Ledger extends Component {
   render() {
     const { collective } = this.props;
     return (
-      <div className='Collective'>
+      <div className='Ledger'>
+        <LoginTopBar />
         <Notification />
-        <h2> {collective.name} </h2>
+
+        <div className='Ledger-container padding40' style={{marginBottom: '0'}}>
+          <div className='line1'>collective information</div>
+          <div className='info-block mr3'>
+            <div className='info-block-value'>{collective.name}</div>
+            <div className='info-block-label'>collective</div>
+          </div>
+          <div className='info-block'>
+            <div className='info-block-value'>
+              <Currency value={collective.balance} currency={collective.currency} precision={2} />
+            </div>
+            <div className='info-block-label'>funds</div>
+          </div>
+        </div>
+
         <CollectiveLedger {...this.props} hasHost={ false } itemsToShow ={ 100 }/>
         <PublicFooter />
       </div>

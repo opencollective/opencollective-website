@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { push } from 'redux-router';
 import { StickyContainer } from 'react-sticky';
 import { createStructuredSelector } from 'reselect';
 import merge from 'lodash/merge';
@@ -260,6 +261,7 @@ export default connect(mapStateToProps, {
   fetchUsers,
   getSocialMediaAvatars,
   notify,
+  push,
   updateCollective,
   updateUser,
   validateSchema

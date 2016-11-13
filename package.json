@@ -101,6 +101,7 @@
     "react-router": "1.0.3",
     "react-sticky": "5.0.5",
     "react-stripe-checkout": "1.8.0",
+    "react-tooltip": "3.2.1",
     "redux": "3.5.2",
     "redux-logger": "2.6.1",
     "redux-router": "1.0.0-beta8",

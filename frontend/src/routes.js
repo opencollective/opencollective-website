@@ -46,7 +46,7 @@ export default (
     <Route path="/:slug" component={PublicPage} />
     <Route path="/:slug/transactions" component={Ledger} />
     {/* TODO: rename to 'expenses' when we remove old route */}
-    <Route path="/:slug/all_expenses" component={Expenses} />
+    <Route path="/:slug/unpaid-expenses" component={Expenses} />
     <Route path="/:slug/expenses/new" component={Transactions} />
     <Route path="/:slug/:type(donations|expenses)" component={Transactions} />
     <Route path="/:slug/donate/:amount" component={DonatePage} />

@@ -3,12 +3,16 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
+import { scrollToExpense } from '../lib/utils';
+
 // Containers
 import Notification from './Notification';
 import LoginTopBar from './LoginTopBar';
 
 // components
 import CollectiveExpenseDetail from '../components/collective/CollectiveExpenseDetail';
+import Currency from '../components/Currency';
+import ExpenseEmptyState from '../components/ExpenseEmptyState';
 import PublicFooter from '../components/PublicFooter';
 
 // actions
@@ -44,17 +48,31 @@ export class Expenses extends Component {
 
   render() {
     const { 
-      collective, 
+      collective,
+      i18n
     } = this.props;
     
     return (
-      <div>
+      <div className='Transactions'>
         <LoginTopBar />
         <Notification />
-        <div className='bg-gray pt2'>
-          <h2 className='center'> Unpaid expenses for <Link to={`/${collective.slug}`}> {collective.name} </Link> </h2>
-          
-          <div className='flex flex-column justify-center bg-gray'>
+        <div className='Transactions-container padding40' style={{marginBottom: '0'}}>
+          <div className='line1'>collective information</div>
+          <div className='info-block mr3'>
+            <div className='info-block-value'>{collective.name}</div>
+            <div className='info-block-label'>collective</div>
+          </div>
+          <div className='info-block'>
+            <div className='info-block-value'>
+              <Currency value={collective.balance} currency={collective.currency} precision={2} />
+            </div>
+            <div className='info-block-label'>funds</div>
+          </div>
+        </div>
+
+        <div className='Transactions-container padding40 expenses-container'>
+            <div className='line1'>unpaid expenses</div>
+            <div className='-list'>
             {collective.expenses
               .map(expense => 
                 <CollectiveExpenseDetail 
@@ -64,10 +82,17 @@ export class Expenses extends Component {
                   onApprove={approveExp.bind(this)}
                   onReject={rejectExp.bind(this)}
                   onPay={payExp.bind(this)}
-                  onUpdate={updateExp.bind(this)}
                   {...this.props}
                   />)}
-          </div>
+            </div>
+            {collective.expenses.length === 0 && 
+              <div className='center'>
+                <ExpenseEmptyState i18n={i18n} />
+                <Link className='center mt1 -btn -btn-micro -btn-outline -border-green -fw-bold -ttu' 
+                  to={`/${collective.slug}/expenses/new`}>
+                  {i18n.getString('submitExpense')}
+                </Link>
+              </div>}
         </div>
         <PublicFooter />
       </div>
@@ -91,7 +116,8 @@ export class Expenses extends Component {
       fetchUsers(collective.slug),
       fetchPendingExpenses(collective.slug),
       fetchTransactions(collective.slug)
-      ]);
+      ])
+    .then(() => scrollToExpense());
   }
 }
 
@@ -139,21 +165,6 @@ export function payExp(expenseId) {
   return payExpense(collective.id, expenseId)
     .then(() => fetchPendingExpenses(collective.slug))
     .then(() => fetchTransactions(collective.slug))
-    .catch(({message}) => notify('error', message));
-}
-
-/*
- * Update expense
- */
-export function updateExp(expenseId) {
-  const {
-    collective,
-    approveExpense,
-    fetchPendingExpenses
-  } = this.props;
-
-  return approveExpense(collective.id, expenseId)
-    .then(() => fetchPendingExpenses(collective.slug))
     .catch(({message}) => notify('error', message));
 }
 

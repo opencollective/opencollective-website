@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react';
+import ReactTooltip from 'react-tooltip';
 
 import { resizeImage } from '../../lib/utils';
 
@@ -38,67 +39,80 @@ const CollectiveExpenseDetail = ({
 
   const updateInProgress = approveInProgress[expense.id] || rejectInProgress[expense.id] || payInProgress[expense.id];
 
-  let src, srcSet, href;
+  let src, srcSet, href, receiptMessage, receiptHelpTip;
 
   if (canViewReceipt && expense.attachment) {
     src = resizeImage(expense.attachment, { width: 240 });
     srcSet = resizeImage(expense.attachment, { width: 480 });
     href = expense.attachment;
+    receiptMessage = '';
+    receiptHelpTip = i18n.getString('validReceiptHelpTip');
   } else {
-    src='/static/images/collectives/expenses-empty-state-image.jpg';
-    srcSet='/static/images/collectives/expenses-empty-state-image@2x.jpg 2x';
+    src='/static/svg/ticket.svg';
     href = '';
+    if (canViewReceipt) {
+      receiptMessage = i18n.getString('missingReceiptMessage');
+      receiptHelpTip = i18n.getString('missingReceiptHelpTip');
+    } else {
+      receiptMessage = i18n.getString('hiddenReceiptMessage');
+      receiptHelpTip = i18n.getString('hiddenReceiptHelpTip');
+    }
   }
   
  
   return (
-    <div className='CollectiveExpenseDetail mx-auto mb2 flex flex-column bg-white col-6 border-white rounded'>
+    <section id={`exp${expense.id}`}>
+      <div className='CollectiveExpenseDetail mx-auto mb2 p2 flex bg-white col-8 border-white rounded'>
 
-      <div className='CollectiveExpenseDetail-top flex'>
-      
-        <div className='CollectiveExpenseDetail-image max-width-1'>
-          <ReceiptPreview
-            src={src}
-            srcSet={srcSet}
-            href={href}
-          />
-        </div>
-
-        <div className='CollectiveExpenseDetail-info flex flex-column'>
-          <span className=''>{ expense.title }</span>
-           <div className='CollectiveExpenseDetail-category'>
-            {expense.category}
+        <div className='CollectiveExpenseDetail-top flex flex-column mr2'>
+        
+          <div className='CollectiveExpenseDetail-image max-width-1'>
+            <ReceiptPreview
+              src={src}
+              srcSet={srcSet}
+              href={href}
+            />
           </div>
-          <p className='h3'>
-            <Currency value={expense.amount} currency={expense.currency} colorify={true} /> 
-          </p>
-          <span className=''>{ expense.incurredAt && i18n.moment(expense.incurredAt).fromNow() } </span>
-          <span className=''>{ i18n.getString('submittedBy') } { user && user.name }</span>
-          
+          <div className='flex justify-center'>
+            <span className='h6 muted'> {receiptMessage} </span>
+            <img className='help' src='/static/svg/help.svg' data-tip={receiptHelpTip} />
+            <ReactTooltip effect='solid' border={true} place='bottom' />
+          </div>  
         </div>
-      </div>
 
-      <div className='CollectiveExpenseDetail-actions flex justify-center'>
-        {showApprove && 
-          <ApproveButton
-            disabled={updateInProgress}
-            approveExp={onApprove.bind(null, expense.id)}
-            inProgress={approveInProgress[expense.id]}
-            i18n={i18n} />}
-        {showReject && 
-          <RejectButton
-            disabled={updateInProgress}
-            rejectExp={onReject.bind(null, expense.id)}
-            inProgress={rejectInProgress[expense.id]}
-            i18n={i18n} />}
-        {showPay && 
-          <PayButton
-            disabled={updateInProgress}
-            payExp={onPay.bind(null, expense.id)}
-            inProgress={payInProgress[expense.id]}
-            i18n={i18n} />}
+        <div>
+          <div className='CollectiveExpenseDetail-info flex flex-column'>
+            <span className='-ff-sec'>{ expense.title } ({expense.category})</span>
+            <span className='h6 m0 muted'>{ i18n.getString('submittedBy') } { user && user.name } - { expense.incurredAt && i18n.moment(expense.incurredAt).fromNow() } </span>
+            <p className='h3 -ff-sec'>
+              <Currency value={expense.amount} currency={expense.currency} colorify={false} /> 
+            </p>
+          </div>
+          <div className='CollectiveExpenseDetail-actions flex justify-center'>
+          {showApprove && 
+            <ApproveButton
+              disabled={updateInProgress}
+              approveExp={onApprove.bind(null, expense.id)}
+              inProgress={approveInProgress[expense.id]}
+              i18n={i18n} />}
+          {showReject && 
+            <RejectButton
+              disabled={updateInProgress}
+              rejectExp={onReject.bind(null, expense.id)}
+              inProgress={rejectInProgress[expense.id]}
+              i18n={i18n} />}
+          {showPay && 
+            <PayButton
+              disabled={updateInProgress}
+              payExp={onPay.bind(null, expense.id)}
+              inProgress={payInProgress[expense.id]}
+              i18n={i18n} />}
+        </div>
+        </div>
+
+       
       </div>
-    </div>
+    </section>
     )
 };
 
