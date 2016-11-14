@@ -201,7 +201,6 @@ export default {
   cache,
   fetchGroupBySlug,
   fetchProfileBySlug,
-  filterUsers,
   extractGithubUsernameFromToken,
   fetchActiveUsers,
   ga,
