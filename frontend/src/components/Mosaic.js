@@ -90,16 +90,13 @@ export default class Mosaic extends Component {
   }
 
   resizeMosaic() {
-    if (!this.el) {
-      console.log("this.el undefined", this.el);
-      return;
-    }
+    if (!this.el) return;
+
     this.width = this.el.parentElement.getBoundingClientRect().width;
     const shouldRoundUp = ((this.width % this.avatarWidth) > (this.avatarWidth / 2));
     const roundingFn = (shouldRoundUp) ? Math.ceil : Math.floor;
     const avatarsPerRow = roundingFn(this.width / this.avatarWidth);
     const height = Math.ceil(this.avatars.length / avatarsPerRow * this.avatarWidth);
-    console.log("mosaic attr", this.el.parentElement, { width: this.width, height, avatars: this.avatars.length, avatarWidth: this.avatarWidth, shouldRoundUp, avatarsPerRow });
     this.el.setAttribute('width', this.width);
     this.el.setAttribute('height', height);
     this.avatars.forEach((avatar, index) => {
@@ -122,7 +119,6 @@ export default class Mosaic extends Component {
     if (!anchor) {
       this.setState({hovercard: false});
     } else {
-      if (!anchor) return;
       const rect = anchor.getBoundingClientRect();
       const hovercard = {
         username: anchor.id,
