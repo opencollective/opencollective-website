@@ -17,6 +17,7 @@ body {
 		margin-top: 30px;
 		margin-bottom: 30px;
 		background-color: #fff;
+		overflow: auto;
 		&.-empty-state {
 			.Icon {
 				vertical-align: middle;
@@ -81,13 +82,13 @@ body {
 	.Button {
 		display: block;
 		margin: auto;
-		margin-top: 40px;
 		box-sizing: border-box;
 		max-width: 350px;
 		height: 55px;
 		width: 100%;
-		border-radius: 100px;
+		border-radius: 15px;
 		line-height: 1.75;
+		min-width: 125px;
 	}
 }
 

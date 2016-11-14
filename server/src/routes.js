@@ -114,8 +114,10 @@ export default (app) => {
   app.get('/github/apply/:token', mw.ga, mw.extractGithubUsernameFromToken, mw.addTitle('Sign up your Github repository'), render);
   app.get('/github/apply', mw.ga, mw.addTitle('Sign up your Github repository'), render);
   app.get('/connect/github', mw.ga, render);
-  app.get('/:slug([A-Za-z0-9-_]+)/transactions', mw.ga, controllers.profile, mw.addMeta, render);
-  app.get('/:slug([A-Za-z0-9-_]+)/unpaid-expenses', mw.ga, controllers.profile, mw.addMeta, render); // TODO: rename to 'expenses' when we remove old route.
+  app.get('/:slug([A-Za-z0-9-_]+)/ledger/new', mw.ga, controllers.profile, mw.addMeta, render);
+  app.get('/:slug([A-Za-z0-9-_]+)/ledger/transactions', mw.ga, controllers.profile, mw.addMeta, render);
+  app.get('/:slug([A-Za-z0-9-_]+)/ledger/unpaidexpenses', mw.ga, controllers.profile, mw.addMeta, render);
+  app.get('/:slug([A-Za-z0-9-_]+)/ledger', mw.ga, controllers.profile, mw.addMeta, render);
   app.get('/:slug/:tier\.:format(json|csv)', mw.ga, mw.fetchGroupBySlug, controllers.tierList); // <-------- WIP
   app.get('/:slug/:tier', mw.ga, mw.fetchGroupBySlug, render); // <-------- WIP
   app.get('/:slug/connect/:provider', mw.ga, render);

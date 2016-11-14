@@ -29,7 +29,7 @@ export default class CollectiveTransactions extends React.Component {
         </div>
         {(collective.transactions.length >= itemsToShow) && (
           <div className='center pt2'>
-            <Link className='-btn -btn-medium -btn-outline -border-green -ttu -fw-bold' to={`/${collective.slug}/transactions`}>
+            <Link className='-btn -btn-medium -btn-outline -border-green -ttu -fw-bold' to={`/${collective.slug}/ledger/transactions`}>
               {i18n.getString('seeAll')} >
             </Link>
           </div>

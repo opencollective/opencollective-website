@@ -8,7 +8,6 @@ import ConnectProvider from './containers/ConnectProvider';
 import Discover from './containers/Discover';
 import DonatePage from './containers/DonatePage';
 import EditTwitter from './components/EditTwitter';
-import Expenses from './containers/Expenses';
 import Faq from './containers/Faq';
 import GroupTierList from './containers/GroupTierList';
 import HomePage from './containers/HomePage';
@@ -44,9 +43,10 @@ export default (
     <Route path="/:slug/connect/:provider" component={ConnectProvider} />
     <Route path="/:slug/edit-twitter" component={EditTwitter} />
     <Route path="/:slug" component={PublicPage} />
-    <Route path="/:slug/transactions" component={Ledger} />
-    {/* TODO: rename to 'expenses' when we remove old route */}
-    <Route path="/:slug/unpaid-expenses" component={Expenses} />
+    <Route path="/:slug/ledger/new" component={Ledger} />
+    <Route path="/:slug/ledger/unpaidexpenses" component={Ledger} />
+    <Route path="/:slug/ledger/transactions" component={Ledger} />
+    <Route path="/:slug/ledger" component={Ledger} />
     <Route path="/:slug/expenses/new" component={Transactions} />
     <Route path="/:slug/:type(donations|expenses)" component={Transactions} />
     <Route path="/:slug/donate/:amount" component={DonatePage} />

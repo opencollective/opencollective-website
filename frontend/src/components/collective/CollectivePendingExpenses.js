@@ -87,7 +87,7 @@ export default class CollectivePendingExpenses extends React.Component {
 
         { collective.expenses.length > 0 && (
           <span className='right'>
-            <Link className='-btn -btn-medium -btn-outline -border-green -ttu -fw-bold' to={`/${collective.slug}/expenses`}>
+            <Link className='-btn -btn-medium -btn-outline -border-green -ttu -fw-bold' to={`/${collective.slug}/ledger/unpaidexpenses`}>
               {i18n.getString('seeAll')} >
             </Link>
           </span>

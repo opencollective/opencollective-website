@@ -88,7 +88,7 @@ const CollectiveExpenseDetail = ({
               <Currency value={expense.amount} currency={expense.currency} colorify={false} /> 
             </p>
           </div>
-          <div className='CollectiveExpenseDetail-actions flex justify-center'>
+          <div className='CollectiveExpenseDetail-actions flex justify-around'>
           {showApprove && 
             <ApproveButton
               disabled={updateInProgress}

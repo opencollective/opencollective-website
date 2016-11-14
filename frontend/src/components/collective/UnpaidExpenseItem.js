@@ -12,7 +12,7 @@ const UnpaidExpenseItem = ({
 }) => {
   
   return (
-    <div className={`UnpaidExpenseItem flex flex-column overflow-hidden border p2 ${className}`} onClick={() => push(`/${collective.slug}/unpaid-expenses#exp${expense.id}`)}>
+    <div className={`UnpaidExpenseItem flex flex-column overflow-hidden border p2 ${className}`} onClick={() => push(`/${collective.slug}/ledger/unpaidexpenses#exp${expense.id}`)}>
       <div className='-ff-sec truncate'> { expense.title || expense.category } </div>
       <div className='flex'>
         <p className='h6 m0 muted'>{i18n.getString('submittedBy')} {user && user.name} &#8212; { expense.incurredAt && i18n.moment(expense.incurredAt).fromNow() } </p>
