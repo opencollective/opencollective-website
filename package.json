@@ -1,6 +1,6 @@
 {
   "name": "opencollective-website",
-  "version": "0.1.212",
+  "version": "0.1.213",
   "engines": {
     "node": "6.2.2",
     "npm": "3.9.5"
@@ -53,6 +53,7 @@
     "bluebird": "3.4.6",
     "browserify": "10.2.6",
     "cache-bust": "0.0.2",
+    "cached-request": "1.1.0",
     "chai": "3.5.0",
     "classnames": "2.2.4",
     "compression": "1.6.1",
