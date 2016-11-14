@@ -91,7 +91,7 @@ export default (app) => {
   app.get('/:slug/badge/:tier.svg', mw.cache(300), mw.fetchActiveUsers(), controllers.banner.badge);
   app.get('/:slug/:tier/:position/avatar(.:format(png|jpg|svg))?', mw.cache(300), mw.ga, mw.fetchActiveUsers({cache: 300}), controllers.banner.avatar);
   app.get('/:slug/:tier/:position/website', mw.ga, mw.fetchActiveUsers(), controllers.banner.redirect);
-  app.get('/:slug([A-Za-z0-9-]+)/widget', mw.cache(300), mw.fetchGroupBySlug, controllers.collectives.widget);
+  app.get('/:slug([A-Za-z0-9-]+)/widget', mw.cache(300), mw.fetchProfileBySlug, controllers.widgets.profile);
 
   /**
    * Server side render the react app
@@ -114,11 +114,11 @@ export default (app) => {
   app.get('/github/apply/:token', mw.ga, mw.extractGithubUsernameFromToken, mw.addTitle('Sign up your Github repository'), render);
   app.get('/github/apply', mw.ga, mw.addTitle('Sign up your Github repository'), render);
   app.get('/connect/github', mw.ga, render);
-  app.get('/:slug([A-Za-z0-9-_]+)/transactions', mw.ga, controllers.profile, mw.addMeta, render);
+  app.get('/:slug([A-Za-z0-9-_]+)/transactions', mw.ga, mw.fetchProfileBySlug, mw.addMeta, render);
   app.get('/:slug/:tier\.:format(json|csv)', mw.ga, mw.fetchGroupBySlug, controllers.tierList); // <-------- WIP
   app.get('/:slug/:tier', mw.ga, mw.fetchGroupBySlug, render); // <-------- WIP
   app.get('/:slug/connect/:provider', mw.ga, render);
-  app.get('/:slug/edit-twitter', mw.ga, controllers.profile, render);
+  app.get('/:slug/edit-twitter', mw.ga, mw.fetchProfileBySlug, render);
   app.get('/:slug/edit', mw.ga, mw.addTitle('Edit'), mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/subscriptions', mw.ga, mw.addTitle('My Subscriptions'), render);
   app.get('/:slug([A-Za-z0-9-_]+)/connected-accounts', mw.ga, render);
@@ -126,7 +126,7 @@ export default (app) => {
   app.get('/:slug([A-Za-z0-9-_]+)/expenses/new', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-_]+)/donate/:amount', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-_]+)/donate/:amount/:interval', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
-  app.get('/:slug([A-Za-z0-9-_]+)', mw.ga, controllers.profile, mw.addMeta, render);
+  app.get('/:slug([A-Za-z0-9-_]+)', mw.ga, mw.fetchProfileBySlug, mw.addMeta, render);
 
   app.use(mw.handleUncaughtError);
 };

@@ -37,6 +37,7 @@ export default (req, res, next) => {
       // Pushes the data to the reducers
       store.dispatch(hydrate({
         group: req.collective || req.group,
+        profile: req.profile,
         collective: req.collective,
         subscriptions: req.subscriptions,
         connectedAccount: req.connectedAccount,

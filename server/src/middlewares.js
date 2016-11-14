@@ -32,6 +32,24 @@ const fetchGroupBySlug = (req, res, next) => {
     .catch(next);
 };
 
+/**
+ * Fetch profile by slug (group or user profile)
+ */
+const fetchProfileBySlug = (req, res, next) => {
+  api
+    .get(`/profile/${req.params.slug.toLowerCase()}`)
+    .then(profile => {
+      req.profile = profile;
+      if (profile.username) {
+        req.user = profile;
+      } else {
+        req.group = profile;
+      }
+      next();
+    })
+    .catch(next);
+}
+
 /*
  * Extract github username from token
  */
@@ -182,6 +200,8 @@ export default {
   addTitle,
   cache,
   fetchGroupBySlug,
+  fetchProfileBySlug,
+  filterUsers,
   extractGithubUsernameFromToken,
   fetchActiveUsers,
   ga,
