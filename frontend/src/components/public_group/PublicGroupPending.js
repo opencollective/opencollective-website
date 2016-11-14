@@ -78,7 +78,8 @@ export default class PublicGroupPending extends Component {
     const contributors = Object.keys(githubContributors).map(username => {
       const commits = githubContributors[username]
       return {
-        name: username,
+        username,
+        tier: 'contributor',
         avatar: `https://avatars.githubusercontent.com/${ username }?s=96`,
         stats: {c: commits}
       }
@@ -92,7 +93,7 @@ export default class PublicGroupPending extends Component {
           <div className='line6'>We are the contributors of this collective nice to meet you.</div>
           <div className='PublicGroup-contrib-container'>
             <div className='line1' >Contributors</div>
-            <PublicGroupContributors contributors={ contributors } />
+            <PublicGroupContributors group={group} />
           </div>
         </div>
       )

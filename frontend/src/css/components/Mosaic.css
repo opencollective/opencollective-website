@@ -7,11 +7,6 @@
 	box-sizing: border-box;
 }
 
-.Mosaic-container {
-	position: relative;
-	overflow: hidden;
-}
-
 .Mosaic-item {
 	position: relative;
 	display: inline-block;
