@@ -11,13 +11,13 @@ export default class CollectiveMembers extends React.Component {
   }
 
   render() {
-    const { i18n, group } = this.props;
-    this.contributors = _.uniqBy(_.union(group.members, group.backers.filter(b => !b.tier.match(/sponsor/i))), 'id');
+    const { i18n, collective } = this.props;
+    this.contributors = _.uniqBy(_.union(collective.members, collective.backers.filter(b => !b.tier.match(/sponsor/i))), 'id');
     this.contributors = this.contributors.map(c => {
       c.href = `/${c.username}`;
       return c;
     });
-    this.sponsors = _.uniqBy(group.backers.filter(b => b.tier.match(/sponsor/i)), 'id');
+    this.sponsors = _.uniqBy(collective.backers.filter(b => b.tier.match(/sponsor/i)), 'id');
     return (
       <section id='contributors' className='Collective-MembersWall relative'>
         <div className='CollectiveBackers container center relative'>
@@ -28,7 +28,7 @@ export default class CollectiveMembers extends React.Component {
             { this.contributors.length < 10 &&
               this._showCards(this.contributors)}
             { this.contributors.length > 10 &&
-              <Mosaic users={this.contributors} i18n={i18n} />
+              <Mosaic hovercards={collective.contributors} svg={`/${collective.slug}/contributors.svg?exclude=sponsors&button=false&style=square&width=640&margin=0`} i18n={i18n} />
             }
             </div>
             <div className='CollectiveWhoWeAre-sponsors' className='flex flex-wrap justify-center'>
