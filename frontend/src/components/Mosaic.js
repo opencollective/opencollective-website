@@ -96,15 +96,15 @@ export default class Mosaic extends Component {
     const shouldRoundUp = ((this.width % this.avatarWidth) > (this.avatarWidth / 2));
     const roundingFn = (shouldRoundUp) ? Math.ceil : Math.floor;
     const avatarsPerRow = roundingFn(this.width / this.avatarWidth);
-    const height = Math.ceil(this.avatars.length / avatarsPerRow * this.avatarWidth);
+    const avatarWidth = Math.floor(this.width / avatarsPerRow);
+    const height = Math.ceil(this.avatars.length / avatarsPerRow) * avatarWidth;
     this.el.setAttribute('width', this.width);
     this.el.setAttribute('height', height);
     this.avatars.forEach((avatar, index) => {
-      const w = Math.floor(this.width / avatarsPerRow);
-      const x = (index % avatarsPerRow) * w;
-      const y = Math.floor(index / avatarsPerRow) * w;
-      avatar.children[0].setAttribute('width', w);
-      avatar.children[0].setAttribute('height', w);
+      const x = (index % avatarsPerRow) * avatarWidth;
+      const y = Math.floor(index / avatarsPerRow) * avatarWidth;
+      avatar.children[0].setAttribute('width', avatarWidth);
+      avatar.children[0].setAttribute('height', avatarWidth);
       avatar.children[0].setAttribute('x', x);
       avatar.children[0].setAttribute('y', y);
     });
