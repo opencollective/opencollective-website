@@ -10,7 +10,7 @@ export default {
   getCloudinaryUrl: (src, { width, height, query }) => {
 
     // We don't try to resize animated gif, svg or images already processed by cloudinary
-    if (src.match(/cloudinary.com/) || src.match(/\.gif$/) || (src.match(/\.svg/))) {
+    if (src.match(/cloudinary.com/) || src.match(/localhost:[0-9]{4}\//) || src.match(/\.gif$/) || (src.match(/\.svg/))) {
       return src;
     }
 

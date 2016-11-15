@@ -1,39 +1,35 @@
 import React from 'react';
 
-import filterCollection from '../lib/filter_collection';
 import CollectiveCard from './CollectiveCard';
 import SponsoredCard from './SponsoredCard';
 
 export default ({
   options,
-  profile,
+  user,
   i18n
 }) => {
 
-  const backing = profile.groups; // filterCollection(profile.groups, { role: 'BACKER' });
+  const backing = user.groups;
 
   return (
     <div className='ProfileWidget'>
 
       {backing.length &&
         <section>
-          <h1>{options.title}</h1>
-          <h2>{options.subtitle}</h2>
+          {options.header &&
+            <div className='header'>
+              <h1>{options.title}</h1>
+              <h2>{options.subtitle}</h2>
+            </div>
+          }
           {backing.map((group, index) => {
             // When sponsored amount & tier exists the `SponsoredCard` will be rendered
             if (group.myTier) {
               return (
-                <SponsoredCard
-                  key={index}
-                  i18n={i18n}
-                  isCollectiveOnProfile={true}
-                  {...group}
-                  amount={group.myTotalDonations}
-                  tier={group.myTier}
-                />
+                <SponsoredCard tier={group.myTier} index={index} width={140} i18n={i18n} group={group} />
               )
             } else {
-              return <CollectiveCard key={index} i18n={i18n} isCollectiveOnProfile={true} group={group} />
+              return <CollectiveCard index={index} width={140} i18n={i18n} isCollectiveOnProfile={true} group={group} />
             }
           })}
         </section>

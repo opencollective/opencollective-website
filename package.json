@@ -24,7 +24,7 @@
     "test:e2e:exec": "npm run rexec:api test_e2e.sh",
     "nightwatch": "./node_modules/nightwatch/bin/nightwatch --config nightwatch.json",
     "build": "gulp build && npm run build:server && npm run build:frontend",
-    "build:server": "rm -rf server/dist && mkdir server/dist && babel -D ./server/src -d ./server/dist",
+    "build:server": "rm -rf server/dist && mkdir server/dist && babel -D ./server/src -d ./server/dist && touch server/src/index.js",
     "build:frontend": "mkdir -p frontend/dist/js && browserify frontend/src/client.js | uglifyjs -cm --screw-ie8 > frontend/dist/js/bundle.js ",
     "watch:js": "mkdir -p frontend/dist/js && watchify frontend/src/client.js -o frontend/dist/js/bundle.js -dv",
     "watch:server": "nodemon -e js,hbs -w server/src -w frontend/src",

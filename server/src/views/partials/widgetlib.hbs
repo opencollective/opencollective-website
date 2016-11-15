@@ -1,39 +1,41 @@
-if (!Array.prototype.find) {
-  Object.defineProperty(Array.prototype, "find", {
-    value: function(predicate) {
-     'use strict';
-     if (this == null) {
-       throw new TypeError('Array.prototype.find called on null or undefined');
-     }
-     if (typeof predicate !== 'function') {
-       throw new TypeError('predicate must be a function');
-     }
-     var list = Object(this);
-     var length = list.length >>> 0;
-     var thisArg = arguments[1];
-     var value;
+OC = (function() {
+  if (!Array.prototype.find) {
+    Object.defineProperty(Array.prototype, "find", {
+      value: function(predicate) {
+      'use strict';
+      if (this == null) {
+        throw new TypeError('Array.prototype.find called on null or undefined');
+      }
+      if (typeof predicate !== 'function') {
+        throw new TypeError('predicate must be a function');
+      }
+      var list = Object(this);
+      var length = list.length >>> 0;
+      var thisArg = arguments[1];
+      var value;
 
-     for (var i = 0; i < length; i++) {
-       value = list[i];
-       if (predicate.call(thisArg, value, i, list)) {
-         return value;
-       }
-     }
-     return undefined;
-    }
-  });
-}
-
-const scriptsNodesArray = [].slice.call(document.querySelectorAll("script"));
-const regex = new RegExp("{{config.host.website}}".replace(/^https?:\/\//, ''),'i');
-const anchor = scriptsNodesArray.find(s => s.getAttribute('src') && s.getAttribute('src').match(regex));
-
-const styles = window.getComputedStyle(anchor.parentNode, null);
-const width = anchor.parentNode.getBoundingClientRect().width - parseInt(styles.paddingLeft, 10) - parseInt(styles.paddingRight, 10);
-
-OC = {
-  getContainerWidth: () => width,
-  inject: (e) => {
-    anchor.parentNode.insertBefore(e, anchor);
+      for (var i = 0; i < length; i++) {
+        value = list[i];
+        if (predicate.call(thisArg, value, i, list)) {
+          return value;
+        }
+      }
+      return undefined;
+      }
+    });
   }
-};
+
+  var scriptsNodesArray = [].slice.call(document.querySelectorAll("script"));
+  var regex = new RegExp("{{config.host.website}}".replace(/^https?:\/\//, ''),'i');
+  var anchor = scriptsNodesArray.find(s => s.getAttribute('src') && s.getAttribute('src').match(regex));
+
+  var styles = window.getComputedStyle(anchor.parentNode, null);
+  var width = anchor.parentNode.getBoundingClientRect().width - parseInt(styles.paddingLeft, 10) - parseInt(styles.paddingRight, 10);
+
+  return {
+    getContainerWidth: () => width,
+    inject: (e) => {
+      anchor.parentNode.insertBefore(e, anchor);
+    }
+  };
+})();

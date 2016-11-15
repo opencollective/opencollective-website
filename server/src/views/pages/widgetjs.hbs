@@ -4,7 +4,7 @@ var width = OC.getContainerWidth();
 
 var html = `
   <center>
-    <iframe src="{{config.host.website}}/{{slug}}/widget" width="${width}" height=300 frameborder=0></iframe>
+    <iframe src="{{config.host.website}}/{{slug}}/widget?header={{options.header}}" width="${width}" height=300 frameborder=0></iframe>
   </center>
 `;
 

@@ -4,13 +4,19 @@ import { renderToString } from 'react-dom/server';
 import api from '../lib/api';
 import Widget from '../../../frontend/src/components/Widget';
 import ProfileWidget from '../../../frontend/src/components/ProfileWidget';
-import i18n from '../../../frontend/src/lib/i18n';
+import i18nlib from '../../../frontend/src/lib/i18n';
 import filterCollection from '../../../frontend/src/lib/filter_collection';
 
 export function js(req, res) {
+
+  const options = {
+    header: (req.query.header !== 'false')
+  };
+
   res.render('pages/widgetjs', {
     layout: false,
     config,
+    options,
     slug: req.params.slug
   })
 }
@@ -20,12 +26,12 @@ export function js(req, res) {
  */
 export function profile(req, res, next) {
 
-  if (req.group) {
-    return collectiveWidget(req, res, next);
-  }
-
   if (req.user) {
     return userWidget(req, res, next);
+  }
+
+  if (req.group) {
+    return collectiveWidget(req, res, next);
   }
 
 }
@@ -35,13 +41,19 @@ export function profile(req, res, next) {
  */
 export function userWidget(req, res) {
 
+  const i18n = i18nlib(req.user.lang);
+
+  const org = (req.user.isOrganization) ? 'Org' : '';
+
   const props = {
     options: {
-      title: 'Our contributions',
-      subtitle: 'Join us in contributing to those collectives'
+      title: i18n.getString(`profileWidgetTitle${org}`),
+      subtitle: i18n.getString(`profileWidgetSubTitle${org}`),
+      showTotalDonations: false,
+      header: (req.query.header !== 'false')
     },
-    profile: req.profile,
-    i18n: i18n('en')
+    user: req.user,
+    i18n
   };
 
   const html = renderToString(<ProfileWidget {...props} />);
@@ -73,7 +85,7 @@ export function collectiveWidget(req, res, next) {
         backers: (req.query.backers !== 'false')
       },
       group,
-      i18n: i18n('en'),
+      i18n: i18nlib(group.lang),
       transactions,
       href: `${config.host.website}/${group.slug}#support`
     };
@@ -90,5 +102,6 @@ export function collectiveWidget(req, res, next) {
 };
 
 export default {
-  profile
+  profile,
+  js
 };

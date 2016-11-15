@@ -39,11 +39,9 @@ const fetchProfileBySlug = (req, res, next) => {
   api
     .get(`/profile/${req.params.slug.toLowerCase()}`)
     .then(profile => {
-      req.profile = profile;
+      req.group = profile; // backward compatibility: PublicPage.js expects `groups` before loading ProfilePage.
       if (profile.username) {
         req.user = profile;
-      } else {
-        req.group = profile;
       }
       next();
     })
@@ -115,10 +113,10 @@ const ga = (req, res, next) => {
 };
 
 const addMeta = (req, res, next) => {
-  const { group } = req;
+  const { group, user } = req;
 
   req.meta = {};
-  if (!group.username) {
+  if (group) {
     req.meta = {
       url: group.publicUrl,
       title: `${group.name} is on Open Collective`,
@@ -127,7 +125,6 @@ const addMeta = (req, res, next) => {
       twitter: `@${group.twitterHandle}`,
     };
   } else {
-    const user = req.group;
     let description = '';
 
     if (user.groups.length > 0) {
