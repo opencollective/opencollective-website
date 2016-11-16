@@ -3,7 +3,6 @@ import merge from 'lodash/merge';
 const DEFAULT_GROUP_STYLES = { 
   hero: { 
     cover: { 
-      filter: "blur(4px)",
       transform: "scale(1.06)",
       backgroundImage: "url('/static/images/collectives/default-header-bg.jpg')"
     }, 
