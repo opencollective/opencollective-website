@@ -42,6 +42,9 @@
   float: right;
 }
 
+.CollectivePendingExpenses-list:hover {
+  cursor: pointer;
+}
 
 /* INTRO / WHO WE ARE */
 .CollectiveIntro::before {

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 
 import ExpenseEmptyState from '../ExpenseEmptyState';
-import UnpaidExpenseItem from './UnpaidExpenseItem';
+import CollectiveExpenseItem from './CollectiveExpenseItem';
 
 
 const DEFAULT_EXPENSES_TO_SHOW = 3;
@@ -68,18 +68,20 @@ export default class CollectivePendingExpenses extends React.Component {
             <ExpenseEmptyState i18n={i18n} />
           </div>}
 
-        <div className='Collective-transactions-list'>
+        <div className='CollectivePendingExpenses'>
           {collective.expenses
             .slice(0, itemsToShow)
             .map(expense => 
-              <UnpaidExpenseItem 
-                key={`cl_${expense.id}`} 
-                expense={expense} 
-                user={users[expense.UserId]} 
-                className='mb2' 
-                i18n={i18n} 
-                collective={collective}
-                push={ push } />)}
+              <div 
+                key={`cl_${expense.id}`}
+                className='CollectivePendingExpenses-list' 
+                onClick={() => push(`/${collective.slug}/transactions/expenses#exp${expense.id}`)}>
+                <CollectiveExpenseItem 
+                  expense={expense} 
+                  user={users[expense.UserId]} 
+                  className='mb2' 
+                  i18n={i18n} />
+              </div>)}
         </div>
         <div className='flex justify-around'>
         { showMoreButton && 
@@ -87,7 +89,7 @@ export default class CollectivePendingExpenses extends React.Component {
 
         { collective.expenses.length > 0 && (
           <span className='right'>
-            <Link className='-btn -btn-medium -btn-outline -border-green -ttu -fw-bold' to={`/${collective.slug}/ledger/unpaidexpenses`}>
+            <Link className='-btn -btn-medium -btn-outline -border-green -ttu -fw-bold' to={`/${collective.slug}/transactions/expenses`}>
               {i18n.getString('seeAll')} >
             </Link>
           </span>

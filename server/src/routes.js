@@ -17,6 +17,8 @@ export default (app) => {
    */
   app.get('/consciousnesshackingsf', (req, res) => res.redirect('/chsf'));
   app.get('/consciousnesshackingsv', (req, res) => res.redirect('/chsv'));
+  app.get('/github/apply/:token', (req, res) => res.redirect('/opensource/apply/:token'));
+  app.get('/github/apply', (req, res) => res.redirect('/opensource/apply'));
 
   /**
    * Server status
@@ -110,14 +112,10 @@ export default (app) => {
   app.get('/login', mw.ga, mw.addTitle('Open Collective Login'), render);
   app.get('/opensource/apply/:token', mw.ga, mw.extractGithubUsernameFromToken, mw.addTitle('Sign up your Github repository'), render);
   app.get('/opensource/apply', mw.ga, mw.addTitle('Sign up your Github repository'), render);
-  /* Leaving github/apply routes for existing links */
-  app.get('/github/apply/:token', mw.ga, mw.extractGithubUsernameFromToken, mw.addTitle('Sign up your Github repository'), render);
-  app.get('/github/apply', mw.ga, mw.addTitle('Sign up your Github repository'), render);
   app.get('/connect/github', mw.ga, render);
-  app.get('/:slug([A-Za-z0-9-_]+)/ledger/new', mw.ga, controllers.profile, mw.addMeta, render);
-  app.get('/:slug([A-Za-z0-9-_]+)/ledger/transactions', mw.ga, controllers.profile, mw.addMeta, render);
-  app.get('/:slug([A-Za-z0-9-_]+)/ledger/unpaidexpenses', mw.ga, controllers.profile, mw.addMeta, render);
-  app.get('/:slug([A-Za-z0-9-_]+)/ledger', mw.ga, controllers.profile, mw.addMeta, render);
+  app.get('/:slug([A-Za-z0-9-_]+)/transactions/expenses/new', mw.ga, controllers.profile, mw.addMeta, render);
+  app.get('/:slug([A-Za-z0-9-_]+)/transactions/expenses', mw.ga, controllers.profile, mw.addMeta, render);
+  app.get('/:slug([A-Za-z0-9-_]+)/transactions', mw.ga, controllers.profile, mw.addMeta, render);
   app.get('/:slug/:tier\.:format(json|csv)', mw.ga, mw.fetchGroupBySlug, controllers.tierList); // <-------- WIP
   app.get('/:slug/:tier', mw.ga, mw.fetchGroupBySlug, render); // <-------- WIP
   app.get('/:slug/connect/:provider', mw.ga, render);
@@ -125,6 +123,7 @@ export default (app) => {
   app.get('/:slug/edit', mw.ga, mw.addTitle('Edit'), mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/subscriptions', mw.ga, mw.addTitle('My Subscriptions'), render);
   app.get('/:slug([A-Za-z0-9-_]+)/connected-accounts', mw.ga, render);
+  // TODO: #cleanup remove next two routes when new collective page is live
   app.get('/:slug([A-Za-z0-9-_]+)/:type(expenses|donations)', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-_]+)/expenses/new', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-_]+)/donate/:amount', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);

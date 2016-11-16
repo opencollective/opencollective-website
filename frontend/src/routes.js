@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router';
+import { Route, Redirect } from 'react-router';
 
 import About from './containers/About';
 import AddGroup from './containers/AddGroup';
@@ -36,19 +36,19 @@ export default (
     <Route path="/subscriptions" component={requireAuthentication(Subscriptions)} />
     <Route path="/opensource/apply/:token" component={OnBoarding} />
     <Route path="/opensource/apply" component={OnBoarding} />
-    {/* Leaving github/apply routes for existing links */}
-    <Route path="/github/apply/:token" component={OnBoarding} />
-    <Route path="/github/apply" component={OnBoarding} />
+    <Redirect from="/github/apply/:token" to="/opensource/apply/:token" />
+    <Redirect from="/github/apply" to="/opensource/apply" />
     <Route path="/:slug/connected-accounts" component={ConnectedAccounts} />
     <Route path="/:slug/connect/:provider" component={ConnectProvider} />
     <Route path="/:slug/edit-twitter" component={EditTwitter} />
     <Route path="/:slug" component={PublicPage} />
-    <Route path="/:slug/ledger/new" component={Ledger} />
-    <Route path="/:slug/ledger/unpaidexpenses" component={Ledger} />
-    <Route path="/:slug/ledger/transactions" component={Ledger} />
-    <Route path="/:slug/ledger" component={Ledger} />
+    <Route path="/:slug/transactions/expenses/new" component={Ledger} />
+    <Route path="/:slug/transactions/expenses" component={Ledger} />
+    <Route path="/:slug/transactions" component={Ledger} />
+    {/* TODO: #cleanup remove next two routes when new collective page is launched */}
     <Route path="/:slug/expenses/new" component={Transactions} />
     <Route path="/:slug/:type(donations|expenses)" component={Transactions} />
+
     <Route path="/:slug/donate/:amount" component={DonatePage} />
     <Route path="/:slug/donate/:amount/:interval" component={DonatePage} />
     <Route path="/:slug/:tier" component={GroupTierList} />

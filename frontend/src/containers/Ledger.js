@@ -12,7 +12,7 @@ import SubmitExpense from './SubmitExpense';
 
 // components
 import Button from '../components/Button';
-import CollectiveExpenseDetail from '../components/collective/CollectiveExpenseDetail';
+import CollectiveExpenseItem from '../components/collective/CollectiveExpenseItem';
 import CollectiveTransactions from '../components/collective/CollectiveTransactions';
 import Currency from '../components/Currency';
 import ExpenseEmptyState from '../components/ExpenseEmptyState';
@@ -38,9 +38,7 @@ import {
 import { getAppRenderedSelector } from '../selectors/app';
 import { 
   getUsersSelector } from '../selectors/users';
-import { 
-  isSessionAuthenticatedSelector,
-  getAuthenticatedUserSelector } from '../selectors/session';
+import { getAuthenticatedUserSelector } from '../selectors/session';
 import { getPathnameSelector } from '../selectors/router';
 import {
   getApproveInProgressSelector,
@@ -73,7 +71,16 @@ export class Ledger extends Component {
   }
 
   render() {
-    const { collective, authenticatedUser, i18n } = this.props;
+    const { 
+      collective, 
+      authenticatedUser, 
+      i18n, 
+      canEditCollective, 
+      isHost,
+      approveInProgress,
+      rejectInProgress,
+      payInProgress } = this.props;
+
     const { showSubmitExpense, showUnpaidExpenses, showTransactions } = this.state;
     return (
       <div className='Ledger'>
@@ -108,14 +115,20 @@ export class Ledger extends Component {
             <div className='-list'>
             {collective.expenses
               .map(expense => 
-                <CollectiveExpenseDetail 
-                  key={expense.id}
-                  collective={ collective }
+                <CollectiveExpenseItem 
+                  key={ expense.id }
                   expense={ expense }
-                  onApprove={approveExp.bind(this)}
-                  onReject={rejectExp.bind(this)}
-                  onPay={payExp.bind(this)}
-                  {...this.props}
+                  compact={ false }
+                  i18n={ i18n }
+                  onApprove={ approveExp.bind(this) }
+                  onReject={ rejectExp.bind(this) }
+                  onPay={ payExp.bind(this) }
+                  canApproveOrReject={ canEditCollective || isHost }
+                  canPay={ isHost }
+                  authenticatedUser={ authenticatedUser }
+                  approveInProgress={ approveInProgress }
+                  rejectInProgress={ rejectInProgress }
+                  payInProgress={ payInProgress }
                   />)}
             </div>
             {collective.expenses.length === 0 && 
@@ -220,7 +233,6 @@ const mapStateToProps = createStructuredSelector({
   // auth related
   authenticatedUser: getAuthenticatedUserSelector,
   canEditCollective: canEditCollectiveSelector,
-  isAuthenticated: isSessionAuthenticatedSelector,
   isHost: isHostOfCollectiveSelector,
 
   // other
