@@ -5,7 +5,7 @@ import AsyncButton from './AsyncButton';
 class PayButton extends Component {
   render() {
     const {
-      payExp,
+      onClick,
       inProgress,
       disabled,
       i18n
@@ -18,7 +18,7 @@ class PayButton extends Component {
           customClass='Button--pay'
           inProgress={inProgress}
           disabled={disabled}
-          onClick={payExp.bind(this)}>
+          onClick={onClick.bind(this)}>
           {i18n.getString('pay')}
         </AsyncButton>
       </div>
@@ -27,10 +27,10 @@ class PayButton extends Component {
 }
 
 PayButton.propTypes = {
-  payExp: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
   inProgress: PropTypes.bool.isRequired,
-  disabled: PropTypes.bool.isRequired,
-  i18n: PropTypes.object.isRequired
+  i18n: PropTypes.object.isRequired,
+  disabled: PropTypes.bool
 };
 
 export default PayButton;

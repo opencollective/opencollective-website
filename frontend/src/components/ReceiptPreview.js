@@ -2,10 +2,6 @@ import React from 'react';
 
 export default ({href, src, srcSet, label=''}) => {
   
-  if (src.match(/\.pdf$/)) {
-    src = '/static/images/mime-pdf.png';
-  }
-
   return (
     <a href={href}>
       <div>

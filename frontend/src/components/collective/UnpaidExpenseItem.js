@@ -28,7 +28,6 @@ const UnpaidExpenseItem = ({
 };
 
 UnpaidExpenseItem.propTypes = {
-  canEditCollective: PropTypes.bool.isRequired,
   expense: PropTypes.object.isRequired,
   approveExpense: PropTypes.func,
   user: PropTypes.object

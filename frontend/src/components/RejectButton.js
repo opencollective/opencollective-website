@@ -4,7 +4,7 @@ import AsyncButton from './AsyncButton';
 // Leave non shallow until proper way of testing them
 class RejectButton extends Component {
   render() {
-    const {rejectExp, inProgress, disabled, i18n} = this.props;
+    const {onClick, inProgress, disabled, i18n} = this.props;
 
     return (
       <div>
@@ -12,7 +12,7 @@ class RejectButton extends Component {
           customClass='Button--reject'
           inProgress={inProgress}
           disabled={disabled}
-          onClick={rejectExp.bind(this)}>
+          onClick={onClick.bind(this)}>
           {i18n.getString('reject')}
         </AsyncButton>
       </div>
@@ -21,10 +21,10 @@ class RejectButton extends Component {
 }
 
 RejectButton.propTypes = {
-  rejectExp: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
   inProgress: PropTypes.bool.isRequired,
-  disable: PropTypes.bool.isRequired,
-  i18n: PropTypes.object.isRequired
+  i18n: PropTypes.object.isRequired,
+  disabled: PropTypes.bool
 };
 
 export default RejectButton;

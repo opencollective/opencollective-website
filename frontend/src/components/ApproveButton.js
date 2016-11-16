@@ -5,7 +5,7 @@ import AsyncButton from './AsyncButton';
 class ApproveButton extends Component {
   render() {
     const {
-      approveExp,
+      onClick,
       inProgress,
       disabled,
       i18n
@@ -18,7 +18,7 @@ class ApproveButton extends Component {
           customClass='Button--approve'
           inProgress={inProgress}
           disabled={disabled}
-          onClick={approveExp.bind(this)}>
+          onClick={onClick.bind(this)}>
           {i18n.getString('approve')}
         </AsyncButton>
       </div>
@@ -27,10 +27,10 @@ class ApproveButton extends Component {
 }
 
 ApproveButton.propTypes = {
-  approveExp: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
   inProgress: PropTypes.bool.isRequired,
-  disabled: PropTypes.bool.isRequired,
-  i18n: PropTypes.object.isRequired
+  i18n: PropTypes.object.isRequired,
+  disabled: PropTypes.bool
 };
 
 export default ApproveButton;
