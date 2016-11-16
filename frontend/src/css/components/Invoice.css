@@ -1,0 +1,37 @@
+.Invoice {
+  padding: 20px;
+  font-size: 12px;
+
+  h1 {
+    margin-bottom: 0;
+    font-size: 16px;
+  }
+
+  table {
+    margin: 40px;
+
+    td {
+      padding: 2px 0px;
+    }
+
+    .date {
+      width: 3rem;
+    }
+
+    .footer {
+      border-top: 1px solid grey;
+      font-weight: bold;
+      text-align: left;
+      font-size: 12px;
+    }
+  }
+}
+
+.footer {
+  text-align: center;
+  font-size: 10px;
+
+  img {
+    width: 200px;
+  }
+}
