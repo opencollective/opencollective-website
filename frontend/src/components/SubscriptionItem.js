@@ -48,7 +48,7 @@ export default class SubscriptionItem extends Component {
             <ul>
               {Transactions.map((transaction, index) => {
                 const description = transaction.title || transaction.description;
-                const { avatar } = transaction.User;
+                const { avatar, username } = transaction.User;
                 const txDate = transaction.incurredAt || transaction.createdAt;
                 return (
                   <li key={index}>
@@ -65,7 +65,10 @@ export default class SubscriptionItem extends Component {
                               </div>
                               <div className='amount'>{formattedAmount}<small>{currency}</small></div>
                             </div>
-                            <div className='time-ago'>{moment(txDate).fromNow()}</div>
+                            <div className='flex'>
+                              <div className='time-ago flex-auto'>{moment(txDate).fromNow()}</div>
+                              <div className='pdf'><a href={`/${username}/invoices/${transaction.id}`}>download invoice</a></div>
+                            </div>
                           </div>
                         </div>
                       </div>
