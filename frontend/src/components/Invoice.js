@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import Currency from './Currency';
-import { resizeImage } from '../lib/utils';
 import Table from 'rc-table';
 
 export default class Invoice extends Component {
@@ -17,11 +16,11 @@ export default class Invoice extends Component {
   render() {
     const {
       transactions,
-      user,
       i18n
     } = this.props;
 
-    const createdAt = new Date(transactions[0].createdAt);
+    const transaction = transactions[0];
+    const createdAt = new Date(transaction.createdAt);
     const year = createdAt.getFullYear();
     const month = createdAt.getMonth() + 1;
 
@@ -51,7 +50,7 @@ export default class Invoice extends Component {
     return (
       <div className='Invoice'>
           <h1>{i18n.moment(`${year}-${month}`).format('MMMM')} {year} Invoice</h1>
-          <div className="reference">Reference: {user.username}-{year}-{month}-1</div>
+          <div className="reference">Reference: {i18n.moment(createdAt).format('YYYYMM')}-{transaction.GroupId}-{transaction.id}</div>
           <Table columns={columns} data={data} rowClassName={(row, index) => (index === data.length - 1) ? `footer` : ''} />
       </div>
     );
