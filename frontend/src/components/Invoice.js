@@ -21,8 +21,6 @@ export default class Invoice extends Component {
     } = this.props;
 
     const createdAt = new Date(transaction.createdAt);
-    const year = createdAt.getFullYear();
-    const month = createdAt.getMonth() + 1;
 
     const columns = [
       {title: 'date', dataIndex: 'date', className: 'date' },
