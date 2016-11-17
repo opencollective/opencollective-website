@@ -17,7 +17,7 @@ export default (app) => {
    */
   app.get('/consciousnesshackingsf', (req, res) => res.redirect('/chsf'));
   app.get('/consciousnesshackingsv', (req, res) => res.redirect('/chsv'));
-  app.get('/github/apply/:token', (req, res) => res.redirect('/opensource/apply/:token'));
+  app.get('/github/apply/:token', (req, res) => res.redirect(`/opensource/apply/${req.params.token}`));
   app.get('/github/apply', (req, res) => res.redirect('/opensource/apply'));
 
   /**
