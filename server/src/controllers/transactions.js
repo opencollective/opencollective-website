@@ -5,21 +5,23 @@ import api from '../lib/api';
 import Invoice from '../../../frontend/src/components/Invoice';
 import i18nlib from '../../../frontend/src/lib/i18n';
 import pdf from 'html-pdf';
+import moment from 'moment';
 
 export function invoice(req, res) {
 
   const { transactionid, username } = req.params;
 
   api
-    .get(`/users/${username}/transactions/${transactionid}`)
+    .get(`/transactions/${transactionid}`)
     .then(transaction => {
-      console.log("transaction", transaction);
       const props = {
         i18n: i18nlib('en'),
-        transactions: [transaction],
+        transaction,
         user: { id: transaction.UserId, username }
       };
 
+      const invoiceDate = moment(transaction.createdAt);
+      const filename = `${invoiceDate.format('YYYYMMDD')}-${transaction.group.slug}.pdf`;
       const html = renderToString(<Invoice {...props} />);
 
       req.app.render('pages/invoice', {
@@ -28,8 +30,10 @@ export function invoice(req, res) {
         html
       }, (err, html) => {
         const options = {
-          format: 'Legal'
+          format: 'Letter'
         }
+        res.setHeader('content-type','application/pdf');
+        res.setHeader('content-disposition', `inline; filename="${filename}"`); // or attachment?
         pdf.create(html, options).toStream((err, stream) => {
           stream.pipe(res);
         });

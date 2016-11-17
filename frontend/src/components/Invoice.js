@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Currency from './Currency';
 import Table from 'rc-table';
+import {getGroupCustomStyles} from '../lib/utils';
 
 export default class Invoice extends Component {
 
@@ -15,11 +16,10 @@ export default class Invoice extends Component {
 
   render() {
     const {
-      transactions,
+      transaction,
       i18n
     } = this.props;
 
-    const transaction = transactions[0];
     const createdAt = new Date(transaction.createdAt);
     const year = createdAt.getFullYear();
     const month = createdAt.getMonth() + 1;
@@ -30,28 +30,51 @@ export default class Invoice extends Component {
       {title: 'amount', dataIndex: 'amount', key: 'amount'},
     ];
 
-    let total = 0;
-    let currency = 'USD';
-    const data = transactions.map(t => {
-      total += t.amount;
-      currency = t.currency;
-      return {
-        date: i18n.moment(t.createdAt).format('MM/DD'),
-        description: t.description,
-        amount: <Currency value={t.amount * 100} currency={t.currency} />
-      }
-    });
+    const data = [{
+      date: i18n.moment(transaction.createdAt).format('MM/DD'),
+      description: transaction.description,
+      amount: <Currency value={transaction.amount * 100} currency={transaction.currency} />
+    }];
 
     data.push({
       description: "Total",
-      amount: <Currency value={total * 100} currency={currency} />
+      amount: <Currency value={transaction.amount * 100} currency={transaction.currency} />
     });
 
+    const hostBillingAddress = (transaction.host.billingAddress || '').replace(/\n/g,'<br />');
+    const userBillingAddress = (transaction.user.billingAddress || '').replace(/\n/g,'<br />');
+
+    const styles = getGroupCustomStyles(transaction.group);
+    styles.hero.cover.backgroundImage = "url(http://localhost:3000/static/images/collectives/default-header-bg.jpg)";
     return (
       <div className='Invoice'>
-          <h1>{i18n.moment(`${year}-${month}`).format('MMMM')} {year} Invoice</h1>
-          <div className="reference">Reference: {i18n.moment(createdAt).format('YYYYMM')}-{transaction.GroupId}-{transaction.id}</div>
+         <a href={`https://opencollective.com/${transaction.group.slug}`}>
+          <div className="hero">
+            <div className="cover" style={styles.hero.cover} />
+            <div className="logo" style={{backgroundImage:`url('${transaction.group.logo}')`}} />
+          </div>
+        </a>
+        <div>
+          <h1>Invoice</h1>
+          <div className="detail"><label>Date:</label> {i18n.moment(createdAt).format('dd MMMM YYYY')}</div>
+          <div className="detail reference"><label>Reference:</label> {i18n.moment(createdAt).format('YYYYMM')}-{transaction.GroupId}-{transaction.id}</div>
+          <div className="userBillingAddress">
+            <span className="label">{i18n.getString('billTo')}:</span><br />
+            {transaction.user.name}<br />
+            <div dangerouslySetInnerHtml={userBillingAddress} />
+          </div>
           <Table columns={columns} data={data} rowClassName={(row, index) => (index === data.length - 1) ? `footer` : ''} />
+        </div>
+
+        <div className="footer">
+          <a href={transaction.host.website}>
+              <img src={transaction.host.avatar} />
+          </a><br />
+          <div className="hostBillingAddress">
+            {transaction.host.name}<br />
+            <div dangerouslySetInnerHtml={hostBillingAddress} />
+          </div>
+        </div>
       </div>
     );
   }
@@ -59,6 +82,5 @@ export default class Invoice extends Component {
 
 Invoice.PropTypes = {
   i18n: PropTypes.object.isRequired,
-  transactions: PropTypes.object,
-  user: PropTypes.object.isRequired
+  transaction: PropTypes.object.isRequired
 };
