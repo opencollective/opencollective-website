@@ -1,0 +1,15 @@
+{{>widgetlib}}
+
+var width = OC.getContainerWidth();
+
+var html = `
+  <center>
+    <iframe src="{{config.host.website}}/{{slug}}/widget?header={{options.header}}" width="${width}" height=300 frameborder=0></iframe>
+  </center>
+`;
+
+var e = document.createElement('div');
+e.id = 'opencollective-banner';
+e.innerHTML = html;
+
+OC.inject(e);

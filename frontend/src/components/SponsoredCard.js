@@ -1,8 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 
 import formatCurrency from '../lib/format_currency';
+import { resizeImage, getGroupCustomStyles } from '../lib/utils';
 
-const DEFAULT_BG = '/static/images/collectives/default-header-bg.jpg';
 const DEFAULT_LOGOS = [
   '/static/images/code.svg',
   '/static/images/rocket.svg',
@@ -12,36 +12,30 @@ const DEFAULT_LOGOS = [
 export default class SponsoredCard extends Component {
 
   render() {
-    const {
-      amount,
-      backgroundImage,
-      className,
-      currency,
-      interval,
-      key,
-      logo,
-      name,
-      publicUrl,
-      tier,
-    } = this.props;
+    const { index, group, tier, className, interval, width } = this.props;
 
-    const formattedAmount = formatCurrency(amount, currency, { compact: true, precision: 0 });
+    const formattedAmount = formatCurrency(group.amount, group.currency, { compact: true, precision: 0 });
+    const defaultLogo = DEFAULT_LOGOS[index || Math.floor(Math.random() * DEFAULT_LOGOS.length)];
 
+    group.settings = group.settings || {};
+    group.settings.style = getGroupCustomStyles(group);
+    if (group.backgroundImage && !group.backgroundImage.match(/^\//)) {
+      group.settings.style.hero.cover.backgroundImage = `url(${resizeImage(group.backgroundImage, { width: width * 2 || 320 })})`;
+    }
     return (
       <div className={`SponsoredCard ${className}`}>
-        <a href={publicUrl}>
+        <a href={group.publicUrl}>
           <div>
             <div className='SponsoredCard-head'>
-              <div className='SponsoredCard-background' style={{backgroundImage: `url(${backgroundImage || DEFAULT_BG})`}}>
-                <div className='SponsoredCard-image' style={{backgroundImage: `url(${logo || DEFAULT_LOGOS[key%DEFAULT_LOGOS.length]})`}}></div>
-              </div>
+              <div className='SponsoredCard-background' style={group.settings.style.hero.cover}></div>
+              <div className='SponsoredCard-image' style={{backgroundImage: `url(${group.logo || defaultLogo})`}}></div>
             </div>
             <div className='SponsoredCard-body'>
-              <div className='SponsoredCard-name'>{ name }</div>
+              <div className='SponsoredCard-name'>{ group.name }</div>
             </div>
             <div className='SponsoredCard-footer'>
-              <div className='SponsoredCard-type'>{ tier }</div>
-              <div className='SponsoredCard-amount'>{`${formattedAmount} ${interval}`}</div>
+              {tier && <div className='SponsoredCard-type'>{ tier }</div> }
+              {group.amount > 0 && <div className='SponsoredCard-amount'>{`${formattedAmount} ${interval}`}</div>}
             </div>
           </div>
         </a>
@@ -52,18 +46,17 @@ export default class SponsoredCard extends Component {
 }
 
 SponsoredCard.propTypes = {
-  amount: PropTypes.number.isRequired,
-  currency: PropTypes.string.isRequired,
+  group: PropTypes.object.isRequired,
   interval: PropTypes.string.isRequired,
-  logo: PropTypes.string,
-  name: PropTypes.string.isRequired,
-  publicUrl: PropTypes.string,
-  tier: PropTypes.string.isRequired,
+  tier: PropTypes.string,
+  index: PropTypes.number
 };
 
 SponsoredCard.defaultProps = {
-  amount: 0,
-  currency: 'USD',
-  interval: '',
-  tier: '',
-}
+  group: { 
+    amount: 0,
+    currency: 'USD',
+    interval: '',
+    tier: ''
+  }
+};

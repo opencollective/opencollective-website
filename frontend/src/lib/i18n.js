@@ -1,8 +1,7 @@
 import moment from './moment'
 import strings from '../ui/strings.json'; // eslint-disable-line
 
-export default (lang) => {
-  lang = lang || 'en';
+export default (lang = 'en') => {
   moment.locale(lang);
   return {
     getString: (strid, replacements = {}) => {
