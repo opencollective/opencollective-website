@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { push } from 'redux-router';
 import { StickyContainer } from 'react-sticky';
 import { createStructuredSelector } from 'reselect';
 import merge from 'lodash/merge';
@@ -10,6 +11,7 @@ import Notification from './Notification';
 // Components
 import CollectiveAboutUs from '../components/collective/CollectiveAboutUs';
 import CollectiveContributorMosaic from '../components/collective/CollectiveContributorMosaic';
+import CollectiveDonate from '../components/collective/CollectiveDonate';
 import CollectiveHero from '../components/collective/CollectiveHero';
 import CollectiveLedger from '../components/collective/CollectiveLedger';
 import CollectiveMembers from '../components/collective/CollectiveMembers';
@@ -39,6 +41,7 @@ import {
   canEditCollectiveSelector,
   getI18nSelector,
   getPopulatedCollectiveSelector,
+  isHostOfCollectiveSelector,
   hasHostSelector } from '../selectors/collectives';
 import {
   getEditCollectiveFormAttrSelector,
@@ -72,7 +75,8 @@ export class Collective extends Component {
       collective,
       editCollectiveInProgress,
       cancelEditCollectiveForm,
-      i18n
+      i18n,
+      hasHost
     } = this.props;
 
     return (
@@ -84,7 +88,10 @@ export class Collective extends Component {
             <EditTopBar onSave={ saveCollective.bind(this) } onCancel={ cancelEditCollectiveForm }/>}
 
           <CollectiveHero { ...this.props } />
-          <CollectiveLedger donateToCollective={ donateToCollective.bind(this) } { ...this.props } />
+          <CollectiveLedger { ...this.props } />
+
+          {hasHost && <CollectiveDonate onDonate={ donateToCollective.bind(this) } { ...this.props }/>}
+
           <CollectiveAboutUs { ...this.props } />
           <CollectiveMembers collective={ collective } i18n={ i18n } />
           <CollectiveContributorMosaic contributors={ collective.contributors } i18n={ i18n } />
@@ -187,16 +194,10 @@ export function donateToCollective({amount, frequency, currency, token, options}
   }
 
   return donate(collective.slug, payment, options)
-    .then(() => {
-      // Paypal will redirect to this page and we will refresh at that moment.
-      // A Stripe donation on the other hand is immediate after the request:
-      if (!(options && options.paypal)) {
-        this.setState({
-          showUserForm: !this.props.hasFullAccount,
-          showThankYouMessage: this.props.hasFullAccount
-        });
-      }
-    })
+    .then(() => this.setState({
+        showUserForm: !this.props.hasFullAccount,
+        showThankYouMessage: this.props.hasFullAccount
+      }))
     .catch((err) => notify('error', err.message));
 }
 
@@ -239,14 +240,13 @@ const mapStateToProps = createStructuredSelector({
     canEditCollective: canEditCollectiveSelector,
     editCollectiveForm: getEditCollectiveFormAttrSelector,
     editCollectiveInProgress: getEditCollectiveInProgressSelector,
+    isHost: isHostOfCollectiveSelector,
 
     // other props
     isAuthenticated: isSessionAuthenticatedSelector,
     i18n: getI18nSelector,
     loadData: getAppRenderedSelector,
     users: getUsersSelector
-
-    // TODO: add paypal props
   });
 
 export default connect(mapStateToProps, {
@@ -261,6 +261,7 @@ export default connect(mapStateToProps, {
   fetchUsers,
   getSocialMediaAvatars,
   notify,
+  push,
   updateCollective,
   updateUser,
   validateSchema

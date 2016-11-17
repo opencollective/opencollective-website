@@ -6,7 +6,7 @@
 }
 
 .Collective-title {
-  font-size: 1.75rem;
+  font-size: 1.25rem;
 }
 
 .Collective-subtitle {
@@ -34,7 +34,17 @@
   padding-top: 3rem;
 }
 
+.CollectiveLedger-title {
+  font-size: 1.5rem;
+}
 
+.CollectiveLedgerAvailableFunds .Currency {
+  float: right;
+}
+
+.CollectivePendingExpenses-list:hover {
+  cursor: pointer;
+}
 
 /* INTRO / WHO WE ARE */
 .CollectiveIntro::before {
@@ -112,7 +122,6 @@
 
 /* EXPENSES AND DONATIONS */
 .Collective-transactions {
-  padding: 6.25rem 0;
 }
 
 .Collective-emptyState {

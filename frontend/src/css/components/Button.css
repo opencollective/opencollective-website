@@ -7,7 +7,6 @@
   text-transform: uppercase;
   padding: calc(var(--spacing) * 0.75) var(--spacing);
   text-align: center;
-  display: inline-block;
   cursor: pointer;
   font-weight: bold
 }
@@ -26,6 +25,7 @@
 }
 
 .Button--approve,
+.Button--pay,
 .Button--save,
 .Button--green,
 .Button--add {
@@ -34,6 +34,7 @@
 }
 
 .Button--approve:hover,
+.Button--pay:hover,
 .Button--save:hover,
 .Button--add:hover,
 .Button--green:hover,
@@ -61,11 +62,13 @@
 }
 
 .Button--approve,
+.Button--pay,
 .Button--save,
 .Button--reject,
 .Button--cancel {
   box-sizing: border-box;
-  max-width: 300px;
+  width: calc(50% - calc(var(--spacing)/2));
+  float: left;
 }
 
 .Button--paypal,
