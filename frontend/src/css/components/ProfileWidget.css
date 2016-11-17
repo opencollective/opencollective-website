@@ -1,0 +1,41 @@
+.ProfileWidget {
+  text-align: center;
+
+  h1 {
+    margin-bottom: 0;
+  }
+
+  h2 {
+    margin-top: 0;
+    font-size: 16px;
+    font-weight: 300;
+  }
+
+  .SponsoredCard {
+    width: 140px;
+    margin: 10px;
+  }
+
+  .SponsoredCard-head {
+    width: 140px;
+    height: 90px;
+  }
+
+  .SponsoredCard-body {
+    height: 35px;
+    .SponsoredCard-name {
+      margin: 0px;
+      height: 35px;
+      line-height: 35px;
+      font-size: 12px;
+    }
+  }
+  
+  .SponsoredCard-type {
+    font-size: 10px;
+  }
+
+  .SponsoredCard-footer {
+    padding: 5px;
+  }
+}
