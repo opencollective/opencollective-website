@@ -45,7 +45,7 @@ export default class Invoice extends Component {
     const userBillingAddress = (transaction.user.billingAddress || '').replace(/\n/g,'<br />');
 
     const styles = getGroupCustomStyles(transaction.group);
-    styles.hero.cover.backgroundImage = "url(http://localhost:3000/static/images/collectives/default-header-bg.jpg)";
+
     return (
       <div className='Invoice'>
          <a href={`https://opencollective.com/${transaction.group.slug}`}>
