@@ -29,7 +29,7 @@ export default class PublicGroupMembersWall extends React.Component {
             { this.membersAndBackers.length < 10 &&
               this._showCards(this.membersAndBackers)}
             { this.membersAndBackers.length > 10 &&
-              <Mosaic hovercards={this.membersAndBackers} svg={`/${group.slug}/members.svg?exclude=sponsors&button=false&style=square&width=640&margin=0`} i18n={i18n} />
+              <Mosaic hovercards={this.membersAndBackers} svg={`/${group.slug}/members.svg?exclude=sponsors&button=false&width=640&margin=1`} i18n={i18n} />
             }
             </div>
             <div className='PublicGroupWhoWeAre-sponsors' className='flex flex-wrap justify-center'>

@@ -11,7 +11,7 @@ export default class ContributorList extends React.Component {
   return (
     <div className='PublicGroup-os-contrib-container'>
       <div className='line1' >+{ group.contributors.length } {i18n.getString('contributorsOnGithub')}</div>
-      <Mosaic hovercards={group.contributors} svg={`/${group.slug}/contributors.svg?button=false&style=square&width=640&margin=0`} i18n={i18n} />
+      <Mosaic hovercards={group.contributors} svg={`/${group.slug}/contributors.svg?button=false&width=640&margin=1`} i18n={i18n} />
     </div>
     );
   }
