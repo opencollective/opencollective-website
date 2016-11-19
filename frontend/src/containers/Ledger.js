@@ -72,7 +72,8 @@ export class Ledger extends Component {
 
   render() {
     const { 
-      collective, 
+      collective,
+      users,
       authenticatedUser, 
       i18n, 
       canEditCollective, 
@@ -117,6 +118,7 @@ export class Ledger extends Component {
               .map(expense => 
                 <CollectiveExpenseItem 
                   key={ expense.id }
+                  user={ users[expense.UserId] }
                   expense={ expense }
                   compact={ false }
                   i18n={ i18n }
