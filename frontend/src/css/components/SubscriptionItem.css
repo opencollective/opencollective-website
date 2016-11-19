@@ -131,6 +131,10 @@
             font-weight: 400;
             color: #969696;
           }
+          .pdf {
+            font-size: 0.8rem;
+            margin: 1px;
+          }
           .amount {
             height: 17px;
             font-family: Lato;

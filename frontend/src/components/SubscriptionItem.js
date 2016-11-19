@@ -65,7 +65,10 @@ export default class SubscriptionItem extends Component {
                               </div>
                               <div className='amount'>{formattedAmount}<small>{currency}</small></div>
                             </div>
-                            <div className='time-ago'>{moment(txDate).fromNow()}</div>
+                            <div className='flex'>
+                              <div className='time-ago flex-auto'>{moment(txDate).fromNow()}</div>
+                              <div className='pdf'><a href={`/${Group.slug}/transactions/${transaction.id}/invoice.pdf`}>download invoice</a></div>
+                            </div>
                           </div>
                         </div>
                       </div>
