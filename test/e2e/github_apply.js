@@ -5,7 +5,7 @@ module.exports = {
   '@tags': ['connect_account_page'],
 
   beforeEach: (client) => resetDb(client)
-    .url(`${config.host.website}/github/apply`)
+    .url(`${config.host.website}/opensource/apply`)
     .waitForElementVisible('body', 1000),
 
   'Redirects to Github after clicking connect': (client) => {
@@ -30,7 +30,7 @@ module.exports = {
 
       .waitForElementVisible('body', 10000)
       // TODO this returns OK even if it's a 404 page: 404s should change window location
-      .assert.urlContains('http://localhost:3000/github/apply')
+      .assert.urlContains('http://localhost:3000/opensource/apply')
       .waitForElementVisible('.OnBoardingButton', 1000)
       .click('.OnBoardingButton') // Repo already selected, click continue
       .waitForElementVisible('.ContributorPickerItemSearch-list-container', 1000)

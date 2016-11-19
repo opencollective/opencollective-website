@@ -99,7 +99,7 @@ export class ProfilePage extends Component {
             <section>
               <div className="lineA">{i18n.getString('proudMember')}</div>
               {belongsTo.map((group, index) => <CollectiveCard
-                key={index}
+                index={index}
                 i18n={i18n}
                 isCollectiveOnProfile={true}
                 group={group}
@@ -115,17 +115,10 @@ export class ProfilePage extends Component {
                 // When sponsored amount & tier exists the `SponsoredCard` will be rendered
                 if (group.myTier) {
                   return (
-                    <SponsoredCard
-                      key={index}
-                      i18n={i18n}
-                      isCollectiveOnProfile={true}
-                      {...group}
-                      amount={group.myTotalDonations}
-                      tier={group.myTier}
-                    />
+                    <SponsoredCard tier={group.myTier} index={index} i18n={i18n} group={group} />
                   )
                 } else {
-                  return <CollectiveCard key={index} i18n={i18n} isCollectiveOnProfile={true} group={group} />
+                  return <CollectiveCard isCollectiveOnProfile={true} index={index} i18n={i18n} group={group} />
                 }
               })}
             </section>

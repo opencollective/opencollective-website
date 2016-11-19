@@ -2,25 +2,27 @@ import React, { Component, PropTypes } from 'react';
 
 import CollectivePendingExpenses from './CollectivePendingExpenses';
 import CollectiveTransactions from './CollectiveTransactions';
-import CollectiveDonate from './CollectiveDonate';
 import Currency from '../Currency';
 
 export default class CollectiveLedger extends Component {
 
   render(){
-    const { collective, i18n, hasHost } = this.props; 
+    const { collective, i18n } = this.props; 
     return (
       <section id='budget' className='px2'>
-        <div className='CollectiveLedger clearfix md-flex'>
-          <div className='CollectiveLedgerItems'>
-            <div className='CollectiveLedgerAvailableFunds'>
-              <h4 className='Collective-title m0 -ff-sec -fw-bold'>{i18n.getString('fundsAvailable')}</h4>
-              <h3> <Currency value={ collective.balance/100 } currency={ collective.currency } precision={0} /></h3>
+        <div className='CollectiveLedger clearfix md-flex justify-center'>
+          <div className='CollectiveLedger-lhs clearfix flex-column mr2 max-width-2'>
+            <CollectivePendingExpenses {...this.props} /> 
+          </div>
+          <div className='CollectiveLedger-activity max-width-1 ml1'>
+            <div className='CollectiveLedgerAvailableFunds clearfix border-bottom border-gray pb2 mb3 flex justify-between'>
+              <h3 className='Collective-title m0 -fw-bold flex-auto'>{i18n.getString('fundsAvailable')}: </h3>
+              <p className='h3 m0 -ff-sec right-align'> 
+                <Currency value={ collective.balance } currency={ collective.currency } precision={ 2 } />
+              </p>
             </div>
-            <CollectivePendingExpenses {...this.props} />
             <CollectiveTransactions {...this.props} />
           </div>
-          {hasHost && <CollectiveDonate {...this.props } />}
         </div>
       </section>
     );
@@ -30,8 +32,4 @@ export default class CollectiveLedger extends Component {
 CollectiveLedger.propTypes = {
   collective: PropTypes.object.isRequired,
   i18n: PropTypes.object.isRequired,
-  hasHost: PropTypes.bool.isRequired,
-  users: PropTypes.object,
-  donate: PropTypes.func,
-  itemsToShow: PropTypes.number
 };
