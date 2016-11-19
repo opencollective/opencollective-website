@@ -8,9 +8,8 @@ import _ from 'lodash';
 const readFile = Promise.promisify(fs.readFile);
 
 export function getCloudinaryUrl(src, { width, height, query }) {
-
   // We don't try to resize animated gif, svg or images already processed by cloudinary
-  if (src.match(/cloudinary.com/) || src.match(/\.gif$/) || (src.match(/\.svg/))) {
+  if (src.match(/cloudinary.com/) || src.match(/\.gif$/) || (src.match(/\.svg/)) || src.match(/localhost\:3000/)) {
     return src;
   }
 

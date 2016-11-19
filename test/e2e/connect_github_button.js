@@ -31,7 +31,7 @@ module.exports = {
       // .click('button[name=authorize]') // click 'Authorize application'
 
       .waitForElementVisible('body', 2000)
-      .assert.urlContains('http://localhost:3000/github/apply')
+      .assert.urlContains('http://localhost:3000/opensource/apply')
       .end();
   }
 };

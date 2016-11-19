@@ -33,6 +33,10 @@
     padding: 8rem 0 6rem;
   }
 
+  .CollectiveHero-logo {
+    height: 10rem;
+  }
+
   .UserPhoto {
     width: 240px;
     width: 15rem;

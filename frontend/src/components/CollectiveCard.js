@@ -60,11 +60,12 @@ export default class CollectiveCard extends Component {
   }
 
   render() {
-    const { i18n, key, group, isSponsor } = this.props;
+    const { i18n, group, isSponsor } = this.props;
 
     const {
       backgroundImage,
       logo,
+      index,
       name,
       publicUrl,
       isCollectiveOnProfile
@@ -90,13 +91,15 @@ export default class CollectiveCard extends Component {
 
     const description = group.mission ? `${i18n.getString('missionTo')} ${group.mission}` : group.description;
 
+    const defaultLogo = DEFAULT_LOGOS[index || Math.floor(Math.random() * DEFAULT_LOGOS.length)];
+
     return (
       <div className={`CollectiveCard ${className}`}>
         <a href={publicUrl}>
           <div>
             <div className='CollectiveCard-head'>
               <div className='CollectiveCard-background' style={group.settings.style.hero.cover}></div>
-              <div className='CollectiveCard-image' style={{backgroundImage: `url(${logo || DEFAULT_LOGOS[key%DEFAULT_LOGOS.length]})`}}></div>
+              <div className='CollectiveCard-image' style={{backgroundImage: `url(${logo || defaultLogo})`}}></div>
             </div>
             <div className='CollectiveCard-body'>
               <div className='CollectiveCard-name'>{name}</div>
@@ -123,8 +126,8 @@ export default class CollectiveCard extends Component {
 }
 
 CollectiveCard.propTypes = {
-  name: PropTypes.string.isRequired,
-  description: PropTypes.string,
-  logo: PropTypes.string,
-  url: PropTypes.string
+  group: PropTypes.object.isRequired,
+  i18n: PropTypes.object.isRequired,
+  index: PropTypes.number,
+  isSponsor: PropTypes.boolean
 };

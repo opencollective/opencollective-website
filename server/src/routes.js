@@ -17,6 +17,8 @@ export default (app) => {
    */
   app.get('/consciousnesshackingsf', (req, res) => res.redirect('/chsf'));
   app.get('/consciousnesshackingsv', (req, res) => res.redirect('/chsv'));
+  app.get('/github/apply/:token', (req, res) => res.redirect(`/opensource/apply/${req.params.token}`));
+  app.get('/github/apply', (req, res) => res.redirect('/opensource/apply'));
 
   /**
    * Server status
@@ -91,8 +93,9 @@ export default (app) => {
   app.get('/:slug/badge/:tier.svg', mw.cache(300), mw.fetchActiveUsers(), controllers.banner.badge);
   app.get('/:slug/:tier/:position/avatar(.:format(png|jpg|svg))?', mw.cache(300), mw.ga, mw.fetchActiveUsers({cache: 300}), controllers.banner.avatar);
   app.get('/:slug/:tier/:position/website', mw.ga, mw.fetchActiveUsers(), controllers.banner.redirect);
-  app.get('/:slug([A-Za-z0-9-]+)/widget', mw.cache(300), mw.fetchGroupBySlug, controllers.collectives.widget);
   app.get('/:slug([A-Za-z0-9-]+)/transactions/:transactionid/invoice.pdf', mw.cache(300), controllers.transactions.invoice);
+  app.get('/:slug([A-Za-z0-9-]+)/widget', mw.cache(300), mw.fetchProfileBySlug, controllers.widgets.profile);
+  app.get('/:slug([A-Za-z0-9-]+)/widget.js', mw.cache(3000), controllers.widgets.js);
 
   /**
    * Server side render the react app
@@ -111,23 +114,23 @@ export default (app) => {
   app.get('/login', mw.ga, mw.addTitle('Open Collective Login'), render);
   app.get('/opensource/apply/:token', mw.ga, mw.extractGithubUsernameFromToken, mw.addTitle('Sign up your Github repository'), render);
   app.get('/opensource/apply', mw.ga, mw.addTitle('Sign up your Github repository'), render);
-  /* Leaving github/apply routes for existing links */
-  app.get('/github/apply/:token', mw.ga, mw.extractGithubUsernameFromToken, mw.addTitle('Sign up your Github repository'), render);
-  app.get('/github/apply', mw.ga, mw.addTitle('Sign up your Github repository'), render);
   app.get('/connect/github', mw.ga, render);
-  app.get('/:slug([A-Za-z0-9-_]+)/transactions', mw.ga, controllers.profile, mw.addMeta, render);
+  app.get('/:slug([A-Za-z0-9-_]+)/transactions/expenses/new', mw.ga, mw.fetchProfileBySlug, mw.addMeta, render);
+  app.get('/:slug([A-Za-z0-9-_]+)/transactions/expenses', mw.ga, mw.fetchProfileBySlug, mw.addMeta, render);
+  app.get('/:slug([A-Za-z0-9-_]+)/transactions', mw.ga, mw.fetchProfileBySlug, mw.addMeta, render);
   app.get('/:slug/:tier\.:format(json|csv)', mw.ga, mw.fetchGroupBySlug, controllers.tierList); // <-------- WIP
   app.get('/:slug/:tier', mw.ga, mw.fetchGroupBySlug, render); // <-------- WIP
   app.get('/:slug/connect/:provider', mw.ga, render);
-  app.get('/:slug/edit-twitter', mw.ga, controllers.profile, render);
+  app.get('/:slug/edit-twitter', mw.ga, mw.fetchProfileBySlug, render);
   app.get('/:slug/edit', mw.ga, mw.addTitle('Edit'), mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/subscriptions', mw.ga, mw.addTitle('My Subscriptions'), render);
   app.get('/:slug([A-Za-z0-9-_]+)/connected-accounts', mw.ga, render);
+  // TODO: #cleanup remove next two routes when new collective page is live
   app.get('/:slug([A-Za-z0-9-_]+)/:type(expenses|donations)', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-_]+)/expenses/new', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-_]+)/donate/:amount', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-_]+)/donate/:amount/:interval', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
-  app.get('/:slug([A-Za-z0-9-_]+)', mw.ga, controllers.profile, mw.addMeta, render);
+  app.get('/:slug([A-Za-z0-9-_]+)', mw.ga, mw.fetchProfileBySlug, mw.addMeta, render);
 
   app.use(mw.handleUncaughtError);
 };

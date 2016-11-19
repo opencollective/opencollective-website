@@ -43,8 +43,8 @@ export default class Markdown extends Component {
         // we split it into multiple sections
         return (
           <div>
-            { sections.map(section =>
-              <div className='section' id={formatAnchor(section.title)}>
+            { sections.map((section, index) =>
+              <div className='section' key={index} id={formatAnchor(section.title)}>
                 <div
                   className={`${className} container ${placeholderClass}`}
                   dangerouslySetInnerHTML={ this.rawMarkup(section.markdown)}

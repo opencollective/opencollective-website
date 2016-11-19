@@ -3,7 +3,6 @@ import merge from 'lodash/merge';
 const DEFAULT_GROUP_STYLES = { 
   hero: { 
     cover: { 
-      filter: "blur(4px)",
       transform: "scale(1.06)",
       backgroundImage: "url('/static/images/collectives/default-header-bg.jpg')"
     }, 
@@ -56,4 +55,17 @@ export function getGroupCustomStyles(group) {
     styles.hero.cover.backgroundImage = `url(${resizeImage(group.backgroundImage, { width: 1024 })})`;
   }
   return merge({}, styles, group.settings.style);
+}
+
+// Hack because react-router doesn't scroll
+export function scrollToExpense() {
+  const hash = window.location.hash;
+  if (window.location.hash) {
+    const element = document.querySelector(hash);
+    if (element) {
+      element.scrollIntoView();
+    }
+  } else {
+   window.scrollTo(0, 0);
+  }
 }
