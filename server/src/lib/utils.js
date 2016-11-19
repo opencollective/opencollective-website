@@ -53,6 +53,9 @@ export function filterUsers(users, filters) {
         }
       });
       break;
+    case 'member':
+      users = users.filter(u => u.role !== 'HOST');
+      break;
     case 'backer':
     case 'sponsor':
       users = filterUsersByTier(users, tierSingular);
