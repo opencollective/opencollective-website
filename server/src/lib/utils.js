@@ -40,6 +40,7 @@ export function filterUsers(users, filters) {
   if (!users) return [];
   const { tier, exclude, requireAvatar } = filters;
   const tierSingular = tier && tier.replace(/s$/,'');
+  let index = 0;
 
   // Used to sort users by tier
   const rank = (tier) => {
@@ -67,7 +68,6 @@ export function filterUsers(users, filters) {
       break;
     case 'member':
       users = users.filter(u => u.role !== 'HOST');
-      let index = 0;
       users = users.map(u => {
         u.index = index++;
         return u;
