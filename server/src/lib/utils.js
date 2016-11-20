@@ -40,6 +40,19 @@ export function filterUsers(users, filters) {
   if (!users) return [];
   const { tier, exclude, requireAvatar } = filters;
   const tierSingular = tier && tier.replace(/s$/,'');
+  let index = 0;
+
+  // Used to sort users by tier
+  const rank = (tier) => {
+    const pos = {
+      'member': 1,
+      'core contributor': 1,
+      'backer': 2,
+      'sponsor': 3,
+      'contributor': 4
+    }
+    return pos[tier] || 5;
+  }
 
   switch (tierSingular) {
     case 'contributor':
@@ -55,6 +68,16 @@ export function filterUsers(users, filters) {
       break;
     case 'member':
       users = users.filter(u => u.role !== 'HOST');
+      users = users.map(u => {
+        u.index = index++;
+        return u;
+      })
+      // We sort by tier (make sure "core contributors" show first)
+      users.sort((a, b) => {
+        if (rank(a.tier) > rank(b.tier)) return 1;
+        if (rank(a.tier) < rank(b.tier)) return -1;
+        return a.index - b.index; // make sure we keep the original order within a tier (typically totalDonations DESC)
+      });
       break;
     case 'backer':
     case 'sponsor':
