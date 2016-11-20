@@ -404,6 +404,11 @@ function mapStateToProps({
   if (group.name && window.document)
     document.title = `${group.name} is on Open Collective`;
 
+  // Order the collectives by number of backers DESC
+  if (group.superCollectiveData && group.superCollectiveData.length > 0) {
+    group.superCollectiveData.sort((a,b) => b.backersAndSponsorsCount - a.backersAndSponsorsCount);
+  }
+
   return {
     group,
     users,
