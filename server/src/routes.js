@@ -7,7 +7,7 @@ import request from 'request';
 import robots from 'robots.txt';
 import * as controllers from './controllers';
 import apiUrl from './utils/api_url';
-import render from './lib/render';
+import { render, renderJSON } from './lib/render';
 import { getCloudinaryUrl } from './lib/utils';
 
 export default (app) => {
@@ -88,6 +88,7 @@ export default (app) => {
   app.get('/:slug/banner.md', mw.cache(300), mw.fetchGroupBySlug, mw.fetchActiveUsers(), controllers.banner.markdown);
   app.get('/:slug/banner.js', mw.cache(3000), mw.fetchGroupBySlug, mw.fetchActiveUsers(), controllers.banner.js);
   app.get('/:slug/:tier.md', mw.cache(300), mw.fetchGroupBySlug, mw.fetchActiveUsers(), controllers.banner.markdown);
+  app.get('/:slug/:tier.json', mw.cache(900), mw.fetchActiveUsers(), renderJSON('users'));
   app.get('/:slug/:tier.:format(svg|png)', mw.cache(300), mw.fetchActiveUsers(), controllers.banner.banner);
   app.get('/:slug/:tier/badge.svg', mw.cache(300), mw.fetchActiveUsers(), controllers.banner.badge);
   app.get('/:slug/badge/:tier.svg', mw.cache(300), mw.fetchActiveUsers(), controllers.banner.badge);

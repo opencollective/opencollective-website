@@ -16,7 +16,7 @@ import hydrate from '../../../frontend/src/actions/session/hydrate';
  * Example taken from redux-router documentation
  * https://github.com/acdlite/redux-router/tree/master/examples/server-rendering
  */
-export default (req, res, next) => {
+export function render(req, res, next) {
 
   const store = compose(
     reduxReactRouter({ routes, createHistory: createMemoryHistory }),
@@ -60,4 +60,11 @@ export default (req, res, next) => {
       });
     }
   }));
+}
+
+export function renderJSON(attr) {
+  return (req, res) => {
+    res.setHeader('content-type','application/json');
+    res.send(req[attr]);
+  }
 }
