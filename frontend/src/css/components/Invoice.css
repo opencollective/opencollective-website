@@ -1,17 +1,32 @@
 .Invoice {
-  padding: 30px 20px;
+  padding: 30px;
   font-size: 12px;
+  max-width: 600px;
+
+  .header {
+    margin: 10px 0px;
+    overflow: hidden;
+    h1 {
+      margin: 10px 0px 0px;
+      line-height: 20px;
+    }
+  }
+
+  .row {
+    overflow: hidden;
+  }
 
   .hero {
+    border-radius: 3px;
     float: left;
-    border-radius: 5px;
     overflow: hidden;
-    width: 240px;
-    height: 160px;
+    width: 120px;
+    height: 60px;
     position: relative;
-    margin: 10px 20px 20px 0px;
+    margin: 0px 20px 20px 0px;
     .cover {
       position: absolute;
+      background-size: cover;
       width: 100%;
       height: 100%;
       top: 0;
@@ -26,30 +41,45 @@
       right: 0;
       top: 0;
       bottom: 0;
-      width: 65%;
-      height: 55%;
+      max-width: 75%;
+      max-height: 75%;
       margin: auto;
     }
   }
 
-  .rc-table {
-    clear: both;
+  .userBillingAddress {
+    float: left;
+    margin-right: 40px;
   }
 
-  h1 {
+  .invoiceDetails {
+    float: left;
+  }
+
+  label {
+    display: inline-block;
+    width: 4rem;
+  }
+
+  .rc-table {
+    clear: both;
+    margin: 100px 0px;
+  }
+
+  h2 {
     margin-bottom: 0;
-    font-size: 16px;
+    font-size: 14px;
   }
 
   table {
     margin: 80px 20px;
 
     td {
-      padding: 2px 0px;
+      padding: 2px;
     }
 
     .date {
-      width: 3rem;
+      width: 2rem;
     }
 
     .footer {
@@ -57,22 +87,16 @@
       font-weight: bold;
       text-align: left;
       font-size: 12px;
+      img {
+        max-height: 100px;
+      }
     }
   }
 
-  .detail label {
-    width: 10rem;
-  }
-}
-
-.userBillingAddress {
-  margin: 1rem 0;
-  .label {
-    font-weight: bold;
-  }
 }
 
 .footer {
+  margin-top: 200px;
   text-align: center;
   font-size: 10px;
 

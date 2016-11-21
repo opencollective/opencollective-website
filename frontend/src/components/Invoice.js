@@ -39,30 +39,43 @@ export default class Invoice extends Component {
       amount: <Currency value={transaction.amount * 100} currency={transaction.currency} />
     });
 
-    const hostBillingAddress = (transaction.host.billingAddress || '').replace(/\n/g,'<br />');
-    const userBillingAddress = (transaction.user.billingAddress || '').replace(/\n/g,'<br />');
-
+    const hostBillingAddress = { __html : (transaction.host.billingAddress || '').replace(/\n/g,'<br />') };
+    const userBillingAddress = { __html : (transaction.user.billingAddress || '').replace(/\n/g,'<br />') };
+    console.log("transaction", transaction);
+    console.log("hostBillingAddress", hostBillingAddress);
     const styles = getGroupCustomStyles(transaction.group);
 
     return (
       <div className='Invoice'>
-         <a href={`https://opencollective.com/${transaction.group.slug}`}>
-          <div className="hero">
-            <div className="cover" style={styles.hero.cover} />
-            <div className="logo" style={{backgroundImage:`url('${transaction.group.logo}')`}} />
+
+        <div className="header">
+          <a href={`https://opencollective.com/${transaction.group.slug}`}>
+            <div className="hero">
+              <div className="cover" style={styles.hero.cover} />
+              <div className="logo" style={{backgroundImage:`url('${transaction.group.logo}')`}} />
+            </div>
+          </a>
+
+          <div className="collectiveInfo">
+            <h1>{transaction.group.name}</h1>
+            <a href={`https://opencollective.com/${transaction.group.slug}`} className="website">https://opencollective.com/{transaction.group.slug}</a>
           </div>
-        </a>
-        <div>
-          <h1>Invoice</h1>
-          <div className="detail"><label>Date:</label> {i18n.moment(createdAt).format('dd MMMM YYYY')}</div>
-          <div className="detail reference"><label>Reference:</label> {i18n.moment(createdAt).format('YYYYMM')}-{transaction.GroupId}-{transaction.id}</div>
-          <div className="userBillingAddress">
-            <span className="label">{i18n.getString('billTo')}:</span><br />
-            {transaction.user.name}<br />
-            <div dangerouslySetInnerHtml={userBillingAddress} />
-          </div>
-          <Table columns={columns} data={data} rowClassName={(row, index) => (index === data.length - 1) ? `footer` : ''} />
         </div>
+
+        <div className="row">
+          <div className="userBillingAddress">
+            <h2>{i18n.getString('billTo')}:</h2>
+            {transaction.user.name}<br />
+            <div dangerouslySetInnerHTML={userBillingAddress} />
+          </div>
+          <div className="invoiceDetails">
+            <h2>Invoice</h2>
+            <div className="detail"><label>Date:</label> {i18n.moment(createdAt).format('D MMMM YYYY')}</div>
+            <div className="detail reference"><label>Reference:</label> {i18n.moment(createdAt).format('YYYYMM')}-{transaction.GroupId}-{transaction.id}</div>
+          </div>
+        </div>
+
+        <Table columns={columns} data={data} rowClassName={(row, index) => (index === data.length - 1) ? `footer` : ''} />
 
         <div className="footer">
           <a href={transaction.host.website}>
@@ -70,7 +83,7 @@ export default class Invoice extends Component {
           </a><br />
           <div className="hostBillingAddress">
             {transaction.host.name}<br />
-            <div dangerouslySetInnerHtml={hostBillingAddress} />
+            <div dangerouslySetInnerHTML={hostBillingAddress} />
           </div>
         </div>
       </div>

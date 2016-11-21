@@ -35,6 +35,7 @@
 
   .PublicGroupHero-logo {
     height: 10rem;
+    max-width: 400px;
   }
 
   .UserPhoto {
