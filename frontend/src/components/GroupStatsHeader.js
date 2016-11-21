@@ -43,5 +43,5 @@ export default class GroupStatsHeader extends Component {
 
 GroupStatsHeader.propTypes = {
   group: PropTypes.object.isRequired,
-  i18n: PropTypes.func.isRequired
+  i18n: PropTypes.object.isRequired
 };
