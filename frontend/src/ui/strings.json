@@ -577,5 +577,15 @@
   },
   "wpsfo":{
     "helpUsContinueOurActivities": "With your support, you’ll help build the local WordPress community! All funds are processed by OpenCollective and are managed through Exygy’s fiscal sponsorship"
+  },
+ "individual":{
+ "helpUsContinueOurActivities": "With your support, you’ll help me cover the expenses I have and you'll allow me to keep going!",
+ "hiThisIs": "Hi! This is ",	
+ "joinAndFulfil": "Join me and help me fulfill this mission",
+ "latestExpenses": "Latest expenses",
+ "menuSupportUs": "Support my work",
+ "missionTo": "I am on a mission to", 
+ "weAre": "I am",
+ "weHave": "I have" 
   }
 }
