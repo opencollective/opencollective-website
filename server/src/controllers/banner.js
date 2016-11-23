@@ -112,8 +112,13 @@ export default {
         const imageHeight = Math.round(maxHeight / 2);
         let imageWidth = 64;
         if (tier.match(/sponsor/)) {
-          const dimensions = sizeOf(data);
-          imageWidth = Math.round(dimensions.width / dimensions.height * imageHeight);
+          try {
+            const dimensions = sizeOf(data);
+            imageWidth = Math.round(dimensions.width / dimensions.height * imageHeight);
+          } catch (e) {
+            console.error("Unable to get image dimensions for ", imageUrl);
+            return res.status(500).send(`Unable to fetch ${imageUrl}`);
+          }
         }
 
         const base64data = new Buffer(data).toString('base64');
