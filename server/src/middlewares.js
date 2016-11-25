@@ -14,7 +14,7 @@ const fetchActiveUsers = (options) => {
     const filters = {
       tier: req.params.tier,
       exclude: req.query.exclude,
-      requireAvatar: req.query.requireAvatar !== 'false' // by default, we skip users without avatar
+      requireAvatar: (typeof options.requireAvatar === 'boolean') ? options.requireAvatar : req.query.requireAvatar !== 'false' // by default, we skip users without avatar
     };
 
     let fetchUsers;
