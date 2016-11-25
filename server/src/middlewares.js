@@ -8,7 +8,7 @@ import { filterUsers } from './lib/utils';
 /**
  * Fetch users by slug
  */
-const fetchActiveUsers = (options) => {
+const fetchActiveUsers = (options = {}) => {
   return (req, res, next) => {
 
     const filters = {
