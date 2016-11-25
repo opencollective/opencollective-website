@@ -49,12 +49,13 @@ export function fixURI(weburl) {
 }
 
 export function getGroupCustomStyles(group) {
-  const styles = merge({}, DEFAULT_GROUP_STYLES);
-  if (!group) return styles;
+  if (!group) return Object.assign({}, DEFAULT_GROUP_STYLES);
+
+  const styles = merge({}, DEFAULT_GROUP_STYLES, group.settings.style);
   if (group.backgroundImage) {
     styles.hero.cover.backgroundImage = `url(${resizeImage(group.backgroundImage, { width: 1024 })})`;
   }
-  return merge({}, styles, group.settings.style);
+  return styles;
 }
 
 // Hack because react-router doesn't scroll
