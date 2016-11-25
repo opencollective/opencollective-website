@@ -8,8 +8,10 @@ import _ from 'lodash';
 const readFile = Promise.promisify(fs.readFile);
 
 export function getCloudinaryUrl(src, { width, height, query }) {
+  const cloudinaryBaseUrl = 'https://res.cloudinary.com/opencollective/image/fetch';
+
   // We don't try to resize animated gif, svg or images already processed by cloudinary
-  if (src.match(/cloudinary.com/) || src.match(/\.gif$/) || (src.match(/\.svg/)) || src.match(/localhost\:3000/)) {
+  if (src.substr(0, cloudinaryBaseUrl.length) === cloudinaryBaseUrl || src.match(/\.gif$/) || (src.match(/\.svg/)) || src.match(/localhost\:3000/)) {
     return src;
   }
 
@@ -22,7 +24,7 @@ export function getCloudinaryUrl(src, { width, height, query }) {
 
   const queryurl = query || `/${size}c_fill,f_${format}/`;
 
-  return `https://res.cloudinary.com/opencollective/image/fetch${queryurl}${encodeURIComponent(src)}`;
+  return `${cloudinaryBaseUrl}${queryurl}${encodeURIComponent(src)}`;
 }
 
 export function filterUsersByTier(users, tiername) {
