@@ -57,6 +57,7 @@ const fetchProfileBySlug = (req, res, next) => {
     .get(`/profile/${req.params.slug.toLowerCase()}`)
     .then(profile => {
       req.group = profile; // backward compatibility: PublicPage.js expects `groups` before loading ProfilePage.
+      req.collective = profile;
       if (profile.username) {
         req.user = profile;
       }
