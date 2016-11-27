@@ -60,7 +60,7 @@ export default class CollectiveCard extends Component {
   }
 
   render() {
-    const { i18n, group, isSponsor } = this.props;
+    const { i18n, group, isSponsor, target } = this.props;
 
     const {
       backgroundImage,
@@ -95,7 +95,7 @@ export default class CollectiveCard extends Component {
 
     return (
       <div className={`CollectiveCard ${className}`}>
-        <a href={publicUrl}>
+        <a href={publicUrl} target={target}>
           <div>
             <div className='CollectiveCard-head'>
               <div className='CollectiveCard-background' style={group.settings.style.hero.cover}></div>
@@ -129,5 +129,16 @@ CollectiveCard.propTypes = {
   group: PropTypes.object.isRequired,
   i18n: PropTypes.object.isRequired,
   index: PropTypes.number,
+  target: PropTypes.string,
   isSponsor: PropTypes.boolean
+};
+
+CollectiveCard.defaultProps = {
+  target: '_top',
+  group: {
+    amount: 0,
+    currency: 'USD',
+    interval: '',
+    tier: ''
+  }
 };

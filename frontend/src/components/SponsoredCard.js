@@ -12,7 +12,7 @@ const DEFAULT_LOGOS = [
 export default class SponsoredCard extends Component {
 
   render() {
-    const { index, group, tier, className, interval, width } = this.props;
+    const { index, group, tier, className, interval, width, target } = this.props;
 
     const formattedAmount = formatCurrency(group.amount, group.currency, { compact: true, precision: 0 });
     const defaultLogo = DEFAULT_LOGOS[index || Math.floor(Math.random() * DEFAULT_LOGOS.length)];
@@ -24,7 +24,7 @@ export default class SponsoredCard extends Component {
     }
     return (
       <div className={`SponsoredCard ${className}`}>
-        <a href={group.publicUrl}>
+        <a href={group.publicUrl} target={target}>
           <div>
             <div className='SponsoredCard-head'>
               <div className='SponsoredCard-background' style={group.settings.style.hero.cover}></div>
@@ -42,18 +42,19 @@ export default class SponsoredCard extends Component {
       </div>
     );
   }
-
 }
 
 SponsoredCard.propTypes = {
   group: PropTypes.object.isRequired,
   interval: PropTypes.string.isRequired,
   tier: PropTypes.string,
+  target: PropTypes.string,
   index: PropTypes.number
 };
 
 SponsoredCard.defaultProps = {
-  group: { 
+  target: '_top',
+  group: {
     amount: 0,
     currency: 'USD',
     interval: '',
