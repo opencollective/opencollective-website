@@ -26,10 +26,10 @@ export default ({
             // When sponsored amount & tier exists the `SponsoredCard` will be rendered
             if (group.myTier) {
               return (
-                <SponsoredCard tier={group.myTier} index={index} width={140} i18n={i18n} group={group} />
+                <SponsoredCard tier={group.myTier} index={index} width={140} i18n={i18n} group={group} target="_blank" />
               )
             } else {
-              return <CollectiveCard index={index} width={140} i18n={i18n} isCollectiveOnProfile={true} group={group} />
+              return <CollectiveCard index={index} width={140} i18n={i18n} isCollectiveOnProfile={true} group={group} target="_blank" />
             }
           })}
         </section>
