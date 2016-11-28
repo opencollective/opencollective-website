@@ -110,7 +110,7 @@ export class Transactions extends Component {
 
     switch (type) {
       case 'expenses':
-        if (!group.expenses || group.expenses.length === 0)
+        if (!group.expenses || group.expenses.length < 4)
           fetchExpenses(group.slug, options);
         break;
 
