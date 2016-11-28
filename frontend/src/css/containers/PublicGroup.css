@@ -1,5 +1,6 @@
 /* GENERAL */
 .PublicGroup {
+  overflow: hidden;
   .LoginTopBar {
     margin-bottom: 20px;
   }
@@ -481,6 +482,7 @@
   text-align: center;
   iframe {
     border: none;
+    max-width: 100%;
   }
 }
 
