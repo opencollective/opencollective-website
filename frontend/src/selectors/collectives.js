@@ -42,7 +42,7 @@ export const getCollectiveSelector = createSelector(
 export const getCollectiveSettingsSelector = createSelector(
   getCollectiveSelector,
   (collective) => {
-    const settings = merge({}, collective.settings, DEFAULT_COLLECTIVE_SETTINGS);
+    const settings = merge({}, DEFAULT_COLLECTIVE_SETTINGS, collective.settings);
 
     if (collective.backgroundImage) {
       settings.style.hero.cover.backgroundImage = `url(${resizeImage(collective.backgroundImage, { width: 1024 })})`;
