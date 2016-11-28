@@ -9,7 +9,8 @@ export default class CollectiveAboutUs extends Component {
 
     const {
       name,
-      longDescription
+      longDescription,
+      canEditCollective
     } = editCollectiveForm;
 
     return (
