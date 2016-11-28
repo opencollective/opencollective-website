@@ -115,7 +115,7 @@ export class Transactions extends Component {
         break;
 
       case 'donations':
-        if (!group.donations || group.donations.length === 0)
+        if (!group.donations || group.donations.length < 4)
           fetchTransactions(group.slug, options);
         break;
     }
