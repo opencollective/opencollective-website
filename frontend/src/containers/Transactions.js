@@ -110,12 +110,12 @@ export class Transactions extends Component {
 
     switch (type) {
       case 'expenses':
-        if (!group.expenses || group.expenses.length === 0)
+        if (!group.expenses || group.expenses.length < 4)
           fetchExpenses(group.slug, options);
         break;
 
       case 'donations':
-        if (!group.donations || group.donations.length === 0)
+        if (!group.donations || group.donations.length < 4)
           fetchTransactions(group.slug, options);
         break;
     }
