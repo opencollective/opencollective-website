@@ -14,7 +14,7 @@ export default class UserAvatarRow extends Component {
 
     const all = unionBy(members, backers, 'username');
     const toShow = all.filter(u => u.avatar && u.avatar.indexOf('http') !== -1 ? true : false).slice(0, MAX_SHOWING-1);
-
+    const plusCount = all.length - toShow.length;
     if (all.length === 0 || toShow.length === 0 ) {
       return (<div />);
     }
@@ -24,7 +24,9 @@ export default class UserAvatarRow extends Component {
           {toShow.map(u =>
             <span className='UserAvatarRow-avatar' key={u.username} style={{backgroundImage: `url(${u.avatar})`}} />)}
         </span>
-        <span className='UserAvatarRowCount'> <a href='#contributors'> {`+${all.length - toShow.length}`} </a></span>
+        {plusCount != 0 &&
+          <span className='UserAvatarRowCount'> <a href='#contributors'> {`+${plusCount}`} </a></span>
+        }
       </div>
     );
   }
