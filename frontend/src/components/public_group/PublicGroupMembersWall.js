@@ -26,7 +26,7 @@ export default class PublicGroupMembersWall extends React.Component {
             <h2 className='PublicGroup-title m0 -ff-sec -fw-bold'>{i18n.getString('membersWallTitle')}</h2>
             <p className='PublicGroup-font-17 max-width-3 mx-auto mb3'>{i18n.getString('membersWallText')}</p>
             <div className='PublicGroupWhoWeAre-contributors' className='flex flex-wrap justify-center'>
-            { this.membersAndBackers.length < 10 &&
+            { this.membersAndBackers.length <= 10 &&
               this._showCards(this.membersAndBackers)}
             { this.membersAndBackers.length > 10 &&
               <Mosaic hovercards={this.membersAndBackers} svg={`/${group.slug}/members.svg?exclude=sponsors&button=false&width=640&margin=5`} i18n={i18n} />
