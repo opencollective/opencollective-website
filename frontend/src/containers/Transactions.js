@@ -94,7 +94,6 @@ export class Transactions extends Component {
   componentWillMount() {
     const {
       group,
-      users,
       type,
       fetchExpenses,
       fetchTransactions,
@@ -119,7 +118,9 @@ export class Transactions extends Component {
           fetchTransactions(group.slug, options);
         break;
     }
-    if (users.length === 0) fetchUsers(group.slug);
+
+    if (!group.users || group.users.length === 0)
+      fetchUsers(group.slug);
   }
 
   componentDidMount() {
