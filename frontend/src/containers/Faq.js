@@ -75,6 +75,24 @@ export class Faq extends Component {
           <h3>How do I make a donation?</h3>
           <p>You rock! We are delighted you are asking this question. Go to the Collective’s Public Page (e.g. https://opencollective.com/wwcodeatl), choose your recurring donation amount and hit the Back Us or Donate button, fill out the form et voilà! Now you are part of that collective, your community will appreciate it.</p>
           
+          <h3>How do I submit an expense?</h3>
+          <p>Go to your collective page to submit an expense. You will need to upload a valid image for it to get reimbursed. Don’t forget to include your paypal email if it’s different from your user’s email.</p>
+          <p>There are two ways of using your Collective’s money:
+            <ul>
+              <li>Submit a receipt for a service you paid for (online services, meals, plane tickets).</li>
+              <li>Submit an invoice for your work. The invoice must include your current address and be made to Open Collective Inc. (or to the host if you are hosted by another organisation) with reference to your collective.</li>
+             </ul>
+          </p>
+          <p>Expenses will be paid once a week on Fridays. Please contact support@opencollective.com if you have any questions.</p> 
+          <p>Open Collective’s details are:</p> 
+          <p>
+            OpenCollective, Inc.<br />
+            EIN: 47-3896707<br />
+            340 S LEMON AVE #3717<br />
+            Walnut CA 91789<br />
+            USA
+          </p>
+          
           <h3>Why do you have monthly payments as default?</h3>
           <p>A collective is an organization of people working together towards a common goal. Sometimes these goals take a few months and sometimes they can take years. By supporting a collective with a recurring monthly amount, you help the collective plan out its future activities.</p>
           
