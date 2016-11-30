@@ -77,8 +77,8 @@ const CollectiveExpenseItem = ({
         </div>}
 
         <div className='flex flex-column flex-auto'>
-          <div className='CollectiveExpenseItem-info flex flex-column flex-auto'>
-            <div className='-ff-sec flex-auto'>{ expense.title } ({expense.category})</div>
+          <div className='CollectiveExpenseItem-info'>
+            <div className='-ff-sec'>{ expense.title } ({expense.category})</div>
             <div className='h6 m0 muted'>{ i18n.getString('submittedBy') } { user && user.name } - { expense.incurredAt && i18n.moment(expense.incurredAt).fromNow() } </div>
             <p className='h3 -ff-sec amount'>
               <Currency value={expense.amount} currency={expense.currency} colorify={false} /> 
@@ -87,7 +87,7 @@ const CollectiveExpenseItem = ({
               <span className='CollectiveExpenseItemStatus border align-middle muted -fw-bold -ttu'>{i18n.getString(expense.status.toLowerCase())}</span>
             </div>
           </div>
-          {!compact && <div className='CollectiveExpenseItem-actions flex justify-around'>
+          {!compact && <div className='CollectiveExpenseItem-actions'>
             {showApprove && 
               <ApproveButton
                 disabled={updateInProgress}

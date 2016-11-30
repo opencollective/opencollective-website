@@ -24,7 +24,22 @@
   background-color: var(--orange);
 }
 
-.Button--approve,
+.Button--approve {
+  background-color: var(--light-blue);
+}
+
+.Button--reject {
+  background-color: white;
+  color: var(--light-blue);
+  border: 1px solid var(--light-blue);
+}
+
+.Button--reject:hover {
+  background-color: var(--red);
+  color: white;
+  border: 1px solid var(--red);
+}
+
 .Button--pay,
 .Button--save,
 .Button--green,
@@ -46,13 +61,11 @@
 }
 
 .Button--red,
-.Button--reject,
 .Button--cancel {
   background-color: var(--red);
   margin-left: calc(var(--spacing)/2);
 }
 
-.Button--reject:hover,
 .Button--cancel:hover,
 .Button--red:hover,
 .Button--reject:active,

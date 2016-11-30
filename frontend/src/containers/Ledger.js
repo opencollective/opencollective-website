@@ -91,7 +91,7 @@ export class Ledger extends Component {
         <div className='Ledger-container padding40' style={{marginBottom: '0'}}>
           <div className='line1'>collective information</div>
           <div className='info-block mr3'>
-            <div className='info-block-value'>{collective.name}</div>
+            <div className='info-block-value'><a href={`/${collective.slug}`}>{collective.name}</a></div>
             <div className='info-block-label'>collective</div>
           </div>
           <div className='info-block'>

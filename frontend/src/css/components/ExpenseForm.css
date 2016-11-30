@@ -130,6 +130,9 @@
       height: 1px;
     }
   }
+  .Button {
+    margin: 3rem auto 0;
+  }
 }
 
 @media (max-width: 818px) {
