@@ -94,7 +94,7 @@ export class Collective extends Component {
 
           <CollectiveAboutUs { ...this.props } />
           <CollectiveMembers collective={ collective } i18n={ i18n } />
-          <CollectiveContributorMosaic contributors={ collective.contributors } i18n={ i18n } />
+          {collective.contributors && <CollectiveContributorMosaic collective={collective} i18n={i18n} />}
           
           {this.state.showThankYouMessage && 
             <CollectivePostDonationThanks closeDonationFlow={ ::this.closeDonationFlow } { ...this.props } />}

@@ -56,7 +56,7 @@ export default class CollectivePendingExpenses extends React.Component {
 
     return (
       <div className='CollectivePendingExpenses col col-12 mb3'>
-        <div className='clearfix border-bottom border-gray pb2 mb3'>
+        <div className='clearfix border-bottom border-gray pb1 mb3'>
           <h4 className='Collective-title left m0 -fw-bold'>{i18n.getString('unpaidExpenses')}</h4>
           <Link className='right mt1 -btn -btn-micro -btn-outline -border-green -fw-bold -ttu' 
             to={`/${collective.slug}/expenses/new`}>

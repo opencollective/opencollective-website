@@ -97,11 +97,15 @@
   min-height: calc(1.38rem * 3);
 }
 
-.CollectiveDonate-container .Button {
-  margin: auto;
-  font-weight: normal;
-  border-radius: 100px;
-  min-width: 70%;
+.CollectiveDonate-container {
+  background: var(--light-gray);
+  padding: 2rem 0;
+  .Button {
+    margin: auto;
+    font-weight: normal;
+    border-radius: 100px;
+    min-width: 70%;
+  }
 }
 
 /* MEMBERS WALL */

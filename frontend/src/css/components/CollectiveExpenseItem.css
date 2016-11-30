@@ -1,5 +1,10 @@
 .CollectiveExpenseItem {
-  box-shadow: 0 1px 3px;
+  border: 1px solid var(--gray);
+  border-radius: 5px;
+
+  .amount {
+    margin: 0.5rem 0;
+  }
 }
 
 .CollectiveExpenseItem-image img {

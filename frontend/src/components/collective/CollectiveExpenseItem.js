@@ -60,7 +60,7 @@ const CollectiveExpenseItem = ({
  
   return (
     <section id={`exp${expense.id}`}>
-      <div className='CollectiveExpenseItem mx-auto mb2 p2 flex bg-white border-white rounded'>
+      <div className='CollectiveExpenseItem mx-auto mb2 p2 flex bg-white border-white'>
         {!compact && <div className='CollectiveExpenseItem-top flex flex-column mr2'>
           <div className='CollectiveExpenseItem-image max-width-1'>
             <ReceiptPreview
@@ -80,7 +80,7 @@ const CollectiveExpenseItem = ({
           <div className='CollectiveExpenseItem-info flex flex-column flex-auto'>
             <div className='-ff-sec flex-auto'>{ expense.title } ({expense.category})</div>
             <div className='h6 m0 muted'>{ i18n.getString('submittedBy') } { user && user.name } - { expense.incurredAt && i18n.moment(expense.incurredAt).fromNow() } </div>
-            <p className='h3 -ff-sec'>
+            <p className='h3 -ff-sec amount'>
               <Currency value={expense.amount} currency={expense.currency} colorify={false} /> 
             </p>
             <div className='-ff-sec flex h6 mb1'>
