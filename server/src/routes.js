@@ -85,18 +85,18 @@ export default (app) => {
   /**
    * Routes
    */
-  app.get('/:slug/banner.md', mw.cache(300), mw.fetchGroupBySlug, mw.fetchActiveUsers(), controllers.banner.markdown);
-  app.get('/:slug/banner.js', mw.cache(3000), mw.fetchGroupBySlug, mw.fetchActiveUsers(), controllers.banner.js);
-  app.get('/:slug/:tier.md', mw.cache(300), mw.fetchGroupBySlug, mw.fetchActiveUsers(), controllers.banner.markdown);
-  app.get('/:slug/:tier.json', mw.cache(900), mw.fetchActiveUsers(), renderJSON('users'));
-  app.get('/:slug/:tier.:format(svg|png)', mw.cache(300), mw.fetchActiveUsers(), controllers.banner.banner);
-  app.get('/:slug/:tier/badge.svg', mw.cache(300), mw.fetchActiveUsers({requireAvatar: false}), controllers.banner.badge);
-  app.get('/:slug/badge/:tier.svg', mw.cache(300), mw.fetchActiveUsers({requireAvatar: false}), controllers.banner.badge);
-  app.get('/:slug/:tier/:position/avatar(.:format(png|jpg|svg))?', mw.cache(300), mw.ga, mw.fetchActiveUsers({cache: 300}), controllers.banner.avatar);
+  app.get('/:slug/banner.md', mw.maxAge(300), mw.fetchGroupBySlug, mw.fetchActiveUsers(), controllers.banner.markdown);
+  app.get('/:slug/banner.js', mw.maxAge(3000), mw.fetchGroupBySlug, mw.fetchActiveUsers(), controllers.banner.js);
+  app.get('/:slug/:tier.md', mw.maxAge(300), mw.fetchGroupBySlug, mw.fetchActiveUsers(), controllers.banner.markdown);
+  app.get('/:slug/:tier.json', mw.maxAge(900), mw.fetchActiveUsers(), renderJSON('users'));
+  app.get('/:slug/:tier.:format(svg|png)', mw.maxAge(300), mw.fetchActiveUsers(), controllers.banner.banner);
+  app.get('/:slug/:tier/badge.svg', mw.maxAge(300), mw.fetchActiveUsers({requireAvatar: false}), controllers.banner.badge);
+  app.get('/:slug/badge/:tier.svg', mw.maxAge(300), mw.fetchActiveUsers({requireAvatar: false}), controllers.banner.badge);
+  app.get('/:slug/:tier/:position/avatar(.:format(png|jpg|svg))?', mw.maxAge(300), mw.ga, mw.fetchActiveUsers({cache: 300}), controllers.banner.avatar);
   app.get('/:slug/:tier/:position/website', mw.ga, mw.fetchActiveUsers(), controllers.banner.redirect);
-  app.get('/:slug([A-Za-z0-9-]+)/transactions/:transactionid/invoice.pdf', mw.cache(300), controllers.transactions.invoice);
-  app.get('/:slug([A-Za-z0-9-]+)/widget', mw.cache(300), mw.fetchProfileBySlug, controllers.widgets.profile);
-  app.get('/:slug([A-Za-z0-9-]+)/widget.js', mw.cache(3000), controllers.widgets.js);
+  app.get('/:slug([A-Za-z0-9-]+)/transactions/:transactionid/invoice.pdf', mw.maxAge(300), controllers.transactions.invoice);
+  app.get('/:slug([A-Za-z0-9-]+)/widget', mw.maxAge(300), mw.fetchProfileBySlug, controllers.widgets.profile);
+  app.get('/:slug([A-Za-z0-9-]+)/widget.js', mw.maxAge(3000), controllers.widgets.js);
 
   /**
    * Server side render the react app
@@ -105,10 +105,10 @@ export default (app) => {
    * When we refactor PublicGroup to fetch the group in the container, we can remove
    * the explicit routes and just do `app.use(render)`
    */
-  app.get('/', mw.ga, mw.addTitle('OpenCollective - A New Form of Association, Transparent by Design'), controllers.homepage, render);
-  app.get('/about', mw.ga, mw.addTitle('About'), render);
+  app.get('/', mw.maxAge(3000), mw.ga, mw.addTitle('OpenCollective - A New Form of Association, Transparent by Design'), controllers.homepage, render);
+  app.get('/about', mw.maxAge(3000), mw.ga, mw.addTitle('About'), render);
   app.get('/discover/:tag?', mw.ga, mw.addTitle('Discover'), render);
-  app.get('/faq', mw.ga, mw.addTitle('Answers'), render);
+  app.get('/faq', mw.maxAge(3000), mw.ga, mw.addTitle('Answers'), render);
   app.get('/create', mw.ga, mw.addTitle('Create a new collective'), render);
   app.get('/addgroup', mw.ga, mw.addTitle('Create a new group'), render);
   app.get('/login/:token', mw.ga, mw.addTitle('Open Collective'), render);
@@ -119,7 +119,7 @@ export default (app) => {
   app.get('/:slug([A-Za-z0-9-_]+)/transactions/expenses/new', mw.ga, mw.fetchProfileBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-_]+)/transactions/expenses', mw.ga, mw.fetchProfileBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-_]+)/transactions', mw.ga, mw.fetchProfileBySlug, mw.addMeta, render);
-  app.get('/:slug/:tier\.:format(json|csv)', mw.ga, mw.fetchGroupBySlug, controllers.tierList); // <-------- WIP
+  app.get('/:slug/:tier\.:format(json|csv)', mw.maxAge(3000), mw.ga, mw.fetchGroupBySlug, controllers.tierList); // <-------- WIP
   app.get('/:slug/:tier', mw.ga, mw.fetchGroupBySlug, render); // <-------- WIP
   app.get('/:slug/connect/:provider', mw.ga, render);
   app.get('/:slug/edit-twitter', mw.ga, mw.fetchProfileBySlug, render);
@@ -131,7 +131,7 @@ export default (app) => {
   app.get('/:slug([A-Za-z0-9-_]+)/expenses/new', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-_]+)/donate/:amount', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-_]+)/donate/:amount/:interval', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
-  app.get('/:slug([A-Za-z0-9-_]+)', mw.ga, mw.fetchProfileBySlug, mw.addMeta, render);
+  app.get('/:slug([A-Za-z0-9-_]+)', mw.maxAge(300), mw.ga, mw.fetchProfileBySlug, mw.addMeta, render);
 
   app.use(mw.handleUncaughtError);
 };

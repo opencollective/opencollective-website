@@ -94,7 +94,7 @@ const extractGithubUsernameFromToken = (req, res, next) => {
 /**
  *
  */
-const cache = (maxAge = 60) => {
+const maxAge = (maxAge = 60) => {
   return (req, res, next) => {
     res.setHeader('Cache-Control', `public, max-age=${maxAge}`);
     next();
@@ -213,7 +213,7 @@ const handleUncaughtError = (error, req, res, next) => {
 export default {
   addMeta,
   addTitle,
-  cache,
+  maxAge,
   fetchGroupBySlug,
   fetchProfileBySlug,
   extractGithubUsernameFromToken,
