@@ -80,7 +80,7 @@ export class Faq extends Component {
           <p>There are two ways of using your Collective’s money:
             <ul>
               <li>Submit a receipt for something you paid like online services, meals, plane tickets, etc.</li>
-              <li>Submit an invoice for your work. The invoice must include your current address and be made to Open Collective Inc. (or to the host if you are hosted by another organisation) with reference to your collective.</li>
+              <li>Submit an invoice for your work. The invoice must include your current address and be made to Open Collective Inc. (or to the host if you are hosted by another organisation) with reference to your collective. The invoice is only visible to the host and core contributors, it is not public.</li>
              </ul>
           </p>
           <p>Expenses will be paid once a week on Fridays. Please contact <a href="mailto:support@opencollective.com">Support</a> if you have any questions.</p> 
