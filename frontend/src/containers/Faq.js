@@ -76,15 +76,15 @@ export class Faq extends Component {
           <p>You rock! We are delighted you are asking this question. Go to the Collective’s Public Page (e.g. https://opencollective.com/wwcodeatl), choose your recurring donation amount and hit the Back Us or Donate button, fill out the form et voilà! Now you are part of that collective, your community will appreciate it.</p>
           
           <h3>How do I submit an expense?</h3>
-          <p>Go to your collective page to submit an expense. You will need to upload a valid image for it to get reimbursed. Don’t forget to include your paypal email if it’s different from your user’s email.</p>
+          <p>Go to your Collective page to submit an expense. You will need to upload a valid image for it to get reimbursed. Don’t forget to include your paypal email if it’s different from your user email.</p>
           <p>There are two ways of using your Collective’s money:
             <ul>
-              <li>Submit a receipt for a service you paid for (online services, meals, plane tickets).</li>
+              <li>Submit a receipt for something you paid like online services, meals, plane tickets, etc.</li>
               <li>Submit an invoice for your work. The invoice must include your current address and be made to Open Collective Inc. (or to the host if you are hosted by another organisation) with reference to your collective.</li>
              </ul>
           </p>
-          <p>Expenses will be paid once a week on Fridays. Please contact support@opencollective.com if you have any questions.</p> 
-          <p>Open Collective’s details are:</p> 
+          <p>Expenses will be paid once a week on Fridays. Please contact <a href="mailto:support@opencollective.com">Support</a> if you have any questions.</p> 
+          <p>Open Collective’s details:</p> 
           <p>
             OpenCollective, Inc.<br />
             EIN: 47-3896707<br />
