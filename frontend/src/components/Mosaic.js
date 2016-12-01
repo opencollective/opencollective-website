@@ -81,7 +81,7 @@ export default class Mosaic extends Component {
     let width = 64;
     if ( this.avatars.length > 50)
       width = 48;
-    if ( this.avatars.length > 100)
+    if ( this.avatars.length > 150)
       width = 24;
 
     this.avatarWidth = width;

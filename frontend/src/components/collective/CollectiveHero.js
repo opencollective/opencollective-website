@@ -50,7 +50,7 @@ export default class CollectiveHero extends Component {
                 placeholder={i18n.getString('defaultMission')}/>
             </h1>
             <UserAvatarRow members={ collective.members } backers={ collective.backers } />
-            <a href='#budget' className='mb3 -btn -btn-big -bg-green -ttu -ff-sec -fw-bold'>{ i18n.getString('bePart') }</a>
+            <a href='#support' className='mb3 -btn -btn-big -bg-green -ttu -ff-sec -fw-bold'>{ i18n.getString('bePart') }</a>
 
             <div className='scrollDown'>
               <p className='h6'>{ i18n.getString('scrollDown') }</p>

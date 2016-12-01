@@ -12,8 +12,8 @@ export default class CollectiveMembers extends React.Component {
 
   render() {
     const { i18n, collective } = this.props;
-    this.contributors = _.uniqBy(_.union(collective.members, collective.backers.filter(b => !b.tier.match(/sponsor/i))), 'id');
-    this.contributors = this.contributors.map(c => {
+    this.membersAndBackers = _.uniqBy(_.union(collective.members, collective.backers.filter(b => !b.tier.match(/sponsor/i))), 'id');
+    this.membersAndBackers = this.membersAndBackers.map(c => {
       c.href = `/${c.username}`;
       return c;
     });
@@ -25,10 +25,10 @@ export default class CollectiveMembers extends React.Component {
             <h2 className='Collective-title m0 -ff-sec -fw-bold'>{i18n.getString('membersWallTitle')}</h2>
             <p className='Collective-font-17 max-width-3 mx-auto mb3'>{i18n.getString('membersWallText')}</p>
             <div className='CollectiveWhoWeAre-contributors' className='flex flex-wrap justify-center'>
-            { this.contributors.length < 10 &&
-              this._showCards(this.contributors)}
-            { this.contributors.length > 10 &&
-              <Mosaic hovercards={collective.contributors} svg={`/${collective.slug}/contributors.svg?exclude=sponsors&button=false&width=640&margin=5`} i18n={i18n} />
+            { this.membersAndBackers.length <= 10 &&
+              this._showCards(this.membersAndBackers)}
+            { this.membersAndBackers.length > 10 &&
+              <Mosaic hovercards={this.membersAndBackers} svg={`/${collective.slug}/members.svg?exclude=sponsors&button=false&width=640&margin=5`} i18n={i18n} />
             }
             </div>
             <div className='CollectiveWhoWeAre-sponsors' className='flex flex-wrap justify-center'>

@@ -1,3 +1,11 @@
+.CollectiveActivityItem {
+  padding: 1rem 0rem;
+
+  .timestamp {
+    margin-top: -5px;
+  }
+}
+
 .CollectiveActivityItem > .UserPhoto {
   width: 2rem;
   height: 2rem;

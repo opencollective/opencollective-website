@@ -30,7 +30,7 @@ export default class CollectiveActivityItem extends Component {
               <Currency value={transaction.amount * 100} currency={transaction.currency} precision={2}/>
             </p>
           </div>
-            <span className='h6 muted'>{transaction.createdAt && i18n.moment(transaction.createdAt).fromNow()}</span>
+          <div className='h6 muted timestamp'>{transaction.createdAt && i18n.moment(transaction.createdAt).fromNow()}</div>
         </div>
       </div>
     );

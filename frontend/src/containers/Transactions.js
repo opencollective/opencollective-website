@@ -42,7 +42,7 @@ export class Transactions extends Component {
         <div className='Transactions-container padding40' style={{marginBottom: '0'}}>
           <div className='line1'>collective information</div>
           <div className='info-block mr3'>
-            <div className='info-block-value'>{group.name}</div>
+            <div className='info-block-value'><a href={`/${group.slug}`}>{group.name}</a></div>
             <div className='info-block-label'>collective</div>
           </div>
           <div className='info-block'>

@@ -68,7 +68,13 @@
           width: 100%;
         }
       }
-
+      .video {
+        text-align: center;
+        iframe {
+          border: none;
+          max-width: 100%;
+        }
+      }
     }
   }
 }
