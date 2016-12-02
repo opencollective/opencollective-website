@@ -14,6 +14,7 @@ import SelectCategory from './SelectCategory';
 import Select from './Select';
 import CustomTextArea from './CustomTextArea';
 import Notification from '../containers/Notification';
+import AsyncButton from '../components/AsyncButton';
 
 class ExpenseForm extends Component {
 
@@ -163,7 +164,14 @@ class ExpenseForm extends Component {
           )}
 
         </div>
-        <button type='submit' className={`Button ${hasAttachment ? 'Button--green' : 'Button--disabled'}`} onClick={hasAttachment && this.onSubmit.bind(this)}>submit expense</button>
+        <AsyncButton
+          color='green'
+          inProgress={expense.inProgress}
+          disabled={expense.inProgress}
+          onClick={hasAttachment && this.onSubmit.bind(this)}>
+          Submit Expense
+        </AsyncButton>
+
       </div>
     )
   }

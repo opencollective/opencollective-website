@@ -4,6 +4,10 @@ import omit from 'lodash/omit';
 
 import errorDetail from '../lib/error_detail';
 import * as constants from '../constants/form';
+import {
+  CREATE_EXPENSE_REQUEST,
+  CREATE_EXPENSE_SUCCESS,
+  CREATE_EXPENSE_FAILURE } from '../constants/expenses';
 
 /**
  * Validate generic joi schema
@@ -88,7 +92,8 @@ const expenseInitialState = {
     vat: null,
     incurredAt: new Date()
   },
-  error: {}
+  error: {},
+  inProgress: false
 };
 
 function expense(state=expenseInitialState, action={}) {
@@ -112,6 +117,13 @@ function expense(state=expenseInitialState, action={}) {
     }
     case constants.VALIDATE_EXPENSE_REQUEST:
       return merge({}, omit(state, 'error'), { error: {} });
+
+    case CREATE_EXPENSE_REQUEST:
+      return merge({}, state, {inProgress: true})
+
+    case CREATE_EXPENSE_SUCCESS:
+    case CREATE_EXPENSE_FAILURE:
+      return merge({}, state, {inProgress: false})
 
     default:
       return state;
