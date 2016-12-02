@@ -23,7 +23,7 @@ export class Login extends Component {
     this.state = { 
       showConfirmation: false,
       inProgress: false,
-      disabled: false };
+    };
   }
 
   render() {
@@ -38,7 +38,7 @@ export class Login extends Component {
               <div className='Login-quote'>
                 <h2> Login to Open Collective </h2>
               </div>
-              <LoginEmailForm onClick={sendNewToken.bind(this)} inProgress={this.state.inProgress} disabled={this.state.disabled} {...this.props} />
+              <LoginEmailForm onClick={sendNewToken.bind(this)} inProgress={this.state.inProgress} {...this.props} />
             </div>
           </div>
         }
@@ -70,14 +70,14 @@ export function sendNewToken(email, redirect) {
     notify
   } = this.props;
 
-  this.setState({inProgress: true, disabled: false});
+  this.setState({inProgress: true});
 
   return sendNewLoginToken(email, redirect)
   .then(() => {
     this.setState({showConfirmation: true})
   })
   .catch(({message}) => {
-    this.setState({inProgress: false, disabled: false});
+    this.setState({inProgress: false});
     notify('error', message)
   });
 }

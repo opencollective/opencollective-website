@@ -77,7 +77,7 @@ describe('containers/Login', () => {
       sendNewToken.call({props, setState})
         .then(() => {
           expect(props.notify).to.have.been.called.with('error');
-          expect(setState).to.have.been.called.with({inProgress: false, disabled: false});
+          expect(setState).to.have.been.called.with({inProgress: false});
           done();
         });
     });

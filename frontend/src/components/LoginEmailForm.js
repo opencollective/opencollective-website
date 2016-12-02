@@ -18,8 +18,7 @@ class LoginEmailForm extends Component {
   }
   render() {
     const {
-      inProgress,
-      disabled
+      inProgress
     } = this.props;
     return (
       <div className='Login-Email'>
@@ -38,7 +37,6 @@ class LoginEmailForm extends Component {
           <AsyncButton
             color='green'
             inProgress={inProgress}
-            disabled={disabled}
             onClick={this.handleSubmit.bind(this)}>
             Send email
           </AsyncButton>
