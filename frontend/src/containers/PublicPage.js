@@ -15,10 +15,10 @@ export class PublicPage extends Component {
       profile.canEditUser = canEditUser(this.props.session, profile)
 
       return <ProfilePage profile={ profile } />
-    } else if (this.props.showNewCollectivePage) {
-      return <Collective />
-    } else {
+    } else if (this.props.showOldCollectivePage) {
       return <PublicGroup />
+    } else {
+      return <Collective />
     }
   }
 }
@@ -32,6 +32,6 @@ export function mapStateToProps({groups, session, router}) {
     group,
     session,
     isUserProfile: Boolean(group.username),
-    showNewCollectivePage: router.location.query.new === '1',
+    showOldCollectivePage: router.location.query.old === '1' || group.isSuperCollective || group.hasPaypal,
   };
 }
