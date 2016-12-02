@@ -18,7 +18,8 @@ class LoginEmailForm extends Component {
   }
   render() {
     const {
-      inProgress
+      inProgress,
+      disabled
     } = this.props;
     return (
       <div className='Login-Email'>
@@ -37,6 +38,7 @@ class LoginEmailForm extends Component {
           <AsyncButton
             color='green'
             inProgress={inProgress}
+            disabled={disabled}
             onClick={this.handleSubmit.bind(this)}>
             Send email
           </AsyncButton>
@@ -59,9 +61,7 @@ class LoginEmailForm extends Component {
 
     event.preventDefault();
 
-    console.log("Inside handleSubmit");
-
-    validate(this.state.form, this.schema)
+    return validate(this.state.form, this.schema)
     .then(() => onClick(this.state.form.email, redirectRoute))
     .catch(error => notify('error', error.message));
   }

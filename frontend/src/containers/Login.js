@@ -20,7 +20,10 @@ import Confirmation from '../components/Confirmation';
 export class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = { showConfirmation: false };
+    this.state = { 
+      showConfirmation: false,
+      inProgress: false,
+      disabled: false };
   }
 
   render() {
@@ -35,7 +38,7 @@ export class Login extends Component {
               <div className='Login-quote'>
                 <h2> Login to Open Collective </h2>
               </div>
-              <LoginEmailForm onClick={sendNewToken.bind(this)} {...this.props} />
+              <LoginEmailForm onClick={sendNewToken.bind(this)} inProgress={this.state.inProgress} disabled={this.state.disabled} {...this.props} />
             </div>
           </div>
         }
@@ -67,11 +70,16 @@ export function sendNewToken(email, redirect) {
     notify
   } = this.props;
 
+  this.setState({inProgress: true, disabled: false})
+
   return sendNewLoginToken(email, redirect)
   .then(() => {
     this.setState({showConfirmation: true})
   })
-  .catch(({message}) => notify('error', message));
+  .catch(({message}) => {
+    this.setState({inProgress: false, disabled: false});
+    notify('error', message)
+  });
 }
 
 export default connect(mapStateToProps, {
