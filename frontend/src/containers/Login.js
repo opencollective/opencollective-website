@@ -70,7 +70,7 @@ export function sendNewToken(email, redirect) {
     notify
   } = this.props;
 
-  this.setState({inProgress: true, disabled: false})
+  this.setState({inProgress: true, disabled: false});
 
   return sendNewLoginToken(email, redirect)
   .then(() => {
