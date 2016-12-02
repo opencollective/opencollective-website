@@ -167,7 +167,6 @@ class ExpenseForm extends Component {
         <AsyncButton
           color='green'
           inProgress={expense.inProgress}
-          disabled={expense.inProgress}
           onClick={hasAttachment && this.onSubmit.bind(this)}>
           Submit Expense
         </AsyncButton>
