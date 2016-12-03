@@ -59,9 +59,7 @@ class LoginEmailForm extends Component {
 
     event.preventDefault();
 
-    console.log("Inside handleSubmit");
-
-    validate(this.state.form, this.schema)
+    return validate(this.state.form, this.schema)
     .then(() => onClick(this.state.form.email, redirectRoute))
     .catch(error => notify('error', error.message));
   }

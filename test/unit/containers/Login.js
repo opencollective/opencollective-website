@@ -72,10 +72,12 @@ describe('containers/Login', () => {
         sendNewLoginToken: () => Promise.reject({ message: 'sending failed' }),
         token: 'token_abc'
       };
+      const setState = chai.spy(noop);
 
-      sendNewToken.call({props})
+      sendNewToken.call({props, setState})
         .then(() => {
           expect(props.notify).to.have.been.called.with('error');
+          expect(setState).to.have.been.called.with({inProgress: false});
           done();
         });
     });
