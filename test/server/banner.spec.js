@@ -173,7 +173,7 @@ describe("banner", () => {
         res.body = { contentLength: Number(res.headers['content-length']) };
       })
       .expect({
-        contentLength: 20921
+        contentLength: 22679
       })
       .expect(200, done);
   });
