@@ -14,7 +14,7 @@ const schema = Joi.object().keys({
     .allow(null),
   name: Joi.string().required()
     .label('Name'),
-  email: Joi.string().email()
+  email: Joi.string().email().required()
     .label('Email'),
   title: Joi.string().required()
     .label('Description'),

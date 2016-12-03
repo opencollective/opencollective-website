@@ -29,7 +29,7 @@ module.exports = {
       .setValue('.js-transaction-amount input', 10)
       .setValue('.js-transaction-payoutMethod', 'other')
       .setValue('.ImageUpload input', 'someReceipt.pdf')
-      .click('button[type=submit]')
+      .click('.Button')
       .waitForElementVisible('.PublicGroupThanks', 5000)
       .assert.containsText('.PublicGroupThanks', 'Expense sent')
       .end();
