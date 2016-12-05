@@ -32,6 +32,6 @@ export function mapStateToProps({groups, session, router}) {
     group,
     session,
     isUserProfile: Boolean(group.username),
-    showOldCollectivePage: router.location.query.old === '1' || group.isSuperCollective || group.hasPaypal,
+    showOldCollectivePage: router.location.query.old === '1' || group.isSupercollective || group.hasPaypal,
   };
 }
