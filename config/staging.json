@@ -1,4 +1,9 @@
 {
   "viewCache": false,
-  "cacheBust": true
+  "cacheBust": true,
+  "host": {
+    "api": "https://opencollective-staging-api.herokuapp.com",
+    "app": "https://opencollective-staging-app.herokuapp.com",
+    "website": "https://staging.opencollective.com"
+  }
 }
