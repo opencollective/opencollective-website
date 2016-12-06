@@ -4,5 +4,10 @@
   "GoogleAnalytics": {
     "active": true,
     "account": "UA-71870756-1"
+  },
+  "host": {
+    "api": "https://api.opencollective.com",
+    "app": "https://app.opencollective.com",
+    "website": "https://opencollective.com"
   }
 }
