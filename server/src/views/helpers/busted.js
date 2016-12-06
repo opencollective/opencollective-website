@@ -8,7 +8,7 @@ const cache = {};
 
 export default (file) => {
   if (!config.cacheBust) {
-    return `/static${file}`;
+    return `${config.host.website}/static${file}`;
   }
 
   if (!cache[file]) {

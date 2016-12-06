@@ -14,13 +14,15 @@ export class LoginTopBar extends Component {
       showProfileMenu: false
     };
     this.showCreateBtn = false;
+    // We don't show the discover link when hosted on a different domain (e.g. brusselstogether.org)
+    this.showDiscoverLink = !window.location.href || (window.location.href.match(/opencollective\.com\//) || window.location.href.match(/localhost:[0-9]{4}\//));
   }
 
   renderLinks() {
     return (
       <ul className='LoginTopBar-Links'>
         {this.showCreateBtn && <li><a className='LoginTopBarButton' href='/create'>create a collective</a></li>}
-        <li><a className='LoginTopBarLink' href='/discover'>Discover</a></li>
+        {this.showDiscoverLink && <li><a className='LoginTopBarLink' href='/discover'>Discover</a></li>}
       </ul>
     )
   }
@@ -37,7 +39,7 @@ export class LoginTopBar extends Component {
           </div>
           <ul>
           {this.showCreateBtn && <li><a href='/create'>create a collective</a></li>}
-            <li><a href='/discover'>Discover</a></li>
+          {this.showDiscoverLink && <li><a href='/discover'>Discover</a></li>}
             <li><a href='#' onClick={this.onClickSubscriptions.bind(this)}>Subscriptions</a></li>
           </ul>
         </div>
