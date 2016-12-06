@@ -8,6 +8,7 @@ import { resizeImage } from '../../lib/utils';
 import ContentEditable from '../../components/ContentEditable';
 import UserPhoto from '../../components/UserPhoto';
 import UserAvatarRow from '../../components/UserAvatarRow';
+import CollectiveStatsHeader from '../../components/collective/CollectiveStatsHeader';
 
 export default class CollectiveHero extends Component {
 
@@ -49,7 +50,8 @@ export default class CollectiveHero extends Component {
                 onChange={event => appendEditCollectiveForm({mission: event.target.value})}
                 placeholder={i18n.getString('defaultMission')}/>
             </h1>
-            <UserAvatarRow members={ collective.members } backers={ collective.backers } />
+            <UserAvatarRow members={ collective.members } backers={ collective.backers } otherCount={ collective.contributorsCount } />
+            <CollectiveStatsHeader collective={ collective } i18n={ i18n } />
             <a href='#support' className='mb3 -btn -btn-big -bg-green -ttu -ff-sec -fw-bold'>{ i18n.getString('bePart') }</a>
 
             <div className='scrollDown'>
