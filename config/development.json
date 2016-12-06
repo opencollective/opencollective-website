@@ -1,6 +1,5 @@
 {
   "apiKey": "dvl-1510egmf4a23d80342403fb599qd",
-  "cacheBust": true,
   "host": {
     "api": "http://localhost:3060",
     "app": "http://localhost:3000",
