@@ -90,6 +90,8 @@
     "morgan": "1.7.0",
     "normalizr": "1.4.1",
     "numbro": "1.6.2",
+    "phantomjs": "^2.1.7",
+    "phantomjs-prebuilt": "^2.1.13",
     "postcss-cssnext": "2.5.2",
     "postcss-discard-comments": "2.0.4",
     "postcss-import": "8.1.0",
