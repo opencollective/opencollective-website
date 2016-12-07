@@ -82,6 +82,24 @@
   font-size: 1rem;
 }
 
+.Collective-markdown img {
+  max-width: 768px;
+  margin: 1rem 0;
+}
+
+.Collective-markdown .video {
+  text-align: center;
+  iframe {
+    border: none;
+    max-width: 100%;
+  }
+}
+
+.Collective-markdown .ContentEditable {
+  max-width: 788px;
+  margin: 0 auto;
+}
+
 /* JOIN US */
 .CollectiveDonate-tier-box-inner {
   border-width: 2px;
