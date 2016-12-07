@@ -34,6 +34,7 @@ import getSocialMediaAvatars from '../actions/users/get_social_media_avatars';
 import notify from '../actions/notification/notify';
 import updateCollective from '../actions/groups/update'; // TODO: change to collective
 import updateUser from '../actions/users/update';
+import uploadImage from '../actions/images/upload';
 import validateSchema from '../actions/form/validate_schema';
 
 // Selectors
@@ -264,6 +265,7 @@ export default connect(mapStateToProps, {
   push,
   updateCollective,
   updateUser,
+  uploadImage,
   validateSchema
 })(Collective);
 
