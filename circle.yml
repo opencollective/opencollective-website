@@ -4,6 +4,8 @@ general:
       - staging
       - production
 machine:
+  pre:
+    - mkdir ~/.yarn-cache
   node:
     version: 6.2.2
   environment:
@@ -11,10 +13,15 @@ machine:
   services:
     - postgresql
 dependencies:
-  cache_directories:
-    - "~/cache"
   pre:
-    - npm run install:debs
+    - curl -o- -L https://yarnpkg.com/install.sh | bash
+  cache_directories:
+    - ~/.yarn-cache
+  override:
+    - yarn install
+test:
+  override:
+    - yarn test
 deployment:
   staging:
     branch: staging
