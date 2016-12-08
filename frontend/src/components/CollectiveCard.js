@@ -60,7 +60,7 @@ export default class CollectiveCard extends Component {
   }
 
   render() {
-    const { i18n, group, isSponsor, target } = this.props;
+    const { group, isSponsor, target } = this.props;
 
     const {
       backgroundImage,
@@ -89,7 +89,7 @@ export default class CollectiveCard extends Component {
       group.settings.style.hero.cover.backgroundImage = `url(${resizeImage(backgroundImage, { width: 320 })})`;
     }
 
-    const description = group.mission ? `${i18n.getString('missionTo')} ${group.mission}` : group.description;
+    const description = group.mission || group.description;
 
     const defaultLogo = DEFAULT_LOGOS[index || Math.floor(Math.random() * DEFAULT_LOGOS.length)];
 
