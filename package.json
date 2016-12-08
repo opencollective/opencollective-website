@@ -21,7 +21,7 @@
     "test:unit": "mocha test/unit/ --opts test/unit/mocha.opts --reporter-options mochaFile=$(bash scripts/test_output_dir.sh junit)/junit.xml",
     "posttest": "npm run test:e2e",
     "test:e2e": "npm run test:e2e:exec api:run website:run website:testE2E",
-    "test:e2e:exec": "npm run rexec:api test_e2e.sh",
+    "test:e2e:exec": "./scripts/test_e2e.sh",
     "nightwatch": "./node_modules/nightwatch/bin/nightwatch --config nightwatch.json",
     "build": "gulp build && npm run build:server && npm run build:frontend",
     "build:server": "rm -rf server/dist && mkdir server/dist && babel -D ./server/src -d ./server/dist && touch server/src/index.js",
