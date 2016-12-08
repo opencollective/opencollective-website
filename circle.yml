@@ -5,7 +5,6 @@ general:
       - production
 machine:
   pre:
-    - mkdir ~/.yarn-cache
     - mkdir ~/cache
   node:
     version: 6.2.2
@@ -15,15 +14,9 @@ machine:
     - postgresql
 dependencies:
   pre:
-    - curl -o- -L https://yarnpkg.com/install.sh | bash
+    - npm run install:debs
   cache_directories:
-    - ~/.yarn-cache
     - ~/cache
-  override:
-    - yarn install
-test:
-  override:
-    - yarn test
 deployment:
   staging:
     branch: staging
