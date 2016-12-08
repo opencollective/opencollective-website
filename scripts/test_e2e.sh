@@ -172,7 +172,7 @@ install() {
     mv ${REPO_NAME}-master ${REPO_DIR}
     cd ${REPO_DIR}
     echo "Performing NPM install"
-    yarn install
+    ~/.yarn/bin/yarn install
   fi
 }
 
