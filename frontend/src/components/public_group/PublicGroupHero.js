@@ -68,7 +68,6 @@ export default class PublicGroupHero extends Component {
               <a href={ group.website } style={group.settings.style.hero.a}> { group.name }</a> { i18n.getString('openCollective') }.
             </p>
             <h1 ref='PublicGroupHero-mission' className='PublicGroupHero-mission max-width-3 mx-auto mt0 mb3 white -ff-sec'>
-              { `${i18n.getString('missionTo')} `}
               <ContentEditable
                 tagName='span'
                 className='ContentEditable-mission editing'
