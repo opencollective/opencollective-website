@@ -117,9 +117,9 @@ export function donateToGroup({amount, frequency, currency, token}) {
     currency
   };
 
-  if (frequency === 'monthly') {
+  if (frequency.match(/^month(ly)?$/i)) {
     payment.interval = 'month';
-  } else if (frequency === 'yearly') {
+  } else if (frequency.match(/^year(ly)?$/i)) {
     payment.interval = 'year';
   }
 
