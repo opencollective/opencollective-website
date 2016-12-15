@@ -24,10 +24,11 @@ export default class UserAvatarRow extends Component {
         <span className='UserAvatarRow-shots'>
           {toShow.map(u =>
             <span className='UserAvatarRow-avatar' key={u.username} style={{backgroundImage: `url(${u.avatar})`}} />)}
-        </span>
         {plusCount != 0 &&
           <span className='UserAvatarRowCount'> <a href='#contributors'> {`+${plusCount}`} </a></span>
         }
+        </span>
+
       </div>
     );
   }

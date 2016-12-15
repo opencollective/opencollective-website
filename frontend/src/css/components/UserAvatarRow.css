@@ -5,7 +5,6 @@
 .UserAvatarRow-shots {
   position: relative;
   box-sizing: border-box;
-  display: inline-block;
   height: 40px;
   border-radius: 5px;
   vertical-align: middle;
