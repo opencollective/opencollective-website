@@ -81,7 +81,7 @@ export class Collective extends Component {
     } = this.props;
 
     return (
-      <div className='Collective'>
+      <div className={`Collective ${collective.slug}`}>
         <Notification />
         <StickyContainer>
 
