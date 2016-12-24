@@ -4,6 +4,7 @@ import expressSession from 'express-session';
 import ua from 'universal-analytics';
 import filterCollection from '../../frontend/src/lib/filter_collection';
 import { filterUsers } from './lib/utils';
+import _ from 'lodash';
 
 /**
  * Fetch users by slug
@@ -29,7 +30,7 @@ const fetchActiveUsers = (options = {}) => {
 
     fetchUsers
       .then((users) => {
-        req.users = filterUsers(users, filters);
+        req.users = _.uniqBy(filterUsers(users, filters), 'id');
       })
       .then(next)
       .catch(next); // make sure we return 404 if group doesn't exist
