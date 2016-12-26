@@ -357,7 +357,7 @@ function mapStateToProps({
   app
 }) {
   const { query } = router.location;
-  const slug = router.params.slug.toLowerCase();
+  const slug = Object.keys(groups)[0];
 
   const newUserId = query.userid;
   const paypalUser = {

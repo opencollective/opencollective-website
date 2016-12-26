@@ -144,7 +144,7 @@ function mapStateToProps({
   users,
   router
 }) {
-  const slug = router.params.slug.toLowerCase();
+  const slug = Object.keys(groups)[0];
   const type = router.params.type || 'expenses'; // `expenses` or `donations` -> should be `revenue` to be more accurate
 
   const group = groups[slug] || {slug}; // to refactor to allow only one group

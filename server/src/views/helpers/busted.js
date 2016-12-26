@@ -8,13 +8,12 @@ const cache = {};
 
 export default (file) => {
   if (!config.cacheBust) {
-    return `${config.host.website}/static${file}`;
+    return `/static${file}`;
   }
 
   if (!cache[file]) {
     // make it a relative path so it hits the static middleware
-    console.log("BUSTING: ", dir + file);
-    cache[file] = bust(dir + file, {remove: true}).replace(dir, `${config.host.website}/static`);
+    cache[file] = bust(dir + file, {remove: true}).replace(dir, `/static`);
   }
 
   return cache[file];
