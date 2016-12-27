@@ -12,9 +12,9 @@ const DEFAULT_LOGOS = [
 export default class SponsoredCard extends Component {
 
   render() {
-    const { index, group, tier, className, interval, width, target } = this.props;
+    const { index, group, tier, className, width, target } = this.props;
 
-    const formattedAmount = formatCurrency(group.amount, group.currency, { compact: true, precision: 0 });
+    const formattedAmount = formatCurrency(group.myTotalDonations, group.currency, { compact: true, precision: 0 });
     const defaultLogo = DEFAULT_LOGOS[index || Math.floor(Math.random() * DEFAULT_LOGOS.length)];
 
     group.settings = group.settings || {};
@@ -35,7 +35,7 @@ export default class SponsoredCard extends Component {
             </div>
             <div className='SponsoredCard-footer'>
               {tier && <div className='SponsoredCard-type'>{ tier }</div> }
-              {group.amount > 0 && <div className='SponsoredCard-amount'>{`${formattedAmount} ${interval}`}</div>}
+              {group.myTotalDonations > 0 && <div className='SponsoredCard-amount'>{`${formattedAmount}`}</div>}
             </div>
           </div>
         </a>
