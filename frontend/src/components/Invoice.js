@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Currency from './Currency';
 import Table from 'rc-table';
 import {getGroupCustomStyles} from '../lib/utils';
+import config from 'config';
 
 export default class Invoice extends Component {
 
@@ -41,9 +42,12 @@ export default class Invoice extends Component {
 
     const hostBillingAddress = { __html : (transaction.host.billingAddress || '').replace(/\n/g,'<br />') };
     const userBillingAddress = { __html : (transaction.user.billingAddress || '').replace(/\n/g,'<br />') };
-    console.log("transaction", transaction);
-    console.log("hostBillingAddress", hostBillingAddress);
     const styles = getGroupCustomStyles(transaction.group);
+
+    // We need to load images in absolute path for PhantomJS
+    if (styles.hero.cover.backgroundImage && styles.hero.cover.backgroundImage.match(/url\(\//)) {
+      styles.hero.cover.backgroundImage = styles.hero.cover.backgroundImage.replace('url(/', `url(${config.host.website}/`);
+    }
 
     return (
       <div className='Invoice'>
