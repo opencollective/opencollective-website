@@ -12,6 +12,7 @@ const DEFAULT_GROUP_STYLES = {
 
 export function resizeImage(imageUrl, { width, height, query }) {
   if (!imageUrl) return null;
+  if (!query && imageUrl.match(/\.svg$/)) return imageUrl; // if we don't need to transform the image, no need to proxy it.
   let queryurl = '';
   if (query) {
     queryurl = encodeURIComponent(query);
