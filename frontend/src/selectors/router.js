@@ -5,7 +5,7 @@ import { createSelector } from 'reselect';
  */
 const getRouterSelector = (state) => state.router;
 
-const getParamsSelector = createSelector(
+export const getParamsSelector = createSelector(
   getRouterSelector,
   (router) => router.params || {});
 

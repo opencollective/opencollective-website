@@ -39,7 +39,7 @@ import { getAppRenderedSelector } from '../selectors/app';
 import { 
   getUsersSelector } from '../selectors/users';
 import { getAuthenticatedUserSelector } from '../selectors/session';
-import { getPathnameSelector } from '../selectors/router';
+import { getPathnameSelector, getParamsSelector } from '../selectors/router';
 import {
   getApproveInProgressSelector,
   getRejectInProgressSelector,
@@ -157,8 +157,18 @@ export class Ledger extends Component {
       fetchUsers,
       fetchPendingExpenses,
       fetchTransactions,
-      loadData
+      loadData,
+      params
     } = this.props;
+
+    switch (params.action) {
+      case 'approve':
+        approveExp(params.expenseid);
+        break;
+      case 'reject':
+        rejectExp(params.expenseid);
+        break;
+    }
 
     if (loadData) { // useful when not server-side rendered
       fetchProfile(collective.slug);
@@ -241,6 +251,7 @@ const mapStateToProps = createStructuredSelector({
   i18n: getI18nSelector,
   loadData: getAppRenderedSelector,
   pathname: getPathnameSelector,
+  params: getParamsSelector
 });
 
 export default connect(mapStateToProps, {
