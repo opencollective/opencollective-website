@@ -30,7 +30,7 @@ export default class UserCard extends Component {
 
     const href = `https://opencollective.com/${user.username}`;
 
-    const roleLabel = formatAnchor(user.tier || user.role);
+    const roleLabel = formatAnchor(user.role || user.tier);
     const addBadge = (roleLabel !== 'sponsor' && roleLabel !== 'member');
 
     return (
