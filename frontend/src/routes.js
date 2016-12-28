@@ -41,13 +41,14 @@ export default (
     <Route path="/:slug/connect/:provider" component={ConnectProvider} />
     <Route path="/:slug/edit-twitter" component={EditTwitter} />
     <Route path="/:slug" component={PublicPage} />
+    {/* TODO: #cleanup we shouldn't have expenses after /transactions/ */}
     <Route path="/:slug/transactions/expenses/new" component={Ledger} />
     <Route path="/:slug/transactions/expenses" component={Ledger} />
+    <Route path="/:slug/expenses/:expenseid/:action(approve|reject)" component={Ledger} />
     <Route path="/:slug/transactions" component={Ledger} />
     {/* TODO: #cleanup remove next two routes when new collective page is launched */}
     <Route path="/:slug/expenses/new" component={Transactions} />
     <Route path="/:slug/:type(donations|expenses)" component={Transactions} />
-
     <Route path="/:slug/donate/:amount" component={DonatePage} />
     <Route path="/:slug/donate/:amount/:interval" component={DonatePage} />
     <Route path="/:slug/:tier" component={GroupTierList} />
