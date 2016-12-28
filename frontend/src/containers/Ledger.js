@@ -50,6 +50,8 @@ export class Ledger extends Component {
 
   constructor(props) {
     super(props);
+    this.approveExp = approveExp.bind(this);
+    this.rejectExp = rejectExp.bind(this);
     let showTransactions = true;
     let showUnpaidExpenses = true;
     const showSubmitExpense = Boolean(props.pathname.match(/new$/));
@@ -163,10 +165,10 @@ export class Ledger extends Component {
 
     switch (params.action) {
       case 'approve':
-        approveExp(params.expenseid);
+        this.approveExp(params.expenseid);
         break;
       case 'reject':
-        rejectExp(params.expenseid);
+        this.rejectExp(params.expenseid);
         break;
     }
 
