@@ -21,16 +21,18 @@ const fetchActiveUsers = (options = {}) => {
     let fetchUsers;
     switch (filters.tier) {
       case 'contributors':
-        fetchUsers = api.get(`/groups/${req.params.slug.toLowerCase()}/`).then(group => group.data.githubContributors);
+        fetchUsers = api.get(`/groups/${req.params.slug.toLowerCase()}/`)
+                        .then(group => group.data.githubContributors);
         break;
       default:
-        fetchUsers = api.get(`/groups/${req.params.slug}/users?filter=active`, options);
+        fetchUsers = api.get(`/groups/${req.params.slug}/users?filter=active`, options)
+                        .then(users => _.uniqBy(users, 'id'));
         break;
     }
 
     fetchUsers
       .then((users) => {
-        req.users = _.uniqBy(filterUsers(users, filters), 'id');
+        req.users = filterUsers(users, filters);
       })
       .then(next)
       .catch(next); // make sure we return 404 if group doesn't exist
