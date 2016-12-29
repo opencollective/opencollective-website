@@ -27,6 +27,7 @@
     "contributor": "contributor",
     "contributorsOnGithub": "contributors on Github",
     "contributors": "contributors",
+    "coreContributor": "Core Contributor",
     "coreContributors": "Core Contributors",
     "creditCard": "Credit Card",
     "customAmount": "Tweak the amount",
@@ -170,6 +171,7 @@
     "comission": "Comission",
     "contributor": "contributeur",
     "contributors": "contributeurs",
+    "coreContributor": "Administrateur",
     "coreContributors": "Administrateurs",
     "creditCard": "Carte de crédit",
     "customAmount": "Précisez le montant",
@@ -298,6 +300,7 @@
     "collectives": "colectivos",
     "comission": "Comisión",
     "contributor": "colaborando",
+    "coreContributors": "Colaborando",
     "coreContributors": "Colaboradores",
     "creditCard": "Tarjeta de crédito",
     "customAmount": "Otra cantidad",
@@ -429,6 +432,7 @@
     "comission": "Commissione",
     "contributor": "collaboratore",
     "contributors": "collaboratori",
+    "coreContributor": "Collaboratori",
     "coreContributors": "Collaboratori stretti",
     "creditCard": "Carta di credito",
     "customAmount": "Modifica l'ammontare",
@@ -541,6 +545,7 @@
     "becomeMemberTitle": "Why Support WWCode?",
     "contributor": "director",
     "contributors": "contributors",
+    "coreContributor": "director",
     "coreContributors": "WWCode leaders",
     "helpUsContinueOurActivities": "With your support, you’ll help us cover all the expenses this WWCode Network needs to keep going!",
     "member": "director",
@@ -567,8 +572,9 @@
     "membersWallText":"Your support allows us to keep going towards our mission. Thank you so much."
   },
   "railsgirlsatl": {
-    "coreContributors": "Rails Girls Board",
-    "contributor": "Board Member"
+    "contributor": "Board Member",
+    "coreContributor": "Board Member",
+    "coreContributors": "Rails Girls Board"
   },
   "freeridetovote":{
     "helpUsContinueOurActivities": "With your support, you will help more people get to the polling stations on November 8th to cast their vote.",
