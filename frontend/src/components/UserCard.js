@@ -30,7 +30,8 @@ export default class UserCard extends Component {
 
     const href = `https://opencollective.com/${user.username}`;
 
-    const roleLabel = formatAnchor(user.role || user.tier);
+    // TODO: find a better way, instead of hard coding on tier string. 
+    const roleLabel = user.tier === 'core contributor' ? formatAnchor(user.role) : formatAnchor(user.tier || user.role);
     const addBadge = (roleLabel !== 'sponsor' && roleLabel !== 'member');
 
     return (
