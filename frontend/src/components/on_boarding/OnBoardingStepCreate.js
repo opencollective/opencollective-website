@@ -48,7 +48,7 @@ export default class OnBoardingStepCreate extends React.Component {
               <div className="flex-auto">
                 <div className="flex flex-column">
                   <div className="OnBoardingStepCreate-label">Help us on our mission to...</div>
-                  <CustomTextArea name={'mission'} value={mission} onChange={(value) => appendGithubForm({mission: value})} maxLength={100} placeholder="State the core mission of your collective"/>
+                  <CustomTextArea name={'mission'} value={mission} onChange={(value) => appendGithubForm({mission: value})} maxLength={100} placeholder="Usually starts with: 'We are on a mission to ...'"/>
                   <div className="OnBoardingStepCreate-label">Describe your project </div>
                   <CustomTextArea name={'description'} value={description} onChange={(value) => appendGithubForm({description: value})} maxLength={255} placeholder="Native AngularJS implementation. Performs well with large data sets; even 10,000+ rows."/>
                 </div>
