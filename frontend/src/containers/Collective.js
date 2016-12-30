@@ -108,20 +108,20 @@ export class Collective extends Component {
     );
   }
 
-  componentDidMount() {
+  componentDidMount() {    
+  }
+
+  componentWillMount() {
     const {
       collective,
       fetchProfile,
       loadData
     } = this.props;
 
-    if (loadData) { // useful when not server-side rendered
-      fetchProfile(collective.slug);
+    if (loadData || !collective.id) { 
+      fetchProfile(collective.slug)
     }
-    this.refreshData();
-  }
-
-  componentWillMount() {
+    this.refreshData(); 
   }
     
   closeDonationFlow() {

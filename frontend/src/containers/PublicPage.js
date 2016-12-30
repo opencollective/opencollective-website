@@ -18,7 +18,7 @@ export class PublicPage extends Component {
       return <ProfilePage profile={ profile } />
     } else if (this.props.showOldCollectivePage) {
       return <PublicGroup />
-    } else if (this.props.group.slug ) {
+    } else if (this.props.slug ) {
       return <Collective />
     } else {
       return <HomePage />
@@ -35,6 +35,7 @@ export function mapStateToProps({groups, session, router}) {
     group,
     session,
     isUserProfile: Boolean(group.username),
+    slug: router.params.slug,
     showOldCollectivePage: router.location.query.old === '1' || group.isSupercollective || group.hasPaypal,
   };
 }

@@ -10,6 +10,7 @@ import DonatePage from './containers/DonatePage';
 import EditTwitter from './components/EditTwitter';
 import Faq from './containers/Faq';
 import GroupTierList from './containers/GroupTierList';
+import Homepage from './containers/HomePage';
 import Ledger from './containers/Ledger';
 import Login from './containers/Login';
 import NewGroup from './containers/NewGroup';
@@ -23,7 +24,7 @@ import { requireAuthentication } from './components/AuthenticatedComponent';
 
 export default (
   <Route>
-    <Route path="/" component={PublicPage} />
+    <Route path="/" component={Homepage} />
     <Route path="/services/email/:action(unsubscribe|approve)" component={Response} />
     <Route path="/about" component={About} />
     <Route path="/faq" component={Faq} />
