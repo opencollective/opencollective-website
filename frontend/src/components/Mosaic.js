@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
+import { formatTierToCamelCase } from '../lib/utils';
+
 import UserPhoto from './UserPhoto';
 
 export default class Mosaic extends Component {
@@ -17,7 +19,6 @@ export default class Mosaic extends Component {
 
     return (
     <div className='Mosaic'>
-
       {hovercards.map((user, index) => {
         const style = { display: 'none' };
         if (hovercard && hovercard.username === user.username) {
@@ -33,7 +34,7 @@ export default class Mosaic extends Component {
                 addBadge={user.core}
                 />
               <div className='HoverCard-name'>{user.name || user.username}</div>
-              {user.tier && <div className='HoverCard-tier'>{user.tier}</div>}
+              {user.tier && <div className='HoverCard-tier'>{i18n.getString(formatTierToCamelCase(user.tier))}</div>}
               {user.createdAt && <div className='HoverCard-since'>{i18n.getString('since')} {i18n.moment(user.createdAt).format('MMMM YYYY')}</div>}
               {user.stats &&
                 <div className='HoverCard-stats'>

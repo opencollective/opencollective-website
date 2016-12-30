@@ -27,6 +27,12 @@ export function formatAnchor(title) {
   return title.toLowerCase().replace(' ','-').replace(/[^a-z0-9\-]/gi,'')
 }
 
+export function formatTierToCamelCase(title) {
+  return title.replace(/\s(.)/g, ($1) => $1.toUpperCase())
+          .replace(/\s/g, '')
+          .replace(/^(.)/, ($1) => $1.toLowerCase());
+}
+
 /**
 * Currently, `Joi.string().uri()` Joi is used to validate the website uri.
 * Unfortunately, a valid URI includes its schema/protocol, so the following urls
