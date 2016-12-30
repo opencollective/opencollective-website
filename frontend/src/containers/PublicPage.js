@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 
 import values from 'lodash/values';
 
-import HomePage from './HomePage';
 import ProfilePage from './ProfilePage';
 import PublicGroup from './PublicGroup';
 import Collective from './Collective'
@@ -18,10 +17,8 @@ export class PublicPage extends Component {
       return <ProfilePage profile={ profile } />
     } else if (this.props.showOldCollectivePage) {
       return <PublicGroup />
-    } else if (this.props.group.slug ) {
-      return <Collective />
     } else {
-      return <HomePage />
+      return <Collective />
     }
   }
 }

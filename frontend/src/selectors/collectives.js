@@ -37,7 +37,7 @@ const getCollectivesSelector = (state) => state.collectives;
 
 export const getCollectiveSelector = createSelector(
   [ getSlugSelector, getCollectivesSelector ],
-  (slug, collectives) => collectives[slug] || {});
+  (slug, collectives) => collectives[slug] || { slug });
 
 export const getCollectiveSettingsSelector = createSelector(
   getCollectiveSelector,

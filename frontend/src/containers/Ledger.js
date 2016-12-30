@@ -156,6 +156,7 @@ export class Ledger extends Component {
   componentWillMount() {
     const { 
       collective,
+      fetchProfile,
       fetchUsers,
       fetchPendingExpenses,
       fetchTransactions,
@@ -163,24 +164,28 @@ export class Ledger extends Component {
       params
     } = this.props;
 
-    switch (params.action) {
-      case 'approve':
-        this.approveExp(params.expenseid);
-        break;
-      case 'reject':
-        this.rejectExp(params.expenseid);
-        break;
+    let promise = Promise.resolve();
+
+    if (loadData || !collective.id) { 
+      promise = promise.then(() => fetchProfile(collective.slug));
     }
 
-    if (loadData) { // useful when not server-side rendered
-      fetchProfile(collective.slug);
+    switch (params.action) {
+      case 'approve':
+        promise = promise.then(() => this.approveExp(params.expenseid));
+        break;
+      case 'reject':
+        promise = promise.then(() => this.rejectExp(params.expenseid));
+        break;
     }
-    Promise.all([
+    promise = promise.then(() => Promise.all([
       fetchUsers(collective.slug),
       fetchPendingExpenses(collective.slug),
       fetchTransactions(collective.slug)
-      ])
-    .then(() => scrollToExpense());
+      ]))
+      .then(() => scrollToExpense());
+
+    return promise;
   }
 }
 
