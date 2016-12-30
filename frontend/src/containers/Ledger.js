@@ -153,34 +153,41 @@ export class Ledger extends Component {
 
   }
 
+  loadCollectiveData() {
+    const { collective, params, fetchProfile } = this.props;
+    if (collective && collective.id) return Promise.resolve(collective);
+    return fetchProfile(params.slug).then(result => {
+      return result.groups[result.slug];
+    });
+  }
+
   componentWillMount() {
     const { 
-      collective,
       fetchUsers,
       fetchPendingExpenses,
       fetchTransactions,
-      loadData,
       params
     } = this.props;
 
-    switch (params.action) {
-      case 'approve':
-        this.approveExp(params.expenseid);
-        break;
-      case 'reject':
-        this.rejectExp(params.expenseid);
-        break;
-    }
+    this.loadCollectiveData()
+      .then((collective) => {
+        this.collective = collective;
+        return Promise.all([
+          fetchUsers(collective.slug),
+          fetchPendingExpenses(collective.slug),
+          fetchTransactions(collective.slug)
+          ])
+      })
+      .then(() => {
+        switch (params.action) {
+          case 'approve':
+            return this.approveExp(params.expenseid);
+          case 'reject':
+            return this.rejectExp(params.expenseid);
+        }
+      })
 
-    if (loadData) { // useful when not server-side rendered
-      fetchProfile(collective.slug);
-    }
-    Promise.all([
-      fetchUsers(collective.slug),
-      fetchPendingExpenses(collective.slug),
-      fetchTransactions(collective.slug)
-      ])
-    .then(() => scrollToExpense());
+      .then(() => scrollToExpense());
   }
 }
 
@@ -190,13 +197,11 @@ export class Ledger extends Component {
 export function approveExp(expenseId) {
   const {
     approveExpense,
-    collective,
     fetchPendingExpenses,
     notify
   } = this.props;
-
-  return approveExpense(collective.id, expenseId)
-    .then(() => fetchPendingExpenses(collective.slug))
+  return approveExpense(this.collective.id, expenseId)
+    .then(() => fetchPendingExpenses(this.collective.slug))
     .catch(({message}) => notify('error', message));
 }
 
@@ -205,14 +210,13 @@ export function approveExp(expenseId) {
  */
 export function rejectExp(expenseId) {
   const {
-    collective,
     fetchPendingExpenses,
     rejectExpense,
     notify
   } = this.props;
 
-  return rejectExpense(collective.id, expenseId)
-    .then(() => fetchPendingExpenses(collective.slug))
+  return rejectExpense(this.collective.id, expenseId)
+    .then(() => fetchPendingExpenses(this.collective.slug))
     .catch(({message}) => notify('error', message));
 }
 
@@ -221,16 +225,15 @@ export function rejectExp(expenseId) {
  */
 export function payExp(expenseId) {
   const {
-    collective,
     fetchPendingExpenses,
     fetchTransactions,
     payExpense,
     notify
   } = this.props;
 
-  return payExpense(collective.id, expenseId)
-    .then(() => fetchPendingExpenses(collective.slug))
-    .then(() => fetchTransactions(collective.slug))
+  return payExpense(this.collective.id, expenseId)
+    .then(() => fetchPendingExpenses(this.collective.slug))
+    .then(() => fetchTransactions(this.collective.slug))
     .catch(({message}) => notify('error', message));
 }
 
