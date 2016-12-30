@@ -141,7 +141,7 @@ const addMeta = (req, res, next) => {
     req.meta = {
       url: group.publicUrl,
       title: `${group.name} is on Open Collective`,
-      description: `${group.name} is on a mission to ${group.mission}`,
+      description: `${group.mission}`,
       image: group.image || group.logo,
       twitter: `@${group.twitterHandle}`,
     };
