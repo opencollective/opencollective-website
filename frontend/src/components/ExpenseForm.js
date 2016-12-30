@@ -186,8 +186,7 @@ class ExpenseForm extends Component {
   }
 
   componentDidMount() {
-    const { categories, resetExpenseForm, appendExpenseForm } = this.props;
-    resetExpenseForm();
+    const { categories, appendExpenseForm } = this.props;
     appendExpenseForm({category: categories[0]});
   }
 }

@@ -7,7 +7,6 @@ import values from 'lodash/values';
 import createExpense from '../actions/expenses/create';
 import uploadImage from '../actions/images/upload';
 
-import resetExpenseForm from '../actions/form/reset_expense';
 import appendExpenseForm from '../actions/form/append_expense';
 import validateExpense from '../actions/form/validate_expense';
 
@@ -106,7 +105,6 @@ export function createExpenseFn() {
 export default connect(mapStateToProps, {
   createExpense,
   uploadImage,
-  resetExpenseForm,
   appendExpenseForm,
   validateExpense,
   pushState,
