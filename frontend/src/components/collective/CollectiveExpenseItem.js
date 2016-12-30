@@ -39,6 +39,13 @@ const CollectiveExpenseItem = ({
 
   let src, srcSet, href, receiptMessage, receiptHelpTip;
 
+  let submittedByName = user && user.name;
+
+  // show email only if the user can view receipt
+  if (canViewReceipt) {
+    submittedByName = user && user.name && user.email ? `${user.name} - ${user.email}` : `${user.email}`;
+  }
+
   if (canViewReceipt && expense.attachment) {
     src = resizeImage(expense.attachment, { width: 240 });
     srcSet = resizeImage(expense.attachment, { width: 480 });
@@ -56,7 +63,6 @@ const CollectiveExpenseItem = ({
       receiptHelpTip = i18n.getString('hiddenReceiptHelpTip');
     }
   }
-  
  
   return (
     <section id={`exp${expense.id}`}>
@@ -79,7 +85,7 @@ const CollectiveExpenseItem = ({
         <div className='flex flex-column flex-auto'>
           <div className='CollectiveExpenseItem-info'>
             <div className='-ff-sec'>{ expense.title } ({expense.category})</div>
-            <div className='h6 m0 muted'>{ i18n.getString('submittedBy') } { user && user.name } - { expense.incurredAt && i18n.moment(expense.incurredAt).fromNow() } </div>
+            <div className='h6 m0 muted'>{ i18n.getString('submittedBy') } { submittedByName } - { expense.incurredAt && i18n.moment(expense.incurredAt).fromNow() } </div>
             <p className='h3 -ff-sec amount'>
               <Currency value={expense.amount} currency={expense.currency} colorify={false} /> 
             </p>
