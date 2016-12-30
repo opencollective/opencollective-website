@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import values from 'lodash/values';
 
+import HomePage from './HomePage';
 import ProfilePage from './ProfilePage';
 import PublicGroup from './PublicGroup';
 import Collective from './Collective'
@@ -17,8 +18,10 @@ export class PublicPage extends Component {
       return <ProfilePage profile={ profile } />
     } else if (this.props.showOldCollectivePage) {
       return <PublicGroup />
-    } else {
+    } else if (this.props.slug ) {
       return <Collective />
+    } else {
+      return <HomePage />
     }
   }
 }
@@ -32,6 +35,7 @@ export function mapStateToProps({groups, session, router}) {
     group,
     session,
     isUserProfile: Boolean(group.username),
+    slug: router.params.slug,
     showOldCollectivePage: router.location.query.old === '1' || group.isSupercollective || group.hasPaypal,
   };
 }
