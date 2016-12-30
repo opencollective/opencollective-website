@@ -202,6 +202,7 @@ export function approveExp(expenseId) {
   } = this.props;
   return approveExpense(this.collective.id, expenseId)
     .then(() => fetchPendingExpenses(this.collective.slug))
+    .then(() => notify('success', 'Expense approved'))
     .catch(({message}) => notify('error', message));
 }
 
@@ -217,6 +218,7 @@ export function rejectExp(expenseId) {
 
   return rejectExpense(this.collective.id, expenseId)
     .then(() => fetchPendingExpenses(this.collective.slug))
+    .then(() => notify('success', 'Expense rejected'))
     .catch(({message}) => notify('error', message));
 }
 
