@@ -37,13 +37,15 @@ const CollectiveExpenseItem = ({
 
   const updateInProgress = approveInProgress[expense.id] || rejectInProgress[expense.id] || payInProgress[expense.id];
 
+  const userEmail = user && (user.paypalEmail || user.email);
+
   let src, srcSet, href, receiptMessage, receiptHelpTip;
 
   let submittedByName = user && user.name;
 
   // show email only if the user can view receipt
   if (canViewReceipt) {
-    submittedByName = user && user.name && user.email ? `${user.name} - ${user.email}` : `${user.email}`;
+    submittedByName = user && user.name && userEmail ? `${user.name} - ${userEmail}` : `${userEmail}`;
   }
 
   if (canViewReceipt && expense.attachment) {
