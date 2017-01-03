@@ -283,7 +283,7 @@ export default class DonationDistributor extends Component {
     const cancellationDisclaimer = (frequency !== 'one-time') ? i18n.getString('cancelAnytime') : '';
     return (
       <h6>
-        {i18n.getString('disclaimer')} {group.host ? group.host.name : null} {this.getStripeDesciption()} {i18n.getString('for')} {group.name}. {cancellationDisclaimer}
+        {i18n.getString('disclaimer')} {group.host ? group.host.name : null} <strong>{this.getStripeDesciption()}</strong> {i18n.getString('for')} {group.name}. {cancellationDisclaimer}
       </h6>
     )
   }
