@@ -142,7 +142,7 @@ export class About extends Component {
           <div className='links center'>
             <ul className='social-list'>
                 <li><a href='//twitter.com/opencollect'><i className='fa-twitter'></i></a></li>
-                <li><a href='mailto:info@opencollective'><i className='fa-envelope-o'></i></a></li>
+                <li><a href='mailto:info@opencollective.com'><i className='fa-envelope-o'></i></a></li>
                 <li><a href='//medium.com/open-collective'><i className='fa-medium'></i></a></li>
                 <li><a href='//slack.opencollective.com/'><i className='fa-slack'></i></a></li>
                 <li><a href='//github.com/OpenCollective/OpenCollective'><i className='fa-github'></i></a></li>
