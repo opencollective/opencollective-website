@@ -32,7 +32,8 @@ export class NewGroup extends Component {
     const {
       appendGroupForm,
       newGroupForm,
-      pushState
+      pushState,
+      host
     } = this.props;
 
     const {
@@ -125,6 +126,10 @@ export class NewGroup extends Component {
         <Notification {...this.props} />
         <LoginTopBar />
         <div className='NewGroup'>
+          { host && <div className='host'>
+            <img src={host.avatar} />
+            <h2>{host.name}</h2>
+          </div>}
           <h1>Create a new collective</h1>
           {showGroupTypes &&
             <div className='NewGroup-PickType NewGroup-question'>
@@ -234,7 +239,7 @@ export class NewGroup extends Component {
   }
 
   create() {
-    const { newGroupForm, validateSchema, createGroup, utmSource, notify } = this.props;
+    const { newGroupForm, validateSchema, createGroup, utmSource, notify, host } = this.props;
     const attr = newGroupForm.attributes;
 
     const group = {
@@ -244,6 +249,7 @@ export class NewGroup extends Component {
       mission: attr.mission,
       longDescription: attr.contribute ? `${attr.description}\n\n# Contribute\n\n${attr.contribute}` : attr.description,
       website: attr.website,
+      HostId: host.id,
       data: {
         utmSource
       },
@@ -267,13 +273,15 @@ export default connect(mapStateToProps, {
   validateSchema
 })(NewGroup);
 
-export function mapStateToProps({router, form}) {
+export function mapStateToProps({router, form, groups}) {
 
+  const host = (groups && router.params.host) ? groups[router.params.host] : null;
   const query = router.location.query;
   const utmSource = query.utm_source;
 
   return {
     newGroupForm: form.addgroup,
+    host,
     utmSource
   };
 }
