@@ -21,10 +21,11 @@ const fetchActiveUsers = (options = {}) => {
     let fetchUsers;
     switch (filters.tier) {
       case 'contributors':
-        fetchUsers = api.get(`/groups/${req.params.slug.toLowerCase()}/`)
+        fetchUsers = api.get(`/groups/${req.params.slug.toLowerCase()}/`, { cache: 60 * 60 })
                         .then(group => group.data.githubContributors);
         break;
       default:
+        options.cache = 300;
         fetchUsers = api.get(`/groups/${req.params.slug}/users?filter=active`, options)
                         .then(users => _.uniqBy(users, 'id'));
         break;

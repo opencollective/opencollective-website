@@ -23,7 +23,7 @@ api.get = (endpoint, options) => {
           return cached.once('finished', () => resolve(cached.response));
       }
     });
-  } else {
+  } else if (options.cache) {
     memory_cache[endpoint] = cached = new EventEmitter();
     cached.status = 'running';
     return api.fetch(apiUrl(endpoint), {headers: options.headers})
@@ -38,6 +38,9 @@ api.get = (endpoint, options) => {
 
         return json;
       });
+  } else {
+    return api.fetch(apiUrl(endpoint), {headers: options.headers})
+      .then(checkStatus)
   }
 };
 
