@@ -33,7 +33,7 @@ export class NewGroup extends Component {
       appendGroupForm,
       newGroupForm,
       pushState,
-      host
+      hostCollective
     } = this.props;
 
     const {
@@ -126,9 +126,9 @@ export class NewGroup extends Component {
         <Notification {...this.props} />
         <LoginTopBar />
         <div className='NewGroup'>
-          { host && <div className='host'>
-            <img src={host.avatar} />
-            <h2>{host.name}</h2>
+          { hostCollective && <div className='host'>
+            <img src={hostCollective.logo} />
+            <h2>{hostCollective.name}</h2>
           </div>}
           <h1>Create a new collective</h1>
           {showGroupTypes &&
@@ -239,7 +239,7 @@ export class NewGroup extends Component {
   }
 
   create() {
-    const { newGroupForm, validateSchema, createGroup, utmSource, notify, host } = this.props;
+    const { newGroupForm, validateSchema, createGroup, utmSource, notify, hostCollective } = this.props;
     const attr = newGroupForm.attributes;
 
     const group = {
@@ -249,7 +249,7 @@ export class NewGroup extends Component {
       mission: attr.mission,
       longDescription: attr.contribute ? `${attr.description}\n\n# Contribute\n\n${attr.contribute}` : attr.description,
       website: attr.website,
-      HostId: host.id,
+      HostId: hostCollective.settings.HostId,
       data: {
         utmSource
       },
@@ -275,13 +275,13 @@ export default connect(mapStateToProps, {
 
 export function mapStateToProps({router, form, groups}) {
 
-  const host = (groups && router.params.host) ? groups[router.params.host] : null;
+  const hostCollective = (groups && router.params.slug) ? groups[router.params.slug] : null;
   const query = router.location.query;
   const utmSource = query.utm_source;
 
   return {
     newGroupForm: form.addgroup,
-    host,
+    hostCollective,
     utmSource
   };
 }
