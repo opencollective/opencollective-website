@@ -74,7 +74,6 @@ export class Collective extends Component {
   render() {
     const {
       collective,
-      host,
       editCollectiveInProgress,
       cancelEditCollectiveForm,
       i18n
