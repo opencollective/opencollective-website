@@ -80,8 +80,6 @@ export class Collective extends Component {
       i18n
     } = this.props;
 
-    console.log(">>> host: ", host);
-
     return (
       <div className={`Collective ${collective.slug}`}>
         <Notification />
