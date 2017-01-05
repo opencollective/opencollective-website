@@ -2,6 +2,17 @@
   max-width: 900px;
   margin: 0 auto;
   padding: 20px;
+  .host {
+    h2 {
+      margin-bottom: -30px;
+      color: var(--dark-gray);
+    }
+    img {
+      max-height: 75px;
+      float: left;
+      margin-right: 20px;      
+    }
+  }
   .NewGroup-question {
     margin: 20px 0 10px 0;
     label {
