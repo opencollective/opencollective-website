@@ -13,7 +13,7 @@ import CollectiveStatsHeader from '../../components/collective/CollectiveStatsHe
 export default class CollectiveHero extends Component {
 
   render() {
-    const { collective, i18n, canEditCollective, editCollectiveForm, appendEditCollectiveForm} = this.props;
+    const { collective, host, i18n, canEditCollective, editCollectiveForm, appendEditCollectiveForm} = this.props;
 
     return (
       <section className='CollectiveHero relative px2 bg-black bg-cover white'>
@@ -52,7 +52,12 @@ export default class CollectiveHero extends Component {
             </h1>
             <UserAvatarRow members={ collective.members } backers={ collective.backers } otherCount={ collective.contributorsCount } />
             <CollectiveStatsHeader collective={ collective } i18n={ i18n } />
-            <a href='#support' className='mb3 -btn -btn-big -bg-green -ttu -ff-sec -fw-bold'>{ i18n.getString('bePart') }</a>
+            {collective.isActive && 
+              <a href='#support' className='mb3 -btn -btn-big -bg-green -ttu -ff-sec -fw-bold'>{ i18n.getString('bePart') }</a>
+            }
+            {!collective.isActive && host &&
+              <div className="underReview">This collective is currently under review by the host (<a href={host.website}>{host.name}</a>)</div>
+            }
 
             <div className='scrollDown'>
               <p className='h6'>{ i18n.getString('scrollDown') }</p>
@@ -86,6 +91,7 @@ export default class CollectiveHero extends Component {
 
 CollectiveHero.propTypes = {
   collective: PropTypes.object.isRequired,
+  host: PropTypes.object.isRequired,
   i18n: PropTypes.object.isRequired,
   editCollectiveForm: PropTypes.object.isRequired,
   appendEditCollectiveForm: PropTypes.func.isRequired,

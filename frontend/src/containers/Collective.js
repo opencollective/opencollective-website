@@ -42,8 +42,8 @@ import {
   canEditCollectiveSelector,
   getI18nSelector,
   getPopulatedCollectiveSelector,
-  isHostOfCollectiveSelector,
-  hasHostSelector } from '../selectors/collectives';
+  getCollectiveHostSelector,
+  isHostOfCollectiveSelector } from '../selectors/collectives';
 import {
   getEditCollectiveFormAttrSelector,
   getEditCollectiveInProgressSelector,
@@ -74,11 +74,13 @@ export class Collective extends Component {
   render() {
     const {
       collective,
+      host,
       editCollectiveInProgress,
       cancelEditCollectiveForm,
-      i18n,
-      hasHost
+      i18n
     } = this.props;
+
+    console.log(">>> host: ", host);
 
     return (
       <div className={`Collective ${collective.slug}`}>
@@ -91,7 +93,7 @@ export class Collective extends Component {
           <CollectiveHero { ...this.props } />
           <CollectiveLedger { ...this.props } />
 
-          {hasHost && <CollectiveDonate onDonate={ donateToCollective.bind(this) } { ...this.props }/>}
+          {collective.isActive && <CollectiveDonate onDonate={ donateToCollective.bind(this) } { ...this.props }/>}
 
           <CollectiveAboutUs { ...this.props } />
           <CollectiveMembers collective={ collective } i18n={ i18n } />
@@ -229,7 +231,8 @@ export function saveNewUser() {
 const mapStateToProps = createStructuredSelector({
     // collective props
     collective: getPopulatedCollectiveSelector,
-    hasHost: hasHostSelector,
+    host: getCollectiveHostSelector,
+    isHost: isHostOfCollectiveSelector,
 
     // donation props
     donationForm: getDonationFormSelector,
@@ -241,7 +244,6 @@ const mapStateToProps = createStructuredSelector({
     canEditCollective: canEditCollectiveSelector,
     editCollectiveForm: getEditCollectiveFormAttrSelector,
     editCollectiveInProgress: getEditCollectiveInProgressSelector,
-    isHost: isHostOfCollectiveSelector,
 
     // other props
     isAuthenticated: isSessionAuthenticatedSelector,

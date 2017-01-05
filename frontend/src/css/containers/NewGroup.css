@@ -7,6 +7,11 @@
       margin-bottom: -30px;
       color: var(--dark-gray);
     }
+    img {
+      max-height: 75px;
+      float: left;
+      margin-right: 20px;      
+    }
   }
   .NewGroup-question {
     margin: 20px 0 10px 0;
