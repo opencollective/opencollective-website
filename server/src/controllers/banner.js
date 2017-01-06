@@ -167,7 +167,7 @@ export default {
 
   banner: (req, res) => {
     const { order } = req.query;
-    const { tier } = req.params;
+    const { tier, slug } = req.params;
     let users = req.users;
     const format = req.params.format || 'svg';
     const style = req.query.style || 'rounded';
@@ -206,6 +206,11 @@ export default {
         encoding: null,
         ttl: 60 * 60 * 24 * 30 * 1000
       };
+
+      users.push({
+        username: slug,
+        website: `${config.host.website}/${slug}#support`
+      })
 
       promises.push(requestPromise(btn));
     }
