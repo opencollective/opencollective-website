@@ -133,6 +133,7 @@ export default (app) => {
   app.get('/:slug([A-Za-z0-9-_]+)/expenses/:expenseid/:action', mw.ga, mw.fetchProfileBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-_]+)/donate/:amount', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-_]+)/donate/:amount/:interval', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
+  app.get('/:slug([A-Za-z0-9-_]+)/donate/:amount/:interval/:description', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-_]+)', mw.ga, mw.fetchProfileBySlug, mw.addMeta, render);
 
   app.use(mw.handleUncaughtError);
