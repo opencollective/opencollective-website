@@ -174,12 +174,12 @@ function mapStateToProps({
   session
 }) {
 
-  let { interval, description } = router.params;
+  let { interval = 'one-time', description } = router.params;
   if (interval.match(/^month(ly)?$/i)) {
     interval = 'month';
   } else if (interval.match(/^year(ly)?$/i)) {
     interval = 'year';
-  } else if (!description) {
+  } else if (interval !== 'one-time') {
     description = interval;
     interval = 'one-time';
   }

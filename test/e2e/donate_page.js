@@ -8,8 +8,9 @@ module.exports = {
 
   'Donate button shows €100.00': (client) => {
     client
-      .url(`${config.host.website}/testcollective/donate/100`)
+      .url(`${config.host.website}/testcollective/donate/100/February Meetup`)
       .waitForElementVisible('body', 1000)
+      .assert.containsText('div[class=Tier]', 'February Meetup')
       .assert.containsText('div[class=PublicGroupForm-disclaimer]', 'EUR €100,00')
       .end();
    },
