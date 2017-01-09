@@ -115,7 +115,7 @@ export default (app) => {
   app.get('/login', mw.ga, mw.addTitle('Open Collective Login'), render);
   app.get('/opensource/apply/:token', mw.ga, mw.extractGithubUsernameFromToken, mw.addTitle('Sign up your Github repository'), render);
   app.get('/opensource/apply', mw.ga, mw.addTitle('Sign up your Github repository'), render);
-  app.get('/:slug/apply', mw.ga, mw.fetchGroupBySlug, controllers.hosts.apply, render);
+  app.get('/:slug/apply', mw.ga, mw.fetchProfileBySlug, controllers.hosts.apply, render);
   app.get('/connect/github', mw.ga, render);
   app.get('/:slug([A-Za-z0-9-_]+)/transactions/expenses/new', mw.ga, mw.fetchProfileBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-_]+)/transactions/expenses', mw.ga, mw.fetchProfileBySlug, mw.addMeta, render);
