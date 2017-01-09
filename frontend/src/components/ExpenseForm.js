@@ -3,7 +3,6 @@ import classnames from 'classnames';
 import moment from 'moment';
 
 import formatCurrency from '../lib/format_currency';
-import env from '../lib/env';
 
 import payoutMethods from '../ui/payout_methods';
 
@@ -44,7 +43,6 @@ class ExpenseForm extends Component {
     const { expense, categories, group, appendExpenseForm, isUploading, enableVAT, i18n, user } = this.props;
     const { prefilled } = this.state;
     const { attributes } = expense;
-    const hasAttachment = env.NODE_ENV !== 'production' || attributes.attachment;
     const className = classnames({
       'ExpenseForm': true,
       'ExpenseForm--isUploading': isUploading,
@@ -167,7 +165,7 @@ class ExpenseForm extends Component {
         <AsyncButton
           color='green'
           inProgress={expense.inProgress}
-          onClick={hasAttachment && this.onSubmit.bind(this)}>
+          onClick={this.onSubmit.bind(this)}>
           Submit Expense
         </AsyncButton>
 
