@@ -49,7 +49,9 @@ export class RequestMoney extends Component {
           <label>{i18n.getString('interval')}</label>
           <Select
             customClass='js-transaction-payoutMethod'
-            options={intervals.map(i => { return { label: i18n.getString(i), value: i}})}
+            options={intervals.map(i => {
+              return { label: i18n.getString(i), value: i};
+            })}
             handleChange={interval => this.handleChange('interval', interval)} />
         </div>
         <div className='col col-12 sm-col-12 md-col-6 lg-col-6 pl1'>
