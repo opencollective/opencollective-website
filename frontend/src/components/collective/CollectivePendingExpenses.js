@@ -75,7 +75,7 @@ export default class CollectivePendingExpenses extends React.Component {
               <div 
                 key={`cl_${expense.id}`}
                 className='CollectivePendingExpenses-list' 
-                onClick={() => push(`/${collective.slug}/transactions/expenses#exp${expense.id}`)}>
+                onClick={() => push(`/${collective.slug}/expenses#exp${expense.id}`)}>
                 <CollectiveExpenseItem 
                   expense={expense} 
                   user={users[expense.UserId]} 
@@ -89,8 +89,8 @@ export default class CollectivePendingExpenses extends React.Component {
 
         { collective.expenses.length > 0 && (
           <span className='right'>
-            <Link className='-btn -btn-medium -btn-outline -border-green -ttu -fw-bold' to={`/${collective.slug}/transactions/expenses`}>
-              {i18n.getString('seeAll')} >
+            <Link className='-btn -btn-medium -btn-outline -border-green -ttu -fw-bold' to={`/${collective.slug}/expenses`}>
+              {i18n.getString('seeAllExpenses')} >
             </Link>
           </span>
         )}

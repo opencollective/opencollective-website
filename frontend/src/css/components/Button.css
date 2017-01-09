@@ -48,6 +48,7 @@
   margin-right: calc(var(--spacing)/2);
 }
 
+.Button--submit:hover,
 .Button--approve:hover,
 .Button--pay:hover,
 .Button--save:hover,
@@ -106,7 +107,6 @@
 /**
  * Keep at the very bottom
  */
-
 .Button--inProgress {
   background-color: var(--dark-gray);
 }

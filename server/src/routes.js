@@ -94,7 +94,6 @@ export default (app) => {
   app.get('/:slug/badge/:tier.svg', mw.maxAge(300), mw.fetchActiveUsers({requireAvatar: false}), controllers.banner.badge);
   app.get('/:slug/:tier/:position/avatar(.:format(png|jpg|svg))?', mw.maxAge(300), mw.ga, mw.fetchActiveUsers({cache: 300}), controllers.banner.avatar);
   app.get('/:slug/:tier/:position/website', mw.ga, mw.fetchActiveUsers(), controllers.banner.redirect);
-  app.get('/:slug([A-Za-z0-9-]+)/transactions/:transactionid/invoice.pdf', mw.maxAge(300), controllers.transactions.invoice);
   app.get('/:slug([A-Za-z0-9-]+)/widget', mw.maxAge(300), mw.fetchProfileBySlug, controllers.widgets.profile);
   app.get('/:slug([A-Za-z0-9-]+)/widget.js', mw.maxAge(3000), controllers.widgets.js);
 
@@ -117,9 +116,6 @@ export default (app) => {
   app.get('/opensource/apply', mw.ga, mw.addTitle('Sign up your Github repository'), render);
   app.get('/:slug/apply', mw.ga, mw.fetchGroupBySlug, controllers.hosts.apply, render);
   app.get('/connect/github', mw.ga, render);
-  app.get('/:slug([A-Za-z0-9-_]+)/transactions/expenses/new', mw.ga, mw.fetchProfileBySlug, mw.addMeta, render);
-  app.get('/:slug([A-Za-z0-9-_]+)/transactions/expenses', mw.ga, mw.fetchProfileBySlug, mw.addMeta, render);
-  app.get('/:slug([A-Za-z0-9-_]+)/transactions', mw.ga, mw.fetchProfileBySlug, mw.addMeta, render);
   app.get('/:slug/:tier\.:format(json|csv)', mw.maxAge(3000), mw.ga, mw.fetchGroupBySlug, controllers.tierList); // <-------- WIP
   app.get('/:slug/:tier', mw.ga, mw.fetchGroupBySlug, render); // <-------- WIP
   app.get('/:slug/connect/:provider', mw.ga, render);
@@ -128,9 +124,11 @@ export default (app) => {
   app.get('/subscriptions', mw.ga, mw.addTitle('My Subscriptions'), render);
   app.get('/:slug([A-Za-z0-9-_]+)/connected-accounts', mw.ga, render);
   // TODO: #cleanup remove next two routes when new collective page is live
-  app.get('/:slug([A-Za-z0-9-_]+)/:type(expenses|donations)', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
-  app.get('/:slug([A-Za-z0-9-_]+)/expenses/new', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
-  app.get('/:slug([A-Za-z0-9-_]+)/expenses/:expenseid/:action', mw.ga, mw.fetchProfileBySlug, mw.addMeta, render);
+  app.get('/:slug([A-Za-z0-9-_]+)/:type(expenses|donations|transactions)', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
+  app.get('/:slug([A-Za-z0-9-]+)/transactions/:transactionid/invoice.pdf', mw.maxAge(300), controllers.transactions.invoice);
+  app.get('/:slug([A-Za-z0-9-_]+)/expenses/:action(new)', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
+  app.get('/:slug([A-Za-z0-9-_]+)/expenses/:expenseid/:action(approve|reject)', mw.ga, mw.fetchProfileBySlug, mw.addMeta, render);
+  app.get('/:slug([A-Za-z0-9-_]+)/donations/:action(request)', mw.ga, mw.fetchProfileBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-_]+)/donate/:amount', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-_]+)/donate/:amount/:interval', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-_]+)', mw.ga, mw.fetchProfileBySlug, mw.addMeta, render);

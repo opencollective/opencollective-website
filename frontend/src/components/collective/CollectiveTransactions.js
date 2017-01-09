@@ -27,13 +27,13 @@ export default class CollectiveTransactions extends React.Component {
                 user={users[transaction.UserId]} 
                 className='' i18n={i18n} />)}
         </div>
-        {(collective.transactions.length >= itemsToShow) && (
-          <div className='center pt2'>
+        <div className='center pt2'>
+          {(collective.transactions.length >= itemsToShow) && (
             <Link className='-btn -btn-medium -btn-outline -border-green -ttu -fw-bold' to={`/${collective.slug}/transactions`}>
-              {i18n.getString('seeAll')} >
+              {i18n.getString('seeAllTransactions')} >
             </Link>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     );
   }

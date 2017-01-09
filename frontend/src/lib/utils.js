@@ -27,6 +27,11 @@ export function formatAnchor(title) {
   return title.toLowerCase().replace(' ','-').replace(/[^a-z0-9\-]/gi,'')
 }
 
+export function capitalize(str) {
+  if (!str) return '';
+  return str[0].toUpperCase() + str.substr(1);
+}
+
 export function formatTierToCamelCase(title) {
   return title.replace(/\s(.)/g, ($1) => $1.toUpperCase())
           .replace(/\s/g, '')

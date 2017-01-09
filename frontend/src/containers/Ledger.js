@@ -3,7 +3,7 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 
 // lib
-import { scrollToExpense } from '../lib/utils';
+import { scrollToExpense, capitalize } from '../lib/utils';
 
 // Containers
 import LoginTopBar from './LoginTopBar';
@@ -11,6 +11,7 @@ import Notification from './Notification';
 import SubmitExpense from './SubmitExpense';
 
 // components
+import RequestMoney from '../components/RequestMoney';
 import Button from '../components/Button';
 import CollectiveExpenseItem from '../components/collective/CollectiveExpenseItem';
 import CollectiveTransactions from '../components/collective/CollectiveTransactions';
@@ -52,24 +53,28 @@ export class Ledger extends Component {
     super(props);
     this.approveExp = approveExp.bind(this);
     this.rejectExp = rejectExp.bind(this);
-    let showTransactions = true;
-    let showUnpaidExpenses = true;
-    const showSubmitExpense = Boolean(props.pathname.match(/new$/));
+    this.switchView = this.switchView.bind(this);
 
-    if (props.pathname.match(/transactions$/)) {
-      showUnpaidExpenses = false;
-    } else if (props.pathname.match(/unpaidexpenses$/)) {
-      showTransactions = false;
+    let view;
+    switch (props.params.action) {
+      case 'new':
+        view = 'SubmitExpense';
+        break;
+      case 'request':
+        view = 'RequestMoney';
+        break;
     }
+
     this.state = {
-      showTransactions,
-      showSubmitExpense,
-      showUnpaidExpenses
+      view
     };
   }
 
-  toggleAddExpense() {
-    this.setState({ showSubmitExpense: !this.state.showSubmitExpense });
+  switchView(view) {
+    if (this.state.view === view)
+      view = '';
+
+    this.setState({view});
   }
 
   render() {
@@ -82,9 +87,10 @@ export class Ledger extends Component {
       isHost,
       approveInProgress,
       rejectInProgress,
+      params,
       payInProgress } = this.props;
 
-    const { showSubmitExpense, showUnpaidExpenses, showTransactions } = this.state;
+    const { view } = this.state;
     return (
       <div className='Ledger'>
         <LoginTopBar />
@@ -104,16 +110,34 @@ export class Ledger extends Component {
           </div>
         </div>
 
-        {showSubmitExpense && <div className='Ledger-container' style={{marginTop: '0'}}>
-          <SubmitExpense onCancel={this.toggleAddExpense.bind(this)} user={authenticatedUser} />
+        { !params.action &&
+        <div className='Ledger-container padding40' style={{marginTop: '0'}}>
+          <div className='showButtons'>
+            { params.type !== 'donations' &&
+              <div className='col-12 sm-col-12 md-col-5 lg-col-5 pr1'>
+                <Button className={(view === 'SubmitExpense') && 'selected'} onClick={() => this.switchView('SubmitExpense')} label={i18n.getString('submitExpense')} id='submitExpenseBtn' />
+              </div>}
+            { params.type !== 'expenses' &&
+              <div className='col-12 sm-col-12 md-col-5 lg-col-5 pl1'>
+                <Button className={(view === 'RequestMoney') ? 'selected' : ''} onClick={() => this.switchView('RequestMoney')} label={i18n.getString('requestMoney')} id='requestMoneyBtn' />
+              </div>}
+          </div>
+        </div>
+        }
+
+        { view === 'SubmitExpense' && <div className='Ledger-container' style={{marginTop: '0'}}>
+          <SubmitExpense onCancel={() => this.switchView()} user={authenticatedUser} />
         </div>}
 
-        {!showSubmitExpense && 
-          <div className='Ledger-container padding40' style={{marginTop: '0'}}>
-            <Button onClick={this.toggleAddExpense.bind(this)} label='Submit Expense' id='submitExpenseBtn' />
-          </div>}
+        { view === 'RequestMoney' && <div className='Ledger-container' style={{marginTop: '0'}}>
+          <RequestMoney
+            onCancel={() => this.switchView()}
+            collective={collective}
+            i18n={i18n}
+            />
+        </div>}
 
-        {showUnpaidExpenses && <div className='Ledger-container padding40 expenses-container'>
+        { params.type === 'expenses' && <div className='Ledger-container padding40 expenses-container'>
             <div className='line1'>unpaid expenses</div>
             <div className='-list'>
             {collective.expenses
@@ -141,12 +165,12 @@ export class Ledger extends Component {
               </div>}
         </div>}
 
-        {showTransactions && <div className='Ledger-container padding40'>
-            <div className='line1'>transactions</div>
+         <div className='Ledger-container padding40'>
+            <div className='line1'>{i18n.getString(`previous${capitalize(params.type)}`)}</div>
             <div className='-list'>
               <CollectiveTransactions {...this.props} hasHost={ false } itemsToShow ={ 100 }/>
             </div>
-        </div>}
+        </div>
         <PublicFooter />
       </div>
     );
@@ -178,10 +202,11 @@ export class Ledger extends Component {
         promise = promise.then(() => this.rejectExp(params.expenseid));
         break;
     }
+
     promise = promise.then(() => Promise.all([
       fetchUsers(collective.slug),
       fetchPendingExpenses(collective.slug),
-      fetchTransactions(collective.slug)
+      fetchTransactions(collective.slug, { type: params.type })
       ]))
       .then(() => scrollToExpense());
 
@@ -230,12 +255,13 @@ export function payExp(expenseId) {
     fetchPendingExpenses,
     fetchTransactions,
     payExpense,
-    notify
+    notify,
+    params
   } = this.props;
 
   return payExpense(collective.id, expenseId)
     .then(() => fetchPendingExpenses(collective.slug))
-    .then(() => fetchTransactions(collective.slug))
+    .then(() => fetchTransactions(collective.slug, { type: params.type }))
     .catch(({message}) => notify('error', message));
 }
 

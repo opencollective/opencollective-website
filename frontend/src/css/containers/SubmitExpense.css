@@ -3,15 +3,6 @@
   margin: 1rem auto;
 }
 
-#submitExpenseBtn {
-  background-color: white;
-  color: var(--light-blue);
-  border-color: var(--light-blue);
-  margin: 1rem auto;
-  display: block;
-
-  &:hover {
-    background-color: var(--light-blue);
-    color: white;
-  }
+.notice {
+  color: var(--dark-gray);
 }

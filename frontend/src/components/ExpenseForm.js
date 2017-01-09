@@ -67,6 +67,8 @@ class ExpenseForm extends Component {
     return (
       <div className={className}>
         <Notification {...this.props} autoclose/>
+        <h1>{i18n.getString('submitExpense')}</h1>
+        <p className='notice'>Please make sure to upload a valid receipt or invoice. We should be able to see clearly on the picture (or PDF) the total amount paid, the date, the items purchased and the legal address.</p>
         <div className='line1'>expense details</div>
         <div className='clearfix input-container'>
           <div className='col col-12 sm-col-12 md-col-6 lg-col-6 pr1'>
@@ -168,7 +170,7 @@ class ExpenseForm extends Component {
           color='green'
           inProgress={expense.inProgress}
           onClick={hasAttachment && this.onSubmit.bind(this)}>
-          Submit Expense
+          {i18n.getString('submitExpense')}
         </AsyncButton>
 
       </div>
@@ -192,7 +194,8 @@ class ExpenseForm extends Component {
 }
 
 ExpenseForm.propTypes = {
-  onCancel: PropTypes.func.isRequired
+  onCancel: PropTypes.func.isRequired,
+  i18n: PropTypes.object.isRequired
 };
 
 export default ExpenseForm;
