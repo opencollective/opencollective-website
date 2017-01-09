@@ -53,6 +53,7 @@ export default (
     <Route path="/:slug/:type(donations|expenses)" component={Transactions} />
     <Route path="/:slug/donate/:amount" component={DonatePage} />
     <Route path="/:slug/donate/:amount/:interval" component={DonatePage} />
+    <Route path="/:slug/donate/:amount/:interval/:description" component={DonatePage} />
     <Route path="/:slug/:tier" component={GroupTierList} />
   </Route>
 );
