@@ -42,12 +42,12 @@ export default (
     <Route path="/:slug/connect/:provider" component={ConnectProvider} />
     <Route path="/:slug/edit-twitter" component={EditTwitter} />
     <Route path="/:slug" component={PublicPage} />
+    <Route path="/:slug/donate/:amount" component={DonatePage} />
+    <Route path="/:slug/donate/:amount/:interval" component={DonatePage} />
     <Route path="/:slug/:type(donations|expenses|transactions)" component={Ledger} />
     <Route path="/:slug/:type(expenses)/:action(new)" component={Ledger} />
     <Route path="/:slug/:type(expenses)/:expenseid/:action(approve|reject)" component={Ledger} />
     <Route path="/:slug/:type(donations)/:action(request)" component={Ledger} />
-    <Route path="/:slug/donate/:amount" component={DonatePage} />
-    <Route path="/:slug/donate/:amount/:interval" component={DonatePage} />
     <Route path="/:slug/:tier" component={GroupTierList} />
   </Route>
 );
