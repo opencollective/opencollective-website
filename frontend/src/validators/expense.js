@@ -9,8 +9,9 @@ import payoutMethods from '../ui/payout_methods';
  * New expense schema
  */
 const schema = Joi.object().keys({
-  attachment: Joi.string().uri().required()
-    .label('Receipt'),
+  attachment: Joi.string().uri()
+    .label('Receipt')
+    .allow(null),
   name: Joi.string().required()
     .label('Name'),
   email: Joi.string().email().required()
