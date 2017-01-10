@@ -10,7 +10,7 @@ import payoutMethods from '../ui/payout_methods';
  */
 const schema = Joi.object().keys({
   attachment: Joi.string().uri()
-    .label('Photo')
+    .label('Receipt')
     .allow(null),
   name: Joi.string().required()
     .label('Name'),

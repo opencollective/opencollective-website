@@ -103,6 +103,11 @@
   transition: all 350ms ease-out;
 }
 
+.Button--disabled {
+  cursor: pointer;
+  background-color: #dde1e4;
+}
+
 /**
  * Keep at the very bottom
  */
