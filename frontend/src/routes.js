@@ -48,6 +48,7 @@ export default (
     <Route path="/:slug/:type(expenses)/:action(new)" component={Ledger} />
     <Route path="/:slug/:type(expenses)/:expenseid/:action(approve|reject)" component={Ledger} />
     <Route path="/:slug/:type(donations)/:action(request)" component={Ledger} />
+    <Route path="/:slug/donate/:amount/:interval/:description" component={DonatePage} />
     <Route path="/:slug/:tier" component={GroupTierList} />
   </Route>
 );

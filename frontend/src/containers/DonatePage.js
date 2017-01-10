@@ -41,6 +41,7 @@ export class DonatePage extends Component {
     const {
       amount,
       interval,
+      description,
       group,
       isAuthenticated,
       donationForm,
@@ -52,7 +53,7 @@ export class DonatePage extends Component {
       tier = {
       name: "custom",
       title: " ",
-      description: i18n.getString('defaultTierDescription'),
+      description: description || i18n.getString('defaultTierDescription'),
       amount,
       interval: interval || 'one-time',
       range: [amount, 10000000]
@@ -101,7 +102,7 @@ export class DonatePage extends Component {
   }
 }
 
-export function donateToGroup({amount, frequency, currency, token}) {
+export function donateToGroup({amount, interval, currency, description, token}) {
   const {
     notify,
     donate,
@@ -114,14 +115,10 @@ export function donateToGroup({amount, frequency, currency, token}) {
     stripeToken: token && token.id,
     email: token && token.email,
     amount,
-    currency
+    interval,
+    currency,
+    description
   };
-
-  if (frequency.match(/^month(ly)?$/i)) {
-    payment.interval = 'month';
-  } else if (frequency.match(/^year(ly)?$/i)) {
-    payment.interval = 'year';
-  }
 
   return donate(group.id, payment)
     .then(({json}) => {
@@ -177,6 +174,16 @@ function mapStateToProps({
   session
 }) {
 
+  let { interval = 'one-time', description } = router.params;
+  if (interval.match(/^month(ly)?$/i)) {
+    interval = 'month';
+  } else if (interval.match(/^year(ly)?$/i)) {
+    interval = 'year';
+  } else if (interval !== 'one-time') {
+    description = interval;
+    interval = 'one-time';
+  }
+
   const group = values(groups)[0] || {stripeAccount: {}}; // to refactor to allow only one group
   const usersByRole = group.usersByRole || {};
   const newUser = users.newUser || {};
@@ -199,7 +206,8 @@ function mapStateToProps({
 
   return {
     amount: router.params.amount,
-    interval: router.params.interval,
+    interval,
+    description,
     group,
     users,
     session,
