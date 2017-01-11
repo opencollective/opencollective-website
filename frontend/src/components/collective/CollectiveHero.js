@@ -40,7 +40,7 @@ export default class CollectiveHero extends Component {
             }
 
             <p ref='CollectiveHero-name' className='Collective-font-20 mt0 mb2'>{ i18n.getString('hiThisIs') }
-              <a href={ collective.website } style={ collective.settings.style.hero.a }> { collective.name }</a> { i18n.getString('openCollective') }.
+              <a href={ collective.website } style={ collective.settings.style.hero.a } target="_blank"> { collective.name }</a> { i18n.getString('openCollective') }.
             </p>
             <h1 ref='CollectiveHero-mission' className='CollectiveHero-mission max-width-3 mx-auto mt0 mb3 white -ff-sec'>
               <ContentEditable
