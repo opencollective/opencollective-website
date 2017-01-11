@@ -25,3 +25,72 @@ label {
     text-align: center;
   }
 }
+
+.line1, .separator {
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: normal;
+  color: #363636;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  padding-top: 20px;
+  overflow: hidden;
+}
+
+input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 50px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+  border: solid 1px #f2f2f2;
+  padding: 10px 20px;
+  &.disabled, &[disabled] {
+    box-shadow: none;
+    color: #7a7b82;
+    &:hover, &:active {
+      color: #7a7b82;
+      cursor: default;
+    }
+  }
+}
+
+.input-container {
+  label {
+    height: 19px;
+    font-family: Lato;
+    font-size: 16px;
+    font-weight: normal;
+    color: #666666;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-transform: capitalize;
+  }
+}
+
+.SelectContainer {
+  width: 100%;
+  &::after {
+    cursor: pointer;
+    right: 20px !important;
+    margin-top: 5px;
+  }
+  select {
+    padding: 10px 16px;
+    outline: 0;
+    cursor: pointer;
+    appearance:none;
+    height: 50px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+    border: solid 1px #f2f2f2;
+    margin: 8px 0;
+  }
+}
+.CustomTextArea {
+  width: 100%;
+  margin: 8px 0;
+  margin-bottom: 20px;
+}

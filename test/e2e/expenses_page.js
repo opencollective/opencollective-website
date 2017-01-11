@@ -15,8 +15,8 @@ module.exports = {
   'Expenses list': (client) => {
 
      client
-       .assert.containsText('.ExpenseItem:first-child', 'Expense 2')
-       .assert.containsText('.ExpenseItem:last-child', 'Expense 1')
+       .assert.containsText('.expenses-container section:first-child', 'Expense 2')
+       .assert.containsText('.expenses-container section:last-child', 'Expense 1')
        .end();
    },
 
@@ -29,7 +29,7 @@ module.exports = {
       .setValue('.js-transaction-amount input', 10)
       .setValue('.js-transaction-payoutMethod', 'other')
       .setValue('.ImageUpload input', 'someReceipt.pdf')
-      .click('.Button')
+      .click('.ExpenseForm .Button')
       .waitForElementVisible('.PublicGroupThanks', 5000)
       .assert.containsText('.PublicGroupThanks', 'Expense sent')
       .end();

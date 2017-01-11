@@ -3,6 +3,9 @@ body {
 }
 
 .Ledger {
+	h1 {
+		margin-top: 0px;
+	}
 	background-color: rgb(245, 246, 247);
 	.LoginTopBar {
 		background-color: white;
@@ -79,6 +82,33 @@ body {
 			}
 		}
 	}
+	.showButtons {
+		text-align: center;
+		& >div {
+			display: inline-block;
+		}
+		button:focus {outline:0;}
+		button {
+			background-color: white;
+			border-color: var(--light-blue);
+			color: var(--light-blue);
+			display: block;
+			padding: 1px;
+
+			&:hover {
+				background-color: white;
+				border-color: var(--light-blue);
+				color: var(--light-blue);
+				padding: 0px;
+				border: 2px solid;
+			}
+		}
+		.selected button {
+			background-color: var(--light-blue);
+			border: 1px solid;
+			color: white;
+		}
+	}	
 	.Button {
 		display: block;
 		margin: auto;
@@ -89,6 +119,15 @@ body {
 		border-radius: 15px;
 		line-height: 1.75;
 		min-width: 125px;
+	}
+
+	.RequestMoney {
+		overflow: hidden;
+		padding: 40px;
+
+		.urlToShare {
+			overflow-wrap: break-word;
+		}
 	}
 }
 

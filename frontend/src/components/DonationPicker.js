@@ -91,7 +91,7 @@ function customField({onChange, value, frequency, currency, showCurrencyPicker, 
           handleChange={(amount) => onChange({amount})} />
       </div>
       <div className='col col-6 pl2'>
-        <label className='mb1 h6 block left-align'>{i18n.getString('frequency')}</label>
+        <label className='mb1 h6 block left-align'>{i18n.getString('interval')}</label>
         <Select
           options={frequencies}
           value={frequency}

@@ -10,7 +10,9 @@ import { formatGithubContributors } from '../lib/github';
 import { resizeImage } from '../lib/utils'
 
 import { getUnpaidExpensesSelector } from './expenses';
-import { getTransactionsSelector } from './transactions';
+import { 
+  getTransactionsSelector,
+  getPaidExpensesSelector } from './transactions';
 
 import roles from '../constants/roles';
 
@@ -94,8 +96,9 @@ export const getPopulatedCollectiveSelector = createSelector(
     getCollectiveBackersSelector,
     getCollectiveContributorsSelector,
     getUnpaidExpensesSelector,
+    getPaidExpensesSelector,
     getTransactionsSelector ],
-    (collective, settings, host, members, backers, contributors, expenses, transactions) =>
+    (collective, settings, host, members, backers, contributors, unpaidExpenses, paidExpenses, transactions) =>
       Object.assign(
         {},
         collective,
@@ -106,7 +109,8 @@ export const getPopulatedCollectiveSelector = createSelector(
         { backersCount: backers.length },
         { contributors },
         { contributorsCount: contributors.length },
-        { expenses: filterCollection(expenses, { GroupId: collective.id })},
+        { unpaidExpenses: filterCollection(unpaidExpenses, { GroupId: collective.id })},
+        { paidExpenses: filterCollection(paidExpenses, { GroupId: collective.id })},
         { transactions: filterCollection(transactions, {GroupId: collective.id })},
     ));
 

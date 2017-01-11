@@ -9,16 +9,17 @@ export default class CollectiveTransactions extends React.Component {
     const {
       users,
       collective,
+      transactions,
       i18n,
       itemsToShow = 5
     } = this.props;
 
     return (
       <div className='Collective-transactions col col-12 mb3'>
-        {(collective.transactions.length === 0) && 
+        {(transactions.length === 0) && 
           <TransactionEmptyState i18n={i18n} />}
         <div className='Collective-transactions-list'>
-          {collective.transactions
+          {transactions
             .slice(0, itemsToShow)
             .map(transaction => 
               <CollectiveActivityItem 
@@ -27,13 +28,13 @@ export default class CollectiveTransactions extends React.Component {
                 user={users[transaction.UserId]} 
                 className='' i18n={i18n} />)}
         </div>
-        {(collective.transactions.length >= itemsToShow) && (
-          <div className='center pt2'>
+        <div className='center pt2'>
+          {(transactions.length >= itemsToShow) && (
             <Link className='-btn -btn-medium -btn-outline -border-green -ttu -fw-bold' to={`/${collective.slug}/transactions`}>
-              {i18n.getString('seeAll')} >
+              {i18n.getString('seeAllTransactions')} >
             </Link>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     );
   }
