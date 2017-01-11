@@ -3,29 +3,13 @@ import React, { Component, PropTypes } from 'react';
 import { Sticky } from 'react-sticky';
 
 import LoginTopBar from '../../containers/LoginTopBar';
-import exportFile from '../../lib/export_file';
+import { exportMembers } from '../../lib/export_file';
 import { resizeImage } from '../../lib/utils';
 
 import ContentEditable from '../../components/ContentEditable';
 import UserPhoto from '../../components/UserPhoto';
 import UserAvatarRow from '../../components/UserAvatarRow';
 import CollectiveStatsHeader from '../../components/collective/CollectiveStatsHeader';
-
-export function exportMembers(authenticatedUser, group) {
-  const accessToken = localStorage.getItem('accessToken');
-  const headers = { authorization: `Bearer ${accessToken}`};
-
-  return fetch(`/api/groups/${group.slug}/users.csv`, { headers })
-    .then(response => response.text())
-    .then(csv => {
-      const d = new Date;
-      const mm = d.getMonth() + 1;
-      const dd = d.getDate();
-      const date =  [d.getFullYear(), (mm < 10) ? `0${mm}` : mm, (dd < 10) ? `0${dd}` : dd].join('');
-      const filename = `${date}-${group.slug}-members.csv`;
-      exportFile('text/plain;charset=utf-8', filename, csv);
-    });
-}
 
 export default class CollectiveHero extends Component {
 
