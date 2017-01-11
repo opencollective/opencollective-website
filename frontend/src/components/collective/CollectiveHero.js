@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import { Sticky } from 'react-sticky';
 
 import LoginTopBar from '../../containers/LoginTopBar';
+import exportFile from '../../lib/export_file';
 import { resizeImage } from '../../lib/utils';
 
 import ContentEditable from '../../components/ContentEditable';
@@ -10,10 +11,26 @@ import UserPhoto from '../../components/UserPhoto';
 import UserAvatarRow from '../../components/UserAvatarRow';
 import CollectiveStatsHeader from '../../components/collective/CollectiveStatsHeader';
 
+export function exportMembers(authenticatedUser, group) {
+  const accessToken = localStorage.getItem('accessToken');
+  const headers = { authorization: `Bearer ${accessToken}`};
+
+  return fetch(`/api/groups/${group.slug}/users.csv`, { headers })
+    .then(response => response.text())
+    .then(csv => {
+      const d = new Date;
+      const mm = d.getMonth() + 1;
+      const dd = d.getDate();
+      const date =  [d.getFullYear(), (mm < 10) ? `0${mm}` : mm, (dd < 10) ? `0${dd}` : dd].join('');
+      const filename = `${date}-${group.slug}-members.csv`;
+      exportFile('text/plain;charset=utf-8', filename, csv);
+    });
+}
+
 export default class CollectiveHero extends Component {
 
   render() {
-    const { collective, host, i18n, canEditCollective, editCollectiveForm, appendEditCollectiveForm} = this.props;
+    const { collective, host, i18n, canEditCollective, editCollectiveForm, appendEditCollectiveForm, loggedinUser} = this.props;
 
     return (
       <section className='CollectiveHero relative px2 bg-black bg-cover white'>
@@ -80,6 +97,11 @@ export default class CollectiveHero extends Component {
               <li className='inline-block'>
                 <a href='#contributors' className='block white -ff-sec -fw-bold'>{ i18n.getString('contributors') }</a>
               </li>
+              { collective.backersCount > 0 && canEditCollective &&
+                <li className='inline-block xs-hide'>
+                  <a href='#exportMembers' className='block white -ff-sec -fw-bold' onClick={ exportMembers.bind(this, loggedinUser, collective) } >Export members.csv</a>
+                </li>
+              }
             </ul>
           </nav>
         </Sticky>
