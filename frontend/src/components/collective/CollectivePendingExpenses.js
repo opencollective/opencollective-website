@@ -23,7 +23,7 @@ export default class CollectivePendingExpenses extends React.Component {
   }
 
   getStateBasedOnProps(currentProps) {
-    const expenses = currentProps.collective.expenses;
+    const expenses = currentProps.collective.unpaidExpenses;
     const itemsToShow = this.state.itemsToShow;
     return {
       showMoreButton: expenses.length > itemsToShow,
@@ -63,13 +63,13 @@ export default class CollectivePendingExpenses extends React.Component {
             {i18n.getString('submitExpense')}
           </Link>
         </div>
-        {collective.expenses.length === 0 && 
+        {collective.unpaidExpenses.length === 0 && 
           <div>
             <ExpenseEmptyState i18n={i18n} />
           </div>}
 
         <div className='CollectivePendingExpenses'>
-          {collective.expenses
+          {collective.unpaidExpenses
             .slice(0, itemsToShow)
             .map(expense => 
               <div 
@@ -87,7 +87,7 @@ export default class CollectivePendingExpenses extends React.Component {
         { showMoreButton && 
           <span className='-btn -btn-medium -btn-outline -border-green -ttu -fw-bold' onClick={ ::this.showMore }> {i18n.getString('showMore')} </span> }
 
-        { collective.expenses.length > 0 && (
+        { collective.unpaidExpenses.length > 0 && (
           <span className='right'>
             <Link className='-btn -btn-medium -btn-outline -border-green -ttu -fw-bold' to={`/${collective.slug}/expenses`}>
               {i18n.getString('seeAllExpenses')} >

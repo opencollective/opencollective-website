@@ -140,7 +140,7 @@ export class Ledger extends Component {
         { params.type === 'expenses' && <div className='Ledger-container padding40 expenses-container'>
             <div className='line1'>unpaid expenses</div>
             <div className='-list'>
-            {collective.expenses
+            {collective.unpaidExpenses
               .map(expense => 
                 <CollectiveExpenseItem 
                   key={ expense.id }
@@ -159,7 +159,7 @@ export class Ledger extends Component {
                   payInProgress={ payInProgress }
                   />)}
             </div>
-            {collective.expenses.length === 0 && 
+            {collective.unpaidExpenses.length === 0 && 
               <div className='center'>
                 <ExpenseEmptyState i18n={i18n} />
               </div>}
@@ -168,7 +168,7 @@ export class Ledger extends Component {
          <div className='Ledger-container padding40'>
             <div className='line1'>{i18n.getString(`previous${capitalize(params.type)}`)}</div>
             <div className='-list'>
-              <CollectiveTransactions {...this.props} hasHost={ false } itemsToShow ={ 100 }/>
+              <CollectiveTransactions {...this.props} transactions={ params.type === 'expenses' ? collective.paidExpenses : collective.transactions } hasHost={ false } itemsToShow ={ 100 }/>
             </div>
         </div>
         <PublicFooter />

@@ -21,7 +21,7 @@ export default class CollectiveLedger extends Component {
                 <Currency value={ collective.balance } currency={ collective.currency } precision={ 2 } />
               </p>
             </div>
-            <CollectiveTransactions {...this.props} />
+            <CollectiveTransactions {...this.props} transactions={ collective.transactions }/>
           </div>
         </div>
       </section>

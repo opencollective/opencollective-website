@@ -14,7 +14,7 @@ export default function transactions(state={
       const transactionsArr = values(transactions);
       return merge({}, state, transactions, {
         donations: transactionsArr.filter(t => t.isDonation),
-        expenses: transactionsArr.filter(t => t.incurredAt)
+        expenses: transactionsArr.filter(t => t.isExpense)
       });
     }
     default:
