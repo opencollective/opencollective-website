@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import { Sticky } from 'react-sticky';
 
 import LoginTopBar from '../../containers/LoginTopBar';
+import { exportMembers } from '../../lib/export_file';
 import { resizeImage } from '../../lib/utils';
 
 import ContentEditable from '../../components/ContentEditable';
@@ -13,7 +14,7 @@ import CollectiveStatsHeader from '../../components/collective/CollectiveStatsHe
 export default class CollectiveHero extends Component {
 
   render() {
-    const { collective, host, i18n, canEditCollective, editCollectiveForm, appendEditCollectiveForm} = this.props;
+    const { collective, host, i18n, canEditCollective, editCollectiveForm, appendEditCollectiveForm, loggedinUser} = this.props;
 
     return (
       <section className='CollectiveHero relative px2 bg-black bg-cover white'>
@@ -80,6 +81,11 @@ export default class CollectiveHero extends Component {
               <li className='inline-block'>
                 <a href='#contributors' className='block white -ff-sec -fw-bold'>{ i18n.getString('contributors') }</a>
               </li>
+              { collective.backersCount > 0 && canEditCollective &&
+                <li className='inline-block xs-hide'>
+                  <a href='#exportMembers' className='block white -ff-sec -fw-bold' onClick={ exportMembers.bind(this, loggedinUser, collective) } >Export members.csv</a>
+                </li>
+              }
             </ul>
           </nav>
         </Sticky>

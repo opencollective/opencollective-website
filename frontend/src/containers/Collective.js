@@ -54,7 +54,7 @@ import {
   getUsersSelector,
   getNewUserSelector,
   getUpdateInProgressSelector } from '../selectors/users';
-import { isSessionAuthenticatedSelector } from '../selectors/session';
+import { isSessionAuthenticatedSelector, getAuthenticatedUserSelector } from '../selectors/session';
 
 // Schemas
 import editCollectiveSchema from '../joi_schemas/editCollective';
@@ -246,7 +246,8 @@ const mapStateToProps = createStructuredSelector({
     isAuthenticated: isSessionAuthenticatedSelector,
     i18n: getI18nSelector,
     loadData: getAppRenderedSelector,
-    users: getUsersSelector
+    users: getUsersSelector,
+    loggedinUser: getAuthenticatedUserSelector
   });
 
 export default connect(mapStateToProps, {
