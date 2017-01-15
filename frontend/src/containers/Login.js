@@ -96,7 +96,7 @@ export function mapStateToProps({notification, router, form}) {
   return {
     notification,
     error: form.schema.error,
-    redirectRoute: router.location.query.next || '/',
+    redirectRoute: router.location.query.next && router.location.query.next === '/login' ? '/' : router.location.query.next,
     token: router.params.token,
   };
 }
