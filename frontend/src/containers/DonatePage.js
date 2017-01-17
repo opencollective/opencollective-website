@@ -14,7 +14,6 @@ import Tiers from '../components/Tiers';
 import getTier from '../lib/tiers';
 
 import fetchGroup from '../actions/groups/fetch_by_slug';
-import fetchUsers from '../actions/users/fetch_by_group';
 import donate from '../actions/groups/donate';
 import notify from '../actions/notification/notify';
 import appendDonationForm from '../actions/form/append_donation';
@@ -24,6 +23,7 @@ import validateSchema from '../actions/form/validate_schema';
 import decodeJWT from '../actions/session/decode_jwt';
 
 import profileSchema from '../joi_schemas/profile';
+import formatCurrency from '../lib/format_currency';
 
 export class DonatePage extends Component {
 
@@ -47,6 +47,10 @@ export class DonatePage extends Component {
     } = this.props;
 
     let tier = getTier({amount, interval}, group.tiers);
+    const groupHandle = (group.twitterHandle) ? `@${group.twitterHandle}` : group.name;
+    const url = window ? window.location.href : '';
+    const tweet = `🎉 I've just donated ${formatCurrency(amount * 100, group.currency, { precision: 0 })} to ${groupHandle} for ${description} ${url}`;
+
     if (!tier || tier.presets && tier.presets.length > 1)
       tier = {
       name: "custom",
@@ -54,7 +58,8 @@ export class DonatePage extends Component {
       description: description || i18n.getString('defaultTierDescription'),
       amount,
       interval: interval || 'one-time',
-      range: [amount, 10000000]
+      range: [amount, 10000000],
+      tweet
     };
     const tiers = [tier];
 
@@ -102,12 +107,10 @@ export class DonatePage extends Component {
   componentWillMount() {
     const {
       group,
-      fetchUsers,
       fetchGroup
     } = this.props;
 
     fetchGroup(group.slug);
-    fetchUsers(group.slug);
   }
 
   componentDidMount() {
@@ -120,19 +123,19 @@ export function donateToGroup({amount, interval, currency, description, token}) 
   const {
     notify,
     donate,
-    group,
-    fetchGroup,
-    fetchUsers
+    group
   } = this.props;
 
   const payment = {
     stripeToken: token && token.id,
     email: token && token.email,
     amount,
-    interval,
     currency,
     description
   };
+
+  if (interval !== 'one-time')
+    payment.interval = interval;
 
   return donate(group.id, payment)
     .then(({json}) => {
@@ -142,8 +145,6 @@ export function donateToGroup({amount, interval, currency, description, token}) 
         this.setState({ showThankYouMessage: true })
       }
     })
-    .then(() => fetchGroup(group.id))
-    .then(() => fetchUsers(group.id))
     .catch((err) => notify('error', err.message));
 }
 
@@ -153,9 +154,7 @@ export function saveNewUser() {
     updateUser,
     profileForm,
     validateSchema,
-    notify,
-    group,
-    fetchUsers
+    notify
   } = this.props;
   return validateSchema(profileForm.attributes, profileSchema)
     .then(() => updateUser(users.newUser.id, profileForm.attributes))
@@ -163,14 +162,12 @@ export function saveNewUser() {
       showUserForm: false,
       showThankYouMessage: true
     }))
-    .then(() => fetchUsers(group.id))
     .catch(({message}) => notify('error', message));
 }
 
 export default connect(mapStateToProps, {
   donate,
   notify,
-  fetchUsers,
   fetchGroup,
   appendProfileForm,
   updateUser,
