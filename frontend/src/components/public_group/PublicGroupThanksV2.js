@@ -10,14 +10,6 @@ export default class PublicGroupThanksV2 extends React.Component {
     this.state = { tweet };
   }
 
-  componentDidMount() {
-    document.body.style.overflow = 'hidden';
-  }
-
-  componentWillUnmount() {
-    document.body.style.overflow = '';
-  }
-
   tweet() {
 
     const shareUrl = `https://twitter.com/intent/tweet?status=${this.state.tweet}`
@@ -45,10 +37,7 @@ export default class PublicGroupThanksV2 extends React.Component {
         <svg className='PublicGroupThanksV2-icon' width='160' height='116'>
           <use xlinkHref={group.currency === 'EUR' ? '#svg-icon-donation-done-euro' : '#svg-icon-donation-done'} />
         </svg>
-        <h2 className='PublicGroupSignupV2-title pt2 m0 -ff-sec -fw-bold'>{i18n.getString('thankyou')}</h2>
-        <div className='PublicGroup-font-17 pb3 -ff-sec -fw-light'>
-          {message || "Thank you for your support"}
-        </div>
+        <h2 className='PublicGroupSignupV2-title pt2 m0 -ff-sec -fw-bold'>{message || i18n.getString('thankyou')}</h2>
         <div className="tweet">
           <textarea name="tweetText" onChange={this.handleChange} name="textToShare" value={this.state.tweet} />
           <button onClick={::this.tweet} className='px3 -btn -green -btn-outline -btn-small -ttu -ff-sec -fw-bold'>Tweet this!</button>

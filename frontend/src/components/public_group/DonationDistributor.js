@@ -459,13 +459,11 @@ export default class DonationDistributor extends Component {
   }
 
   open() {
-    document.body.style.overflow = 'hidden';
     this.resetOptions();
     this.setState({opened: true});
   }
 
   close() {
-    document.body.style.overflow = 'auto';
     this.setState({opened: false});
   }
 }

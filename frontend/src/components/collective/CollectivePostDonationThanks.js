@@ -40,14 +40,6 @@ export default class CollectivePostDonationThanks extends Component {
     );
   }
 
-  componentDidMount() {
-    document.body.style.overflow = 'hidden';
-  }
-
-  componentWillUnmount() {
-    document.body.style.overflow = '';
-  }
-
   tweet() {
     const shareUrl = `https://twitter.com/intent/tweet?status=${this.state.tweet}`
     const w = 650;

@@ -5,9 +5,6 @@ import SaveButton from '../../components/SaveButton';
 import ImagePicker from '../../components/ImagePicker';
 
 export default class PublicGroupSignupV2 extends React.Component {
-  componentDidMount() {
-    document.body.style.overflow = 'hidden';
-  }
 
   render() {
     const {
