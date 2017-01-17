@@ -12,7 +12,7 @@ export default class PublicGroupThanksV2 extends React.Component {
 
   tweet() {
 
-    const shareUrl = `https://twitter.com/intent/tweet?status=${this.state.tweet}`
+    const shareUrl = `https://twitter.com/intent/tweet?status=${encodeURIComponent(this.state.tweet)}`
 
     const w = 650;
     const h = 450;
