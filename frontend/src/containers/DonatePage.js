@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import values from 'lodash/values';
 import i18n from '../lib/i18n';
 
-import LoginTopBar from '../containers/LoginTopBar';
-
 import roles from '../constants/roles';
 import Notification from '../containers/Notification';
 import PublicFooter from '../components/PublicFooter';
@@ -62,24 +60,40 @@ export class DonatePage extends Component {
 
     group.backers = []; // We don't show the backers
 
-    let donationSection;
+    let showHeader = true, view = 'default';
     if (this.state.showThankYouMessage || (isAuthenticated && this.state.showUserForm)) { // we don't handle userform from logged in users) {
-      donationSection = <PublicGroupThanks i18n={i18n} group={group} message={i18n.getString('thankyou')} tweet={tier.tweet} />;
+      view = 'thankyou';
+      showHeader = false;
     } else if (this.state.showUserForm) {
-      donationSection = <PublicGroupSignup {...this.props} save={saveNewUser.bind(this)} />
-    } else {
-      donationSection = <Tiers tiers={tiers} {...this.props} form={donationForm} onToken={donateToGroup.bind(this)} />
+      view = 'signup';
+      showHeader = false;      
     }
 
     return (
-      <div className='DonatePage'>
-        <LoginTopBar />
+      <div className='DonatePage Page'>
         <Notification />
-        <div className='DonatePage-logo' style={{backgroundImage: `url(${group.logo ? group.logo : '/static/images/rocket.svg'})`}}></div>
-        <div className='DonatePage-line1'>Hi! We are <b>{ group.name }</b>. With your support we can</div>
-        {group.mission ? <div className='DonatePage-line2'>{ group.mission }</div> : null}
-        {group.website ? <a className='DonatePage-line3' href={group.website}>{group.website}</a> : null}
-        <div className='DonatePage-donation-container'>{ donationSection }</div>
+        <div className="Page-container">
+          { showHeader &&
+            <div className="DonatePage-header">
+              <a href={`/${group.slug}`}>
+                <div className='DonatePage-logo' style={{backgroundImage: `url(${group.logo ? group.logo : '/static/images/rocket.svg'})`}}></div>
+              </a>
+              <div className='DonatePage-line1'>Hi! We are  <a href={`/${group.slug}`}>{ group.name }</a>.</div>
+              {group.mission ? <div className='DonatePage-line2'>{ group.mission }</div> : null}
+            </div>
+          }
+          <div className='DonatePage-donation-container'>
+            { view === 'thankyou' &&
+              <PublicGroupThanks i18n={i18n} group={group} message={i18n.getString('thankyou')} tweet={tier.tweet} />
+            }
+            { view === 'signup' &&
+              <PublicGroupSignup {...this.props} save={saveNewUser.bind(this)} />
+            }
+            { view === 'default' &&
+              <Tiers tiers={tiers} {...this.props} form={donationForm} onToken={donateToGroup.bind(this)} />
+            }
+          </div>
+        </div>
         <PublicFooter />
       </div>
     );
