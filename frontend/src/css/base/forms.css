@@ -11,6 +11,15 @@ form {
   margin: 1rem 0;
 }
 
+.buttonsRow {
+  overflow: hidden;
+  display: flex;
+  justify-content: space-around;
+  .Button {
+    margin: 0 auto;
+  }
+}
+
 label {
   display: block;
   font-weight: 600;

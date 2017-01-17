@@ -66,8 +66,7 @@ export class Collective extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showThankYouMessage: false,
-      showUserForm: false
+      view: 'signup'
     };
   }
 
@@ -84,24 +83,30 @@ export class Collective extends Component {
         <Notification />
         <StickyContainer>
 
-          {editCollectiveInProgress && 
-            <EditTopBar onSave={ saveCollective.bind(this) } onCancel={ cancelEditCollectiveForm }/>}
+          { this.state.view === 'default' &&
+            <div>
+              {editCollectiveInProgress && 
+                <EditTopBar onSave={ saveCollective.bind(this) } onCancel={ cancelEditCollectiveForm }/>}
 
-          <CollectiveHero { ...this.props } />
-          <CollectiveLedger { ...this.props } />
+              <CollectiveHero { ...this.props } />
+              <CollectiveLedger { ...this.props } />
 
-          {collective.isActive && <CollectiveDonate onDonate={ donateToCollective.bind(this) } { ...this.props }/>}
+              {collective.isActive && <CollectiveDonate onDonate={ donateToCollective.bind(this) } { ...this.props }/>}
 
-          <CollectiveAboutUs { ...this.props } />
-          <CollectiveMembers collective={ collective } i18n={ i18n } />
-          {collective.contributors && <CollectiveContributorMosaic collective={collective} i18n={i18n} />}
-          
-          {this.state.showThankYouMessage && 
+              <CollectiveAboutUs { ...this.props } />
+              <CollectiveMembers collective={ collective } i18n={ i18n } />
+              {collective.contributors && <CollectiveContributorMosaic collective={collective} i18n={i18n} />}
+            </div>
+          }
+
+          {this.state.view === 'thankyou' && 
             <CollectivePostDonationThanks closeDonationFlow={ ::this.closeDonationFlow } { ...this.props } />}
-          {this.state.showUserForm && 
+          {this.state.view === 'signup' && 
             <CollectivePostDonationUserSignup closeDonationFlow={ ::this.closeDonationFlow } save={ saveNewUser.bind(this) } { ...this.props } />}
 
-          <PublicFooter />
+          {this.state.view === 'default' &&
+            <PublicFooter />
+          }
         </StickyContainer>
       </div>
     );
@@ -125,10 +130,7 @@ export class Collective extends Component {
     
   closeDonationFlow() {
     return this.refreshData()
-      .then(() => this.setState({
-                    showThankYouMessage: false,
-                    showUserForm: false }));
-    
+      .then(() => this.setState({ view: 'default' }));
   }
 
   refreshData() {
@@ -194,10 +196,7 @@ export function donateToCollective({amount, frequency, currency, token, options}
   }
 
   return donate(collective.slug, payment, options)
-    .then(() => this.setState({
-        showUserForm: !this.props.hasFullAccount,
-        showThankYouMessage: this.props.hasFullAccount
-      }))
+    .then(() => this.setState({ view: this.props.hasFullAccount ? 'thankyou' : 'signup' }))
     .catch((err) => notify('error', err.message));
 }
 
@@ -217,10 +216,7 @@ export function saveNewUser() {
 
   return validateSchema(profileForm, profileSchema)
     .then(() => updateUser(newUser.id, Object.assign({}, profileForm)))
-    .then(() => this.setState({
-      showUserForm: false,
-      showThankYouMessage: true
-    }))
+    .then(() => this.setState({ view: 'thankyou' }))
     .then(() => fetchUsers(collective.slug))
     .catch(({message}) => notify('error', message));
 }

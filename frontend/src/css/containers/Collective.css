@@ -179,7 +179,6 @@
 .CollectiveDonationFlowWrapper {
   height: 100vh;
   overflow: auto;
-  -webkit-overflow-scrolling: touch;
   background-color: #f5f6f7;
   background-color: rgba(245,246,247,.98);
 }
