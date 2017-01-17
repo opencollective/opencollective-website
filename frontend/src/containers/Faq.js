@@ -22,9 +22,9 @@ export class Faq extends Component {
 
   render() {
     return (
-      <div className='Faq'>
+      <div className='Faq Page'>
         <LoginTopBar />
-        <div className="Faq-container">
+        <div className="Page-container">
           <h1>FAQ</h1>
 
           <h3>What is an Open Collective?</h3>

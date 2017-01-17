@@ -45,7 +45,7 @@ export default class Tiers extends Component {
           {filterUsersByTier(group.backers, tier.name).map((user, index) => <UserCard user={user} key={index} className='m1' i18n={i18n} />)}
         </div>
 
-        <p>{description}</p>
+        <p className="Tier-description">{description}</p>
 
         {tier.presets && (
           <div>

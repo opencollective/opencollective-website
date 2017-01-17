@@ -1,0 +1,30 @@
+.Page {
+  background-color:var(--background-color);
+  .LoginTopBar {
+    background-color: #fff;
+  }
+ .Page-container {
+    box-sizing: border-box;
+    margin: 30px auto 30px auto;
+    padding: 30px 60px;
+    max-width: 900px;
+    min-height: 200px;
+    background-color: white;
+    &.no-bg {
+      background: none;
+    }
+    h1 {
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 20px 0;
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .Page {
+    .Page-container {
+     padding: 30px 30px;
+    }
+  }
+}

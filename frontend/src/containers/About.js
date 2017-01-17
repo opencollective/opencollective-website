@@ -21,9 +21,9 @@ export class About extends Component {
 
   render() {
     return (
-      <div className='About'>
+      <div className='About Page'>
         <LoginTopBar />
-        <div className='About-container'>
+        <div className='Page-container'>
           <h2>About</h2>
           <p>While the Internet has been very good so far at helping people do things together, it is still very difficult for groups to collect money and use it transparently. As a result, we see initiatives, projects, movements popping up here and there that disappear quickly from lack of funding. Imagine how many wonderful things don’t happen in the world because funding - which is oxygen for most organizations - is difficult to sustain. Without an easy way to raise and spend money, it’s hard to manage and grow many of these seeds of an idea that could change the world.</p>
 
