@@ -49,7 +49,8 @@ export class DonatePage extends Component {
     let tier = getTier({amount, interval}, group.tiers);
     const groupHandle = (group.twitterHandle) ? `@${group.twitterHandle}` : group.name;
     const url = window ? window.location.href : '';
-    const tweet = `🎉 I've just donated ${formatCurrency(amount * 100, group.currency, { precision: 0 })} to ${groupHandle} for ${description} ${url}`;
+    const forDescription = description ? ` for ${description}` : '';
+    const tweet = `🎉 I've just donated ${formatCurrency(amount * 100, group.currency, { precision: 0 })} to ${groupHandle}${forDescription} ${url}`;
 
     if (!tier || tier.presets && tier.presets.length > 1)
       tier = {
