@@ -8,9 +8,9 @@ import convertToCents from '../lib/convert_to_cents';
 
 export default class Tiers extends Component {
 
-  onTokenReceived(tier, token) {
+  onTokenReceived(tier, payload) {
     this.setState({loading: tier.name});
-    this.props.onToken(token)
+    this.props.onToken(payload)
       .then(() => {
         this.setState({loading: null});
       })
@@ -47,7 +47,7 @@ export default class Tiers extends Component {
     const cancellationDisclaimer = (frequency !== 'one-time') ? i18n.getString('cancelAnytime') : "";
     const description = tier.description || i18n.getString(`${tier.name}Description`);
 
-    const mockedToken = {"amount":"10","frequency":"one-time","currency":"USD","token":{"id":"tok_19dTz2DjPFcHOcTmc66YD53U","object":"token","card":{"id":"card_19dTz2DjPFcHOcTmWfy61v2L","object":"card","address_city":null,"address_country":null,"address_line1":null,"address_line1_check":null,"address_line2":null,"address_state":null,"address_zip":null,"address_zip_check":null,"brand":"Visa","country":"US","cvc_check":"pass","dynamic_last4":null,"exp_month":11,"exp_year":2020,"funding":"credit","last4":"4242","metadata":{},"name":"dfds@fdsdsf.com","tokenization_method":null},"client_ip":"74.73.151.59","created":1484786456,"email":"dfds@fdsdsf.com","livemode":false,"type":"card","used":false}};
+    const mockedPayload = {"amount":"10","frequency":"one-time","currency":"USD","token":{"id":"tok_19dTz2DjPFcHOcTmc66YD53U","object":"token","card":{"id":"card_19dTz2DjPFcHOcTmWfy61v2L","object":"card","address_city":null,"address_country":null,"address_line1":null,"address_line1_check":null,"address_line2":null,"address_state":null,"address_zip":null,"address_zip_check":null,"brand":"Visa","country":"US","cvc_check":"pass","dynamic_last4":null,"exp_month":11,"exp_year":2020,"funding":"credit","last4":"4242","metadata":{},"name":"dfds@fdsdsf.com","tokenization_method":null},"client_ip":"74.73.151.59","created":1484786456,"email":"dfds@fdsdsf.com","livemode":false,"type":"card","used":false}};
 
     return (
       <div className='Tier' id={tier.name} key={`${tier.name}`}>
@@ -108,7 +108,7 @@ export default class Tiers extends Component {
             )}
 
             { window && window.location.hostname === 'localhost' &&
-              <button onClick={() => ::this.onTokenReceived(tier, mockedToken)} >Simulate Donation</button>
+              <button onClick={() => ::this.onTokenReceived(tier, mockedPayload)} >Simulate Donation</button>
             }
 
             </div>
