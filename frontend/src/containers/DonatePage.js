@@ -140,11 +140,6 @@ export class DonatePage extends Component {
     return fetchUsers(collective.slug);
   }
 
-  componentDidMount() {
-    const { collective, host } = this.props;
-    console.log("componentDidMount>>> collective", collective, "host", host);
-  }
-
 }
 
 export function donateToGroup({amount, interval, currency, description, token}) {
