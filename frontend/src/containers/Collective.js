@@ -58,6 +58,7 @@ import {
   getNewUserSelector,
   getUpdateInProgressSelector } from '../selectors/users';
 import { isSessionAuthenticatedSelector, getAuthenticatedUserSelector } from '../selectors/session';
+import { getQuerySelector } from '../selectors/router';
 
 // Schemas
 import editCollectiveSchema from '../joi_schemas/editCollective';
@@ -68,9 +69,11 @@ export class Collective extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      view: 'default'
-    };
+    let view = 'default';
+    if (this.props.query.status === 'payment_success') {
+      view = (this.props.query.has_full_account === 'true') ? 'thankyou' : 'signup';
+    }
+    this.state = { view };
   }
 
   render() {
@@ -136,11 +139,6 @@ export class Collective extends Component {
         </StickyContainer>
       </div>
     );
-  }
-
-  componentDidMount() {
-    const { collective, host } = this.props;
-    console.log(">>> collective", collective, "host", host);
   }
 
   componentWillMount() {
@@ -272,7 +270,8 @@ const mapStateToProps = createStructuredSelector({
     i18n: getI18nSelector,
     loadData: getAppRenderedSelector,
     users: getUsersSelector,
-    loggedinUser: getAuthenticatedUserSelector
+    loggedinUser: getAuthenticatedUserSelector,
+    query: getQuerySelector
   });
 
 export default connect(mapStateToProps, {
