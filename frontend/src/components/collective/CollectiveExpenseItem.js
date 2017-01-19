@@ -67,7 +67,7 @@ const CollectiveExpenseItem = ({
   }
  
   return (
-    <section id={`exp${expense.id}`}>
+    <div id={`exp${expense.id}`}>
       <div className='CollectiveExpenseItem mx-auto mb2 p2 flex bg-white border-white'>
         {!compact && <div className='CollectiveExpenseItem-top flex flex-column mr2'>
           <div className='CollectiveExpenseItem-image max-width-1'>
@@ -117,7 +117,7 @@ const CollectiveExpenseItem = ({
           </div>}
         </div>       
       </div>
-    </section>
+    </div>
     )
 };
 

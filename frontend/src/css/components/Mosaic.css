@@ -27,6 +27,7 @@
 }
 
 .Mosaic-HoverCard {
+	text-align: center;
 	box-sizing: border-box;
 	position: absolute;
 	z-index: 999;

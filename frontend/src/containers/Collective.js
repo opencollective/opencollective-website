@@ -4,21 +4,23 @@ import { push } from 'redux-router';
 import { StickyContainer } from 'react-sticky';
 import { createStructuredSelector } from 'reselect';
 import merge from 'lodash/merge';
+import { capitalize } from '../lib/utils';
 
 // Containers
 import Notification from './Notification';
 
 // Components
 import CollectiveAboutUs from '../components/collective/CollectiveAboutUs';
-import CollectiveContributorMosaic from '../components/collective/CollectiveContributorMosaic';
 import CollectiveDonate from '../components/collective/CollectiveDonate';
 import CollectiveHero from '../components/collective/CollectiveHero';
 import CollectiveLedger from '../components/collective/CollectiveLedger';
 import CollectiveMembers from '../components/collective/CollectiveMembers';
 import CollectivePostDonationThanks from '../components/collective/CollectivePostDonationThanks';
 import CollectivePostDonationUserSignup from '../components/collective/CollectivePostDonationUserSignup';
+import CollectiveOpenSourceCTA from '../components/collective/CollectiveOpenSourceCTA';
 import EditTopBar from '../components/EditTopBar';
 import PublicFooter from '../components/PublicFooter';
+import RelatedGroups from '../components/RelatedGroups';
 
 // Actions
 import appendDonationForm from '../actions/form/append_donation';
@@ -42,6 +44,7 @@ import {
   canEditCollectiveSelector,
   getI18nSelector,
   getPopulatedCollectiveSelector,
+  getSubCollectivesSelector,
   getCollectiveHostSelector,
   isHostOfCollectiveSelector } from '../selectors/collectives';
 import {
@@ -66,15 +69,19 @@ export class Collective extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: 'signup'
+      view: 'default'
     };
   }
 
   render() {
     const {
       collective,
+      host,
+      subCollectives,
       editCollectiveInProgress,
       cancelEditCollectiveForm,
+      donationForm,
+      appendDonationForm,
       i18n
     } = this.props;
 
@@ -90,29 +97,50 @@ export class Collective extends Component {
 
               <CollectiveHero { ...this.props } />
               <CollectiveLedger { ...this.props } />
-
-              {collective.isActive && <CollectiveDonate onDonate={ donateToCollective.bind(this) } { ...this.props }/>}
-
-              <CollectiveAboutUs { ...this.props } />
-              <CollectiveMembers collective={ collective } i18n={ i18n } />
-              {collective.contributors && <CollectiveContributorMosaic collective={collective} i18n={i18n} />}
             </div>
           }
 
-          {this.state.view === 'thankyou' && 
-            <CollectivePostDonationThanks closeDonationFlow={ ::this.closeDonationFlow } { ...this.props } />}
-          {this.state.view === 'signup' && 
-            <CollectivePostDonationUserSignup closeDonationFlow={ ::this.closeDonationFlow } save={ saveNewUser.bind(this) } { ...this.props } />}
+          {this.state.view === 'default' && collective.isActive && 
+            <CollectiveDonate
+              collective={collective}
+              host={host}
+              i18n={i18n}
+              donationForm={donationForm}
+              appendDonationForm={appendDonationForm}
+              onToken={donateToCollective.bind(this)}
+            />}
+          <div className='CollectiveDonationFlowWrapper'>
+            {this.state.view === 'signup' && 
+              <CollectivePostDonationUserSignup save={ saveNewUser.bind(this) } { ...this.props } />}
+            {this.state.view === 'thankyou' && 
+              <CollectivePostDonationThanks closeDonationFlow={ ::this.closeDonationFlow } { ...this.props } />}
+          </div>
 
-          {this.state.view === 'default' &&
-            <PublicFooter />
+          { this.state.view === 'default' &&
+            <div>
+              <CollectiveAboutUs { ...this.props } />
+
+              {collective.slug === 'opensource' && <CollectiveOpenSourceCTA />}
+
+              {subCollectives  && subCollectives.length > 0 &&
+                <section id="collectives">
+                  <h1>{capitalize(i18n.getString('collectives'))}</h1>
+                  <h2 className="subtitle">{i18n.getString('DiscoverOurCollectives', { tag: collective.settings.superCollectiveTag})}</h2>
+                  <RelatedGroups title={' '} groupList={ subCollectives } {...this.props} />
+                </section>
+              }
+              <CollectiveMembers collective={ collective } i18n={ i18n } />
+              <PublicFooter />
+            </div>
           }
         </StickyContainer>
       </div>
     );
   }
 
-  componentDidMount() {    
+  componentDidMount() {
+    const { collective, host } = this.props;
+    console.log(">>> collective", collective, "host", host);
   }
 
   componentWillMount() {
@@ -224,6 +252,7 @@ export function saveNewUser() {
 const mapStateToProps = createStructuredSelector({
     // collective props
     collective: getPopulatedCollectiveSelector,
+    subCollectives: getSubCollectivesSelector,
     host: getCollectiveHostSelector,
     isHost: isHostOfCollectiveSelector,
 

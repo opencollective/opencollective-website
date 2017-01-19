@@ -5,7 +5,6 @@ import values from 'lodash/values';
 
 import HomePage from './HomePage';
 import ProfilePage from './ProfilePage';
-import PublicGroup from './PublicGroup';
 import Collective from './Collective'
 import { canEditUser } from '../lib/admin';
 
@@ -14,10 +13,7 @@ export class PublicPage extends Component {
     if (this.props.isUserProfile) {
       const profile = this.props.group;
       profile.canEditUser = canEditUser(this.props.session, profile)
-
       return <ProfilePage profile={ profile } />
-    } else if (this.props.showOldCollectivePage) {
-      return <PublicGroup />
     } else if (this.props.slug ) {
       return <Collective />
     } else {

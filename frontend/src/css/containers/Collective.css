@@ -5,14 +5,6 @@
   }
 }
 
-.Collective-title {
-  font-size: 1.25rem;
-}
-
-.Collective-subtitle {
-  font-size: 1.375rem;
-}
-
 .Collective-font-15 {
   font-size: .9375rem;
   line-height: 1.688rem;
@@ -100,34 +92,49 @@
   margin: 0 auto;
 }
 
-/* JOIN US */
-.CollectiveDonate-tier-box-inner {
-  border-width: 2px;
-  border-radius: 6px;
-  padding-bottom: 30px;
+.Tiers {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-.CollectiveDonate-tier-box-title {
+.Tier {
+  width: 100%;
+  max-width: 380px;
+  margin: 20px;
+}
+
+.Tier-container {
+  border-radius: 8px;
+  padding: 0px 10px 20px;
+  border: 2px solid var(--green);
+}
+
+.Tier-title {
   margin-top: -1em;
 }
 
-.CollectiveDonate-tier-box-description {
-  min-height: calc(1.38rem * 3);
+.Tier-description {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(1.6rem * 3);
 }
 
-.CollectiveDonate-container {
-  background: var(--light-gray);
-  padding: 2rem 0;
-  .Button {
+.Button {
+    display: inline-block;
     margin: auto;
-    font-weight: normal;
-    border-radius: 100px;
     min-width: 70%;
-  }
+  /* font-weight: bold; */
+  /* padding: 0.75rem 1rem; */
+  /* font-size: 1rem; */
 }
 
 /* MEMBERS WALL */
-.Collective-MembersWall::before {
+.CollectiveMembers {
+  padding: 4rem 0 3rem;
+}
+.CollectiveMembers::before {
   content: '';
   position: absolute;
   left: 0;
@@ -135,11 +142,6 @@
   bottom: 0;
   height: 15rem;
 }
-
-.CollectiveBackers {
-  padding: 4rem 0 3rem;
-}
-
 
 
 /* EXPENSES AND DONATIONS */
@@ -176,40 +178,49 @@
 
 
 /* DONATION FLOW */
-.CollectiveDonationFlowWrapper {
-  height: 100vh;
-  overflow: auto;
+section#donate {
   background-color: #f5f6f7;
   background-color: rgba(245,246,247,.98);
 }
 
-.CollectiveDonationFlowWrapper .pb20px
-{
-  padding-bottom: 20px;
+.CollectiveDonationFlowWrapper {
+  background-color: var(--background-color);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  & > div {
+    padding-bottom: 10rem;
+  }
+}
+
+.Collective .CollectiveDonationFlowWrapper {
+  overflow: scroll;
+  align-items: baseline;
 }
 
 .CollectiveSignup-title {
   font-size: 2.25rem;
 }
 
-.CollectiveSignup .Field {
-  width: 100%;
-  font-size: 15px;
-  height: 40px;
-  margin: 0;
-  padding: 0 .5rem;
-  border: 1px solid rgba(48, 50, 51, .15);
-  background: white;
-  box-shadow: inset 0 1px 0 rgba(0,0,0,.1);
-}
-.CollectiveSignup .Field {
-  color: var(--darkest-gray);
-  padding-left: 32px;
-  background-repeat: no-repeat;
-  background-size: 16px;
-  background-position: 9px center;
-}
 .CollectiveSignup {
+  .Field {
+    width: 100%;
+    font-size: 15px;
+    height: 40px;
+    margin: 0 0 0.5rem 0;
+    padding: 0 .5rem;
+    padding-left: 32px;
+    border: 1px solid rgba(48, 50, 51, .15);
+    background: white;
+    box-shadow: inset 0 1px 0 rgba(0,0,0,.1);
+    color: var(--darkest-gray);
+    background-repeat: no-repeat;
+    background-size: 16px;
+    background-position: 9px center;
+  }
   .-name {
     .Field {
       background-image: url(/static/images/user-icon.svg);
@@ -244,212 +255,24 @@
   color: #75CC1F;
 }
 
-.Collective .Notification {
-  top: 0;
-}
-
-.CollectiveDonationFlowWrapper .Button {
-    display: inline-block;
-    margin: auto;
-    width: 320px;
-    height: 56px;
-    border-radius: 50px;
-    background-color: #75cc1f;
-  /* font-weight: bold; */
-  /* padding: 0.75rem 1rem; */
-  /* font-size: 1rem; */
-}
-
-.Collective .Button .Icon
-{
-  display: none;
-}
-
-
-.Collective .Collective-quoteText ul {
-  list-style: none;
-  padding: 0;
-}
-
 .Collective
 {
   h2 {
-    color: #494b4d;
+    color: var(--h2-color);
   }
-}
-
-.Collective-os-contrib-container {
-  text-align: center;
-  padding: 40px 0px;
-  background-color:var(--light-gray);
-  .line1 {
-    font-family: montserratlight;
-    font-size: 22px;
-    color: #4d4d4d;
+  .Notification {
+    top: 0;
   }
-}
-
-/**
-* Inactive/Pending Collective
-*/
-.Collective.Collective--inactive {
-  font-family: Montserrat-Light, sans-serif;
-
-  .line1 {
-    font-family: montserratlight;
+  .Button .Icon
+  {
+    display: none;
+  }
+  .Collective-quoteText ul {
+    list-style: none;
+    padding: 0;
+  }
+  .GithubContributors {
     text-align: center;
-    margin-top: 32px;
-    font-size: 16px;
-    line-height: 1.8;
-    color: #797d80;
-    padding: 0 15px;
-  }
-
-  .line2 {
-    text-align: center;
-    font-family: Montserrat, sans-serif;
-    font-size: 44px;
-    line-height: 1.3;
-    letter-spacing: -0.5px;
-    color: #303233;
-    max-width: 880px;
-    font-weight: bold;
-    margin: 0 auto;
-    margin-top: 10px;
-    padding: 0 15px;
-  }
-
-  .line3 {
-    text-align: center;
-    max-width: 1023px;
-    font-family: Montserrat, sans-serif;
-    font-weight: bold;
-    font-size: 22px;
-    line-height: 1.6;
-    color: #797d80;
-    margin: 80px auto 0 auto;
-    padding: 0 15px;
-  }
-
-  .line4 {
-    font-family: montserratlight;
-    text-align: center;
-    max-width: 1023px;
-    font-size: 18px;
-    line-height: 1.6;
-    color: #797d80;
-    margin: 10px auto 0 auto;
-    padding: 0 15px;
-  }
-
-  .line5 {
-    text-align: center;
-    max-width: 1080px;
-    height: 33px;
-    font-family: Montserrat, sans-serif;
-    font-size: 28px;
-    color: #494b4d;
-    margin: 60px auto 0 auto;
-    padding: 0 15px;
-  }
-
-  .line6 {
-    text-align: center;
-    max-width: 628px;
-    height: 26px;
-    font-family: montserratlight;
-    font-size: 22px;
-    color: #4d4d4d;
-    margin: 10px auto 0 auto;
-    padding: 0 15px;
-  }
-
-  .Collective-backer-container {
-    background-color: rgb(249, 251, 252);
-    text-align: center;
-
-    .-top-gradient {
-      background-image: linear-gradient(to bottom, white, rgb(249, 251, 252));
-      height: 50px;
-    }
-
-    .-bottom-gradient {
-      background-image: linear-gradient(to top, white, rgb(249, 251, 252));
-      height: 50px;
-    }
-
-    .-wrap {
-      max-width: 1060px;
-      margin: 0 auto;
-      padding: 0 10px;
-    }
-
-    .UserCard {
-      display: inline-block;
-      vertical-align: middle;
-      margin: 10px;
-    }
-  }
-
-  .Collective-contrib-container {
-    .line1 {
-      font-family: montserratlight;
-      font-size: 22px;
-      color: #4d4d4d;
-      margin-top: 100px;
-    }
-  }
-
-  .Collective-about-container {
-    box-sizing: border-box;
-    width: 100%;
-    min-height: 390px;
-    background-color: #494b4d;
-    padding-top: 64px;
-    margin-top: 100px;
-
-    .line1 {
-      text-align: center;
-      font-family: Montserrat;
-      font-weight: bold;
-      font-size: 28px;
-      color: #ffffff;
-    }
-
-    .line2 {
-      max-width: 730px;
-      font-family: Lato;
-      font-size: 15px;
-      line-height: 1.6;
-      color: #ffffff;
-
-      b {
-        font-size: 18px;
-      }
-    }
-
-    .more-button {
-      padding: 5px 8px;
-      box-sizing: border-box;
-      text-transform: uppercase;
-      margin:  0 auto;
-      min-width: 142px;
-      min-height: 30px;
-      border-radius: 100px;
-      border: solid 2px #75cc1f;
-      width: 79px;
-      height: 12px;
-      font-family: Montserrat;
-      font-size: 10px;
-      letter-spacing: 1px;
-      color: #ffffff;
-      font-weight: bold;
-      margin-top: 32px;
-      text-align: center;
-      &:hover {
-        opacity: .94;
-      }
-    }
   }
 }
 
@@ -458,7 +281,8 @@
   textarea {
     width: 100%;
     max-width: 600px;
-    height: 6rem;
+    height: 5rem;
+    font-size: 1rem;
   }
   button {
     display: block;
@@ -470,7 +294,7 @@
   margin-top: 20px;
 }
 
-.Collective .section {
+section {
   padding: 1rem;
   .container {
     max-width: 768px;
@@ -478,6 +302,57 @@
   }
 }
 
-.Collective .section:nth-child(even) {
+section:nth-child(odd) {
   background-color:var(--light-gray);
+}
+
+section h1 {
+  text-align: center;
+  color: #494b4d;
+  font-family: Montserrat,sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+section .subtitle {
+  text-align: center;
+  color: var(--dark-gray);
+  font-size: 22px;
+  font-size: 1.065rem;
+  line-height: 1.5;
+  margin: 0 auto;
+  padding-bottom: 1rem;
+  max-width: 48rem;
+  font-weight: normal;
+}
+
+.DonateDisclaimer {
+  max-width: 360px;
+  font-family: Lato;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  color: #808080;
+  margin: 10px auto 0px;
+}
+
+
+@media (max-width: 700px) {
+  .CollectiveDonationFlowWrapper {
+    overflow: scroll;
+    padding-top: 2rem;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    & > div {
+      padding-bottom: 1rem;
+      max-width: 600px;
+    }
+  }  
 }

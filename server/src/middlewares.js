@@ -48,6 +48,7 @@ const fetchGroupBySlug = (req, res, next) => {
     .get(`/groups/${req.params.slug.toLowerCase()}/`)
     .then(group => {
       req.group = group;
+      req.collective = group;
       next();
     })
     .catch(next);

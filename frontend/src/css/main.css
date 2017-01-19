@@ -1,13 +1,11 @@
 /**
  * Reset
  */
-
 @import './vendors/normalize.css';
 
 /**
  * Base elements
  */
-
 @import './base/variables.css';
 @import './base/fonts.css';
 @import './base/body.css';
@@ -19,7 +17,6 @@
 /**
  * Vendors
  */
-
 @import './vendors/react-datepicker.css';
 @import 'basscss'; /* http://www.basscss.com/ */
 @import 'basscss-background-images';
@@ -27,7 +24,6 @@
 /**
  * Containers
  */
-
 @import './containers/About.css';
 @import './containers/AddGroup.css';
 @import './containers/Collective.css';
@@ -42,7 +38,6 @@
 @import './containers/NewGroup.css';
 @import './containers/OnBoarding.css';
 @import './containers/ProfilePage.css';
-@import './containers/PublicGroup.css';
 @import './containers/Response.css';
 @import './containers/SubmitExpense.css';
 @import './containers/Subscriptions.css';
@@ -50,9 +45,7 @@
 /**
  * Components
  */
-
 @import './components/ActivityItem.css';
-@import './components/BackerCard.css';
 @import './components/Button.css';
 @import './components/Checkbox.css';
 @import './components/CollectiveAboutUs.css';
@@ -91,11 +84,9 @@
 @import './components/Mosaic.css';
 @import './components/Notification.css';
 @import './components/ProfilePhoto.css';
-@import './components/PublicGroupHero.css';
-@import './components/PublicGroupOpenSourceCTA.css';
+@import './components/CollectiveOpenSourceCTA.css';
 @import './components/PublicGroupThanks.css';
 @import './components/PublicGroupTiers.css';
-@import './components/PublicGroupWhoWeAre.css';
 @import './components/RelatedGroups.css';
 @import './components/RepositoryPicker.css';
 @import './components/RepositoryPickerItem.css';
@@ -117,7 +108,6 @@
 /**
  * Media queries
  */
-
 @import './base/media-queries.css';
 
 /**

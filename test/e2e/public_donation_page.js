@@ -29,8 +29,8 @@ module.exports = {
     client
       // callback after filling paypal
       .url(`${config.host.website}/testcollective?status=payment_success&userid=1&has_full_account=true`)
-      .waitForElementVisible('.PublicGroupThanksV2', 10000)
-      .assert.containsText('.PublicGroupThanksV2', 'You are now in our backers wall!')
+      .waitForElementVisible('.CollectiveThanks', 10000)
+      .assert.containsText('.CollectiveThanks', 'You are now on our backers wall!')
       .end();
   },
 
@@ -39,8 +39,8 @@ module.exports = {
     client
       // callback after filling paypal
       .url(`${config.host.website}/testcollective?status=payment_success&userid=1&has_full_account=false`)
-      .waitForElementVisible('.PublicGroupSignupV2', 10000)
-      .assert.containsText('.PublicGroupSignupV2', 'How should we show you on the page?')
+      .waitForElementVisible('.CollectiveSignup', 10000)
+      .assert.containsText('.CollectiveSignup', 'How should we show you on the page?')
       .end();
   },
 

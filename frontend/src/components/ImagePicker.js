@@ -55,8 +55,8 @@ export default class ImagePicker extends Component {
     this.state = {
       isLoading: false,
       currentIndex: 0,
-      twitter: '',
-      website: ''
+      twitter: undefined,
+      website: undefined
     };
 
     this.lazyLookupSocialMediaAvatars = _.debounce(this.lookupSocialMediaAvatars.bind(this), 600);
@@ -121,13 +121,12 @@ export default class ImagePicker extends Component {
     if (this.props.dontLookupSocialMediaAvatars) return;
 
     if (website !== this.state.website || twitter !== this.state.twitter) {
-      const nextStateWebsite = REG_VALID_URL.test(website) ? website : '';
-      const nextStateTwitter = REG_VALID_TWITTER_USERNAME.test(twitter) ? REG_VALID_TWITTER_USERNAME.exec(twitter)[1] : '';
+      const nextStateWebsite = REG_VALID_URL.test(website) ? website : undefined;
+      const nextStateTwitter = twitter && REG_VALID_TWITTER_USERNAME.test(twitter) ? REG_VALID_TWITTER_USERNAME.exec(twitter)[1] : undefined;
 
       if (nextStateWebsite !== this.state.website || nextStateTwitter !== this.state.twitter) {
         this.state.twitter = nextStateTwitter;
         this.state.website = nextStateWebsite;
-
         if (this.state.twitter || this.state.website) {
           this.lazyLookupSocialMediaAvatars(this.state.website, this.state.twitter);
         }
@@ -214,7 +213,10 @@ export default class ImagePicker extends Component {
       uploadOptionFirst
     } = this.props;
 
-    if (!getSocialMediaAvatars) return;
+    if (!getSocialMediaAvatars) return console.error("lookupSocialMediaAvatars> getSocialMediaAvatars action no available");
+    if (!website && !twitter) return console.error("lookupSocialMediaAvatars> no website or twitter handle to lookup", website, twitter);
+    if (!newUser.id) return console.error("lookupSocialMediaAvatars> no user id");
+
     const defaultPresetIndex = uploadOptionFirst ? 1 : 0;
     if (!this.state.isLoading) {
       this.setState({isLoading: true});

@@ -245,7 +245,7 @@
 .DonationDistributor-disclaimer {
   position: absolute;
   h6 {
-    margin: 1rem 0px 0px 0px;
+    margin: 0.5rem 0px 0px 0px;
     font-weight: 400;
     color: var(--dark-gray);
   }

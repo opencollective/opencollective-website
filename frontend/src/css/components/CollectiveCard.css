@@ -157,6 +157,36 @@
     height: 74px;
     .CollectiveCard-metric-value {
       font-size: 16px;
+      margin-top: 15px;
+    }
+  }
+}
+
+.CollectiveCard.small {
+  width: 160px;
+  height: 217px;
+  margin: 7px;
+  .CollectiveCard-head {
+    height: 90px;
+  }
+  .CollectiveCard-body {
+    .CollectiveCard-name {
+      min-height: 20px;
+      font-size: 14px;
+      margin: 5px;
+    }
+    .CollectiveCard-description {
+      font-size: 10px;
+      line-height: 1.1;
+      height: 50px;
+      margin: 0 5px;
+    }
+  }
+  .CollectiveCard-footer {
+    height: 37px;
+    .CollectiveCard-metric-value {
+      font-size: 11px;
+      margin: 3px 2px 0px;
     }
   }
 }

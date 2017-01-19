@@ -1,4 +1,5 @@
 .DonatePage {
+  text-align: center;
   .DonatePage-logo {
     width: 152px;
     height: 152px;
@@ -43,6 +44,11 @@
       opacity: .8;
     }
   }
+  .CollectiveDonationFlowWrapper {
+    & > div {
+      max-width: 600px;
+    }
+  }
   .Tier-description {
     font-family: Lato;
     font-size: 16px;
@@ -52,39 +58,37 @@
     color: #67676f;
     padding: 0 15px;
   }
+  .Button {
+    max-width: 300px;
+    width: 85%;    
+  }
   .button-container {
     text-align: center;
     margin: 20px auto;
     margin-top: 40px;
   }
-  .DonatePage-donation-container {
-    max-width: 600px;
-    margin: auto;
-    text-align: center;
-    .Button {
-      border-radius: 28px !important;
+  
+  .LightFooter {
+    margin-top: 75px;
+    margin-bottom: 25px;
+    li {
+      display: inline-block;
+      padding: 0 var(--spacing);
+      font-weight: normal;
+      font-variant: small-caps;
       text-transform: uppercase;
-      min-width: 280px;
-      box-sizing: border-box;
-      float: none;
-      margin: 0 auto;
-    }
-    .PublicGroupForm-disclaimer {
-      max-width: 360px;
-      font-family: Lato;
-      font-size: 10px;
-      font-weight: 400;
-      line-height: 1.9;
-      text-align: center;
-      color: #808080;
-      margin: auto;
+      font-size: 0.8rem;
+      font-weight: bold;
     }
   }
-  .PublicFooter {
-    margin-top: 60px;
-  }
-  .pb20px {
-    padding-bottom: 20px;
+
+  .Tier {
+    .Tier-container {
+      border: none;
+    }
+    .Tier-title {
+      display: none;
+    }
   }
 }
 
