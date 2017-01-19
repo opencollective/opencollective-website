@@ -15,8 +15,8 @@ module.exports = {
   'Expenses list': (client) => {
 
      client
-       .assert.containsText('.expenses-container section:first-child', 'Expense 2')
-       .assert.containsText('.expenses-container section:last-child', 'Expense 1')
+       .assert.containsText('.expenses-container .CollectiveExpenseItem:first-child', 'Expense 2')
+       .assert.containsText('.expenses-container .CollectiveExpenseItem:last-child', 'Expense 1')
        .end();
    },
 

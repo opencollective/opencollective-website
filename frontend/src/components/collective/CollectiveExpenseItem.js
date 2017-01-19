@@ -67,8 +67,8 @@ const CollectiveExpenseItem = ({
   }
  
   return (
-    <div id={`exp${expense.id}`}>
-      <div className='CollectiveExpenseItem mx-auto mb2 p2 flex bg-white border-white'>
+    <div className='CollectiveExpenseItem' id={`exp${expense.id}`}>
+      <div className='mx-auto mb2 p2 flex bg-white border-white'>
         {!compact && <div className='CollectiveExpenseItem-top flex flex-column mr2'>
           <div className='CollectiveExpenseItem-image max-width-1'>
             <ReceiptPreview
