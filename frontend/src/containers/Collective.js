@@ -20,7 +20,7 @@ import CollectivePostDonationUserSignup from '../components/collective/Collectiv
 import CollectiveOpenSourceCTA from '../components/collective/CollectiveOpenSourceCTA';
 import EditTopBar from '../components/EditTopBar';
 import PublicFooter from '../components/PublicFooter';
-import RelatedGroups from '../components/RelatedGroups';
+import CollectiveList from '../components/CollectiveList';
 
 // Actions
 import appendDonationForm from '../actions/form/append_donation';
@@ -129,7 +129,7 @@ export class Collective extends Component {
                 <section id="collectives">
                   <h1>{capitalize(i18n.getString('collectives'))}</h1>
                   <h2 className="subtitle">{i18n.getString('DiscoverOurCollectives', { tag: collective.settings.superCollectiveTag})}</h2>
-                  <RelatedGroups title={' '} groupList={ subCollectives } {...this.props} />
+                  <CollectiveList title={' '} groupList={ subCollectives } {...this.props} />
                 </section>
               }
               <CollectiveMembers collective={ collective } i18n={ i18n } />

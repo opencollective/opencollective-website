@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-import RelatedGroups from '../RelatedGroups';
+import CollectiveList from '../CollectiveList';
 
 export default class CollectivePostDonationThanks extends Component {
 
@@ -32,7 +32,7 @@ export default class CollectivePostDonationThanks extends Component {
         </div>
         { showRelated &&
           <section className='pt2 center'>
-            <RelatedGroups style="small" title={i18n.getString('checkOutOtherSimilarCollectives')} groupList={collective.related} {...this.props} />
+            <CollectiveList style="small" title={i18n.getString('checkOutOtherSimilarCollectives')} groupList={collective.related} {...this.props} />
           </section>
         }
         <div className="CollectiveThanks center pt3" onClick={ closeDonationFlow }>
