@@ -28,22 +28,20 @@ export const getQuerySelector = createSelector(
 export const getTierSelector = createSelector(
   getParamsSelector,
   (params) => {
+    let { interval = 'one-time', description } = params;
+    if (interval.match(/^month(ly)?$/i)) {
+      interval = 'month';
+    } else if (interval.match(/^year(ly)?$/i)) {
+      interval = 'year';
+    } else if (interval !== 'one-time') {
+      description = interval;
+      interval = 'one-time';
+    }
 
-  let { interval = 'one-time', description } = params;
-  if (interval.match(/^month(ly)?$/i)) {
-    interval = 'month';
-  } else if (interval.match(/^year(ly)?$/i)) {
-    interval = 'year';
-  } else if (interval !== 'one-time') {
-    description = interval;
-    interval = 'one-time';
-  }
-
-  return {
-    amount: params.amount,
-    interval,
-    description
-  }
-
+    return {
+      amount: params.amount,
+      interval,
+      description
+    }
   }
 )
