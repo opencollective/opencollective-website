@@ -51,8 +51,11 @@ export default class CollectiveHero extends Component {
                 onChange={event => appendEditCollectiveForm({mission: event.target.value})}
                 placeholder={i18n.getString('defaultMission')}/>
             </h1>
+
             <UserAvatarRow members={ collective.members } backers={ collective.backers } otherCount={ collective.contributorsCount } />
+
             <CollectiveStatsHeader collective={ collective } i18n={ i18n } />
+
             {collective.isActive && 
               <a href='#support' className='mb3 -btn -btn-big -bg-green -ttu -ff-sec -fw-bold'>{ i18n.getString('bePart') }</a>
             }

@@ -91,36 +91,26 @@ export class Collective extends Component {
     return (
       <div className={`Collective ${collective.slug}`}>
         <Notification />
-        <StickyContainer>
 
           { this.state.view === 'default' &&
-            <div>
+            <StickyContainer>
               {editCollectiveInProgress && 
                 <EditTopBar onSave={ saveCollective.bind(this) } onCancel={ cancelEditCollectiveForm }/>}
 
               <CollectiveHero { ...this.props } />
               <CollectiveLedger { ...this.props } />
-            </div>
-          }
 
-          {this.state.view === 'default' && collective.isActive && 
-            <CollectiveDonate
-              collective={collective}
-              host={host}
-              i18n={i18n}
-              donationForm={donationForm}
-              appendDonationForm={appendDonationForm}
-              onToken={donateToCollective.bind(this)}
-            />}
-          <div className='CollectiveDonationFlowWrapper'>
-            {this.state.view === 'signup' && 
-              <CollectivePostDonationUserSignup save={ saveNewUser.bind(this) } { ...this.props } />}
-            {this.state.view === 'thankyou' && 
-              <CollectivePostDonationThanks closeDonationFlow={ ::this.closeDonationFlow } { ...this.props } />}
-          </div>
+              {collective.isActive && 
+                <CollectiveDonate
+                  collective={collective}
+                  host={host}
+                  i18n={i18n}
+                  donationForm={donationForm}
+                  appendDonationForm={appendDonationForm}
+                  onToken={donateToCollective.bind(this)}
+                />
+              }
 
-          { this.state.view === 'default' &&
-            <div>
               <CollectiveAboutUs { ...this.props } />
 
               {collective.slug === 'opensource' && <CollectiveOpenSourceCTA />}
@@ -134,9 +124,21 @@ export class Collective extends Component {
               }
               <CollectiveMembers collective={ collective } i18n={ i18n } />
               <PublicFooter />
+            </StickyContainer>
+          }
+
+          {this.state.view === 'signup' && 
+            <div className='CollectiveDonationFlowWrapper'>
+              <CollectivePostDonationUserSignup save={ saveNewUser.bind(this) } { ...this.props } />
             </div>
           }
-        </StickyContainer>
+          
+          {this.state.view === 'thankyou' && 
+            <div className='CollectiveDonationFlowWrapper'>
+              <CollectivePostDonationThanks closeDonationFlow={ ::this.closeDonationFlow } { ...this.props } />
+            </div>
+          }
+
       </div>
     );
   }
