@@ -11,7 +11,7 @@ module.exports = {
       .url(`${config.host.website}/testcollective/donate/100/February Meetup`)
       .waitForElementVisible('body', 1000)
       .assert.containsText('div[class=Tier]', 'February Meetup')
-      .assert.containsText('div[class=PublicGroupForm-disclaimer]', 'EUR €100,00')
+      .assert.containsText('div[class=DonateDisclaimer]', 'EUR €100,00')
       .end();
    },
 
@@ -19,7 +19,7 @@ module.exports = {
     client
       .url(`${config.host.website}/testcollective/donate/100/monthly`)
       .waitForElementVisible('body', 1000)
-      .assert.containsText('div[class=PublicGroupForm-disclaimer]', 'EUR €100,00 per month')
+      .assert.containsText('div[class=DonateDisclaimer]', 'EUR €100,00 per month')
       .end();
    },
 
