@@ -217,10 +217,8 @@ export function donateToCollective({amount, interval, currency, token, options})
     distribution: options && options.distribution
   };
 
-  if (interval === 'monthly') {
-    payment.interval = 'month';
-  } else if (interval === 'yearly') {
-    payment.interval = 'year';
+  if (interval && interval !== 'one-time') {
+    payment.interval = interval.replace(/ly$/,'');
   }
 
   return donate(collective.slug, payment, options)
