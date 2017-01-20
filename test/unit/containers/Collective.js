@@ -73,7 +73,7 @@ describe('Collective container', () => {
 
     donateToCollective.call({ props, setState }, {
       amount: 10,
-      frequency: 'monthly',
+      interval: 'month',
       currency,
       token
     })
@@ -104,12 +104,12 @@ describe('Collective container', () => {
       donate,
       collective,
       slug: collective.slug,
-      frequency: 'monthly'
+      interval: 'month'
     };
 
     donateToCollective.call({props, setState, refreshData}, {
       amount: 10,
-      frequency: 'monthly',
+      interval: 'month',
       currency: collective.currency,
       token
     })
@@ -167,7 +167,7 @@ describe('Collective container', () => {
       collective
     };
 
-    donateToCollective.call({ props }, 10, 'monthly', 'MXN', token)
+    donateToCollective.call({ props }, 10, 'month', 'MXN', token)
     .then(() => {
       expect(donate).to.have.been.called();
       expect(props.notify).to.have.been.called.with('error');

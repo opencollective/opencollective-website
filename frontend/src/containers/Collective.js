@@ -202,7 +202,7 @@ export function saveCollective() {
 /*
  * Receive donation to a collective
  */
-export function donateToCollective({amount, frequency, currency, token, options}) {
+export function donateToCollective({amount, interval, currency, token, options}) {
   const {
     notify,
     collective,
@@ -217,9 +217,9 @@ export function donateToCollective({amount, frequency, currency, token, options}
     distribution: options && options.distribution
   };
 
-  if (frequency === 'monthly') {
+  if (interval === 'monthly') {
     payment.interval = 'month';
-  } else if (frequency === 'yearly') {
+  } else if (interval === 'yearly') {
     payment.interval = 'year';
   }
 

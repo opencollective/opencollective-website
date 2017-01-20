@@ -119,7 +119,7 @@ export class OnBoarding extends Component {
             "description":"Support us with a monthly donation and help us continue our activities.",
             "button":"Become a backer",
             "range":[2,100000],"presets":[2,5,10,25,50],
-            "interval":"monthly"
+            "interval":"month"
           },
           {
             "name":"sponsor",
@@ -128,7 +128,7 @@ export class OnBoarding extends Component {
             "button":"Become a sponsor",
             "range":[100,500000],
             "presets":[100,250,500],
-            "interval":"monthly"
+            "interval":"month"
           }]
       },
       users: attr.contributors,
