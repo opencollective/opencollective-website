@@ -224,7 +224,7 @@ export function donateToCollective({amount, frequency, currency, token, options}
   }
 
   return donate(collective.slug, payment, options)
-    .then(({json}) => this.setState({ view: (json && !json.hasFullAccount) ? 'signup' : 'thankyou' }))
+    .then(({json}) => this.setState({ view: (json && json.user.firstName && json.user.avatar) ? 'thankyou' : 'signup' }))
     .catch((err) => notify('error', err.message));
 }
 
