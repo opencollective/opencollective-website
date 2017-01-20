@@ -122,7 +122,7 @@ export default class DonationPicker extends Component {
       </div>
     );
   }
-};
+}
 
 DonationPicker.propTypes = {
   amount: PropTypes.number, // initial amount
