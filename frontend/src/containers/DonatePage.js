@@ -102,7 +102,7 @@ export class DonatePage extends Component {
               />
             }
             { view === 'signup' &&
-              <PostDonationSignUp {...this.props} save={saveNewUser.bind(this)} {...this.props} />
+              <PostDonationSignUp {...this.props} onSave={saveNewUser.bind(this)} onSkip={onSkipSaveUser.bind(this)} {...this.props} />
             }
             { view === 'thankyou' &&
               <PostDonationThanks i18n={i18n} collective={collective} message={i18n.getString('thankyou')} tweet={tier.tweet} showRelated={false} closeDonationFlow={this.closeDonationFlow.bind(this)} />
@@ -163,6 +163,10 @@ export function donateToGroup({amount, interval, currency, description, token}) 
   return donate(collective.id, payment)
     .then(({json}) => this.setState({ view: (json && !json.hasFullAccount) ? 'signup' : 'thankyou' }))
     .catch((err) => notify('error', err.message));
+}
+
+export function onSkipSaveUser() {
+  this.setState({ view: 'thankyou' });
 }
 
 export function saveNewUser() {

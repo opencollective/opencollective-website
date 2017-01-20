@@ -129,7 +129,7 @@ export class Collective extends Component {
 
           {this.state.view === 'signup' && 
             <div className='CollectiveDonationFlowWrapper'>
-              <CollectivePostDonationUserSignup save={ saveNewUser.bind(this) } { ...this.props } />
+              <CollectivePostDonationUserSignup onSave={ saveNewUser.bind(this) } onSkip={ onSkipSaveUser.bind(this) } { ...this.props } />
             </div>
           }
           
@@ -224,8 +224,12 @@ export function donateToCollective({amount, frequency, currency, token, options}
   }
 
   return donate(collective.slug, payment, options)
-    .then(() => this.setState({ view: this.props.hasFullAccount ? 'thankyou' : 'signup' }))
+    .then(({json}) => this.setState({ view: (json && !json.hasFullAccount) ? 'signup' : 'thankyou' }))
     .catch((err) => notify('error', err.message));
+}
+
+export function onSkipSaveUser() {
+  this.setState({ view: 'thankyou' });
 }
 
 /*
