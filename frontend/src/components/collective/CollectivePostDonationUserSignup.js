@@ -12,7 +12,7 @@ export default class CollectivePostDonationUserSignup extends Component {
     const {
       profileForm,
       updateInProgress,
-      save,
+      onSave,
       appendProfileForm,
       newUser,
       i18n
@@ -90,13 +90,13 @@ export default class CollectivePostDonationUserSignup extends Component {
             </div>
             <div className="buttonsRow pt3">
               <SaveButton
-                save={save.bind(this)}
+                save={onSave.bind(this)}
                 label={i18n.getString('save')}
                 inProgress={updateInProgress} />
             </div>
           </div>
           <div className="CollectiveSignup center pt3" onClick={ ::this.skip }>
-            <a href='#'>{i18n.getString('skipToRemainAnonymous')}</a>
+            <a href='#'>{i18n.getString('skip')}</a>
           </div>
         </div>
       </div>
@@ -104,13 +104,8 @@ export default class CollectivePostDonationUserSignup extends Component {
   }
 
   skip() {
-    const { appendProfileForm, save } = this.props;
-    appendProfileForm({
-      avatar: '',
-      name: '',
-      twitterHandle: ''
-    });
-    return save();
+    const { onSkip } = this.props;
+    return onSkip();
   }
 
   componentDidMount() {
@@ -125,5 +120,7 @@ export default class CollectivePostDonationUserSignup extends Component {
 
 CollectivePostDonationUserSignup.propTypes = {
   collective: PropTypes.object.isRequired,
+  onSave: PropTypes.func.isRequired,
+  onSkip: PropTypes.func.isRequired,
   i18n: PropTypes.object.isRequired,
 }
