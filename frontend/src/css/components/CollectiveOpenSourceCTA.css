@@ -1,4 +1,4 @@
-.PublicGroupOpenSourceCTA {
+.CollectiveOpenSourceCTA {
   box-sizing: border-box;
   font-family: "Montserrat-Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
   position: relative;
@@ -23,6 +23,7 @@
   }
   .line1 {
     font-size: 20px;
+    color: white;
     font-weight: bold;
   }
   .line2 {

@@ -1,224 +1,214 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
-import values from 'lodash/values';
-import i18n from '../lib/i18n';
 
-import LoginTopBar from '../containers/LoginTopBar';
-
-import roles from '../constants/roles';
 import Notification from '../containers/Notification';
-import PublicFooter from '../components/PublicFooter';
-import PublicGroupThanks from '../components/public_group/PublicGroupThanksV2';
+import PostDonationSignUp from '../components/collective/CollectivePostDonationUserSignup';
+import PostDonationThanks from '../components/collective/CollectivePostDonationThanks';
 import getSocialMediaAvatars from '../actions/users/get_social_media_avatars';
-import PublicGroupSignup from '../components/public_group/PublicGroupSignupV2';
 import Tiers from '../components/Tiers';
 import getTier from '../lib/tiers';
 
-import fetchGroup from '../actions/groups/fetch_by_slug';
-import fetchUsers from '../actions/users/fetch_by_group';
+import fetchUsers from '../actions/users/fetch_by_group'; // TODO: change to collective
+
 import donate from '../actions/groups/donate';
 import notify from '../actions/notification/notify';
 import appendDonationForm from '../actions/form/append_donation';
 import appendProfileForm from '../actions/form/append_profile';
 import updateUser from '../actions/users/update';
 import validateSchema from '../actions/form/validate_schema';
-import decodeJWT from '../actions/session/decode_jwt';
+import uploadImage from '../actions/images/upload';
 
 import profileSchema from '../joi_schemas/profile';
+import formatCurrency from '../lib/format_currency';
+
+// Selectors
+import { createStructuredSelector } from 'reselect';
+import { getTierSelector } from '../selectors/router';
+import {
+  getI18nSelector,
+  getCollectiveSelector,
+  getCollectiveHostSelector,
+  isHostOfCollectiveSelector } from '../selectors/collectives';
+import {
+  getDonationFormSelector,
+  getProfileFormAttrSelector } from '../selectors/form';
+import { getAppRenderedSelector } from '../selectors/app';
+import { 
+  getUsersSelector,
+  getNewUserSelector,
+  getUpdateInProgressSelector } from '../selectors/users';
+import { isSessionAuthenticatedSelector, getAuthenticatedUserSelector } from '../selectors/session';
+
 
 export class DonatePage extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      showThankYouMessage: false,
-      showUserForm: false
-    };
+    this.state = { view: 'default' };
   }
 
   render() {
     const {
-      amount,
-      interval,
-      description,
-      group,
-      isAuthenticated,
+      collective,
+      host,
       donationForm,
       i18n
     } = this.props;
 
-    let tier = getTier({amount, interval}, group.tiers);
-    if (!tier || tier.presets && tier.presets.length > 1)
-      tier = {
+    const { view } = this.state;
+
+    const tier = (this.props.tier.description)  ? this.props.tier : getTier(this.props.tier, collective.tiers) || this.props.tier;
+    const collectiveHandle = (collective.twitterHandle) ? `@${collective.twitterHandle}` : collective.name;
+    const url = window ? window.location.href : '';
+    const forDescription = tier.description ? ` for ${tier.description}` : '';
+    const tweet = `🎉 I've just donated ${formatCurrency(tier.amount * 100, collective.currency, { precision: 0 })} to ${collectiveHandle}${forDescription} ${url}`;
+
+    if (!tier.name || tier.presets && tier.presets.length > 1) {
+      Object.assign(tier, {
       name: "custom",
       title: " ",
-      description: description || i18n.getString('defaultTierDescription'),
-      amount,
-      interval: interval || 'one-time',
-      range: [amount, 10000000]
-    };
-    const tiers = [tier];
-
-    group.backers = []; // We don't show the backers
-
-    let donationSection;
-    if (this.state.showThankYouMessage || (isAuthenticated && this.state.showUserForm)) { // we don't handle userform from logged in users) {
-      donationSection = <PublicGroupThanks i18n={i18n} group={group} message={i18n.getString('thankyou')} tweet={tier.tweet} />;
-    } else if (this.state.showUserForm) {
-      donationSection = <PublicGroupSignup {...this.props} save={saveNewUser.bind(this)} />
-    } else {
-      donationSection = <Tiers tiers={tiers} {...this.props} form={donationForm} onToken={donateToGroup.bind(this)} />
+      description: tier.description || i18n.getString('defaultTierDescription'),
+      range: [tier.amount, 10000000],
+      tweet
+      });
     }
+    const tiers = [tier];
+    collective.backers = []; // We don't show the backers
 
     return (
-      <div className='DonatePage'>
-        <LoginTopBar />
+      <div className='DonatePage Page'>
         <Notification />
-        <div className='DonatePage-logo' style={{backgroundImage: `url(${group.logo ? group.logo : '/static/images/rocket.svg'})`}}></div>
-        <div className='DonatePage-line1'>Hi! We are <b>{ group.name }</b>. With your support we can</div>
-        {group.mission ? <div className='DonatePage-line2'>{ group.mission }</div> : null}
-        {group.website ? <a className='DonatePage-line3' href={group.website}>{group.website}</a> : null}
-        <div className='DonatePage-donation-container'>{ donationSection }</div>
-        <PublicFooter />
+          <div className='CollectiveDonationFlowWrapper'>
+            <div>
+            { view === 'default' &&
+                <div className="DonatePage-header">
+                  <a href={`/${collective.slug}`}>
+                    <div className='DonatePage-logo' style={{backgroundImage: `url(${collective.logo ? collective.logo : '/static/images/rocket.svg'})`}}></div>
+                  </a>
+                  <div className='DonatePage-line1'>Hi! We are  <a href={`/${collective.slug}`}>{ collective.name }</a>.</div>
+                  {collective.mission ? <div className='DonatePage-line2'>{ collective.mission }</div> : null}
+                </div>
+            }
+            { view === 'default' &&
+              <Tiers
+                tiers={tiers}
+                collective={collective}
+                host={host}
+                donationForm={donationForm}
+                appendDonationForm={appendDonationForm}
+                onToken={donateToGroup.bind(this)}
+                i18n={i18n}
+              />
+            }
+            { view === 'signup' &&
+              <PostDonationSignUp {...this.props} save={saveNewUser.bind(this)} {...this.props} />
+            }
+            { view === 'thankyou' &&
+              <PostDonationThanks i18n={i18n} collective={collective} message={i18n.getString('thankyou')} tweet={tier.tweet} showRelated={false} closeDonationFlow={this.closeDonationFlow.bind(this)} />
+            }
+            { view === 'default' &&
+              <div className="LightFooter">
+                <a href="/">
+                  <div className="logo">
+                    <svg width='14' height='14' className='inline-block align-middle mr1'>
+                      <use xlinkHref='#svg-isotype' fill='#7FADF2'/>
+                    </svg>
+                    <svg width='138' height='20' className='inline-block align-middle'>
+                      <use xlinkHref='#svg-logotype' fill='#919699'/>
+                    </svg>
+                  </div>
+                </a>
+              </div>
+            }
+          </div>
+        </div>
       </div>
     );
   }
 
+  closeDonationFlow() {
+    const  { collective } = this.props;
+    window.location = `/${collective.slug}`;
+  }
+
   componentWillMount() {
     const {
-      group,
-      fetchUsers,
-      fetchGroup
+      collective,
+      fetchUsers
     } = this.props;
-
-    fetchGroup(group.slug);
-    fetchUsers(group.slug);
+    return fetchUsers(collective.slug);
   }
 
-  componentDidMount() {
-    // decode here because we don't handle auth on the server side yet
-    this.props.decodeJWT();
-  }
 }
 
 export function donateToGroup({amount, interval, currency, description, token}) {
   const {
     notify,
     donate,
-    group,
-    fetchGroup,
-    fetchUsers
+    collective
   } = this.props;
 
   const payment = {
     stripeToken: token && token.id,
     email: token && token.email,
     amount,
-    interval,
     currency,
     description
   };
 
-  return donate(group.id, payment)
-    .then(({json}) => {
-      if (json && !json.hasFullAccount) {
-        this.setState({ showUserForm: true })
-      } else {
-        this.setState({ showThankYouMessage: true })
-      }
-    })
-    .then(() => fetchGroup(group.id))
-    .then(() => fetchUsers(group.id))
+  if (interval !== 'one-time')
+    payment.interval = interval;
+
+  return donate(collective.id, payment)
+    .then(({json}) => this.setState({ view: (json && !json.hasFullAccount) ? 'signup' : 'thankyou' }))
     .catch((err) => notify('error', err.message));
 }
 
 export function saveNewUser() {
  const {
-    users,
+    newUser,
     updateUser,
     profileForm,
     validateSchema,
-    notify,
-    group,
-    fetchUsers
+    notify
   } = this.props;
   return validateSchema(profileForm.attributes, profileSchema)
-    .then(() => updateUser(users.newUser.id, profileForm.attributes))
-    .then(() => this.setState({
-      showUserForm: false,
-      showThankYouMessage: true
-    }))
-    .then(() => fetchUsers(group.id))
+    .then(() => updateUser(newUser.id, Object.assign({}, profileForm)))
+    .then(() => this.setState({ view: 'thankyou' }))
     .catch(({message}) => notify('error', message));
 }
 
+const mapStateToProps = createStructuredSelector({
+    // collective props
+    collective: getCollectiveSelector,
+    host: getCollectiveHostSelector,
+    isHost: isHostOfCollectiveSelector,
+
+    // donation props
+    donationForm: getDonationFormSelector,
+    profileForm: getProfileFormAttrSelector,
+    newUser: getNewUserSelector,
+    updateInProgress: getUpdateInProgressSelector,
+
+    // other props
+    isAuthenticated: isSessionAuthenticatedSelector,
+    i18n: getI18nSelector,
+    loadData: getAppRenderedSelector,
+    users: getUsersSelector,
+    loggedinUser: getAuthenticatedUserSelector,
+    tier: getTierSelector
+  });
+
 export default connect(mapStateToProps, {
-  donate,
-  notify,
-  fetchUsers,
-  fetchGroup,
+  appendDonationForm,
   appendProfileForm,
-  updateUser,
-  validateSchema,
+  donate,
+  fetchUsers,
   getSocialMediaAvatars,
-  decodeJWT,
-  appendDonationForm
+  notify,
+  updateUser,
+  uploadImage,
+  validateSchema
 })(DonatePage);
 
-function mapStateToProps({
-  router,
-  groups,
-  form,
-  users,
-  session
-}) {
-
-  let { interval = 'one-time', description } = router.params;
-  if (interval.match(/^month(ly)?$/i)) {
-    interval = 'month';
-  } else if (interval.match(/^year(ly)?$/i)) {
-    interval = 'year';
-  } else if (interval !== 'one-time') {
-    description = interval;
-    interval = 'one-time';
-  }
-
-  const group = values(groups)[0] || {stripeAccount: {}}; // to refactor to allow only one group
-  const usersByRole = group.usersByRole || {};
-  const newUser = users.newUser || {};
-
-  /* @xdamman:
-   * We should refactor this. The /api/group route should directly return
-   * group.host, group.backers, group.members, group.donations, group.expenses
-   */
-  group.id = Number(group.id);
-
-  group.hosts = usersByRole[roles.HOST] || [];
-  group.members = usersByRole[roles.MEMBER] || [];
-  group.backers = usersByRole[roles.BACKER] || [];
-
-  group.host = group.hosts[0] || {};
-
-  group.backersCount = group.backers.length;
-  group.settings = group.settings || { lang: 'en' };
-  group.settings.formatCurrency = group.settings.formatCurrency || { compact: false, precision: 2 };
-
-  return {
-    amount: router.params.amount,
-    interval,
-    description,
-    group,
-    users,
-    session,
-    inProgress: groups.donateInProgress,
-    shareUrl: window.location.href,
-    profileForm: form.profile,
-    donationForm: form.donation,
-    showUserForm: users.showUserForm || false,
-    saveInProgress: users.updateInProgress,
-    isAuthenticated: session.isAuthenticated,
-    newUser,
-    i18n: i18n(group.settings.lang)
-  };
-}

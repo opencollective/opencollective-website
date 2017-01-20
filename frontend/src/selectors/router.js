@@ -20,3 +20,28 @@ export const getPathnameSelector = createSelector(
 export const getSlugSelector = createSelector(
   getParamsSelector,
   (params) => params.slug ? params.slug.toLowerCase() : '');
+
+export const getQuerySelector = createSelector(
+  getLocationSelector,
+  (location) => location.query);
+
+export const getTierSelector = createSelector(
+  getParamsSelector,
+  (params) => {
+    let { interval = 'one-time', description } = params;
+    if (interval.match(/^month(ly)?$/i)) {
+      interval = 'month';
+    } else if (interval.match(/^year(ly)?$/i)) {
+      interval = 'year';
+    } else if (interval !== 'one-time') {
+      description = interval;
+      interval = 'one-time';
+    }
+
+    return {
+      amount: params.amount,
+      interval,
+      description
+    }
+  }
+)

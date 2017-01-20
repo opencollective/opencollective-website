@@ -10,31 +10,16 @@
     margin-bottom: 20px;
     background-size: contain;
   }
-  .DonatePage-line1 {
-    font-family: montserratlight;
-    font-size: 22px;
-    font-weight: 300;
-    text-align: center;
-    color: #616466;
-    margin: auto;
-    margin-bottom: 10px;
-    b {
-      color: rgb(70, 176, 237);
-    }
-    padding: 0 15px;
-  }
-  .DonatePage-line2 {
+  .DonatePage-line1, .DonatePage-line2 {
     max-width: 900px;
     font-family: Montserrat;
-    font-size: 36px;
-    font-weight: 700;
+    font-size: 18px;
     line-height: 1.27;
     letter-spacing: -0.5px;
     text-align: center;
     color: #303233;
     margin: auto;
-    margin-bottom: 20px;
-    padding: 0 15px;
+    margin-bottom: 10px;
   }
   .DonatePage-line3 {
     display: inline-block;
@@ -59,57 +44,62 @@
       opacity: .8;
     }
   }
+  .CollectiveDonationFlowWrapper {
+    & > div {
+      max-width: 600px;
+    }
+  }
+  .Tier-description {
+    font-family: Lato;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.62;
+    text-align: center;
+    color: #67676f;
+    padding: 0 15px;
+  }
+  .Button {
+    max-width: 300px;
+    width: 85%;    
+  }
   .button-container {
     text-align: center;
     margin: 20px auto;
     margin-top: 40px;
   }
-  .DonatePage-donation-container {
-    width: 600px;
-    margin: auto;
-    text-align: center;
-    .Button {
-      border-radius: 28px !important;
+  
+  .LightFooter {
+    margin-top: 75px;
+    margin-bottom: 25px;
+    li {
+      display: inline-block;
+      padding: 0 var(--spacing);
+      font-weight: normal;
+      font-variant: small-caps;
       text-transform: uppercase;
-      min-width: 280px;
-      box-sizing: border-box;
-    }
-    p {
-      font-family: Lato;
-      font-size: 16px;
-      font-weight: 400;
-      line-height: 1.62;
-      text-align: center;
-      color: #67676f;
-      padding: 0 15px;
-    }
-    .PublicGroupForm-disclaimer {
-      max-width: 360px;
-      font-family: Lato;
-      font-size: 10px;
-      font-weight: 400;
-      line-height: 1.9;
-      text-align: center;
-      color: #808080;
-      margin: auto;
+      font-size: 0.8rem;
+      font-weight: bold;
     }
   }
-  .PublicFooter {
-    margin-top: 60px;
-  }
-  .pb20px {
-    padding-bottom: 20px;
+
+  .Tier {
+    .Tier-container {
+      border: none;
+    }
+    .Tier-title {
+      display: none;
+    }
   }
 }
 
 
 @media (max-width: 700px) {
-  .DonatePage {
-    .DonatePage-donation-container {
-      width: auto;
+  .Page {
+    .Page-container {
+      margin: 0 auto;
     }
-    .DonatePage-line2 {
-      font-size: 28px;
+    .DonatePage-line1, .DonatePage-line2 {
+      font-size: 14px;
     }
   }
 }

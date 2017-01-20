@@ -4,21 +4,23 @@ import { push } from 'redux-router';
 import { StickyContainer } from 'react-sticky';
 import { createStructuredSelector } from 'reselect';
 import merge from 'lodash/merge';
+import { capitalize } from '../lib/utils';
 
 // Containers
 import Notification from './Notification';
 
 // Components
 import CollectiveAboutUs from '../components/collective/CollectiveAboutUs';
-import CollectiveContributorMosaic from '../components/collective/CollectiveContributorMosaic';
 import CollectiveDonate from '../components/collective/CollectiveDonate';
 import CollectiveHero from '../components/collective/CollectiveHero';
 import CollectiveLedger from '../components/collective/CollectiveLedger';
 import CollectiveMembers from '../components/collective/CollectiveMembers';
 import CollectivePostDonationThanks from '../components/collective/CollectivePostDonationThanks';
 import CollectivePostDonationUserSignup from '../components/collective/CollectivePostDonationUserSignup';
+import CollectiveOpenSourceCTA from '../components/collective/CollectiveOpenSourceCTA';
 import EditTopBar from '../components/EditTopBar';
 import PublicFooter from '../components/PublicFooter';
+import CollectiveList from '../components/CollectiveList';
 
 // Actions
 import appendDonationForm from '../actions/form/append_donation';
@@ -42,6 +44,7 @@ import {
   canEditCollectiveSelector,
   getI18nSelector,
   getPopulatedCollectiveSelector,
+  getSubCollectivesSelector,
   getCollectiveHostSelector,
   isHostOfCollectiveSelector } from '../selectors/collectives';
 import {
@@ -55,6 +58,7 @@ import {
   getNewUserSelector,
   getUpdateInProgressSelector } from '../selectors/users';
 import { isSessionAuthenticatedSelector, getAuthenticatedUserSelector } from '../selectors/session';
+import { getQuerySelector } from '../selectors/router';
 
 // Schemas
 import editCollectiveSchema from '../joi_schemas/editCollective';
@@ -65,49 +69,78 @@ export class Collective extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      showThankYouMessage: false,
-      showUserForm: false
-    };
+    let view = 'default';
+    if (this.props.query.status === 'payment_success') {
+      view = (this.props.query.has_full_account === 'true') ? 'thankyou' : 'signup';
+    }
+    this.state = { view };
   }
 
   render() {
     const {
       collective,
+      host,
+      subCollectives,
       editCollectiveInProgress,
       cancelEditCollectiveForm,
+      donationForm,
+      appendDonationForm,
       i18n
     } = this.props;
 
     return (
       <div className={`Collective ${collective.slug}`}>
         <Notification />
-        <StickyContainer>
 
-          {editCollectiveInProgress && 
-            <EditTopBar onSave={ saveCollective.bind(this) } onCancel={ cancelEditCollectiveForm }/>}
+          { this.state.view === 'default' &&
+            <StickyContainer>
+              {editCollectiveInProgress && 
+                <EditTopBar onSave={ saveCollective.bind(this) } onCancel={ cancelEditCollectiveForm }/>}
 
-          <CollectiveHero { ...this.props } />
-          <CollectiveLedger { ...this.props } />
+              <CollectiveHero { ...this.props } />
+              <CollectiveLedger { ...this.props } />
 
-          {collective.isActive && <CollectiveDonate onDonate={ donateToCollective.bind(this) } { ...this.props }/>}
+              {collective.isActive && 
+                <CollectiveDonate
+                  collective={collective}
+                  host={host}
+                  i18n={i18n}
+                  donationForm={donationForm}
+                  appendDonationForm={appendDonationForm}
+                  onToken={donateToCollective.bind(this)}
+                />
+              }
 
-          <CollectiveAboutUs { ...this.props } />
-          <CollectiveMembers collective={ collective } i18n={ i18n } />
-          {collective.contributors && <CollectiveContributorMosaic collective={collective} i18n={i18n} />}
+              <CollectiveAboutUs { ...this.props } />
+
+              {collective.slug === 'opensource' && <CollectiveOpenSourceCTA />}
+
+              {subCollectives  && subCollectives.length > 0 &&
+                <section id="collectives">
+                  <h1>{capitalize(i18n.getString('collectives'))}</h1>
+                  <h2 className="subtitle">{i18n.getString('DiscoverOurCollectives', { tag: collective.settings.superCollectiveTag})}</h2>
+                  <CollectiveList title={' '} groupList={ subCollectives } {...this.props} />
+                </section>
+              }
+              <CollectiveMembers collective={ collective } i18n={ i18n } />
+              <PublicFooter />
+            </StickyContainer>
+          }
+
+          {this.state.view === 'signup' && 
+            <div className='CollectiveDonationFlowWrapper'>
+              <CollectivePostDonationUserSignup save={ saveNewUser.bind(this) } { ...this.props } />
+            </div>
+          }
           
-          {this.state.showThankYouMessage && 
-            <CollectivePostDonationThanks closeDonationFlow={ ::this.closeDonationFlow } { ...this.props } />}
-          {this.state.showUserForm && 
-            <CollectivePostDonationUserSignup closeDonationFlow={ ::this.closeDonationFlow } save={ saveNewUser.bind(this) } { ...this.props } />}
+          {this.state.view === 'thankyou' && 
+            <div className='CollectiveDonationFlowWrapper'>
+              <CollectivePostDonationThanks closeDonationFlow={ ::this.closeDonationFlow } { ...this.props } />
+            </div>
+          }
 
-          <PublicFooter />
-        </StickyContainer>
       </div>
     );
-  }
-
-  componentDidMount() {    
   }
 
   componentWillMount() {
@@ -125,10 +158,7 @@ export class Collective extends Component {
     
   closeDonationFlow() {
     return this.refreshData()
-      .then(() => this.setState({
-                    showThankYouMessage: false,
-                    showUserForm: false }));
-    
+      .then(() => this.setState({ view: 'default' }));
   }
 
   refreshData() {
@@ -194,10 +224,7 @@ export function donateToCollective({amount, frequency, currency, token, options}
   }
 
   return donate(collective.slug, payment, options)
-    .then(() => this.setState({
-        showUserForm: !this.props.hasFullAccount,
-        showThankYouMessage: this.props.hasFullAccount
-      }))
+    .then(() => this.setState({ view: this.props.hasFullAccount ? 'thankyou' : 'signup' }))
     .catch((err) => notify('error', err.message));
 }
 
@@ -217,10 +244,7 @@ export function saveNewUser() {
 
   return validateSchema(profileForm, profileSchema)
     .then(() => updateUser(newUser.id, Object.assign({}, profileForm)))
-    .then(() => this.setState({
-      showUserForm: false,
-      showThankYouMessage: true
-    }))
+    .then(() => this.setState({ view: 'thankyou' }))
     .then(() => fetchUsers(collective.slug))
     .catch(({message}) => notify('error', message));
 }
@@ -228,6 +252,7 @@ export function saveNewUser() {
 const mapStateToProps = createStructuredSelector({
     // collective props
     collective: getPopulatedCollectiveSelector,
+    subCollectives: getSubCollectivesSelector,
     host: getCollectiveHostSelector,
     isHost: isHostOfCollectiveSelector,
 
@@ -247,7 +272,8 @@ const mapStateToProps = createStructuredSelector({
     i18n: getI18nSelector,
     loadData: getAppRenderedSelector,
     users: getUsersSelector,
-    loggedinUser: getAuthenticatedUserSelector
+    loggedinUser: getAuthenticatedUserSelector,
+    query: getQuerySelector
   });
 
 export default connect(mapStateToProps, {

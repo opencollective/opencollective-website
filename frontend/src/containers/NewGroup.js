@@ -249,7 +249,7 @@ export class NewGroup extends Component {
       mission: attr.mission,
       longDescription: attr.contribute ? `${attr.description}\n\n# Contribute\n\n${attr.contribute}` : attr.description,
       website: attr.website,
-      HostId: hostCollective.settings.HostId,
+      HostId: hostCollective && hostCollective.settings.HostId,
       data: {
         utmSource
       },

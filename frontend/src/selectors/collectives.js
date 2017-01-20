@@ -52,6 +52,19 @@ export const getCollectiveSettingsSelector = createSelector(
     return settings;
   });
 
+export const getSubCollectivesSelector = createSelector(
+  [ getCollectiveSelector ],
+  (collective) => {
+
+    // Order the collectives by number of backers DESC
+    if (collective.superCollectiveData && collective.superCollectiveData.length > 0) {
+      collective.superCollectiveData.sort((a,b) => b.backersAndSponsorsCount - a.backersAndSponsorsCount);
+    }
+
+    return collective.superCollectiveData;
+  }
+)
+
 export const getStripeAccountSelector = createSelector(
   getCollectiveSelector,
   (collective) => collective.stripeAccount || {});
@@ -84,7 +97,7 @@ export const getCollectiveDataSelector = createSelector(
   getCollectiveSelector,
   (collective) => collective.data || {});
 
-export const getCollectiveContributorsSelector = createSelector(
+export const getCollectiveGithubContributorsSelector = createSelector(
   getCollectiveDataSelector,
   (data) => data.githubContributors ? formatGithubContributors(data.githubContributors) : []);
 
@@ -94,7 +107,7 @@ export const getPopulatedCollectiveSelector = createSelector(
     getCollectiveHostSelector,
     getCollectiveMembersSelector,
     getCollectiveBackersSelector,
-    getCollectiveContributorsSelector,
+    getCollectiveGithubContributorsSelector,
     getUnpaidExpensesSelector,
     getPaidExpensesSelector,
     getTransactionsSelector ],

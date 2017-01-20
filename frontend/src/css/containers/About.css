@@ -1,27 +1,6 @@
 .About {
-  background-color: #f5f6f7;
-
-  .LoginTopBar {
-    background-color: #fff;
-  }
   .MailChimpInputSection {
     background: none;
-  }
-  .About-container {
-    box-sizing: border-box;
-    margin: 30px auto 30px auto;
-    padding: 30px 60px;
-    width: 900px;
-    min-height: 200px;
-    background-color: white;
-    &.no-bg {
-      background: none;
-    }
-    h1 {
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin: 20px 0;
-    }
   }
   .team-member {
     text-align: center;

@@ -63,11 +63,6 @@
   .UsersList-name {
     font-size: 0.85rem;
   }
-  .PublicContent .PublicGroup-expenses, .PublicContent .PublicGroup-donations {
-    width: 100%;
-    padding-right: 0;
-    margin-bottom:1.5rem;
-  }
   .PublicGroup .TransactionItem .ProfilePhoto {
     width: 3rem;
     height: 3rem;
@@ -77,16 +72,6 @@
   }
   .PublicFooter img {
     max-height: 30px;
-  }
-
-  .PublicGroupHero-content {
-    /* line-height: 2.5rem; */
-    padding: 8rem 0 3rem;
-  }
-
-  .PublicGroupHero-mission {
-    line-height: 2.5rem;
-    letter-spacing: -.5px;
   }
 
   /* For new collective page */
@@ -132,7 +117,7 @@
     max-width: 75%
   }
 
-  .PublicGroupThanksV2 {
+  .ThankYou {
     .tweet {
       margin: 20px 0px;
       textarea {

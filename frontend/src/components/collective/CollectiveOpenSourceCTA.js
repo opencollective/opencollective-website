@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default () => (
-  <div className='PublicGroupOpenSourceCTA'>
+  <div className='CollectiveOpenSourceCTA'>
     <div className='arrow-down'></div>
     <div className='line1'>Apply to create an open collective for your open source project.</div>
     <div className='line2'>We are slowly accepting new open collectives. Reserve your spot today.</div>

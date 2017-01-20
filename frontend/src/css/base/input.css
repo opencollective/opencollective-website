@@ -15,6 +15,9 @@ select, input, textarea {
 input[type="checkbox"] {
   -webkit-appearance: checkbox;
   margin-right: 0.5rem;
+  width: 20px;
+  box-shadow: none;
+  height: 16px;
 }
 
 /** Add all the magic for the radio buttons **/

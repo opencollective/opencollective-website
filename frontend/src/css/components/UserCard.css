@@ -2,6 +2,7 @@
   width: 12rem;
   border-radius: 5px;
   box-shadow: 0 1px 3px rgba(46, 77, 97,.2);
+  text-align: center;
 }
 
 .UserCard-name {

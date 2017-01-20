@@ -15,13 +15,12 @@ export default class CollectivePostDonationUserSignup extends Component {
       save,
       appendProfileForm,
       newUser,
-      i18n,
-      closeDonationFlow
+      i18n
     } = this.props;
 
     return (
-      <div className='CollectiveDonationFlowWrapper px2 py4 border-box fixed top-0 left-0 right-0 bottom-0'>
-        <div className='CollectiveSignup center'>
+      <div className='CollectiveSignup'>
+        <div className='center'>
           <h2 className='CollectiveSignup-title mt2 mb0 -ff-sec -fw-bold'>
             {i18n.getString('thankyou')}
           </h2>
@@ -45,7 +44,7 @@ export default class CollectivePostDonationUserSignup extends Component {
                   />
                 </div>
               </div>
-              <div className="sm-col-10 pr1 order-1 content-center">
+              <div className="sm-col-10 ml1 mr1 order-1 content-center">
                 <div className='pb20px'>
                   <label className='Collective-font-15 pb1 -fw-normal display-none'>
                     {i18n.getString('displayName')}
@@ -96,12 +95,22 @@ export default class CollectivePostDonationUserSignup extends Component {
                 inProgress={updateInProgress} />
             </div>
           </div>
-          <div className="CollectiveSignup center pt3" onClick={ closeDonationFlow }>
-            <a href='#'> Return to the collective page </a>
+          <div className="CollectiveSignup center pt3" onClick={ ::this.skip }>
+            <a href='#'>{i18n.getString('skipToRemainAnonymous')}</a>
           </div>
         </div>
       </div>
     );
+  }
+
+  skip() {
+    const { appendProfileForm, save } = this.props;
+    appendProfileForm({
+      avatar: '',
+      name: '',
+      twitterHandle: ''
+    });
+    return save();
   }
 
   componentDidMount() {
@@ -115,7 +124,6 @@ export default class CollectivePostDonationUserSignup extends Component {
 }
 
 CollectivePostDonationUserSignup.propTypes = {
-  endFlow: PropTypes.func.isRequired,
   collective: PropTypes.object.isRequired,
   i18n: PropTypes.object.isRequired,
 }

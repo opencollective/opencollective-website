@@ -1,14 +1,14 @@
 .Button {
   color: white;
   background: var(--gray);
-  border-radius: 3px;
+  border-radius: 50px;
   border: 1px solid transparent;
   vertical-align: middle;
   text-transform: uppercase;
   padding: calc(var(--spacing) * 0.75) var(--spacing);
   text-align: center;
   cursor: pointer;
-  font-weight: bold
+  font-weight: normal;
 }
 
 .Button span,
@@ -45,6 +45,7 @@
 .Button--green,
 .Button--add {
   background-color: var(--green);
+  margin-left: calc(var(--spacing)/2);
   margin-right: calc(var(--spacing)/2);
 }
 

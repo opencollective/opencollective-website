@@ -14,7 +14,7 @@ import CollectiveStatsHeader from '../../components/collective/CollectiveStatsHe
 export default class CollectiveHero extends Component {
 
   render() {
-    const { collective, host, i18n, canEditCollective, editCollectiveForm, appendEditCollectiveForm, loggedinUser} = this.props;
+    const { collective, subCollectives, host, i18n, canEditCollective, editCollectiveForm, appendEditCollectiveForm, loggedinUser} = this.props;
 
     return (
       <section className='CollectiveHero relative px2 bg-black bg-cover white'>
@@ -51,8 +51,11 @@ export default class CollectiveHero extends Component {
                 onChange={event => appendEditCollectiveForm({mission: event.target.value})}
                 placeholder={i18n.getString('defaultMission')}/>
             </h1>
+
             <UserAvatarRow members={ collective.members } backers={ collective.backers } otherCount={ collective.contributorsCount } />
+
             <CollectiveStatsHeader collective={ collective } i18n={ i18n } />
+
             {collective.isActive && 
               <a href='#support' className='mb3 -btn -btn-big -bg-green -ttu -ff-sec -fw-bold'>{ i18n.getString('bePart') }</a>
             }
@@ -78,6 +81,11 @@ export default class CollectiveHero extends Component {
               <li className='inline-block'>
                 <a href='#about_us' className='block white -ff-sec -fw-bold'>{ i18n.getString('menuAboutUs') }</a>
               </li>
+              { subCollectives  && subCollectives.length > 0 &&
+                <li className='inline-block'>
+                  <a href='#collectives' className='block white -ff-sec -fw-bold'>{ i18n.getString('collectives') }</a>
+                </li>
+              }
               <li className='inline-block'>
                 <a href='#contributors' className='block white -ff-sec -fw-bold'>{ i18n.getString('contributors') }</a>
               </li>

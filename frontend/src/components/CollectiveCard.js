@@ -17,16 +17,16 @@ export default class CollectiveCard extends Component {
 
   mapCollectiveCardProps() {
     const { i18n, group } = this.props;
-
     const stats = [];
-    if (group.contributorsCount)
-      stats.push({ label: i18n.getString('coreContributors'), value: group.contributorsCount});
-    else if (group.membersCount) {
-      stats.push({ label: i18n.getString('members'), value: group.membersCount });
-    }
 
     if (group.backersAndSponsorsCount) {
       stats.push({ label: i18n.getString('backers'), value: group.backersAndSponsorsCount });
+    } else {
+      if (group.contributorsCount)
+        stats.push({ label: i18n.getString('contributors'), value: group.contributorsCount});
+      else if (group.membersCount) {
+        stats.push({ label: i18n.getString('members'), value: group.membersCount });
+      }      
     }
 
     stats.push({ label: i18n.getString('annualIncome'), value: formatCurrency(group.yearlyIncome, group.currency, { compact: true, precision: 0 }) });
@@ -60,7 +60,7 @@ export default class CollectiveCard extends Component {
   }
 
   render() {
-    const { group, isSponsor, target } = this.props;
+    const { group, isSponsor, target, style } = this.props;
 
     const {
       backgroundImage,
@@ -94,7 +94,7 @@ export default class CollectiveCard extends Component {
     const defaultLogo = DEFAULT_LOGOS[index || Math.floor(Math.random() * DEFAULT_LOGOS.length)];
 
     return (
-      <div className={`CollectiveCard ${className}`}>
+      <div className={`CollectiveCard ${className} ${style}`}>
         <a href={publicUrl} target={target}>
           <div>
             <div className='CollectiveCard-head'>
@@ -106,7 +106,6 @@ export default class CollectiveCard extends Component {
               <div className='CollectiveCard-description'>{description}</div>
             </div>
             <div className='CollectiveCard-footer'>
-              <div className='clearfix mt2'>
               { stats.map((stat) =>
                 <div key={stat.label} className={`col col-${12/(stats.length||1)}`}>
                   <div className='CollectiveCard-metric'>
@@ -115,7 +114,6 @@ export default class CollectiveCard extends Component {
                   </div>
                 </div>
               ) }
-              </div>
             </div>
           </div>
         </a>
@@ -130,6 +128,7 @@ CollectiveCard.propTypes = {
   i18n: PropTypes.object.isRequired,
   index: PropTypes.number,
   target: PropTypes.string,
+  style: PropTypes.string,
   isSponsor: PropTypes.boolean
 };
 
