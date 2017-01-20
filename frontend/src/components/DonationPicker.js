@@ -36,8 +36,8 @@ export default ({value, currency, frequency, presets, onChange, showCurrencyPick
       <li
         className={className(presetLabel, value)}
         key={presetLabel}
-        // need to set this back to 'monthly' if you flip back from 'Other' control
-        onClick={() => onChange({amount:amountValue, frequency: 'monthly'}) }>
+        // need to set this back to the initial frequency of the presets if you flip back from 'Other' control
+        onClick={() => onChange({amount:amountValue, frequency}) }>
         {amountLabel}
       </li>
     );
@@ -58,14 +58,14 @@ export default ({value, currency, frequency, presets, onChange, showCurrencyPick
 
 function customField({onChange, value, frequency, currency, showCurrencyPicker, i18n}) {
   const frequencies = [{
+    label: i18n.getString('one-time'),
+    value: 'one-time'
+  }, {
     label: i18n.getString('monthly'),
     value: 'month'
   }, {
     label: i18n.getString('yearly'),
     value: 'year'
-  }, {
-    label: i18n.getString('one-time'),
-    value: 'one-time'
   }];
 
   const currencies = [{
