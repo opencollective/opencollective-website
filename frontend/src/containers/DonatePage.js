@@ -161,7 +161,7 @@ export function donateToGroup({amount, interval, currency, description, token}) 
     payment.interval = interval;
 
   return donate(collective.id, payment)
-    .then(({json}) => this.setState({ view: (json && !json.hasFullAccount) ? 'signup' : 'thankyou' }))
+    .then(({json}) => this.setState({ view: (json && json.user.firstName && json.user.avatar) ? 'thankyou' : 'signup' }))
     .catch((err) => notify('error', err.message));
 }
 
