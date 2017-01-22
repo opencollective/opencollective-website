@@ -29,6 +29,9 @@ export default class CollectivePostDonationThanks extends Component {
             <textarea name="tweetText" onChange={this.handleChange} name="textToShare" value={this.state.tweet} />
             <button onClick={::this.tweet} className='px3 -btn -green -btn-outline -btn-small -ttu -ff-sec -fw-bold'>Tweet this!</button>
           </div>
+          <div className='Collective-font-13 max-width-2 pt2 pb2 center -ff-sec -fw-light '>
+            { i18n.getString('chargeDateNotice') } <a href='https://opencollective.com/faq#charge-date-notice'>Why?</a>
+          </div>
         </div>
         { showRelated &&
           <section className='pt2 center'>
