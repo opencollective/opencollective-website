@@ -96,6 +96,9 @@ export class Faq extends Component {
           <h3>Why do you have monthly payments as default?</h3>
           <p>A collective is an organization of people working together towards a common goal. Sometimes these goals take a few months and sometimes they can take years. By supporting a collective with a recurring monthly amount, you help the collective plan out its future activities.</p>
           
+          <h3 id='charge-date-notice'>Why do you charge recurring monthly subscriptions on 1st of every month?</h3>
+          <p>It helps our collectives manage their monthly budget. Instead of getting donations randomly throughout the month, they can start a month knowing a minimum available budget for that month. Any new donations during the month only improves their budget.</p>
+          
           <h3>How can I cancel my monthly donation?</h3>
           <p>We are sorry to see you go! Go to <a href="https://opencollective.com/subscriptions">opencollective.com/subscriptions</a> to manage your subscriptions.</p>
           
