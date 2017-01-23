@@ -53,7 +53,6 @@ export default class CollectivePendingExpenses extends React.Component {
       showMoreButton
     } = this.state
 
-
     return (
       <div className='CollectivePendingExpenses col col-12 mb3'>
         <div className='clearfix border-bottom border-gray pb1 mb3'>
@@ -87,7 +86,7 @@ export default class CollectivePendingExpenses extends React.Component {
         { showMoreButton && 
           <span className='-btn -btn-medium -btn-outline -border-green -ttu -fw-bold' onClick={ ::this.showMore }> {i18n.getString('showMore')} </span> }
 
-        { collective.unpaidExpenses.length > 0 && (
+        { collective.transactions.length > 0 && (
           <span className='right'>
             <Link className='-btn -btn-medium -btn-outline -border-green -ttu -fw-bold' to={`/${collective.slug}/expenses`}>
               {i18n.getString('seeAllExpenses')} >
