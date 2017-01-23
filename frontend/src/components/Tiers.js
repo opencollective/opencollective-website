@@ -38,16 +38,16 @@ export default class Tiers extends Component {
 
     donationForm[tier.name] = donationForm[tier.name] || {};
     const amount = donationForm[tier.name].amount !== undefined ? donationForm[tier.name].amount : tier.range[0];
-    const frequency = donationForm[tier.name].frequency || tier.interval;
+    const interval = donationForm[tier.name].interval || tier.interval;
     const currency = donationForm[tier.name].currency || collective.currency;
 
-    const frequencyHuman = frequency === 'one-time' ? '' : `${i18n.getString('per')} ${i18n.getString(frequency.replace(/ly$/,''))}`;
-    const stripeDescription =  `${formatCurrency((amount * 100), currency, collective.settings.formatCurrency)} ${frequencyHuman}`;
+    const intervalHuman = interval === 'one-time' ? '' : `${i18n.getString('per')} ${i18n.getString(interval.replace(/ly$/,''))}`;
+    const stripeDescription =  `${formatCurrency((amount * 100), currency, collective.settings.formatCurrency)} ${intervalHuman}`;
     const button = tier.button || `${i18n.getString('donate')} ${stripeDescription}`;
-    const cancellationDisclaimer = (frequency !== 'one-time') ? i18n.getString('cancelAnytime') : "";
+    const cancellationDisclaimer = (interval !== 'one-time') ? i18n.getString('cancelAnytime') : "";
     const description = tier.description || i18n.getString(`${tier.name}Description`);
 
-    const mockedPayload = {"amount":"10","frequency":"one-time","currency":"USD","token":{"id":"tok_19dTz2DjPFcHOcTmc66YD53U","object":"token","card":{"id":"card_19dTz2DjPFcHOcTmWfy61v2L","object":"card","address_city":null,"address_country":null,"address_line1":null,"address_line1_check":null,"address_line2":null,"address_state":null,"address_zip":null,"address_zip_check":null,"brand":"Visa","country":"US","cvc_check":"pass","dynamic_last4":null,"exp_month":11,"exp_year":2020,"funding":"credit","last4":"4242","metadata":{},"name":"dfds@fdsdsf.com","tokenization_method":null},"client_ip":"74.73.151.59","created":1484786456,"email":"dfds@fdsdsf.com","livemode":false,"type":"card","used":false}};
+    const mockedPayload = {"amount":"10","interval":"one-time","currency":"USD","token":{"id":"tok_19dTz2DjPFcHOcTmc66YD53U","object":"token","card":{"id":"card_19dTz2DjPFcHOcTmWfy61v2L","object":"card","address_city":null,"address_country":null,"address_line1":null,"address_line1_check":null,"address_line2":null,"address_state":null,"address_zip":null,"address_zip_check":null,"brand":"Visa","country":"US","cvc_check":"pass","dynamic_last4":null,"exp_month":11,"exp_year":2020,"funding":"credit","last4":"4242","metadata":{},"name":"dfds@fdsdsf.com","tokenization_method":null},"client_ip":"74.73.151.59","created":1484786456,"email":"dfds@fdsdsf.com","livemode":false,"type":"card","used":false}};
 
     return (
       <div className='Tier' id={tier.name} key={`${tier.name}`}>
@@ -63,12 +63,12 @@ export default class Tiers extends Component {
 
           {tier.presets &&
               <DonationPicker
-                value={amount}
+                amount={amount}
                 currency={currency}
-                frequency={frequency}
+                interval={interval}
                 presets={tier.presets}
                 i18n={i18n}
-                onChange={({amount, frequency, currency}) => appendDonationForm(tier.name, {amount, frequency, currency})}
+                onChange={({amount, interval, currency}) => appendDonationForm(tier.name, {amount, interval, currency})}
                 // MAJOR HACK to support a donation for this collective.
                 showCurrencyPicker={collective.id == 10}/>
           }
@@ -82,7 +82,7 @@ export default class Tiers extends Component {
                 inProgress={inProgress}
                 onClick={() => ::this.onTokenReceived(tier, {
                   amount,
-                  frequency,
+                  interval,
                   currency,
                   options: {
                     paypal: true
@@ -93,7 +93,7 @@ export default class Tiers extends Component {
             }
             {hasStripe && !hasPaypal && ( // paypal has priority -> to refactor after prototyping phase
               <StripeCheckout
-                token={(token) => ::this.onTokenReceived(tier, {amount, frequency, currency, token})}
+                token={(token) => ::this.onTokenReceived(tier, {amount, interval, currency, token})}
                 stripeKey={stripeKey}
                 name={collective.name}
                 currency={currency}
@@ -130,7 +130,7 @@ export default class Tiers extends Component {
         name: 'backer',
         presets: [2, 5, 10, 50, 100],
         range: [2, 1000000],
-        interval: 'monthly'
+        interval: 'month'
       }];
 
     return (
