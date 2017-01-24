@@ -109,7 +109,6 @@ input[type="radio"]:checked:disabled {
 }
 
 input[type="text"], textarea {
-    background-color: var(--light-gray);
     color: var(--dark-gray);
     border: 0 none;
     font-size: 1.2rem;
