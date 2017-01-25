@@ -216,8 +216,8 @@ export class Ledger extends Component {
 
 function findExpense(expenseId, expensesObj) {
   if (expensesObj) {
-    for(let key in expensesObj) {
-      if(expensesObj[key].id === expenseId) {
+    for (let key in expensesObj) { // eslint-disable-line prefer-const
+      if (expensesObj[key].id === expenseId) {
         return expensesObj[key];
       }
     }
@@ -236,7 +236,6 @@ export function approveExp(expenseId) {
     notify
   } = this.props;
 
-  const expense = collective && collective.unpaidExpenses && collective.unpaidExpenses
   return approveExpense(collective.id, expenseId)
     .then(() => fetchPendingExpenses(collective.slug))
     .then(() => {
