@@ -227,6 +227,7 @@ export function approveExp(expenseId) {
 
   return approveExpense(collective.id, expenseId)
     .then(() => fetchPendingExpenses(collective.slug))
+    .then(() => notify('success', `Expense approved: ${expense.amount/100} for ${expense.title}`))
     .catch(({message}) => notify('error', message));
 }
 
@@ -243,6 +244,7 @@ export function rejectExp(expenseId) {
 
   return rejectExpense(collective.id, expenseId)
     .then(() => fetchPendingExpenses(collective.slug))
+    .then(() => notify('success', `Expense rejected: ${expense.amount/100} for ${expense.title}`))
     .catch(({message}) => notify('error', message));
 }
 
@@ -262,6 +264,7 @@ export function payExp(expenseId) {
   return payExpense(collective.id, expenseId)
     .then(() => fetchPendingExpenses(collective.slug))
     .then(() => fetchTransactions(collective.slug, { type: params.type }))
+    .then(() => notify('success', `Expense paid: ${expense.amount/100} for ${expense.title}`))
     .catch(({message}) => notify('error', message));
 }
 
