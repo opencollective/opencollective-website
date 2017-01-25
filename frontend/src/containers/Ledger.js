@@ -214,6 +214,17 @@ export class Ledger extends Component {
   }
 }
 
+function findExpense(expenseId, expensesObj) {
+  if (expensesObj) {
+    for(let key in expensesObj) {
+      if(expensesObj[key].id === expenseId) {
+        return expensesObj[key];
+      }
+    }
+  }
+  return null;
+}
+
 /*
  * Approve expense
  */
@@ -225,9 +236,17 @@ export function approveExp(expenseId) {
     notify
   } = this.props;
 
+  const expense = collective && collective.unpaidExpenses && collective.unpaidExpenses
   return approveExpense(collective.id, expenseId)
     .then(() => fetchPendingExpenses(collective.slug))
-    .then(() => notify('success', `Expense approved: ${expense.amount/100} for ${expense.title}`))
+    .then(() => {
+      const expense = findExpense(expenseId, collective.unpaidExpenses);
+      if (expense) {
+        return notify('success', `Expense approved: ${expense.amount/100} for ${expense.title}`)
+      } else {
+        return notify('success', 'Expense approved');
+      }
+    })
     .catch(({message}) => notify('error', message));
 }
 
@@ -244,7 +263,14 @@ export function rejectExp(expenseId) {
 
   return rejectExpense(collective.id, expenseId)
     .then(() => fetchPendingExpenses(collective.slug))
-    .then(() => notify('success', `Expense rejected: ${expense.amount/100} for ${expense.title}`))
+    .then(() => {
+      const expense = findExpense(expenseId, collective.unpaidExpenses);
+      if (expense) {
+        return notify('success', `Expense rejected: ${expense.amount/100} for ${expense.title}`)
+      } else {
+        return notify('success', 'Expense rejected');
+      }
+    })
     .catch(({message}) => notify('error', message));
 }
 
@@ -264,7 +290,18 @@ export function payExp(expenseId) {
   return payExpense(collective.id, expenseId)
     .then(() => fetchPendingExpenses(collective.slug))
     .then(() => fetchTransactions(collective.slug, { type: params.type }))
-    .then(() => notify('success', `Expense paid: ${expense.amount/100} for ${expense.title}`))
+    .then(() => {
+      // we need to check both lists because of timing issues;
+      const expense = findExpense(expenseId, collective.unpaidExpenses);
+      const transaction = findExpense(expenseId, collective.paidExpenses); // in case it's already paid; timing issue.
+      if (expense) {
+        return notify('success', `Expense paid: ${expense.amount/100} for ${expense.title}`)
+      } else if (transaction) {
+        return notify('success', `Expense paid: ${transaction.amount} for ${transaction.description}`)
+      } else {
+        return notify('success', 'Expense paid');
+      }
+    })
     .catch(({message}) => notify('error', message));
 }
 
