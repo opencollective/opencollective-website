@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-
+import { resizeImage } from '../lib/utils';
 import unionBy from 'lodash/unionBy';
 
 const MAX_SHOWING = 12;
@@ -23,7 +23,7 @@ export default class UserAvatarRow extends Component {
       <div className='UserAvatarRow'>
         <span className='UserAvatarRow-shots'>
           {toShow.map(u =>
-            <span className='UserAvatarRow-avatar' key={u.username} style={{backgroundImage: `url(${u.avatar})`}} />)}
+            <span className='UserAvatarRow-avatar' key={u.username} style={{backgroundImage: `url(${resizeImage(u.avatar, { height: 52 })})`}} />)}
         {plusCount != 0 &&
           <span className='UserAvatarRowCount'> <a href='#contributors'> {`+${plusCount}`} </a></span>
         }
