@@ -92,6 +92,7 @@ export default class Mosaic extends Component {
 
   resizeMosaic() {
     if (!this.el) return;
+    if (!this.avatars) return;
 
     this.width = this.el.parentElement.getBoundingClientRect().width;
     const shouldRoundUp = ((this.width % this.avatarWidth) > (this.avatarWidth / 2));
