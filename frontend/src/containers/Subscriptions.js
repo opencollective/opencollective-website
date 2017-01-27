@@ -36,7 +36,7 @@ export class Subscriptions extends Component {
               key={subscription.id}
               subscription={subscription}
               onCancel={cancel.bind(this)}
-              onClickImage={() => pushState(null, `/${subscription.Transactions[0].Group.slug}`)}
+              onClickImage={() => pushState(null, `/${subscription.Donation.Group.slug}`)}
               {...this.props} />
             )
           }) : null}
