@@ -111,7 +111,7 @@ export class Faq extends Component {
           <p>We are thrilled you want to create your Open Collective! We are still in private beta and we have a selection process to ensure the quality of the collectives our users can back. We are working hard to get everyone on board! Please send as an email hello@opencollective.com and we’ll be in touch soon. </p>
           
           <h3>What are your Terms of Service?</h3>
-          <p>You can see the current draft <a href="https://docs.google.com/document/d/1-hajYd7coL05z2LTCOKXTYzXqNp40kPuw0z66kEIY5Y/pub">here</a>. As soon as they are final we'll publish them on our site and we'll inform our collectives of any substantial changes to this draft.</p>
+          <p>You can see the current draft <a href="https://docs.google.com/document/u/1/d/1HRYVADHN1-4B6wGCxIA6dx28jHtcAVIvt95hkjEZVQE/pub">here</a>. As soon as they are final we'll publish them on our site and we'll inform our collectives of any substantial changes to this draft.</p>
           
           <h3>Can’t find the answer you are looking for?</h3>
           <p>Shoot us an email at support@opencollective.com or drop by our Slack channel https://slack.opencollective.com</p>
