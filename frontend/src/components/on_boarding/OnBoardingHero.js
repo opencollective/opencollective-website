@@ -17,7 +17,7 @@ export default ({ utmSource }) => (
     <div className="-requirements">
       You'll need a GitHub account, a repository with over 100 stars that you own & at least 2 contributors.
       <br />
-      <a href="https://docs.google.com/document/d/1-hajYd7coL05z2LTCOKXTYzXqNp40kPuw0z66kEIY5Y/pub">Terms of Service</a>
+      <a href="https://docs.google.com/document/u/1/d/1HRYVADHN1-4B6wGCxIA6dx28jHtcAVIvt95hkjEZVQE/pub">Terms of Service</a>
     </div>
   </div>
 )
