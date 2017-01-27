@@ -15,18 +15,21 @@ export default class SubscriptionItem extends Component {
   render() {
     const { subscription, i18n, onClickImage } = this.props;
     const { opened } = this.state;
-    const { amount } = subscription;
-    const { createdAt } = subscription
-    const { currency } = subscription;
-    const { interval } = subscription;
-    const { isActive } = subscription;
+    const { 
+      amount,
+      createdAt,
+      currency,
+      interval,
+      isActive,
+      Donation: donation  } = subscription;
+
     const formattedAmount = formatCurrency(amount*100, currency, {compact: true});
     const formattedInterval = `${interval[0].toUpperCase()}${interval.substr(1)}ly`;
     const formattedCreatedAt = isActive ? `${i18n.getString('since')} ${moment(createdAt).format('MMM, YYYY')}`: 'Inactive';
-    const { Transactions } = subscription;
-    const Group = Transactions.length ? Transactions[0].Group : null;
-    const name = Group ? Group.name : '';
-    const image = Group ? Group.image : '';
+    const { Transactions } = donation;
+    const group = donation.Group;
+    const name = group ? group.name : '';
+    const image = group ? group.image : '';
     return (
       <div className='SubscriptionItem'>
         <div className='SubscriptionItem-header'>
@@ -48,7 +51,7 @@ export default class SubscriptionItem extends Component {
             <ul>
               {Transactions.map((transaction, index) => {
                 const description = transaction.title || transaction.description;
-                const { avatar } = transaction.User;
+                const { avatar } = donation.User;
                 const txDate = transaction.incurredAt || transaction.createdAt;
                 return (
                   <li key={index}>
@@ -67,7 +70,7 @@ export default class SubscriptionItem extends Component {
                             </div>
                             <div className='flex'>
                               <div className='time-ago flex-auto'>{moment(txDate).fromNow()}</div>
-                              <div className='pdf'><a href={`/${Group.slug}/transactions/${transaction.id}/invoice.pdf`}>download invoice</a></div>
+                              <div className='pdf'><a href={`/${group.slug}/transactions/${transaction.id}/invoice.pdf`}>download invoice</a></div>
                             </div>
                           </div>
                         </div>
