@@ -22,7 +22,8 @@ export default class Invoice extends Component {
     } = this.props;
 
     const createdAt = new Date(transaction.createdAt);
-
+    const localeDateFormat = (transaction.group.currency === 'USD') ? 'en' : 'fr';
+    i18n.moment.locale(localeDateFormat);
     const columns = [
       {title: 'date', dataIndex: 'date', className: 'date' },
       {title: 'description', dataIndex: 'description', key: 'description', width: 400},
@@ -30,7 +31,7 @@ export default class Invoice extends Component {
     ];
 
     const data = [{
-      date: i18n.moment(transaction.createdAt).format('MM/DD'),
+      date: i18n.moment(createdAt).format('l'),
       description: transaction.description,
       amount: <Currency value={transaction.amount * 100} currency={transaction.currency} />
     }];
