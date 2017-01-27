@@ -116,7 +116,7 @@ export default class Tiers extends Component {
 
           { host &&
             <div className='DonateDisclaimer'>
-              {i18n.getString('disclaimer')} {host.name} {stripeDescription} {i18n.getString('for')} {collective.name}. {cancellationDisclaimer}
+              {i18n.getString('disclaimer')} {host.name} <strong>{stripeDescription}</strong> {i18n.getString('for')} {collective.name}. {cancellationDisclaimer}
             </div>
           }
 
