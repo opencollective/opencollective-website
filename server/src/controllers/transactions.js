@@ -30,7 +30,7 @@ export function invoice(req, res) {
         html
       }, (err, html) => {
         const options = {
-          format: 'Letter'
+          format: (transaction.group.currency === 'EUR') ? 'A4' : 'Letter'
         }
         res.setHeader('content-type','application/pdf');
         res.setHeader('content-disposition', `inline; filename="${filename}"`); // or attachment?
