@@ -45,7 +45,6 @@
 /**
  * Components
  */
-@import './components/ActivityItem.css';
 @import './components/Button.css';
 @import './components/Checkbox.css';
 @import './components/CollectiveAboutUs.css';
