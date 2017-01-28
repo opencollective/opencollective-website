@@ -25,19 +25,19 @@ export default class SubscriptionItem extends Component {
 
     const formattedAmount = formatCurrency(amount, currency, {compact: true});
     const formattedInterval = `${interval[0].toUpperCase()}${interval.substr(1)}ly`;
-    const formattedCreatedAt = isActive ? `${i18n.getString('since')} ${moment(createdAt).format('MMM, YYYY')}`: 'Inactive';
+    const formattedCreatedAt = isActive ? `${i18n.getString('since')} ${i18n.moment(createdAt).format('MMM, YYYY')}`: 'Cancelled';
     const { Transactions } = donation;
     const group = donation.Group;
     const name = group ? group.name : '';
-    const image = group ? group.image : '';
+    const logo = group ? group.logo : '';
     return (
       <div className='SubscriptionItem'>
         <div className='SubscriptionItem-header'>
           <div className='left'>{ name }</div>
-          <div className={`right ${isActive ? '' : 'canceled'}`} onClick={this.toggleActivation.bind(this)}>{`${isActive ? 'Cancel Subscription' : 'Canceled'}`}</div>
+          <div className={`right ${isActive ? '' : 'canceled'}`} onClick={this.toggleActivation.bind(this)}>{`${isActive ? 'Cancel Subscription' : ''}`}</div>
         </div>
         <div className='SubscriptionItem-body'>
-          <div className='SubscriptionItem-image' onClick={onClickImage} style={{display: image ? 'inline-block': 'none', backgroundImage: `url(${image})`}}></div>
+          <div className='SubscriptionItem-image' onClick={onClickImage} style={{display: logo ? 'inline-block': 'none', backgroundImage: `url(${logo})`}}></div>
           <div className='SubscriptionItem-info'>
             <div className='SubscriptionItem-info-amount'>
               <span>{formattedAmount}</span>
