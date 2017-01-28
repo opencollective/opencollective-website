@@ -30,7 +30,6 @@ export class Subscriptions extends Component {
       }
     });
     
-    console.log(subscriptions);
     return (
       <div className='Subscriptions'>
         <LoginTopBar />

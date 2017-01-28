@@ -25,7 +25,7 @@ export default class SubscriptionItem extends Component {
 
     const formattedAmount = formatCurrency(amount*100, currency, {compact: true});
     const formattedInterval = `${interval[0].toUpperCase()}${interval.substr(1)}ly`;
-    const formattedCreatedAt = isActive ? `${i18n.getString('since')} ${moment(createdAt).format('MMM, YYYY')}`: 'Cancelled';
+    const formattedCreatedAt = isActive ? `${i18n.getString('since')} ${i18n.moment(createdAt).format('MMM, YYYY')}`: 'Cancelled';
     const { Transactions } = donation;
     const group = donation.Group;
     const name = group ? group.name : '';

@@ -21,7 +21,7 @@
       font-weight: 400;
       font-style: italic;
       text-align: right;
-      color: #dd2663;
+      color: var(--red);
       &:not(.canceled):hover {
         color: #7fadf2;
         cursor: pointer;
@@ -37,7 +37,7 @@
       display: inline-block;
       width: 110px;
       height: 110px;
-      background-color: ##DDE1E4;
+      background-color: var(--gray);
       box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.13);
       vertical-align: top;
       margin-right: 15px;
