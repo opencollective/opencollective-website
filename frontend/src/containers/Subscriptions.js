@@ -20,6 +20,17 @@ export class Subscriptions extends Component {
       pushState
     } = this.props;
 
+    subscriptions.sort((a, b) => {
+      if (a.isActive && b.isActive) {
+        return 0;
+      } else if (a.isActive && !b.isActive) {
+        return -1;
+      } else {
+        return 1;
+      }
+    });
+    
+    console.log(subscriptions);
     return (
       <div className='Subscriptions'>
         <LoginTopBar />
