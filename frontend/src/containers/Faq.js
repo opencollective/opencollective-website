@@ -75,7 +75,7 @@ export class Faq extends Component {
           <h3>How do I make a donation?</h3>
           <p>You rock! We are delighted you are asking this question. Go to the Collective’s Public Page (e.g. https://opencollective.com/wwcodeatl), choose your recurring donation amount and hit the Back Us or Donate button, fill out the form et voilà! Now you are part of that collective, your community will appreciate it.</p>
           
-          <h3>How do I submit an expense?</h3>
+          <h3 id="expense">How do I submit an expense?</h3>
           <p>Go to your Collective page to submit an expense. You will need to upload a valid image for it to get reimbursed. Don’t forget to include your paypal email if it’s different from your user email.</p>
           <p>There are two ways of using your Collective’s money:
             <ul>
@@ -96,7 +96,7 @@ export class Faq extends Component {
           <h3>Why do you have monthly payments as default?</h3>
           <p>A collective is an organization of people working together towards a common goal. Sometimes these goals take a few months and sometimes they can take years. By supporting a collective with a recurring monthly amount, you help the collective plan out its future activities.</p>
           
-          <h3 id='charge-date-notice'>Why do you charge recurring monthly subscriptions on 1st of every month?</h3>
+          <h3 id="charge-date-notice">Why do you charge recurring monthly subscriptions on 1st of every month?</h3>
           <p>It helps our collectives manage their monthly budget. Instead of getting donations randomly throughout the month, they can start a month with a minimum budget for that month. Any new donations during the month only improves their budget.</p>
 
           <p>We would also like to eventually move to charging a single payment for multiple monthly donations from the same user. Fewer transactions means less fees going towards payment processors and more for collectives. Stay tuned for updates on that in the near future.</p> 
@@ -107,11 +107,11 @@ export class Faq extends Component {
           <h3>Where can I report a Collective? </h3>
           <p>We strive to keep our community healthy, safe and in line with our mission. If you wish to report a collective’s activity please email us report@opencollective.com</p>
           
-          <h3>Why can’t I start an Open Collective yet? </h3>
-          <p>We are thrilled you want to create your Open Collective! We are still in private beta and we have a selection process to ensure the quality of the collectives our users can back. We are working hard to get everyone on board! Please send as an email hello@opencollective.com and we’ll be in touch soon. </p>
+          <h3>Why is my Collective not able to receive donations yet? </h3>
+          <p>We are thrilled you have created your Open Collective! We are still in private beta and we have a selection process to ensure the quality of the collectives our users can back before they are active to receive donations. We are working hard to get everyone aboard!</p>
           
           <h3>What are your Terms of Service?</h3>
-          <p>You can see the current draft <a href="https://docs.google.com/document/u/1/d/1HRYVADHN1-4B6wGCxIA6dx28jHtcAVIvt95hkjEZVQE/pub">here</a>. As soon as they are final we'll publish them on our site and we'll inform our collectives of any substantial changes to this draft.</p>
+          <p>You can find them <a href="https://docs.google.com/document/u/1/d/1HRYVADHN1-4B6wGCxIA6dx28jHtcAVIvt95hkjEZVQE/pub">here</a>.</p>
           
           <h3>Can’t find the answer you are looking for?</h3>
           <p>Shoot us an email at support@opencollective.com or drop by our Slack channel https://slack.opencollective.com</p>
