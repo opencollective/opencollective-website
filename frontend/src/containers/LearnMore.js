@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import i18n from '../lib/i18n';
-
 import LoginTopBar from '../containers/LoginTopBar';
 import PublicFooter from '../components/PublicFooter';
 import Grid, { Column } from '../components/Grid';
