@@ -30,10 +30,12 @@ export class LearnMore extends Component {
                 <Column span='6'>
                   <div className='LearnMoreLead'>Unpaid Expenses</div>
                   <div className='LearnMoreSubLead'>All submited expenses can bee seen by everyone and be marked as “pending” until you approve or reject them.</div>
+                  <div className='-img-1'></div>
                 </Column>
                 <Column span='6'>
                   <div className='LearnMoreLead'>Funds Avaliable</div>
                   <div className='LearnMoreSubLead'>Your funds will be openly displayed, everyone will be able to see the money that went in & out of the collective.</div>
+                  <div className='-img-2'></div>
                 </Column>
               </Grid>
               <div className='-img'></div>
@@ -52,11 +54,11 @@ export class LearnMore extends Component {
             <section className='LearnMore-Section4'>
               <Grid className='Wrap1000'>
                 <Column span='6'>
-                  <div className='-img'></div>
+                  <div className='LearnMoreHeader'>Approve & Reimburse <span className='-faded'>(Or&nbsp;Reject)</span></div>
+                  <div className='LearnMoreText'>Give permission to the organizers of your collective to approve expenses. Once approved, the Host can reimburse the expenses in one click. (using&nbsp;paypal&nbsp;or&nbsp;manualy)</div>
                 </Column>
                 <Column span='6'>
-                  <div className='LearnMoreHeader'>Approve & Reimburse <span className='-faded'>(Or Reject)</span></div>
-                  <div className='LearnMoreText'>Give permission to the organizers of your collective to approve expenses. Once approved, the Host can reimburse the expenses in one click. (using paypal or manualy)</div>
+                  <div className='-img'></div>
                 </Column>
               </Grid>
             </section>
@@ -105,7 +107,7 @@ export class LearnMore extends Component {
                 <div className='LearnMoreText'>Show the people that supports your mission and earn the trust of new comers</div>
               </div>
               <div className='-img'></div>
-              <div className='Wrap900'>
+              <div className='Wrap1000'>
                 <div className='-info'>backers via: webpack</div>
               </div>
             </section>
@@ -128,8 +130,8 @@ export class LearnMore extends Component {
                 <div className='LearnMoreHeader'>Join The Movement</div>
                 <div className='LearnMoreText'>Support the new generation of associations</div>
                 <div>
-                  <div className="Button Button--green">Start A Collective</div>
-                  <div className="Button Button--green">Discover Collective</div>
+                  <a className='Button Button--green' href='/opensource/apply'>Start A Collective</a>
+                  <a className='Button Button--green' href='/discover'>Discover&nbsp;Collective</a>
                 </div>
               </div>
             </section>
