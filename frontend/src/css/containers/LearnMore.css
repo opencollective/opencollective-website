@@ -31,13 +31,6 @@
   color: #303233;
 }
 
-@media (max-width: 900px) {
-  .LearnMoreHeader {
-    font-size: 28px;
-    line-height: 1.54;
-  }
-}
-
 .LearnMoreSubHeader {
   font-family: montserratlight;
   font-size: 16px;
@@ -278,7 +271,6 @@
     display: inline-block;
     max-width: 515px;
     height: 348px;
-    opacity: 0.44;
     background-image: url(../images/bg-download.png);
   }
 }
@@ -331,6 +323,10 @@
 /* Responsiveness */
 
 @media (max-width: 900px) {
+  .LearnMoreHeader {
+    font-size: 28px;
+    line-height: 1.54;
+  }
   .LearnMore-Section6 {
     margin-top: 80px;
     .Column {
@@ -379,6 +375,7 @@
       margin-bottom: 90px;
     }
     .-img-2 {
+      max-width: 385px;
       background-image: url(../images/bg-ledger-screen-2.png);
     }
   }
