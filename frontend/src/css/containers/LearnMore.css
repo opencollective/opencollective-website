@@ -1,0 +1,202 @@
+.LearnMore {
+  background-color: #fff;
+  .LoginTopBar { background-color: #fff; }
+  .PublicFooter { margin-top: 0; }
+  section {
+  	/* Fix: section is affected by external rules */
+  	background-color: #fff;
+  	padding: 0;
+  }
+  .-faded { opacity: 0.5; }
+  .-img {
+  	display: inline-block;
+		object-fit: contain;
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
+		margin-right: auto;
+  }
+}
+
+// Common Typography
+
+.LearnMoreHeader {
+	font-family: montserratlight;
+	font-size: 32px;
+	font-weight: 300;
+	line-height: 1.5;
+	color: #303233;
+}
+
+.LearnMoreSubHeader {
+	font-family: montserratlight;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.94;
+  letter-spacing: normal;
+  color: rgba(73, 75, 77, 0.5);
+}
+
+.LearnMoreLead {
+	font-family: Lato;
+	font-size: 20px;
+	line-height: 1.8;
+	text-align: center;
+	color: #494b4d;
+}
+
+.LearnMoreSubLead {
+	font-family: Lato;
+	font-size: 16px;
+	line-height: 1.44;
+	text-align: center;
+	color: #787d80;
+	margin-bottom: 20px;
+}
+
+.LearnMoreText {
+	font-family: montserratlight;
+	font-size: 16px;
+	font-weight: 300;
+	line-height: 1.94;
+	letter-spacing: normal;
+	color: #494b4d;
+}
+
+// Common Wrappers
+
+.Wrap520 {
+	max-width: 520px;
+	margin: 0 auto;
+}
+.Wrap900 {
+	max-width: 900px;
+	margin: 0 auto;
+}
+.Wrap1000 {
+	max-width: 1080px;
+	margin: 0 auto;
+}
+
+// Sections
+
+.LearnMore-Section1 {
+	text-align: center;
+	margin-top: 80px;
+	margin-bottom: 120px;
+	background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #ffffff);
+	.-img {
+		margin: 0 auto;
+		margin-top: 35px;
+		width: 850px;
+		height: 480px;
+		background-image: url(../images/learn-screen.png);
+	}
+}
+
+.LearnMore-Section2 {
+	text-align: center;
+	margin-bottom: 180px;
+	.LearnMoreHeader {
+		text-align: center;
+		margin-bottom: 100px;
+	}
+	.-img {
+		margin: 0 auto;
+		width: 1078px;
+		height: 570px;
+		background-image: url(../images/ledger-screen.png);
+	}
+	.Column:first-child { padding-right: 50px; }
+	.Column:last-child { padding-left: 50px; }
+}
+
+.LearnMore-Section3 {
+	margin-bottom: 80px;
+	.LearnMoreHeader {
+		text-align: left;
+		margin-top: 200px;
+	}
+	.-img {
+		width: 256px; height: 513px; object-fit: contain;
+		background-image: url(../images/learn-phone.png);
+		margin-left: auto;
+	}
+}
+
+.LearnMore-Section4 {
+	margin-bottom: 180px;
+	.LearnMoreHeader {
+		text-align: left;
+		margin-top: 100px;
+	}
+	.-img {
+		width: 490px;
+		height: 440px;
+		background-image: url(../images/approve-or-reject-screen.png);
+	}
+}
+
+.LearnMore-Section5 {
+	.-img {
+		width: 600px;
+		height: 800px;
+		background-color: limegreen;
+	}
+}
+
+.LearnMore-Section6 {
+	.-img {
+		width: 440px;
+		height: 450px;
+		background-color: limegreen;
+	}
+}
+
+.LearnMore-Section7 {
+	.-img {
+		width: 396px;
+		height: 525px;
+		background-color: limegreen;
+		margin-left: auto;
+	}
+}
+
+.LearnMore-Section8 {
+	text-align: center;
+	.-img {
+		display: inline-block;
+		width: 1034px;
+		height: 344px;
+		background-color: limegreen;
+		margin-left: auto;
+	}
+}
+
+.LearnMore-Section9 {
+	text-align: center;
+	.-img {
+		display: inline-block;
+		width: 515px;
+		height: 348px;
+		opacity: 0.44;
+		background-color: limegreen;
+	}
+}
+
+.LearnMore-SectionA {
+	text-align: center;
+	.-img {
+		display: inline-block;
+		width: 220px; 
+		height: 220px;
+		background-color: limegreen;
+	}
+}
+
+.LearnMore-SectionB {
+	background-color: #303233 !important;
+	width: 100%;
+	height: 450px; 
+	opacity: 0.2;
+}
