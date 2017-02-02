@@ -1,73 +1,72 @@
 :root {
-    --grav-green: #29baa5;
-    --grav-purple: #844ba1;
-    --grav-light-blue: #0ebcf3;
-    --grav-gray: #ccc;
-    --grav-darkgray: #424242;
+  --grav-green: #29baa5;
+  --grav-purple: #844ba1;
+  --grav-light-blue: #0ebcf3;
+  --grav-gray: #ccc;
+  --grav-darkgray: #424242;
 }
 
 .grav {
-    .coverImage {
-        background-image: url(/proxy/images/?src=http%3A%2F%2Fres.cloudinary.com%2Fopencollective%2Fimage%2Fupload%2Fv1485809932%2Fgrav-cms-background_byil8g.png&width=3824) !important;
-        transform: none;
+  .coverImage {
+    background-image: url(/proxy/images/?src=http%3A%2F%2Fres.cloudinary.com%2Fopencollective%2Fimage%2Fupload%2Fv1485809932%2Fgrav-cms-background_byil8g.png&width=3824) !important;
+    transform: none;
+  }
+
+  .CollectiveHero-content {
+    a:not(.-btn) {
+      color: var(--grav-light-blue);
+    }
+  }
+
+  .-bg-green {
+    background-color: var(--grav-purple);
+  }
+
+  .-border-green {
+    border-color: var(--grav-light-blue);
+  }
+
+  .Currency--green {
+    color: var(--grav-light-blue);
+  }
+
+  .-green {
+    color: var(--grav-light-blue);
+  }
+
+  .UserCard-name > a {
+    color: var(--grav-darkgray);
+  }
+
+  .UserPhoto {
+    box-shadow: 0 0 0 2px var(--grav-light-blue);
+  }
+
+  #backer {
+    .Tier-container {
+      border-color: var(--grav-gray);
     }
 
-    .CollectiveHero-content {
-        a:not(.-btn) {
-            color: var(--grav-light-blue);
-        }
+    .Button--green, .DonationPicker-amount--selected {
+      background-color: var(--grav-purple);
     }
 
-    .-bg-green {
-        background-color: var(--grav-purple);
+    .Button--green:hover {
+      background-color: color(var(--grav-purple) blackness(+ 10%));
+    }
+  }
+
+  #sponsor {
+    .Tier-container {
+      border-color: var(--grav-light-blue);
     }
 
-    .-border-green {
-        border-color: var(--grav-light-blue);
+    .Button--green, .DonationPicker-amount--selected {
+      background-color: var(--grav-light-blue);
     }
 
-    .Currency--green {
-        color: var(--grav-light-blue);
+    .Button--green:hover {
+      background-color: color(var(--grav-light-blue) blackness(+ 10%));
     }
-
-    .-green {
-        color: var(--grav-light-blue);
-    }
-
-    .UserCard-name > a {
-        color: var(--grav-darkgray);
-    }
-
-    .UserPhoto {
-        box-shadow: 0 0 0 2px var(--grav-light-blue);
-    }
-
-    #backer {
-        .Tier-container {
-            border-color: var(--grav-gray);
-        }
-
-        .Button--green, .DonationPicker-amount--selected {
-            background-color: var(--grav-purple);
-
-        }
-
-        .Button--green:hover {
-            background-color: color(var(--grav-purple) blackness(+ 10%));
-        }
-    }
-
-    #sponsor {
-        .Tier-container {
-            border-color: var(--grav-light-blue);
-        }
-
-        .Button--green, .DonationPicker-amount--selected {
-            background-color: var(--grav-light-blue);
-        }
-
-        .Button--green:hover {
-            background-color: color(var(--grav-light-blue) blackness(+ 10%));
-        }
-    }
+  }
 }
