@@ -36,7 +36,7 @@ export class LearnMore extends Component {
                   <div className='LearnMoreSubLead'>Your funds will be openly displayed, everyone will be able to see the money that went in & out of the collective.</div>
                 </Column>
               </Grid>
-              <div className='d'></div>
+              <div className='-img'></div>
             </section>
             <section className='LearnMore-Section3'>
               <Grid className='Wrap900'>
@@ -77,15 +77,19 @@ export class LearnMore extends Component {
               </div>
               <Grid className='Wrap1000'>
                 <Column span='6'>
-                  <div className='-img'></div>
+                  <div className='-img'>
+                    <div className='-img2'></div>
+                  </div>
                 </Column>
                 <Column span='6'>
-                  <div className='-img'></div>
+                  <div className='-img -sponsor'>
+                    <div className='-img2'></div>
+                  </div>
                 </Column>
               </Grid>
             </section>
             <section className='LearnMore-Section7'>
-              <Grid className='Wrap900'>
+              <Grid className='Wrap1000'>
                 <Column span='7'>
                   <div className='LearnMoreHeader'>Automaticaly generate PDF with each donation.</div>
                   <div className='LearnMoreText'>You can customize the information displayed</div>
@@ -96,10 +100,14 @@ export class LearnMore extends Component {
               </Grid>
             </section>
             <section className='LearnMore-Section8'>
-              <div className='LearnMoreHeader'>Show your backers</div>
-              <div className='LearnMoreText'>Show the people that supports your mission and earn the trust of new comers</div>
+              <div className='Wrap1000'>
+                <div className='LearnMoreHeader'>Show your backers</div>
+                <div className='LearnMoreText'>Show the people that supports your mission and earn the trust of new comers</div>
+              </div>
               <div className='-img'></div>
-              <div className='d'></div>
+              <div className='Wrap900'>
+                <div className='-info'>backers via: webpack</div>
+              </div>
             </section>
             <section className='LearnMore-Section9'>
               <div className='Wrap520'>
@@ -115,7 +123,16 @@ export class LearnMore extends Component {
                 <div className='-img'></div>
               </div>
             </section>
-            <section className='LearnMore-SectionB'></section>
+            <section className='LearnMore-SectionB'>
+              <div className='Wrap520'>
+                <div className='LearnMoreHeader'>Join The Movement</div>
+                <div className='LearnMoreText'>Support the new generation of associations</div>
+                <div>
+                  <div className="Button Button--green">Start A Collective</div>
+                  <div className="Button Button--green">Discover Collective</div>
+                </div>
+              </div>
+            </section>
           </div>
           <PublicFooter />
       </div>
