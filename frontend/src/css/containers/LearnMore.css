@@ -18,7 +18,7 @@
   }
 }
 
-// Common Typography
+/* Common Typography */
 
 .LearnMoreHeader {
 	font-family: montserratlight;
@@ -63,7 +63,7 @@
 	color: #494b4d;
 }
 
-// Common Wrappers
+/* Common Wrappers */
 
 .Wrap520 {
 	max-width: 520px;
@@ -78,7 +78,7 @@
 	margin: 0 auto;
 }
 
-// Sections
+/* Sections */
 
 .LearnMore-Section1 {
 	text-align: center;
