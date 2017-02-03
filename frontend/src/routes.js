@@ -12,6 +12,7 @@ import Faq from './containers/Faq';
 import GroupTierList from './containers/GroupTierList';
 import Homepage from './containers/HomePage';
 import Ledger from './containers/Ledger';
+import LearnMore from './containers/LearnMore';
 import Login from './containers/Login';
 import NewGroup from './containers/NewGroup';
 import OnBoarding from './containers/OnBoarding';
@@ -28,6 +29,7 @@ export default (
     <Route path="/about" component={About} />
     <Route path="/faq" component={Faq} />
     <Route path="/discover(/:tag)" component={Discover} />
+    <Route path="/learn-more" component={LearnMore} />
     <Route path="/create" component={NewGroup} />
     <Route path="/addgroup" component={requireAuthentication(AddGroup)} />
     <Route path="/login/:token" component={Login} />

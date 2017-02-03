@@ -33,6 +33,7 @@
 @import './containers/Faq.css';
 @import './containers/GroupTierList.css';
 @import './containers/HomePage.css';
+@import './containers/LearnMore.css';
 @import './containers/Ledger.css';
 @import './containers/Login.css';
 @import './containers/NewGroup.css';
