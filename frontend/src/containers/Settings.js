@@ -33,6 +33,9 @@ export class Settings extends Component {
       lang: settings.lang,
       currency: currency,
     };
+    this.onSaveGeneralRef = this.onSaveGeneral.bind(this);
+    this.onSaveBankingRef = this.onSaveBanking.bind(this);
+    this.onSaveMailingRef = this.onSaveMailing.bind(this);
   }
 
   render() {
@@ -66,10 +69,10 @@ export class Settings extends Component {
             </Column>
             <Column auto>
               <div className='SettingsPage'>
-                {currentPage === 'general' && <SettingsGeneral currency={currency} language={settings.lang} onSave={console.log.bind(console)} />}
+                {currentPage === 'general' && <SettingsGeneral currency={currency} language={settings.lang} onSave={this.onSaveGeneralRef} />}
                 {currentPage === 'social integrations' && <SettingsSocialIntegration />}
-                {currentPage === 'banking' && <SettingsBanking onSave={console.log.bind(console)} />}
-                {currentPage === 'mailing' && <SettingsMailing onSave={console.log.bind(console)} />}
+                {currentPage === 'banking' && <SettingsBanking onSave={this.onSaveBankingRef} />}
+                {currentPage === 'mailing' && <SettingsMailing onSave={this.onSaveMailingRef} />}
               </div>
             </Column>
           </Grid>
@@ -78,13 +81,20 @@ export class Settings extends Component {
       </div>
     )
   }
-
   getUrlHash() {
     return this.props.location.hash ? this.props.location.hash.substr(1).trim().toLowerCase().replace('-', ' ') : '';
   }
-
   setUrlHash(name) {
     window.location.hash = name.replace(' ', '-');
+  }
+  onSaveGeneral(settings) {
+    console.log('General', settings)
+  }
+  onSaveBanking(settings) {
+    console.log('Banking', settings)
+  }
+  onSaveMailing(settings) {
+    console.log('Mailing', settings)
   }
 }
 
