@@ -136,14 +136,19 @@
 }
 
 .LearnMore-Section2 {
+  position: relative;
   text-align: center;
-  margin-bottom: 180px;
+  padding-bottom: 180px !important;
+  .LearnMoreSubLead, .LearnMoreLead {
+    position: relative;
+  }
   .LearnMoreHeader {
     text-align: center;
     margin-bottom: 100px;
   }
   .LearnMoreLead { margin-bottom: 20px; }
   .-img {
+    position: relative;
     margin: 0 auto;
     max-width: 1078px;
     height: 570px;
@@ -151,10 +156,20 @@
   }
   .Column:first-child { padding-right: 50px; }
   .Column:last-child { padding-left: 50px; }
+  .-bg {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 595px;
+    background-color: #eef4f8;
+  }
 }
 
 .LearnMore-Section3 {
-  margin-bottom: 80px;
+  padding-bottom: 80px !important;
+  background-color: #eef4f8 !important;
   .LearnMoreHeader {
     text-align: left;
     margin-top: 200px;
@@ -170,7 +185,8 @@
 }
 
 .LearnMore-Section4 {
-  margin-bottom: 180px;
+  background-color: #eef4f8 !important;
+  padding-bottom: 180px !important;
   .LearnMoreHeader { margin-top: 100px; }
   .Column:first-child {
     float: right;
@@ -186,6 +202,7 @@
 
 .LearnMore-Section5 {
   text-align: center;
+  background-image: linear-gradient(to bottom, #eef4f8, #ffffff);
   .-img {
     margin-top: 40px;
     width: 100%;
@@ -240,6 +257,7 @@
 }
 
 .LearnMore-Section8 {
+  position: relative;
   margin-top: 180px;
   text-align: center;
   .LearnMoreText {
@@ -247,12 +265,14 @@
     margin: 0 auto;
   }
   .-img {
+    position: relative;
     margin-top: 40px;
     display: inline-block;
     max-width: 1034px;
     height: 344px;
     background-image: url(../images/backers.png);
     margin-left: auto;
+    z-index: 1;
   }
   .-info {
     font-family: Lato;
@@ -261,11 +281,22 @@
     text-align: right;
     color: rgba(57, 58, 60, 0.5);
   }
+  .-bg {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 330px;
+    background-color: #eef4f8;
+  }
+  .Wrap900 { position: relative; z-index: 1; }
 }
 
 .LearnMore-Section9 {
-  margin-top: 180px;
+  padding-top: 180px !important;
   text-align: center;
+  background-color: #eef4f8 !important;
   .-img {
     margin-top: 80px;
     display: inline-block;
@@ -276,7 +307,9 @@
 }
 
 .LearnMore-SectionA {
-  margin-top: 180px;
+  background-color: #eef4f8 !important;
+  padding-top: 180px !important;
+  padding-bottom: 180px !important;
   text-align: center;
   .-img {
     margin-top: 50px;
@@ -289,7 +322,6 @@
 
 .LearnMore-SectionB {
   text-align: center;
-  margin-top: 180px;
   padding-top: 140px !important;
   background-color: #303233 !important;
   background-image: url(../images/bg-learn-more-footer.png);
@@ -348,7 +380,7 @@
     .-img { height: 380px; }
   }
   .LearnMore-Section2 {
-     margin-bottom: 80px;
+     padding-bottom: 80px !important;
     .LearnMoreHeader {
       max-width: 300px;
       margin: 0 auto;
@@ -364,6 +396,7 @@
     }
     .-img { display: none; }
     .-img-1, .-img-2 {
+      position: relative;
       max-width: 345px;
       height: 500px;
       margin: 0 auto;
@@ -397,7 +430,7 @@
   }
   .LearnMore-Section4 {
     text-align: center;
-    margin-bottom: 80px;
+    padding-bottom: 80px !important;
     .LearnMoreHeader { margin-top: 0; }
     .Column:first-child { float: none; }
     .Column { width: 100% !important; }
@@ -425,14 +458,14 @@
     .-info { text-align: center; }
   }
   .LearnMore-Section9 {
-    margin-top: 60px;
+    padding-top: 60px !important;
     .-img { margin-top: 0 !important; }
   }
   .LearnMore-SectionA {
-    margin-top: 60px;
+    padding-top: 60px !important;
+    padding-bottom: 60px !important;
   }
   .LearnMore-SectionB {
-    margin-top: 80px;
     padding-top: 50px !important;
     height: 500px;
     .Button {

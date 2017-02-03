@@ -23,6 +23,7 @@ export class LearnMore extends Component {
               <div className='-img'></div>
             </section>
             <section className='LearnMore-Section2'>
+              <div className='-bg'></div>
               <div className='LearnMoreHeader'>Open your finances to your community</div>
               <Grid className='Wrap900'>
                 <Column span='6'>
@@ -100,12 +101,13 @@ export class LearnMore extends Component {
               </Grid>
             </section>
             <section className='LearnMore-Section8'>
+              <div className='-bg'></div>
               <div className='Wrap1000'>
                 <div className='LearnMoreHeader'>Show your backers</div>
                 <div className='LearnMoreText'>Highlight those who support your mission and earn the trust of new comers</div>
               </div>
               <div className='-img'></div>
-              <div className='Wrap1000'>
+              <div className='Wrap900'>
                 <div className='-info'>backers via: webpack</div>
               </div>
             </section>
@@ -124,7 +126,7 @@ export class LearnMore extends Component {
               </div>
             </section>
             <section className='LearnMore-SectionB'>
-              <div className='Wrap520'>
+              <div className='Wrap900'>
                 <div className='LearnMoreHeader'>Join the movement</div>
                 <div className='LearnMoreText'>Support the new generation of associations</div>
                 <div>
