@@ -153,3 +153,36 @@
     }
   }
 }
+
+/* Responsiveness */
+
+@media (max-width: 900px) {
+  .SettingsPage {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  .Settings-container {
+    .Grid.Grid--flex {
+      display: block;
+      .Column {
+        float: none;
+        flex: none;
+      }
+      .SettingsNavHeader {
+        display: inline-block;
+        margin-left: 20px;
+      }
+      .SettingsNav {
+        display: inline-block;
+        width: auto;
+        height: auto;
+        margin-left: 20px;
+      }
+      .SettingsNavItem {
+        display: inline-block;
+        margin-right: 15px;
+        &:last-child { margin-right: 0; }
+      }
+    }
+  }
+}
