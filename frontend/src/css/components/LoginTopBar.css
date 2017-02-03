@@ -65,7 +65,7 @@
       text-align: center;
       color: #b4bbbf;
       text-transform: capitalize;
-      padding: 4px 0px;
+      padding: 4px 16px;
       cursor: pointer;
       &:hover, &:active {
         color: #363636;

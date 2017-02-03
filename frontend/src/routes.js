@@ -29,7 +29,7 @@ export default (
     <Route path="/about" component={About} />
     <Route path="/faq" component={Faq} />
     <Route path="/discover(/:tag)" component={Discover} />
-    <Route path="/learn" component={LearnMore} />
+    <Route path="/learn-more" component={LearnMore} />
     <Route path="/create" component={NewGroup} />
     <Route path="/addgroup" component={requireAuthentication(AddGroup)} />
     <Route path="/login/:token" component={Login} />
