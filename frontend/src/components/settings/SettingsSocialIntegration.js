@@ -3,7 +3,14 @@ import React, { Component } from 'react';
 import CustomInput from '../CustomInput';
 
 export default class SettingsSocialIntegration extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      rsvpCode: '',
+    };
+  }
   render() {
+    const {rsvpCode} = this.state;
     return (
       <div className='SettingsSocialIntegration'>
         <div className='SettingsPageH1'>Social Integrations</div>
@@ -21,7 +28,7 @@ export default class SettingsSocialIntegration extends Component {
           <div>Meetup</div>
         </div>
         <p>Get the code for embedding an RSVP button for any Meetup. Visitors to your website will be able to RSVP to your event on your website without leaving the page. to get link <a href='#'>click here</a> </p>
-        <CustomInput value='' placeholder='RSVP code' />
+        <CustomInput value={rsvpCode} placeholder='RSVP code' onChange={(rsvpCode) => this.setState({rsvpCode})} />
         <div className='SettingsPageButton' style={{margin: '20px 0'}}>Add RSVP</div>
       </div>
     )
