@@ -285,9 +285,9 @@ export default connect(mapStateToProps, {
 export function mapStateToProps({router, form, groups}) {
 
   const hostCollective = (groups && router.params.slug) ? groups[router.params.slug] : null;
+  const groupType = router.params.type;
   const query = router.location.query;
   const utmSource = query.utm_source;
-  const groupType = query.groupType;
 
   return {
     newGroupForm: form.addgroup,
