@@ -37,7 +37,7 @@ export default (
     <Route path="/subscriptions" component={requireAuthentication(Subscriptions)} />
     <Route path="/opensource/apply/:token" component={OnBoarding} />
     <Route path="/opensource/apply" component={OnBoarding} />
-    <Route path="/:slug/apply" component={NewGroup} />
+    <Route path="/:slug/apply/:type" component={NewGroup} />
     <Redirect from="/github/apply/:token" to="/opensource/apply/:token" />
     <Redirect from="/github/apply" to="/opensource/apply" />
     <Route path="/:slug/connected-accounts" component={ConnectedAccounts} />

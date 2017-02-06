@@ -28,12 +28,21 @@ export class NewGroup extends Component {
     };
   }
 
+  componentWillMount() {
+    const { groupType, appendGroupForm } = this.props;
+
+    if (groupType) {
+      appendGroupForm({tags: groupType});
+    }
+  }
+
   render() {
     const {
       appendGroupForm,
       newGroupForm,
       pushState,
-      hostCollective
+      hostCollective,
+      groupType
     } = this.props;
 
     const {
@@ -110,8 +119,8 @@ export class NewGroup extends Component {
     if (tags === 'opensource')
       return pushState(null, '/opensource/apply');
 
-    const showGroupTypes = (!showConfirmation);
-    const showFormDetails = (tags && !showConfirmation);
+    const showGroupTypes = (!showConfirmation && !groupType);
+    const showFormDetails = (tags && !showConfirmation && groupType);
 
     const validateSlug = (slug) => {
       fetch(`/api/profile/${slug}`)
@@ -276,12 +285,14 @@ export default connect(mapStateToProps, {
 export function mapStateToProps({router, form, groups}) {
 
   const hostCollective = (groups && router.params.slug) ? groups[router.params.slug] : null;
+  const groupType = router.params.type;
   const query = router.location.query;
   const utmSource = query.utm_source;
 
   return {
     newGroupForm: form.addgroup,
     hostCollective,
-    utmSource
+    utmSource,
+    groupType,
   };
 }
