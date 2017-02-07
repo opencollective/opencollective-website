@@ -120,7 +120,7 @@ export class NewGroup extends Component {
       return pushState(null, '/opensource/apply');
 
     const showGroupTypes = (!showConfirmation && !groupType);
-    const showFormDetails = (tags && !showConfirmation && groupType);
+    const showFormDetails = (!showConfirmation && (groupType || tags));
 
     const validateSlug = (slug) => {
       fetch(`/api/profile/${slug}`)
