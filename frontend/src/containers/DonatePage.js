@@ -24,7 +24,8 @@ import formatCurrency from '../lib/format_currency';
 
 // Selectors
 import { createStructuredSelector } from 'reselect';
-import { getTierSelector } from '../selectors/router';
+import { getTierSelector, getParamsSelector } from '../selectors/router';
+
 import {
   getI18nSelector,
   getCollectiveSelector,
@@ -59,6 +60,9 @@ export class DonatePage extends Component {
     const { view } = this.state;
 
     const tier = (this.props.tier.description)  ? this.props.tier : getTier(this.props.tier, collective.tiers) || this.props.tier;
+    const intervalString = (tier.interval && tier.interval !== 'one-time') ? `/${tier.interval}` : '';
+    tier.button = tier.button || `${this.props.params.verb} ${formatCurrency(tier.amount * 100, collective.currency, { precision: 0 })}${intervalString}`;
+
     const collectiveHandle = (collective.twitterHandle) ? `@${collective.twitterHandle}` : collective.name;
     const url = window ? window.location.href : '';
     const forDescription = tier.description ? ` for ${tier.description}` : '';
@@ -201,7 +205,8 @@ const mapStateToProps = createStructuredSelector({
     loadData: getAppRenderedSelector,
     users: getUsersSelector,
     loggedinUser: getAuthenticatedUserSelector,
-    tier: getTierSelector
+    tier: getTierSelector,
+    params: getParamsSelector
   });
 
 export default connect(mapStateToProps, {
