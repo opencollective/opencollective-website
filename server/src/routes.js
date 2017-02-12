@@ -87,6 +87,7 @@ export default (app) => {
    */
   app.get('/:slug/banner.md', mw.maxAge(300), mw.fetchGroupBySlug, mw.fetchActiveUsers(), controllers.banner.markdown);
   app.get('/:slug/banner.js', mw.maxAge(3000), mw.fetchGroupBySlug, mw.fetchActiveUsers(), controllers.banner.js);
+  app.get('/:slug.json', mw.maxAge(900), mw.fetchProfileBySlug, renderJSON('collective'));
   app.get('/:slug/:tier.md', mw.maxAge(300), mw.fetchGroupBySlug, mw.fetchActiveUsers(), controllers.banner.markdown);
   app.get('/:slug/:tier.json', mw.maxAge(900), mw.fetchActiveUsers(), renderJSON('users'));
   app.get('/:slug/:tier.:format(svg|png)', mw.maxAge(300), mw.fetchActiveUsers(), controllers.banner.banner);
