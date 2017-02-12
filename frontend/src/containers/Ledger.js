@@ -114,11 +114,11 @@ export class Ledger extends Component {
         <div className='Ledger-container padding40' style={{marginTop: '0'}}>
           <div className='showButtons'>
             { params.type !== 'donations' &&
-              <div className='col-12 sm-col-12 md-col-5 lg-col-5 pr1'>
+              <div className='col-12 sm-col-12 md-col-5 lg-col-5 pr1 pl1 pt1'>
                 <Button className={(view === 'SubmitExpense') && 'selected'} onClick={() => this.switchView('SubmitExpense')} label={i18n.getString('submitExpense')} id='submitExpenseBtn' />
               </div>}
             { params.type !== 'expenses' &&
-              <div className='col-12 sm-col-12 md-col-5 lg-col-5 pl1'>
+              <div className='col-12 sm-col-12 md-col-5 lg-col-5 pl1 pr1 pt1'>
                 <Button className={(view === 'RequestMoney') ? 'selected' : ''} onClick={() => this.switchView('RequestMoney')} label={i18n.getString('requestMoney')} id='requestMoneyBtn' />
               </div>}
           </div>
