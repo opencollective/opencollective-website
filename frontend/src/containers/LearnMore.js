@@ -130,8 +130,8 @@ export class LearnMore extends Component {
                 <div className='LearnMoreHeader'>Join the movement</div>
                 <div className='LearnMoreText'>Support the new generation of associations</div>
                 <div>
-                  <a className='Button Button--green' href='/opensource/apply'>Start A Collective</a>
-                  <a className='Button Button--green' href='/discover'>Discover&nbsp;Collective</a>
+                  <a className='Button Button--green' href='/apply'>Apply</a>
+                  <a className='Button Button--green' href='/discover'>Discover&nbsp;Collectives</a>
                 </div>
               </div>
             </section>

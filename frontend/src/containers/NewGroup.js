@@ -139,7 +139,7 @@ export class NewGroup extends Component {
             <img src={hostCollective.logo} />
             <h2>{hostCollective.name}</h2>
           </div>}
-          <h1>Create a new collective</h1>
+          <h1>Apply to create a collective</h1>
           {showGroupTypes &&
             <div className='NewGroup-PickType NewGroup-question'>
               <label>What is your collective for?</label>
@@ -229,7 +229,7 @@ export class NewGroup extends Component {
               </div>
 
             <center>
-              <div className={`center AddGroup-Button ${slugAvailable ? '' : 'disabled'}`} onClick={ this.createRef }>create your collective</div>
+              <div className={`center AddGroup-Button ${slugAvailable ? '' : 'disabled'}`} onClick={ this.createRef }>submit</div>
             </center>
             </div>
           }

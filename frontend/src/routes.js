@@ -30,7 +30,7 @@ export default (
     <Route path="/faq" component={Faq} />
     <Route path="/discover(/:tag)" component={Discover} />
     <Route path="/learn-more" component={LearnMore} />
-    <Route path="/create" component={NewGroup} />
+    <Route path="/:action(create|apply)" component={NewGroup} />
     <Route path="/addgroup" component={requireAuthentication(AddGroup)} />
     <Route path="/login/:token" component={Login} />
     <Route path="/login" component={Login} />,
