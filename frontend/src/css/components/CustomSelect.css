@@ -1,0 +1,63 @@
+.CustomSelect {
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;  
+  height: 40px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  box-shadow: inset 0 -4px 0 0 rgba(0, 0, 0, 0.05);
+  border: solid 1px rgba(48, 50, 51, 0.2);
+  overflow: hidden;
+  &:hover {
+    cursor: pointer;
+  }
+
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    &:focus {
+      outline: none;
+    }
+  }
+
+  select::-ms-expand {
+    display: none;
+  }
+
+  select:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #000;
+    text-shadow: 0 0 0 rgba(26, 26, 26, 0.96);
+    cursor: pointer;
+  }
+
+  .CustomSelect-select {
+    background: none;
+    width: 100%;
+    height: 100%;
+    border: none;
+    padding-left: 10px;
+    text-overflow: ellipsis;
+    padding-right: 40px;
+    &:hover {
+      cursor: pointer;
+    }
+    color: rgba(26, 26, 26);
+  }
+
+  .CustomSelect-arrow {
+    position: absolute;
+    right: 17px;
+    top: 13px;
+    width: 7px;
+    height: 7px;
+    border-left: 1px solid #75cc1f;
+    border-bottom: 1px solid #75cc1f;
+    transform: rotate(-45deg);
+    pointer-events:none;
+    background: none !important;
+  }
+
+  .CustomSelect-option {}
+}

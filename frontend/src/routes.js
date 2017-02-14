@@ -19,6 +19,7 @@ import OnBoarding from './containers/OnBoarding';
 import PublicPage from './containers/PublicPage';
 import Response from './containers/Response';
 import Subscriptions from './containers/Subscriptions';
+import Settings from './containers/Settings';
 
 import { requireAuthentication } from './components/AuthenticatedComponent';
 
@@ -45,6 +46,7 @@ export default (
     <Route path="/:slug/connected-accounts" component={ConnectedAccounts} />
     <Route path="/:slug/connect/:provider" component={ConnectProvider} />
     <Route path="/:slug/edit-twitter" component={EditTwitter} />
+    <Route path="/:slug/settings" component={Settings} />
     <Route path="/:slug" component={PublicPage} />
     <Route path="/:slug/donate/:amount" component={DonatePage} />
     <Route path="/:slug/donate/:amount/:interval" component={DonatePage} />

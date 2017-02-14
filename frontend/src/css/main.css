@@ -40,6 +40,7 @@
 @import './containers/OnBoarding.css';
 @import './containers/ProfilePage.css';
 @import './containers/Response.css';
+@import './containers/Settings.css';
 @import './containers/SubmitExpense.css';
 @import './containers/Subscriptions.css';
 
@@ -59,6 +60,8 @@
 @import './components/ContributorList.css';
 @import './components/ContributorPicker.css';
 @import './components/Currency.css';
+@import './components/CustomInput.css';
+@import './components/CustomSelect.css';
 @import './components/CustomTextArea.css';
 @import './components/DiscoverSelect.css';
 @import './components/DonationDistributor.css';
