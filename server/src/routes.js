@@ -108,7 +108,7 @@ export default (app) => {
   app.get('/about', mw.maxAge(3000), mw.ga, mw.addTitle('About'), render);
   app.get('/discover/:tag?', mw.ga, mw.addTitle('Discover'), render);
   app.get('/faq', mw.maxAge(3000), mw.ga, mw.addTitle('Answers'), render);
-  app.get('/create', mw.ga, mw.addTitle('Create a new collective'), render);
+  app.get('/:action(create|apply)', mw.ga, mw.addTitle('Apply to create a collective'), render);
   app.get('/learn-more', mw.ga, mw.addTitle('Learn more'), render);
   app.get('/addgroup', mw.ga, mw.addTitle('Create a new group'), render);
   app.get('/login/:token', mw.ga, mw.addTitle('Open Collective'), render);
