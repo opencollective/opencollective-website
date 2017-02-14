@@ -9,16 +9,15 @@ import Confirmation from '../components/Confirmation';
 
 export class Response extends Component {
   render() {
-    const { params }  = this.props;
     const response = {};
 
-    if (params.action === 'unsubscribe') {
+    if (this.props.route.action === 'unsubscribe') {
       response.imageUrl = '/static/images/sad-mail.svg';
       response.title = 'Mailing subscription cancelled';
       response.description = 'Sorry for any inconvenience, feel free to subscribe again at any time.';
       response.linkUrl = '/discover';
       response.linkLabel = 'Discover new collectives';
-    } else if (params.action === 'approve') {
+    } else if (this.props.route.action === 'approve') {
       response.imageUrl = '/static/images/happy-mail.svg';
       response.title = 'Mailing subscription successful';
       response.linkUrl = '/discover';

@@ -56,7 +56,7 @@ export class Ledger extends Component {
     this.switchView = this.switchView.bind(this);
 
     let view;
-    switch (props.params.action) {
+    switch (props.route.action) {
       case 'new':
         view = 'SubmitExpense';
         break;
@@ -87,7 +87,6 @@ export class Ledger extends Component {
       isHost,
       approveInProgress,
       rejectInProgress,
-      params,
       payInProgress } = this.props;
 
     const { view } = this.state;
@@ -110,14 +109,14 @@ export class Ledger extends Component {
           </div>
         </div>
 
-        { !params.action &&
+        { !this.props.route.action &&
         <div className='Ledger-container padding40' style={{marginTop: '0'}}>
           <div className='showButtons'>
-            { params.type !== 'donations' &&
+            { this.props.route.type !== 'donations' &&
               <div className='col-12 sm-col-12 md-col-5 lg-col-5 pr1 pl1 pt1'>
                 <Button className={(view === 'SubmitExpense') && 'selected'} onClick={() => this.switchView('SubmitExpense')} label={i18n.getString('submitExpense')} id='submitExpenseBtn' />
               </div>}
-            { params.type !== 'expenses' &&
+            { this.props.route.type !== 'expenses' &&
               <div className='col-12 sm-col-12 md-col-5 lg-col-5 pl1 pr1 pt1'>
                 <Button className={(view === 'RequestMoney') ? 'selected' : ''} onClick={() => this.switchView('RequestMoney')} label={i18n.getString('requestMoney')} id='requestMoneyBtn' />
               </div>}
@@ -137,7 +136,7 @@ export class Ledger extends Component {
             />
         </div>}
 
-        { params.type === 'expenses' && <div className='Ledger-container padding40 expenses-container'>
+        { this.props.route.type === 'expenses' && <div className='Ledger-container padding40 expenses-container'>
             <div className='line1'>unpaid expenses</div>
             <div className='-list'>
             {collective.unpaidExpenses
@@ -166,9 +165,9 @@ export class Ledger extends Component {
         </div>}
 
          <div className='Ledger-container padding40'>
-            <div className='line1'>{i18n.getString(`previous${capitalize(params.type)}`)}</div>
+            <div className='line1'>{i18n.getString(`previous${capitalize(this.props.route.type)}`)}</div>
             <div className='-list'>
-              <CollectiveTransactions {...this.props} transactions={ params.type === 'expenses' ? collective.paidExpenses : collective.transactions } hasHost={ false } itemsToShow ={ 100 }/>
+              <CollectiveTransactions {...this.props} transactions={ this.props.route.type === 'expenses' ? collective.paidExpenses : collective.transactions } hasHost={ false } itemsToShow ={ 100 }/>
             </div>
         </div>
         <PublicFooter />
@@ -194,7 +193,7 @@ export class Ledger extends Component {
       promise = promise.then(() => fetchProfile(collective.slug));
     }
 
-    switch (params.action) {
+    switch (this.props.route.action) {
       case 'approve':
         promise = promise.then(() => this.approveExp(params.expenseid));
         break;
@@ -206,7 +205,7 @@ export class Ledger extends Component {
     promise = promise.then(() => Promise.all([
       fetchUsers(collective.slug),
       fetchPendingExpenses(collective.slug),
-      fetchTransactions(collective.slug, { type: params.type })
+      fetchTransactions(collective.slug, { type: this.props.route.type })
       ]))
       .then(() => scrollToExpense());
 
