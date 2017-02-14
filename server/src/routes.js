@@ -127,14 +127,14 @@ export default (app) => {
   app.get('/subscriptions', mw.ga, mw.addTitle('My Subscriptions'), render);
   app.get('/:slug([A-Za-z0-9-_]+)/connected-accounts', mw.ga, render);
   // TODO: #cleanup remove next two routes when new collective page is live
-  app.get('/:slug([A-Za-z0-9-_]+)/donate/:amount', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
-  app.get('/:slug([A-Za-z0-9-_]+)/donate/:amount/:interval', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
+  app.get('/:slug([A-Za-z0-9-_]+)/:verb(donate|pay|contribute)/:amount/:interval/:description', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
+  app.get('/:slug([A-Za-z0-9-_]+)/:verb(donate|pay|contribute)/:amount/:interval', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
+  app.get('/:slug([A-Za-z0-9-_]+)/:verb(donate|pay|contribute)/:amount', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-_]+)/:type(expenses|donations|transactions)', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-]+)/transactions/:transactionid/invoice.pdf', mw.maxAge(300), controllers.transactions.invoice);
   app.get('/:slug([A-Za-z0-9-_]+)/expenses/:action(new)', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-_]+)/expenses/:expenseid/:action(approve|reject)', mw.ga, mw.fetchProfileBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-_]+)/donations/:action(request)', mw.ga, mw.fetchProfileBySlug, mw.addMeta, render);
-  app.get('/:slug([A-Za-z0-9-_]+)/donate/:amount/:interval/:description', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-_]+)', mw.ga, mw.fetchProfileBySlug, mw.addMeta, render);
 
   app.use(mw.handleUncaughtError);
