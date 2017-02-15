@@ -101,6 +101,7 @@
   font-size: 10px;
 
   img {
-    height: 150px;
+    max-height: 100px;
+    max-width: 200px;
   }
 }
