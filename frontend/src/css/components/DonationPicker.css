@@ -1,12 +1,14 @@
 .DonationPicker-amount {
   min-width: 3rem;
-  min-height: 3rem;
+  min-height: 2rem;
   cursor: pointer;
+  padding: 0.5rem;
 }
 
 .DonationPicker-amount--selected {
   background-color: #494B4D;
   color: #fff;
+  border-radius: 2rem;
 }
 
 .DonationPicker-input.Input::before {
