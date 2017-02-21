@@ -55,7 +55,8 @@ export class Faq extends Component {
           <p>When you create a collective, the money collected goes to the bank account associated with the collective. Whenever you –or a member of the collective– wants to use the money, they submit an expense on the public page of your collective (<a href="https://opencollective.com/railsgirlsatl/expenses/new">like this one</a>). Once you approve it, the person who submitted the expense is automatically reimbursed on their personal PayPal account. The budget and all the expenses are visible publicly.</p>
 
           <h3>How much does it cost?</h3>
-          <p>Open Collective takes 10% + credit card fees (usually 3% + $0.30/transaction) of the money raised by the collective for managing their bookkeeping, taxes, and the admin of reimbursing their expenses. We share this commission with the fiscal sponsor (legal owner of the bank account that holds the money on behalf of the collective).</p>
+          <p>Open Collective takes 10% of the money raised by the collective for managing their bookkeeping, taxes, and the admin of reimbursing their expenses. We share this commission with the fiscal sponsor (legal owner of the bank account that holds the money on behalf of the collective).</p>
+          <p>Additionally, our payment processors charge a fee - Stripe for receiving money via a Credit Card and PayPal for paying out expenses. Usually 2.9% + $0.30 per transaction. We know that these fees can add up quickly for a collective. We are actively exploring alternatives (like ACH) to reduce them.</p>
 
           <h3 id="organizations">What is Open Collective For Organizations?</h3>
           <p>Open Collective for Organizations allows you to empower local chapters to raise money and have their own budget without having to open a separate bank account. No more asking a local sponsor to directly pay for the pizzas! See how <a href="https://opencollective.com/wwcode">Women Who Code uses Open Collective</a>.</p>
