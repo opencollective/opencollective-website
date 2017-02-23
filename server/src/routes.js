@@ -41,6 +41,14 @@ export default (app) => {
   app.use(robots(path.join(__dirname, '../../frontend/dist/robots.txt')));
 
   /**
+   * GET /.well-known
+   * Server getting hammered with this request
+   * Best guess, someone is scanning us for this info:
+   * https://ma.ttias.be/well-known-directory-webservers-aka-rfc-5785/
+   */
+   app.use('/.well-known', (req, res) => res.status(404).send('Not found'));
+
+  /**
    * Proxy all images so that we can serve them from the opencollective.com domain
    * and we can cache them at cloudflare level (to reduce bandwidth at cloudinary level)
    * Format: /proxy/images?src=:encoded_url&width=:width
