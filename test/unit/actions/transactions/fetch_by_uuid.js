@@ -4,9 +4,9 @@ import expect from 'expect';
 import mockStore from '../../helpers/mockStore';
 import env from '../../../../frontend/src/lib/env';
 import * as constants from '../../../../frontend/src/constants/transactions';
-import fetchById from '../../../../frontend/src/actions/transactions/fetch_by_id';
+import fetchById from '../../../../frontend/src/actions/transactions/fetch_by_uuid';
 
-describe('transactions/fetch_by_id', () => {
+describe('transactions/fetch_by_uuid', () => {
 
   afterEach(() => nock.cleanAll());
 
