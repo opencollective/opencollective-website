@@ -71,6 +71,19 @@ const fetchProfileBySlug = (req, res, next) => {
     .catch(next);
 }
 
+/**
+ * Fetch transaction by UUID
+ */
+const fetchTransactionByUUID = (req, res, next) => {
+  api
+    .get(`/transactions/${req.params.transactionuuid}`)
+    .then(transaction => {
+      req.transaction = transaction;
+      next();
+    })
+    .catch(next);
+}
+
 /*
  * Extract github username from token
  */
@@ -221,6 +234,7 @@ export default {
   maxAge,
   fetchGroupBySlug,
   fetchProfileBySlug,
+  fetchTransactionByUUID,
   extractGithubUsernameFromToken,
   fetchActiveUsers,
   ga,

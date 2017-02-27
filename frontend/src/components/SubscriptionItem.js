@@ -70,7 +70,7 @@ export default class SubscriptionItem extends Component {
                             </div>
                             <div className='flex'>
                               <div className='time-ago flex-auto'>{moment(txDate).fromNow()}</div>
-                              <div className='pdf'><a href={`/${group.slug}/transactions/${transaction.id}/invoice.pdf`}>download invoice</a></div>
+                              <div className='pdf'><a href={`/${group.slug}/transactions/${transaction.uuid}/invoice.pdf`}>download invoice</a></div>
                             </div>
                           </div>
                         </div>
