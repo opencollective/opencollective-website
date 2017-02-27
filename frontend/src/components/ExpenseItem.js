@@ -38,7 +38,7 @@ ExpenseItem.defaultProps = {
   expense: {},
   user: {
     name: 'Anonymous',
-    avatar: '/static/images/default_avatar.svg'
+    avatar: '/public/images/default_avatar.svg'
   }
 };
 

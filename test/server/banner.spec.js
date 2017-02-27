@@ -55,14 +55,14 @@ describe("avatar", () => {
   it("redirects to 'become a backer' placeholder", (done) => {
     request(app)
       .get(`/yeoman/backers/${mocks.backers.length}/avatar`)
-      .expect('Location', '/static/images/become_backer.svg')
+      .expect('Location', '/public/images/become_backer.svg')
       .expect(302, done);
   });
 
   it("redirects to the 1px transparent png if out of bound", (done) => {
     request(app)
       .get(`/yeoman/backers/${(mocks.backers.length+1)}/avatar`)
-      .expect('Location', '/static/images/1px.png')
+      .expect('Location', '/public/images/1px.png')
       .expect(302, done);
   });
 

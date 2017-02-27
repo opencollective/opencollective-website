@@ -34,16 +34,16 @@
           color: #797d80;
         }
         &.placeholder, &:not(.imagePreview) {
-          background-image: url(/static/images/users/upload-default.svg);
+          background-image: url(/public/images/users/upload-default.svg);
           background-repeat: no-repeat;
           background-position: center;
           &:hover {
-            background-image: url(/static/images/users/upload-hover.svg);
+            background-image: url(/public/images/users/upload-hover.svg);
           }
           &:active {
-            background-image: url(/static/images/users/upload-pressed.svg);
+            background-image: url(/public/images/users/upload-pressed.svg);
           }
-          img[src="/static/images/mime-pdf.png"] {
+          img[src="/public/images/mime-pdf.png"] {
             height: 200px;
             margin-top: 20px;
             background-color: white;

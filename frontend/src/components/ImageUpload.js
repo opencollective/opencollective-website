@@ -36,7 +36,7 @@ class ImageUpload extends Component {
     const uploadingTemplate = isFunction(uploading) ? uploading : defaultTemplate;
 
     let className='placeholder';
-    let imgsrc = noDefaultImage ? '' : '/static/images/uploading.png';
+    let imgsrc = noDefaultImage ? '' : '/public/images/uploading.png';
     let label = i18n.getString('uploadReceipt');
 
     if (value) {

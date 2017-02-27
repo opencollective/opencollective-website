@@ -8,7 +8,7 @@ export default class Confirmation extends Component {
 
   render() {
     const {
-      image = '/static/images/happy-mail.svg',
+      image = '/public/images/happy-mail.svg',
       link,
       href
     } = this.props;

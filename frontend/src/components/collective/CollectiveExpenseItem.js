@@ -55,7 +55,7 @@ const CollectiveExpenseItem = ({
     receiptMessage = '';
     receiptHelpTip = i18n.getString('validReceiptHelpTip');
   } else {
-    src='/static/svg/ticket.svg';
+    src='/public/svg/ticket.svg';
     href = '';
     if (canViewReceipt) {
       receiptMessage = i18n.getString('missingReceiptMessage');
@@ -79,7 +79,7 @@ const CollectiveExpenseItem = ({
           </div>
           <div className='flex justify-center'>
             <span className='h6 muted'> {receiptMessage} </span>
-            <img className='help' src='/static/svg/help.svg' data-tip={receiptHelpTip} />
+            <img className='help' src='/public/svg/help.svg' data-tip={receiptHelpTip} />
             <ReactTooltip effect='solid' border={true} place='bottom' />
           </div>  
         </div>}
@@ -141,7 +141,7 @@ CollectiveExpenseItem.propTypes = {
 CollectiveExpenseItem.defaultProps = {
   user: {
     name: 'Anonymous',
-    avatar: '/static/images/default_avatar.svg'
+    avatar: '/public/images/default_avatar.svg'
   },
   authenticatedUser: {},
   compact: true,

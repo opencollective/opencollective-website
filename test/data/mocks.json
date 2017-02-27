@@ -78,7 +78,7 @@
         "website": ""
     },
     {
-        "avatar": "https://opencollective.com/static/images/users/avatar-01.svg",
+        "avatar": "https://opencollective.com/public/images/users/avatar-01.svg",
         "createdAt": "2016-02-03T02:07:55.287Z",
         "id": 84,
         "name": "David Smith",
@@ -90,7 +90,7 @@
         "website": ""
     },
     {
-        "avatar": "https://opencollective.com/static/images/users/avatar-02.svg",
+        "avatar": "https://opencollective.com/public/images/users/avatar-02.svg",
         "createdAt": null,
         "id": 103,
         "name": "John  Appleseed",

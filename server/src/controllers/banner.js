@@ -82,7 +82,7 @@ export default {
       req.ga.pageview();
     }
 
-    let imageUrl = "/static/images/user.svg";
+    let imageUrl = "/public/images/user.svg";
     if (user.avatar && user.avatar.substr(0,1) !== '/') {
       if (!tier.match(/sponsor/)) {
         imageUrl = getCloudinaryUrl(user.avatar, { query: `/c_thumb,g_face,h_${maxHeight},r_max,w_${maxHeight},bo_3px_solid_white/c_thumb,h_${maxHeight},r_max,w_${maxHeight},bo_2px_solid_rgb:66C71A/e_trim/f_auto/` });
@@ -93,9 +93,9 @@ export default {
 
     if (position == users.length) {
       const btnImage = (tier.match(/sponsor/)) ? 'sponsor' : tierSingular;
-      imageUrl = `/static/images/become_${btnImage}.svg`;
+      imageUrl = `/public/images/become_${btnImage}.svg`;
     } else if (position > users.length) {
-      imageUrl = "/static/images/1px.png";
+      imageUrl = "/public/images/1px.png";
     }
 
     if (imageUrl.substr(0,1) === '/') {
@@ -202,7 +202,7 @@ export default {
     if (showBtn && tier.length > 0) {
       const btnImage = (tier.match(/sponsor/)) ? 'sponsor' : tier.replace(/s$/,'');
       const btn = {
-        url: `${config.host.website}/static/images/become_${btnImage}.svg`,
+        url: `${config.host.website}/public/images/become_${btnImage}.svg`,
         encoding: null,
         ttl: 60 * 60 * 24 * 30 * 1000
       };

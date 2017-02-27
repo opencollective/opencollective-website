@@ -16,7 +16,7 @@
         right: 0;
         top: 0;
         bottom: 0;
-        background-image: url(/static/images/discover-bg.svg);
+        background-image: url(/public/images/discover-bg.svg);
         padding: 0 15px;
         background-size: cover;
         .Discover-hero-line1 {
