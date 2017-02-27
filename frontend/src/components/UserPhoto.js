@@ -71,14 +71,16 @@ export default class UserPhoto extends React.Component {
 
     return (
       <div className={`UserPhoto bg-no-repeat bg-center relative ${user.tier} ${className} ${avatar ? 'UserPhoto--loaded' : ''} `} onMouseEnter={ onMouseEnter } onMouseLeave={ onMouseLeave }>
-        <div className='width-100 height-100 bg-contain bg-no-repeat bg-center' style={styles}></div>
-        {addBadge && (
-          <div className='UserPhoto-badge absolute bg-white'>
-            <svg className='block -green' width={`${customBadgeSize ? customBadgeSize : '14'}`} height={`${customBadgeSize ? customBadgeSize : '14'}`}>
-              <use xlinkHref={`#${customBadge ? customBadge : 'svg-isotype'}`}/>
-            </svg>
-          </div>
-        )}
+        <a href={`/${user.username}`} title={user.name} >
+          <div className='width-100 height-100 bg-contain bg-no-repeat bg-center' style={styles}></div>
+          {addBadge && (
+            <div className='UserPhoto-badge absolute bg-white'>
+              <svg className='block -green' width={`${customBadgeSize ? customBadgeSize : '14'}`} height={`${customBadgeSize ? customBadgeSize : '14'}`}>
+                <use xlinkHref={`#${customBadge ? customBadge : 'svg-isotype'}`}/>
+              </svg>
+            </div>
+          )}
+        </a>
       </div>
     );
   }
