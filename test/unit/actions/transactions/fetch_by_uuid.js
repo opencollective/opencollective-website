@@ -12,7 +12,7 @@ describe('transactions/fetch_by_uuid', () => {
 
   it('creates TRANSACTION_SUCCESS if it fetches successfully', (done) => {
     const transaction = {
-      id: 2,
+      uuid: '32a6b676-2b92-48f9-b6e9-b084a94238b0',
       amount: 999
     };
     const slug = 'testgroup';
