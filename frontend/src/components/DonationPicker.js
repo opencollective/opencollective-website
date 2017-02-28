@@ -25,7 +25,7 @@ export default class DonationPicker extends Component {
   className(selectedPreset) {
     return classnames({
       'DonationPicker-amount flex items-center justify-center -ff-sec': true,
-      'DonationPicker-amount--selected -fw-bold': (this.state.selected == selectedPreset)
+      'DonationPicker-amount--selected -fw-bold': (this.state.selected === selectedPreset)
     });
   }
 
