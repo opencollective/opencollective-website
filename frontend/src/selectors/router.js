@@ -25,6 +25,15 @@ export const getQuerySelector = createSelector(
   getLocationSelector,
   (location) => location.query);
 
+export const getPaypalQueryFieldsSelector = createSelector(
+  getQuerySelector,
+  (query) => {
+    return { 
+      preapprovalKey: query.preapprovalKey, 
+      status: query.paypalApprovalStatus
+    }
+  });
+
 export const getTierSelector = createSelector(
   getParamsSelector,
   (params) => {

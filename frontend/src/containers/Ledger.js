@@ -15,6 +15,7 @@ import RequestMoney from '../components/RequestMoney';
 import Button from '../components/Button';
 import CollectiveExpenseItem from '../components/collective/CollectiveExpenseItem';
 import CollectiveTransactions from '../components/collective/CollectiveTransactions';
+import ConnectPaypalButton from '../components/ConnectPaypalButton';
 import Currency from '../components/Currency';
 import ExpenseEmptyState from '../components/ExpenseEmptyState';
 import PublicFooter from '../components/PublicFooter';
@@ -29,6 +30,9 @@ import notify from '../actions/notification/notify';
 import payExpense from '../actions/expenses/pay';
 import rejectExpense from '../actions/expenses/reject';
 import validateSchema from '../actions/form/validate_schema';
+import fetchCards from '../actions/users/fetch_cards';
+import getApprovalKey from '../actions/users/get_approval_key';
+import confirmPreapprovalKey from '../actions/users/confirm_preapproval_key';
 
 // Selectors
 import {
@@ -38,9 +42,14 @@ import {
   isHostOfCollectiveSelector } from '../selectors/collectives';
 import { getAppRenderedSelector } from '../selectors/app';
 import { 
-  getUsersSelector } from '../selectors/users';
+  getUsersSelector,
+  getPaypalCardSelector,
+  getConnectPaypalInProgressSelector } from '../selectors/users';
 import { getAuthenticatedUserSelector } from '../selectors/session';
-import { getPathnameSelector, getParamsSelector } from '../selectors/router';
+import { 
+  getPathnameSelector, 
+  getParamsSelector,
+  getPaypalQueryFieldsSelector } from '../selectors/router';
 import {
   getApproveInProgressSelector,
   getRejectInProgressSelector,
@@ -87,7 +96,10 @@ export class Ledger extends Component {
       isHost,
       approveInProgress,
       rejectInProgress,
-      payInProgress } = this.props;
+      payInProgress,
+      paypalCard,
+      connectPaypalInProgress
+    } = this.props;
 
     const { view } = this.state;
     return (
@@ -138,6 +150,18 @@ export class Ledger extends Component {
 
         { this.props.route.type === 'expenses' && <div className='Ledger-container padding40 expenses-container'>
             <div className='line1'>unpaid expenses</div>
+            
+            {isHost && !paypalCard &&
+              <div className='Ledger-paymentmethod-notice'>
+                You need a valid PayPal account to pay expenses. 
+                <ConnectPaypalButton
+                  disabled={ connectPaypalInProgress }
+                  onClick={ getPaypalPreapprovalKey.bind(this, authenticatedUser.id) }
+                  inProgress={ connectPaypalInProgress }
+                  i18n={i18n}
+                />
+              </div>}
+
             <div className='-list'>
             {collective.unpaidExpenses
               .map(expense => 
@@ -156,6 +180,7 @@ export class Ledger extends Component {
                   approveInProgress={ approveInProgress }
                   rejectInProgress={ rejectInProgress }
                   payInProgress={ payInProgress }
+                  paymentMethod={ paypalCard }
                   />)}
             </div>
             {collective.unpaidExpenses.length === 0 && 
@@ -178,13 +203,19 @@ export class Ledger extends Component {
 
   componentWillMount() {
     const { 
+      authenticatedUser,
       collective,
+      confirmPreapprovalKey,
+      fetchCards,
       fetchProfile,
       fetchUsers,
       fetchPendingExpenses,
       fetchTransactions,
       loadData,
-      params
+      params,
+      paypalQueryFields,
+      notify,
+      paypalCard
     } = this.props;
 
     let promise = Promise.resolve();
@@ -202,12 +233,29 @@ export class Ledger extends Component {
         break;
     }
 
+    const confirmPaypalPromise = () => {
+      const {
+        preapprovalKey,
+        status
+      } = paypalQueryFields;
+
+      if (preapprovalKey && status === 'success') {
+        return confirmPreapprovalKey(authenticatedUser.id, preapprovalKey)
+        .then(() => fetchCards(authenticatedUser.id, { service: 'paypal'}))
+        .then(() => notify('success', 'Successfully connected PayPal account'));
+      }
+      return Promise.resolve();
+    };
+
     promise = promise.then(() => Promise.all([
       fetchUsers(collective.slug),
       fetchPendingExpenses(collective.slug),
-      fetchTransactions(collective.slug, { type: this.props.route.type })
+      fetchTransactions(collective.slug, { type: this.props.route.type }),
+      fetchCards(authenticatedUser.id, { service: 'paypal'} ),
+      confirmPaypalPromise()
       ]))
-      .then(() => scrollToExpense());
+      .then(() => scrollToExpense())
+      .catch(error => notify('error', error.message));
 
     return promise;
   }
@@ -303,10 +351,24 @@ export function payExp(expenseId) {
     .catch(({message}) => notify('error', message));
 }
 
+/*
+ * Get Paypal Preapproval key
+ */
+export function getPaypalPreapprovalKey(userId) {
+  const {
+    getApprovalKey
+  } = this.props;
+
+  return getApprovalKey(userId, { baseUrl: window.location})
+}
+
 const mapStateToProps = createStructuredSelector({
   // general data
   collective: getPopulatedCollectiveSelector,
   users: getUsersSelector,
+  paypalCard: getPaypalCardSelector,
+  paypalQueryFields: getPaypalQueryFieldsSelector,
+  connectPaypalInProgress: getConnectPaypalInProgressSelector,
 
   // expense action related
   approveInProgress: getApproveInProgressSelector,
@@ -327,6 +389,9 @@ const mapStateToProps = createStructuredSelector({
 
 export default connect(mapStateToProps, {
   approveExpense,
+  getApprovalKey,
+  confirmPreapprovalKey,
+  fetchCards,
   fetchPendingExpenses,
   fetchTransactions,
   fetchProfile,
