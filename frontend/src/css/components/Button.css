@@ -87,8 +87,11 @@
   float: left;
 }
 
-.Button--disabled {
-  background-color: var(--light-gray);
+.Button--disabled,
+.Button--disabled:hover {
+  background-color: var(--gray);
+  color: var(--darkest-gray);
+  cursor: default;
 }
 
 .Button--paypal,

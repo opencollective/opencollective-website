@@ -1,5 +1,4 @@
 import { get } from '../../lib/api';
-import origin from '../../lib/origin';
 import * as constants from '../../constants/users';
 
 /**

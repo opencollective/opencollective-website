@@ -15,7 +15,6 @@ import RequestMoney from '../components/RequestMoney';
 import Button from '../components/Button';
 import CollectiveExpenseItem from '../components/collective/CollectiveExpenseItem';
 import CollectiveTransactions from '../components/collective/CollectiveTransactions';
-import ConnectPaypalButton from '../components/ConnectPaypalButton';
 import Currency from '../components/Currency';
 import ExpenseEmptyState from '../components/ExpenseEmptyState';
 import PublicFooter from '../components/PublicFooter';
@@ -150,17 +149,14 @@ export class Ledger extends Component {
 
         { this.props.route.type === 'expenses' && <div className='Ledger-container padding40 expenses-container'>
             <div className='line1'>unpaid expenses</div>
-            
-            {isHost && !paypalCard &&
-              <div className='Ledger-paymentmethod-notice'>
-                You need a valid PayPal account to pay expenses. 
-                <ConnectPaypalButton
-                  disabled={ connectPaypalInProgress }
-                  onClick={ getPaypalPreapprovalKey.bind(this, authenticatedUser.id) }
-                  inProgress={ connectPaypalInProgress }
-                  i18n={i18n}
-                />
-              </div>}
+
+            {isHost && 
+              <PaypalReminder
+                i18n={ i18n }
+                card={ paypalCard }
+                onClickConnect={ getPaypalPreapprovalKey.bind(this, authenticatedUser.id) }
+                onClickInProgress = { connectPaypalInProgress }
+                />}
 
             <div className='-list'>
             {collective.unpaidExpenses
@@ -175,7 +171,7 @@ export class Ledger extends Component {
                   onReject={ rejectExp.bind(this) }
                   onPay={ payExp.bind(this) }
                   canApproveOrReject={ canEditCollective || isHost }
-                  canPay={ isHost }
+                  canPay={ isHost && paypalCard }
                   authenticatedUser={ authenticatedUser }
                   approveInProgress={ approveInProgress }
                   rejectInProgress={ rejectInProgress }
