@@ -7,7 +7,7 @@ import * as constants from '../../constants/users';
 
 export default (userid, options={}) => {
   // Redirect to homepage that will confirm the preapproval key
-  const callback = `${options.baseUrl || origin}/?paypalApprovalStatus=`;
+  const callback = `${options.baseUrl}/?paypalApprovalStatus=`;
   const preapprovalTemplate = '${preapprovalKey}';
 
   const params = {

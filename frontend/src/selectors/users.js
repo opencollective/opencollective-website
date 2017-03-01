@@ -1,5 +1,4 @@
 import { createSelector } from 'reselect';
-import filterCollection from '../lib/filter_collection';
 
 import { getAuthenticatedUserSelector } from './session';
 
@@ -28,7 +27,7 @@ export const getPaypalCardSelector = createSelector(
   (cards) => {
     let paypalCard = null;
     if (cards) {
-      Object.keys(cards).forEach((key, index) => {
+      Object.keys(cards).forEach((key) => {
         if (cards[key].service === 'paypal') {
           paypalCard = cards[key];
         }

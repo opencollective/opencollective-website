@@ -211,8 +211,7 @@ export class Ledger extends Component {
       loadData,
       params,
       paypalQueryFields,
-      notify,
-      paypalCard
+      notify
     } = this.props;
 
     let promise = Promise.resolve();
