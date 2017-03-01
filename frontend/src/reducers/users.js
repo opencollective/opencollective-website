@@ -10,8 +10,7 @@ import {DONATE_GROUP_SUCCESS} from '../constants/groups';
 export default function users(state={
   updateInProgress: false,
   sendingEmailInProgress: false,
-  connectPaypalInProgress: false,
-  cards: []
+  connectPaypalInProgress: false
 }, action={}) {
   const {
     type,

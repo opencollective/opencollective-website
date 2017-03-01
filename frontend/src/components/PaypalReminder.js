@@ -5,29 +5,28 @@ import ConnectPaypalButton from './ConnectPaypalButton';
 class PaypalReminder extends Component {
   render() {
     const {
-      paypalCard,
+      card,
       onClickConnect,
-      connectPaypalInProgress,
+      onClickInProgress,
       i18n
     } = this.props;
 
-
     return (
       <div className='PaypalReminder'>
-        {!paypalCard &&
+        {!card &&
           <div>
             { i18n.getString('paypalReminderNeedValidAccount') }
             <ConnectPaypalButton
-              disabled={ connectPaypalInProgress }
+              disabled={ onClickInProgress }
               onClick={ onClickConnect }
-              inProgress={ connectPaypalInProgress }
+              inProgress={ onClickInProgress }
               i18n={i18n}
             />
           </div>}
-        {paypalCard && 
+        {card && 
           <div>
-          { `${i18n.getString('paypalReminderCurrentlyLinkedPaypalAccount')} ${paypalCard.number}.`} 
-          <span onClick={ onClickConnect }> {i18n.getString('paypalReminderSwitchAccount')} </span>
+          { `${i18n.getString('paypalReminderAccountLinked')} ${card.number}.`} 
+          <span className='PaypalReminder-switch ml1' onClick={ onClickConnect }> {i18n.getString('paypalReminderSwitchAccount')} </span>
           </div>}
 
       </div>

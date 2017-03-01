@@ -39,16 +39,6 @@ body {
 			.-list {
 				padding-top: 40px;
 			}
-			.Ledger-paymentmethod-notice {
-				text-align: center;
-				border: 1px solid var(--gray);
-  				border-radius: 5px;
-  				padding: 20px 0px;
-  				.Button--connectpaypal {
-					width: 200px;
-					margin-top: 20px;
-				}
-			}
 		}
 		.PublicGroupThanks {
 			padding: 20px;

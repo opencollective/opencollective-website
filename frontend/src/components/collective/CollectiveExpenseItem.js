@@ -26,7 +26,6 @@ const CollectiveExpenseItem = ({
   approveInProgress,
   rejectInProgress,
   payInProgress,
-  paymentMethod,
 }) => {
 
   const canViewReceipt = canApproveOrReject || (authenticatedUser && authenticatedUser.id === expense.UserId);
@@ -39,8 +38,6 @@ const CollectiveExpenseItem = ({
   const updateInProgress = approveInProgress[expense.id] || rejectInProgress[expense.id] || payInProgress[expense.id];
 
   const userEmail = user && (user.paypalEmail || user.email);
-
-  const paymentMethodAvailable = Boolean(paymentMethod);
 
   let src, srcSet, href, receiptMessage, receiptHelpTip;
 
@@ -114,7 +111,7 @@ const CollectiveExpenseItem = ({
                 i18n={i18n} />}
             {showPay && 
               <PayButton
-                disabled={updateInProgress || !paymentMethodAvailable}
+                disabled={updateInProgress}
                 onClick={onPay.bind(null, expense.id)}
                 inProgress={payInProgress[expense.id]}
                 i18n={i18n} />}

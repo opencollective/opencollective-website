@@ -18,6 +18,7 @@ import CollectiveTransactions from '../components/collective/CollectiveTransacti
 import Currency from '../components/Currency';
 import ExpenseEmptyState from '../components/ExpenseEmptyState';
 import PublicFooter from '../components/PublicFooter';
+import PaypalReminder from '../components/PaypalReminder';
 
 // actions
 import approveExpense from '../actions/expenses/approve';

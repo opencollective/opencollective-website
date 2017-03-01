@@ -88,7 +88,7 @@
     "month": "month",
     "monthly": "Monthly",
     "name": "Name",
-    "paypalReminderCurrentlyLinkedPaypalAccount": "Paying expenses will use your currently linked PayPal account: ",
+    "paypalReminderAccountLinked": "PayPal account linked:",
     "paypalReminderNeedValidAccount": "You need to link a valid PayPal account to pay expenses.",
     "paypalReminderRefreshAccount": "Refresh",
     "paypalReminderSwitchAccount": "Switch",
