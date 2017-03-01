@@ -35,10 +35,10 @@ class PaypalReminder extends Component {
 }
 
 PaypalReminder.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  inProgress: PropTypes.bool.isRequired,
+  card: PropTypes.object,
+  onClickConnect: PropTypes.bool.isRequired,
+  onClickInProgress: PropTypes.bool,
   i18n: PropTypes.object.isRequired,
-  disabled: PropTypes.bool
 };
 
 export default PaypalReminder;
