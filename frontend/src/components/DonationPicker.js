@@ -19,21 +19,21 @@ export default class DonationPicker extends Component {
       this.presetAmounts.push('other');
     }
 
-    this.state = { isCustomMode: false, amount, interval};
+    this.state = { amount, interval, selected: this.presetAmounts[0] };
   }
 
-  className(selectedPreset, amount) {
+  className(selectedPreset) {
     return classnames({
-      'DonationPicker-amount flex items-center justify-center mr1 circle -ff-sec': true,
-      'DonationPicker-amount--selected -fw-bold': (selectedPreset === amount) || (selectedPreset === 'other' && this.state.isCustomMode)
+      'DonationPicker-amount flex items-center justify-center -ff-sec': true,
+      'DonationPicker-amount--selected -fw-bold': (this.state.selected === selectedPreset)
     });
   }
 
   presetListItem(presetLabel) {
-    const { amount, currency, i18n } = this.props;
+    const { amount, currency, i18n, range } = this.props;
     let amountLabel, amountValue;
     if (presetLabel === 'other') {
-      amountValue = '100';
+      amountValue = range ? range[0] : 50;
       amountLabel = i18n.getString('other');
     } else {
       amountValue = presetLabel;
@@ -44,11 +44,16 @@ export default class DonationPicker extends Component {
       <li
         className={this.className(presetLabel, amount)}
         key={presetLabel}
-        onClick={() => this.onChange({amount:amountValue, interval: this.interval}) }>
+        onClick={() => this.onPresetClick({selected: presetLabel, amount:amountValue, interval: this.interval}) }>
         {amountLabel}
       </li>
     );
 
+  }
+
+  onPresetClick({selected, amount, interval}) {
+    this.setState({ amount, interval, selected });
+    this.onChange({amount, interval});
   }
 
   customField({onChange, amount, interval, currency, showCurrencyPicker, i18n}) {
@@ -104,7 +109,6 @@ export default class DonationPicker extends Component {
   }
 
   onChange({amount, interval, currency}) {
-    this.setState({ amount, interval, currency, isCustomMode: (this.presetAmounts.indexOf(amount) === -1) });
     this.props.onChange({amount, interval, currency});
   }
 
@@ -117,7 +121,7 @@ export default class DonationPicker extends Component {
           {this.presetAmounts.map(::this.presetListItem)}
         </ul>
         <div className='px3'>
-          {this.state.isCustomMode && this.customField({onChange: ::this.onChange, amount, interval, currency, showCurrencyPicker, i18n})}
+          {this.state.selected === 'other' && this.customField({onChange: ::this.onChange, amount, interval, currency, showCurrencyPicker, i18n})}
         </div>
       </div>
     );

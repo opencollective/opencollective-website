@@ -19,8 +19,8 @@ import roles from '../constants/roles';
 const DEFAULT_COLLECTIVE_SETTINGS = {
   lang: 'en',
   formatCurrency: {
-    compact: false,
-    precision: 2
+    compact: true,
+    precision: 0
   },
   style: {
     hero: { 
