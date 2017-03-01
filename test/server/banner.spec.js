@@ -42,13 +42,13 @@ describe("avatar", () => {
       .expect((res) => {
         res.body = sizeOf(res.body);
       })
-      .expect(200, { width: 387, height: 64, type: 'svg' }, done);
+      .expect(200, { width: 128, height: 64, type: 'svg' }, done);
   });
 
   it("redirects to the avatar url of the backer", (done) => {
     request(app)
-      .get('/yeoman/backers/0/avatar.jpg')
-      .expect('content-type', 'image/jpeg')
+      .get('/yeoman/backers/0/avatar.png')
+      .expect('content-type', 'image/png')
       .expect(200, done);
   });
 
@@ -68,11 +68,11 @@ describe("avatar", () => {
 
   it("handles the avatarHeight option", (done) => {
     request(app)
-      .get('/yeoman/backers/0/avatar.jpg?avatarHeight=256')
+      .get('/yeoman/backers/0/avatar.png?avatarHeight=256')
       .expect((res) => {
         res.body = sizeOf(res.body);
       })
-      .expect(200, { width: 260, height: 260, type: 'jpg' }, done);
+      .expect(200, { width: 260, height: 260, type: 'png' }, done);
   });
 });
 
@@ -173,7 +173,7 @@ describe("banner", () => {
         res.body = { contentLength: Number(res.headers['content-length']) };
       })
       .expect({
-        contentLength: 27250
+        contentLength: 8738
       })
       .expect(200, done);
   });
