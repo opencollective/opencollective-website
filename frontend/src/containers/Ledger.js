@@ -177,7 +177,6 @@ export class Ledger extends Component {
                   approveInProgress={ approveInProgress }
                   rejectInProgress={ rejectInProgress }
                   payInProgress={ payInProgress }
-                  paymentMethod={ paypalCard }
                   />)}
             </div>
             {collective.unpaidExpenses.length === 0 && 

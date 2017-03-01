@@ -25,7 +25,7 @@ const CollectiveExpenseItem = ({
   authenticatedUser,
   approveInProgress,
   rejectInProgress,
-  payInProgress,
+  payInProgress
 }) => {
 
   const canViewReceipt = canApproveOrReject || (authenticatedUser && authenticatedUser.id === expense.UserId);
@@ -65,7 +65,6 @@ const CollectiveExpenseItem = ({
       receiptHelpTip = i18n.getString('hiddenReceiptHelpTip');
     }
   }
-
  
   return (
     <div className='CollectiveExpenseItem' id={`exp${expense.id}`}>
