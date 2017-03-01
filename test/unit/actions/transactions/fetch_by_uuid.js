@@ -12,6 +12,7 @@ describe('transactions/fetch_by_uuid', () => {
 
   it('creates TRANSACTION_SUCCESS if it fetches successfully', (done) => {
     const transaction = {
+      id: 1,
       uuid: '32a6b676-2b92-48f9-b6e9-b084a94238b0',
       amount: 999
     };
@@ -44,6 +45,7 @@ describe('transactions/fetch_by_uuid', () => {
   it('creates TRANSACTION_FAILURE if it fails to fetch a transaction', (done) => {
     const transaction = {
       id: 2,
+      uuid: '32a6b676-2b92-48f9-b6e9-b084a94238b0',
       amount: 999
     };
     const slug = 1;
@@ -61,7 +63,7 @@ describe('transactions/fetch_by_uuid', () => {
 
       expect(request).toEqual({ type: constants.TRANSACTION_REQUEST, slug, transactionuuid });
       expect(failure.type).toEqual(constants.TRANSACTION_FAILURE);
-      expect(failure.error.message).toContain('request to http://localhost:3000/api/groups/1/transactions/2 failed');
+      expect(failure.error.message).toContain(`request to http://localhost:3000/api/groups/1/transactions/${transactionuuid} failed`);
       done();
     })
     .catch(done);
