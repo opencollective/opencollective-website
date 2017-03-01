@@ -5,7 +5,7 @@ import ProfilePhoto from '../../../frontend/src/components/ProfilePhoto';
 describe('ProfilePhoto component', () => {
   it('should have a default image', () => {
     const element = ProfilePhoto({});
-    expect(element.props.style.backgroundImage).to.be.equal('url(/static/images/default_avatar.svg)');
+    expect(element.props.style.backgroundImage).to.be.equal('url(/public/images/default_avatar.svg)');
   });
 
   it('should render an image if provided', () => {

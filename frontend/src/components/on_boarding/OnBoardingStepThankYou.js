@@ -19,7 +19,7 @@ export default class OnBoardingStepThankYou extends React.Component {
 
     return (
       <div className="OnBoardingStepThankYou">
-        <img src="/static/images/ghost.svg" width="170px" height="230px"/>
+        <img src="/public/images/ghost.svg" width="170px" height="230px"/>
         <OnBoardingStepHeading step="" title="Thank you for submitting your repository" subtitle="Your collective is in the queue - we'll be in touch soon."/>
         <div style={shareButtonsContainerStyle}>
           <ShareIcon type='twitter' url={shareUrl} name={group.name} description={group.description} />

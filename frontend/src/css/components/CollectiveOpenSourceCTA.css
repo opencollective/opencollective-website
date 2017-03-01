@@ -5,7 +5,7 @@
   letter-spacing: .5px;
   width: 100%;
   background-color: black;
-  background-image: url(/static/images/whyjoin-placeholder.png);
+  background-image: url(/public/images/whyjoin-placeholder.png);
   color: white;
   padding: 54px 20px 40px 20px;
   text-align: center;

@@ -62,7 +62,7 @@ export class LoginTopBar extends Component {
   render() {
     const { user, isAuthenticated, redirectRoute, pushState } = this.props;
     const { showProfileMenu } = this.state;
-    const avatar = isAuthenticated && user && user.avatar ? user.avatar : '/static/images/default_avatar.svg';
+    const avatar = isAuthenticated && user && user.avatar ? user.avatar : '/public/images/default_avatar.svg';
     const name = isAuthenticated && user && user.name ? user.name : null;
     const email = isAuthenticated && user && user.email ? user.email : null;
 

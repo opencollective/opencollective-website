@@ -8,12 +8,12 @@ const cache = {};
 
 export default (file) => {
   if (!config.cacheBust) {
-    return `/static${file}`;
+    return `/public${file}`;
   }
 
   if (!cache[file]) {
     // make it a relative path so it hits the static middleware
-    cache[file] = bust(dir + file, {remove: true}).replace(dir, `/static`);
+    cache[file] = bust(dir + file, {remove: true}).replace(dir, `/public`);
   }
 
   return cache[file];

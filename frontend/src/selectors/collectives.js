@@ -25,7 +25,7 @@ const DEFAULT_COLLECTIVE_SETTINGS = {
   style: {
     hero: { 
       cover: { 
-        backgroundImage: "url('/static/images/collectives/default-header-bg.jpg')"
+        backgroundImage: "url('/public/images/collectives/default-header-bg.jpg')"
       }, 
       a: {}
     }

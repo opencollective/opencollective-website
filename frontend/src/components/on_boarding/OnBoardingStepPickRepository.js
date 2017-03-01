@@ -27,7 +27,7 @@ export default ({ onNextStep, githubForm, repositories, blacklist, appendGithubF
       }
       {fetchedRepositories && noRepo && (
           <div>
-            <img className="mx-auto my4 block" src="/static/images/github-star.svg"/>
+            <img className="mx-auto my4 block" src="/public/images/github-star.svg"/>
             <div className="center" style={{fontFamily: 'Lato', fontSize: '22px', color: '#4a4a4a', padding: '0 20px'}}>
             We didn’t find any repository with {constants.MIN_STARS_FOR_ONBOARDING}+
             <svg width='19px' height='19px' className='mt1' style={{color: '#4a4a4a', margin: '5px 4px 0px 4px'}}>

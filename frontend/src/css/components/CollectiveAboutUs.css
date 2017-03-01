@@ -8,7 +8,7 @@
     text-align: center;
     margin: 0 auto;
     padding-top: 3.5rem;
-    background-image: url(/static/images/collectives/logo-placeholder.png);
+    background-image: url(/public/images/collectives/logo-placeholder.png);
     background-size: 41.3125rem 26.1875rem;
     background-position: 50% 0;
     .CollectiveAboutUs-title {

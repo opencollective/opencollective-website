@@ -33,7 +33,7 @@ export default (app) => {
   /**
    * Static folder
    */
-  app.use('/static', express.static(path.join(__dirname, `../../frontend/dist`), { maxAge: '1d' }));
+  app.use('/public', express.static(path.join(__dirname, `../../frontend/dist`), { maxAge: '1d' }));
 
   /**
    * GET /robots.txt

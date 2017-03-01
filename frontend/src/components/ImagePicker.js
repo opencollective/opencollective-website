@@ -5,22 +5,22 @@ import _ from 'lodash';
 const REG_VALID_URL = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
 const REG_VALID_TWITTER_USERNAME = /^@?([a-zA-Z0-9_]{1,15})$/;
 const PRESET_AVATARS = [
-  '/static/images/users/icon-avatar-placeholder.svg',
-  '/static/images/users/avatar-02.svg',
-  '/static/images/users/avatar-03.svg',
-  '/static/images/users/avatar-04.svg',
+  '/public/images/users/icon-avatar-placeholder.svg',
+  '/public/images/users/avatar-02.svg',
+  '/public/images/users/avatar-03.svg',
+  '/public/images/users/avatar-04.svg',
 ];
-const UPLOAD_AVATAR = '/static/images/users/upload-default.svg';
-const UPLOAD_AVATAR_HOVER = '/static/images/users/upload-hover.svg';
-const UPLOAD_AVATAR_ACTIVE = '/static/images/users/upload-pressed.svg';
+const UPLOAD_AVATAR = '/public/images/users/upload-default.svg';
+const UPLOAD_AVATAR_HOVER = '/public/images/users/upload-hover.svg';
+const UPLOAD_AVATAR_ACTIVE = '/public/images/users/upload-pressed.svg';
 const KNOWN_SOURCES = {
-  'facebook': '/static/images/users/facebook-badge.svg',
-  'twitter': '/static/images/users/twitter-badge.svg',
-  'google': '/static/images/users/google-badge.svg',
-  'github': '/static/images/users/github-badge.svg',
-  'gravatar': '/static/images/users/gravatar-badge.svg',
-  'angelist': '/static/images/users/angelist-badge.svg',
-  'aboutme': '/static/images/users/aboutme-badge.svg',
+  'facebook': '/public/images/users/facebook-badge.svg',
+  'twitter': '/public/images/users/twitter-badge.svg',
+  'google': '/public/images/users/google-badge.svg',
+  'github': '/public/images/users/github-badge.svg',
+  'gravatar': '/public/images/users/gravatar-badge.svg',
+  'angelist': '/public/images/users/angelist-badge.svg',
+  'aboutme': '/public/images/users/aboutme-badge.svg',
 }
 
 export default class ImagePicker extends Component {
@@ -83,7 +83,7 @@ export default class ImagePicker extends Component {
 
     // Update Hover/Press images for upload avatar
     if (hover && currentImage.source === 'upload' &&
-      currentImage.src.indexOf('/static') === 0) {
+      currentImage.src.indexOf('/public') === 0) {
       currentSrc = (pressed) ? UPLOAD_AVATAR_ACTIVE : UPLOAD_AVATAR_HOVER;
     }
 

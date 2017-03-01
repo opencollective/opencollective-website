@@ -13,7 +13,7 @@ export default class RepositoryPickerItem extends React.Component {
         <div>
           <span className="-title">{title}</span>
           <span className="-stars">
-            <img src="/static/images/star.svg" />
+            <img src="/public/images/star.svg" />
             {stars}
           </span>
         </div>

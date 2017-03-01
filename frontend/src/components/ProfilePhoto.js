@@ -3,7 +3,7 @@ import { resizeImage } from '../lib/utils';
 
 const ProfilePhoto = ({url, spinner, hasBorder=false}) => {
 
-  const backgroundImage = url ? resizeImage(url, { height: 128 }) : '/static/images/default_avatar.svg';
+  const backgroundImage = url ? resizeImage(url, { height: 128 }) : '/public/images/default_avatar.svg';
 
   const border = hasBorder ? {
     border: '3px solid white',

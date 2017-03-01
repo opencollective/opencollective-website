@@ -67,7 +67,7 @@
   height: 64px;
 }
 
-.ImagePicker-preview img[src^="/static/"]
+.ImagePicker-preview img[src^="/public/"]
 {
   cursor: pointer;
 }
@@ -119,23 +119,23 @@
 .ImagePicker-prev
 {
   left: 20px;
-  background-image: url(/static/images/prev_gray.svg);
+  background-image: url(/public/images/prev_gray.svg);
 }
 
 .ImagePicker-prev.active
 {
-  background-image: url(/static/images/prev.svg);
+  background-image: url(/public/images/prev.svg);
 }
 
 .ImagePicker-next
 {
   right: 20px;
-  background-image: url(/static/images/next_gray.svg);
+  background-image: url(/public/images/next_gray.svg);
 }
 
 .ImagePicker-next.active
 {
-  background-image: url(/static/images/next.svg);
+  background-image: url(/public/images/next.svg);
 }
 
 .ImagePicker-dot-list

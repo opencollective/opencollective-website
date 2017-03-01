@@ -4,9 +4,9 @@ import formatCurrency from '../lib/format_currency';
 import { resizeImage, getGroupCustomStyles } from '../lib/utils';
 
 const DEFAULT_LOGOS = [
-  '/static/images/code.svg',
-  '/static/images/rocket.svg',
-  '/static/images/repo.svg',
+  '/public/images/code.svg',
+  '/public/images/rocket.svg',
+  '/public/images/repo.svg',
 ];
 
 export default class SponsoredCard extends Component {

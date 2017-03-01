@@ -49,7 +49,7 @@ export default class UserPhoto extends React.Component {
     // that's probably why we were using so much bandwidth from cloudinary!
     const width = this.props.width;
     const height = this.props.height || width;
-    const avatar = (!this.state.avatar || this.state.avatar.indexOf('/static/') === 0) ? this.state.avatar : resizeImage(this.state.avatar, { width: width * 2, height: height * 2 });
+    const avatar = (!this.state.avatar || this.state.avatar.indexOf('/public/') === 0) ? this.state.avatar : resizeImage(this.state.avatar, { width: width * 2, height: height * 2 });
     const styles = {
       backgroundImage: `url(${avatar})`,
       width,

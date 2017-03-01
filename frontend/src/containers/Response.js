@@ -12,13 +12,13 @@ export class Response extends Component {
     const response = {};
 
     if (this.props.route.action === 'unsubscribe') {
-      response.imageUrl = '/static/images/sad-mail.svg';
+      response.imageUrl = '/public/images/sad-mail.svg';
       response.title = 'Mailing subscription cancelled';
       response.description = 'Sorry for any inconvenience, feel free to subscribe again at any time.';
       response.linkUrl = '/discover';
       response.linkLabel = 'Discover new collectives';
     } else if (this.props.route.action === 'approve') {
-      response.imageUrl = '/static/images/happy-mail.svg';
+      response.imageUrl = '/public/images/happy-mail.svg';
       response.title = 'Mailing subscription successful';
       response.linkUrl = '/discover';
       response.linkLabel = 'Discover new collectives';

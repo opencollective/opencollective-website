@@ -38,17 +38,17 @@ gulp.task('purge', (cb) => {
 gulp.task('build', ['build:assets','build:css', 'purge']);
 
 /**
- * Copy all static assets from ./frontend/src/assets/* to ./frontend/dist/
+ * Copy all static assets from ./frontend/src/public/* to ./frontend/dist/
  * (includes /images, /fonts, /robots.txt)
  */
 gulp.task('build:assets', () => {
-  return gulp.src([`${SRC_DIR}/assets/**/*`])
+  return gulp.src([`${SRC_DIR}/public/**/*`])
     .pipe(changed(`${DIST_DIR}`))
     .pipe(gulp.dest(DIST_DIR));
 });
 
 gulp.task('watch:assets', () => {
-  gulp.watch(`${SRC_DIR}/assets/**/*`, ['build:assets']);
+  gulp.watch(`${SRC_DIR}/public/**/*`, ['build:assets']);
 });
 
 /**
@@ -72,7 +72,7 @@ gulp.task('watch:css', () => {
 });
 
 gulp.task('build:svg', () => {
-  return gulp.src(`${SRC_DIR}/assets/svg/*.svg`)
+  return gulp.src(`${SRC_DIR}/public/svg/*.svg`)
     .pipe(svgSprite({
       mode: {
         symbol: {
@@ -92,5 +92,5 @@ gulp.task('build:svg', () => {
 });
 
 gulp.task('watch:svg', () => {
-  gulp.watch(`${SRC_DIR}/assets/svg/*.svg`, ['build:svg']);
+  gulp.watch(`${SRC_DIR}/public/svg/*.svg`, ['build:svg']);
 });

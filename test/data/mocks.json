@@ -1,7 +1,7 @@
 {
   "users": [
     {
-        "avatar": "https://pbs.twimg.com/profile_images/535488349339803648/1DhSH-6C.jpeg",
+        "avatar": "http://placehold.it/64x64",
         "createdAt": null,
         "id": 23,
         "name": "Simon Boudrias",
@@ -12,7 +12,7 @@
         "website": null
     },
     {
-        "avatar": null,
+        "avatar": "http://placehold.it/64x64",
         "createdAt": null,
         "id": 24,
         "name": "Sindre Sorhus",
@@ -23,7 +23,7 @@
         "website": null
     },
     {
-        "avatar": "https://pbs.twimg.com/profile_images/586079587626422272/80Q5wAFU.jpg",
+        "avatar": "http://placehold.it/64x64",
         "createdAt": null,
         "id": 25,
         "name": "Addy Osmani",
@@ -34,7 +34,7 @@
         "website": null
     },
     {
-        "avatar": "https://pbs.twimg.com/profile_images/627637122460053504/BIqckiVj.jpg",
+        "avatar": "http://placehold.it/64x64",
         "createdAt": null,
         "id": 42,
         "name": "Eddie Monge",
@@ -45,7 +45,7 @@
         "website": "http://eddiemonge.com"
     },
     {
-        "avatar": "https://opencollective.com/public/images/opencollectivelogo.png",
+        "avatar": "http://placehold.it/128x64",
         "createdAt": null,
         "id": 40,
         "name": "OpenCollective",
@@ -56,7 +56,7 @@
         "website": "https://digitalocean.com?utm_campaign=opensource&utm_medium=github&utm_source=oc"
     },
     {
-        "avatar": "https://pbs.twimg.com/profile_images/693913286555869186/jMoeGBOJ.jpg",
+        "avatar": "http://placehold.it/64x64",
         "createdAt": "2016-01-15T23:27:04.355Z",
         "id": 41,
         "name": "Aseem Sood",
@@ -67,7 +67,7 @@
         "website": null
     },
     {
-        "avatar": "https://pbs.twimg.com/profile_images/535488349339803648/1DhSH-6C.jpeg",
+        "avatar": "http://placehold.it/64x64",
         "createdAt": "2016-02-18T02:36:50.640Z",
         "id": 107,
         "name": "Chris Vasquez",
@@ -78,7 +78,7 @@
         "website": ""
     },
     {
-        "avatar": "https://opencollective.com/static/images/users/avatar-01.svg",
+        "avatar": "http://placehold.it/64x64",
         "createdAt": "2016-02-03T02:07:55.287Z",
         "id": 84,
         "name": "David Smith",
@@ -90,7 +90,7 @@
         "website": ""
     },
     {
-        "avatar": "https://opencollective.com/static/images/users/avatar-02.svg",
+        "avatar": "http://placehold.it/64x64",
         "createdAt": null,
         "id": 103,
         "name": "John  Appleseed",

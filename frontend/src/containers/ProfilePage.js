@@ -143,7 +143,7 @@ export class ProfilePage extends Component {
           <div style={{textAlign: 'center', margin: `${isEmpty ? 0 : 48}px auto 78px auto`, opacity: '.4'}} >
             {isEmpty ? (
               <div className="mb1">
-                <img src="/static/images/spooky-ghost.svg" />
+                <img src="/public/images/spooky-ghost.svg" />
                 <div style={{fontStyle: 'italic', fontFamily: 'Lato', fontSize: '22px', color: '#c0c0c0', textAlign: 'center'}}>This Profile page is so empty you might find a ghost</div>
               </div>
               ) : null

@@ -18,7 +18,7 @@ export default ({group}) => {
     return (<div className='PublicGroup-image absolute top-0 left-0 bg-contain bg-center bg-no-repeat height-100 width-100' style={styles}></div>);
   } else {
     return (
-      <div className='PublicGroup-image absolute top-0 left-0 bg-contain bg-center bg-no-repeat height-100 width-100' style={{backgroundImage: 'url(/static/images/whyjoin-placeholder.png)'}}></div>
+      <div className='PublicGroup-image absolute top-0 left-0 bg-contain bg-center bg-no-repeat height-100 width-100' style={{backgroundImage: 'url(/public/images/whyjoin-placeholder.png)'}}></div>
     );
   }
 };

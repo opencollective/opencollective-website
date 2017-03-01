@@ -4,7 +4,7 @@ const DEFAULT_GROUP_STYLES = {
   hero: { 
     cover: { 
       transform: "scale(1.06)",
-      backgroundImage: "url('/static/images/collectives/default-header-bg.jpg')"
+      backgroundImage: "url('/public/images/collectives/default-header-bg.jpg')"
     }, 
     a: {}
   }

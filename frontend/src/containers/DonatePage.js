@@ -88,7 +88,7 @@ export class DonatePage extends Component {
             { view === 'default' &&
                 <div className="DonatePage-header">
                   <a href={`/${collective.slug}`}>
-                    <div className='DonatePage-logo' style={{backgroundImage: `url(${collective.logo ? collective.logo : '/static/images/rocket.svg'})`}}></div>
+                    <div className='DonatePage-logo' style={{backgroundImage: `url(${collective.logo ? collective.logo : '/public/images/rocket.svg'})`}}></div>
                   </a>
                   <div className='DonatePage-line1'>Hi! We are  <a href={`/${collective.slug}`}>{ collective.name }</a>.</div>
                   {collective.mission ? <div className='DonatePage-line2'>{ collective.mission }</div> : null}
