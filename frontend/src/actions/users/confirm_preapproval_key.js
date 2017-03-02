@@ -4,7 +4,6 @@ import * as constants from '../../constants/users';
 /**
  * Confirm approval key
  */
-
 export default (userid, preapprovalKey) => {
   const url = `/users/${userid}/paypal/preapproval/${preapprovalKey}`;
 
