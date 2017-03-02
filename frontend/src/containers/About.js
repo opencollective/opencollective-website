@@ -109,7 +109,7 @@ export class About extends Component {
                 <p>Cofounder</p>
                 <ul>
                     <li>
-                      <a href='//twitter.com/asood123'>
+                      <a href='//twitter.com/AseemSood_'>
                         <i className='fa-twitter'></i>
                       </a>
                     </li>
