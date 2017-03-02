@@ -22,10 +22,10 @@ export default class CollectiveTransactions extends React.Component {
           {transactions
             .slice(0, itemsToShow)
             .map(transaction => 
-              <CollectiveActivityItem 
-                key={`pgd_${transaction.id}`} 
-                transaction={transaction} 
-                user={users[transaction.UserId]} 
+              <CollectiveActivityItem
+                key={`pgd_${transaction.uuid}`}
+                transaction={transaction}
+                user={users[transaction.UserId]}
                 className='' i18n={i18n} />)}
         </div>
         <div className='center pt2'>

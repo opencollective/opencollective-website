@@ -90,6 +90,7 @@ export default (app) => {
   app.get('/:slug.json', mw.maxAge(900), mw.fetchProfileBySlug, renderJSON('collective'));
   app.get('/:slug/:tier.md', mw.maxAge(300), mw.fetchGroupBySlug, mw.fetchActiveUsers(), controllers.banner.markdown);
   app.get('/:slug/:tier.json', mw.maxAge(900), mw.fetchActiveUsers(), renderJSON('users'));
+  app.get('/:slug/transactions/:transactionuuid.json', mw.maxAge(900), mw.fetchTransactionByUUID, renderJSON('transaction'));
   app.get('/:slug/:tier.:format(svg|png)', mw.maxAge(300), mw.fetchActiveUsers(), controllers.banner.banner);
   app.get('/:slug/:tier/badge.svg', mw.maxAge(300), mw.fetchActiveUsers({requireAvatar: false}), controllers.banner.badge);
   app.get('/:slug/badge/:tier.svg', mw.maxAge(300), mw.fetchActiveUsers({requireAvatar: false}), controllers.banner.badge);
@@ -131,7 +132,7 @@ export default (app) => {
   app.get('/:slug([A-Za-z0-9-_]+)/:verb(donate|pay|contribute)/:amount/:interval', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-_]+)/:verb(donate|pay|contribute)/:amount', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-_]+)/:type(expenses|donations|transactions)', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
-  app.get('/:slug([A-Za-z0-9-]+)/transactions/:transactionid/invoice.pdf', mw.maxAge(300), controllers.transactions.invoice);
+  app.get('/:slug([A-Za-z0-9-]+)/transactions/:transactionuuid/invoice.pdf', mw.maxAge(300), mw.fetchTransactionByUUID, controllers.transactions.invoice);
   app.get('/:slug([A-Za-z0-9-_]+)/expenses/:action(new)', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-_]+)/expenses/:expenseid/:action(approve|reject)', mw.ga, mw.fetchProfileBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-_]+)/donations/:action(request)', mw.ga, mw.fetchProfileBySlug, mw.addMeta, render);
