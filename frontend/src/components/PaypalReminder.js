@@ -26,7 +26,7 @@ class PaypalReminder extends Component {
         {card && 
           <div>
           { `${i18n.getString('paypalReminderAccountLinked')} ${card.number}.`} 
-          <span className='PaypalReminder-switch ml1' onClick={ onClickConnect }> {i18n.getString('paypalReminderSwitchAccount')} </span>
+          <span className='PaypalReminder-switch ml1' onClick={ onClickConnect }> {i18n.getString('paypalReminderRefreshKey')} </span>
           </div>}
 
       </div>
