@@ -15,6 +15,9 @@ dependencies:
     - "~/cache"
   pre:
     - npm run install:debs
+database:
+  post:
+    - psql -U ubuntu -d circle_test -c 'CREATE EXTENSION POSTGIS;'
 deployment:
   staging:
     branch: staging
