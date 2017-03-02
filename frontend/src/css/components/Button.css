@@ -24,6 +24,7 @@
   background-color: var(--orange);
 }
 
+.Button--connectpaypal,
 .Button--approve {
   background-color: var(--light-blue);
 }
@@ -84,6 +85,13 @@
   box-sizing: border-box;
   width: calc(50% - calc(var(--spacing)/2));
   float: left;
+}
+
+.Button--disabled,
+.Button--disabled:hover {
+  background-color: var(--gray);
+  color: var(--darkest-gray);
+  cursor: default;
 }
 
 .Button--paypal,

@@ -9,7 +9,6 @@ export default (id) => {
       .then(json => dispatch(success(id, json)))
       .catch(err => {
         dispatch(failure(err));
-        console.log('err', err.stack);
         throw new Error(err.message);
       });
   };

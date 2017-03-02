@@ -10,12 +10,14 @@ import {DONATE_GROUP_SUCCESS} from '../constants/groups';
 export default function users(state={
   updateInProgress: false,
   sendingEmailInProgress: false,
-  cards: []
+  connectPaypalInProgress: false
 }, action={}) {
   const {
     type,
     error,
-    users
+    users,
+    userid,
+    cards
   } = action;
 
   switch (type) {
@@ -64,6 +66,17 @@ export default function users(state={
       return merge({}, state, {
         newUser: action.json.user
       });
+
+    case constants.USER_CARDS_SUCCESS:
+      return merge({}, state, {
+        [userid]: { cards }
+      });
+
+    case constants.GET_APPROVAL_KEY_FOR_USER_REQUEST:
+      return merge({}, state, { connectPaypalInProgress: true});
+
+    case constants.GET_APPROVAL_KEY_FOR_USER_FAILURE:
+      return merge({}, state, {connectPaypalInProgress: false});
 
     default:
       return state;

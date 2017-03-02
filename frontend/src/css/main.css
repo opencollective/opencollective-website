@@ -83,6 +83,7 @@
 @import './components/Metric.css';
 @import './components/Mosaic.css';
 @import './components/Notification.css';
+@import './components/PaypalReminder.css';
 @import './components/ProfilePhoto.css';
 @import './components/CollectiveOpenSourceCTA.css';
 @import './components/PublicGroupThanks.css';

@@ -1,0 +1,19 @@
+.PaypalReminder {
+  text-align: center;
+  border: 1px solid var(--gray);
+  border-radius: 5px;
+  padding: 20px 0px;
+  margin-top: 30px;
+}
+
+.PaypalReminder .Button--connectpaypal {
+  width: 200px;
+  margin-top: 20px;
+}
+
+.PaypalReminder-switch {
+  color: var(--light-blue);
+}
+.PaypalReminder-switch:hover {
+  cursor: pointer;
+}
