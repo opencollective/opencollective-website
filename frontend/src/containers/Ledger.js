@@ -234,7 +234,7 @@ export class Ledger extends Component {
         status
       } = paypalQueryFields;
 
-      if (preapprovalKey && status === 'success') {
+      if (authenticatedUser && preapprovalKey && status === 'success') {
         return confirmPreapprovalKey(authenticatedUser.id, preapprovalKey)
         .then(() => fetchCards(authenticatedUser.id, { service: 'paypal'}))
         .then(() => notify('success', 'Successfully connected PayPal account'));
@@ -242,11 +242,18 @@ export class Ledger extends Component {
       return Promise.resolve();
     };
 
+    const fetchCardsPromise = () => {
+      if (authenticatedUser) {
+        return fetchCards(authenticatedUser.id, { service: 'paypal'})
+      }
+      return Promise.resolve();
+    }
+
     promise = promise.then(() => Promise.all([
       fetchUsers(collective.slug),
       fetchPendingExpenses(collective.slug),
       fetchTransactions(collective.slug, { type: this.props.route.type }),
-      fetchCards(authenticatedUser.id, { service: 'paypal'} ),
+      fetchCardsPromise(),
       confirmPaypalPromise()
       ]))
       .then(() => scrollToExpense())
