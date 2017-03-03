@@ -90,6 +90,7 @@
     "name": "Name",
     "paypalReminderAccountLinked": "PayPal account linked:",
     "paypalReminderNeedValidAccount": "You need to link a valid PayPal account to pay expenses.",
+    "paypalReminderRefreshKey": "Refresh",
     "paypalReminderSwitchAccount": "Switch",
     "note": "Note",
     "nowOnBackersWall": "You are now on our backers wall!",
