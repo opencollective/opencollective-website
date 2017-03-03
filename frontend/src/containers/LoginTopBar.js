@@ -22,6 +22,7 @@ export class LoginTopBar extends Component {
         {this.showCreateBtn && <li><a className='LoginTopBarButton' href='/create'>create a collective</a></li>}
         <li><a className='LoginTopBarLink' href='/learn-more'>How it works</a></li>
         <li><a className='LoginTopBarLink' href='/discover'>Discover</a></li>
+        <li><a className='LoginTopBarLink' href='https://medium.com/open-collective'>Blog</a></li>
       </ul>
     )
   }

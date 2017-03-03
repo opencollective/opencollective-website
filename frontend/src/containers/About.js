@@ -45,8 +45,8 @@ export class About extends Component {
           <p>
             Download the <a href='/public/images/opencollectivelogo.png'>Open Collective Logo</a> in high resolution: <a href='/public/images/opencollectivelogo.svg'>svg</a> - <a href='/public/images/opencollectivelogo.png'>png</a>
             <br />      
-            <a href='//opencollective.com/public/images/opencollectivelogo.svg'>
-              <img src='//opencollective.com/public/images/opencollectivelogo.svg' style={{marginTop: '40px'}} />
+            <a href='/public/images/opencollectivelogo.svg'>
+              <img src='/public/images/opencollectivelogo.svg' style={{marginTop: '40px'}} />
             </a>
           </p>
         </div>
@@ -56,7 +56,7 @@ export class About extends Component {
           <div className='clearfix'>
             <div className='col col-12 sm-col-12 md-col-6 lg-col-4'>
               <div className='team-member'>
-                  <img src='//opencollective.com/public/images/xavier.jpg' height='200px' width='200px' alt='Xavier Damman' />
+                  <img src='/public/images/xavier.jpg' height='200px' width='200px' alt='Xavier Damman' />
                   <h4>Xavier Damman</h4>
                   <p>Founder/CEO</p>
                   <ul>
@@ -80,7 +80,7 @@ export class About extends Component {
             </div>
             <div className='col col-12 sm-col-12 md-col-6 lg-col-4'>
               <div className='team-member'>
-                  <img src='//opencollective.com/public/images/pia.jpg' height='200px' width='200px' alt='Pia Mancini' />
+                  <img src='/public/images/pia.jpg' height='200px' width='200px' alt='Pia Mancini' />
                   <h4>Pia Mancini</h4>
                   <p>Cofounder</p>
                   <ul>
@@ -104,7 +104,7 @@ export class About extends Component {
             </div>
             <div className='col col-12 sm-col-12 md-col-6 lg-col-4'>
               <div className='team-member'>
-                <img src='//opencollective.com/public/images/aseem.jpg' height='200px' width='200px' alt='Aseem Sood' />
+                <img src='/public/images/aseem.jpg' height='200px' width='200px' alt='Aseem Sood' />
                 <h4>Aseem Sood</h4>
                 <p>Cofounder</p>
                 <ul>
