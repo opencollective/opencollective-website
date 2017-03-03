@@ -1,4 +1,5 @@
 import React from 'react';
+import { pushState } from 'redux-router';
 import getAvatarByNumber from '../lib/avatar_by_number';
 import ImagePicker from '../components/ImagePicker';
 import { resizeImage } from '../lib/utils';
@@ -70,9 +71,9 @@ export default class UserPhoto extends React.Component {
     }
 
     return (
-      <div className={`UserPhoto bg-no-repeat bg-center relative ${user.tier} ${className} ${avatar ? 'UserPhoto--loaded' : ''} `} onMouseEnter={ onMouseEnter } onMouseLeave={ onMouseLeave }>
-        <a href={`/${user.username}`} title={user.name} >
-          <div className='width-100 height-100 bg-contain bg-no-repeat bg-center' style={styles}></div>
+      <div className={`UserPhoto bg-no-repeat bg-center relative ${user.tier} ${className} ${avatar ? 'UserPhoto--loaded' : ''} `} onClick={() => pushState(null, `/${user.username}`)} onMouseEnter={ onMouseEnter } onMouseLeave={ onMouseLeave }>
+          
+          <div className='width-100 height-100 bg-contain bg-no-repeat bg-center' style={styles} title={user.name} ></div>
           {addBadge && (
             <div className='UserPhoto-badge absolute bg-white'>
               <svg className='block -green' width={`${customBadgeSize ? customBadgeSize : '14'}`} height={`${customBadgeSize ? customBadgeSize : '14'}`}>
@@ -80,7 +81,6 @@ export default class UserPhoto extends React.Component {
               </svg>
             </div>
           )}
-        </a>
       </div>
     );
   }

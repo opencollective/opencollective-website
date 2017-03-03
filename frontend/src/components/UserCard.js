@@ -19,7 +19,7 @@ export default class UserCard extends Component {
 
   _link(href, children) {
     if (href) {
-      return (<a href={href} target='_blank' className='inline-block align-top'>{children}</a>);
+      return (<a href={href} className='inline-block align-top'>{children}</a>);
     }
 
     return children;
