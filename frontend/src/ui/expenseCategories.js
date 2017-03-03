@@ -52,6 +52,7 @@ export default function(slug = '') {
       ];
        break;
     case 'partidodigital':
+    case 'technovationmx':
       categories = [
         'Comunicación',
         'Diseño',
