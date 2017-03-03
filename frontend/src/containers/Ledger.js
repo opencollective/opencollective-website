@@ -19,9 +19,11 @@ import Currency from '../components/Currency';
 import ExpenseEmptyState from '../components/ExpenseEmptyState';
 import PublicFooter from '../components/PublicFooter';
 import PaypalReminder from '../components/PaypalReminder';
+import StripeReminder from '../components/StripeReminder';
 
 // actions
 import approveExpense from '../actions/expenses/approve';
+import authorizeStripe from '../actions/users/authorize_stripe';
 import fetchPendingExpenses from '../actions/expenses/fetch_pending_by_collective';
 import fetchTransactions from '../actions/transactions/fetch_by_collective';
 import fetchProfile from '../actions/profile/fetch_by_slug';
@@ -39,12 +41,14 @@ import {
   canEditCollectiveSelector,
   getI18nSelector,
   getPopulatedCollectiveSelector,
-  isHostOfCollectiveSelector } from '../selectors/collectives';
+  isHostOfCollectiveSelector,
+  connectedToStripeAccountSelector } from '../selectors/collectives';
 import { getAppRenderedSelector } from '../selectors/app';
 import { 
   getUsersSelector,
   getPaypalCardSelector,
-  getConnectPaypalInProgressSelector } from '../selectors/users';
+  getConnectPaypalInProgressSelector,
+  getConnectStripeInProgressSelector } from '../selectors/users';
 import { getAuthenticatedUserSelector } from '../selectors/session';
 import { 
   getPathnameSelector, 
@@ -98,7 +102,10 @@ export class Ledger extends Component {
       rejectInProgress,
       payInProgress,
       paypalCard,
-      connectPaypalInProgress
+      connectPaypalInProgress,
+      connectStripeInProgress,
+      connectedToStripeAccount,
+      authorizeStripe
     } = this.props;
 
     const { view } = this.state;
@@ -187,6 +194,12 @@ export class Ledger extends Component {
 
          <div className='Ledger-container padding40'>
             <div className='line1'>{i18n.getString(`previous${capitalize(this.props.route.type)}`)}</div>
+            {isHost && !connectedToStripeAccount &&
+              <StripeReminder
+                i18n={ i18n }
+                onClickConnect={ authorizeStripe.bind(this, {returnUrl: window.location }) }
+                onClickInProgress={ connectStripeInProgress }
+                />}
             <div className='-list'>
               <CollectiveTransactions {...this.props} transactions={ this.props.route.type === 'expenses' ? collective.paidExpenses : collective.transactions } hasHost={ false } itemsToShow ={ 100 }/>
             </div>
@@ -210,7 +223,7 @@ export class Ledger extends Component {
       loadData,
       params,
       paypalQueryFields,
-      notify
+      notify,
     } = this.props;
 
     let promise = Promise.resolve();
@@ -368,9 +381,13 @@ const mapStateToProps = createStructuredSelector({
   // general data
   collective: getPopulatedCollectiveSelector,
   users: getUsersSelector,
+
+  // Payments related
   paypalCard: getPaypalCardSelector,
   paypalQueryFields: getPaypalQueryFieldsSelector,
   connectPaypalInProgress: getConnectPaypalInProgressSelector,
+  connectedToStripeAccount: connectedToStripeAccountSelector,
+  connectStripeInProgress: getConnectStripeInProgressSelector,
 
   // expense action related
   approveInProgress: getApproveInProgressSelector,
@@ -391,8 +408,9 @@ const mapStateToProps = createStructuredSelector({
 
 export default connect(mapStateToProps, {
   approveExpense,
-  getApprovalKey,
+  authorizeStripe,
   confirmPreapprovalKey,
+  getApprovalKey,
   fetchCards,
   fetchPendingExpenses,
   fetchTransactions,

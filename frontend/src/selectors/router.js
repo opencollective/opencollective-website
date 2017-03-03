@@ -34,6 +34,10 @@ export const getPaypalQueryFieldsSelector = createSelector(
     }
   });
 
+export const getStripeStatusQuerySelector = createSelector(
+  getQuerySelector,
+  (query) => query.stripeStatus)
+
 export const getTierSelector = createSelector(
   getParamsSelector,
   (params) => {

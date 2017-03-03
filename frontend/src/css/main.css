@@ -95,6 +95,7 @@
 @import './components/ShareIcon.css';
 @import './components/Slider.css';
 @import './components/SponsoredCard.css';
+@import './components/StripeReminder.css';
 @import './components/SubscriptionItem.css';
 @import './components/TransactionItem.css';
 @import './components/TransactionStatus.css';

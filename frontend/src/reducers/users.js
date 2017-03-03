@@ -10,7 +10,8 @@ import {DONATE_GROUP_SUCCESS} from '../constants/groups';
 export default function users(state={
   updateInProgress: false,
   sendingEmailInProgress: false,
-  connectPaypalInProgress: false
+  connectPaypalInProgress: false,
+  connectStripeInProgress: false,
 }, action={}) {
   const {
     type,
@@ -77,6 +78,12 @@ export default function users(state={
 
     case constants.GET_APPROVAL_KEY_FOR_USER_FAILURE:
       return merge({}, state, {connectPaypalInProgress: false});
+
+    case constants.AUTHORIZE_STRIPE_REQUEST:
+      return merge({}, state, { connectStripeInProgress: true});
+
+    case constants.AUTHORIZE_STRIPE_FAILURE:
+      return merge({}, state, { connectStripeInProgress: false});
 
     default:
       return state;

@@ -73,6 +73,10 @@ export const getStripePublishableKeySelector = createSelector(
   getStripeAccountSelector,
   (stripeAccount) => stripeAccount.stripePublishableKey);
 
+export const connectedToStripeAccountSelector = createSelector(
+  getStripePublishableKeySelector,
+  (stripePublishableKey) => Boolean(stripePublishableKey));
+
 const getCollectiveUsersByRoleSelector = createSelector(
   getCollectiveSelector,
   (collective) => collective.usersByRole || {});
