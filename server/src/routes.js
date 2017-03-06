@@ -119,12 +119,12 @@ export default (app) => {
   app.get('/opensource/apply', mw.ga, mw.addTitle('Sign up your Github repository'), render);
   app.get('/:slug/apply/:type', mw.ga, mw.fetchProfileBySlug, controllers.hosts.apply, render);
   app.get('/:slug/apply', mw.ga, mw.fetchProfileBySlug, controllers.hosts.apply, render);
+  app.get('/:slug/settings', mw.ga, mw.addTitle('Settings'), mw.fetchProfileBySlug, render);
   app.get('/connect/github', mw.ga, render);
   app.get('/:slug/:tier\.:format(json|csv)', mw.maxAge(3000), mw.ga, mw.fetchGroupBySlug, controllers.tierList); // <-------- WIP
   app.get('/:slug/:tier', mw.ga, mw.fetchGroupBySlug, render); // <-------- WIP
   app.get('/:slug/connect/:provider', mw.ga, render);
   app.get('/:slug/edit-twitter', mw.ga, mw.fetchProfileBySlug, render);
-  app.get('/:slug/edit', mw.ga, mw.addTitle('Edit'), mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/subscriptions', mw.ga, mw.addTitle('My Subscriptions'), render);
   app.get('/:slug([A-Za-z0-9-_]+)/connected-accounts', mw.ga, render);
   // TODO: #cleanup remove next two routes when new collective page is live

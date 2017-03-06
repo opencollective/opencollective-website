@@ -1,0 +1,13 @@
+#content-404 {
+  margin: 7% auto;
+  max-width: 400px;
+  font-size: 18px;
+}
+
+#content-404 img{
+  width: 100%;
+}
+
+#content-404 p{
+  margin-left: 13px;
+}
