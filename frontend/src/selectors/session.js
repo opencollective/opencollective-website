@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 /*
  * Session selectors
  */
-const getSessionSelector = (state) => state.session;
+export const getSessionSelector = (state) => state.session;
 
 export const isSessionAuthenticatedSelector = createSelector(
   getSessionSelector,

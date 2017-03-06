@@ -1,34 +1,40 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
-import values from 'lodash/values';
+import { createStructuredSelector } from 'reselect';
 
 import ProfilePage from './ProfilePage';
 import Collective from './Collective'
+import NotFound from '../components/NotFound';
+
 import { canEditUser } from '../lib/admin';
+
+import { getPopulatedCollectiveSelector } from '../selectors/collectives';
+import { getCurrentUserProfileSelector } from '../selectors/users';
+import { getSessionSelector } from '../selectors/session';
 
 export class PublicPage extends Component {
   render() {
-    if (this.props.isUserProfile) {
-      const profile = this.props.group;
-      profile.canEditUser = canEditUser(this.props.session, profile)
+    const {
+      collective,
+      profile,
+      session
+    } = this.props;
+
+    if (profile) {
+      profile.canEditUser = canEditUser(session, profile)
       return <ProfilePage profile={ profile } />
-    } else {
+    } else if (collective) {
       return <Collective />
+    } else {
+      return <NotFound />
     }
   }
 }
 
+const mapStateToProps = createStructuredSelector({
+  collective: getPopulatedCollectiveSelector,
+  profile: getCurrentUserProfileSelector,
+  session: getSessionSelector,
+});
+
 export default connect(mapStateToProps , {})(PublicPage);
-
-export function mapStateToProps({groups, session, router}) {
-  const group = values(groups)[0] || {};
-
-  return {
-    group,
-    session,
-    isUserProfile: Boolean(group.username),
-    slug: router.params.slug,
-    showOldCollectivePage: router.location.query.old === '1' || group.isSupercollective || group.hasPaypal,
-  };
-}

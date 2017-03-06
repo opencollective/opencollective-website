@@ -1,5 +1,7 @@
 import { createSelector } from 'reselect';
+import findKey from 'lodash/findKey';
 
+import { getSlugSelector } from './router';
 import { getAuthenticatedUserSelector } from './session';
 
 export const getUsersSelector = (state) => state.users;
@@ -7,6 +9,13 @@ export const getUsersSelector = (state) => state.users;
 export const getNewUserSelector = createSelector(
   getUsersSelector,
   (users) => users.newUser || {});
+
+export const getCurrentUserProfileSelector = createSelector(
+  [getSlugSelector, getUsersSelector],
+  (slug, users) => {
+    const userId = findKey(users, u => u.username === slug);
+    return userId ? users[userId] : null;
+  });
 
 export const getUpdateInProgressSelector = createSelector(
   getUsersSelector,

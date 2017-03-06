@@ -10,9 +10,9 @@ export default function groups(state={}, action={}) {
   switch (action.type) {
 
     case HYDRATE:
-      if (action.data.group) {
+      if (action.data.collective) {
         return merge({}, state, {
-          [action.data.group.slug]: action.data.group
+          [action.data.collective.slug]: action.data.collective
         });
       } 
       return state;

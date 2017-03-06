@@ -5,7 +5,7 @@ import { normalize } from 'normalizr';
 
 import * as constants from '../constants/users';
 import {DONATE_GROUP_SUCCESS} from '../constants/groups';
-
+import { HYDRATE } from '../constants/session';
 
 export default function users(state={
   updateInProgress: false,
@@ -21,6 +21,15 @@ export default function users(state={
   } = action;
 
   switch (type) {
+
+   case HYDRATE:
+    if (action.data.user) {
+      return merge({}, state, {
+        [action.data.user.id]: action.data.user
+      });
+    } 
+    return state;
+
 
     case constants.FETCH_USER_SUCCESS:
     case constants.FETCH_USERS_BY_GROUP_SUCCESS: {

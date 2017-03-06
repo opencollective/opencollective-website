@@ -61,10 +61,10 @@ const fetchProfileBySlug = (req, res, next) => {
   api
     .get(`/profile/${req.params.slug.toLowerCase()}`)
     .then(profile => {
-      req.group = profile; // backward compatibility: PublicPage.js expects `groups` before loading ProfilePage.
-      req.collective = profile;
       if (profile.username) {
         req.user = profile;
+      } else {
+        req.collective = profile;
       }
       next();
     })
@@ -149,16 +149,16 @@ const ga = (req, res, next) => {
 };
 
 const addMeta = (req, res, next) => {
-  const { group, user } = req;
+  const { collective, user } = req;
 
   req.meta = {};
-  if (group) {
+  if (collective) {
     req.meta = {
-      url: group.publicUrl,
-      title: `${group.name} is on Open Collective`,
-      description: `${group.mission}`,
-      image: group.image || group.logo,
-      twitter: `@${group.twitterHandle}`,
+      url: collective.publicUrl,
+      title: `${collective.name} is on Open Collective`,
+      description: `${collective.mission}`,
+      image: collective.image || collective.logo,
+      twitter: `@${collective.twitterHandle}`,
     };
   } else {
     let description = '';
