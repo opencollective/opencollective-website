@@ -42,11 +42,23 @@ import {
   getConnectStripeInProgressSelector } from '../selectors/users';
 import { getAuthenticatedUserSelector } from '../selectors/session';
 
+const SETTINGS_PAGES = [
+  'general',
+  'host'
+];
 
 export class Settings extends Component {
 
   constructor(props) {
     super(props);
+    const urlHash = this.getUrlHash();
+    const validUrlHash = SETTINGS_PAGES.indexOf(urlHash) !== -1;
+    if (!validUrlHash) this.setUrlHash(SETTINGS_PAGES[0]);
+    this.state = {
+      currentPage: validUrlHash ? urlHash : SETTINGS_PAGES[0],
+    };
+    this.onSaveGeneralRef = this.onSaveGeneral.bind(this);
+    this.onSaveHostRef = this.onSaveHost.bind(this);
   }
 
 
@@ -64,18 +76,37 @@ export class Settings extends Component {
 
     const { view } = this.state;
     return (
-      <div className='Ledger'>
+      <div className='Settings'>
         <LoginTopBar />
         <Notification />
 
-        <div className='Settings-container padding40' style={{marginBottom: '0'}}>
-          <div className='line1'>Settings</div>
-          <div className='info-block mr3'>
-            <div className='info-block-value'><a href={`/${user.slug}`}>{user.name || user.slug}</a></div>
-            <div className='info-block-label'>user</div>
-          </div>
+        <div className='Settings-container'>
+          <Grid flex>
+            <Column>
+              <div className='SettingsNavHeader'>Your Settings</div>
+              <div className='SettingsNav'>
+                {SETTINGS_PAGES.map(pageName => {
+                  return (
+                    <div
+                      key={pageName}
+                      className={`SettingsNavItem ${currentPage === pageName ? 'SettingsNavItem--active' : ''}`}
+                      onClick={() => {
+                        this.setState({currentPage: pageName});
+                        this.setUrlHash(pageName);
+                      }}
+                      >{pageName}</div>
+                  )
+                })}
+              </div>
+            </Column>
+            <Column auto>
+              <div className='SettingsPage'>
+                {currentPage === 'general' && <SettingsUserGeneral currency={currency} language={settings.lang} onSave={this.onSaveGeneralRef} />}
+                {currentPage === 'host' && <SettingsUserHost onSave={this.onSaveBankingRef} />}
+              </div>
+            </Column>
+          </Grid>
         </div>
-
         <PublicFooter />
       </div>
     );
@@ -85,7 +116,17 @@ export class Settings extends Component {
   componentWillMount() {
    
    }
+
+  getUrlHash() {
+    return this.props.location.hash ? this.props.location.hash.substr(1).trim().toLowerCase().replace('-', ' ') : '';
+  }
+
+  setUrlHash(name) {
+    window.location.hash = name.replace(' ', '-');
+  }
 }
+
+
 
 /*
  * Get Paypal Preapproval key

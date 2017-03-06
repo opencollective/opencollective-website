@@ -125,6 +125,7 @@ export default (app) => {
   app.get('/:slug/connect/:provider', mw.ga, render);
   app.get('/:slug/edit-twitter', mw.ga, mw.fetchProfileBySlug, render);
   app.get('/:slug/edit', mw.ga, mw.addTitle('Edit'), mw.fetchGroupBySlug, mw.addMeta, render);
+  app.get('/:slug/settings', mw.ga, mw.addTitle('Settings'), mw.fetchProfileBySlug, render);
   app.get('/subscriptions', mw.ga, mw.addTitle('My Subscriptions'), render);
   app.get('/:slug([A-Za-z0-9-_]+)/connected-accounts', mw.ga, render);
   // TODO: #cleanup remove next two routes when new collective page is live
