@@ -82,3 +82,11 @@ export function scrollToExpense() {
    window.scrollTo(0, 0);
   }
 }
+
+export function getUrlHash() {
+    return window.location.hash ? window.location.hash.substr(1).trim().toLowerCase().replace('-', ' ') : '';
+  }
+
+export function setUrlHash(name) {
+  window.location.hash = name.replace(' ', '-');
+}
