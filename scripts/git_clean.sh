@@ -1,4 +1,5 @@
-f [[ `git checkout master` ]]; then 
+#!/bin/bash
+if [[ `git checkout master` ]]; then 
   for BRANCH in `git branch | grep -v "*"`; do
     if [[ `git diff master..$BRANCH` ]]; then
       echo "- $BRANCH needs to be fast-forward";
