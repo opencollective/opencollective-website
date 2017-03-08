@@ -146,13 +146,8 @@ export class Collective extends Component {
   componentWillMount() {
     const {
       collective,
-      fetchProfile,
-      loadData
     } = this.props;
 
-    if (loadData || !collective.id) { 
-      fetchProfile(collective.slug)
-    }
     this.refreshData(); 
   }
     
@@ -272,7 +267,6 @@ const mapStateToProps = createStructuredSelector({
     // other props
     isAuthenticated: isSessionAuthenticatedSelector,
     i18n: getI18nSelector,
-    loadData: getAppRenderedSelector,
     users: getUsersSelector,
     loggedinUser: getAuthenticatedUserSelector,
     query: getQuerySelector

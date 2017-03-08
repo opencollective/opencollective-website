@@ -25,6 +25,7 @@
 }
 
 .Button--connectpaypal,
+.Button--connectstripe,
 .Button--approve {
   background-color: var(--light-blue);
 }
@@ -90,7 +91,6 @@
 .Button--disabled,
 .Button--disabled:hover {
   background-color: var(--gray);
-  color: var(--darkest-gray);
   cursor: default;
 }
 

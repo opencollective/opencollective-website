@@ -13,21 +13,19 @@ import PublicFooter from '../components/PublicFooter';
 import UserSettingsForHost from '../components/settings/UserSettingsForHost';
 
 // actions
-import confirmPreapprovalKey from '../actions/users/confirm_preapproval_key';
-import getApprovalKey from '../actions/users/get_approval_key';
+import fetchProfile from '../actions/profile/fetch_by_slug';
 
 // libs
 import { canEditUser } from '../lib/admin';
 import { getUrlHash, setUrlHash } from '../lib/utils';
 
 // selectors
-import { getPopulatedCollectiveSelector } from '../selectors/collectives';
+import { getI18nSelector } from '../selectors/collectives';
 import { 
-  getCurrentUserProfileSelector,
-  getPaypalCardSelector,
-  getConnectPaypalInProgressSelector } from '../selectors/users';
+  getCurrentUserProfileSelector } from '../selectors/users';
 import { getSessionSelector } from '../selectors/session';
-import { getPaypalQueryFieldsSelector } from '../selectors/router';
+import { getAppRenderedSelector } from '../selectors/app';
+import { getSlugSelector } from '../selectors/router';
 
 
 export class Settings extends Component {
@@ -42,12 +40,19 @@ export class Settings extends Component {
 
   componentWillMount() {
     const {
-      profile
+      profile,
+      loadData,
+      fetchProfile,
+      slug
     } = this.props;
 
     let settingsPages = [];
 
-    if (profile) {
+    console.log("Profile: ", profile);
+    if (!profile) {
+      fetchProfile(slug)
+      .then(() => settingsPages = ['host']);
+    } else {
       settingsPages = ['host'];
     }
 
@@ -62,9 +67,9 @@ export class Settings extends Component {
 
   render() {
     const {
-      collective,
       profile,
-      session
+      session,
+      i18n
     } = this.props;
 
     const {
@@ -95,14 +100,16 @@ export class Settings extends Component {
                         this.setState({currentPage: pageName});
                         this.setUrlHash(pageName);
                       }}
-                      >{pageName}</div>
-                  )
+                      >{pageName}
+                    </div>
+                    );
                 })}
               </div>
             </Column>
             <Column auto>
               <div className='SettingsPage'>
-                {currentPage === 'host' && <UserSettingsForHost />}
+                {currentPage === 'host' && 
+                  <UserSettingsForHost i18n={ i18n } />}
               </div>
             </Column>
           </Grid>
@@ -114,19 +121,13 @@ export class Settings extends Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  collective: getPopulatedCollectiveSelector,
   profile: getCurrentUserProfileSelector,
   session: getSessionSelector,
+  slug: getSlugSelector,
 
-  // Paypal
-  paypalCard: getPaypalCardSelector,
-  paypalQueryFields: getPaypalQueryFieldsSelector,
-  connectPaypalInProgress: getConnectPaypalInProgressSelector,
-
-  // Stripe
+  i18n: getI18nSelector,
 });
 
 export default connect(mapStateToProps , {
-  getApprovalKey,
-  confirmPreapprovalKey
+  fetchProfile
 })(Settings);

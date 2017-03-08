@@ -37,6 +37,10 @@ const DEFAULT_COLLECTIVE_SETTINGS = {
  */
 const getCollectivesSelector = (state) => state.collectives;
 
+export const getCurrentCollectiveSelector = createSelector(
+  [ getSlugSelector, getCollectivesSelector ],
+  (slug, collectives) => collectives[slug]);
+
 export const getCollectiveSelector = createSelector(
   [ getSlugSelector, getCollectivesSelector ],
   (slug, collectives) => collectives[slug] || { slug });
@@ -72,6 +76,10 @@ export const getStripeAccountSelector = createSelector(
 export const getStripePublishableKeySelector = createSelector(
   getStripeAccountSelector,
   (stripeAccount) => stripeAccount.stripePublishableKey);
+
+export const connectedToStripeAccountSelector = createSelector(
+  getStripePublishableKeySelector,
+  (stripePublishableKey) => Boolean(stripePublishableKey));
 
 const getCollectiveUsersByRoleSelector = createSelector(
   getCollectiveSelector,

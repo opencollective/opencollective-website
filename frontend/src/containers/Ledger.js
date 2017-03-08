@@ -9,6 +9,7 @@ import { scrollToExpense, capitalize } from '../lib/utils';
 import LoginTopBar from './LoginTopBar';
 import Notification from './Notification';
 import SubmitExpense from './SubmitExpense';
+import PaypalPreapprovalContainer from './PaypalPreapprovalContainer';
 
 // components
 import RequestMoney from '../components/RequestMoney';
@@ -18,7 +19,6 @@ import CollectiveTransactions from '../components/collective/CollectiveTransacti
 import Currency from '../components/Currency';
 import ExpenseEmptyState from '../components/ExpenseEmptyState';
 import PublicFooter from '../components/PublicFooter';
-import PaypalReminder from '../components/PaypalReminder';
 
 // actions
 import approveExpense from '../actions/expenses/approve';
@@ -31,8 +31,6 @@ import payExpense from '../actions/expenses/pay';
 import rejectExpense from '../actions/expenses/reject';
 import validateSchema from '../actions/form/validate_schema';
 import fetchCards from '../actions/users/fetch_cards';
-import getApprovalKey from '../actions/users/get_approval_key';
-import confirmPreapprovalKey from '../actions/users/confirm_preapproval_key';
 
 // Selectors
 import {
@@ -97,8 +95,7 @@ export class Ledger extends Component {
       approveInProgress,
       rejectInProgress,
       payInProgress,
-      paypalCard,
-      connectPaypalInProgress
+      paypalCard
     } = this.props;
 
     const { view } = this.state;
@@ -151,13 +148,7 @@ export class Ledger extends Component {
         { this.props.route.type === 'expenses' && <div className='Ledger-container padding40 expenses-container'>
             <div className='line1'>unpaid expenses</div>
 
-            {isHost && 
-              <PaypalReminder
-                i18n={ i18n }
-                card={ paypalCard }
-                onClickConnect={ getPaypalPreapprovalKey.bind(this, authenticatedUser.id) }
-                onClickInProgress = { connectPaypalInProgress }
-                />}
+            {isHost && <PaypalPreapprovalContainer />}
 
             <div className='-list'>
             {collective.unpaidExpenses
@@ -201,7 +192,6 @@ export class Ledger extends Component {
     const { 
       authenticatedUser,
       collective,
-      confirmPreapprovalKey,
       fetchCards,
       fetchProfile,
       fetchUsers,
@@ -209,7 +199,6 @@ export class Ledger extends Component {
       fetchTransactions,
       loadData,
       params,
-      paypalQueryFields,
       notify
     } = this.props;
 
@@ -228,20 +217,6 @@ export class Ledger extends Component {
         break;
     }
 
-    const confirmPaypalPromise = () => {
-      const {
-        preapprovalKey,
-        status
-      } = paypalQueryFields;
-
-      if (authenticatedUser && preapprovalKey && status === 'success') {
-        return confirmPreapprovalKey(authenticatedUser.id, preapprovalKey)
-        .then(() => fetchCards(authenticatedUser.id, { service: 'paypal'}))
-        .then(() => notify('success', 'Successfully connected PayPal account'));
-      }
-      return Promise.resolve();
-    };
-
     const fetchCardsPromise = () => {
       if (authenticatedUser) {
         return fetchCards(authenticatedUser.id, { service: 'paypal'})
@@ -254,7 +229,6 @@ export class Ledger extends Component {
       fetchPendingExpenses(collective.slug),
       fetchTransactions(collective.slug, { type: this.props.route.type }),
       fetchCardsPromise(),
-      confirmPaypalPromise()
       ]))
       .then(() => scrollToExpense())
       .catch(error => notify('error', error.message));
@@ -369,8 +343,6 @@ const mapStateToProps = createStructuredSelector({
   collective: getPopulatedCollectiveSelector,
   users: getUsersSelector,
   paypalCard: getPaypalCardSelector,
-  paypalQueryFields: getPaypalQueryFieldsSelector,
-  connectPaypalInProgress: getConnectPaypalInProgressSelector,
 
   // expense action related
   approveInProgress: getApproveInProgressSelector,
@@ -391,8 +363,6 @@ const mapStateToProps = createStructuredSelector({
 
 export default connect(mapStateToProps, {
   approveExpense,
-  getApprovalKey,
-  confirmPreapprovalKey,
   fetchCards,
   fetchPendingExpenses,
   fetchTransactions,

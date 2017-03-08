@@ -91,7 +91,7 @@ export class LoginTopBar extends Component {
 
   componentWillMount() {
     const { isAuthenticated, user, loggedInUserId, fetchUser } = this.props;
-    if (isAuthenticated && !user) {
+    if (isAuthenticated && (!user || !user.stripeAccount)) {
       fetchUser(loggedInUserId);
     }
   }

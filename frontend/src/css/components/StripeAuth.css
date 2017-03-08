@@ -1,0 +1,11 @@
+.StripeAuth {
+  text-align: center;
+  padding: 20px 0px;
+  margin-top: 30px;
+}
+
+.StripeAuth .Button--connectstripe {
+  width: 200px;
+  margin-top: 20px;
+  min-width: 100px;
+}

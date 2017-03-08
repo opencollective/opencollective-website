@@ -40,6 +40,7 @@
 @import './containers/OnBoarding.css';
 @import './containers/ProfilePage.css';
 @import './containers/Response.css';
+@import './containers/Settings.css';
 @import './containers/SubmitExpense.css';
 @import './containers/Subscriptions.css';
 
@@ -84,7 +85,7 @@
 @import './components/Mosaic.css';
 @import './components/NotFound.css';
 @import './components/Notification.css';
-@import './components/PaypalReminder.css';
+@import './components/PaypalPreapproval.css';
 @import './components/ProfilePhoto.css';
 @import './components/CollectiveOpenSourceCTA.css';
 @import './components/PublicGroupThanks.css';
@@ -96,6 +97,7 @@
 @import './components/ShareIcon.css';
 @import './components/Slider.css';
 @import './components/SponsoredCard.css';
+@import './components/StripeAuth.css';
 @import './components/SubscriptionItem.css';
 @import './components/TransactionItem.css';
 @import './components/TransactionStatus.css';
