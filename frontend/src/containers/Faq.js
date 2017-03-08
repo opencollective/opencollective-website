@@ -111,8 +111,10 @@ export class Faq extends Component {
           <h3>Why is my Collective not able to receive donations yet? </h3>
           <p>We are thrilled you have created your Open Collective! We are still in private beta and we have a selection process to ensure the quality of the collectives our users can back before they are active to receive donations. We are working hard to get everyone aboard!</p>
           
-          <h3>What are your Terms of Service?</h3>
-          <p>You can find them <a href="https://docs.google.com/document/u/1/d/1HRYVADHN1-4B6wGCxIA6dx28jHtcAVIvt95hkjEZVQE/pub">here</a>.</p>
+          <h3>What are your Terms of Service and Privacy Policy?</h3>
+          <p><a href="https://docs.google.com/document/u/1/d/1HRYVADHN1-4B6wGCxIA6dx28jHtcAVIvt95hkjEZVQE/pub">Terms of Service</a></p>
+          <p><a href="https://docs.google.com/document/u/1/d/1OHztLGympxBPVwrLqb8jtCIlDV5Fr6TysOeGXUkDnMM/pub">Privacy Policy</a></p>
+          <p>Please read them carefully!</p>    
           
           <h3>Can’t find the answer you are looking for?</h3>
           <p>Shoot us an email at support@opencollective.com or drop by our Slack channel https://slack.opencollective.com</p>
