@@ -138,7 +138,7 @@ export class Faq extends Component {
               </ul>
             </p>
 
-            <p>We did a follow up round of $305k in July 2016 (SAFE, $8M cap) with:
+            <p>We did a follow up round of $315k in July 2016 (SAFE, $8M cap) with:
               <ul>
                 <li><span>$100k</span> <a href="https://www.linkedin.com/in/ricardo-gorodisch-9b057889">Ricardo Gorodisch</a> (Argentina, President <a href="http://www.fundacionkaleidos.org/">Foundation Kaleidos</a>)</li>
                 <li><span>$50k</span> <a href="https://www.linkedin.com/in/petekoomen">Pete Koomen</a> (SF, Cofounder/CTO <a href="http://optimizely.com">Optimizely</a>)</li>
@@ -146,13 +146,13 @@ export class Faq extends Component {
                 <li><span>$25k</span> <a href="https://www.linkedin.com/in/caesar-sengupta-2743b">Caesar Sengupta</a> (Bay Area, VP Product Management at Google)</li>
                 <li><span>$20k</span> <a href="https://www.linkedin.com/in/gkgandhi">Gautam Gandhi</a> (India, Entrepreneur, former Head New Business Development India at Google)</li>
                 <li><span>$15k</span> <a href="https://www.linkedin.com/in/tpbrown5">Tom Brown</a> (FinTech lawyer, partner at Paul Hastings, former VP at Visa )</li>
+                <li><span>$15k</span> <a href="https://www.linkedin.com/in/sam-de-brouwer-b0a34122">Sam De Brouwer</a> (SF, <a href="http://www.tedxsanfrancisco.com">TEDxSanFrancisco</a>)</li>
                 <li><span>$15k</span> Vadim (NYC/Bay Area/Buenos Aires)</li>
                 <li><span>$10k</span> <a href="https://www.linkedin.com/in/johnkobs">John Kobs</a> (SF, Entrepreneur/CEO at <a href="http://ApartmentList.com">ApartmentList</a>)</li>
                 <li><span>$10k</span> <a href="https://www.linkedin.com/in/nicolaswittenborn">Nicolas Wittenborn</a> (Berlin, principal at point 9 venture)</li>
                 <li><span>$10k</span> <a href="https://www.linkedin.com/in/derek-parham-b7b5504">Derek Parham</a> (NYC, deputy CTO at Hillary For America)</li>
                 <li><span>$10k</span> <a href="https://www.linkedin.com/in/hbridge">Henry Bridge</a> (NYC, Director of Product at Hillary For America)</li>
                 <li><span>$10k</span> <a href="https://www.linkedin.com/in/antoineperdaens">Antoine Perdaens</a> (Belgium, Cofounder/CEO at <a href="http://knowledgeplaza.net">KnowledgePlaza</a>)</li>
-                <li><span>$10k</span> <a href="https://www.linkedin.com/in/sam-de-brouwer-b0a34122">Sam De Brouwer</a> (SF, <a href="http://www.tedxsanfrancisco.com">TEDxSanFrancisco</a>)</li>
               </ul>
             </p>
           </details>
