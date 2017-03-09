@@ -118,10 +118,8 @@
   }
 }
 
-@media (max-width: 600px) {
-  .About .About-container {
-    padding: 30px;
-  }
+.About .About-container {
+  padding: 30px;
 }
 
 
