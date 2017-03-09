@@ -46,7 +46,7 @@ export default class CollectivePostDonationThanks extends Component {
   }
 
   tweet() {
-    const shareUrl = `https://twitter.com/intent/tweet?status=${this.state.tweet}`
+    const shareUrl = `https://twitter.com/intent/tweet?status=${encodeURIComponent(this.state.tweet)}`
     const w = 650;
     const h = 450;
     const left = (screen.width / 2) - (w / 2);
