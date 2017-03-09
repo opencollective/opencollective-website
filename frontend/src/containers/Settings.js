@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { pushState } from 'redux-router';
 
 // containers
 import LoginTopBar from './LoginTopBar';
