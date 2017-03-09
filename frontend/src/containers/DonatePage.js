@@ -101,7 +101,7 @@ export class DonatePage extends Component {
                 host={host}
                 donationForm={donationForm}
                 appendDonationForm={appendDonationForm}
-                onToken={donateToGroup.bind(this)}
+                onToken={donateToCollective.bind(this)}
                 i18n={i18n}
               />
             }
@@ -146,7 +146,7 @@ export class DonatePage extends Component {
 
 }
 
-export function donateToGroup({amount, interval, currency, description, token}) {
+export function donateToCollective({amount, interval, currency, description, token}) {
   const {
     notify,
     donate,
@@ -164,13 +164,35 @@ export function donateToGroup({amount, interval, currency, description, token}) 
   if (interval !== 'one-time')
     payment.interval = interval;
 
-  return donate(collective.id, payment)
-    .then(({json}) => this.setState({ view: (json && json.user.firstName && json.user.avatar) ? 'thankyou' : 'signup' }))
+  return donate(collective.slug, payment)
+    .then(({json}) => afterDonate.bind(this)(json))
     .catch((err) => notify('error', err.message));
 }
 
 export function onSkipSaveUser() {
-  this.setState({ view: 'thankyou' });
+  close.bind(this)();
+}
+
+export function afterDonate(donation) {
+  this.donation = donation;
+  if (donation && donation.user.firstName && donation.user.avatar) {
+    close.bind(this)();
+  } else {
+    this.setState({ view: 'signup' });
+  }
+}
+
+export function close() {
+  const params = this.props.location.query;
+  const redirect = this.props.redirect || function(url) {
+    window.location = url
+  };
+
+  if (params.redirect) {
+    redirect(`${params.redirect}?transactionuuid=${this.donation.transaction.uuid}`);
+  } else {
+    this.setState({ view: 'thankyou' });
+  }
 }
 
 export function saveNewUser() {
@@ -183,7 +205,7 @@ export function saveNewUser() {
   } = this.props;
   return validateSchema(profileForm.attributes, profileSchema)
     .then(() => updateUser(newUser.id, Object.assign({}, profileForm)))
-    .then(() => this.setState({ view: 'thankyou' }))
+    .then(close.bind(this))
     .catch(({message}) => notify('error', message));
 }
 

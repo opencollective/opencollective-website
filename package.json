@@ -1,6 +1,6 @@
 {
   "name": "opencollective-website",
-  "version": "0.1.274",
+  "version": "0.1.275",
   "engines": {
     "node": "6.2.2",
     "npm": "3.9.5"
@@ -30,7 +30,7 @@
     "watch:server": "nodemon -e js,hbs -w server/src -w frontend/src",
     "watch:test": "mocha test/unit/ --opts test/unit/mocha.opts --watch",
     "postinstall": "bash scripts/postinstall.sh",
-    "git:clean": "if [[ `git checkout master` ]]; then for BRANCH in `git branch | grep -v \"*\"`; do  if [[ `git diff master..$BRANCH` ]]; then echo \"- $BRANCH has unmerged changes\"; else echo \"> Deleting $BRANCH\"; git branch -D $BRANCH; fi; done; fi;",
+    "git:clean": "./scripts/git_clean.sh",
     "deploy:staging": "bash -x scripts/deploy.sh staging",
     "deploy:production": "bash -x scripts/deploy.sh production",
     "rexec:api": "bash scripts/remote_exec_api.sh",
