@@ -83,7 +83,8 @@ export class Settings extends Component {
         <Notification />
 
         <div className='Settings-container'>
-          <div className='SettingsHead' style={{backgroundImage: `url(/public/images/onboarding-bg.svg)`}}>
+          <div className='SettingsHead' style={{backgroundImage: 'url(/public/images/default-settings-background.png)'}}>
+            <img className='SettingsHeadLogo' src={profile.avatar} />
           </div>
           <Grid flex>
             <Column>

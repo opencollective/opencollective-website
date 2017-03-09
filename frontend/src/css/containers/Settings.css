@@ -10,7 +10,7 @@
       margin-bottom: 40px;
       background-repeat: no-repeat;
       background-position: center -88px;
-      background-size: 800px 600px;
+      background-size: cover;
       .SettingsHeadLogo {
         filter: none;
         position: absolute;
@@ -18,12 +18,13 @@
         left: 0;
         right: 0;
         bottom: 0;
-        width: 240px;
-        height: 160px;
+        height: 96px;
         margin: auto;
         background-repeat: no-repeat;
         background-position: center;
         background-size: contain;
+        border: 3px solid;
+        border-radius: 50%;
       }
     }
     .SettingsNavHeader {
