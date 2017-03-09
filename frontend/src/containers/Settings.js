@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { pushState } from 'redux-router';
 
 // containers
 import LoginTopBar from './LoginTopBar';
@@ -23,7 +24,8 @@ import { getUrlHash, setUrlHash } from '../lib/utils';
 import { getI18nSelector } from '../selectors/collectives';
 import { 
   getCurrentUserProfileSelector } from '../selectors/users';
-import { getSessionSelector } from '../selectors/session';
+import { 
+  getSessionSelector } from '../selectors/session';
 import { getSlugSelector } from '../selectors/router';
 
 

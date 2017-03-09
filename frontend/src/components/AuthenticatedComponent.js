@@ -8,15 +8,15 @@ export function requireAuthentication(Component) {
   class AuthenticatedComponent extends React.Component {
 
     componentWillMount() {
-      this.checkAuth();
+      this.checkAuth(this.props.isAuthenticated);
     }
 
-    componentWillReceiveProps() {
-      this.checkAuth();
+    componentWillReceiveProps(nextProps) {
+      this.checkAuth(nextProps.isAuthenticated);
     }
 
-    checkAuth() {
-      if (!this.props.isAuthenticated) {
+    checkAuth(isAuthenticated) {
+      if (!isAuthenticated) {
         const redirectAfterLogin = this.props.location.pathname;
         this.props
         .dispatch(pushState(null, `/login?next=${redirectAfterLogin}`));
