@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
@@ -39,7 +39,6 @@ class StripeAuthContainer extends Component {
     const {
       stripeAccount,
       connectStripeInProgress,
-      authenticatedUser,
       i18n,
       authorizeStripe
     } = this.props;

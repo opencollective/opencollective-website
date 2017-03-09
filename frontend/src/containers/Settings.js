@@ -24,7 +24,6 @@ import { getI18nSelector } from '../selectors/collectives';
 import { 
   getCurrentUserProfileSelector } from '../selectors/users';
 import { getSessionSelector } from '../selectors/session';
-import { getAppRenderedSelector } from '../selectors/app';
 import { getSlugSelector } from '../selectors/router';
 
 
@@ -41,7 +40,6 @@ export class Settings extends Component {
   componentWillMount() {
     const {
       profile,
-      loadData,
       fetchProfile,
       slug
     } = this.props;
@@ -50,8 +48,6 @@ export class Settings extends Component {
       userSettingsPages
     } = this.state;
 
-
-    console.log("Profile: ", profile);
     if (!profile) {
       fetchProfile(slug)
     }
@@ -100,7 +96,7 @@ export class Settings extends Component {
                       className={`SettingsNavItem ${currentPage === pageName ? 'SettingsNavItem--active' : ''}`}
                       onClick={() => {
                         this.setState({currentPage: pageName});
-                        this.setUrlHash(pageName);
+                        setUrlHash(pageName);
                       }}
                       >{pageName}
                     </div>

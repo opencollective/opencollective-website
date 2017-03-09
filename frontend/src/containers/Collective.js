@@ -52,7 +52,6 @@ import {
   getEditCollectiveInProgressSelector,
   getDonationFormSelector,
   getProfileFormAttrSelector } from '../selectors/form';
-import { getAppRenderedSelector } from '../selectors/app';
 import { 
   getUsersSelector,
   getNewUserSelector,
@@ -144,10 +143,6 @@ export class Collective extends Component {
   }
 
   componentWillMount() {
-    const {
-      collective,
-    } = this.props;
-
     this.refreshData(); 
   }
     
@@ -167,7 +162,8 @@ export class Collective extends Component {
     return Promise.all([
       fetchUsers(collective.slug),
       fetchPendingExpenses(collective.slug),
-      fetchTransactions(collective.slug)]);
+      fetchTransactions(collective.slug)
+    ]);
   }
 }
 

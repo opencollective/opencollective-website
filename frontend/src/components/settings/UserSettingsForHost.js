@@ -13,7 +13,7 @@ export default class UserSettingsForHost extends Component {
     return (
       <div className='SettingsSection'>
         <div className='SettingsPageH1'>Host Settings</div>
-        <p>Configure PayPal and Stripe accounts as a Host</p>
+        <p>{i18n.getString('settingsHostHeader')}</p>
         <div className='SettingsPageHr'>
           <div>PayPal</div>
         </div>

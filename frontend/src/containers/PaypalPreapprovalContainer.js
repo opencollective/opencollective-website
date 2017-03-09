@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
@@ -25,7 +25,7 @@ class PaypalPreapprovalContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: !Boolean(this.props.paypalCard)
+      loading: !this.props.paypalCard
     }
   }
 

@@ -41,13 +41,11 @@ import {
 import { getAppRenderedSelector } from '../selectors/app';
 import { 
   getUsersSelector,
-  getPaypalCardSelector,
-  getConnectPaypalInProgressSelector } from '../selectors/users';
+  getPaypalCardSelector } from '../selectors/users';
 import { getAuthenticatedUserSelector } from '../selectors/session';
 import { 
   getPathnameSelector, 
-  getParamsSelector,
-  getPaypalQueryFieldsSelector } from '../selectors/router';
+  getParamsSelector } from '../selectors/router';
 import {
   getApproveInProgressSelector,
   getRejectInProgressSelector,
