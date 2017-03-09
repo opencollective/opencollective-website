@@ -6,11 +6,11 @@
   .Settings-container {
     .SettingsHead {
       position: relative;
-      height: 220px;
+      height: 150px;
       margin-bottom: 40px;
       background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
+      background-position: center -88px;
+      background-size: 800px 600px;
       .SettingsHeadLogo {
         filter: none;
         position: absolute;

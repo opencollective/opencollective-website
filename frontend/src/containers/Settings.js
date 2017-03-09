@@ -33,7 +33,7 @@ export class Settings extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      settingsPages: [],
+      userSettingsPages: ['host'],
       currentPage: ''
     }
   }
@@ -46,22 +46,22 @@ export class Settings extends Component {
       slug
     } = this.props;
 
-    let settingsPages = [];
+    const {
+      userSettingsPages
+    } = this.state;
+
 
     console.log("Profile: ", profile);
     if (!profile) {
       fetchProfile(slug)
-      .then(() => settingsPages = ['host']);
-    } else {
-      settingsPages = ['host'];
     }
 
     const urlHash = getUrlHash();
-    const validUrlHash = settingsPages.indexOf(urlHash) !== -1;
+    const validUrlHash = userSettingsPages.indexOf(urlHash) !== -1;
 
     this.setState({
-      settingsPages,
-      currentPage: validUrlHash ? urlHash : settingsPages[0],
+      userSettingsPages,
+      currentPage: validUrlHash ? urlHash : userSettingsPages[0],
     });
   }
 
@@ -73,7 +73,7 @@ export class Settings extends Component {
     } = this.props;
 
     const {
-      settingsPages,
+      userSettingsPages,
       currentPage
     } = this.state;
 
@@ -87,11 +87,13 @@ export class Settings extends Component {
         <Notification />
 
         <div className='Settings-container'>
+          <div className='SettingsHead' style={{backgroundImage: `url(/public/images/onboarding-bg.svg)`}}>
+          </div>
           <Grid flex>
             <Column>
               <div className='SettingsNavHeader'>Your Settings</div>
               <div className='SettingsNav'>
-                {settingsPages.map(pageName => {
+                {userSettingsPages.map(pageName => {
                   return (
                     <div
                       key={pageName}

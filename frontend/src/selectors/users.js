@@ -10,6 +10,11 @@ export const getNewUserSelector = createSelector(
   getUsersSelector,
   (users) => users.newUser || {});
 
+/*
+ * Gets the user currently referenced by the slug in the url
+ * If not found, returns null;
+ * Useful for determining whether current slug is a user profile or collective
+ */
 export const getCurrentUserProfileSelector = createSelector(
   [getSlugSelector, getUsersSelector],
   (slug, users) => {
