@@ -87,7 +87,7 @@ const CollectiveExpenseItem = ({
         <div className='flex flex-column flex-auto'>
           <div className='CollectiveExpenseItem-info'>
             <div className='-ff-sec'>{ expense.title } ({expense.category})</div>
-            <div className='h6 m0 muted'>{ i18n.getString('submittedBy') } { submittedByName } - { expense.incurredAt && i18n.moment(expense.incurredAt).fromNow() } </div>
+            <div className='h6 m0 muted' title={i18n.moment(expense.incurredAt).format('MMMM Do YYYY')}>{ i18n.getString('submittedBy') } { submittedByName } - { expense.incurredAt && i18n.moment(expense.incurredAt).fromNow() } </div>
             <p className='h3 -ff-sec amount'>
               <Currency value={expense.amount} currency={expense.currency} colorify={false} /> 
             </p>
