@@ -82,7 +82,7 @@ class PaypalPreapprovalContainer extends Component {
     return (
       <PaypalPreapproval 
         card={ paypalCard }
-        onClickConnect={ getApprovalKey.bind(this, authenticatedUser.id, { baseUrl: window.location})}
+        onClick={ getApprovalKey.bind(this, authenticatedUser.id, { baseUrl: window.location})}
         onClickInProgress={ connectPaypalInProgress }
         i18n={ i18n }
         loading={ this.state.loading }

@@ -6,7 +6,7 @@ class PaypalPreapproval extends Component {
   render() {
     const {
       card,
-      onClickConnect,
+      onClick,
       onClickInProgress,
       i18n,
       loading
@@ -20,7 +20,7 @@ class PaypalPreapproval extends Component {
             { i18n.getString('paypalPreapprovalNeedValidAccount') }
             <ConnectPaypalButton
               disabled={ onClickInProgress }
-              onClick={ onClickConnect }
+              onClick={ onClick }
               inProgress={ onClickInProgress }
               i18n={i18n}
             />
@@ -38,7 +38,7 @@ class PaypalPreapproval extends Component {
 
 PaypalPreapproval.propTypes = {
   i18n: PropTypes.object.isRequired,
-  onClickConnect: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired,
   card: PropTypes.object,
   onClickInProgress: PropTypes.bool,
   loading: PropTypes.bool,

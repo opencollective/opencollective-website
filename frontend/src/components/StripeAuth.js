@@ -6,7 +6,7 @@ class StripeAuth extends Component {
   render() {
     const {
       stripeAccount,
-      onClickConnect,
+      onClick,
       onClickInProgress,
       i18n,
       loading
@@ -20,7 +20,7 @@ class StripeAuth extends Component {
             { i18n.getString('stripeAuthNeedAccount') }
             <ConnectStripeButton
               disabled={ onClickInProgress }
-              onClick={ onClickConnect }
+              onClick={ onClick }
               inProgress={ onClickInProgress }
               i18n={i18n}
             />
@@ -33,7 +33,7 @@ class StripeAuth extends Component {
 
 StripeAuth.propTypes = {
   i18n: PropTypes.object.isRequired,
-  onClickConnect: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired,
   stripeAccount: PropTypes.object,
   onClickInProgress: PropTypes.bool,
   loading: PropTypes.bool,

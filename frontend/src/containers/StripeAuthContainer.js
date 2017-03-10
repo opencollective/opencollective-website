@@ -46,7 +46,7 @@ class StripeAuthContainer extends Component {
     return (
       <StripeAuth 
         stripeAccount={ stripeAccount }
-        onClickConnect={ authorizeStripe.bind(this) }
+        onClick={ authorizeStripe.bind(this) }
         onClickInProgress={ connectStripeInProgress }
         i18n={ i18n }
       />);
