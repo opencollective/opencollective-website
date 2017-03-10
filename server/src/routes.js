@@ -85,6 +85,7 @@ export default (app) => {
   /**
    * Routes
    */
+  app.get('/:slug/:image(avatar|logo).:format(txt|png|jpg|gif|svg)', mw.maxAge(300), mw.fetchProfileBySlug, controllers.banner.logo);
   app.get('/:slug/banner.md', mw.maxAge(300), mw.fetchGroupBySlug, mw.fetchActiveUsers(), controllers.banner.markdown);
   app.get('/:slug/banner.js', mw.maxAge(3000), mw.fetchGroupBySlug, mw.fetchActiveUsers(), controllers.banner.js);
   app.get('/:slug.json', mw.maxAge(900), mw.fetchProfileBySlug, renderJSON('collective'));

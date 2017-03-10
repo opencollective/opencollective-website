@@ -43,7 +43,8 @@
   }
 
   .CollectiveHero-logo {
-    height: 10rem;
+    max-height: 10rem;
+    max-width: 30rem;
   }
 
   .UserPhoto {

@@ -8,6 +8,8 @@ import { getCloudinaryUrl, svg2png } from '../lib/utils';
 import queryString from 'query-string';
 import url from 'url';
 import cachedRequestLib from 'cached-request';
+import imageToAscii from 'image-to-ascii';
+import gm from 'gm';
 
 const cachedRequest = cachedRequestLib(request);
 cachedRequest.setCacheDirectory('/tmp');
@@ -19,6 +21,66 @@ export default {
     res.render('backers', {
       users: req.users
     });
+  },
+
+  logo: (req, res) => {
+
+    // Keeping the resulting image for 60 days in the CDN cache (we purge that cache on deploy)
+    res.setHeader('Cache-Control', `public, max-age=${60*24*60*60}`);
+
+    const imagesrc = (req.user) ? req.user.avatar : req.collective.logo;
+
+    const params = {};
+    const { width, height } = req.query;
+    if (Number(width)) {
+      params['width'] = Number(width);
+    }
+    if (Number(height)) {
+      params['height'] = Number(height);
+    }
+
+    const variants = {
+        solid : '█'.split(''),
+        variant1 : ' .,:;i1tfLCG08@'.split(''),
+        variant2 : '@%#*+=-:. '.split('').reverse(),
+        variant3 : '#¥¥®®ØØ$$ø0oo°++=-,.    '.split('').reverse(),
+        variant4 : '#WMBRXVYIti+=;:,. '.split('').reverse(),
+        'ultra-wide' : ('MMMMMMM@@@@@@@WWWWWWWWWBBBBBBBB000000008888888ZZZZZZZZZaZaaaaaa2222222SSS'
+            +'SSSSXXXXXXXXXXX7777777rrrrrrr;;;;;;;;iiiiiiiii:::::::,:,,,,,,.........    ').split('').reverse(),
+        wide : '@@@@@@@######MMMBBHHHAAAA&&GGhh9933XXX222255SSSiiiissssrrrrrrr;;;;;;;;:::::::,,,,,,,........        '.split(''),
+        hatching : '##XXxxx+++===---;;,,...    '.split('').reverse(),
+        bits : '# '.split('').reverse(),
+        binary : '01 '.split('').reverse(),
+        greyscale : ' ▤▦▩█'.split(''),
+        blocks : ' ▖▚▜█'.split('')
+    };
+
+    switch (req.params.format) {
+      case 'txt':
+        imageToAscii(imagesrc, {
+          bg: (req.query.bg === 'true') ? true : false,
+          fg: (req.query.fg === 'true') ? true : false,
+          white_bg: (req.query.white_bg === 'false') ? false : true,
+          colored: (req.query.colored === 'false') ? false : true,
+          size: {
+            height: params.height || 20,
+            width: params.width
+          },
+          pixels: variants[req.query.variant || 'wide'],
+          reverse: (req.query.reverse === 'true') ? true : false
+        }, (err, ascii) => {
+          res.setHeader('content-type', 'text/plain; charset=us-ascii');
+          res.send(`${ascii}\n`);
+        });
+        break;
+
+      default:
+        gm(request(imagesrc))
+          .resize(params.width, params.height)
+          .stream(req.params.format)
+          .pipe(res);
+        break;
+    }
   },
 
   markdown: (req, res) => {
