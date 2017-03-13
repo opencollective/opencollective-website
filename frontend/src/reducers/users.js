@@ -5,12 +5,13 @@ import { normalize } from 'normalizr';
 
 import * as constants from '../constants/users';
 import {DONATE_GROUP_SUCCESS} from '../constants/groups';
-
+import { HYDRATE } from '../constants/session';
 
 export default function users(state={
   updateInProgress: false,
   sendingEmailInProgress: false,
-  connectPaypalInProgress: false
+  connectPaypalInProgress: false,
+  connectStripeInProgress: false
 }, action={}) {
   const {
     type,
@@ -21,6 +22,15 @@ export default function users(state={
   } = action;
 
   switch (type) {
+
+   case HYDRATE:
+    if (action.data.user) {
+      return merge({}, state, {
+        [action.data.user.id]: action.data.user
+      });
+    } 
+    return state;
+
 
     case constants.FETCH_USER_SUCCESS:
     case constants.FETCH_USERS_BY_GROUP_SUCCESS: {
@@ -78,6 +88,12 @@ export default function users(state={
     case constants.GET_APPROVAL_KEY_FOR_USER_FAILURE:
       return merge({}, state, {connectPaypalInProgress: false});
 
+    case constants.AUTHORIZE_STRIPE_REQUEST:
+      return merge({}, state, { connectStripeInProgress: true});
+
+    case constants.AUTHORIZE_STRIPE_FAILURE:
+      return merge({}, state, { connectStripeInProgress: false});
+      
     default:
       return state;
   }

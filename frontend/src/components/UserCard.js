@@ -28,7 +28,7 @@ export default class UserCard extends Component {
   render() {
     const { className = '', user, i18n } = this.props;
 
-    const href = `https://opencollective.com/${user.username}`;
+    const href = `/${user.username}`;
 
     const tierLabel = formatTierToCamelCase(user.tier);
     const addBadge = (tierLabel !== 'sponsor' && tierLabel !== 'member');

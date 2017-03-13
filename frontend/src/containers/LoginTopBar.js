@@ -39,7 +39,6 @@ export class LoginTopBar extends Component {
           </div>
           <ul>
           {this.showCreateBtn && <li><a href='/create'>create a collective</a></li>}
-          <li><a className='LoginTopBarLink' href='/learn-more'>How it works</a></li>
           <li><a href='/discover'>Discover</a></li>
             <li><a href='#' onClick={this.onClickSubscriptions.bind(this)}>Subscriptions</a></li>
           </ul>
@@ -91,7 +90,7 @@ export class LoginTopBar extends Component {
 
   componentWillMount() {
     const { isAuthenticated, user, loggedInUserId, fetchUser } = this.props;
-    if (isAuthenticated && !user) {
+    if (isAuthenticated && (!user || !user.stripeAccount)) {
       fetchUser(loggedInUserId);
     }
   }

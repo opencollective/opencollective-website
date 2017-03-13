@@ -1,0 +1,19 @@
+.PaypalPreapproval {
+  text-align: center;
+  padding: 20px 0px;
+  margin-top: 30px;
+}
+
+.PaypalPreapproval .Button--connectpaypal {
+  width: 200px;
+  margin-top: 20px;
+  min-width: 100px;
+}
+
+.PaypalPreapproval-switch {
+  color: var(--light-blue);
+}
+
+.PaypalPreapproval-switch:hover {
+  cursor: pointer;
+}

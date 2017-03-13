@@ -52,7 +52,6 @@ import {
   getEditCollectiveInProgressSelector,
   getDonationFormSelector,
   getProfileFormAttrSelector } from '../selectors/form';
-import { getAppRenderedSelector } from '../selectors/app';
 import { 
   getUsersSelector,
   getNewUserSelector,
@@ -144,15 +143,6 @@ export class Collective extends Component {
   }
 
   componentWillMount() {
-    const {
-      collective,
-      fetchProfile,
-      loadData
-    } = this.props;
-
-    if (loadData || !collective.id) { 
-      fetchProfile(collective.slug)
-    }
     this.refreshData(); 
   }
     
@@ -172,7 +162,8 @@ export class Collective extends Component {
     return Promise.all([
       fetchUsers(collective.slug),
       fetchPendingExpenses(collective.slug),
-      fetchTransactions(collective.slug)]);
+      fetchTransactions(collective.slug)
+    ]);
   }
 }
 
@@ -272,7 +263,6 @@ const mapStateToProps = createStructuredSelector({
     // other props
     isAuthenticated: isSessionAuthenticatedSelector,
     i18n: getI18nSelector,
-    loadData: getAppRenderedSelector,
     users: getUsersSelector,
     loggedinUser: getAuthenticatedUserSelector,
     query: getQuerySelector

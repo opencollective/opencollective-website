@@ -102,6 +102,10 @@
   .Subscription-transactions {
     margin-left: calc(50px + var(--spacing));
   }
+
+  .CollectiveStatsHeader-backer-statistics {
+    width: 210px;
+  }
 }
 
 @media (--small-viewport) {

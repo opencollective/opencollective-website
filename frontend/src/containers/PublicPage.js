@@ -1,34 +1,67 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
-import values from 'lodash/values';
-
+// containers
 import ProfilePage from './ProfilePage';
 import Collective from './Collective'
+
+// components
+import NotFound from '../components/NotFound';
+
+// actions
+import fetchProfile from '../actions/profile/fetch_by_slug';
+
+// libs
 import { canEditUser } from '../lib/admin';
 
+// selectors
+import { getCurrentCollectiveSelector } from '../selectors/collectives';
+import { getCurrentUserProfileSelector } from '../selectors/users';
+import { getSessionSelector } from '../selectors/session';
+import { getSlugSelector } from '../selectors/router'; 
+
 export class PublicPage extends Component {
+
+  componentWillMount() {
+    const {
+      collective,
+      profile,
+      slug,
+      fetchProfile
+    } = this.props;
+
+    // this means it wasn't server side rendered
+    if (!collective && !profile) {
+      fetchProfile(slug);
+    }
+  }
+
   render() {
-    if (this.props.isUserProfile) {
-      const profile = this.props.group;
-      profile.canEditUser = canEditUser(this.props.session, profile)
+    const {
+      collective,
+      profile,
+      session
+    } = this.props;
+
+    if (collective) {
+      return <Collective />
+    } else if (profile) {
+      profile.canEditUser = canEditUser(session, profile)
       return <ProfilePage profile={ profile } />
     } else {
-      return <Collective />
+      return <NotFound />
     }
   }
 }
 
-export default connect(mapStateToProps , {})(PublicPage);
+const mapStateToProps = createStructuredSelector({
+  collective: getCurrentCollectiveSelector,
+  profile: getCurrentUserProfileSelector,
+  session: getSessionSelector,
+  slug: getSlugSelector
+});
 
-export function mapStateToProps({groups, session, router}) {
-  const group = values(groups)[0] || {};
-
-  return {
-    group,
-    session,
-    isUserProfile: Boolean(group.username),
-    slug: router.params.slug,
-    showOldCollectivePage: router.location.query.old === '1' || group.isSupercollective || group.hasPaypal,
-  };
-}
+export default connect(mapStateToProps , {
+  fetchProfile
+})(PublicPage);

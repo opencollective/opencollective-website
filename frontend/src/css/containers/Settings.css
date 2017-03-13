@@ -1,0 +1,187 @@
+.Settings {
+  background-color: #f3f3f3;
+  .LoginTopBar {
+    background-color: white;
+  }
+  .Settings-container {
+    .SettingsHead {
+      position: relative;
+      height: 150px;
+      margin-bottom: 40px;
+      background-repeat: no-repeat;
+      background-position: center -88px;
+      background-size: cover;
+      .SettingsHeadLogo {
+        filter: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 96px;
+        margin: auto;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+      }
+    }
+    .SettingsNavHeader {
+      text-transform: uppercase;
+      font-size: 16px;
+      color: black;
+      font-family: Montserrat, sans-serif;
+      margin-bottom: 30px;
+      margin-left: 90px;
+    }
+    .SettingsNav {
+      width: 230px;
+      height: 400px;
+      background: ruby;
+      margin-left: 90px;
+      margin-right: 20px;
+      .SettingsNavItem {
+        box-sizing: border-box;
+        font-family: Lato;
+        font-size: 20px;
+        color: #787d80;
+        height: 40px;
+        margin-bottom: 20px;
+        padding: 2px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        text-transform: capitalize;
+        line-height: 1.75;
+        &.SettingsNavItem--active {
+          background: white;
+          cursor: default;
+          color: black;
+          line-height: 1.75;
+        }
+      }
+    }
+  }
+  .PublicFooter {
+    margin-top: 40px;
+  }
+}
+
+.SettingsPage {
+  background: white;
+  margin-right: 90px;
+  box-shadow: 0 1px 3px 0 rgba(45, 77, 97, 0.2);
+  padding: 40px;
+  font-family: Montserrat, sans-serif;
+  .CustomInput {
+    min-width: 300px;
+    height: 44px;
+    .CustomInput-input {
+      height: 44px;
+    }
+  }
+  .CustomSelect {
+    min-width: 130px;
+  }
+  .CustomTextArea {
+    width: 100%;
+    margin-top: 20px;
+    height: 370px;
+  }
+  .Checkbox {
+    vertical-align: middle;
+  }
+  .SettingsPageLabel {
+    display: inline-block;
+    color: #1a1a1a;
+    font-family: Lato, sans-serif;
+    font-size: 16px;
+    vertical-align: middle;
+    margin-left: 5px;
+  }
+  .SettingsPageH1 {
+    font-weight: bold;
+    font-size: 24px;
+    color: black;
+  }
+  .SettingsPageLead {
+    font-family: Lato;
+    font-size: 20px;
+    color: #303233;
+    i {
+      color: #cccccc;
+      margin-left: 20px;
+    }
+  }
+  .SettingsPageHr {
+    position: relative;
+    height: 1px;
+    background: #cccccc;
+    margin: 50px 0;
+    div {
+      display: inline-block;
+      font-family: montserratlight, sans-serif;
+      font-size: 20px;
+      background: white;
+      position: absolute;
+      left: 0px;
+      top: -16px;
+      padding-right: 40px;
+      color: black;
+    }
+  }
+  p, .SettingsPageP {
+    font-family: Lato;
+    font-size: 16px;
+    line-height: 1.4;
+    color: #787d80;
+  }
+  .SettingsPageButton {
+    width: 190px;
+    height: 40px;
+    border-radius: 100px;
+    background-color: #46b0ed;
+    color: white;
+    text-align: center;
+    line-height: 2.55;
+    &.SettingsPageButton--disabled {
+      background: #cbcbcb;
+      color: white;
+    }
+    &:not(.SettingsPageButton--disabled):hover {
+      cursor: pointer;
+      opacity: .9;
+    }
+  }
+}
+
+/* Responsiveness */
+
+@media (max-width: 900px) {
+  .SettingsPage {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  .Settings-container {
+    .Grid.Grid--flex {
+      display: block;
+      .Column {
+        float: none;
+        flex: none;
+      }
+      .SettingsNavHeader {
+        display: inline-block;
+        margin-left: 20px;
+      }
+      .SettingsNav {
+        display: inline-block;
+        width: auto;
+        height: auto;
+        margin-left: 20px;
+      }
+      .SettingsNavItem {
+        display: inline-block;
+        margin-right: 15px;
+        &:last-child { margin-right: 0; }
+      }
+    }
+  }
+}

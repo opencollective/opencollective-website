@@ -1,5 +1,7 @@
 import { createSelector } from 'reselect';
+import findKey from 'lodash/findKey';
 
+import { getSlugSelector } from './router';
 import { getAuthenticatedUserSelector } from './session';
 
 export const getUsersSelector = (state) => state.users;
@@ -7,6 +9,18 @@ export const getUsersSelector = (state) => state.users;
 export const getNewUserSelector = createSelector(
   getUsersSelector,
   (users) => users.newUser || {});
+
+/*
+ * Gets the user currently referenced by the slug in the url
+ * If not found, returns null;
+ * Useful for determining whether current slug is a user profile or collective
+ */
+export const getCurrentUserProfileSelector = createSelector(
+  [getSlugSelector, getUsersSelector],
+  (slug, users) => {
+    const userId = findKey(users, u => u.username === slug);
+    return userId ? users[userId] : null;
+  });
 
 export const getUpdateInProgressSelector = createSelector(
   getUsersSelector,
@@ -39,3 +53,11 @@ export const getPaypalCardSelector = createSelector(
 export const getConnectPaypalInProgressSelector = createSelector(
   getUsersSelector,
   (users) => users.connectPaypalInProgress);
+
+export const getStripeAccountSelector = createSelector(
+  getCurrentUserProfileSelector,
+  user => user.stripeAccount);
+
+export const getConnectStripeInProgressSelector = createSelector(
+  getUsersSelector,
+  (users) => users.connectStripeInProgress);

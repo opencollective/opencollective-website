@@ -23,7 +23,7 @@ describe('session reducer', () => {
     expect(reducer({}, {
       type: DECODE_JWT_FAILURE
     }))
-    .toEqual({isAuthenticated: false});
+    .toEqual({isAuthenticated: false, user: {}});
   });
 
   it('should set isAuthenticated to false if it does not have a JWT', () => {
@@ -31,6 +31,6 @@ describe('session reducer', () => {
     expect(reducer({}, {
       type: DECODE_JWT_EMPTY
     }))
-    .toEqual({isAuthenticated: false});
+    .toEqual({isAuthenticated: false, user: {}});
   });
 });

@@ -21,7 +21,7 @@ export default class CollectiveStatsHeader extends Component {
     return (
       <div className='CollectiveStatsHeader-backer-statistics'>
         <div className='CollectiveStatsHeader-backer-count-text'>
-          {`${i18n.getString('weHave')} ${i18n.getString('aYearlyBudgetOf')}`}
+          {i18n.getString('aYearlyBudgetOf')}
         </div>
         {yearlyIncome > 0 && (
             <div className='CollectiveStatsHeader-backer-yearly-budget'>

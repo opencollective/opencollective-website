@@ -1,10 +1,12 @@
 import merge from 'lodash/merge';
 import * as constants from '../constants/session';
 
-export default function session(state={
+const defaultState = {
   user: {},
   isAuthenticated: false
-}, action={
+};
+
+export default function session(state=defaultState, action={
   hasPopOverMenuOpen: false
 }) {
   switch (action.type) {
@@ -17,9 +19,7 @@ export default function session(state={
 
     case constants.DECODE_JWT_FAILURE:
     case constants.DECODE_JWT_EMPTY:
-      return merge({}, state, {
-        isAuthenticated: false
-      });
+      return merge({}, defaultState);
 
     case constants.HYDRATE:
       return merge({}, state, {

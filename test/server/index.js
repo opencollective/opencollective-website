@@ -7,7 +7,8 @@ import app from '../../server/src';
 
 describe('server', () => {
   const group = {
-    name: 'Women who code Austin'
+    name: 'Women who code Austin',
+    slug: 'wwcode-austin'
   };
 
   afterEach(() => nock.cleanAll());

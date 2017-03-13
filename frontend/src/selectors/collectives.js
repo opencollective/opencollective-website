@@ -37,6 +37,20 @@ const DEFAULT_COLLECTIVE_SETTINGS = {
  */
 const getCollectivesSelector = (state) => state.collectives;
 
+/*
+ * Gets the collective currently referenced by the slug in the url
+ * If not found, returns null;
+ * Useful for determining whether current slug is a collective or user profile
+ */
+export const getCurrentCollectiveSelector = createSelector(
+  [ getSlugSelector, getCollectivesSelector ],
+  (slug, collectives) => collectives[slug]);
+
+/*
+ * Attempts to get the collective currently referenced by the slug in url
+ * If not found, returns an object with slug in it.
+ * This is useful for rendering the Collective page and knowing that slug is always there.
+ */
 export const getCollectiveSelector = createSelector(
   [ getSlugSelector, getCollectivesSelector ],
   (slug, collectives) => collectives[slug] || { slug });
@@ -72,6 +86,10 @@ export const getStripeAccountSelector = createSelector(
 export const getStripePublishableKeySelector = createSelector(
   getStripeAccountSelector,
   (stripeAccount) => stripeAccount.stripePublishableKey);
+
+export const connectedToStripeAccountSelector = createSelector(
+  getStripePublishableKeySelector,
+  (stripePublishableKey) => Boolean(stripePublishableKey));
 
 const getCollectiveUsersByRoleSelector = createSelector(
   getCollectiveSelector,
