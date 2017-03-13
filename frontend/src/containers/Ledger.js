@@ -49,7 +49,8 @@ import { getAuthenticatedUserSelector } from '../selectors/session';
 import { 
   getPathnameSelector, 
   getParamsSelector,
-  getPaypalQueryFieldsSelector } from '../selectors/router';
+  getPaypalQueryFieldsSelector,
+  getShowPaypalReminderQuerySelector } from '../selectors/router';
 import {
   getApproveInProgressSelector,
   getRejectInProgressSelector,
@@ -98,9 +99,11 @@ export class Ledger extends Component {
       rejectInProgress,
       payInProgress,
       paypalCard,
-      connectPaypalInProgress
+      connectPaypalInProgress,
+      showPaypalReminder
     } = this.props;
 
+    console.log(showPaypalReminder)
     const { view } = this.state;
     return (
       <div className='Ledger'>
@@ -151,7 +154,7 @@ export class Ledger extends Component {
         { this.props.route.type === 'expenses' && <div className='Ledger-container padding40 expenses-container'>
             <div className='line1'>unpaid expenses</div>
 
-            {isHost && 
+            {isHost && showPaypalReminder &&
               <PaypalReminder
                 i18n={ i18n }
                 card={ paypalCard }
@@ -371,6 +374,7 @@ const mapStateToProps = createStructuredSelector({
   paypalCard: getPaypalCardSelector,
   paypalQueryFields: getPaypalQueryFieldsSelector,
   connectPaypalInProgress: getConnectPaypalInProgressSelector,
+  showPaypalReminder: getShowPaypalReminderQuerySelector,
 
   // expense action related
   approveInProgress: getApproveInProgressSelector,

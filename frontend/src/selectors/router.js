@@ -25,6 +25,10 @@ export const getQuerySelector = createSelector(
   getLocationSelector,
   (location) => location.query);
 
+export const getShowPaypalReminderQuerySelector = createSelector(
+  getQuerySelector,
+  (query) => query.showPaypalReminder);
+
 export const getPaypalQueryFieldsSelector = createSelector(
   getQuerySelector,
   (query) => {
