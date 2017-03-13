@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { pushState } from 'redux-router';
 
 // components
 import PaypalPreapproval from '../components/PaypalPreapproval';
@@ -36,7 +37,8 @@ class PaypalPreapprovalContainer extends Component {
       paypalQueryFields,
       authenticatedUser,
       confirmPreapprovalKey,
-      notify
+      notify,
+      pushState
     } = this.props;
 
 
@@ -58,6 +60,7 @@ class PaypalPreapprovalContainer extends Component {
         return confirmPreapprovalKey(authenticatedUser.id, preapprovalKey)
         .then(() => fetchCards(authenticatedUser.id, { service: 'paypal'}))
         .then(() => this.setState({loading: false}))
+        .then(() => pushState(null, window.location.pathname))
         .then(() => notify('success', 'Successfully connected PayPal account'));
       }
       return Promise.resolve();
@@ -107,5 +110,6 @@ export default connect(mapStateToProps, {
   getApprovalKey,
   confirmPreapprovalKey,
   fetchCards,
-  notify
+  notify,
+  pushState
 })(PaypalPreapprovalContainer);

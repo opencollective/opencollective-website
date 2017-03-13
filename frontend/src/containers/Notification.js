@@ -11,14 +11,8 @@ class Notification extends Component {
   }
 
   render() {
-    const { notification, autoclose, autocloseTimeout=5000 } = this.props;
+    const { notification } = this.props;
     const status = notification.status || 'hide';
-
-    if (autoclose && status !== 'hide') {
-      setTimeout(() => {
-        this.props.resetNotifications();
-      }, autocloseTimeout);
-    }
 
     return (
       <div className={`Notification Notification--${status}`} onClick={() => this.props.resetNotifications()}>
@@ -39,13 +33,31 @@ class Notification extends Component {
     return <Icon type={type[status]} />;
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.resetNotifications();
+  }
+
+  componentDidMount() {
+    this.setTimerToResetNotifications();
+  }
+
+  componentDidUpdate() {
+    this.setTimerToResetNotifications();
+  }
+
+  setTimerToResetNotifications() {
+    if (this.props.notification.status && this.props.notification.status !== 'hide') {
+      const autocloseTimeout = this.props.autocloseTimeout || 5000;
+      setTimeout(() => {
+        this.props.resetNotifications();
+      }, autocloseTimeout);
+    }
   }
 }
 
 Notification.propTypes = {
   resetNotifications: PropTypes.func.isRequired,
+  autocloseTimeout: PropTypes.number,
   notification: PropTypes.shape({
     status: PropTypes.string,
     message: PropTypes.string
