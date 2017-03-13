@@ -28,7 +28,7 @@ class PaypalPreapproval extends Component {
         {card && !loading &&
           <div>
           { `${i18n.getString('paypalPreapprovalAccountLinked')} ${card.number}.`} 
-          <span className='PaypalPreapproval-switch ml1' onClick={ onClickConnect }> {i18n.getString('paypalPreapprovalRefreshKey')} </span>
+          <span className='PaypalPreapproval-switch ml1' onClick={ onClick }> {i18n.getString('paypalPreapprovalRefreshKey')} </span>
           </div>}
 
       </div>
