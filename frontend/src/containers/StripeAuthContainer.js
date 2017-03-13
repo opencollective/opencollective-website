@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { pushState } from 'redux-router';
 import { createStructuredSelector } from 'reselect';
 
 // components
@@ -27,10 +28,12 @@ class StripeAuthContainer extends Component {
   componentWillMount() {
     const {
       stripeStatusQuery,
-      notify
+      notify,
+      pushState
     } = this.props;
 
     if (stripeStatusQuery && stripeStatusQuery === 'success') {
+      pushState(null, `${window.location.pathname}`)
       notify('success', 'Stripe account successfully connected');
     }
   }
@@ -68,5 +71,6 @@ const mapStateToProps = createStructuredSelector({
 
 export default connect(mapStateToProps, {
   authorizeStripe,
-  notify
+  notify,
+  pushState
 })(StripeAuthContainer);
