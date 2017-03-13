@@ -39,3 +39,7 @@ export const getPaypalCardSelector = createSelector(
 export const getConnectPaypalInProgressSelector = createSelector(
   getUsersSelector,
   (users) => users.connectPaypalInProgress);
+
+export const getConnectStripeInProgressSelector = createSelector(
+  getUsersSelector,
+  (users) => users.connectStripeInProgress);

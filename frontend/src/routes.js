@@ -11,13 +11,14 @@ import EditTwitter from './components/EditTwitter';
 import Faq from './containers/Faq';
 import GroupTierList from './containers/GroupTierList';
 import Homepage from './containers/HomePage';
-import Ledger from './containers/Ledger';
 import LearnMore from './containers/LearnMore';
+import Ledger from './containers/Ledger';
 import Login from './containers/Login';
 import NewGroup from './containers/NewGroup';
 import OnBoarding from './containers/OnBoarding';
 import PublicPage from './containers/PublicPage';
 import Response from './containers/Response';
+import Settings from './containers/Settings';
 import Subscriptions from './containers/Subscriptions';
 
 import { requireAuthentication } from './components/AuthenticatedComponent';
@@ -55,6 +56,7 @@ export default (
     <Route path="/:slug/expenses/new" action="new" component={Ledger} />
     <Route path="/:slug/expenses/:expenseid/approve" action="approve" component={Ledger} />
     <Route path="/:slug/expenses/:expenseid/reject" action="reject" component={Ledger} />
+    <Route path="/:slug/settings" component={requireAuthentication(Settings)} />
     // :verb can be donate, pay or contribute
     <Route path="/:slug/:verb/:amount/:interval/:description" component={DonatePage} />
     <Route path="/:slug/:verb/:amount/:interval" component={DonatePage} />
