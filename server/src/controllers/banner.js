@@ -69,6 +69,9 @@ export default {
           pixels: variants[req.query.variant || 'wide'],
           reverse: (req.query.reverse === 'true') ? true : false
         }, (err, ascii) => {
+          if (req.query.trim !== 'false') {
+            ascii = ascii.replace(/\n^\s*$/gm, '');
+          }
           res.setHeader('content-type', 'text/plain; charset=us-ascii');
           res.send(`${ascii}\n`);
         });
