@@ -9,6 +9,11 @@ import {
   CREATE_EXPENSE_SUCCESS,
   CREATE_EXPENSE_FAILURE } from '../constants/expenses';
 
+import {
+  CREATE_ADDFUNDS_REQUEST,
+  CREATE_ADDFUNDS_FAILURE,
+  CREATE_ADDFUNDS_SUCCESS } from '../constants/addfunds';
+
 /**
  * Validate generic joi schema
  */
@@ -115,6 +120,7 @@ function expense(state=expenseInitialState, action={}) {
         }
       });
     }
+
     case constants.VALIDATE_EXPENSE_REQUEST:
       return merge({}, omit(state, 'error'), { error: {} });
 
@@ -131,9 +137,58 @@ function expense(state=expenseInitialState, action={}) {
 }
 
 /**
+ *
+ */
+const addFundsInitialState = {
+  attributes: {
+    amount: 0,
+    email: null,
+    name: null,
+    title: '',
+    notes: '',
+    fundsFromHost: true
+  },
+  error: {},
+  inProgress: false
+};
+
+function addFunds(state=addFundsInitialState, action={}) {
+  switch (action.type) {
+    case constants.RESET_ADDFUNDS_FORM:
+      return merge({}, addFundsInitialState);
+
+    case constants.APPEND_ADDFUNDS_FORM:
+      return merge({}, state, { attributes: action.attributes });
+
+    case constants.VALIDATE_ADDFUNDS_FAILURE: {
+      const {path, message} = errorDetail(action);
+
+      return merge({}, state, {
+        error: {
+          [path]: true,
+          message
+        }
+      });      
+    }
+
+    case constants.VALIDATE_ADDFUNDS_REQUEST:
+      return merge({}, omit(state, 'error'), { error: {} });
+
+    case CREATE_ADDFUNDS_REQUEST:
+      return merge({}, state, { inProgress: true });
+
+    case CREATE_ADDFUNDS_SUCCESS:
+    case CREATE_ADDFUNDS_FAILURE:
+      return merge({}, state, { inProgress: false });
+
+    default:
+      return state;
+  }
+}
+
+/**
  * Github form reducer
  */
-
 const githubInitialState = {
   attributes: {}
 };
@@ -226,5 +281,6 @@ export default combineReducers({
   addgroup,
   editGroup,
   editCollective,
-  twitter
+  twitter,
+  addFunds
 });
