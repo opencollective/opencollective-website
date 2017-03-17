@@ -1,0 +1,69 @@
+.AddFundsForm {
+	box-sizing: border-box;
+	padding: 40px;
+  font-size: 14px;
+	margin: 0;
+	.-notes textarea {
+		height: 145px;
+	}
+  .input-container {
+    
+  }
+  label {
+    font-size: 14px;
+  }
+  .button {
+    font-size: 16px;
+  }
+}
+
+.AddFundsForm-switch {
+  color: var(--light-blue);
+}
+
+.AddFundsForm-switch:hover {
+	cursor: pointer;
+}
+
+.AddFundsForm-bb {
+  border-bottom: 1px solid var(--gray);
+}
+
+.AddFundsForm-host-fees {
+  color: var(--red);
+  border-bottom: 1px solid var(--gray);
+  text-align: right;
+}
+.AddFundsForm-amount {
+  color: var(--green);
+  text-align: right;
+}
+
+.AddFundsForm-currency-notice {
+  font-style: italic; 
+}
+
+
+@media (max-width: 818px) {
+  .col {
+    &.pr1 {
+      padding-right: 0;
+    }
+    &.pl1 {
+      padding-left: 0;
+    }
+  }
+  .AddFundsForm {
+    padding: 20px 20px 40px 20px;
+    .line1 {
+      font-size: 16px;
+      font-family: montserratlight, sans-serif;
+    }
+    .info-block {
+      margin-bottom: 20px;
+      &.mr3 {
+        margin-right: 0;
+      }
+    }
+  }
+}

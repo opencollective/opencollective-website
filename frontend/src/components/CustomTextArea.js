@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import classnames from 'classnames';
 
 export default class CustomTextArea extends Component {
 
@@ -22,12 +23,19 @@ export default class CustomTextArea extends Component {
       rows,
       cols,
       resize,
-      name
+      name,
+      hasError
     } = this.props;
 
     const { hasScrollbar } = this.state;
+
+    const baseClassName = classnames({
+      CustomTextArea: true,
+      'CustomTextArea--error': hasError,
+      [className]: !!className
+    });
     return (
-      <div className={`CustomTextArea ${className} ${disabled ? 'CustomTextArea--disabled' : ''} ${hasScrollbar ? 'CustomTextArea-has-scrollbar' : ''}`}>
+      <div className={`${baseClassName} ${disabled ? 'CustomTextArea--disabled' : ''} ${hasScrollbar ? 'CustomTextArea-has-scrollbar' : ''}`}>
       {prepend && <span className="CustomTextArea-prepend">{prepend}</span> }
       <div className='CustomTextArea-field'>
         {!value && <div className="CustomTextArea-placeholder" onClick={this.onPlaceholderClick.bind(this)}>{placeholder}</div>}
