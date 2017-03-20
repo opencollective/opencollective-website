@@ -13,7 +13,7 @@ module.exports = {
       .waitForElementVisible('body', 1000)
       .assert.containsText('body', 'OpenCollective Test Group')
       .assert.visible('.Ledger-container', 5000)
-      .assert.visible('#addFundsBtn', 5000)
+      .assert.visible('#addFundsBtn', 10000)
   },
 
    'Add funds from host': (client) => {
