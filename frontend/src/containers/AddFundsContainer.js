@@ -51,7 +51,7 @@ export class AddFundsContainer extends Component {
         <div>
           <PublicGroupThanks message="Funds added" />
           <div style={{padding: '20px', textAlign: 'center', paddingTop: 0}}>
-            <span className='AddFundsForm-switch' onClick={() => this.setState({showThankYouMessage: false})} >Add more funds</span>
+            <span id='AddFundsForm-again' className='AddFundsForm-switch' onClick={() => this.setState({showThankYouMessage: false})} >Add more funds</span>
           </div>
         </div>}
       {!this.state.showThankYouMessage &&

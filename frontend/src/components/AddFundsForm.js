@@ -47,22 +47,19 @@ class AddFundsForm extends Component {
                 this.onAmountChange(amountText, attributes.fundsFromHost);
               }} />
             <label>{i18n.getString('title')}</label>
-            <CustomTextArea
-              rows={1}
-              resize='vertical'
-              customClass='js-transaction-description'
+            <Input
+              customClass='js-transaction-title'
               placeholder='ex: T-shirt sales from Threadless'
               hasError={validationError.title}
               value={attributes.title}
-              onChange={title => onChange({title})}
-              maxLength={255} />
+              handleChange={title => onChange({title})} />
           </div>
           <div className='col col-12 sm-col-12 md-col-6 lg-col-6 pl1'>
             <label>{i18n.getString('notes')}</label>
             <CustomTextArea
               rows={5}
               resize='vertical'
-              customClass='js-transaction-description'
+              customClass='js-transaction-notes'
               placeholder='Optional: amount earned by collective from June t-shirt sales'
               hasError={validationError.notes}
               value={attributes.notes}
@@ -73,12 +70,12 @@ class AddFundsForm extends Component {
         <div className='line1'>donor's information</div>
         {attributes.fundsFromHost && 
           <div className='clearfix input-container mb2'>
-            <span> {userString} <span className='AddFundsForm-switch ml1' onClick={::this.switchState}> Change source</span></span>
+            <span> {userString} <span className='AddFundsForm-switch change-source ml1' onClick={::this.switchState}> Change source</span></span>
           </div>}
         
         {!attributes.fundsFromHost && 
           <div className='clearfix input-container mb2'>
-            <span className='col col-12 pb1'>Tell us who these funds are from. <span className='AddFundsForm-switch ml1' onClick={::this.switchState}> Keep { host.name || host.email } as the donor </span></span>
+            <span className='col col-12 pb1'>Tell us who these funds are from. <span className='AddFundsForm-switch change-source ml1' onClick={::this.switchState}> Keep { host.name || host.email } as the donor </span></span>
             <div className='col col-12 sm-col-12 md-col-6 lg-col-6 pr1'>
               <label>{i18n.getString('name')}</label>
               <Input
