@@ -123,6 +123,7 @@ body {
     border-radius: 15px;
     line-height: 1.75;
     min-width: 125px;
+    font-size: 16px;
   }
 
   .RequestMoney {

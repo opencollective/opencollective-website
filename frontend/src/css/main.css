@@ -47,6 +47,7 @@
 /**
  * Components
  */
+@import './components/AddFundsForm.css';
 @import './components/Button.css';
 @import './components/Checkbox.css';
 @import './components/CollectiveAboutUs.css';

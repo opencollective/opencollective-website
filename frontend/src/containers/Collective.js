@@ -203,7 +203,7 @@ export function donateToCollective({amount, interval, currency, token, options})
   const payment = {
     stripeToken: token && token.id,
     email: token && token.email,
-    amount,
+    amount: amount*100,
     currency,
     distribution: options && options.distribution
   };

@@ -12,12 +12,12 @@ describe('groups/donate', () => {
 
   it('creates DONATE_GROUP_SUCCESS when fetching a group is done', (done) => {
     const payment = {
-      amount: 10,
+      amount: 1000,
       stripeToken: 'tok_123'
     };
 
     nock(env.API_ROOT)
-      .post('/groups/1/payments/')
+      .post('/groups/1/donations/stripe')
       .reply(200, payment);
 
     const store = mockStore({});
@@ -34,12 +34,12 @@ describe('groups/donate', () => {
 
   it('creates DONATE_GROUP_FAILURE when donating fails', (done) => {
     const payment = {
-      amount: 10,
+      amount: 1000,
       stripeToken: 'tok_123'
     };
 
     nock(env.API_ROOT)
-      .post('/groups/1/payments/')
+      .post('/groups/1/donations/stripe')
       .replyWithError('');
 
     const store = mockStore({});
@@ -49,7 +49,7 @@ describe('groups/donate', () => {
       const [request, failure] = store.getActions();
       expect(request).toEqual({ type: constants.DONATE_GROUP_REQUEST, id: 1, payment });
       expect(failure.type).toEqual(constants.DONATE_GROUP_FAILURE);
-      expect(failure.error.message).toContain('request to http://localhost:3000/api/groups/1/payments/ failed, reason:');
+      expect(failure.error.message).toContain('request to http://localhost:3000/api/groups/1/donations/stripe failed, reason:');
       done();
     });
   });

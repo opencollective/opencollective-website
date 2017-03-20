@@ -10,6 +10,7 @@ import LoginTopBar from './LoginTopBar';
 import Notification from './Notification';
 import SubmitExpense from './SubmitExpense';
 import PaypalPreapprovalContainer from './PaypalPreapprovalContainer';
+import AddFundsContainer from './AddFundsContainer';
 
 // components
 import RequestMoney from '../components/RequestMoney';
@@ -68,6 +69,9 @@ export class Ledger extends Component {
       case 'request':
         view = 'RequestMoney';
         break;
+      case 'addfunds':
+        view = 'AddFunds';
+        break;
     }
 
     this.state = {
@@ -120,12 +124,16 @@ export class Ledger extends Component {
         <div className='Ledger-container padding40' style={{marginTop: '0'}}>
           <div className='showButtons'>
             { this.props.route.type !== 'donations' &&
-              <div className='col-12 sm-col-12 md-col-5 lg-col-5 pr1 pl1 pt1'>
+              <div className='col-12 sm-col-12 md-col-3 lg-col-3 pr1 pl1 pt1'>
                 <Button className={(view === 'SubmitExpense') && 'selected'} onClick={() => this.switchView('SubmitExpense')} label={i18n.getString('submitExpense')} id='submitExpenseBtn' />
               </div>}
             { this.props.route.type !== 'expenses' &&
-              <div className='col-12 sm-col-12 md-col-5 lg-col-5 pl1 pr1 pt1'>
+              <div className='col-12 sm-col-12 md-col-3 lg-col-3 pl1 pr1 pt1'>
                 <Button className={(view === 'RequestMoney') ? 'selected' : ''} onClick={() => this.switchView('RequestMoney')} label={i18n.getString('requestMoney')} id='requestMoneyBtn' />
+              </div>}
+            { isHost && 
+              <div className='col-12 sm-col-12 md-col-3 lg-col-3 pl1 pr1 pt1'>
+                <Button className={(view === 'AddFunds') ? 'selected' : ''} onClick={() => this.switchView('AddFunds')} label={i18n.getString('addFunds')} id='addFundsBtn' />
               </div>}
           </div>
         </div>
@@ -141,6 +149,14 @@ export class Ledger extends Component {
             collective={collective}
             i18n={i18n}
             />
+        </div>}
+
+        { view === 'AddFunds' && <div className='Ledger-container' style={{marginTop: '0'}}>
+          <AddFundsContainer 
+            collective={ collective }
+            i18n={ i18n }
+            onCancel={() => this.switchView()}
+          />
         </div>}
 
         { this.props.route.type === 'expenses' && <div className='Ledger-container padding40 expenses-container'>

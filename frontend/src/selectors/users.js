@@ -22,6 +22,18 @@ export const getCurrentUserProfileSelector = createSelector(
     return userId ? users[userId] : null;
   });
 
+export const getLoggedInUserProfileSelector = createSelector(
+  [getUsersSelector, getAuthenticatedUserSelector],
+  (users, authenticatedUser) => {
+    if (authenticatedUser && users[authenticatedUser.id]) {
+      return users[authenticatedUser.id]
+    } else if (authenticatedUser) {
+      return authenticatedUser;
+    } else {
+      return null;
+    }
+  });
+
 export const getUpdateInProgressSelector = createSelector(
   getUsersSelector,
   (users) => users.updateInProgress);

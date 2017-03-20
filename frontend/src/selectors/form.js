@@ -27,7 +27,6 @@ export const getDonationFormSelector = createSelector(
 /*
  * Profile form selector
  */
-
 export const getProfileFormSelector = createSelector(
 	getFormSelector,
 	(form) => form.profile);
@@ -35,3 +34,22 @@ export const getProfileFormSelector = createSelector(
 export const getProfileFormAttrSelector = createSelector(
 	getProfileFormSelector,
 	(profileForm) => profileForm.attributes);
+
+/*
+ * Add funds form selector
+ */
+export const getAddFundsFormSelector = createSelector(
+	getFormSelector,
+	(form) => form.addFunds);
+
+export const getAddFundsFormAttrSelector = createSelector(
+	getAddFundsFormSelector,
+	(addFundsForm) => addFundsForm.attributes);
+
+export const getAddFundsFormInProgressSelector = createSelector(
+	getAddFundsFormSelector,
+	(addFundsForm) => addFundsForm.inProgress);
+
+export const getAddFundsFormErrorSelector = createSelector(
+	getAddFundsFormSelector,
+	(addFundsForm) => addFundsForm.error);
