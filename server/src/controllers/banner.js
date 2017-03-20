@@ -93,7 +93,7 @@ export default {
       positions[i] = { position: i };
     }
 
-    let { tiers } = req.group;
+    let { tiers } = req.collective;
     tiers.map(t => {
       t.positions = positions;
     });

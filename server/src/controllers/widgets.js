@@ -30,7 +30,7 @@ export function profile(req, res, next) {
     return userWidget(req, res, next);
   }
 
-  if (req.group) {
+  if (req.collective) {
     return collectiveWidget(req, res, next);
   }
 
