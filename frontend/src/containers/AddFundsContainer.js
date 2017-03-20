@@ -64,7 +64,7 @@ export class AddFundsContainer extends Component {
           validationError={ addFundsFormError }
           onChange={ appendAddFundsForm }
           attributes={ addFundsFormAttributes }
-          defaultUser={ host } />}
+          host= { host } />}
       </div>
     );
   }

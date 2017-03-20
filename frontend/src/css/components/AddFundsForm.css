@@ -15,6 +15,12 @@
   .button {
     font-size: 16px;
   }
+  .help {
+    vertical-align: middle;
+    width: 14px;
+    height: 14px;
+    margin-bottom: 2px;
+  }
 }
 
 .AddFundsForm-switch {

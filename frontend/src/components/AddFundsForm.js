@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import ReactTooltip from 'react-tooltip';
 
 // components
 import Input from './Input';
@@ -14,18 +15,19 @@ class AddFundsForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      areFundsFromDefaultUser: true,
+      areFundsFromHost: true,
       amount: 0,
-      hostFees: 0,
+      fees: 0,
     }
   }
 
   render() {
-    const { attributes, validationError, inProgress, collective, onChange, i18n, onSubmit, defaultUser } = this.props;
+    const { attributes, validationError, inProgress, collective, onChange, i18n, onSubmit, host } = this.props;
 
     const amountPlaceholder = formatCurrency(0, collective.currency);
-
-    const userString = defaultUser.name ? `${defaultUser.name} (${defaultUser.email})` : defaultUser.email;
+    const userString = host.name ? `${host.name} (${host.email})` : host.email;
+    const netAmount = formatCurrency(this.state.amount + this.state.fees, collective.currency);
+    const amountStringInNotice = this.state.amount > 0 ? `(${netAmount})` : 'funds';
 
     return (
       <div className='AddFundsForm'>
@@ -76,7 +78,7 @@ class AddFundsForm extends Component {
         
         {!attributes.fundsFromHost && 
           <div className='clearfix input-container mb2'>
-            <span className='col col-12 pb1'>Tell us who these funds are from. <span className='AddFundsForm-switch ml1' onClick={::this.switchState}> Keep { defaultUser.name || defaultUser.email } as the donor </span></span>
+            <span className='col col-12 pb1'>Tell us who these funds are from. <span className='AddFundsForm-switch ml1' onClick={::this.switchState}> Keep { host.name || host.email } as the donor </span></span>
             <div className='col col-12 sm-col-12 md-col-6 lg-col-6 pr1'>
               <label>{i18n.getString('name')}</label>
               <Input
@@ -102,16 +104,16 @@ class AddFundsForm extends Component {
             <span className='col col-2 AddFundsForm-amount'> {formatCurrency(this.state.amount, collective.currency)}</span>
           </div>
           <div className='col col-12'>
-            <span className='col col-4 AddFundsForm-bb'> Host fees ({collective.hostFeePercent}%): </span>
-            <span className='col col-2 AddFundsForm-host-fees'> {formatCurrency(this.state.hostFees, collective.currency)} </span>
+            <span className='col col-4 AddFundsForm-bb'> Host fees {collective.hostFeePercent}%: <img className='help' src='/public/svg/help.svg' data-tip='When the source of funds is not the host, we deduct the usual host fee.'/><ReactTooltip effect='solid' border={true} place='right' /></span>
+            <span className='col col-2 AddFundsForm-host-fees'> {formatCurrency(this.state.fees, collective.currency)} </span>
           </div>
           <div className='col col-12'>
-            <span className='col col-4'> Net funds for collective:</span>
-            <span className='col col-2 AddFundsForm-amount'> {formatCurrency(this.state.amount - this.state.hostFees, collective.currency)} </span>
+            <span className='col col-4 '> Net amount: <img className='help' src='/public/svg/help.svg' data-tip='Funds credited to the collective from this donation'/><ReactTooltip effect='solid' border={true} place='right' /></span>
+            <span className='col col-2 AddFundsForm-amount'> {netAmount} </span>
           </div>
         </div>
 
-        <p className='notice'>When the source of funds is someone other than the host, we deduct the host fee. By clicking below, you agree to set aside these funds in your bank account on behalf of the collective. </p>
+        <p className='notice'>By clicking below, you agree to set aside { amountStringInNotice } in your bank account on behalf of the collective. </p>
      
         <AsyncButton
           color='green'
@@ -139,11 +141,11 @@ class AddFundsForm extends Component {
     } else {
       amount = this.state.amount
     }
-    const addHostFees = !areFundsFromDefaultUser;
+    const addFees = !areFundsFromDefaultUser;
 
     this.setState({
       amount: (amount === '' || isNaN(amount)) ? 0 : amount,
-      hostFees: (addHostFees && !isNaN(amount)) ? -1*this.props.collective.hostFeePercent/100*amount : 0
+      fees: (addFees && !isNaN(amount)) ? -1*this.props.collective.hostFeePercent/100*amount : 0
     });
   }
 
@@ -158,7 +160,7 @@ AddFundsForm.propTypes = {
   validationError: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
   attributes: PropTypes.object.isRequired,
-  defaultUser: PropTypes.object
+  host: PropTypes.object
 };
 
 export default AddFundsForm;
