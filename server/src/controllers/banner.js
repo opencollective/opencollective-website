@@ -23,7 +23,7 @@ export default {
     });
   },
 
-  logo: (req, res) => {
+  logo: (req, res, next) => {
 
     // Keeping the resulting image for 60 days in the CDN cache (we purge that cache on deploy)
     res.setHeader('Cache-Control', `public, max-age=${60*24*60*60}`);
@@ -69,6 +69,9 @@ export default {
           pixels: variants[req.query.variant || 'wide'],
           reverse: (req.query.reverse === 'true') ? true : false
         }, (err, ascii) => {
+          if (err) {
+            return next(new Error(`Unable to create an ASCII art for ${imagesrc}`));
+          }
           if (req.query.trim !== 'false') {
             ascii = ascii.replace(/\n^\s*$/gm, '');
           }
