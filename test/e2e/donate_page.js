@@ -27,7 +27,7 @@ module.exports = {
     client
       .url(`${config.host.website}/testcollective/donate`)
       .waitForElementVisible('body', 1000)
-      .setValue('.DonationPicker-input input', 50)
+      .setValue('.DonationPicker-input input', '50')
       .assert.containsText('div[class=DonateDisclaimer]', '€50,00')
       .end();
    },
