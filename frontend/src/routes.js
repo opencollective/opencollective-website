@@ -62,6 +62,7 @@ export default (
     <Route path="/:slug/:verb/:amount/:interval/:description" component={DonatePage} />
     <Route path="/:slug/:verb/:amount/:interval" component={DonatePage} />
     <Route path="/:slug/:verb/:amount" component={DonatePage} />
+    <Route path="/:slug/donate" component={DonatePage} />
     // TODO: this is generating the searchbox on 404s right now
     <Route path="/:slug/:tier" component={GroupTierList} />
     <Route path="/:slug" component={PublicPage} />

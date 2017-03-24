@@ -37,17 +37,15 @@ export default class Tiers extends Component {
     const hasStripe = stripeKey && amount !== '';
 
     donationForm[tier.name] = donationForm[tier.name] || {};
-    const amount = donationForm[tier.name].amount !== undefined ? donationForm[tier.name].amount : tier.range[0];
+    const amount = donationForm[tier.name].amount !== undefined ? donationForm[tier.name].amount : tier.range[0] || tier.amount;
     const interval = donationForm[tier.name].interval || tier.interval;
     const currency = donationForm[tier.name].currency || collective.currency;
 
     const intervalHuman = interval === 'one-time' ? '' : `${i18n.getString('per')} ${i18n.getString(interval.replace(/ly$/,''))}`;
     const stripeDescription =  `${formatCurrency((amount * 100), currency, collective.settings.formatCurrency)} ${intervalHuman}`;
-    const button = tier.button || `${i18n.getString('donate')} ${stripeDescription}`;
+    const button = tier.button || `${i18n.getString(tier.verb || 'donate')} ${stripeDescription}`;
     const cancellationDisclaimer = (interval !== 'one-time') ? i18n.getString('cancelAnytime') : "";
     const description = tier.description || i18n.getString(`${tier.name}Description`);
-
-    const mockedPayload = {"amount":"10","interval":"one-time","currency":"USD","token":{"id":"tok_19dTz2DjPFcHOcTmc66YD53U","object":"token","card":{"id":"card_19dTz2DjPFcHOcTmWfy61v2L","object":"card","address_city":null,"address_country":null,"address_line1":null,"address_line1_check":null,"address_line2":null,"address_state":null,"address_zip":null,"address_zip_check":null,"brand":"Visa","country":"US","cvc_check":"pass","dynamic_last4":null,"exp_month":11,"exp_year":2020,"funding":"credit","last4":"4242","metadata":{},"name":"dfds@fdsdsf.com","tokenization_method":null},"client_ip":"74.73.151.59","created":1484786456,"email":"dfds@fdsdsf.com","livemode":false,"type":"card","used":false}};
 
     return (
       <div className='Tier' id={tier.name} key={`${tier.name}`}>
@@ -106,10 +104,6 @@ export default class Tiers extends Component {
                   </AsyncButton>
               </StripeCheckout>
             )}
-
-            { window && window.location.hostname === 'localhost' &&
-              <button onClick={() => ::this.onTokenReceived(tier, mockedPayload)} >Simulate Donation</button>
-            }
 
             </div>
           </div>
