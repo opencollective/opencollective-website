@@ -45,6 +45,9 @@
     }
   }
   .CollectiveDonationFlowWrapper {
+    align-items: baseline;
+    padding: 1rem;
+    box-sizing: border-box;
     & > div {
       max-width: 600px;
     }
