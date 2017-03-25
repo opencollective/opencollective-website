@@ -71,7 +71,7 @@ describe('Collective container', () => {
       expect(slug).to.be.equal(collective.slug);
       expect(payment.currency).to.be.equal('MXN');
       expect(payment.email).to.be.equal(token.email);
-      expect(payment.amount).to.be.equal(10);
+      expect(payment.amount).to.be.equal(1000);
 
       return Promise.resolve(donateActionResponseMock);
     });
@@ -108,7 +108,7 @@ describe('Collective container', () => {
       expect(payment.stripeToken).to.be.equal(token.id);
       expect(payment.email).to.be.equal(token.email);
       expect(payment.currency).to.be.equal(collective.currency);
-      expect(payment.amount).to.be.equal(10);
+      expect(payment.amount).to.be.equal(1000);
       return Promise.resolve(donateActionResponseMock);
     });
 
@@ -202,7 +202,7 @@ describe('Collective container', () => {
       expect(slug).to.be.equal(collective.slug);
       expect(payment.currency).to.be.equal('MXN');
       expect(payment.email).to.be.equal(token.email);
-      expect(payment.amount).to.be.equal(10);
+      expect(payment.amount).to.be.equal(1000);
 
       return Promise.resolve(donateActionResponseMock);
     });
