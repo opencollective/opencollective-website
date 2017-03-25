@@ -46,7 +46,45 @@ export class DonatePage extends Component {
 
   constructor(props) {
     super(props);
+
+    this.prepareTweet = this.prepareTweet.bind(this);
+
+    const { collective, i18n } = props;
     this.state = { view: 'default' };
+    this.tier = (this.props.tier.description) ? this.props.tier : getTier(this.props.tier, collective.tiers) || this.props.tier;
+    const verb = this.props.params.verb || 'donate';
+
+    if (!this.tier.name || this.tier.presets && this.tier.presets.length > 1) {
+      Object.assign(this.tier, {
+      name: "custom",
+      title: " ",
+      description: this.tier.description || i18n.getString('defaultTierDescription'),
+      range: [this.tier.amount || 0, 10000000]
+      });
+    }
+
+    if (!this.tier.amount) {
+      Object.assign(this.tier, {
+        presets: ["other", 5, 10, 50, 100],
+        interval: 'one-time',
+        amount: 20,
+        verb
+      });
+    } else {
+      const intervalString = (this.tier.interval && this.tier.interval !== 'one-time') ? `/${this.tier.interval}` : '';
+      this.tier.button = this.tier.button || `${verb} ${formatCurrency(this.tier.amount * 100, collective.currency, { precision: 0 })}${intervalString}`;    
+    }
+
+    this.tiers = [this.tier];
+
+  }
+
+  prepareTweet(amount) {
+    const { collective } = this.props;
+    const collectiveHandle = (collective.twitterHandle) ? `@${collective.twitterHandle}` : collective.name;
+    const url = window ? window.location.href : '';
+    const forDescription = this.tier.description ? ` for ${this.tier.description}` : '';
+    return `🎉 I've just donated ${formatCurrency(amount * 100, collective.currency, { precision: 0 })} to ${collectiveHandle}${forDescription} ${url}`;
   }
 
   render() {
@@ -54,31 +92,15 @@ export class DonatePage extends Component {
       collective,
       host,
       donationForm,
+      appendDonationForm,
       i18n
     } = this.props;
 
     const { view } = this.state;
 
-    const tier = (this.props.tier.description)  ? this.props.tier : getTier(this.props.tier, collective.tiers) || this.props.tier;
-    const intervalString = (tier.interval && tier.interval !== 'one-time') ? `/${tier.interval}` : '';
-    tier.button = tier.button || `${this.props.params.verb} ${formatCurrency(tier.amount * 100, collective.currency, { precision: 0 })}${intervalString}`;
-
-    const collectiveHandle = (collective.twitterHandle) ? `@${collective.twitterHandle}` : collective.name;
-    const url = window ? window.location.href : '';
-    const forDescription = tier.description ? ` for ${tier.description}` : '';
-    const tweet = `🎉 I've just donated ${formatCurrency(tier.amount * 100, collective.currency, { precision: 0 })} to ${collectiveHandle}${forDescription} ${url}`;
-
-    if (!tier.name || tier.presets && tier.presets.length > 1) {
-      Object.assign(tier, {
-      name: "custom",
-      title: " ",
-      description: tier.description || i18n.getString('defaultTierDescription'),
-      range: [tier.amount, 10000000],
-      tweet
-      });
-    }
-    const tiers = [tier];
     collective.backers = []; // We don't show the backers
+
+    const currentAmount = (donationForm.custom && donationForm.custom.amount) || this.tier.amount;
 
     return (
       <div className='DonatePage Page'>
@@ -96,7 +118,7 @@ export class DonatePage extends Component {
             }
             { view === 'default' &&
               <Tiers
-                tiers={tiers}
+                tiers={this.tiers}
                 collective={collective}
                 host={host}
                 donationForm={donationForm}
@@ -109,7 +131,7 @@ export class DonatePage extends Component {
               <PostDonationSignUp {...this.props} onSave={saveNewUser.bind(this)} onSkip={onSkipSaveUser.bind(this)} {...this.props} />
             }
             { view === 'thankyou' &&
-              <PostDonationThanks i18n={i18n} collective={collective} message={i18n.getString('thankyou')} tweet={tier.tweet} showRelated={false} closeDonationFlow={this.closeDonationFlow.bind(this)} />
+              <PostDonationThanks i18n={i18n} collective={collective} message={i18n.getString('thankyou')} tweet={this.prepareTweet(currentAmount)} showRelated={false} closeDonationFlow={this.closeDonationFlow.bind(this)} />
             }
             { view === 'default' &&
               <div className="LightFooter">

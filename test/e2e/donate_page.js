@@ -23,4 +23,13 @@ module.exports = {
       .end();
    },
 
+  'Donate custom amount': (client) => {
+    client
+      .url(`${config.host.website}/testcollective/donate`)
+      .waitForElementVisible('body', 1000)
+      .clearValue('.DonationPicker-input input')
+      .setValue('.DonationPicker-input input', '50')
+      .assert.containsText('div[class=DonateDisclaimer]', '€50,00')
+      .end();
+   },
 };

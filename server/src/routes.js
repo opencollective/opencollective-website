@@ -132,6 +132,7 @@ export default (app) => {
   app.get('/:slug([A-Za-z0-9-_]+)/:verb(donate|pay|contribute)/:amount/:interval/:description', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-_]+)/:verb(donate|pay|contribute)/:amount/:interval', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-_]+)/:verb(donate|pay|contribute)/:amount', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
+  app.get('/:slug([A-Za-z0-9-_]+)/:verb(donate|pay|contribute)', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-_]+)/:type(expenses|donations|transactions)', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
   app.get('/:slug([A-Za-z0-9-]+)/transactions/:transactionuuid/invoice.pdf', mw.maxAge(300), mw.fetchTransactionByUUID, controllers.transactions.invoice);
   app.get('/:slug([A-Za-z0-9-_]+)/expenses/:action(new)', mw.ga, mw.fetchGroupBySlug, mw.addMeta, render);
