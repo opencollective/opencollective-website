@@ -178,7 +178,7 @@ export function donateToCollective({amount, interval, currency, description, tok
   const payment = {
     stripeToken: token && token.id,
     email: token && token.email,
-    amount,
+    amount: amount*100,
     currency,
     description
   };
