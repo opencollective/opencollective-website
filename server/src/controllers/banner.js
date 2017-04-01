@@ -372,6 +372,6 @@ export default {
 
     req.ga.event(`GithubWidget-${tier}`, `Click`, user.name, position);
 
-    res.redirect(redirectUrl);
+    res.redirect(301, redirectUrl);
   }
 };
