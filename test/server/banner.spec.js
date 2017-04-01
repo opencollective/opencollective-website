@@ -124,14 +124,14 @@ describe("redirect", () => {
     request(app)
       .get('/yeoman/sponsors/0/website')
       .expect('Location', `https://digitalocean.com/?utm_campaign=opensource&utm_medium=github&utm_source=oc`)
-      .expect(302, done);
+      .expect(301, done);
   });
 
   it(`redirects to profile of the backer (@${mocks.backers[2].twitterHandle})`, (done) => {
     request(app)
       .get('/yeoman/backers/2/website')
       .expect('Location', `${config.host.website}/${mocks.backers[2].twitterHandle}?utm_campaign=yeoman&utm_medium=github&utm_source=opencollective`)
-      .expect(302, done);
+      .expect(301, done);
   });
 
 })
