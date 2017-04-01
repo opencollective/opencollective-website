@@ -127,7 +127,7 @@ export function checkStatus(response) {
   }
 }
 
-function addAuthTokenToHeader(obj) {
+function addAuthTokenToHeader(obj = {}) {
   const accessToken = localStorage.getItem('accessToken');
   if (!accessToken) return obj;
   return {
