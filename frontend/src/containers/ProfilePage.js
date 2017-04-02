@@ -79,6 +79,16 @@ export class ProfilePage extends Component {
               placeholder={i18n.getString('defaultName')} />
 
         <div className="website-twitter">
+          {profile.canEditUser &&
+            <ContentEditable
+                  className='ContentEditable-username'
+                  html={profile.username}
+                  disabled={false}
+                  multiline={false}
+                  onChange={event => this.saveUser({username: event.target.value})}
+                  />
+          }
+
           <ContentEditable
                 className='ContentEditable-website'
                 html={profile.canEditUser ? profile.website : prettyLink(profile.website)}
@@ -88,7 +98,7 @@ export class ProfilePage extends Component {
                 placeholder={i18n.getString('defaultWebsite')} />
           <ContentEditable
                 className='ContentEditable-twitterHandle'
-                html={profile.canEditUser ? `@${profile.twitterHandle}` : `<a href="https://twitter.com/${profile.twitterHandle}" target="_blank">@${profile.twitterHandle}</a>`}
+                html={profile.canEditUser ? profile.twitterHandle : `<a href="https://twitter.com/${profile.twitterHandle}" target="_blank">@${profile.twitterHandle}</a>`}
                 disabled={!profile.canEditUser}
                 multiline={false}
                 onChange={event => this.saveUser({twitterHandle: event.target.value})}

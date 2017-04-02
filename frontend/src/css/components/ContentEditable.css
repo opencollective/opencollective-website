@@ -39,3 +39,11 @@ span.editing {
 .ContentEditable-description p {
   text-align: center;
 }
+
+.ContentEditable-username::before {
+  content: 'opencollective.com/';
+}
+
+.ContentEditable--enabled.ContentEditable-twitterHandle::before {
+  content: 'twitter.com/';
+}
