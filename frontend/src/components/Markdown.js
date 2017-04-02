@@ -55,7 +55,7 @@ export default class Markdown extends Component {
       } else {
         return (
           <div
-            className={`ContentEditable ${className} container ${placeholderClass}`}
+            className={`ContentEditable ${className} container ${placeholderClass} ${this.props.canEdit ? `ContentEditable--enabled` : ''}`}
             dangerouslySetInnerHTML={ this.rawMarkup(content)}
             onClick={ this.onClick } />
         );

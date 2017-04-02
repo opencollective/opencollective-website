@@ -27,6 +27,15 @@ span.editing {
   }
 }
 
+.ContentEditable-name {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.ContentEditable-website, .ContentEditable-twitterHandle {
+  font-size: 0.9rem;
+}
+
 .ContentEditable-description p {
   text-align: center;
 }

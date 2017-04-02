@@ -20,6 +20,8 @@ import validateSchema from '../actions/form/validate_schema';
 import profileSchema from '../joi_schemas/profile';
 import appendProfileForm from '../actions/form/append_profile';
 
+import { prettyLink } from '../lib/utils';
+
 export class ProfilePage extends Component {
   constructor(props) {
     super(props);
@@ -70,11 +72,28 @@ export class ProfilePage extends Component {
         {profile.isOrganization && <div className="line1">Hello We are</div>}
 
         <ContentEditable
-              className='line2 ContentEditable-description'
+              className='line2 ContentEditable-name'
               html={profile.name}
               disabled={!profile.canEditUser}
               onChange={event => this.saveUser({name: event.target.value})}
-              placeholder={i18n.getString('defaultDescription')} />
+              placeholder={i18n.getString('defaultName')} />
+
+        <div className="website-twitter">
+          <ContentEditable
+                className='ContentEditable-website'
+                html={profile.canEditUser ? profile.website : prettyLink(profile.website)}
+                disabled={!profile.canEditUser}
+                multiline={false}
+                onChange={event => this.saveUser({website: event.target.value})}
+                placeholder={i18n.getString('defaultWebsite')} />
+          <ContentEditable
+                className='ContentEditable-twitterHandle'
+                html={profile.canEditUser ? `@${profile.twitterHandle}` : `<a href="https://twitter.com/${profile.twitterHandle}" target="_blank">@${profile.twitterHandle}</a>`}
+                disabled={!profile.canEditUser}
+                multiline={false}
+                onChange={event => this.saveUser({twitterHandle: event.target.value})}
+                placeholder={i18n.getString('defaultTwitterHandle')} />
+        </div>
 
         <ContentEditable
               className='line3 ContentEditable-description'
