@@ -9,9 +9,10 @@ import _ from 'lodash';
 /**
  * Fetch users by slug
  */
-const fetchActiveUsers = (options = {}) => {
+const fetchUsers = (options = {}) => {
   return (req, res, next) => {
 
+    const requireActive = (typeof options.requireActive === 'boolean') ? options.requireActive : req.query.requireActive !== 'false'; // by default, we skip inactive users
     const filters = {
       tier: req.params.tier,
       exclude: req.query.exclude,
@@ -26,7 +27,7 @@ const fetchActiveUsers = (options = {}) => {
         break;
       default:
         options.cache = 300;
-        fetchUsers = api.get(`/groups/${req.params.slug}/users?filter=active`, options)
+        fetchUsers = api.get(`/groups/${req.params.slug}/users${requireActive ? '?filter=active' : ''}`, options)
                         .then(users => _.uniqBy(users, 'id'));
         break;
     }
@@ -236,7 +237,7 @@ export default {
   fetchProfileBySlug,
   fetchTransactionByUUID,
   extractGithubUsernameFromToken,
-  fetchActiveUsers,
+  fetchUsers,
   ga,
   handleUncaughtError
 }
