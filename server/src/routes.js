@@ -86,17 +86,17 @@ export default (app) => {
    * Routes
    */
   app.get('/:slug/:image(avatar|logo).:format(txt|png|jpg|gif|svg)', mw.maxAge(300), mw.fetchProfileBySlug, controllers.banner.logo);
-  app.get('/:slug/banner.md', mw.maxAge(300), mw.fetchGroupBySlug, mw.fetchActiveUsers(), controllers.banner.markdown);
-  app.get('/:slug/banner.js', mw.maxAge(3000), mw.fetchGroupBySlug, mw.fetchActiveUsers(), controllers.banner.js);
+  app.get('/:slug/banner.md', mw.maxAge(300), mw.fetchGroupBySlug, mw.fetchUsers(), controllers.banner.markdown);
+  app.get('/:slug/banner.js', mw.maxAge(3000), mw.fetchGroupBySlug, mw.fetchUsers(), controllers.banner.js);
   app.get('/:slug.json', mw.maxAge(900), mw.fetchProfileBySlug, renderJSON('collective'));
-  app.get('/:slug/:tier.md', mw.maxAge(300), mw.fetchGroupBySlug, mw.fetchActiveUsers(), controllers.banner.markdown);
-  app.get('/:slug/:tier.json', mw.maxAge(900), mw.fetchActiveUsers(), renderJSON('users'));
+  app.get('/:slug/:tier.md', mw.maxAge(300), mw.fetchGroupBySlug, mw.fetchUsers(), controllers.banner.markdown);
+  app.get('/:slug/:tier.json', mw.maxAge(900), mw.fetchUsers(), renderJSON('users'));
   app.get('/:slug/transactions/:transactionuuid.json', mw.maxAge(900), mw.fetchTransactionByUUID, renderJSON('transaction'));
-  app.get('/:slug/:tier.:format(svg|png)', mw.maxAge(300), mw.fetchActiveUsers(), controllers.banner.banner);
-  app.get('/:slug/:tier/badge.svg', mw.maxAge(300), mw.fetchActiveUsers({requireAvatar: false}), controllers.banner.badge);
-  app.get('/:slug/badge/:tier.svg', mw.maxAge(300), mw.fetchActiveUsers({requireAvatar: false}), controllers.banner.badge);
-  app.get('/:slug/:tier/:position/avatar(.:format(png|jpg|svg))?', mw.maxAge(300), mw.ga, mw.fetchActiveUsers({cache: 300}), controllers.banner.avatar);
-  app.get('/:slug/:tier/:position/website', mw.ga, mw.fetchActiveUsers(), controllers.banner.redirect);
+  app.get('/:slug/:tier.:format(svg|png)', mw.maxAge(300), mw.fetchUsers(), controllers.banner.banner);
+  app.get('/:slug/:tier/badge.svg', mw.maxAge(300), mw.fetchUsers({requireAvatar: false}), controllers.banner.badge);
+  app.get('/:slug/badge/:tier.svg', mw.maxAge(300), mw.fetchUsers({requireAvatar: false}), controllers.banner.badge);
+  app.get('/:slug/:tier/:position/avatar(.:format(png|jpg|svg))?', mw.maxAge(300), mw.ga, mw.fetchUsers({cache: 300}), controllers.banner.avatar);
+  app.get('/:slug/:tier/:position/website', mw.ga, mw.fetchUsers(), controllers.banner.redirect);
   app.get('/:slug([A-Za-z0-9-]+)/widget', mw.maxAge(300), mw.fetchProfileBySlug, controllers.widgets.profile);
   app.get('/:slug([A-Za-z0-9-]+)/widget.js', mw.maxAge(3000), controllers.widgets.js);
 
