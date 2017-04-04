@@ -1,11 +1,12 @@
 import React from 'react';
+import debounce from 'lodash/debounce';
 
 // Taken from `react-contenteditable` module
 
 export default class ContentEditable extends React.Component {
   constructor(props) {
     super();
-    this.emitChange = this.emitChange.bind(this);
+    this.debouncedEmitChange = debounce(this.emitChange.bind(this), 500);
     this.lastHtml = props.html;
   }
 
@@ -20,8 +21,14 @@ export default class ContentEditable extends React.Component {
         ...props,
         className: `ContentEditable ${!disabled ? 'ContentEditable--enabled' : ''} ${className}`,
         ref: (e) => this.htmlEl = e,
-        onInput: this.emitChange,
+        onInput: this.debouncedEmitChange,
         onBlur: this.props.onBlur || this.emitChange,
+        onKeyPress: (e) => {
+          if (!this.props.multiline && e.which === 13) {
+            e.preventDefault();
+            return false;
+          }
+        },
         contentEditable: !disabled,
         dangerouslySetInnerHTML: {__html: html.replace(/\n|<br>|<\/?div>/g,'')}
       },
