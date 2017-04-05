@@ -11,6 +11,7 @@ const DEFAULT_GROUP_STYLES = {
 };
 
 export function prettyLink(url) {
+  if (!url) return '';
   const prettyUrl = url.replace(/^https?:\/\/(www\.)?/i,'').replace(/\?.+/, '');
   return `<a href="${url}" target="_blank">${prettyUrl}</a>`;
 }
