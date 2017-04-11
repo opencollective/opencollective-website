@@ -1,5 +1,4 @@
 import express from 'express';
-import perf from 'express-perf';
 import morgan from 'morgan';
 import config from 'config';
 import compression from 'compression';
@@ -11,11 +10,6 @@ import views from './views';
  * Express app
  */
 const app = express();
-
-// monitoring, should go first
-app.use(perf(express, {
-  apiKey: config.expressperf.api_key
-}))
 
 /**
  * Locals for the templates
