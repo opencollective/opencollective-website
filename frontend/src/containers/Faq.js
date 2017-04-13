@@ -36,33 +36,36 @@ export class Faq extends Component {
             <li>Let your members submit expenses and reimburse them with a click (<a href="https://opencollective.com/RailsGirlsAtl/expenses/new">example</a>)</li>
             <li>Give everyone visibility on your budget (<a href="https://opencollective.com/RailsGirlsAtl#budget">example</a>)</li>
           </ul>
-          <p>If you have an organization, you can use Open Collective to empower local chapters to raise money locally and have their own budget. See <a href="#organizations">Open Collective For Organizations</a>.</p>
+          <p>If you have an organization, you can use Open Collective to empower local chapters to raise money in their community and have their own budget. See <a href="#organizations">Open Collective For Organizations</a>.</p>
+      
+      <h3>Do you have a Getting Started guide?</h3>
+      <p>Glad you asked! Check it out: <a href="https://medium.com/open-collective/ten-steps-to-successful-open-source-crowdfunding-fa2b43e82687">Ten Steps to Successful Open Source Crowdfunding</a>.
 
           <h3>What is Open Collective good for?</h3>
-          <p>Open Collective is perfect for any side project that is not for profit. Side projects should be fun. You shouldn't have to worry about creating and maintaining a legal entity, doing bookkeeping, etc. as soon as you need to collect money to reimburse your expenses. Open Collective is ideal for meetups, open source projects, parent associations, neighborhood associations, clubs, unions, movements, non-profits, business incubators, etc.</p>
+          <p>Open Collective is perfect for any side project that is not for profit. Side projects should be fun. You shouldn't have to worry about creating and maintaining a legal entity, doing bookkeeping, etc, just to collect money to reimburse your expenses. Open Collective is ideal for all kinds of groups, like meetups, open source projects, parent associations, neighborhood associations, clubs, unions, movements, non-profits, and business incubators.</p>
 
           <h3>Why should I use Open Collective?</h3>
-          <p>Open Collective makes it easy to be transparent about your finances. We help you collect money <em>recurringly</em> for your community. Think about funding an ongoing open source software, collecting dues for a parent association or charge a monthly fee for your food coop. Once you have the money on Open Collective, it’s easy to spend it and everyone can see how it’s being spent. We believe that financial transparency in a community will create stronger and more efficient collaboration among people.</p>
+          <p>Open Collective makes it easy to be transparent about your finances. We help you collect <em>recurring</em> contributions from supporters, whether you're funding an ongoing work on open source software, collecting dues for a parent association, or charging a monthly fee for your food coop. Once you have the money on Open Collective, reimbursing expenses is simple, and everyone can see how funds are being spent. We believe that financial transparency creates stronger collaboration.</p>
 
-          <h3>How is that different from other crowdfunding platforms?</h3>
+          <h3>How is it different from other crowdfunding platforms?</h3>
           <p>Two major differences:</p>
           <ul>
-            <li>Open Collective helps you raise money recurringly (e.g. monthly) to finance the activities of your community. That way, you can plan your future activities against your anticipated monthly budget.</li>
-            <li>Open Collective allows (and encourages) full transparency and accountability of the money raised. Other platforms hand over the money without showing to the backers how their money is used. On Open Collective, in order to use the money, you submit an expense for everyone to see. We believe transparency leads to healthier organizations.</li>
+            <li>While most crowdfunding is about once-off projects, Open Collective helps you raise money recurringly (e.g. monthly) to finance the ongoing activities of your community. That way, you can plan your activities against an anticipated monthly budget.</li>
+            <li>Open Collective operates with full financial transparency and accountability. Other platforms hand over the money without showing the the backers, who provided the funds, how it's used. On Open Collective, you submit expenses for everyone to see. We believe transparency leads to healthier organizations and communities.</li>
           </ul>
 
           <h3>How does it work?</h3>
-          <p>When you create a collective, the money collected goes to the bank account associated with the collective. Whenever you –or a member of the collective– wants to use the money, they submit an expense on the public page of your collective (<a href="https://opencollective.com/railsgirlsatl/expenses/new">like this one</a>). Once you approve it, the person who submitted the expense is automatically reimbursed on their personal PayPal account. The budget and all the expenses are visible publicly.</p>
+          <p>When you create a collective, the money collected goes to the bank account associated with the collective. When someone wants to use the money, they submit an expense on the public page of your collective (<a href="https://opencollective.com/railsgirlsatl/expenses/new">like this one</a>). After the expense is approved by you, the person is automatically reimbursed to their PayPal account. The budget and all the expenses are visible publicly.</p>
 
           <h3>How much does it cost?</h3>
-          <p>Open Collective takes 10% of the money raised by the collective for managing their bookkeeping, taxes, and the admin of reimbursing their expenses. We share this commission with the fiscal sponsor (legal owner of the bank account that holds the money on behalf of the collective).</p>
-          <p>Additionally, our payment processors charge a fee - Stripe for receiving money via a Credit Card and PayPal for paying out expenses. Usually 2.9% + $0.30 per transaction. We are exploring adding other means of payments, including ACH transfers and Bitcoin, to reduce those fees.</p>
+          <p>Open Collective takes 10% of the money raised by the collective for managing bookkeeping, taxes, and admin (fiscal sponsorship), as well as providing your Open Collective page and the software it runs on. We share this commission with the fiscal sponsor (legal owner of the bank account that holds the money on behalf of the collective).</p>
+          <p>Additionally, our payment processors charge a fee - Stripe for receiving money via a Credit Card and PayPal for paying out expenses. Usually 2.9% + $0.30 per transaction. We are exploring adding other means of payment to reduce those fees, including ACH transfers and Bitcoin.</p>
 
           <h3 id="organizations">What is Open Collective For Organizations?</h3>
-          <p>Open Collective for Organizations allows you to empower local chapters to raise money and have their own budget without having to open a separate bank account. No more asking a local sponsor to directly pay for the pizzas! See how <a href="https://opencollective.com/wwcode">Women Who Code uses Open Collective</a>.</p>
+          <p>Open Collective for Organizations allows you to empower chapters or projects in your local area or network to raise money and have their own budget, without having to open a separate bank account. No more asking a local sponsor to directly pay for the pizzas! See how <a href="https://medium.com/open-collective/women-who-code-powering-up-an-international-network-with-local-crowdfunding-78ccf5d3c725">Women Who Code uses Open Collective</a>.</p>
 
-          <h4 sstyle="margin-left:40px">How does it work?</h4>
-          <p sstyle="margin-left:40px">Open Collective sits on top of the Stripe and PayPal account of your organization. It creates virtual groups for each of your chapters. Each have their own dedicated page and independent budget (see for example <a href="https://opencollective.com/wwcodeaustin">Women Who Code Austin</a>). This empowers them to raise money on their own (and you can opt in to keep a percentage for the main organization). Legally speaking, this is the equivalent of acting as a "Fiscal Sponsor".</p>
+          <h4 sstyle="margin-left:40px">How does it work for Organizations?</h4>
+          <p sstyle="margin-left:40px">Open Collective sits on top of the Stripe and PayPal account of your organization. It creates virtual groups for each of your chapters. Each have their own dedicated page and independent budget (see for example <a href="https://opencollective.com/wwcodeaustin">Women Who Code Austin</a>). This empowers them to raise money on their own, from their local comminty and sponsors, in place of or in addition to any budget they receive from your organization. Legally speaking, this is the equivalent of acting as a "Fiscal Sponsor".</p> You decide what, if any, perrcentage goes to the main organization for providing this service.
 
           <h4 sstyle="margin-left:40px">How much does Open collective for Organizations cost?</h4>
           <p sstyle="margin-left:40px">We are currently in private beta. Contact hello@opencollective.com and we'll work with you.</p>
@@ -76,12 +79,12 @@ export class Faq extends Component {
           <h3>How do I make a donation?</h3>
           <p>You rock! We are delighted you are asking this question. Go to the Collective’s Public Page (e.g. https://opencollective.com/wwcodeatl), choose your recurring donation amount and hit the Back Us or Donate button, fill out the form et voilà! Now you are part of that collective, your community will appreciate it.</p>
           
-          <h3 id="expense">How do I submit an expense?</h3>
-          <p>Go to your Collective page to submit an expense. You will need to upload a valid image for it to get reimbursed. Don’t forget to include your paypal email if it’s different from your user email.</p>
+          <h3 id="expense">How do I submit an expense for reimbursement?</h3>
+          <p>Go to the page of the Collective you're submitting the expense to, and click "Submit Expense". You will need to upload a receipt or invoice, and provide your contact details and PayPal address.</p>
           <p>There are two ways of using your Collective’s money:
             <ul>
-              <li>Submit a receipt for something you paid like online services, meals, plane tickets, etc.</li>
-              <li>Submit an invoice for your work. The invoice must include your current address and be made to Open Collective Inc. (or to the host if you are hosted by another organisation) with reference to your collective. The invoice is only visible to the host and core contributors, it is not public.</li>
+              <li>Submit a receipt for something you paid for, like online services, meals, plane tickets, etc.</li>
+              <li>Submit an invoice for your work. The invoice must include your current address and be made to Open Collective Inc (or to the host if the Collective is hosted by another organisation) with reference to the Collective name. The expense amount will be listed on the Collective page, but the invoice itself is only visible to the host and core contributors (not public).</li>
              </ul>
           </p>
           <p>Expenses will be paid once a week on Fridays. Please contact <a href="mailto:support@opencollective.com">Support</a> if you have any questions.</p> 
@@ -95,23 +98,23 @@ export class Faq extends Component {
           </p>
           
           <h3>Why do you have monthly payments as default?</h3>
-          <p>A collective is an organization of people working together towards a common goal. Sometimes these goals take a few months and sometimes they can take years. By supporting a collective with a recurring monthly amount, you help the collective plan out its future activities.</p>
+          <p>A collective is an organization of people working together towards a common goal. Sometimes these goals take a few months or a few years to achieve. By supporting a collective with a recurring monthly amount, you help the collective plan out its future.</p>
           
           <h3 id="charge-date-notice">Why do you charge recurring monthly subscriptions on 1st of every month?</h3>
-          <p>It helps our collectives manage their monthly budget. Instead of getting donations randomly throughout the month, they can start a month with a minimum budget for that month. Any new donations during the month only improves their budget.</p>
+          <p>It helps our collectives manage their monthly budget. Instead of getting donations randomly throughout the month, they can start with a minimum budget for that month. Any new donations improve the budget.</p>
 
-          <p>We would also like to eventually move to charging a single payment for multiple monthly donations from the same user. Fewer transactions means less fees going towards payment processors and more for collectives. Stay tuned for updates on that in the near future.</p> 
+          <p>We're working on a way to charge a single payment spread out across monthly contributions, to reduce payment processor transaction fees.</p> 
           
           <h3>How can I cancel my monthly donation?</h3>
           <p>We are sorry to see you go! Go to <a href="https://opencollective.com/subscriptions">opencollective.com/subscriptions</a> to manage your subscriptions.</p>
           
           <h3>Where can I report a Collective? </h3>
-          <p>We strive to keep our community healthy, safe and in line with our mission. If you wish to report a collective’s activity please email us report@opencollective.com</p>
+          <p>We strive to keep our community healthy, safe and in line with our mission. If you have a complaint or concern please email us: report@opencollective.com</p>
           
-          <h3>Why is my Collective not able to receive donations yet? </h3>
-          <p>We are thrilled you have created your Open Collective! We are still in private beta and we have a selection process to ensure the quality of the collectives our users can back before they are active to receive donations. We are working hard to get everyone aboard!</p>
+          <h3>Why is my Collective not able to receive donations right away? </h3>
+          <p>We are thrilled you have created your Open Collective! We are still in private beta and we have a selection process before new Collectives can receive donations. We are a small team, but working hard to get everyone aboard!</p>
           
-          <h3>What are your Terms of Service and Privacy Policy?</h3>
+          <h3>Where are your Terms of Service and Privacy Policy?</h3>
           <p><a href="https://docs.google.com/document/u/1/d/1HRYVADHN1-4B6wGCxIA6dx28jHtcAVIvt95hkjEZVQE/pub">Terms of Service</a></p>
           <p><a href="https://docs.google.com/document/u/1/d/1OHztLGympxBPVwrLqb8jtCIlDV5Fr6TysOeGXUkDnMM/pub">Privacy Policy</a></p>
           <p>Please read them carefully!</p>    
