@@ -39,7 +39,7 @@ export class Faq extends Component {
           <p>If you have an organization, you can use Open Collective to empower local chapters to raise money in their community and have their own budget. See <a href="#organizations">Open Collective For Organizations</a>.</p>
       
       <h3>Do you have a Getting Started guide?</h3>
-      <p>Glad you asked! Check it out: <a href="https://medium.com/open-collective/ten-steps-to-successful-open-source-crowdfunding-fa2b43e82687">Ten Steps to Successful Open Source Crowdfunding</a>.
+      <p>Glad you asked! Check it out: <a href="https://medium.com/open-collective/ten-steps-to-successful-open-source-crowdfunding-fa2b43e82687">Ten Steps to Successful Open Source Crowdfunding</a>.</p>
 
           <h3>What is Open Collective good for?</h3>
           <p>Open Collective is perfect for any side project that is not for profit. Side projects should be fun. You shouldn't have to worry about creating and maintaining a legal entity, doing bookkeeping, etc, just to collect money to reimburse your expenses. Open Collective is ideal for all kinds of groups, like meetups, open source projects, parent associations, neighborhood associations, clubs, unions, movements, non-profits, and business incubators.</p>
