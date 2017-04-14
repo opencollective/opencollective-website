@@ -121,7 +121,7 @@ export class LearnMore extends Component {
             <section className='LearnMore-SectionA'>
               <div className='Wrap520'>
                 <div className='LearnMoreHeader'>Open At Heart</div>
-                <div className='LearnMoreText'>Our software is open source. <a href='//github.com/opencollective'>Visit our github</a></div>
+                <div className='LearnMoreText'>Our software is open source. <a href='//github.com/opencollective'>Visit our GitHub.</a></div>
                 <div className='-img'></div>
               </div>
             </section>
