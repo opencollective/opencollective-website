@@ -65,6 +65,8 @@ const CollectiveExpenseItem = ({
       receiptHelpTip = i18n.getString('hiddenReceiptHelpTip');
     }
   }
+
+  const payoutMethodString = expense.payoutMethod === 'paypal' ? `PayPal (${expense.user.paypalEmail || expense.user.email})` : expense.payoutMethod;
  
   return (
     <div className='CollectiveExpenseItem' id={`exp${expense.id}`}>
@@ -81,13 +83,15 @@ const CollectiveExpenseItem = ({
             <span className='h6 muted'> {receiptMessage} </span>
             <img className='help' src='/public/svg/help.svg' data-tip={receiptHelpTip} />
             <ReactTooltip effect='solid' border={true} place='bottom' />
-          </div>  
+          </div>
         </div>}
 
         <div className='flex flex-column flex-auto'>
           <div className='CollectiveExpenseItem-info'>
             <div className='-ff-sec'>{ expense.title } ({expense.category})</div>
             <div className='h6 m0 muted' title={i18n.moment(expense.incurredAt).format('MMMM Do YYYY')}>{ i18n.getString('submittedBy') } { submittedByName } - { expense.incurredAt && i18n.moment(expense.incurredAt).fromNow() } </div>
+            {canViewReceipt && <div className='h6 m0'><b>Reimbursement method:</b> {payoutMethodString}</div>}
+            {expense.notes && canViewReceipt && <div className='h6 m0'><b>Notes:</b> {expense.notes}</div>}
             <p className='h3 -ff-sec amount'>
               <Currency value={expense.amount} currency={expense.currency} colorify={false} /> 
             </p>
