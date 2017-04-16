@@ -8,6 +8,7 @@ class PayButton extends Component {
       onClick,
       inProgress,
       disabled,
+      label,
       i18n
     } = this.props;
 
@@ -19,7 +20,7 @@ class PayButton extends Component {
           inProgress={inProgress}
           disabled={disabled}
           onClick={onClick.bind(this)}>
-          {i18n.getString('pay')}
+          {label || i18n.getString('pay')}
         </AsyncButton>
       </div>
     );
@@ -30,6 +31,7 @@ PayButton.propTypes = {
   onClick: PropTypes.func.isRequired,
   inProgress: PropTypes.bool.isRequired,
   i18n: PropTypes.object.isRequired,
+  label: PropTypes.string,
   disabled: PropTypes.bool
 };
 

@@ -22,6 +22,7 @@ const CollectiveExpenseItem = ({
   onApprove,
   onReject,
   onPay,
+  hasPaypalCard,
   authenticatedUser,
   approveInProgress,
   rejectInProgress,
@@ -33,7 +34,8 @@ const CollectiveExpenseItem = ({
   // compute which actions to show
   const showApprove = !compact && canApproveOrReject && expense.status === EXPENSE_STATUS.PENDING;
   const showReject = !compact && canApproveOrReject && expense.status === EXPENSE_STATUS.PENDING;
-  const showPay = !compact && canPay && expense.status === EXPENSE_STATUS.APPROVED;
+  // We can pay if we have a paypal card or if payoutMethod is other
+  const showPay = !compact && canPay && expense.status === EXPENSE_STATUS.APPROVED && (expense.payoutMethod !== 'paypal' || hasPaypalCard);
 
   const updateInProgress = approveInProgress[expense.id] || rejectInProgress[expense.id] || payInProgress[expense.id];
 
@@ -67,6 +69,7 @@ const CollectiveExpenseItem = ({
   }
 
   const payoutMethodString = expense.payoutMethod === 'paypal' ? `PayPal (${expense.user.paypalEmail || expense.user.email})` : expense.payoutMethod;
+  const payButtonLabel = (expense.payoutMethod === 'paypal') ? 'Pay using PayPal' : 'Paid'
  
   return (
     <div className='CollectiveExpenseItem' id={`exp${expense.id}`}>
@@ -117,7 +120,9 @@ const CollectiveExpenseItem = ({
                 disabled={updateInProgress}
                 onClick={onPay.bind(null, expense.id)}
                 inProgress={payInProgress[expense.id]}
+                label={payButtonLabel}
                 i18n={i18n} />}
+            { showPay && expense.payoutMethod !== 'paypal' && <div className="h6 muted">(Please make sure you have paid this expense manually before clicking on "Paid")</div>}
           </div>}
         </div>       
       </div>
@@ -133,7 +138,8 @@ CollectiveExpenseItem.propTypes = {
   authenticatedUser: PropTypes.object,  
   compact: PropTypes.bool,
   canApproveOrReject: PropTypes.bool,
-  canPay: PropTypes.bool, 
+  canPay: PropTypes.bool,
+  hasPaypalCard: PropTypes.bool,
   approveInProgress: PropTypes.object,
   rejectInProgress: PropTypes.object,
   payInProgress: PropTypes.object,
@@ -151,6 +157,7 @@ CollectiveExpenseItem.defaultProps = {
   compact: true,
   canApproveOrReject: false,
   canPay: false,
+  hasPaypalCard: false,
   approveInProgress: {},
   rejectInProgress: {},
   payInProgress: {}
