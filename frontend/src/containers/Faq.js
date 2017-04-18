@@ -50,8 +50,8 @@ export class Faq extends Component {
           <h3>How is it different from other crowdfunding platforms?</h3>
           <p>Two major differences:</p>
           <ul>
-            <li>While most crowdfunding is about once-off projects, Open Collective helps you raise money recurringly (e.g. monthly) to finance the ongoing activities of your community. That way, you can plan your activities against an anticipated monthly budget.</li>
-            <li>Open Collective operates with full financial transparency and accountability. Other platforms hand over the money without showing the the backers, who provided the funds, how it's used. On Open Collective, you submit expenses for everyone to see. We believe transparency leads to healthier organizations and communities.</li>
+            <li>While most crowdfunding is about one-off projects, Open Collective helps you raise money recurringly (e.g. monthly) to finance the ongoing activities of your community. That way, you can plan your activities against an anticipated monthly budget.</li>
+            <li>Open Collective operates with full financial transparency and accountability. Other platforms hand over the money without showing the backers, who provided the funds, how it's used. On Open Collective, you submit expenses for everyone to see. We believe transparency leads to healthier organizations and communities.</li>
           </ul>
 
           <h3>How does it work?</h3>
