@@ -118,6 +118,7 @@ const CollectiveExpenseItem = ({
             {showPay && 
               <PayButton
                 disabled={updateInProgress}
+                className={expense.payoutMethod}
                 onClick={onPay.bind(null, expense.id)}
                 inProgress={payInProgress[expense.id]}
                 label={payButtonLabel}
