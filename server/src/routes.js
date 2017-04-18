@@ -9,6 +9,7 @@ import * as controllers from './controllers';
 import apiUrl from './utils/api_url';
 import { render, renderJSON } from './lib/render';
 import { getCloudinaryUrl } from './lib/utils';
+import cors from 'cors';
 
 export default (app) => {
 
@@ -88,10 +89,10 @@ export default (app) => {
   app.get('/:slug/:image(avatar|logo).:format(txt|png|jpg|gif|svg)', mw.maxAge(300), mw.fetchProfileBySlug, controllers.banner.logo);
   app.get('/:slug/banner.md', mw.maxAge(300), mw.fetchGroupBySlug, mw.fetchUsers(), controllers.banner.markdown);
   app.get('/:slug/banner.js', mw.maxAge(3000), mw.fetchGroupBySlug, mw.fetchUsers(), controllers.banner.js);
-  app.get('/:slug.json', mw.maxAge(900), mw.fetchProfileBySlug, renderJSON('collective'));
+  app.get('/:slug.json', cors(), mw.maxAge(900), mw.fetchProfileBySlug, renderJSON('collective'));
   app.get('/:slug/:tier.md', mw.maxAge(300), mw.fetchGroupBySlug, mw.fetchUsers(), controllers.banner.markdown);
-  app.get('/:slug/:tier.json', mw.maxAge(900), mw.fetchUsers(), renderJSON('users'));
-  app.get('/:slug/transactions/:transactionuuid.json', mw.maxAge(900), mw.fetchTransactionByUUID, renderJSON('transaction'));
+  app.get('/:slug/:tier.json', cors(), mw.maxAge(900), mw.fetchUsers(), renderJSON('users'));
+  app.get('/:slug/transactions/:transactionuuid.json', cors(), mw.maxAge(900), mw.fetchTransactionByUUID, renderJSON('transaction'));
   app.get('/:slug/:tier.:format(svg|png)', mw.maxAge(300), mw.fetchUsers(), controllers.banner.banner);
   app.get('/:slug/:tier/badge.svg', mw.maxAge(300), mw.fetchUsers({requireAvatar: false}), controllers.banner.badge);
   app.get('/:slug/badge/:tier.svg', mw.maxAge(300), mw.fetchUsers({requireAvatar: false}), controllers.banner.badge);
