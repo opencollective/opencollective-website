@@ -25,6 +25,7 @@ describe("api.json.js", () => {
     request(app)
       .get('/yeoman/backers.json')
       .expect('content-type', 'application/json; charset=utf-8')
+      .expect('Access-Control-Allow-Origin', '*')
       .expect((res) => {
         const backers = res.body;
         expect(backers).to.have.length(4);
