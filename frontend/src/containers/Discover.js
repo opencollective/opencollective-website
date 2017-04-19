@@ -19,7 +19,7 @@ export class Discover extends Component {
     super(props);
     this.state = {
       currentShowOption: props.params.tag || props.show || 'all',
-      currentSortOption: props.sort || 'newest'
+      currentSortOption: props.sort || 'most popular'
     };
     this.onSelectShowOption = this.onSelectShowOption.bind(this);
     this.onSelectSortOption = this.onSelectSortOption.bind(this);
@@ -46,7 +46,7 @@ export class Discover extends Component {
     const { i18n, discover, tags } = this.props;
     const { currentShowOption, currentSortOption } = this.state;
     const showOptions = ['all'];
-    const sortOptions = ['newest', 'oldest'];
+    const sortOptions = ['most popular', 'newest'];
     const collectives = discover.collectives ? discover.collectives : [];
 
     if (tags) {
