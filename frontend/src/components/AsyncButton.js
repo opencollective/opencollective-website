@@ -5,6 +5,7 @@ export default ({
   inProgress,
   onClick,
   customClass,
+  className,
   children,
   color,
   disabled,
@@ -22,7 +23,7 @@ export default ({
   return (
     <div
       style={style}
-      className={btnClass}
+      className={`${btnClass} ${className}`}
       onClick={disabled || inProgress ? noop : onClick} >
       {inProgress ? 'Loading' : children}
     </div>

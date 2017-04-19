@@ -27,5 +27,13 @@
   .Button {
     max-width: 150px;
     margin-right: 1rem;
+    &.Button--pay {
+      &.paypal {
+        max-width: 200px;
+      }
+      &.other {
+        max-width: 100px;
+      }
+    }
   }
 }
