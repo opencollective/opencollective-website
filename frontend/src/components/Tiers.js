@@ -5,6 +5,7 @@ import formatCurrency from '../lib/format_currency';
 import AsyncButton from './AsyncButton';
 import DonationPicker from './DonationPicker';
 import convertToCents from '../lib/convert_to_cents';
+import marked from 'marked';
 
 export default class Tiers extends Component {
 
@@ -19,6 +20,12 @@ export default class Tiers extends Component {
   constructor(props) {
     super(props);
     this.state = { };
+  }
+
+  rawMarkup(text) {
+    const rawMarkup = (text) ? marked(text, {sanitize: true}) : '';
+
+    return { __html: rawMarkup };
   }
 
   showTier(tier) {
@@ -38,7 +45,7 @@ export default class Tiers extends Component {
 
     donationForm[tier.name] = donationForm[tier.name] || {};
     const amount = donationForm[tier.name].amount !== undefined ? donationForm[tier.name].amount : tier.range[0] || tier.amount;
-    const interval = donationForm[tier.name].interval || tier.interval;
+    const interval = donationForm[tier.name].interval || tier.interval || 'one-time';
     const currency = donationForm[tier.name].currency || collective.currency;
 
     const intervalHuman = interval === 'one-time' ? '' : `${i18n.getString('per')} ${i18n.getString(interval.replace(/ly$/,''))}`;
@@ -55,9 +62,7 @@ export default class Tiers extends Component {
             <span className='bg-light-gray px2 -fw-ultra-bold'>{i18n.getString('becomeA')} {tier.name}</span>
           </h3>
 
-          <p className='Tier-description'>
-            {description}
-          </p>
+          <div className='Tier-description' dangerouslySetInnerHTML={ this.rawMarkup(description)} />
 
           {tier.presets &&
               <DonationPicker
