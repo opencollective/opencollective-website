@@ -178,7 +178,7 @@ export class Ledger extends Component {
                   onPay={ payExp.bind(this) }
                   canApproveOrReject={ canEditCollective || isHost }
                   canPay={ isHost }
-                  hasPaypalCard={Boolean(paypalCard)}
+                  hasPaypalCard={paypalCard}
                   authenticatedUser={ authenticatedUser }
                   approveInProgress={ approveInProgress }
                   rejectInProgress={ rejectInProgress }

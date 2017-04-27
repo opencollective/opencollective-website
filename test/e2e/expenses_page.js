@@ -13,9 +13,8 @@ module.exports = {
   },
 
   'Expenses list': (client) => {
-
      client
-       .waitForElementVisible('.expenses-container .CollectiveExpenseItem', 5000)
+       .waitForElementVisible('.expenses-container .CollectiveExpenseItem', 10000)
        .assert.containsText('.expenses-container .CollectiveExpenseItem:first-child', 'Expense 2')
        .assert.containsText('.expenses-container .CollectiveExpenseItem:last-child', 'Expense 1')
        .end();

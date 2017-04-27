@@ -5,6 +5,7 @@ import formatCurrency from '../lib/format_currency';
 import AsyncButton from './AsyncButton';
 import DonationPicker from './DonationPicker';
 import convertToCents from '../lib/convert_to_cents';
+import marked from 'marked';
 
 export default class Tiers extends Component {
 
@@ -19,6 +20,12 @@ export default class Tiers extends Component {
   constructor(props) {
     super(props);
     this.state = { };
+  }
+
+  rawMarkup(text) {
+    const rawMarkup = (text) ? marked(text, {sanitize: true}) : '';
+
+    return { __html: rawMarkup };
   }
 
   showTier(tier) {
@@ -37,8 +44,17 @@ export default class Tiers extends Component {
     const hasStripe = stripeKey && amount !== '';
 
     donationForm[tier.name] = donationForm[tier.name] || {};
-    const amount = donationForm[tier.name].amount !== undefined ? donationForm[tier.name].amount : tier.range[0] || tier.amount;
-    const interval = donationForm[tier.name].interval || tier.interval;
+
+    let amount;
+    if (donationForm[tier.name].amount !== undefined) {
+      amount = donationForm[tier.name].amount;
+    } else if (tier.presets) {
+      amount = tier.presets[0];
+    } else {
+      amount = tier.range[0] || tier.amount;
+    }
+
+    const interval = donationForm[tier.name].interval || tier.interval || 'one-time';
     const currency = donationForm[tier.name].currency || collective.currency;
 
     const intervalHuman = interval === 'one-time' ? '' : `${i18n.getString('per')} ${i18n.getString(interval.replace(/ly$/,''))}`;
@@ -46,18 +62,17 @@ export default class Tiers extends Component {
     const button = tier.button || `${i18n.getString(tier.verb || 'donate')} ${stripeDescription}`;
     const cancellationDisclaimer = (interval !== 'one-time') ? i18n.getString('cancelAnytime') : "";
     const description = tier.description || i18n.getString(`${tier.name}Description`);
+    const title = tier.title || `${i18n.getString('becomeA')} ${tier.name}`;
 
     return (
       <div className='Tier' id={tier.name} key={`${tier.name}`}>
         <div className='Tier-container'>
 
           <h3 className='Tier-title h3 mt0'>
-            <span className='bg-light-gray px2 -fw-ultra-bold'>{i18n.getString('becomeA')} {tier.name}</span>
+            <span className='bg-light-gray px2 -fw-ultra-bold'>{title}</span>
           </h3>
 
-          <p className='Tier-description'>
-            {description}
-          </p>
+          <div className='Tier-description' dangerouslySetInnerHTML={ this.rawMarkup(description)} />
 
           {tier.presets &&
               <DonationPicker
