@@ -44,7 +44,7 @@ export default class Tiers extends Component {
     const hasStripe = stripeKey && amount !== '';
 
     donationForm[tier.name] = donationForm[tier.name] || {};
-    const amount = donationForm[tier.name].amount !== undefined ? donationForm[tier.name].amount : tier.range[0] || tier.amount;
+    const amount = donationForm[tier.name].amount !== undefined ? donationForm[tier.name].amount : tier.presets[0] || tier.range[0] || tier.amount;
     const interval = donationForm[tier.name].interval || tier.interval || 'one-time';
     const currency = donationForm[tier.name].currency || collective.currency;
 
