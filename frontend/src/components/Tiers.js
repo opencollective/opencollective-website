@@ -53,13 +53,14 @@ export default class Tiers extends Component {
     const button = tier.button || `${i18n.getString(tier.verb || 'donate')} ${stripeDescription}`;
     const cancellationDisclaimer = (interval !== 'one-time') ? i18n.getString('cancelAnytime') : "";
     const description = tier.description || i18n.getString(`${tier.name}Description`);
+    const title = tier.title || `${i18n.getString('becomeA')} ${tier.name}`;
 
     return (
       <div className='Tier' id={tier.name} key={`${tier.name}`}>
         <div className='Tier-container'>
 
           <h3 className='Tier-title h3 mt0'>
-            <span className='bg-light-gray px2 -fw-ultra-bold'>{i18n.getString('becomeA')} {tier.name}</span>
+            <span className='bg-light-gray px2 -fw-ultra-bold'>{title}</span>
           </h3>
 
           <div className='Tier-description' dangerouslySetInnerHTML={ this.rawMarkup(description)} />
