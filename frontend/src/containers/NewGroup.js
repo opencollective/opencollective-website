@@ -224,7 +224,7 @@ export class NewGroup extends Component {
               <div className='NewGroup-question NewGroup-email'>
                 <label>
                   <input type="checkbox" onChange={(event) => appendGroupForm({tos: event.target.checked})} />
-                  By clicking here you agree to the <a href="https://docs.google.com/document/u/1/d/1HRYVADHN1-4B6wGCxIA6dx28jHtcAVIvt95hkjEZVQE/pub">terms of service</a>
+                  By clicking here you agree to the <a href="/tos">terms of service</a>
                 </label>
               </div>
 

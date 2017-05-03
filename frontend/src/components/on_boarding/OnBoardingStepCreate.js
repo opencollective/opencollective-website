@@ -57,7 +57,7 @@ export default class OnBoardingStepCreate extends React.Component {
           </div>
           <div className="OnBoardingStepCreate-tos">
             <Checkbox checked={agreedTOS} onChange={(checked) => this.setState({agreedTOS: checked})} />
-            <span>Agree to <a href="https://docs.google.com/document/u/1/d/1HRYVADHN1-4B6wGCxIA6dx28jHtcAVIvt95hkjEZVQE/pub" target='_blank'>Terms &amp; Conditions</a></span>
+            <span>Agree to <a href="/tos" target='_blank'>Terms &amp; Conditions</a></span>
           </div>
           <div style={buttonContainerStyle}>
             <div className={`OnBoardingButton ${canCreate ? '' : 'disabled'}`} onClick={canCreate && this.onCreate.bind(this)}>create!</div>
