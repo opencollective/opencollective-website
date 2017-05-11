@@ -120,6 +120,7 @@ export class Faq extends Component {
           <p>Please read them carefully!</p>    
           
           <h3>Can’t find the answer you are looking for?</h3>
+          <p> Check our <a href="https://github.com/OpenCollective/OpenCollective/wiki">Wiki</a></p>
           <p>Shoot us an email at support@opencollective.com or drop by our Slack channel https://slack.opencollective.com</p>
           
           <h3 id="investors">Who are your investors?</h3>
