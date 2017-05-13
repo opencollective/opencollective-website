@@ -6,7 +6,7 @@ import { resizeImage } from '../lib/utils';
 
 export default ({
   options,
-  group,
+  collective,
   i18n,
   href
 }) => {
@@ -15,10 +15,10 @@ export default ({
     <div className='Widget'>
         {options.header && (
           <div className='Widget-header'>
-            <img src={resizeImage(group.logo, { width: 200 })} />
-            <h1>{group.name}</h1>
-            <p>{group.description}</p>
-            <GroupStatsHeader group={group} i18n={i18n} />
+            <img src={resizeImage(collective.logo, { width: 200 })} />
+            <h1>{collective.name}</h1>
+            <p>{collective.description}</p>
+            <GroupStatsHeader group={collective} i18n={i18n} />
           </div>
         )}
 
@@ -34,7 +34,7 @@ export default ({
 
         {options.backers && (
           <div className='Widget-backers'>
-            <UsersList users={group.backers} i18n={i18n} />
+            <UsersList users={collective.backers} i18n={i18n} />
           </div>
         )}
     </div>
