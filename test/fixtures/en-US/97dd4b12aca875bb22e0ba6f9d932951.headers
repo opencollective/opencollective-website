@@ -11,11 +11,11 @@
     "content-type": "application/json; charset=utf-8",
     "content-length": "2",
     "etag": "W/\"2-11FxOYiYfpMxmANj4kGJzg\"",
-    "date": "Sun, 14 May 2017 00:12:44 GMT",
+    "date": "Sun, 14 May 2017 06:27:18 GMT",
     "connection": "keep-alive"
   },
   "url": "http://localhost:3060/groups/testcollective/transactions?type=expenses&api_key=circleci-1510egmf4a23d80342403fb599qd",
-  "time": 79,
+  "time": 28,
   "request": {
     "method": "GET",
     "headers": {

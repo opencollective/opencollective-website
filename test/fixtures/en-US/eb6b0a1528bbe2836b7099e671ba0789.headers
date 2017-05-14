@@ -10,11 +10,11 @@
     "content-type": "application/json; charset=utf-8",
     "content-length": "16",
     "etag": "W/\"10-c2PoX+nt7m8FOksxlYjAhg\"",
-    "date": "Sun, 14 May 2017 00:39:43 GMT",
+    "date": "Sun, 14 May 2017 06:27:17 GMT",
     "connection": "keep-alive"
   },
   "url": "http://localhost:3060/database/reset?api_key=circleci-1510egmf4a23d80342403fb599qd",
-  "time": 982,
+  "time": 934,
   "request": {
     "method": "GET",
     "headers": {

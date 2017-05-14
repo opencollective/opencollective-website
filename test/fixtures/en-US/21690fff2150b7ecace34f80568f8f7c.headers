@@ -10,12 +10,12 @@
     "cache-control": "public, max-age=60",
     "content-type": "application/json; charset=utf-8",
     "content-length": "1523",
-    "etag": "W/\"5f3-b0gLj23z02IFASASTWm3AQ\"",
-    "date": "Sun, 14 May 2017 00:15:07 GMT",
+    "etag": "W/\"5f3-9zRM4bSPJvxXWiPiPQbq/Q\"",
+    "date": "Sun, 14 May 2017 06:27:18 GMT",
     "connection": "keep-alive"
   },
   "url": "http://localhost:3060/groups/testcollective/users?api_key=circleci-1510egmf4a23d80342403fb599qd",
-  "time": 54,
+  "time": 29,
   "request": {
     "method": "GET",
     "headers": {
@@ -23,7 +23,7 @@
       "connection": "keep-alive",
       "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36",
       "accept": "*/*",
-      "referer": "http://localhost:3000/testcollective/donations",
+      "referer": "http://localhost:3000/testcollective/expenses",
       "accept-encoding": "gzip, deflate, sdch, br",
       "accept-language": "en-US,en;q=0.8"
     }
