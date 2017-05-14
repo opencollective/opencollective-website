@@ -14,8 +14,6 @@ dependencies:
   cache_directories:
     - "~/cache"
     - "test/fixtures"
-  pre:
-    - npm run install:debs
 database:
   post:
     - psql -U ubuntu -d circle_test -c 'CREATE EXTENSION POSTGIS;'
