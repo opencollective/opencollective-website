@@ -1,0 +1,15 @@
+{
+  "url": "http://localhost:3060/groups/testcollective/users?api_key=circleci-1510egmf4a23d80342403fb599qd",
+  "method": "GET",
+  "headers": {
+    "host": "localhost:3060",
+    "connection": "keep-alive",
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36",
+    "authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImxvZ2luIiwiaWQiOjQsImVtYWlsIjoidGVzdHVzZXJAb3BlbmNvbGxlY3RpdmUuY29tIiwiaWF0IjoxNDk0NzIwNzI4LCJleHAiOjE0OTczMTI3MjgsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzA2MCIsInN1YiI6NH0.VhkFU84eMhA-appflaZ629FDI9n-CK9pz4CDq0FfMyk",
+    "accept": "*/*",
+    "referer": "http://localhost:3000/testcollective/transactions",
+    "accept-encoding": "gzip, deflate, sdch, br",
+    "accept-language": "en-US,en;q=0.8"
+  },
+  "body": ""
+}

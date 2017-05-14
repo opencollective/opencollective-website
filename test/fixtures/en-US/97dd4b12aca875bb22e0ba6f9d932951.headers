@@ -1,0 +1,31 @@
+{
+  "statusCode": 200,
+  "headers": {
+    "x-dns-prefetch-control": "off",
+    "x-frame-options": "SAMEORIGIN",
+    "x-download-options": "noopen",
+    "x-content-type-options": "nosniff",
+    "x-xss-protection": "1; mode=block",
+    "access-control-allow-origin": "*",
+    "link": "<http://localhost:3060/groups/testcollective/transactions?type=expenses&page=2&per_page=20>; rel=\"next\", <http://localhost:3060/groups/testcollective/transactions?type=expenses&page=1&per_page=20>; rel=\"current\"",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "2",
+    "etag": "W/\"2-11FxOYiYfpMxmANj4kGJzg\"",
+    "date": "Sun, 14 May 2017 00:12:44 GMT",
+    "connection": "keep-alive"
+  },
+  "url": "http://localhost:3060/groups/testcollective/transactions?type=expenses&api_key=circleci-1510egmf4a23d80342403fb599qd",
+  "time": 79,
+  "request": {
+    "method": "GET",
+    "headers": {
+      "host": "localhost:3060",
+      "connection": "keep-alive",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36",
+      "accept": "*/*",
+      "referer": "http://localhost:3000/testcollective/expenses",
+      "accept-encoding": "gzip, deflate, sdch, br",
+      "accept-language": "en-US,en;q=0.8"
+    }
+  }
+}

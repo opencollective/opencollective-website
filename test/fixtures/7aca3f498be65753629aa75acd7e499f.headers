@@ -1,0 +1,39 @@
+{
+  "statusCode": 200,
+  "headers": {
+    "x-powered-by": "Express",
+    "x-dns-prefetch-control": "off",
+    "x-frame-options": "SAMEORIGIN",
+    "x-download-options": "noopen",
+    "x-content-type-options": "nosniff",
+    "x-xss-protection": "1; mode=block",
+    "access-control-allow-origin": "*",
+    "cache-control": "public, max-age=60",
+    "content-type": "application/json; charset=utf-8",
+    "etag": "W/\"5f3-b0gLj23z02IFASASTWm3AQ\"",
+    "date": "Sun, 14 May 2017 00:15:07 GMT",
+    "connection": "close",
+    "vary": "Accept-Encoding",
+    "content-encoding": "gzip",
+    "transfer-encoding": "chunked"
+  },
+  "url": "http://localhost:3000/api/groups/testcollective/users",
+  "time": 134,
+  "request": {
+    "method": "GET",
+    "headers": {
+      "accept-encoding": [
+        "gzip,deflate"
+      ],
+      "user-agent": [
+        "node-fetch/1.0 (+https://github.com/bitinn/node-fetch)"
+      ],
+      "connection": [
+        "close"
+      ],
+      "accept": [
+        "*/*"
+      ]
+    }
+  }
+}
