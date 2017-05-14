@@ -30,10 +30,10 @@ export default class DonationPicker extends Component {
   }
 
   presetListItem(presetLabel) {
-    const { amount, currency, i18n, range } = this.props;
+    const { amount, currency, i18n } = this.props;
     let amountLabel, amountValue;
     if (presetLabel === 'other') {
-      amountValue = range ? range[0] : 50;
+      amountValue = amount;
       amountLabel = i18n.getString('other');
     } else {
       amountValue = presetLabel;

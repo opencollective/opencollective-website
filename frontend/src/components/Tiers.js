@@ -48,10 +48,12 @@ export default class Tiers extends Component {
     let amount;
     if (donationForm[tier.name].amount !== undefined) {
       amount = donationForm[tier.name].amount;
+    } else if (tier.amount) {
+      amount = tier.amount;
     } else if (tier.presets) {
-      amount = tier.presets[0];
+      amount = !isNaN(tier.presets[0]) && tier.presets[0] || !isNaN(tier.presets[1]) && tier.presets[1];
     } else {
-      amount = tier.range[0] || tier.amount;
+      amount = tier.range[0];
     }
 
     const interval = donationForm[tier.name].interval || tier.interval || 'one-time';
