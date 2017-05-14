@@ -48,7 +48,6 @@
     "basscss": "8.0.1",
     "basscss-background-images": "0.1.1",
     "bluebird": "3.4.6",
-    "browserify": "10.2.6",
     "cache-bust": "0.0.2",
     "cached-request": "1.1.0",
     "chai": "3.5.0",
@@ -118,6 +117,7 @@
     "universal-analytics": "0.3.11"
   },
   "devDependencies": {
+    "browserify": "14.3.0",
     "chai": "3.5.0",
     "chai-spies": "0.7.1",
     "chromedriver": "2.25.1",
