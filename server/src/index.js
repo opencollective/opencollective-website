@@ -14,10 +14,27 @@ if (process.env.DEBUG && process.env.DEBUG.match(/sepia/)) {
 }
 sepia.filter({
   url: /connected-accounts\/github/,
-  urlFilter: function(url) {
+  urlFilter: (url) => {
     return url.replace(/&code=[^&]+/, '');
   }
 });
+sepia.filter({
+  url: /\/expenses/,
+  bodyFilter: (body) => {
+    if (!body) return;
+    try {
+      const json = JSON.parse(body);
+      if (json.expense && json.expense.incurredAt) {
+        delete json.expense.incurredAt;
+        body = JSON.stringify(json);
+      }
+    } catch (e) {
+      // noop
+    }
+    return body;
+  }
+});
+
 
 import 'babel-register';
 import './global';
