@@ -20,7 +20,7 @@
     "test:server": "mocha --opts test/unit/mocha.opts test/server",
     "test:unit": "mocha test/unit/ --opts test/unit/mocha.opts --reporter-options mochaFile=test/output/junit/junit.xml",
     "posttest": "npm run test:e2e",
-    "test:e2e": "sh -c \"npm start > server.log\" & PID=$! && echo \"PID is $PID\" && sleep 5 && npm run nightwatch && kill $PID",
+    "test:e2e": "sh -c \"VCR_MODE=cache npm start > server.log\" & PID=$! && echo \"PID is $PID\" && sleep 5 && npm run nightwatch && kill $PID",
     "nightwatch": "./node_modules/nightwatch/bin/nightwatch --config nightwatch.conf.js",
     "build": "gulp build && npm run build:server && npm run build:frontend",
     "build:server": "rm -rf server/dist && mkdir server/dist && babel -D ./server/src -d ./server/dist && touch server/src/index.js",
@@ -28,7 +28,7 @@
     "watch:js": "mkdir -p frontend/dist/js && watchify frontend/src/client.js -o frontend/dist/js/bundle.js -dv",
     "watch:server": "nodemon -e js,hbs -w server/src -w frontend/src",
     "watch:test": "mocha test/unit/ --opts test/unit/mocha.opts --watch",
-    "postinstall": "node nightwatch.conf.js",
+    "postinstall": "npm run build && node nightwatch.conf.js && ./scripts/install_chrome.sh",
     "git:clean": "./scripts/git_clean.sh",
     "deploy:staging": "bash -x scripts/deploy.sh staging",
     "deploy:production": "bash -x scripts/deploy.sh production"
