@@ -20,8 +20,7 @@
     "test:server": "mocha --opts test/unit/mocha.opts test/server",
     "test:unit": "mocha test/unit/ --opts test/unit/mocha.opts --reporter-options mochaFile=test/output/junit/junit.xml",
     "posttest": "npm run test:e2e",
-    "test:e2e": "npm run test:e2e:exec api:run website:run website:testE2E",
-    "test:e2e:exec": "npm run rexec:api test_e2e.sh",
+    "test:e2e": "sh -c \"npm start > server.log\" & PID=$! && echo \"PID is $PID\" && sleep 5 && npm run nightwatch && kill $PID",
     "nightwatch": "./node_modules/nightwatch/bin/nightwatch --config nightwatch.conf.js",
     "build": "gulp build && npm run build:server && npm run build:frontend",
     "build:server": "rm -rf server/dist && mkdir server/dist && babel -D ./server/src -d ./server/dist && touch server/src/index.js",
@@ -29,12 +28,10 @@
     "watch:js": "mkdir -p frontend/dist/js && watchify frontend/src/client.js -o frontend/dist/js/bundle.js -dv",
     "watch:server": "nodemon -e js,hbs -w server/src -w frontend/src",
     "watch:test": "mocha test/unit/ --opts test/unit/mocha.opts --watch",
-    "postinstall": "bash scripts/postinstall.sh && node nightwatch.conf.js",
+    "postinstall": "node nightwatch.conf.js",
     "git:clean": "./scripts/git_clean.sh",
     "deploy:staging": "bash -x scripts/deploy.sh staging",
-    "deploy:production": "bash -x scripts/deploy.sh production",
-    "rexec:api": "bash scripts/remote_exec_api.sh",
-    "install:debs": "npm run rexec:api install_apt_get_debs.sh"
+    "deploy:production": "bash -x scripts/deploy.sh production"
   },
   "dependencies": {
     "babel-cli": "6.14.0",
