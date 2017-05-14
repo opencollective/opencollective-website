@@ -18,7 +18,7 @@
     "pretest": "npm run hint",
     "test": "npm run test:server && npm run test:unit",
     "test:server": "mocha --opts test/unit/mocha.opts test/server",
-    "test:unit": "mocha test/unit/ --opts test/unit/mocha.opts --reporter-options mochaFile=$(bash scripts/test_output_dir.sh junit)/junit.xml",
+    "test:unit": "mocha test/unit/ --opts test/unit/mocha.opts --reporter-options mochaFile=test/output/junit/junit.xml",
     "posttest": "npm run test:e2e",
     "test:e2e": "npm run test:e2e:exec api:run website:run website:testE2E",
     "test:e2e:exec": "npm run rexec:api test_e2e.sh",
