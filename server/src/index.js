@@ -12,6 +12,12 @@ if (process.env.DEBUG && process.env.DEBUG.match(/sepia/)) {
     debug: true
   });
 }
+sepia.filter({
+  url: /connected-accounts\/github/,
+  urlFilter: function(url) {
+    return url.replace(/&code=[^&]+/, '');
+  }
+});
 
 import 'babel-register';
 import './global';
