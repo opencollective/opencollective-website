@@ -1,5 +1,5 @@
 .env
-
+.env.*
 .DS_Store
 yarn.lock
 .idea/
@@ -44,6 +44,7 @@ frontend/dist/
 # test artifacts
 output/
 test-results.xml
+test/screenshots/**/*.png
 
 # extra binaries
 bin

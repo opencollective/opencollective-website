@@ -82,6 +82,8 @@ app.set('port', process.env.WEBSITE_PORT || process.env.PORT || 3000);
  * Start server
  */
 console.log(`Starting OpenCollective Website Server on port ${app.get('port')} in ${app.get('env')} environment.`);
+console.log(`DEBUG=${process.env.DEBUG}`);
+console.log(`VCR_MODE=${process.env.VCR_MODE}`);
 app
   .listen(app.get('port'))
   .on('error', (err) => {
