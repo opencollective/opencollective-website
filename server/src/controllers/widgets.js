@@ -67,15 +67,15 @@ export function userWidget(req, res) {
  * Show the widget of a collective
  */
 export function collectiveWidget(req, res, next) {
-  const { group } = req;
+  const { collective } = req;
 
   Promise.all([
-    api.get(`/groups/${group.slug}/transactions?per_page=3`),
-    api.get(`/groups/${group.slug}/users`)
+    api.get(`/groups/${collective.slug}/transactions?per_page=3`),
+    api.get(`/groups/${collective.slug}/users`)
   ])
   .then(([transactions, users]) => {
 
-    group.backers = filterCollection(users, { role: 'BACKER' });
+    collective.backers = filterCollection(users, { role: 'BACKER' });
 
     const props = {
       options: {
@@ -84,10 +84,10 @@ export function collectiveWidget(req, res, next) {
         donate: (req.query.donate !== 'false'),
         backers: (req.query.backers !== 'false')
       },
-      group,
-      i18n: i18nlib(group.lang),
+      collective,
+      i18n: i18nlib(collective.lang),
       transactions,
-      href: `${config.host.website}/${group.slug}#support`
+      href: `${config.host.website}/${collective.slug}#support`
     };
 
     const html = renderToString(<Widget {...props} />);
