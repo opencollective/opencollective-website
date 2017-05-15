@@ -2,8 +2,8 @@
   "name": "opencollective-website",
   "version": "0.1.294",
   "engines": {
-    "node": "6.2.2",
-    "npm": "3.9.5"
+    "node": "6.10.3",
+    "npm": "3.10.10"
   },
   "browserify": {
     "transform": [
@@ -15,26 +15,23 @@
     "start": "node server/dist",
     "dev": "npm run build && WEBSITE_PORT=3000 nf start -j Procfile_dev",
     "hint": "eslint '**/*.js' --quiet",
-    "pretest": "npm run hint",
+    "pretest": "npm run hint && gulp build",
     "test": "npm run test:server && npm run test:unit",
     "test:server": "mocha --opts test/unit/mocha.opts test/server",
-    "test:unit": "mocha test/unit/ --opts test/unit/mocha.opts --reporter-options mochaFile=$(bash scripts/test_output_dir.sh junit)/junit.xml",
+    "test:unit": "mocha test/unit/ --opts test/unit/mocha.opts --reporter-options mochaFile=test/output/junit/junit.xml",
     "posttest": "npm run test:e2e",
-    "test:e2e": "npm run test:e2e:exec api:run website:run website:testE2E",
-    "test:e2e:exec": "npm run rexec:api test_e2e.sh",
-    "nightwatch": "./node_modules/nightwatch/bin/nightwatch --config nightwatch.json",
+    "test:e2e": "sh -c \"VCR_MODE=cache npm start > server.log\" & PID=$! && echo \"PID is $PID\" && sleep 5 && npm run nightwatch && kill $PID",
+    "nightwatch": "./node_modules/nightwatch/bin/nightwatch --config nightwatch.conf.js",
     "build": "gulp build && npm run build:server && npm run build:frontend",
     "build:server": "rm -rf server/dist && mkdir server/dist && babel -D ./server/src -d ./server/dist && touch server/src/index.js",
     "build:frontend": "mkdir -p frontend/dist/js && browserify frontend/src/client.js | uglifyjs -cm --screw-ie8 > frontend/dist/js/bundle.js ",
     "watch:js": "mkdir -p frontend/dist/js && watchify frontend/src/client.js -o frontend/dist/js/bundle.js -dv",
     "watch:server": "nodemon -e js,hbs -w server/src -w frontend/src",
     "watch:test": "mocha test/unit/ --opts test/unit/mocha.opts --watch",
-    "postinstall": "bash scripts/postinstall.sh",
+    "postinstall": "npm run build && node nightwatch.conf.js && ./scripts/install_chrome.sh",
     "git:clean": "./scripts/git_clean.sh",
     "deploy:staging": "bash -x scripts/deploy.sh staging",
-    "deploy:production": "bash -x scripts/deploy.sh production",
-    "rexec:api": "bash scripts/remote_exec_api.sh",
-    "install:debs": "npm run rexec:api install_apt_get_debs.sh"
+    "deploy:production": "bash -x scripts/deploy.sh production"
   },
   "dependencies": {
     "babel-cli": "6.14.0",
@@ -51,7 +48,7 @@
     "basscss": "8.0.1",
     "basscss-background-images": "0.1.1",
     "bluebird": "3.4.6",
-    "browserify": "10.2.6",
+    "browserify": "14.3.0",
     "cache-bust": "0.0.2",
     "cached-request": "1.1.0",
     "chai": "3.5.0",
@@ -134,11 +131,13 @@
     "loose-envify": "1.1.0",
     "mocha": "2.4.5",
     "mocha-circleci-reporter": "0.0.1",
-    "nightwatch": "0.9.8",
+    "nightwatch": "0.9.15",
     "nock": "2.18.2",
     "nodemon": "1.9.2",
     "react-addons-test-utils": "0.14.8",
     "redux-mock-store": "1.0.2",
+    "selenium-download": "2.0.10",
+    "sepia": "2.0.2",
     "sinon": "1.17.3",
     "supertest": "1.2.0",
     "watchify": "3.7.0"
