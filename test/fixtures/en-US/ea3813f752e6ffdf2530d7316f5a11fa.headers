@@ -1,0 +1,33 @@
+{
+  "statusCode": 200,
+  "headers": {
+    "x-dns-prefetch-control": "off",
+    "x-frame-options": "SAMEORIGIN",
+    "x-download-options": "noopen",
+    "x-content-type-options": "nosniff",
+    "x-xss-protection": "1; mode=block",
+    "access-control-allow-origin": "*",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "4951",
+    "etag": "W/\"1357-zQrKcyBg0G2JPHz3SlL7Cw\"",
+    "date": "Sun, 14 May 2017 00:12:50 GMT",
+    "connection": "keep-alive"
+  },
+  "url": "http://localhost:3060/groups/testcollective/expenses/?api_key=circleci-1510egmf4a23d80342403fb599qd",
+  "time": 199,
+  "request": {
+    "method": "POST",
+    "headers": {
+      "host": "localhost:3060",
+      "connection": "keep-alive",
+      "content-length": "209",
+      "accept": "application/json",
+      "origin": "http://localhost:3000",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36",
+      "content-type": "application/json",
+      "referer": "http://localhost:3000/testcollective/expenses",
+      "accept-encoding": "gzip, deflate, br",
+      "accept-language": "en-US,en;q=0.8"
+    }
+  }
+}

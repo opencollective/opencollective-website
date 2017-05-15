@@ -1,0 +1,41 @@
+{
+  "statusCode": 200,
+  "headers": {
+    "x-powered-by": "Express",
+    "x-dns-prefetch-control": "off",
+    "x-frame-options": "SAMEORIGIN",
+    "x-download-options": "noopen",
+    "x-content-type-options": "nosniff",
+    "x-xss-protection": "1; mode=block",
+    "access-control-allow-origin": "*",
+    "link": "<http://localhost:3060/groups/testcollective/transactions?type=expenses&page=2&per_page=20>; rel=\"next\", <http://localhost:3060/groups/testcollective/transactions?type=expenses&page=1&per_page=20>; rel=\"current\"",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "2",
+    "etag": "W/\"2-11FxOYiYfpMxmANj4kGJzg\"",
+    "date": "Sun, 14 May 2017 00:12:43 GMT",
+    "connection": "close",
+    "vary": "Accept-Encoding"
+  },
+  "url": "http://localhost:3000/api/groups/testcollective/transactions?type=expenses",
+  "time": 88,
+  "request": {
+    "method": "GET",
+    "headers": {
+      "authorization": [
+        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImxvZ2luIiwiaWQiOjQsImVtYWlsIjoidGVzdHVzZXJAb3BlbmNvbGxlY3RpdmUuY29tIiwiaWF0IjoxNDk0NzIwNzI4LCJleHAiOjE0OTczMTI3MjgsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzA2MCIsInN1YiI6NH0.VhkFU84eMhA-appflaZ629FDI9n-CK9pz4CDq0FfMyk"
+      ],
+      "accept-encoding": [
+        "gzip,deflate"
+      ],
+      "user-agent": [
+        "node-fetch/1.0 (+https://github.com/bitinn/node-fetch)"
+      ],
+      "connection": [
+        "close"
+      ],
+      "accept": [
+        "*/*"
+      ]
+    }
+  }
+}

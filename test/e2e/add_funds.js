@@ -4,7 +4,7 @@ const resetDb = require('../lib/reset_db.js');
 module.exports = {
   '@tags': ['add_funds'],
   beforeEach: (client) => {
-    const userLoginUrl = `${config.host.api}/test/loginlink?api_key=${config.apiKey}`;
+    const userLoginUrl = `${config.host.website}/api/test/loginlink`;
 
     resetDb(client)
       .url(userLoginUrl)
