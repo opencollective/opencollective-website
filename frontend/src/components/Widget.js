@@ -1,5 +1,4 @@
 import React from 'react';
-
 import UsersList from './UsersList';
 import GroupStatsHeader from './GroupStatsHeader';
 import { resizeImage } from '../lib/utils';
