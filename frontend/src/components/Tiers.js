@@ -51,7 +51,7 @@ export default class Tiers extends Component {
     } else if (tier.amount) {
       amount = tier.amount;
     } else if (tier.presets) {
-      amount = !isNaN(tier.presets[0]) && tier.presets[0] || !isNaN(tier.presets[1]) && tier.presets[1];
+      amount = (!isNaN(tier.presets[0]) && tier.presets[0]) || (!isNaN(tier.presets[1]) && tier.presets[1]);
     } else {
       amount = tier.range[0];
     }
