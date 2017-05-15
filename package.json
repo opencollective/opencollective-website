@@ -111,6 +111,7 @@
     "request": "2.72.0",
     "reselect": "2.5.4",
     "robots.txt": "1.1.0",
+    "sepia": "2.0.2",
     "serialize-javascript": "1.2.0",
     "serve-favicon": "2.3.0",
     "svg-to-png": "3.1.0",
@@ -137,7 +138,6 @@
     "react-addons-test-utils": "0.14.8",
     "redux-mock-store": "1.0.2",
     "selenium-download": "2.0.10",
-    "sepia": "2.0.2",
     "sinon": "1.17.3",
     "supertest": "1.2.0",
     "watchify": "3.7.0"
