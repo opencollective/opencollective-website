@@ -1,0 +1,12 @@
+{
+  "url": "http://localhost:3060/groups/testcollective/users?api_key=circleci-1510egmf4a23d80342403fb599qd",
+  "method": "GET",
+  "headers": {
+    "host": "localhost:3060",
+    "accept-encoding": "gzip,deflate",
+    "user-agent": "node-fetch/1.0 (+https://github.com/bitinn/node-fetch)",
+    "connection": "close",
+    "accept": "*/*"
+  },
+  "body": ""
+}

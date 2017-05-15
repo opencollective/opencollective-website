@@ -1,0 +1,19 @@
+{
+  "url": "http://localhost:3060/groups?api_key=circleci-1510egmf4a23d80342403fb599qd",
+  "method": "POST",
+  "headers": {
+    "host": "localhost:3060",
+    "connection": "keep-alive",
+    "content-length": "893",
+    "accept": "application/json",
+    "origin": "http://localhost:3000",
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36",
+    "flow": "github",
+    "authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImNvbm5lY3RlZC1hY2NvdW50IiwiY29ubmVjdGVkQWNjb3VudElkIjoyLCJ1c2VybmFtZSI6Ik9wZW5Db2xsZWN0aXZlVGVzdCIsImlkIjo2LCJlbWFpbCI6ImluZm9Ab3BlbmNvbGxlY3RpdmUuY29tIiwiaWF0IjoxNDk0NzIwNzc1LCJleHAiOjE0OTQ4MDcxNzUsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzA2MCIsInN1YiI6Nn0.XtX1Jf824RSn4_rZXreJ6TE9FjTvGB0TLDlpVZKtnRM",
+    "content-type": "application/json",
+    "referer": "http://localhost:3000/opensource/apply/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImNvbm5lY3RlZC1hY2NvdW50IiwiY29ubmVjdGVkQWNjb3VudElkIjoyLCJ1c2VybmFtZSI6Ik9wZW5Db2xsZWN0aXZlVGVzdCIsImlkIjo2LCJlbWFpbCI6ImluZm9Ab3BlbmNvbGxlY3RpdmUuY29tIiwiaWF0IjoxNDk0NzIwNzc1LCJleHAiOjE0OTQ4MDcxNzUsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzA2MCIsInN1YiI6Nn0.XtX1Jf824RSn4_rZXreJ6TE9FjTvGB0TLDlpVZKtnRM",
+    "accept-encoding": "gzip, deflate, br",
+    "accept-language": "en-US,en;q=0.8"
+  },
+  "body": "{\"payload\":{\"group\":{\"name\":\"test\",\"slug\":\"test\",\"mission\":\"fund open source projects\",\"longDescription\":\"pay for servers and tshirts\",\"logo\":\"\",\"website\":\"https://github.com/OpenCollectiveTest/test\",\"data\":{},\"settings\":{\"githubRepo\":\"OpenCollectiveTest/test\"},\"tags\":[\"open source\"],\"tiers\":[{\"name\":\"backer\",\"title\":\"Backers\",\"description\":\"Support us with a monthly donation and help us continue our activities.\",\"button\":\"Become a backer\",\"range\":[2,100000],\"presets\":[2,5,10,25,50],\"interval\":\"monthly\"},{\"name\":\"sponsor\",\"title\":\"Sponsors\",\"description\":\"Become a sponsor and get your logo on our README on Github with a link to your site.\",\"button\":\"Become a sponsor\",\"range\":[100,500000],\"presets\":[100,250,500],\"interval\":\"monthly\"}]},\"users\":[\"asood123\"],\"github_username\":\"OpenCollectiveTest\",\"user\":{\"id\":19271932,\"login\":\"OpenCollectiveTest\",\"name\":null,\"email\":null,\"blog\":\"\"}}}"
+}

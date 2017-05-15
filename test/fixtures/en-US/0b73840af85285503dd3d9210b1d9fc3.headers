@@ -1,0 +1,30 @@
+{
+  "statusCode": 304,
+  "headers": {
+    "x-dns-prefetch-control": "off",
+    "x-frame-options": "SAMEORIGIN",
+    "x-download-options": "noopen",
+    "x-content-type-options": "nosniff",
+    "x-xss-protection": "1; mode=block",
+    "access-control-allow-origin": "*",
+    "cache-control": "public, max-age=60",
+    "etag": "W/\"5f3-b0gLj23z02IFASASTWm3AQ\"",
+    "date": "Sun, 14 May 2017 00:16:47 GMT",
+    "connection": "keep-alive"
+  },
+  "url": "http://localhost:3060/groups/testcollective/users?api_key=circleci-1510egmf4a23d80342403fb599qd",
+  "time": 71,
+  "request": {
+    "method": "GET",
+    "headers": {
+      "host": "localhost:3060",
+      "connection": "keep-alive",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36",
+      "accept": "*/*",
+      "referer": "http://localhost:3000/testcollective?status=payment_success&userid=1&has_full_account=true",
+      "accept-encoding": "gzip, deflate, sdch, br",
+      "accept-language": "en-US,en;q=0.8",
+      "if-none-match": "W/\"5f3-b0gLj23z02IFASASTWm3AQ\""
+    }
+  }
+}
