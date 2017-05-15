@@ -1,0 +1,25 @@
+{
+  "error": {
+    "code": "ECONNREFUSED",
+    "errno": "ECONNREFUSED",
+    "syscall": "connect",
+    "address": "127.0.0.1",
+    "port": 3060
+  },
+  "url": "http://localhost:3060/connected-accounts/github/callback?utm_source=&slug=testcollective&code=f89b8324b4d59a263c6d&api_key=circleci-1510egmf4a23d80342403fb599qd",
+  "time": 12,
+  "request": {
+    "method": "GET",
+    "headers": {
+      "host": "localhost:3060",
+      "connection": "keep-alive",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36",
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+      "referer": "https://github.com/",
+      "accept-encoding": "gzip, deflate, sdch, br",
+      "accept-language": "en-US,en;q=0.8",
+      "cookie": "connect.sid=s%3A6g0MopT4mPBasAeJw5pwfYBFYiFGKlu6.MVtoPvtDdNWJb0GDeL3gBMu9dxeoA1s3cGYE2QIRGw0"
+    }
+  }
+}
