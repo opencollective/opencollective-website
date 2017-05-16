@@ -17,6 +17,8 @@ import validateSchema from '../actions/form/validate_schema';
 
 import newGroupSchema from '../joi_schemas/newGroup';
 
+import { uniq } from 'lodash';
+
 export class NewGroup extends Component {
 
   constructor(props) {
@@ -250,6 +252,7 @@ export class NewGroup extends Component {
   create() {
     const { newGroupForm, validateSchema, createGroup, utmSource, notify, hostCollective } = this.props;
     const attr = newGroupForm.attributes;
+    const tags = attr.tags && attr.tags.split(',').map(x => x.trim());
 
     const group = {
       tos: attr.tos,
@@ -262,7 +265,7 @@ export class NewGroup extends Component {
       data: {
         utmSource
       },
-      tags: attr.tags && attr.tags.split(',').map(x => x.trim()),
+      tags: uniq([...tags, ...hostCollective.tags]),
       users: attr.users
     };
 
