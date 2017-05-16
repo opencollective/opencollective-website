@@ -1,10 +1,7 @@
-import i18nlib from '../lib/i18n';
-
 /**
  * Static data the for the payment methods (transaction)
  */
-export default (lang) => {
-  const i18n = i18nlib(lang);
+export default (i18n) => {
   return [
     {
       label: 'PayPal',

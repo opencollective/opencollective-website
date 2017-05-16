@@ -129,7 +129,7 @@ class ExpenseForm extends Component {
             <label>{i18n.getString('reimbursementMethod')}</label>
             <Select
               customClass='js-transaction-payoutMethod'
-              options={payoutMethods(group.settings.lang)}
+              options={payoutMethods(i18n)}
               value={attributes.payoutMethod}
               handleChange={payoutMethod => appendExpenseForm({payoutMethod})} />
             <label>{i18n.getString('date')}</label>

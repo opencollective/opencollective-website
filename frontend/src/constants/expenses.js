@@ -26,6 +26,10 @@ export const PAY_EXPENSE_REQUEST = 'PAY_EXPENSE_REQUEST';
 export const PAY_EXPENSE_SUCCESS = 'PAY_EXPENSE_SUCCESS';
 export const PAY_EXPENSE_FAILURE = 'PAY_EXPENSE_FAILURE';
 
+export const UPDATE_EXPENSE_REQUEST = 'UPDATE_EXPENSE_REQUEST';
+export const UPDATE_EXPENSE_SUCCESS = 'UPDATE_EXPENSE_SUCCESS';
+export const UPDATE_EXPENSE_FAILURE = 'UPDATE_EXPENSE_FAILURE';
+
 export const MANUAL = 'manual';
 
 export const EXPENSE_STATUS = {
@@ -34,3 +38,8 @@ export const EXPENSE_STATUS = {
   REJECTED: 'REJECTED',
   PAID: 'PAID'
 };
+
+export const PAYOUT_METHODS = {
+  paypal: 'paypal',
+  other: 'other'
+}
