@@ -265,6 +265,7 @@ export class NewGroup extends Component {
       longDescription: attr.contribute ? `${attr.description}\n\n# Contribute\n\n${attr.contribute}` : attr.description,
       website: attr.website,
       HostId: hostCollective && hostCollective.settings.HostId,
+      hostFeePercent: hostCollective && hostCollective.settings.hostFeePercent || 5,
       data: {
         utmSource
       },
