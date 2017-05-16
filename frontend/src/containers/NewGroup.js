@@ -63,6 +63,12 @@ export class NewGroup extends Component {
     } = newGroupForm.attributes;
 
     const groupTypes = new Map();
+    groupTypes.set('association', {
+      label: 'Association'
+    });
+    groupTypes.set('coop', {
+      label: 'Cooperative'
+    });
     groupTypes.set('meetup',{
       label: 'Meetup Group',
       placeholders: {
@@ -73,8 +79,11 @@ export class NewGroup extends Component {
         contribute: 'We need more people to join the community and attend our events. We are also looking for volunteers to help us organize our meetups.'
       }
     });
+    groupTypes.set('movement', {
+      label: 'Movement'
+    });
     groupTypes.set('opensource', {
-      label: 'OpenSource Project',
+      label: 'Open Source Project',
       placeholders: {
         name: 'MochaJS',
         slug: 'mochajs',
@@ -88,12 +97,6 @@ export class NewGroup extends Component {
     });
     groupTypes.set('studentclub', {
       label: 'Student Club'
-    });
-    groupTypes.set('movement', {
-      label: 'Movement'
-    });
-    groupTypes.set('association', {
-      label: 'Association'
     });
     groupTypes.set('default', {
       label: 'Other',
