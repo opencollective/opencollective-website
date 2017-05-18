@@ -255,7 +255,10 @@ export class NewGroup extends Component {
   create() {
     const { newGroupForm, validateSchema, createGroup, utmSource, notify, hostCollective } = this.props;
     const attr = newGroupForm.attributes;
-    const tags = attr.tags && attr.tags.split(',').map(x => x.trim());
+    let tags = attr.tags && attr.tags.split(',').map(x => x.trim());
+    if (hostCollective) {
+      tags = uniq([...tags, ...hostCollective.tags]);
+    }
 
     const group = {
       tos: attr.tos,
@@ -269,7 +272,7 @@ export class NewGroup extends Component {
       data: {
         utmSource
       },
-      tags: uniq([...tags, ...hostCollective.tags]),
+      tags,
       users: attr.users
     };
 
