@@ -10,6 +10,8 @@ import _ from 'lodash';
  * Fetch users by slug
  */
 const fetchUsers = (options = {}) => {
+  options.cache = options.cache || 300; // default cache for api requests to fetch users: 5mn
+
   return (req, res, next) => {
 
     const requireActive = (typeof options.requireActive === 'boolean') ? options.requireActive : req.query.requireActive !== 'false'; // by default, we skip inactive users
@@ -27,8 +29,14 @@ const fetchUsers = (options = {}) => {
         break;
       default:
         options.cache = 300;
-        fetchUsers = api.get(`/groups/${req.params.slug}/users${requireActive ? '?filter=active' : ''}`, options)
-                        .then(users => _.uniqBy(users, 'id'));
+        fetchUsers = api.get(`/groups/${req.params.slug.toLowerCase()}/users${requireActive ? '?filter=active' : ''}`, options)
+                        .then(users => _.filter(users, (u) => {
+                          if (filters.tier) {
+                            return u.tier === filters.tier;
+                          } else {
+                            return true;
+                          }
+                        }));
         break;
     }
 
