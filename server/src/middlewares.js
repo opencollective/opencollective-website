@@ -32,7 +32,7 @@ const fetchUsers = (options = {}) => {
         fetchUsers = api.get(`/groups/${req.params.slug.toLowerCase()}/users${requireActive ? '?filter=active' : ''}`, options)
                         .then(users => _.filter(users, (u) => {
                           if (filters.tier) {
-                            return u.tier === filters.tier;
+                            return u.tier === filters.tier || u.tier === filters.tier.replace(/s$/, '');
                           } else {
                             return true;
                           }
