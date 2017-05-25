@@ -125,7 +125,7 @@ export class Faq extends Component {
           
           <h3 id="investors">Who are your investors?</h3>
           <details>
-            <summary>We raised a total of $805k so far on convertible notes (<a href="https://www.ycombinator.com/docs/SAFE_Cap.rtf">SAFE</a>)</summary>
+            <summary>We raised a total of $815k so far on convertible notes (<a href="https://www.ycombinator.com/docs/SAFE_Cap.rtf">SAFE</a>)</summary>
 
             <p>We did a first pre-seed round of $500k in October 2015 (SAFE, $5M cap) with:
               <ul>
