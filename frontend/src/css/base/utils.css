@@ -74,7 +74,7 @@ h1, h2, h3, h4, h5, h6 {color: #494B4D}
 .bg-white {background-color: #fff}
 .bg-black {background-color: #1B2226}
 .-bg-green {background-color: #75CC1F}
-.bg-light-gray {background-color: var(--light-gray)}
+.bg-color {background-color: var(--background-color)}
 .bg-gray {background-color: var(--gray)}
 .border-gray {border-color: var(--gray)}
 .border-white {border-color: #fff}

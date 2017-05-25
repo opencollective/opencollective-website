@@ -71,7 +71,7 @@ export default class Tiers extends Component {
         <div className='Tier-container'>
 
           <h3 className='Tier-title h3 mt0'>
-            <span className='bg-light-gray px2 -fw-ultra-bold'>{title}</span>
+            <span className='bg-color px2 -fw-ultra-bold'>{title}</span>
           </h3>
 
           <div className='Tier-description' dangerouslySetInnerHTML={ this.rawMarkup(description)} />
