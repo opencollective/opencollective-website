@@ -117,10 +117,10 @@ export default (app) => {
   app.get('/addgroup', mw.ga, mw.addTitle('Create a new group'), render);
   app.get('/login/:token', mw.ga, mw.addTitle('Open Collective'), render);
   app.get('/login', mw.ga, mw.addTitle('Open Collective Login'), render);
-  app.get('/opensource/apply/:token', mw.ga, mw.extractGithubUsernameFromToken, mw.addTitle('Sign up your Github repository'), render);
-  app.get('/opensource/apply', mw.ga, mw.addTitle('Sign up your Github repository'), render);
-  app.get('/:slug/apply/:type', mw.ga, mw.fetchProfileBySlug, controllers.hosts.apply, render);
-  app.get('/:slug/apply', mw.ga, mw.fetchProfileBySlug, controllers.hosts.apply, render);
+  app.get('/opensource/:verb(apply)/:token', mw.ga, mw.extractGithubUsernameFromToken, mw.addTitle('Sign up your Github repository'), render);
+  app.get('/opensource/:verb(apply)', mw.ga, mw.addTitle('Sign up your Github repository'), render);
+  app.get('/:slug/:verb(apply)/:type', mw.ga, mw.fetchProfileBySlug, controllers.hosts.apply, mw.addMeta, render);
+  app.get('/:slug/:verb(apply)', mw.ga, mw.fetchProfileBySlug, controllers.hosts.apply, mw.addMeta, render);
   app.get('/:slug/settings', mw.ga, mw.addTitle('Settings'), mw.fetchProfileBySlug, render);
   app.get('/connect/github', mw.ga, render);
   app.get('/:slug/connect/:provider', mw.ga, render);

@@ -159,7 +159,6 @@ const ga = (req, res, next) => {
 };
 
 const addMeta = (req, res, next) => {
-
   const { collective, user } = req;
 
   req.meta = {};
