@@ -37,3 +37,12 @@
     }
   }
 }
+
+.CollectiveExpenseItem-switch {
+  color: var(--light-blue);
+  padding-left: 0.5rem;
+}
+
+.CollectiveExpenseItem-switch:hover {
+  cursor: pointer;
+}
