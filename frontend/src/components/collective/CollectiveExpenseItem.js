@@ -119,9 +119,9 @@ class CollectiveExpenseItem extends React.Component {
                 <div className='h6 m0'>
                   <b>Reimburse via:</b> {payoutMethodString} 
                   {expense.payoutMethod === PAYOUT_METHODS.paypal && !this.state.switchReimbursementMethod && 
-                    <span className='CollectiveExpenseItem-switch' onClick={() => this.setState({switchReimbursementMethod: true, payoutMethod: PAYOUT_METHODS.other})}> Already Reimbursed? </span>}
+                    <span className='CollectiveExpenseItem-switch' onClick={() => this.setState({switchReimbursementMethod: true, payoutMethod: PAYOUT_METHODS.other})}> Reimburse manually </span>}
                   {expense.payoutMethod !== PAYOUT_METHODS.paypal && !this.state.switchReimbursementMethod &&
-                    <span className='CollectiveExpenseItem-switch' onClick={() => this.setState({switchReimbursementMethod: true, payoutMethod: PAYOUT_METHODS.paypal})}> Use PayPal? </span>}
+                    <span className='CollectiveExpenseItem-switch' onClick={() => this.setState({switchReimbursementMethod: true, payoutMethod: PAYOUT_METHODS.paypal})}> Use PayPal </span>}
                   {this.state.switchReimbursementMethod && 
                     <span>
                       <span className='CollectiveExpenseItem-switch' onClick={() => this.setState({switchReimbursementMethod: false, payoutMethod: expense.payoutMethod})}> Cancel </span>
