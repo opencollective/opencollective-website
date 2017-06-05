@@ -10,9 +10,6 @@ import ReceiptPreview from '../../components/ReceiptPreview';
 import ApproveButton from '../../components/ApproveButton';
 import RejectButton from '../../components/RejectButton';
 import PayButton from '../../components/PayButton';
-import Select from '../../components/Select';
-
-import payoutMethods from '../../ui/payout_methods';
 
 class CollectiveExpenseItem extends React.Component {
 
@@ -35,7 +32,6 @@ class CollectiveExpenseItem extends React.Component {
       onApprove,
       onReject,
       onPay,
-      onUpdate,
       hasPaypalCard,
       authenticatedUser,
       approveInProgress,
@@ -107,8 +103,6 @@ class CollectiveExpenseItem extends React.Component {
             <div className='CollectiveExpenseItem-info'>
               <div className='-ff-sec'>{ expense.title } ({expense.category})</div>
               <div className='h6 m0 muted' title={i18n.moment(expense.incurredAt).format('MMMM Do YYYY')}>{ i18n.getString('submittedBy') } { submittedByName } - { expense.incurredAt && i18n.moment(expense.incurredAt).fromNow() } </div>
-              
-
 
               {expense.notes && canViewReceipt && <div className='h6 m0'><b>Notes:</b> {expense.notes}</div>}
               <p className='h3 -ff-sec amount'>
@@ -117,14 +111,14 @@ class CollectiveExpenseItem extends React.Component {
 
               {canViewReceipt && 
                 <div className='h6 m0'>
-                  <b>Reimburse via:</b> {payoutMethodString} 
+                  <b>{i18n.getString('reimbursementMethod')}</b> {payoutMethodString} 
                   {expense.payoutMethod === PAYOUT_METHODS.paypal && !this.state.switchReimbursementMethod && 
-                    <span className='CollectiveExpenseItem-switch' onClick={() => this.setState({switchReimbursementMethod: true, payoutMethod: PAYOUT_METHODS.other})}> Reimburse manually </span>}
+                    <span className='CollectiveExpenseItem-switch' onClick={() => this.setState({switchReimbursementMethod: true, payoutMethod: PAYOUT_METHODS.other})}> {i18n.getString('reimburseManually')} </span>}
                   {expense.payoutMethod !== PAYOUT_METHODS.paypal && !this.state.switchReimbursementMethod &&
-                    <span className='CollectiveExpenseItem-switch' onClick={() => this.setState({switchReimbursementMethod: true, payoutMethod: PAYOUT_METHODS.paypal})}> Use PayPal </span>}
+                    <span className='CollectiveExpenseItem-switch' onClick={() => this.setState({switchReimbursementMethod: true, payoutMethod: PAYOUT_METHODS.paypal})}> {i18n.getString('usePaypal')} </span>}
                   {this.state.switchReimbursementMethod && 
                     <span>
-                      <span className='CollectiveExpenseItem-switch' onClick={() => this.setState({switchReimbursementMethod: false, payoutMethod: expense.payoutMethod})}> Cancel </span>
+                      <span className='CollectiveExpenseItem-switch' onClick={() => this.setState({switchReimbursementMethod: false, payoutMethod: expense.payoutMethod})}> {i18n.getString('cancel')} </span>
                       <span className='CollectiveExpenseItem-switch' onClick={::this.saveExpense}> Save </span>
                     </span>}
                 </div> }
