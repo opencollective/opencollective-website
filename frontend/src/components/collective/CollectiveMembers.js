@@ -12,7 +12,7 @@ export default class CollectiveMembers extends React.Component {
   }
 
   render() {
-    const { i18n, collective } = this.props;
+    const { i18n, collective, canEditCollective } = this.props;
     this.membersAndBackers = _.uniqBy(_.union(collective.members, collective.backers.filter(b => !b.tier.match(/sponsor/i))), 'id');
     this.membersAndBackers = this.membersAndBackers.map(c => {
       c.href = `/${c.username}`;
@@ -24,6 +24,9 @@ export default class CollectiveMembers extends React.Component {
         <div className='container center'>
           <h2 className='m0 -ff-sec -fw-bold'>{i18n.getString('membersWallTitle')}</h2>
           <p className='Collective-font-17 max-width-3 mx-auto mb3'>{i18n.getString('membersWallText')}</p>
+          { canEditCollective &&
+            <p className='Collective-font-17 max-width-3 mx-auto mb3'>{i18n.getString('sendEmailToBackers')} <a href={`mailto:backers@${collective.slug}.opencollective.com`}>{`backers@${collective.slug}.opencollective.com`}</a></p>
+          }
         </div>
         <div className='CollectiveMembers-backers' className='flex flex-wrap justify-center'>
           { this.membersAndBackers.length <= 20 &&
