@@ -4,6 +4,7 @@ import expressSession from 'express-session';
 import ua from 'universal-analytics';
 import filterCollection from '../../frontend/src/lib/filter_collection';
 import { filterUsers } from './lib/utils';
+import { capitalize } from '../../frontend/src/lib/utils';
 import _ from 'lodash';
 
 /**
@@ -162,9 +163,12 @@ const addMeta = (req, res, next) => {
 
   req.meta = {};
   if (collective) {
+
+    const title = req.params.verb ? `${capitalize(req.params.verb)} to ${collective.name}` : `${collective.name} is on Open Collective`;
+
     req.meta = {
       url: collective.publicUrl,
-      title: `${collective.name} is on Open Collective`,
+      title,
       description: `${collective.mission}`,
       image: collective.image || collective.logo,
       twitter: `@${collective.twitterHandle}`,
@@ -172,16 +176,18 @@ const addMeta = (req, res, next) => {
   } else {
     let description = '';
 
+    const plural = (n) => n > 1 ? 's' : '';
+
     if (user.groups.length > 0) {
       const belongsTo = filterCollection(user.groups, { role: 'MEMBER' });
       const backing = filterCollection(user.groups, { role: 'BACKER' });
 
       if (belongsTo.length > 0) {
-        description += `a member of ${belongsTo.length} collectives`;
+        description += `a member of ${belongsTo.length} collective${plural(belongsTo.length)}`;
       }
       if (backing.length > 0) {
         if (description.length > 0) description += ' and ';
-        description += `supporting ${backing.length} collectives`;
+        description += `supporting ${backing.length} collective${plural(backing.length)}`;
       }
 
       user.groups.sort((a, b) => (b.members - a.members));
