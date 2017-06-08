@@ -112,6 +112,7 @@ export default class Tiers extends Component {
                 stripeKey={stripeKey}
                 name={collective.name}
                 currency={currency}
+                bitcoin={collective.settings.bitcoin}
                 amount={convertToCents(amount)}
                 description={stripeDescription}>
                   <AsyncButton
