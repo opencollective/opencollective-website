@@ -96,8 +96,8 @@ const getCollectiveUsersByRoleSelector = createSelector(
   (collective) => collective.usersByRole || {});
 
 export const getCollectiveHostSelector = createSelector(
-  getCollectiveUsersByRoleSelector,
-  (usersByRole) => usersByRole[roles.HOST] && usersByRole[roles.HOST].length > 0 ? usersByRole[roles.HOST][0] : null);
+  getCollectiveSelector,
+  (collective) => collective.host || null);
 
 export const getCollectiveMembersSelector = createSelector(
   getCollectiveUsersByRoleSelector,
