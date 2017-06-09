@@ -25,7 +25,8 @@ export default function github(state={}, action={}) {
           fullName: repo.full_name,
           description: repo.description,
           stars: repo.stargazers_count,
-          owner: repo.owner.login
+          owner: repo.owner.login,
+          topics: repo.topics
         };
       });
       return merge({}, state, {repositories});

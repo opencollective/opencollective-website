@@ -18,7 +18,7 @@ export default ({ onNextStep, githubForm, repositories, blacklist, appendGithubF
       <OnBoardingStepHeading step="1/3" title="Pick a repository" subtitle={`\"Select a project you wish to create an open collective for.\nOnly repositories with at least ${constants.MIN_STARS_FOR_ONBOARDING} stars and ${constants.MIN_CONTRIBUTORS_FOR_ONBOARDING} contributors are eligible.\"`}/>
       {fetchedRepositories && !noRepo && (
           <div>
-            <RepositoryPicker repositories={validRepos} onSelect={(repository, owner) => appendGithubForm({ repository, username: owner })} selectedRepo={repository} />
+            <RepositoryPicker repositories={validRepos} onSelect={(repository, owner, tags) => appendGithubForm({ repository, username: owner, tags })} selectedRepo={repository} />
             <div style={buttonContainerStyle}>
               <div className={`OnBoardingButton ${repository || singleRepo ? '': 'disabled'}`} onClick={repository || singleRepo ? () => onNextStep(singleRepo ? repositories[0].title : repository) : null}>continue</div>
             </div>
