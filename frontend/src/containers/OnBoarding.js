@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { uniq } from 'lodash';
 
 import Notification from '../containers/Notification';
 
@@ -98,6 +99,11 @@ export class OnBoarding extends Component {
   create() {
     const { githubForm, validateSchema, createGroupFromGithubRepo, githubUser,utmSource } = this.props;
     const attr = githubForm.attributes;
+    const tags = attr.tags ? attr.tags.toLowerCase().split(',').map(s => s.trim()) : [];
+    if (!tags.find(str => str === 'open source')) {
+      tags.push('open source');
+    }
+
     const payload = {
       group: {
         name: attr.repository,
@@ -112,7 +118,7 @@ export class OnBoarding extends Component {
         settings: {
           githubRepo: `${attr.username}/${attr.repository}`
         },
-        tags: ['open source'],
+        tags: uniq(tags),
         tiers: [{
             "name":"backer",
             "title":"Backers",
