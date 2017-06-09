@@ -17,7 +17,6 @@ export default class RepositoryPicker extends React.Component {
     return (
       <div className="RepositoryPicker">
         {repositories && repositories.map((repo) => {
-          console.log(repo.title, repo.topics)
           const topics = repo.topics && repo.topics.length > 1 ? repo.topics.join(', ').concat(', open source') : 'open source';
           return (
             <RepositoryPickerItem
