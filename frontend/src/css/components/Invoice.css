@@ -1,7 +1,13 @@
 .Invoice {
-  padding: 30px;
+  padding: 3rem;
   font-size: 12px;
-  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  -webkit-flex: 1;
+  -webkit-flex-direction: column;
+  -webkit-justify-content: space-between;
+  box-sizing: border-box;
 
   .header {
     margin: 10px 0px;
@@ -47,13 +53,13 @@
     }
   }
 
-  .userBillingAddress {
-    float: left;
-    margin-right: 40px;
-  }
-
   .invoiceDetails {
     float: left;
+  }
+
+  .userBillingAddress {
+    float: right;
+    padding-right: 7rem;
   }
 
   label {
@@ -73,13 +79,21 @@
 
   table {
     margin: 80px 20px;
+    width: 90%;
+    overflow: hidden;
 
     td {
-      padding: 2px;
+      padding: 10px;
     }
 
     .date {
       width: 2rem;
+    }
+
+    .amount {
+      width: 3rem;
+      text-align: right;
+      padding-right: 2rem;
     }
 
     .footer {
@@ -89,6 +103,9 @@
       font-size: 12px;
       img {
         max-height: 100px;
+      }
+      .description {
+        text-align: right;
       }
     }
   }
