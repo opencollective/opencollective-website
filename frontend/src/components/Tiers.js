@@ -11,6 +11,7 @@ export default class Tiers extends Component {
 
   onTokenReceived(tier, payload) {
     this.setState({loading: tier.name});
+    payload.description = tier.description;
     this.props.onToken(payload)
       .then(() => {
         this.setState({loading: null});
