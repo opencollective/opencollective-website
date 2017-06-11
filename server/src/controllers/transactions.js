@@ -8,13 +8,14 @@ import moment from 'moment';
 
 export function invoice(req, res) {
 
-  const { username } = req.params;
+  const { username, format } = req.params;
 
   const transaction = req.transaction;
 
   const props = {
     i18n: i18nlib('en'),
     transaction,
+    paperSize: (transaction.group.currency === 'EUR') ? 'A4' : 'Letter',
     user: { id: transaction.UserId, username }
   };
 
@@ -28,13 +29,17 @@ export function invoice(req, res) {
     html
   }, (err, html) => {
     const options = {
-      format: (transaction.group.currency === 'EUR') ? 'A4' : 'Letter'
+      format: props.paperSize
     }
-    res.setHeader('content-type','application/pdf');
-    res.setHeader('content-disposition', `inline; filename="${filename}"`); // or attachment?
-    pdf.create(html, options).toStream((err, stream) => {
-      stream.pipe(res);
-    });
+    if (format === 'pdf') {
+      res.setHeader('content-type','application/pdf');
+      res.setHeader('content-disposition', `inline; filename="${filename}"`); // or attachment?
+      pdf.create(html, options).toStream((err, stream) => {
+        stream.pipe(res);
+      });
+    } else {
+      res.send(html);
+    }
   });
 }
 
