@@ -17,7 +17,7 @@ export default class CollectiveTransactions extends React.Component {
     return (
       <div className='Collective-transactions col col-12 mb3'>
         {(transactions.length === 0) && 
-          <TransactionEmptyState i18n={i18n} />}
+          <TransactionEmptyState i18n={i18n} link={`/${collective.slug}/transactions`}/>}
         <div className='Collective-transactions-list'>
           {transactions
             .slice(0, itemsToShow)
@@ -29,11 +29,9 @@ export default class CollectiveTransactions extends React.Component {
                 className='' i18n={i18n} />)}
         </div>
         <div className='center pt2'>
-          {(transactions.length >= itemsToShow) && (
             <Link className='-btn -btn-medium -btn-outline -border-green -ttu -fw-bold' to={`/${collective.slug}/transactions`}>
               {i18n.getString('seeAllTransactions')} >
             </Link>
-          )}
         </div>
       </div>
     );
