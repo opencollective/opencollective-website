@@ -18,7 +18,8 @@ export default class Invoice extends Component {
   render() {
     const {
       transaction,
-      i18n
+      i18n,
+      paperSize
     } = this.props;
 
     const createdAt = new Date(transaction.createdAt);
@@ -26,8 +27,8 @@ export default class Invoice extends Component {
     i18n.moment.locale(localeDateFormat);
     const columns = [
       {title: 'date', dataIndex: 'date', className: 'date' },
-      {title: 'description', dataIndex: 'description', key: 'description', width: 400},
-      {title: 'amount', dataIndex: 'amount', key: 'amount'},
+      {title: 'description', dataIndex: 'description', key: 'description', width: 400, className: 'description'},
+      {title: 'amount', dataIndex: 'amount', key: 'amount', className: 'amount'},
     ];
 
     const data = [{
@@ -50,9 +51,26 @@ export default class Invoice extends Component {
       styles.hero.cover.backgroundImage = styles.hero.cover.backgroundImage.replace('url(/', `url(${config.host.website}/`);
     }
 
-    return (
-      <div className='Invoice'>
+    const pageStyle = {
+      'A4': {
+        width: '210mm',
+        height: '297mm'
+      },
+      'Letter': {
+        width: '8.5in',
+        height: '11in'
+      }
+    }
 
+    return (
+      <div className='Invoice' style={pageStyle[paperSize]}>
+        <style>{`
+        html {
+          zoom: 0.75;
+          width: ${pageStyle[paperSize].width};
+          height: ${pageStyle[paperSize].height};
+        }
+        `}</style>
         <div className="header">
           <a href={`https://opencollective.com/${transaction.group.slug}`}>
             <div className="hero">
@@ -67,20 +85,22 @@ export default class Invoice extends Component {
           </div>
         </div>
 
-        <div className="row">
-          <div className="userBillingAddress">
-            <h2>{i18n.getString('billTo')}:</h2>
-            {transaction.user.name}<br />
-            <div dangerouslySetInnerHTML={userBillingAddress} />
+        <div className="body">
+          <div className="row">
+            <div className="invoiceDetails">
+              <h2>Invoice</h2>
+              <div className="detail"><label>Date:</label> {i18n.moment(createdAt).format('D MMMM YYYY')}</div>
+              <div className="detail reference"><label>Reference:</label> {i18n.moment(createdAt).format('YYYYMM')}-{transaction.GroupId}-{transaction.id}</div>
+            </div>
+            <div className="userBillingAddress">
+              <h2>{i18n.getString('billTo')}:</h2>
+              {transaction.user.name}<br />
+              <div dangerouslySetInnerHTML={userBillingAddress} />
+            </div>
           </div>
-          <div className="invoiceDetails">
-            <h2>Invoice</h2>
-            <div className="detail"><label>Date:</label> {i18n.moment(createdAt).format('D MMMM YYYY')}</div>
-            <div className="detail reference"><label>Reference:</label> {i18n.moment(createdAt).format('YYYYMM')}-{transaction.GroupId}-{transaction.id}</div>
-          </div>
-        </div>
 
-        <Table columns={columns} data={data} rowClassName={(row, index) => (index === data.length - 1) ? `footer` : ''} />
+          <Table columns={columns} data={data} rowClassName={(row, index) => (index === data.length - 1) ? `footer` : ''} />
+        </div>
 
         <div className="footer">
           <a href={transaction.host.website}>

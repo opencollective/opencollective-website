@@ -49,7 +49,7 @@ export default class SubscriptionItem extends Component {
         <div className='SubscriptionItem-footer'>
           {opened && (
             <ul>
-              {Transactions.map((transaction, index) => {
+              {Transactions.sort((A, B) => B.createdAt > A.createdAt).map((transaction, index) => {
                 const description = transaction.title || transaction.description;
                 const { avatar } = donation.User;
                 const txDate = transaction.incurredAt || transaction.createdAt;

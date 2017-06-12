@@ -11,6 +11,7 @@ export default class Tiers extends Component {
 
   onTokenReceived(tier, payload) {
     this.setState({loading: tier.name});
+    payload.description = tier.description;
     this.props.onToken(payload)
       .then(() => {
         this.setState({loading: null});
@@ -112,6 +113,7 @@ export default class Tiers extends Component {
                 stripeKey={stripeKey}
                 name={collective.name}
                 currency={currency}
+                bitcoin={collective.settings.bitcoin}
                 amount={convertToCents(amount)}
                 description={stripeDescription}>
                   <AsyncButton

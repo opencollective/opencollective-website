@@ -32,6 +32,7 @@ import payExpense from '../actions/expenses/pay';
 import rejectExpense from '../actions/expenses/reject';
 import validateSchema from '../actions/form/validate_schema';
 import fetchCards from '../actions/users/fetch_cards';
+import updateExpense from '../actions/expenses/update';
 
 // Selectors
 import {
@@ -176,6 +177,7 @@ export class Ledger extends Component {
                   onApprove={ approveExp.bind(this) }
                   onReject={ rejectExp.bind(this) }
                   onPay={ payExp.bind(this) }
+                  onUpdate={ updateExp.bind(this, expense.id) }
                   canApproveOrReject={ canEditCollective || isHost }
                   canPay={ isHost }
                   hasPaypalCard={paypalCard}
@@ -343,6 +345,23 @@ export function payExp(expenseId) {
 }
 
 /*
+ * Edit Expense
+ */
+export function updateExp(expenseId, newFields) {
+  const {
+    collective,
+    updateExpense,
+    fetchPendingExpenses,
+    notify
+  } = this.props;
+
+  return updateExpense(collective.id, expenseId, newFields)
+    .then(() => fetchPendingExpenses(collective.slug))
+    .then(() => notify('success', 'Expense updated'))
+    .catch(({message}) => notify('error', message));
+}
+
+/*
  * Get Paypal Preapproval key
  */
 export function getPaypalPreapprovalKey(userId) {
@@ -386,7 +405,8 @@ export default connect(mapStateToProps, {
   notify,
   payExpense,
   rejectExpense,
-  validateSchema
+  validateSchema,
+  updateExpense
 })(Ledger);
 
 Ledger.propTypes = {
