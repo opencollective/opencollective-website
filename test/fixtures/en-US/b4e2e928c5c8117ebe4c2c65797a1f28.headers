@@ -1,0 +1,32 @@
+{
+  "statusCode": 200,
+  "headers": {
+    "x-dns-prefetch-control": "off",
+    "x-frame-options": "SAMEORIGIN",
+    "x-download-options": "noopen",
+    "x-content-type-options": "nosniff",
+    "x-xss-protection": "1; mode=block",
+    "access-control-allow-origin": "*",
+    "link": "<http://localhost:3060/groups/testcollective/expenses?direction=desc&exclude=fees&per_page=20&sort=incurredAt&unpaid_only=true&page=1>; rel=\"current\", <http://localhost:3060/groups/testcollective/expenses?direction=desc&exclude=fees&per_page=20&sort=incurredAt&unpaid_only=true&page=1>; rel=\"last\"",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "1509",
+    "etag": "W/\"5e5-h7w548vAbq1bnHlKel4pzQ\"",
+    "date": "Wed, 14 Jun 2017 22:36:23 GMT",
+    "connection": "keep-alive"
+  },
+  "url": "http://localhost:3060/groups/testcollective/expenses?direction=desc&exclude=fees&per_page=20&sort=incurredAt&unpaid_only=true&api_key=dvl-1510egmf4a23d80342403fb599qd",
+  "time": 223,
+  "request": {
+    "method": "GET",
+    "headers": {
+      "host": "localhost:3060",
+      "connection": "keep-alive",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
+      "authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImxvZ2luIiwiaWQiOjQsImVtYWlsIjoidGVzdHVzZXJAb3BlbmNvbGxlY3RpdmUuY29tIiwiaWF0IjoxNDk3NDc5NzgwLCJleHAiOjE1MDAwNzE3ODAsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzA2MCIsInN1YiI6NH0._3RZ6LIAFOpTlnPUsKjsANPfVuCsZwfVPWX18L_85JU",
+      "accept": "*/*",
+      "referer": "http://localhost:3000/testcollective/transactions",
+      "accept-encoding": "gzip, deflate, sdch, br",
+      "accept-language": "en-US,en;q=0.8"
+    }
+  }
+}

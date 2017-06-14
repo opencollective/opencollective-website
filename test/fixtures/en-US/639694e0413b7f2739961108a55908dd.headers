@@ -1,0 +1,33 @@
+{
+  "statusCode": 302,
+  "headers": {
+    "x-dns-prefetch-control": "off",
+    "x-frame-options": "SAMEORIGIN",
+    "x-download-options": "noopen",
+    "x-content-type-options": "nosniff",
+    "x-xss-protection": "1; mode=block",
+    "access-control-allow-origin": "*",
+    "location": "http://localhost:3000/github/apply/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImNvbm5lY3RlZC1hY2NvdW50IiwiY29ubmVjdGVkQWNjb3VudElkIjoyLCJ1c2VybmFtZSI6Ik9wZW5Db2xsZWN0aXZlVGVzdCIsImlkIjo2LCJlbWFpbCI6ImluZm9Ab3BlbmNvbGxlY3RpdmUuY29tIiwiaWF0IjoxNDk3NDc5ODM2LCJleHAiOjE0OTc1NjYyMzYsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzA2MCIsInN1YiI6Nn0.iqGkvxEcHjkoYRXsuU03RubwM0mYSUlggyluIxDRAlM?utm_source=undefined",
+    "vary": "Accept",
+    "content-type": "text/html; charset=utf-8",
+    "content-length": "844",
+    "date": "Wed, 14 Jun 2017 22:37:16 GMT",
+    "connection": "keep-alive"
+  },
+  "url": "http://localhost:3060/connected-accounts/github/callback?utm_source=undefined&slug=&code=e0431cf6ec66dab486e1&api_key=dvl-1510egmf4a23d80342403fb599qd",
+  "time": 284,
+  "request": {
+    "method": "GET",
+    "headers": {
+      "host": "localhost:3060",
+      "connection": "keep-alive",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+      "referer": "https://github.com/",
+      "accept-encoding": "gzip, deflate, sdch, br",
+      "accept-language": "en-US,en;q=0.8",
+      "cookie": "connect.sid=s%3AnQxq9fvzBzvsNMq5Ig94whsBxw6A1w7x.REKHCm%2BFLc2Ff1c8%2FmycqdeKCz%2B%2FiQUhXNDIKpDWkpU"
+    }
+  }
+}

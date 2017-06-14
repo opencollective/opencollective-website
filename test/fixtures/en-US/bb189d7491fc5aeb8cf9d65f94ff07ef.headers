@@ -10,23 +10,23 @@
     "server": "cloudinary",
     "surrogate-key": "230973566690443766258669984737153773871 502599675146879933343081022708439674231 6c54d001f69ddcd03d9c05a420299c6f",
     "content-length": "1753",
-    "cache-control": "public, max-age=598532",
-    "date": "Sun, 14 May 2017 00:13:06 GMT",
+    "cache-control": "public, max-age=599584",
+    "date": "Wed, 14 Jun 2017 22:37:30 GMT",
     "connection": "keep-alive"
   },
   "url": "http://res.cloudinary.com:443/opencollective/image/fetch/h_52,c_fill,f_jpg/https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F3075727251%2F5c825534ad62223ae6a539f6a5076d3c.jpeg",
-  "time": 135,
+  "time": 120,
   "request": {
     "method": "GET",
     "headers": {
       "host": "res.cloudinary.com",
       "connection": "keep-alive",
-      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
       "accept": "image/webp,image/*,*/*;q=0.8",
       "referer": "http://localhost:3000/testcollective",
       "accept-encoding": "gzip, deflate, sdch, br",
       "accept-language": "en-US,en;q=0.8",
-      "cookie": "connect.sid=s%3AJ9edDRkmtB4IBKC10z8p08IR-6o0MQT1.e83uAik3PNCBScSLNmZNnXJMcjC94ESUCfH%2FVWX0MMM"
+      "cookie": "connect.sid=s%3ANFgj62wiltnVcGNENpA7ai6O82XiTZbh.wmE0aLWv7uIpFn63PJOa%2BbncIDZ16Dl16tqZ8xHcu%2BM"
     }
   }
 }

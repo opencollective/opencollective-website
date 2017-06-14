@@ -1,0 +1,31 @@
+{
+  "statusCode": 302,
+  "headers": {
+    "x-dns-prefetch-control": "off",
+    "x-frame-options": "SAMEORIGIN",
+    "x-download-options": "noopen",
+    "x-content-type-options": "nosniff",
+    "x-xss-protection": "1; mode=block",
+    "access-control-allow-origin": "*",
+    "location": "https://github.com/login/oauth/authorize?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fconnected-accounts%2Fgithub%2Fcallback%3Futm_source%3D%26slug%3Dtestcollective&scope=user%3Aemail%2Crepo&client_id=cdc163e5f5695e16787b",
+    "content-length": "0",
+    "date": "Wed, 14 Jun 2017 22:36:38 GMT",
+    "connection": "keep-alive"
+  },
+  "url": "http://localhost:3060/connected-accounts/github?slug=testcollective&api_key=dvl-1510egmf4a23d80342403fb599qd",
+  "time": 9,
+  "request": {
+    "method": "GET",
+    "headers": {
+      "host": "localhost:3060",
+      "connection": "keep-alive",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+      "referer": "http://localhost:3000/testcollective/connect/github",
+      "accept-encoding": "gzip, deflate, sdch, br",
+      "accept-language": "en-US,en;q=0.8",
+      "cookie": "connect.sid=s%3AP3QczGxBTvYdleLnIJ-12vo4u9jLbACT.Dz%2FIZQ9JxYiTUdUVp3w61XodD1Ie4lNIIqVAg4ig06U"
+    }
+  }
+}

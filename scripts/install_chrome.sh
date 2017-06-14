@@ -5,7 +5,7 @@
 if [ "$NODE_ENV" = "circleci" ]; then
   echo "Installing Google Chrome for E2E tests";
 else
-  exit;
+  exit 0;
 fi
 
 set -e

@@ -10,20 +10,20 @@
     "access-control-allow-origin": "*",
     "cache-control": "public, max-age=60",
     "content-type": "application/json; charset=utf-8",
-    "etag": "W/\"686-bYES5bwyif7OgLbfBL02Sw\"",
-    "date": "Sun, 14 May 2017 00:12:10 GMT",
+    "etag": "W/\"686-Y05m8vW8pURLxPp0P16bQw\"",
+    "date": "Wed, 14 Jun 2017 22:36:22 GMT",
     "connection": "close",
     "vary": "Accept-Encoding",
     "content-encoding": "gzip",
     "transfer-encoding": "chunked"
   },
   "url": "http://localhost:3000/api/groups/testcollective/users",
-  "time": 180,
+  "time": 145,
   "request": {
     "method": "GET",
     "headers": {
       "authorization": [
-        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImxvZ2luIiwiaWQiOjQsImVtYWlsIjoidGVzdHVzZXJAb3BlbmNvbGxlY3RpdmUuY29tIiwiaWF0IjoxNDk0NzIwNzI4LCJleHAiOjE0OTczMTI3MjgsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzA2MCIsInN1YiI6NH0.VhkFU84eMhA-appflaZ629FDI9n-CK9pz4CDq0FfMyk"
+        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImxvZ2luIiwiaWQiOjQsImVtYWlsIjoidGVzdHVzZXJAb3BlbmNvbGxlY3RpdmUuY29tIiwiaWF0IjoxNDk3NDc5NzgwLCJleHAiOjE1MDAwNzE3ODAsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzA2MCIsInN1YiI6NH0._3RZ6LIAFOpTlnPUsKjsANPfVuCsZwfVPWX18L_85JU"
       ],
       "accept-encoding": [
         "gzip,deflate"
