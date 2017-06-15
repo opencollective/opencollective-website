@@ -1,0 +1,35 @@
+{
+  "statusCode": 200,
+  "headers": {
+    "x-dns-prefetch-control": "off",
+    "x-frame-options": "SAMEORIGIN",
+    "x-download-options": "noopen",
+    "x-content-type-options": "nosniff",
+    "x-xss-protection": "1; mode=block",
+    "access-control-allow-origin": "*",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "1284",
+    "etag": "W/\"504-d7oIt1RcIiV3Jw0uC6crZw\"",
+    "date": "Thu, 15 Jun 2017 21:44:02 GMT",
+    "connection": "keep-alive"
+  },
+  "url": "http://localhost:3060/groups?api_key=circleci-1510egmf4a23d80342403fb599qd",
+  "time": 818,
+  "request": {
+    "method": "POST",
+    "headers": {
+      "host": "localhost:3060",
+      "connection": "keep-alive",
+      "content-length": "893",
+      "accept": "application/json",
+      "origin": "http://localhost:3000",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
+      "flow": "github",
+      "authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImNvbm5lY3RlZC1hY2NvdW50IiwiY29ubmVjdGVkQWNjb3VudElkIjoyLCJ1c2VybmFtZSI6Ik9wZW5Db2xsZWN0aXZlVGVzdCIsImlkIjo2LCJlbWFpbCI6ImluZm9Ab3BlbmNvbGxlY3RpdmUuY29tIiwiaWF0IjoxNDk3NTYzMDM3LCJleHAiOjE0OTc2NDk0MzcsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzA2MCIsInN1YiI6Nn0.9nHgy9A960rUa3CG9SPIbDFoxnBw5qj2t3kueUSFfpA",
+      "content-type": "application/json",
+      "referer": "http://localhost:3000/opensource/apply/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImNvbm5lY3RlZC1hY2NvdW50IiwiY29ubmVjdGVkQWNjb3VudElkIjoyLCJ1c2VybmFtZSI6Ik9wZW5Db2xsZWN0aXZlVGVzdCIsImlkIjo2LCJlbWFpbCI6ImluZm9Ab3BlbmNvbGxlY3RpdmUuY29tIiwiaWF0IjoxNDk3NTYzMDM3LCJleHAiOjE0OTc2NDk0MzcsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzA2MCIsInN1YiI6Nn0.9nHgy9A960rUa3CG9SPIbDFoxnBw5qj2t3kueUSFfpA",
+      "accept-encoding": "gzip, deflate, br",
+      "accept-language": "en-US,en;q=0.8"
+    }
+  }
+}

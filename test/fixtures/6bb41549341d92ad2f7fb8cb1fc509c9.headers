@@ -10,20 +10,20 @@
     "access-control-allow-origin": "*",
     "link": "<http://localhost:3060/groups/testcollective/expenses?direction=desc&exclude=fees&per_page=20&sort=incurredAt&unpaid_only=true&page=1>; rel=\"current\", <http://localhost:3060/groups/testcollective/expenses?direction=desc&exclude=fees&per_page=20&sort=incurredAt&unpaid_only=true&page=1>; rel=\"last\"",
     "content-type": "application/json; charset=utf-8",
-    "etag": "W/\"5e5-snatHMG2QSGAB9RlWr77dQ\"",
-    "date": "Thu, 15 Jun 2017 20:47:46 GMT",
+    "etag": "W/\"5e5-S0WxmFoFKpV42a8eZFxgsw\"",
+    "date": "Thu, 15 Jun 2017 21:43:00 GMT",
     "connection": "close",
     "vary": "Accept-Encoding",
     "content-encoding": "gzip",
     "transfer-encoding": "chunked"
   },
   "url": "http://localhost:3000/api/groups/testcollective/expenses?direction=desc&exclude=fees&per_page=20&sort=incurredAt&unpaid_only=true",
-  "time": 280,
+  "time": 213,
   "request": {
     "method": "GET",
     "headers": {
       "authorization": [
-        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImxvZ2luIiwiaWQiOjQsImVtYWlsIjoidGVzdHVzZXJAb3BlbmNvbGxlY3RpdmUuY29tIiwiaWF0IjoxNDk3NTU5NjYzLCJleHAiOjE1MDAxNTE2NjMsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzA2MCIsInN1YiI6NH0.-RwyIMm6486Kf7tL5ctQspu6-VH-igMDiUCu4mZxVHs"
+        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImxvZ2luIiwiaWQiOjIsImVtYWlsIjoidGVzdHVzZXJAb3BlbmNvbGxlY3RpdmUuY29tIiwiaWF0IjoxNDk3NTYyOTc3LCJleHAiOjE1MDAxNTQ5NzcsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzA2MCIsInN1YiI6Mn0.e2Lcn67RFdt9elelEk_-3h2DZNMArILAJOI9iUBONc4"
       ],
       "accept-encoding": [
         "gzip,deflate"

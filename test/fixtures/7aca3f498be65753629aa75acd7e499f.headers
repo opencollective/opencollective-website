@@ -10,15 +10,15 @@
     "access-control-allow-origin": "*",
     "cache-control": "public, max-age=60",
     "content-type": "application/json; charset=utf-8",
-    "etag": "W/\"5f3-4wDvXHk4Sd/SCupOUaHNrA\"",
-    "date": "Thu, 15 Jun 2017 20:47:38 GMT",
+    "etag": "W/\"5f3-amt3AcHB3LCT5msbYYKNTQ\"",
+    "date": "Thu, 15 Jun 2017 21:42:52 GMT",
     "connection": "close",
     "vary": "Accept-Encoding",
     "content-encoding": "gzip",
     "transfer-encoding": "chunked"
   },
   "url": "http://localhost:3000/api/groups/testcollective/users",
-  "time": 205,
+  "time": 156,
   "request": {
     "method": "GET",
     "headers": {
