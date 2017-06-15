@@ -106,7 +106,7 @@ export default function(slug = '') {
     case 'fosteradoptiverocklandcounty':
     case 'brighterstars':
     case 'adoptivefamliescapitalregion':
-    case 'affcny'
+    case 'affcny':
        categories = [
         'Training',
         'Outreach',
