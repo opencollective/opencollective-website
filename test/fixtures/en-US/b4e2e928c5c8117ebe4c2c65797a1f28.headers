@@ -10,19 +10,19 @@
     "link": "<http://localhost:3060/groups/testcollective/expenses?direction=desc&exclude=fees&per_page=20&sort=incurredAt&unpaid_only=true&page=1>; rel=\"current\", <http://localhost:3060/groups/testcollective/expenses?direction=desc&exclude=fees&per_page=20&sort=incurredAt&unpaid_only=true&page=1>; rel=\"last\"",
     "content-type": "application/json; charset=utf-8",
     "content-length": "1509",
-    "etag": "W/\"5e5-JIRLBXlPBWLKvaGNeyylXA\"",
-    "date": "Thu, 15 Jun 2017 16:35:17 GMT",
+    "etag": "W/\"5e5-1aDLYIuV1ck1Ym650xYkdA\"",
+    "date": "Thu, 15 Jun 2017 20:47:47 GMT",
     "connection": "keep-alive"
   },
   "url": "http://localhost:3060/groups/testcollective/expenses?direction=desc&exclude=fees&per_page=20&sort=incurredAt&unpaid_only=true&api_key=dvl-1510egmf4a23d80342403fb599qd",
-  "time": 236,
+  "time": 212,
   "request": {
     "method": "GET",
     "headers": {
       "host": "localhost:3060",
       "connection": "keep-alive",
       "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
-      "authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImxvZ2luIiwiaWQiOjQsImVtYWlsIjoidGVzdHVzZXJAb3BlbmNvbGxlY3RpdmUuY29tIiwiaWF0IjoxNDk3NTQ0NTE0LCJleHAiOjE1MDAxMzY1MTQsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzA2MCIsInN1YiI6NH0.4F5j5InB1SKs6e0r9M8COW-RvvZ1LUlHCwJl1JmbP0M",
+      "authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImxvZ2luIiwiaWQiOjQsImVtYWlsIjoidGVzdHVzZXJAb3BlbmNvbGxlY3RpdmUuY29tIiwiaWF0IjoxNDk3NTU5NjYzLCJleHAiOjE1MDAxNTE2NjMsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzA2MCIsInN1YiI6NH0.-RwyIMm6486Kf7tL5ctQspu6-VH-igMDiUCu4mZxVHs",
       "accept": "*/*",
       "referer": "http://localhost:3000/testcollective/transactions",
       "accept-encoding": "gzip, deflate, sdch, br",

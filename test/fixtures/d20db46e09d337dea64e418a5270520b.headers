@@ -10,12 +10,12 @@
     "link": "<http://localhost:3060/groups/testcollective/transactions?type=donations&page=1&per_page=20>; rel=\"current\", <http://localhost:3060/groups/testcollective/transactions?type=donations&page=1&per_page=20>; rel=\"last\"",
     "content-type": "application/json; charset=utf-8",
     "content-length": "541",
-    "etag": "W/\"21d-2TRW2GeG0ZCGouMIcpMgHA\"",
-    "date": "Thu, 15 Jun 2017 16:35:10 GMT",
+    "etag": "W/\"21d-9SR8EGRH+8xpELNxcMVFtQ\"",
+    "date": "Thu, 15 Jun 2017 20:47:38 GMT",
     "connection": "close"
   },
   "url": "http://localhost:3060/groups/testcollective/transactions?type=donations&api_key=dvl-1510egmf4a23d80342403fb599qd",
-  "time": 145,
+  "time": 118,
   "request": {
     "method": "GET",
     "headers": {

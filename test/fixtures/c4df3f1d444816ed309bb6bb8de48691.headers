@@ -10,7 +10,7 @@
     "content-type": "application/json; charset=utf-8",
     "content-length": "76",
     "etag": "W/\"4c-WpF7YC5vGyfT9B4ZE5bpLg\"",
-    "date": "Thu, 15 Jun 2017 16:35:34 GMT",
+    "date": "Thu, 15 Jun 2017 20:48:10 GMT",
     "connection": "close"
   },
   "url": "http://localhost:3060/connected-accounts/github/verify?api_key=dvl-1510egmf4a23d80342403fb599qd",
@@ -19,7 +19,7 @@
     "method": "GET",
     "headers": {
       "authorization": [
-        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImNvbm5lY3RlZC1hY2NvdW50IiwiY29ubmVjdGVkQWNjb3VudElkIjoyLCJ1c2VybmFtZSI6Ik9wZW5Db2xsZWN0aXZlVGVzdCIsImlkIjo2LCJlbWFpbCI6ImluZm9Ab3BlbmNvbGxlY3RpdmUuY29tIiwiaWF0IjoxNDk3NTQ0NTM0LCJleHAiOjE0OTc2MzA5MzQsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzA2MCIsInN1YiI6Nn0.JEWwx3XflBGUXfg8H9G06b_aXrQ_QFr4tGBDr8Hk9GY"
+        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImNvbm5lY3RlZC1hY2NvdW50IiwiY29ubmVjdGVkQWNjb3VudElkIjoyLCJ1c2VybmFtZSI6Ik9wZW5Db2xsZWN0aXZlVGVzdCIsImlkIjo2LCJlbWFpbCI6ImluZm9Ab3BlbmNvbGxlY3RpdmUuY29tIiwiaWF0IjoxNDk3NTU5NjkwLCJleHAiOjE0OTc2NDYwOTAsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzA2MCIsInN1YiI6Nn0.eYS8Bmhs-ykZPhmCaXlNE6L8ZRzQUMmzHdE_96UXCSA"
       ],
       "accept-encoding": [
         "gzip,deflate"
