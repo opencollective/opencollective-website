@@ -10,11 +10,11 @@
     "content-type": "application/json; charset=utf-8",
     "content-length": "16",
     "etag": "W/\"10-c2PoX+nt7m8FOksxlYjAhg\"",
-    "date": "Thu, 15 Jun 2017 21:43:03 GMT",
+    "date": "Thu, 15 Jun 2017 23:06:23 GMT",
     "connection": "keep-alive"
   },
   "url": "http://localhost:3060/groups/testcollective/donations/manual?api_key=circleci-1510egmf4a23d80342403fb599qd",
-  "time": 177,
+  "time": 157,
   "request": {
     "method": "POST",
     "headers": {
@@ -24,7 +24,7 @@
       "accept": "application/json",
       "origin": "http://localhost:3000",
       "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
-      "authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImxvZ2luIiwiaWQiOjIsImVtYWlsIjoidGVzdHVzZXJAb3BlbmNvbGxlY3RpdmUuY29tIiwiaWF0IjoxNDk3NTYyOTc3LCJleHAiOjE1MDAxNTQ5NzcsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzA2MCIsInN1YiI6Mn0.e2Lcn67RFdt9elelEk_-3h2DZNMArILAJOI9iUBONc4",
+      "authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImxvZ2luIiwiaWQiOjMsImVtYWlsIjoidGVzdHVzZXJAb3BlbmNvbGxlY3RpdmUuY29tIiwiaWF0IjoxNDk3NTY3OTc4LCJleHAiOjE1MDAxNTk5NzgsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzA2MCIsInN1YiI6M30.x-shHmIZY8DMLP3I-6U6LV7MQwsguQ_NKHnSHlYOgLs",
       "content-type": "application/json",
       "referer": "http://localhost:3000/testcollective/transactions",
       "accept-encoding": "gzip, deflate, br",

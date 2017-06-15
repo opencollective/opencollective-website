@@ -9,17 +9,17 @@
     "access-control-allow-origin": "*",
     "content-type": "application/json; charset=utf-8",
     "content-length": "712",
-    "etag": "W/\"2c8-MKTjObOWy4wLX5fu3RBGIw\"",
-    "date": "Thu, 15 Jun 2017 21:42:57 GMT",
+    "etag": "W/\"2c8-gywrnrOF6yXtX7CDv2IQyg\"",
+    "date": "Thu, 15 Jun 2017 23:06:18 GMT",
     "connection": "close"
   },
-  "url": "http://localhost:3060/users/2?api_key=circleci-1510egmf4a23d80342403fb599qd",
-  "time": 87,
+  "url": "http://localhost:3060/users/3?api_key=circleci-1510egmf4a23d80342403fb599qd",
+  "time": 83,
   "request": {
     "method": "GET",
     "headers": {
       "host": "localhost:3060",
-      "authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImxvZ2luIiwiaWQiOjIsImVtYWlsIjoidGVzdHVzZXJAb3BlbmNvbGxlY3RpdmUuY29tIiwiaWF0IjoxNDk3NTYyOTc3LCJleHAiOjE1MDAxNTQ5NzcsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzA2MCIsInN1YiI6Mn0.e2Lcn67RFdt9elelEk_-3h2DZNMArILAJOI9iUBONc4",
+      "authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImxvZ2luIiwiaWQiOjMsImVtYWlsIjoidGVzdHVzZXJAb3BlbmNvbGxlY3RpdmUuY29tIiwiaWF0IjoxNDk3NTY3OTc4LCJleHAiOjE1MDAxNTk5NzgsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzA2MCIsInN1YiI6M30.x-shHmIZY8DMLP3I-6U6LV7MQwsguQ_NKHnSHlYOgLs",
       "accept-encoding": "gzip,deflate",
       "user-agent": "node-fetch/1.0 (+https://github.com/bitinn/node-fetch)",
       "connection": "close",

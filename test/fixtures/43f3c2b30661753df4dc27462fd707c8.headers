@@ -12,17 +12,17 @@
     "content-type": "application/json; charset=utf-8",
     "content-length": "2",
     "etag": "W/\"2-11FxOYiYfpMxmANj4kGJzg\"",
-    "date": "Thu, 15 Jun 2017 21:43:41 GMT",
+    "date": "Thu, 15 Jun 2017 23:07:01 GMT",
     "connection": "close",
     "vary": "Accept-Encoding"
   },
   "url": "http://localhost:3000/api/groups/testcollective/transactions?type=expenses",
-  "time": 196,
+  "time": 538,
   "request": {
     "method": "GET",
     "headers": {
       "authorization": [
-        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImxvZ2luIiwiaWQiOjIsImVtYWlsIjoidGVzdHVzZXJAb3BlbmNvbGxlY3RpdmUuY29tIiwiaWF0IjoxNDk3NTYyOTc3LCJleHAiOjE1MDAxNTQ5NzcsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzA2MCIsInN1YiI6Mn0.e2Lcn67RFdt9elelEk_-3h2DZNMArILAJOI9iUBONc4"
+        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImxvZ2luIiwiaWQiOjMsImVtYWlsIjoidGVzdHVzZXJAb3BlbmNvbGxlY3RpdmUuY29tIiwiaWF0IjoxNDk3NTY3OTc4LCJleHAiOjE1MDAxNTk5NzgsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzA2MCIsInN1YiI6M30.x-shHmIZY8DMLP3I-6U6LV7MQwsguQ_NKHnSHlYOgLs"
       ],
       "accept-encoding": [
         "gzip,deflate"

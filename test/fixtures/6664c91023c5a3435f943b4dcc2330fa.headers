@@ -10,17 +10,17 @@
     "cache-control": "public, max-age=60",
     "content-type": "application/json; charset=utf-8",
     "content-length": "1670",
-    "etag": "W/\"686-ctDU+OJ6dh5uULlQz7XObg\"",
-    "date": "Thu, 15 Jun 2017 21:42:59 GMT",
+    "etag": "W/\"686-TVD6XCkU1J0mQxQ4I38srA\"",
+    "date": "Thu, 15 Jun 2017 23:05:39 GMT",
     "connection": "close"
   },
   "url": "http://localhost:3060/groups/testcollective/users?api_key=circleci-1510egmf4a23d80342403fb599qd",
-  "time": 120,
+  "time": 180,
   "request": {
     "method": "GET",
     "headers": {
       "host": "localhost:3060",
-      "authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImxvZ2luIiwiaWQiOjIsImVtYWlsIjoidGVzdHVzZXJAb3BlbmNvbGxlY3RpdmUuY29tIiwiaWF0IjoxNDk3NTYyOTc3LCJleHAiOjE1MDAxNTQ5NzcsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzA2MCIsInN1YiI6Mn0.e2Lcn67RFdt9elelEk_-3h2DZNMArILAJOI9iUBONc4",
+      "authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImxvZ2luIiwiaWQiOjMsImVtYWlsIjoidGVzdHVzZXJAb3BlbmNvbGxlY3RpdmUuY29tIiwiaWF0IjoxNDk3NTY3NzUwLCJleHAiOjE1MDAxNTk3NTAsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzA2MCIsInN1YiI6M30.AnLu6PH4ztkmuENwFpDRaWiRTzMcwWSK2LGc0MpT6DQ",
       "accept-encoding": "gzip,deflate",
       "user-agent": "node-fetch/1.0 (+https://github.com/bitinn/node-fetch)",
       "connection": "close",

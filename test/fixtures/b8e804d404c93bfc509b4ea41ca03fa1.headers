@@ -10,20 +10,20 @@
     "access-control-allow-origin": "*",
     "link": "<http://localhost:3060/groups/testcollective/transactions?page=1&per_page=20>; rel=\"current\", <http://localhost:3060/groups/testcollective/transactions?page=1&per_page=20>; rel=\"last\"",
     "content-type": "application/json; charset=utf-8",
-    "etag": "W/\"459-OkwbuywrFLBub/wrdRokzg\"",
-    "date": "Thu, 15 Jun 2017 21:44:09 GMT",
+    "etag": "W/\"459-0DT7942HFOzZR9oV1LGFSA\"",
+    "date": "Thu, 15 Jun 2017 23:07:27 GMT",
     "connection": "close",
     "vary": "Accept-Encoding",
     "content-encoding": "gzip",
     "transfer-encoding": "chunked"
   },
   "url": "http://localhost:3000/api/groups/testcollective/transactions",
-  "time": 252,
+  "time": 162,
   "request": {
     "method": "GET",
     "headers": {
       "authorization": [
-        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImxvZ2luIiwiaWQiOjIsImVtYWlsIjoidGVzdHVzZXJAb3BlbmNvbGxlY3RpdmUuY29tIiwiaWF0IjoxNDk3NTYyOTc3LCJleHAiOjE1MDAxNTQ5NzcsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzA2MCIsInN1YiI6Mn0.e2Lcn67RFdt9elelEk_-3h2DZNMArILAJOI9iUBONc4"
+        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImxvZ2luIiwiaWQiOjMsImVtYWlsIjoidGVzdHVzZXJAb3BlbmNvbGxlY3RpdmUuY29tIiwiaWF0IjoxNDk3NTY3OTc4LCJleHAiOjE1MDAxNTk5NzgsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzA2MCIsInN1YiI6M30.x-shHmIZY8DMLP3I-6U6LV7MQwsguQ_NKHnSHlYOgLs"
       ],
       "accept-encoding": [
         "gzip,deflate"

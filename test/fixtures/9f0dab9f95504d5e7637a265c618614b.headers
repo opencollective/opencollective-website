@@ -9,12 +9,12 @@
     "access-control-allow-origin": "*",
     "content-type": "application/json; charset=utf-8",
     "content-length": "1844",
-    "etag": "W/\"734-DdFOA0AmIAMO3O+jk38zng\"",
-    "date": "Thu, 15 Jun 2017 21:42:52 GMT",
+    "etag": "W/\"734-ODdRh5Y7dlT0ONZOjevsIw\"",
+    "date": "Thu, 15 Jun 2017 23:05:38 GMT",
     "connection": "close"
   },
   "url": "http://localhost:3060/groups/testcollective/?api_key=circleci-1510egmf4a23d80342403fb599qd",
-  "time": 105,
+  "time": 84,
   "request": {
     "method": "GET",
     "headers": {

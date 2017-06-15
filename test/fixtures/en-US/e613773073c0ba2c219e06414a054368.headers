@@ -7,16 +7,16 @@
     "x-content-type-options": "nosniff",
     "x-xss-protection": "1; mode=block",
     "access-control-allow-origin": "*",
-    "location": "https://api.twitter.com/oauth/authenticate?oauth_token=_cOATAAAAAAAvq-3AAABXK21_hk",
+    "location": "https://api.twitter.com/oauth/authenticate?oauth_token=2bLCkQAAAAAAvq-3AAABXK4CSAE",
     "content-length": "0",
     "set-cookie": [
-      "connect.sid=s%3AFjVhjyB6BudeoEdGZiqKrfl823i9QKVl.vaij%2FPW7fwvLCN4ZaTBoZDII0IfxFjzGXN61j6Zm2V4; Path=/; Expires=Thu, 15 Jun 2017 21:48:24 GMT; HttpOnly"
+      "connect.sid=s%3AqrjDMJX1nnWVmetNZzIHgOWfVnH4vu2Y.moFOPIvigv4U3sEZtXDSmgnpmyAOP5eFlSVznsahvN4; Path=/; Expires=Thu, 15 Jun 2017 23:11:44 GMT; HttpOnly"
     ],
-    "date": "Thu, 15 Jun 2017 21:43:24 GMT",
+    "date": "Thu, 15 Jun 2017 23:06:44 GMT",
     "connection": "keep-alive"
   },
   "url": "http://localhost:3060/connected-accounts/twitter?slug=testcollective&api_key=circleci-1510egmf4a23d80342403fb599qd",
-  "time": 302,
+  "time": 157,
   "request": {
     "method": "GET",
     "headers": {
@@ -28,7 +28,7 @@
       "referer": "http://localhost:3000/testcollective/connect/twitter",
       "accept-encoding": "gzip, deflate, sdch, br",
       "accept-language": "en-US,en;q=0.8",
-      "cookie": "connect.sid=s%3ArCLgOiXXFFNIBaW9OfabnGMUqXFm53w9.VfHWBYbyTHkdwDYKnKgXkOnEAJWfUa%2BYceGf5AuSBT0"
+      "cookie": "connect.sid=s%3AEjL6PpWEhF2gTEcT7dOCqOXSPsVXFp0U.RjUZiBTkf07t2HxObZJAMsUHA1JLQYd0qIMtdWsSboE"
     }
   }
 }

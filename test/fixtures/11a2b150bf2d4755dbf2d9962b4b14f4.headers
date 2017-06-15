@@ -10,16 +10,17 @@
     "link": "<http://localhost:3060/groups/testcollective/transactions?type=donations&page=1&per_page=20>; rel=\"current\", <http://localhost:3060/groups/testcollective/transactions?type=donations&page=1&per_page=20>; rel=\"last\"",
     "content-type": "application/json; charset=utf-8",
     "content-length": "541",
-    "etag": "W/\"21d-n+7RpbFV4vLTVtP0QEvjEA\"",
-    "date": "Thu, 15 Jun 2017 21:42:52 GMT",
+    "etag": "W/\"21d-xxoXFb4dU61J+0BT6ox8OA\"",
+    "date": "Thu, 15 Jun 2017 23:05:39 GMT",
     "connection": "close"
   },
   "url": "http://localhost:3060/groups/testcollective/transactions?type=donations&api_key=circleci-1510egmf4a23d80342403fb599qd",
-  "time": 214,
+  "time": 242,
   "request": {
     "method": "GET",
     "headers": {
       "host": "localhost:3060",
+      "authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImxvZ2luIiwiaWQiOjMsImVtYWlsIjoidGVzdHVzZXJAb3BlbmNvbGxlY3RpdmUuY29tIiwiaWF0IjoxNDk3NTY3NzUwLCJleHAiOjE1MDAxNTk3NTAsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzA2MCIsInN1YiI6M30.AnLu6PH4ztkmuENwFpDRaWiRTzMcwWSK2LGc0MpT6DQ",
       "accept-encoding": "gzip,deflate",
       "user-agent": "node-fetch/1.0 (+https://github.com/bitinn/node-fetch)",
       "connection": "close",

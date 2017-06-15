@@ -7,15 +7,15 @@
     "x-content-type-options": "nosniff",
     "x-xss-protection": "1; mode=block",
     "access-control-allow-origin": "*",
-    "location": "http://localhost:3000/github/apply/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImNvbm5lY3RlZC1hY2NvdW50IiwiY29ubmVjdGVkQWNjb3VudElkIjoyLCJ1c2VybmFtZSI6Ik9wZW5Db2xsZWN0aXZlVGVzdCIsImlkIjo2LCJlbWFpbCI6ImluZm9Ab3BlbmNvbGxlY3RpdmUuY29tIiwiaWF0IjoxNDk3NTYzMDM3LCJleHAiOjE0OTc2NDk0MzcsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzA2MCIsInN1YiI6Nn0.9nHgy9A960rUa3CG9SPIbDFoxnBw5qj2t3kueUSFfpA?utm_source=undefined",
+    "location": "http://localhost:3000/github/apply/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImNvbm5lY3RlZC1hY2NvdW50IiwiY29ubmVjdGVkQWNjb3VudElkIjoyLCJ1c2VybmFtZSI6Ik9wZW5Db2xsZWN0aXZlVGVzdCIsImlkIjo2LCJlbWFpbCI6ImluZm9Ab3BlbmNvbGxlY3RpdmUuY29tIiwiaWF0IjoxNDk3NTY4MDM1LCJleHAiOjE0OTc2NTQ0MzUsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzA2MCIsInN1YiI6Nn0.I2crXp_4rzcZUbTQcVUmu82Cb3B3u4IKv_7cobOfz_I?utm_source=undefined",
     "vary": "Accept",
     "content-type": "text/html; charset=utf-8",
     "content-length": "844",
-    "date": "Thu, 15 Jun 2017 21:43:57 GMT",
+    "date": "Thu, 15 Jun 2017 23:07:15 GMT",
     "connection": "keep-alive"
   },
-  "url": "http://localhost:3060/connected-accounts/github/callback?utm_source=undefined&slug=&code=a693af032405f6bea60b&api_key=circleci-1510egmf4a23d80342403fb599qd",
-  "time": 336,
+  "url": "http://localhost:3060/connected-accounts/github/callback?utm_source=undefined&slug=&code=36877991656e24f57aeb&api_key=circleci-1510egmf4a23d80342403fb599qd",
+  "time": 264,
   "request": {
     "method": "GET",
     "headers": {
@@ -27,7 +27,7 @@
       "referer": "https://github.com/",
       "accept-encoding": "gzip, deflate, sdch, br",
       "accept-language": "en-US,en;q=0.8",
-      "cookie": "connect.sid=s%3AmBO-dyuXrSY5nuXPph_O3X-ML2pdQCM_.Op%2BCzrpWczh2BaAb6ua5hfOHxk%2F%2B6h2RCPuycTlFdgs"
+      "cookie": "connect.sid=s%3AoQKknMPXarQp3wKfyM6ZWe4uiC2Bqv5K.XUMVAjHJEHRrx9iNd%2BOfdJqN8kgYgO5AxKPQd9VNcQA"
     }
   }
 }

@@ -10,17 +10,17 @@
     "link": "<http://localhost:3060/groups/testcollective/transactions?type=transactions&page=1&per_page=20>; rel=\"current\", <http://localhost:3060/groups/testcollective/transactions?type=transactions&page=1&per_page=20>; rel=\"last\"",
     "content-type": "application/json; charset=utf-8",
     "content-length": "541",
-    "etag": "W/\"21d-n+7RpbFV4vLTVtP0QEvjEA\"",
-    "date": "Thu, 15 Jun 2017 21:43:00 GMT",
+    "etag": "W/\"21d-xxoXFb4dU61J+0BT6ox8OA\"",
+    "date": "Thu, 15 Jun 2017 23:06:20 GMT",
     "connection": "close"
   },
   "url": "http://localhost:3060/groups/testcollective/transactions?type=transactions&api_key=circleci-1510egmf4a23d80342403fb599qd",
-  "time": 283,
+  "time": 55,
   "request": {
     "method": "GET",
     "headers": {
       "host": "localhost:3060",
-      "authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImxvZ2luIiwiaWQiOjIsImVtYWlsIjoidGVzdHVzZXJAb3BlbmNvbGxlY3RpdmUuY29tIiwiaWF0IjoxNDk3NTYyOTc3LCJleHAiOjE1MDAxNTQ5NzcsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzA2MCIsInN1YiI6Mn0.e2Lcn67RFdt9elelEk_-3h2DZNMArILAJOI9iUBONc4",
+      "authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImxvZ2luIiwiaWQiOjMsImVtYWlsIjoidGVzdHVzZXJAb3BlbmNvbGxlY3RpdmUuY29tIiwiaWF0IjoxNDk3NTY3OTc4LCJleHAiOjE1MDAxNTk5NzgsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzA2MCIsInN1YiI6M30.x-shHmIZY8DMLP3I-6U6LV7MQwsguQ_NKHnSHlYOgLs",
       "accept-encoding": "gzip,deflate",
       "user-agent": "node-fetch/1.0 (+https://github.com/bitinn/node-fetch)",
       "connection": "close",
