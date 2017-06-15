@@ -1,0 +1,32 @@
+{
+  "statusCode": 200,
+  "headers": {
+    "x-dns-prefetch-control": "off",
+    "x-frame-options": "SAMEORIGIN",
+    "x-download-options": "noopen",
+    "x-content-type-options": "nosniff",
+    "x-xss-protection": "1; mode=block",
+    "access-control-allow-origin": "*",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "712",
+    "etag": "W/\"2c8-vAdQvK4jfDhnOotpRrCUmg\"",
+    "date": "Thu, 15 Jun 2017 23:06:20 GMT",
+    "connection": "keep-alive"
+  },
+  "url": "http://localhost:3060/users/3?api_key=circleci-1510egmf4a23d80342403fb599qd",
+  "time": 41,
+  "request": {
+    "method": "GET",
+    "headers": {
+      "host": "localhost:3060",
+      "connection": "keep-alive",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
+      "authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImxvZ2luIiwiaWQiOjMsImVtYWlsIjoidGVzdHVzZXJAb3BlbmNvbGxlY3RpdmUuY29tIiwiaWF0IjoxNDk3NTY3OTc4LCJleHAiOjE1MDAxNTk5NzgsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzA2MCIsInN1YiI6M30.x-shHmIZY8DMLP3I-6U6LV7MQwsguQ_NKHnSHlYOgLs",
+      "accept": "*/*",
+      "referer": "http://localhost:3000/",
+      "accept-encoding": "gzip, deflate, sdch, br",
+      "accept-language": "en-US,en;q=0.8",
+      "if-none-match": "W/\"2c8-aXkrUMCyQzYHJEiQ0RIkMg\""
+    }
+  }
+}

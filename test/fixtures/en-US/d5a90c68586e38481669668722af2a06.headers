@@ -10,18 +10,18 @@
     "link": "<http://localhost:3060/groups/testcollective/transactions?page=1&per_page=20>; rel=\"current\", <http://localhost:3060/groups/testcollective/transactions?page=1&per_page=20>; rel=\"last\"",
     "content-type": "application/json; charset=utf-8",
     "content-length": "1113",
-    "etag": "W/\"459-jrKbVqOqjYCzEehhEB56nw\"",
-    "date": "Sun, 14 May 2017 00:13:06 GMT",
+    "etag": "W/\"459-0DT7942HFOzZR9oV1LGFSA\"",
+    "date": "Thu, 15 Jun 2017 23:07:28 GMT",
     "connection": "keep-alive"
   },
   "url": "http://localhost:3060/groups/testcollective/transactions?api_key=circleci-1510egmf4a23d80342403fb599qd",
-  "time": 23,
+  "time": 33,
   "request": {
     "method": "GET",
     "headers": {
       "host": "localhost:3060",
       "connection": "keep-alive",
-      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
       "accept": "*/*",
       "referer": "http://localhost:3000/testcollective",
       "accept-encoding": "gzip, deflate, sdch, br",

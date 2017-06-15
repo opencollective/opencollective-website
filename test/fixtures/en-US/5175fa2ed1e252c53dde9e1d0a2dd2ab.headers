@@ -9,23 +9,23 @@
     "access-control-allow-origin": "*",
     "location": "https://github.com/login/oauth/authorize?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fconnected-accounts%2Fgithub%2Fcallback%3Futm_source%3Dundefined%26slug%3D&scope=user%3Aemail%2Crepo&client_id=cdc163e5f5695e16787b",
     "content-length": "0",
-    "date": "Sun, 14 May 2017 00:12:53 GMT",
+    "date": "Thu, 15 Jun 2017 23:07:13 GMT",
     "connection": "keep-alive"
   },
   "url": "http://localhost:3060/connected-accounts/github?utm_source=undefined&api_key=circleci-1510egmf4a23d80342403fb599qd",
-  "time": 6,
+  "time": 8,
   "request": {
     "method": "GET",
     "headers": {
       "host": "localhost:3060",
       "connection": "keep-alive",
       "upgrade-insecure-requests": "1",
-      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
       "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
       "referer": "http://localhost:3000/opensource/apply",
       "accept-encoding": "gzip, deflate, sdch, br",
       "accept-language": "en-US,en;q=0.8",
-      "cookie": "connect.sid=s%3AvKeby_XL40gOGTe2vSNHiju_5btHm0q6.4Dl9%2BvwCm1PMGSdQH6%2BIzBNE3XRBEKGSD6pSHyevp%2F0"
+      "cookie": "connect.sid=s%3AoQKknMPXarQp3wKfyM6ZWe4uiC2Bqv5K.XUMVAjHJEHRrx9iNd%2BOfdJqN8kgYgO5AxKPQd9VNcQA"
     }
   }
 }

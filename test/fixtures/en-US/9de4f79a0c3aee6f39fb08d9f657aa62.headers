@@ -7,22 +7,22 @@
     "x-content-type-options": "nosniff",
     "x-xss-protection": "1; mode=block",
     "access-control-allow-origin": "*",
-    "location": "http://localhost:3000/login/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImxvZ2luIiwiaWQiOjQsImVtYWlsIjoidGVzdHVzZXJAb3BlbmNvbGxlY3RpdmUuY29tIiwiaWF0IjoxNDk0NzIwNzI4LCJleHAiOjE0OTczMTI3MjgsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzA2MCIsInN1YiI6NH0.VhkFU84eMhA-appflaZ629FDI9n-CK9pz4CDq0FfMyk?next=",
+    "location": "http://localhost:3000/login/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImxvZ2luIiwiaWQiOjMsImVtYWlsIjoidGVzdHVzZXJAb3BlbmNvbGxlY3RpdmUuY29tIiwiaWF0IjoxNDk3NTY3OTc4LCJleHAiOjE1MDAxNTk5NzgsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzA2MCIsInN1YiI6M30.x-shHmIZY8DMLP3I-6U6LV7MQwsguQ_NKHnSHlYOgLs?next=",
     "vary": "Accept",
     "content-type": "text/html; charset=utf-8",
     "content-length": "632",
-    "date": "Sun, 14 May 2017 00:12:08 GMT",
+    "date": "Thu, 15 Jun 2017 23:06:18 GMT",
     "connection": "keep-alive"
   },
   "url": "http://localhost:3060/test/loginlink?api_key=circleci-1510egmf4a23d80342403fb599qd",
-  "time": 11,
+  "time": 71,
   "request": {
     "method": "GET",
     "headers": {
       "host": "localhost:3060",
       "connection": "keep-alive",
       "upgrade-insecure-requests": "1",
-      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
       "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
       "accept-encoding": "gzip, deflate, sdch, br",
       "accept-language": "en-US,en;q=0.8"

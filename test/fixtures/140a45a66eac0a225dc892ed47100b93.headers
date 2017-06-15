@@ -1,0 +1,30 @@
+{
+  "statusCode": 200,
+  "headers": {
+    "x-dns-prefetch-control": "off",
+    "x-frame-options": "SAMEORIGIN",
+    "x-download-options": "noopen",
+    "x-content-type-options": "nosniff",
+    "x-xss-protection": "1; mode=block",
+    "access-control-allow-origin": "*",
+    "link": "<http://localhost:3060/groups/testcollective/expenses?direction=desc&exclude=fees&per_page=20&sort=incurredAt&unpaid_only=true&page=1>; rel=\"current\", <http://localhost:3060/groups/testcollective/expenses?direction=desc&exclude=fees&per_page=20&sort=incurredAt&unpaid_only=true&page=1>; rel=\"last\"",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "1509",
+    "etag": "W/\"5e5-g30Uk+oIOk4l1pF+5oOCkQ\"",
+    "date": "Thu, 15 Jun 2017 23:05:39 GMT",
+    "connection": "close"
+  },
+  "url": "http://localhost:3060/groups/testcollective/expenses?direction=desc&exclude=fees&per_page=20&sort=incurredAt&unpaid_only=true&api_key=circleci-1510egmf4a23d80342403fb599qd",
+  "time": 269,
+  "request": {
+    "method": "GET",
+    "headers": {
+      "host": "localhost:3060",
+      "authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImxvZ2luIiwiaWQiOjMsImVtYWlsIjoidGVzdHVzZXJAb3BlbmNvbGxlY3RpdmUuY29tIiwiaWF0IjoxNDk3NTY3NzUwLCJleHAiOjE1MDAxNTk3NTAsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzA2MCIsInN1YiI6M30.AnLu6PH4ztkmuENwFpDRaWiRTzMcwWSK2LGc0MpT6DQ",
+      "accept-encoding": "gzip,deflate",
+      "user-agent": "node-fetch/1.0 (+https://github.com/bitinn/node-fetch)",
+      "connection": "close",
+      "accept": "*/*"
+    }
+  }
+}

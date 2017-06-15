@@ -1,0 +1,40 @@
+{
+  "statusCode": 200,
+  "headers": {
+    "x-powered-by": "Express",
+    "x-dns-prefetch-control": "off",
+    "x-frame-options": "SAMEORIGIN",
+    "x-download-options": "noopen",
+    "x-content-type-options": "nosniff",
+    "x-xss-protection": "1; mode=block",
+    "access-control-allow-origin": "*",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "712",
+    "etag": "W/\"2c8-gywrnrOF6yXtX7CDv2IQyg\"",
+    "date": "Thu, 15 Jun 2017 23:06:18 GMT",
+    "connection": "close",
+    "vary": "Accept-Encoding"
+  },
+  "url": "http://localhost:3000/api/users/3",
+  "time": 108,
+  "request": {
+    "method": "GET",
+    "headers": {
+      "authorization": [
+        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImxvZ2luIiwiaWQiOjMsImVtYWlsIjoidGVzdHVzZXJAb3BlbmNvbGxlY3RpdmUuY29tIiwiaWF0IjoxNDk3NTY3OTc4LCJleHAiOjE1MDAxNTk5NzgsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzA2MCIsInN1YiI6M30.x-shHmIZY8DMLP3I-6U6LV7MQwsguQ_NKHnSHlYOgLs"
+      ],
+      "accept-encoding": [
+        "gzip,deflate"
+      ],
+      "user-agent": [
+        "node-fetch/1.0 (+https://github.com/bitinn/node-fetch)"
+      ],
+      "connection": [
+        "close"
+      ],
+      "accept": [
+        "*/*"
+      ]
+    }
+  }
+}

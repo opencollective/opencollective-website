@@ -8,13 +8,13 @@
     "x-xss-protection": "1; mode=block",
     "access-control-allow-origin": "*",
     "content-type": "application/json; charset=utf-8",
-    "content-length": "1507",
-    "etag": "W/\"5e3-b1r1viKHisiQfaO4TWHLwA\"",
-    "date": "Sun, 14 May 2017 00:13:05 GMT",
+    "content-length": "1854",
+    "etag": "W/\"73e-FND5zAGsXMQPCMowBVKE3A\"",
+    "date": "Thu, 15 Jun 2017 23:06:44 GMT",
     "connection": "close"
   },
   "url": "http://localhost:3060/profile/testcollective?api_key=circleci-1510egmf4a23d80342403fb599qd",
-  "time": 40,
+  "time": 74,
   "request": {
     "method": "GET",
     "headers": {

@@ -4,26 +4,26 @@
     "x-powered-by": "Express",
     "accept-ranges": "bytes",
     "cache-control": "public, max-age=86400",
-    "last-modified": "Tue, 18 Apr 2017 21:50:34 GMT",
-    "etag": "W/\"44-15b830bb410\"",
+    "last-modified": "Mon, 06 Mar 2017 19:46:50 GMT",
+    "etag": "W/\"44-15aa528f810\"",
     "content-type": "image/png",
     "content-length": "68",
-    "date": "Sun, 14 May 2017 00:13:05 GMT",
+    "date": "Thu, 15 Jun 2017 23:07:27 GMT",
     "connection": "keep-alive"
   },
   "url": "http://localhost:3000/public/images/1px.png",
-  "time": 11,
+  "time": 8,
   "request": {
     "method": "GET",
     "headers": {
       "host": "localhost:3000",
       "connection": "keep-alive",
-      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
       "accept": "image/webp,image/*,*/*;q=0.8",
       "referer": "http://localhost:3000/testcollective",
       "accept-encoding": "gzip, deflate, sdch, br",
       "accept-language": "en-US,en;q=0.8",
-      "cookie": "connect.sid=s%3AJ9edDRkmtB4IBKC10z8p08IR-6o0MQT1.e83uAik3PNCBScSLNmZNnXJMcjC94ESUCfH%2FVWX0MMM"
+      "cookie": "connect.sid=s%3AHVR4QGfi_Ep2G932yZogs2n8wHnGV8lu.1UoF3BXLd8IcFs1WrNl%2B%2FcboiriFe9WWMVy9TWN%2FoP0"
     }
   }
 }
