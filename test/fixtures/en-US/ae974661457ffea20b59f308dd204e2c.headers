@@ -13,7 +13,7 @@
     "date": "Thu, 15 Jun 2017 20:47:45 GMT",
     "connection": "keep-alive"
   },
-  "url": "http://localhost:3060/users/4?api_key=dvl-1510egmf4a23d80342403fb599qd",
+  "url": "http://localhost:3060/users/4?api_key=circleci-1510egmf4a23d80342403fb599qd",
   "time": 40,
   "request": {
     "method": "GET",
