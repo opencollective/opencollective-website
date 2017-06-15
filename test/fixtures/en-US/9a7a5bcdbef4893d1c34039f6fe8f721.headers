@@ -10,11 +10,11 @@
     "content-type": "application/json; charset=utf-8",
     "content-length": "16",
     "etag": "W/\"10-c2PoX+nt7m8FOksxlYjAhg\"",
-    "date": "Wed, 14 Jun 2017 22:36:14 GMT",
+    "date": "Thu, 15 Jun 2017 16:35:09 GMT",
     "connection": "keep-alive"
   },
   "url": "http://localhost:3060/database/reset?api_key=dvl-1510egmf4a23d80342403fb599qd",
-  "time": 1370,
+  "time": 2123,
   "request": {
     "method": "GET",
     "headers": {

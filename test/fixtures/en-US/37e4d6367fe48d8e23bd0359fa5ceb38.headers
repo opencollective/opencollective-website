@@ -7,15 +7,15 @@
     "x-content-type-options": "nosniff",
     "x-xss-protection": "1; mode=block",
     "access-control-allow-origin": "*",
-    "location": "http://localhost:3000/login/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImxvZ2luIiwiaWQiOjQsImVtYWlsIjoidGVzdHVzZXJAb3BlbmNvbGxlY3RpdmUuY29tIiwiaWF0IjoxNDk3NDc5NzgwLCJleHAiOjE1MDAwNzE3ODAsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzA2MCIsInN1YiI6NH0._3RZ6LIAFOpTlnPUsKjsANPfVuCsZwfVPWX18L_85JU?next=",
+    "location": "http://localhost:3000/login/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6ImxvZ2luIiwiaWQiOjQsImVtYWlsIjoidGVzdHVzZXJAb3BlbmNvbGxlY3RpdmUuY29tIiwiaWF0IjoxNDk3NTQ0NTE0LCJleHAiOjE1MDAxMzY1MTQsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzA2MCIsInN1YiI6NH0.4F5j5InB1SKs6e0r9M8COW-RvvZ1LUlHCwJl1JmbP0M?next=",
     "vary": "Accept",
     "content-type": "text/html; charset=utf-8",
     "content-length": "632",
-    "date": "Wed, 14 Jun 2017 22:36:20 GMT",
+    "date": "Thu, 15 Jun 2017 16:35:14 GMT",
     "connection": "keep-alive"
   },
   "url": "http://localhost:3060/test/loginlink?api_key=dvl-1510egmf4a23d80342403fb599qd",
-  "time": 13,
+  "time": 12,
   "request": {
     "method": "GET",
     "headers": {

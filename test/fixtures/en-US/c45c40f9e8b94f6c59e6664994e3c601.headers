@@ -8,11 +8,11 @@
     "etag": "W/\"44-15aa528f810\"",
     "content-type": "image/png",
     "content-length": "68",
-    "date": "Wed, 14 Jun 2017 22:37:28 GMT",
+    "date": "Thu, 15 Jun 2017 16:36:19 GMT",
     "connection": "keep-alive"
   },
   "url": "http://localhost:3000/public/images/1px.png",
-  "time": 10,
+  "time": 5,
   "request": {
     "method": "GET",
     "headers": {
@@ -23,7 +23,7 @@
       "referer": "http://localhost:3000/testcollective",
       "accept-encoding": "gzip, deflate, sdch, br",
       "accept-language": "en-US,en;q=0.8",
-      "cookie": "connect.sid=s%3ANFgj62wiltnVcGNENpA7ai6O82XiTZbh.wmE0aLWv7uIpFn63PJOa%2BbncIDZ16Dl16tqZ8xHcu%2BM"
+      "cookie": "connect.sid=s%3Au9zD0fShBHHL_RhPZxzuhNB8c_8_6cNY.D4FpzzdqBD3Yk34niF3oJCHmSTYlFUWB64dyywM9rNU"
     }
   }
 }

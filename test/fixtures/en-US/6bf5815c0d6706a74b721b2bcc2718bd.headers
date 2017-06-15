@@ -10,12 +10,12 @@
     "cache-control": "public, max-age=60",
     "content-type": "application/json; charset=utf-8",
     "content-length": "1912",
-    "etag": "W/\"778-4T1bkrDaAkl0jIRCBm3U/A\"",
-    "date": "Wed, 14 Jun 2017 22:37:32 GMT",
+    "etag": "W/\"778-SfLrm41jZ3w7Zkxw4BPqwg\"",
+    "date": "Thu, 15 Jun 2017 16:36:21 GMT",
     "connection": "keep-alive"
   },
   "url": "http://localhost:3060/groups/testcollective/users?api_key=dvl-1510egmf4a23d80342403fb599qd",
-  "time": 34,
+  "time": 20,
   "request": {
     "method": "GET",
     "headers": {
@@ -26,7 +26,7 @@
       "referer": "http://localhost:3000/testcollective?status=payment_success&userid=1&has_full_account=true",
       "accept-encoding": "gzip, deflate, sdch, br",
       "accept-language": "en-US,en;q=0.8",
-      "if-none-match": "W/\"5f3-1Oa/kl063U00j9qN4ZANRw\""
+      "if-none-match": "W/\"5f3-+NxvamvkYCcBKuolMdWy9g\""
     }
   }
 }

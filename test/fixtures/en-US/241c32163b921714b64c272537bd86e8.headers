@@ -9,12 +9,12 @@
     "access-control-allow-origin": "*",
     "content-type": "application/json; charset=utf-8",
     "content-length": "1854",
-    "etag": "W/\"73e-ax8WdLLtrRx3ah+9yuJ6OA\"",
-    "date": "Wed, 14 Jun 2017 22:37:06 GMT",
+    "etag": "W/\"73e-VWSRkjEr70F5ms84WHRBBw\"",
+    "date": "Thu, 15 Jun 2017 16:35:59 GMT",
     "connection": "keep-alive"
   },
   "url": "http://localhost:3060/groups/testcollective?api_key=dvl-1510egmf4a23d80342403fb599qd",
-  "time": 161,
+  "time": 108,
   "request": {
     "method": "GET",
     "headers": {

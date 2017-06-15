@@ -11,11 +11,11 @@
     "content-type": "application/json; charset=utf-8",
     "content-length": "86",
     "etag": "W/\"56-Mq2ZWZHzNnQwkE6zHJ+nkA\"",
-    "date": "Wed, 14 Jun 2017 22:35:52 GMT",
+    "date": "Thu, 15 Jun 2017 16:34:42 GMT",
     "connection": "close"
   },
   "url": "http://localhost:3060/groups/wwcode-austin/transactions?api_key=dvl-1510egmf4a23d80342403fb599qd",
-  "time": 102,
+  "time": 240,
   "request": {
     "method": "GET",
     "headers": {

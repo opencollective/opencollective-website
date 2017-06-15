@@ -10,12 +10,12 @@
     "server": "cloudinary",
     "surrogate-key": "284871854154485270936286335888119553892 502599675146879933343081022708439674231 6c54d001f69ddcd03d9c05a420299c6f",
     "content-length": "1883",
-    "cache-control": "public, max-age=599556",
-    "date": "Wed, 14 Jun 2017 22:37:30 GMT",
+    "cache-control": "public, max-age=534826",
+    "date": "Thu, 15 Jun 2017 16:36:20 GMT",
     "connection": "keep-alive"
   },
   "url": "https://res.cloudinary.com:443/opencollective/image/fetch/h_52,c_fill,f_jpg/https%3A%2F%2Fopencollective-production.s3-us-west-1.amazonaws.com%2F9EflVQqM_400x400jpg_2aee92e0-858d-11e6-9fd7-73dd31eb7c0c.jpeg",
-  "time": 146,
+  "time": 55,
   "request": {
     "method": "GET",
     "headers": {
@@ -26,7 +26,7 @@
       "referer": "http://localhost:3000/testcollective",
       "accept-encoding": "gzip, deflate, sdch, br",
       "accept-language": "en-US,en;q=0.8",
-      "cookie": "connect.sid=s%3ANFgj62wiltnVcGNENpA7ai6O82XiTZbh.wmE0aLWv7uIpFn63PJOa%2BbncIDZ16Dl16tqZ8xHcu%2BM"
+      "cookie": "connect.sid=s%3Au9zD0fShBHHL_RhPZxzuhNB8c_8_6cNY.D4FpzzdqBD3Yk34niF3oJCHmSTYlFUWB64dyywM9rNU"
     }
   }
 }

@@ -9,12 +9,12 @@
     "access-control-allow-origin": "*",
     "content-type": "application/json; charset=utf-8",
     "content-length": "4970",
-    "etag": "W/\"136a-tDza2UyfOTZ+LjlD+C6QQA\"",
-    "date": "Wed, 14 Jun 2017 22:37:10 GMT",
+    "etag": "W/\"136a-guzjiAGmp3SEQj3plVDHnA\"",
+    "date": "Thu, 15 Jun 2017 16:36:01 GMT",
     "connection": "keep-alive"
   },
   "url": "http://localhost:3060/groups/testcollective/expenses/?api_key=dvl-1510egmf4a23d80342403fb599qd",
-  "time": 104,
+  "time": 124,
   "request": {
     "method": "POST",
     "headers": {
