@@ -2,7 +2,7 @@
   "name": "opencollective-website",
   "version": "0.1.303",
   "engines": {
-    "node": "6.10.3",
+    "node": "6.11.0",
     "npm": "3.10.10"
   },
   "browserify": {
