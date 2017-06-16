@@ -33,6 +33,14 @@ const fetchUsers = (options = {}) => {
         fetchUsers = api.get(`/groups/${req.params.slug.toLowerCase()}/users${requireActive ? '?filter=active' : ''}`, options)
                         .then(users => _.filter(users, (u) => {
                           if (filters.tier) {
+                            if (filters.exclude) {
+                              if (u.tier === filters.exclude || u.tier === filters.exclude.repalce(/s$/,'')) {
+                                return false;
+                              }
+                            }
+                            if (filters.tier === 'members') {
+                              return (['BACKER', 'MEMBER'].indexOf(u.role) !== -1)
+                            }
                             return u.tier === filters.tier || u.tier === filters.tier.replace(/s$/, '');
                           } else {
                             return true;
