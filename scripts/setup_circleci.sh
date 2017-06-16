@@ -9,12 +9,20 @@ else
   exit;
 fi
 
-# Installing API
 cd
-git clone git@github.com:opencollective/opencollective-api.git
+# If opencollective-api directory doesn't exist
+if [ ! -d "opencollective-api" ]; then
+  echo "Cloning opencollective-api repo"
+  git clone git@github.com:opencollective/opencollective-api.git --depth 1
+  cd opencollective-api
+  rm circle.yml # circleci doesn't like having more than one circle.yml
+  echo "Running npm install on api"
+  npm install
+  cd
+fi
+
 cd opencollective-api
-rm circle.yml # circleci doesn't like having more than one circle.yml
-npm install
+echo "Running api"
 npm start &
 sleep 5
 cd -
