@@ -72,11 +72,6 @@
   cursor: pointer;
 }
 
-.avatar .ImagePicker-preview
-{
-  border-radius: 100%;
-}
-
 .logo .ImagePicker-preview
 {
   border-radius: 6px;

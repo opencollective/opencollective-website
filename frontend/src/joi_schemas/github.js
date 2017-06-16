@@ -9,7 +9,8 @@ const schema = Joi.alternatives().try(
     mission: Joi.string().max(100).label('Mission'),
     description: Joi.string().max(255).label('Group Description'),
     logo: Joi.string().allow('').label('Repository Logo'),
-    token: Joi.string().label('Github Access Token')
+    token: Joi.string().label('Github Access Token'),
+    tags: Joi.string().label('Tags').allow('')
   })
 );
 

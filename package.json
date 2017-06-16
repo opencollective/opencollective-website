@@ -1,6 +1,6 @@
 {
   "name": "opencollective-website",
-  "version": "0.1.294",
+  "version": "0.1.303",
   "engines": {
     "node": "6.10.3",
     "npm": "3.10.10"
@@ -15,7 +15,7 @@
     "start": "node server/dist",
     "dev": "npm run build && WEBSITE_PORT=3000 nf start -j Procfile_dev",
     "hint": "eslint '**/*.js' --quiet",
-    "pretest": "npm run hint && gulp build",
+    "pretest": "npm run hint && gulp build && ./scripts/install_chrome.sh && node nightwatch.conf.js",
     "test": "npm run test:server && npm run test:unit",
     "test:server": "mocha --opts test/unit/mocha.opts test/server",
     "test:unit": "mocha test/unit/ --opts test/unit/mocha.opts --reporter-options mochaFile=test/output/junit/junit.xml",
@@ -28,7 +28,7 @@
     "watch:js": "mkdir -p frontend/dist/js && watchify frontend/src/client.js -o frontend/dist/js/bundle.js -dv",
     "watch:server": "nodemon -e js,hbs -w server/src -w frontend/src",
     "watch:test": "mocha test/unit/ --opts test/unit/mocha.opts --watch",
-    "postinstall": "npm run build && node nightwatch.conf.js && ./scripts/install_chrome.sh",
+    "postinstall": "npm run build",
     "git:clean": "./scripts/git_clean.sh",
     "deploy:staging": "bash -x scripts/deploy.sh staging",
     "deploy:production": "bash -x scripts/deploy.sh production"
@@ -111,6 +111,7 @@
     "request": "2.72.0",
     "reselect": "2.5.4",
     "robots.txt": "1.1.0",
+    "sepia": "2.0.2",
     "serialize-javascript": "1.2.0",
     "serve-favicon": "2.3.0",
     "svg-to-png": "3.1.0",
@@ -137,7 +138,6 @@
     "react-addons-test-utils": "0.14.8",
     "redux-mock-store": "1.0.2",
     "selenium-download": "2.0.10",
-    "sepia": "2.0.2",
     "sinon": "1.17.3",
     "supertest": "1.2.0",
     "watchify": "3.7.0"

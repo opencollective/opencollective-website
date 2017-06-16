@@ -23,6 +23,8 @@ export default class OnBoardingStepCreate extends React.Component {
 
     const { mission } = githubForm.attributes;
     const { description } = githubForm.attributes;
+    const { tags } = githubForm.attributes;
+
     const canCreate = mission && description && agreedTOS;
 
     return (
@@ -51,13 +53,15 @@ export default class OnBoardingStepCreate extends React.Component {
                   <CustomTextArea name={'mission'} value={mission} onChange={(value) => appendGithubForm({mission: value})} maxLength={100} placeholder="Usually starts with: 'We are on a mission to ...'"/>
                   <div className="OnBoardingStepCreate-label">Describe your project </div>
                   <CustomTextArea name={'description'} value={description} onChange={(value) => appendGithubForm({description: value})} maxLength={255} placeholder="Native AngularJS implementation. Performs well with large data sets; even 10,000+ rows."/>
+                  <div className="OnBoardingStepCreate-label">Tag your project to make it easy to find on Open Collective (use commas to separate entries) </div>
+                  <CustomTextArea name={'tags'} value={tags} onChange={(value) => appendGithubForm({tags: value})} maxLength={255} />
                 </div>
               </div>
             </div>
           </div>
           <div className="OnBoardingStepCreate-tos">
             <Checkbox checked={agreedTOS} onChange={(checked) => this.setState({agreedTOS: checked})} />
-            <span>Agree to <a href="https://docs.google.com/document/u/1/d/1HRYVADHN1-4B6wGCxIA6dx28jHtcAVIvt95hkjEZVQE/pub" target='_blank'>Terms &amp; Conditions</a></span>
+            <span>Agree to <a href="/tos" target='_blank'>Terms &amp; Conditions</a></span>
           </div>
           <div style={buttonContainerStyle}>
             <div className={`OnBoardingButton ${canCreate ? '' : 'disabled'}`} onClick={canCreate && this.onCreate.bind(this)}>create!</div>

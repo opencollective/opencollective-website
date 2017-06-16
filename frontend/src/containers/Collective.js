@@ -80,6 +80,7 @@ export class Collective extends Component {
       collective,
       host,
       subCollectives,
+      canEditCollective,
       editCollectiveInProgress,
       cancelEditCollectiveForm,
       donationForm,
@@ -121,7 +122,7 @@ export class Collective extends Component {
                   <CollectiveList title={' '} groupList={ subCollectives } {...this.props} />
                 </section>
               }
-              <CollectiveMembers collective={ collective } i18n={ i18n } />
+              <CollectiveMembers collective={collective} canEditCollective={canEditCollective} i18n={ i18n } />
               <PublicFooter />
             </StickyContainer>
           }

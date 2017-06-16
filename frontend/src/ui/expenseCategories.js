@@ -88,6 +88,33 @@ export default function(slug = '') {
         'Servizi web'
       ];
       break;
+    case 'rappdutchess':
+    case 'adoptiveparentsupportgroupnyc':
+    case 'nufaces':
+    case 'sharefamilysupports':
+    case 'ontariofosteradoptive':
+    case 'grahamsforeverfamilies':
+    case 'fosterparentsstlawrencecounty':
+    case 'fosterparentsnassaucounty':
+    case 'westernnyfosteradoptive':
+    case 'suffolkfosterparents':
+    case 'liftadoptionsupportgroup':
+    case 'circlesoflove':
+    case 'capitalregionfosteradoptive':
+    case 'tompkinscountyfosterparents':
+    case 'rapporangecounty':
+    case 'fosteradoptiverocklandcounty':
+    case 'brighterstars':
+    case 'adoptivefamliescapitalregion':
+    case 'affcny':
+       categories = [
+        'Training',
+        'Outreach',
+        'Supplies',
+        'Other'
+       ];
+      break;
+      
     default:
       categories = [
         'Communications',

@@ -87,7 +87,14 @@ export class Faq extends Component {
               <li>Submit an invoice for your work. The invoice must include your current address and be made to Open Collective Inc (or to the host if the Collective is hosted by another organisation) with reference to the Collective name. The expense amount will be listed on the Collective page, but the invoice itself is only visible to the host and core contributors (not public).</li>
              </ul>
           </p>
-          <p>Expenses will be paid once a week on Fridays. Please contact <a href="mailto:support@opencollective.com">Support</a> if you have any questions.</p> 
+          <p>
+            <ul>
+              <li>US nationals and/or residents fill up <a href="https://www.irs.gov/pub/irs-pdf/fw9.pdf">this form</a></li>
+              <li>Non US nationals or residents use <a href="https://www.irs.gov/pub/irs-pdf/fw8ben.pdf">this one</a></li>
+            </ul>
+            <a href="https://docs.google.com/document/d/1ROQA11PaYjGtcie-1Ut8cFV5LCISKipSu8sgsY5U7vw/edit?usp=sharing">Here</a> is a template for an invoice. Please leave Open Collective details as they are and edit everything else.
+            </p>        
+          <p>Only expenses approved by core contributors will be paid. To approve your team's expenses, use the links on the notification email or log in to your collective and click on the expense. Expenses are paid once a week on Fridays. Please contact <a href="mailto:support@opencollective.com">Support</a> if you have any questions.</p> 
           <p>Open Collective’s details:</p> 
           <p>
             OpenCollective, Inc.<br />
@@ -125,7 +132,7 @@ export class Faq extends Component {
           
           <h3 id="investors">Who are your investors?</h3>
           <details>
-            <summary>We raised a total of $805k so far on convertible notes (<a href="https://www.ycombinator.com/docs/SAFE_Cap.rtf">SAFE</a>)</summary>
+            <summary>We raised a total of $815k so far on convertible notes (<a href="https://www.ycombinator.com/docs/SAFE_Cap.rtf">SAFE</a>)</summary>
 
             <p>We did a first pre-seed round of $500k in October 2015 (SAFE, $5M cap) with:
               <ul>

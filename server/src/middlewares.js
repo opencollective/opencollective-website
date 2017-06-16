@@ -4,12 +4,15 @@ import expressSession from 'express-session';
 import ua from 'universal-analytics';
 import filterCollection from '../../frontend/src/lib/filter_collection';
 import { filterUsers } from './lib/utils';
+import { capitalize } from '../../frontend/src/lib/utils';
 import _ from 'lodash';
 
 /**
  * Fetch users by slug
  */
 const fetchUsers = (options = {}) => {
+  options.cache = options.cache || 300; // default cache for api requests to fetch users: 5mn
+
   return (req, res, next) => {
 
     const requireActive = (typeof options.requireActive === 'boolean') ? options.requireActive : req.query.requireActive !== 'false'; // by default, we skip inactive users
@@ -27,8 +30,14 @@ const fetchUsers = (options = {}) => {
         break;
       default:
         options.cache = 300;
-        fetchUsers = api.get(`/groups/${req.params.slug}/users${requireActive ? '?filter=active' : ''}`, options)
-                        .then(users => _.uniqBy(users, 'id'));
+        fetchUsers = api.get(`/groups/${req.params.slug.toLowerCase()}/users${requireActive ? '?filter=active' : ''}`, options)
+                        .then(users => _.filter(users, (u) => {
+                          if (filters.tier) {
+                            return u.tier === filters.tier || u.tier === filters.tier.replace(/s$/, '');
+                          } else {
+                            return true;
+                          }
+                        }));
         break;
     }
 
@@ -154,9 +163,12 @@ const addMeta = (req, res, next) => {
 
   req.meta = {};
   if (collective) {
+
+    const title = req.params.verb ? `${capitalize(req.params.verb)} to ${collective.name}` : `${collective.name} is on Open Collective`;
+
     req.meta = {
       url: collective.publicUrl,
-      title: `${collective.name} is on Open Collective`,
+      title,
       description: `${collective.mission}`,
       image: collective.image || collective.logo,
       twitter: `@${collective.twitterHandle}`,
@@ -164,16 +176,18 @@ const addMeta = (req, res, next) => {
   } else {
     let description = '';
 
+    const plural = (n) => n > 1 ? 's' : '';
+
     if (user.groups.length > 0) {
       const belongsTo = filterCollection(user.groups, { role: 'MEMBER' });
       const backing = filterCollection(user.groups, { role: 'BACKER' });
 
       if (belongsTo.length > 0) {
-        description += `a member of ${belongsTo.length} collectives`;
+        description += `a member of ${belongsTo.length} collective${plural(belongsTo.length)}`;
       }
       if (backing.length > 0) {
         if (description.length > 0) description += ' and ';
-        description += `supporting ${backing.length} collectives`;
+        description += `supporting ${backing.length} collective${plural(backing.length)}`;
       }
 
       user.groups.sort((a, b) => (b.members - a.members));

@@ -1,0 +1,48 @@
+.codeformiami .coverImage {
+	background-image: url(http://i.imgur.com/7uTlbw9.png) !important;
+}
+
+.codeformiami .CollectiveHero-content .Collective-font-20 a {
+    color: #fff;
+    border-bottom: 1px solid #fff;
+}
+
+.codeformiami a[href="#support"] {
+    background-color: #a00;
+}
+
+.codeformiami a[href="#support"]:hover {
+    background-color: #d33;
+}
+
+.codeformiami .-green, .codeformiami .Currency--green {
+	color: #0ebcf3;
+}
+
+.codeformiami .-green {
+    color: #aa0000;
+}
+
+.codeformiami .-border-green {
+    border-color: #0ebcf3;
+}
+
+.codeformiami .Tier-container {
+	border-color: #dde1e4;
+}
+
+.codeformiami .Button--green {
+    background-color: #a00;
+}
+
+.codeformiami .Button--green:hover {
+    background-color: #d33;
+}
+
+.codeformiami .UserCard-name > a {
+    color: #666;
+}
+
+.codeformiami .UserPhoto {
+    box-shadow: 0 0 0 2px #0ebcf3;
+}

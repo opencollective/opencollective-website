@@ -11,6 +11,7 @@ export default class Tiers extends Component {
 
   onTokenReceived(tier, payload) {
     this.setState({loading: tier.name});
+    payload.description = tier.description;
     this.props.onToken(payload)
       .then(() => {
         this.setState({loading: null});
@@ -48,10 +49,12 @@ export default class Tiers extends Component {
     let amount;
     if (donationForm[tier.name].amount !== undefined) {
       amount = donationForm[tier.name].amount;
+    } else if (tier.amount) {
+      amount = tier.amount;
     } else if (tier.presets) {
-      amount = tier.presets[0];
+      amount = (!isNaN(tier.presets[0]) && tier.presets[0]) || (!isNaN(tier.presets[1]) && tier.presets[1]);
     } else {
-      amount = tier.range[0] || tier.amount;
+      amount = tier.range[0];
     }
 
     const interval = donationForm[tier.name].interval || tier.interval || 'one-time';
@@ -69,7 +72,7 @@ export default class Tiers extends Component {
         <div className='Tier-container'>
 
           <h3 className='Tier-title h3 mt0'>
-            <span className='bg-light-gray px2 -fw-ultra-bold'>{title}</span>
+            <span className='bg-color px2 -fw-ultra-bold'>{title}</span>
           </h3>
 
           <div className='Tier-description' dangerouslySetInnerHTML={ this.rawMarkup(description)} />
@@ -110,6 +113,7 @@ export default class Tiers extends Component {
                 stripeKey={stripeKey}
                 name={collective.name}
                 currency={currency}
+                bitcoin={collective.settings.bitcoin}
                 amount={convertToCents(amount)}
                 description={stripeDescription}>
                   <AsyncButton

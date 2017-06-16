@@ -17,6 +17,8 @@ import validateSchema from '../actions/form/validate_schema';
 
 import newGroupSchema from '../joi_schemas/newGroup';
 
+import { uniq } from 'lodash';
+
 export class NewGroup extends Component {
 
   constructor(props) {
@@ -61,6 +63,12 @@ export class NewGroup extends Component {
     } = newGroupForm.attributes;
 
     const groupTypes = new Map();
+    groupTypes.set('association', {
+      label: 'Association'
+    });
+    groupTypes.set('coop', {
+      label: 'Cooperative'
+    });
     groupTypes.set('meetup',{
       label: 'Meetup Group',
       placeholders: {
@@ -71,8 +79,11 @@ export class NewGroup extends Component {
         contribute: 'We need more people to join the community and attend our events. We are also looking for volunteers to help us organize our meetups.'
       }
     });
+    groupTypes.set('movement', {
+      label: 'Movement'
+    });
     groupTypes.set('opensource', {
-      label: 'OpenSource Project',
+      label: 'Open Source Project',
       placeholders: {
         name: 'MochaJS',
         slug: 'mochajs',
@@ -86,12 +97,6 @@ export class NewGroup extends Component {
     });
     groupTypes.set('studentclub', {
       label: 'Student Club'
-    });
-    groupTypes.set('movement', {
-      label: 'Movement'
-    });
-    groupTypes.set('association', {
-      label: 'Association'
     });
     groupTypes.set('default', {
       label: 'Other',
@@ -224,7 +229,7 @@ export class NewGroup extends Component {
               <div className='NewGroup-question NewGroup-email'>
                 <label>
                   <input type="checkbox" onChange={(event) => appendGroupForm({tos: event.target.checked})} />
-                  By clicking here you agree to the <a href="https://docs.google.com/document/u/1/d/1HRYVADHN1-4B6wGCxIA6dx28jHtcAVIvt95hkjEZVQE/pub">terms of service</a>
+                  By clicking here you agree to the <a href="/tos">terms of service</a>
                 </label>
               </div>
 
@@ -250,6 +255,10 @@ export class NewGroup extends Component {
   create() {
     const { newGroupForm, validateSchema, createGroup, utmSource, notify, hostCollective } = this.props;
     const attr = newGroupForm.attributes;
+    let tags = attr.tags && attr.tags.split(',').map(x => x.trim());
+    if (hostCollective) {
+      tags = uniq([...tags, ...hostCollective.tags]);
+    }
 
     const group = {
       tos: attr.tos,
@@ -259,10 +268,11 @@ export class NewGroup extends Component {
       longDescription: attr.contribute ? `${attr.description}\n\n# Contribute\n\n${attr.contribute}` : attr.description,
       website: attr.website,
       HostId: hostCollective && hostCollective.settings.HostId,
+      hostFeePercent: hostCollective && hostCollective.settings.hostFeePercent || 5,
       data: {
         utmSource
       },
-      tags: attr.tags && attr.tags.split(',').map(x => x.trim()),
+      tags,
       users: attr.users
     };
 
