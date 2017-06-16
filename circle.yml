@@ -12,7 +12,7 @@ machine:
     - postgresql
 dependencies:
   pre:
-    ./scripts/setup_circleci.sh
+    - ./scripts/setup_circleci.sh
   cache_directories:
     - "~/cache"
     - "~/opencollective-api"

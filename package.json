@@ -13,9 +13,10 @@
   },
   "scripts": {
     "start": "node server/dist",
+    "start:api": "sh -c \"cd $API_DIR && npm start > api.log &\"",
     "dev": "npm run build && WEBSITE_PORT=3000 nf start -j Procfile_dev",
     "hint": "eslint '**/*.js' --quiet",
-    "pretest": "npm run hint && gulp build && node nightwatch.conf.js",
+    "pretest": "npm run hint && gulp build && node nightwatch.conf.js && npm run start:api",
     "test": "npm run test:server && npm run test:unit",
     "test:server": "mocha --opts test/unit/mocha.opts test/server",
     "test:unit": "mocha test/unit/ --opts test/unit/mocha.opts --reporter-options mochaFile=test/output/junit/junit.xml",
