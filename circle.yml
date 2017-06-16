@@ -5,15 +5,17 @@ general:
       - production
 machine:
   node:
-    version: 6.10.3
+    version: 6.11.0
   environment:
     NODE_ENV: circleci
   services:
     - postgresql
 dependencies:
+  pre:
+    - ./scripts/setup_circleci.sh
   cache_directories:
     - "~/cache"
-    - "test/fixtures"
+    - "~/opencollective-api"
 database:
   post:
     - psql -U ubuntu -d circle_test -c 'CREATE EXTENSION POSTGIS;'

@@ -2,7 +2,7 @@
   "name": "opencollective-website",
   "version": "0.1.303",
   "engines": {
-    "node": "6.10.3",
+    "node": "6.11.0",
     "npm": "3.10.10"
   },
   "browserify": {
@@ -13,14 +13,15 @@
   },
   "scripts": {
     "start": "node server/dist",
+    "start:api": "sh -c \"cd $API_DIR && npm start > api.log &\"",
     "dev": "npm run build && WEBSITE_PORT=3000 nf start -j Procfile_dev",
     "hint": "eslint '**/*.js' --quiet",
-    "pretest": "npm run hint && gulp build && ./scripts/install_chrome.sh && node nightwatch.conf.js",
+    "pretest": "npm run hint && gulp build && node nightwatch.conf.js && npm run start:api",
     "test": "npm run test:server && npm run test:unit",
     "test:server": "mocha --opts test/unit/mocha.opts test/server",
     "test:unit": "mocha test/unit/ --opts test/unit/mocha.opts --reporter-options mochaFile=test/output/junit/junit.xml",
     "posttest": "npm run test:e2e",
-    "test:e2e": "sh -c \"VCR_MODE=cache npm start > server.log\" & PID=$! && echo \"PID is $PID\" && sleep 5 && npm run nightwatch && kill $PID",
+    "test:e2e": "sh -c \"npm start > server.log\" & PID=$! && echo \"PID is $PID\" && sleep 5 && npm run nightwatch && kill $PID",
     "nightwatch": "./node_modules/nightwatch/bin/nightwatch --config nightwatch.conf.js",
     "build": "gulp build && npm run build:server && npm run build:frontend",
     "build:server": "rm -rf server/dist && mkdir server/dist && babel -D ./server/src -d ./server/dist && touch server/src/index.js",
@@ -111,7 +112,6 @@
     "request": "2.72.0",
     "reselect": "2.5.4",
     "robots.txt": "1.1.0",
-    "sepia": "2.0.2",
     "serialize-javascript": "1.2.0",
     "serve-favicon": "2.3.0",
     "svg-to-png": "3.1.0",
