@@ -13,7 +13,7 @@ machine:
 dependencies:
   cache_directories:
     - "~/cache"
-    - "test/fixtures"
+    - "~/opencollective-api"
 database:
   post:
     - psql -U ubuntu -d circle_test -c 'CREATE EXTENSION POSTGIS;'

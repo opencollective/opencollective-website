@@ -1,4 +1,5 @@
 #!/bin/bash
+# This script only runs on circleci, just before the e2e tests
 # first version cfr. https://discuss.circleci.com/t/add-ability-to-cache-apt-get-programs/598/6
 
 
@@ -7,6 +8,16 @@ if [ "$NODE_ENV" = "circleci" ]; then
 else
   exit;
 fi
+
+# Installing API
+cd
+git clone git@github.com:opencollective/opencollective-api.git
+cd opencollective-api
+rm circle.yml # circleci doesn't like having more than one circle.yml
+npm install
+npm start &
+sleep 5
+cd -
 
 set -e
 
