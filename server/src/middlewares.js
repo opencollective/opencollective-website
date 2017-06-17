@@ -34,7 +34,7 @@ const fetchUsers = (options = {}) => {
                         .then(users => _.filter(users, (u) => {
                           if (filters.tier) {
                             if (filters.exclude) {
-                              if (u.tier === filters.exclude || u.tier === filters.exclude.repalce(/s$/,'')) {
+                              if (u.tier === filters.exclude || u.tier === filters.exclude.replace(/s$/,'')) {
                                 return false;
                               }
                             }
