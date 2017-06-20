@@ -148,8 +148,8 @@ class CollectiveExpenseItem extends React.Component {
                   inProgress={payInProgress[expense.id]}
                   label={payButtonLabel}
                   i18n={i18n} />}
-              { showPay && expense.payoutMethod !== PAYOUT_METHODS.paypal && <div className="h6 muted">(Please make sure you have paid this expense manually before clicking on "Paid")</div>}
             </div>}
+              { showPay && expense.payoutMethod !== PAYOUT_METHODS.paypal && <div className="h6 muted">(Please make sure you have paid this expense manually before clicking on "Paid")</div>}
           </div>       
         </div>
       </div>)
