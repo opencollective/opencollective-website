@@ -11,6 +11,7 @@ import Notification from './Notification';
 
 // Components
 import CollectiveAboutUs from '../components/collective/CollectiveAboutUs';
+import CollectiveEvents from '../components/collective/CollectiveEvents';
 import CollectiveDonate from '../components/collective/CollectiveDonate';
 import CollectiveHero from '../components/collective/CollectiveHero';
 import CollectiveLedger from '../components/collective/CollectiveLedger';
@@ -112,6 +113,10 @@ export class Collective extends Component {
               }
 
               <CollectiveAboutUs { ...this.props } />
+
+              {collective.settings && collective.settings.events &&
+                <CollectiveEvents { ...this.props } />
+              }
 
               {collective.slug === 'opensource' && <CollectiveOpenSourceCTA />}
 
