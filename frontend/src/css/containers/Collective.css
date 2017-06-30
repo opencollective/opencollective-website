@@ -307,7 +307,7 @@ section {
   }
 }
 
-section:nth-child(even) {
+section:nth-child(odd) {
   background-color:var(--light-gray);
 }
 
