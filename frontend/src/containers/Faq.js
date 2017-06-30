@@ -111,6 +111,17 @@ export class Faq extends Component {
           <p>It helps our collectives manage their monthly budget. Instead of getting donations randomly throughout the month, they can start with a minimum budget for that month. Any new donations improve the budget.</p>
 
           <p>We're working on a way to charge a single payment spread out across monthly contributions, to reduce payment processor transaction fees.</p> 
+
+          <h3 id="yearly-budget">How do you compute the "Estimated annual budget based on current donations"?</h3>
+          <p>In short: it's the amont of money that a collective can spend for their activities in the next 12 months.</p>
+          <p>It's the sum of:
+          <ul>
+            <li>Current balance available</li>
+            <li>Active monthly subscriptions * 12</li>
+            <li>Active yearly subscriptions * 1</li>
+          </ul>
+          </p>
+          <p>It useful for a collective to know if they can afford to hire someone part time or full time for example.</p>
           
           <h3>How can I cancel my monthly donation?</h3>
           <p>We are sorry to see you go! Go to <a href="https://opencollective.com/subscriptions">opencollective.com/subscriptions</a> to manage your subscriptions.</p>
