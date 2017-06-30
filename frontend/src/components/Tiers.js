@@ -20,7 +20,17 @@ export default class Tiers extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { };
+    this.state = { 
+      applePay: false
+    };
+  }
+
+  componentWillMount(props) {
+    const { collective } = this.props;
+    if (collective.stripeAccount && collective.stripeAccount.stripePublishableKey) {
+      Stripe.setPublishableKey && Stripe.setPublishableKey(collective.stripeAccount.stripePublishableKey);
+      Stripe.applePay && Stripe.applePay.checkAvailability(available => this.setState({applePay: available}));
+    }
   }
 
   rawMarkup(text) {
@@ -36,6 +46,10 @@ export default class Tiers extends Component {
       donationForm,
       appendDonationForm,
       i18n
+    } = this.props;
+
+    const {
+      applePay
     } = this.props;
 
     const inProgress = this.state.loading === tier.name;
@@ -67,6 +81,7 @@ export default class Tiers extends Component {
     const description = tier.description || i18n.getString(`${tier.name}Description`);
     const title = tier.title || `${i18n.getString('becomeA')} ${tier.name}`;
 
+    console.log('applePay available: ', this.state.applePay)
     return (
       <div className='Tier' id={tier.name} key={`${tier.name}`}>
         <div className='Tier-container'>
@@ -124,6 +139,10 @@ export default class Tiers extends Component {
               </StripeCheckout>
             )}
 
+            {hasStripe && !hasPaypal && this.state.applePay && (
+              <button onClick={() => this.beginApplePay(tier, {amount, interval, currency})} id="apple-pay-button"></button>
+            )}
+
             </div>
           </div>
 
@@ -151,6 +170,29 @@ export default class Tiers extends Component {
         { tiers.map(this.showTier.bind(this)) }
       </div>
     );
+  }
+
+  beginApplePay(tier, payload) {
+    const { collective, onToken } = this.props;
+    const paymentRequest = {
+      countryCode: 'US',
+      currencyCode: collective.currency,
+      total: {
+        label: `${collective.name} - Open Collective`,
+        amount: payload.amount
+      },
+      requiredShippingContactFields: ['email']
+    }
+    const session = Stripe.applePay.buildSession(paymentRequest,
+      (result, completion) => {
+        payload.description = tier.description;
+        payload.token = { id: result.token.id, email: result.shippingContact.emailAddress };
+        return onToken(payload)
+          .then(() => completion(ApplePaySession.STATUS_SUCCESS))
+          .catch(err => completion(ApplePaySession.STATUS_FAILURE));
+        }, error => notify('error', error.message));
+    session.oncancel = () => console.log('User hit cancel button');
+    session.begin();
   }
 }
 

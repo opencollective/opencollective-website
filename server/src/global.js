@@ -9,6 +9,8 @@ global.window = {
   addEventListener: () => {}
 };
 
+global.Stripe = {};
+
 // In memory localstorage
 global.localStorage = localStorage;
 
