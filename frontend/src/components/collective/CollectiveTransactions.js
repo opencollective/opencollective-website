@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router';
 
 import CollectiveActivityItem from './CollectiveActivityItem';
 import TransactionEmptyState from '../TransactionEmptyState';
