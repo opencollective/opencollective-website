@@ -1,4 +1,6 @@
 import express from 'express';
+import https from 'https';
+import fs from 'fs';
 import morgan from 'morgan';
 import config from 'config';
 import compression from 'compression';
@@ -92,5 +94,13 @@ app
     else
       console.log(err);
   });
+
+// https server needed for testing apple pay
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0" // Avoids DEPTH_ZERO_SELF_SIGNED_CERT error for self-signed certs
+const privateKey  = fs.readFileSync('sslcert/server.key', 'utf8');
+const certificate = fs.readFileSync('sslcert/server.crt', 'utf8');
+const credentials = {key: privateKey, cert: certificate};
+
+https.createServer(credentials, app).listen(8443);
 
 export default app;

@@ -1,8 +1,8 @@
 {
   "apiKey": "dvl-1510egmf4a23d80342403fb599qd",
   "host": {
-    "api": "http://localhost:3060",
+    "api": "https://aseem-macbook-air.local:8460",
     "app": "http://localhost:3000",
-    "website": "http://localhost:3000"
+    "website": "https://localhost:443"
   }
 }

@@ -76,6 +76,7 @@
     "gulp-watch": "4.3.5",
     "history": "1.17.0",
     "html-pdf": "2.1.0",
+    "https": "1.0.0",
     "image-size": "0.5.0",
     "image-to-ascii": "3.0.5",
     "immutable": "3.8.1",

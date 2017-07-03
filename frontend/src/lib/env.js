@@ -12,7 +12,7 @@ const env = {
 };
 
 if (env.NODE_ENV === 'circleci' || env.NODE_ENV === 'development') {
-  env.API_ROOT = 'http://localhost:3000/api';
+  env.API_ROOT = 'https://aseem-macbook-air.local:8443/api';
 }
 
 export default env;
