@@ -1,3 +1,5 @@
+/*global Stripe, ApplePaySession*/
+
 import React, { Component, PropTypes } from 'react';
 
 import StripeCheckout from 'react-stripe-checkout';
@@ -21,16 +23,16 @@ export default class Tiers extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      applePay: false
+      applePayAvailable: false
     };
   }
 
-  componentWillMount(props) {
+  componentWillMount() {
     const { collective } = this.props;
     if (collective.stripeAccount && collective.stripeAccount.stripePublishableKey) {
       // Stripe.setPublishableKey needs to be called before any other call to Stripe
       Stripe.setPublishableKey && Stripe.setPublishableKey(collective.stripeAccount.stripePublishableKey);
-      Stripe.applePay && Stripe.applePay.checkAvailability(available => this.setState({applePay: available}));
+      Stripe.applePay && Stripe.applePay.checkAvailability(available => this.setState({applePayAvailable: available}));
     }
   }
 
@@ -50,7 +52,7 @@ export default class Tiers extends Component {
     } = this.props;
 
     const {
-      applePay
+      applePayAvailable
     } = this.props;
 
     const inProgress = this.state.loading === tier.name;
@@ -82,7 +84,6 @@ export default class Tiers extends Component {
     const description = tier.description || i18n.getString(`${tier.name}Description`);
     const title = tier.title || `${i18n.getString('becomeA')} ${tier.name}`;
 
-    console.log('applePay available: ', this.state.applePay)
     return (
       <div className='Tier' id={tier.name} key={`${tier.name}`}>
         <div className='Tier-container'>
@@ -132,7 +133,7 @@ export default class Tiers extends Component {
                     onClick={() => this.callApplePay(tier, {amount, interval, currency})}>
                   </button>}
                   <div className='h4 my2'>
-                    {this.state.applePay &&
+                    {applePayAvailable &&
                       <span> You can also </span>
                     }
                     <StripeCheckout
@@ -143,12 +144,12 @@ export default class Tiers extends Component {
                       bitcoin={collective.settings.bitcoin}
                       amount={convertToCents(amount)}
                       description={stripeDescription}>
-                        {this.state.applePay && 
+                        {applePayAvailable && 
                           <span className='apple-pay-alternate underline my2'> 
                             use another payment method.
                           </span>
                         }
-                        {!this.state.applePay && 
+                        {!applePayAvailable && 
                           <AsyncButton
                             color='green'
                             inProgress={inProgress} >
@@ -212,7 +213,7 @@ export default class Tiers extends Component {
         };
         return onToken(payload)
           .then(() => completion(ApplePaySession.STATUS_SUCCESS))
-          .catch(err => completion(ApplePaySession.STATUS_FAILURE));
+          .catch(() => completion(ApplePaySession.STATUS_FAILURE));
         }, error => console.error(error.message));
     
     // begin session
