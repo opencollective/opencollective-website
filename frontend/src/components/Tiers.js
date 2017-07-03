@@ -53,7 +53,7 @@ export default class Tiers extends Component {
 
     const {
       applePayAvailable
-    } = this.props;
+    } = this.state;
 
     const inProgress = this.state.loading === tier.name;
 
@@ -127,7 +127,7 @@ export default class Tiers extends Component {
 
             {hasStripe && !hasPaypal && (
               <div>
-                {this.state.applePay && 
+                {applePayAvailable && 
                   <button 
                     id="apple-pay-button" 
                     onClick={() => this.callApplePay(tier, {amount, interval, currency})}>
