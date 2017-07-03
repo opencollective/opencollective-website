@@ -114,9 +114,7 @@ export class Collective extends Component {
 
               <CollectiveAboutUs { ...this.props } />
 
-              {collective.settings && collective.settings.events &&
-                <CollectiveEvents { ...this.props } />
-              }
+              <CollectiveEvents { ...this.props } />
 
               {collective.slug === 'opensource' && <CollectiveOpenSourceCTA />}
 
