@@ -38,8 +38,8 @@ export class Faq extends Component {
           </ul>
           <p>If you have an organization, you can use Open Collective to empower local chapters to raise money in their community and have their own budget. See <a href="#organizations">Open Collective For Organizations</a>.</p>
       
-      <h3>Do you have a Getting Started guide?</h3>
-      <p>Glad you asked! Check it out: <a href="https://medium.com/open-collective/ten-steps-to-successful-open-source-crowdfunding-fa2b43e82687">Ten Steps to Successful Open Source Crowdfunding</a>.</p>
+          <h3>Do you have a Getting Started guide?</h3>
+          <p>Glad you asked! Check it out: <a href="https://medium.com/open-collective/ten-steps-to-successful-open-source-crowdfunding-fa2b43e82687">Ten Steps to Successful Open Source Crowdfunding</a>.</p>
 
           <h3>What is Open Collective good for?</h3>
           <p>Open Collective is perfect for any side project that is not for profit. Side projects should be fun. You shouldn't have to worry about creating and maintaining a legal entity, doing bookkeeping, etc, just to collect money to reimburse your expenses. Open Collective is ideal for all kinds of groups, like meetups, open source projects, parent associations, neighborhood associations, clubs, unions, movements, non-profits, and business incubators.</p>
@@ -47,6 +47,10 @@ export class Faq extends Component {
           <h3>Why should I use Open Collective?</h3>
           <p>Open Collective makes it easy to be transparent about your finances. We help you collect <em>recurring</em> contributions from supporters, whether you're funding an ongoing work on open source software, collecting dues for a parent association, or charging a monthly fee for your food coop. Once you have the money on Open Collective, reimbursing expenses is simple, and everyone can see how funds are being spent. We believe that financial transparency creates stronger collaboration.</p>
 
+          <h3>What do Collectives spend money on? How do we decide what to pay for?</h3>
+          <p>There are as many answers to this question as there are collectives! It's up to each community to decide how to spend their funds. Your core contributors (the admins of your Open Collective) can approve expenses for payment from your funds (which anyone can submit), and you can have as many core contributors as you need. Some communities delegate financial decision-making to a specific person or role, some develop policies about what should be funded, and others have processes in place to make spending decisions together as a group.</p>
+          <p>If you'd like some ideas and examples of what collectives fund, check out this article:[Has Your Open Source Community Raised Money? Here’s How to Spend It](https://medium.com/open-collective/has-your-open-source-community-raised-money-heres-how-to-spend-it-3e9dd957dad). Some common examples are hosting costs, documentation, community moderation, t-shirts and stickers, conference travel expenses, food at meetups, work on specific features... even paying someone to work on the project full time! It completely depends on the needs and culture of your project.</p>
+      
           <h3>How is it different from other crowdfunding platforms?</h3>
           <p>Two major differences:</p>
           <ul>
