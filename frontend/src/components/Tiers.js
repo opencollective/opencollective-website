@@ -28,6 +28,7 @@ export default class Tiers extends Component {
   componentWillMount(props) {
     const { collective } = this.props;
     if (collective.stripeAccount && collective.stripeAccount.stripePublishableKey) {
+      // Stripe.setPublishableKey needs to be called before any other call to Stripe
       Stripe.setPublishableKey && Stripe.setPublishableKey(collective.stripeAccount.stripePublishableKey);
       Stripe.applePay && Stripe.applePay.checkAvailability(available => this.setState({applePay: available}));
     }
@@ -122,27 +123,42 @@ export default class Tiers extends Component {
                 {button}
               </AsyncButton>
             }
-            {hasStripe && !hasPaypal && ( // paypal has priority -> to refactor after prototyping phase
-              <StripeCheckout
-                token={(token) => ::this.onTokenReceived(tier, {amount, interval, currency, token})}
-                stripeKey={stripeKey}
-                name={collective.name}
-                currency={currency}
-                bitcoin={collective.settings.bitcoin}
-                amount={convertToCents(amount)}
-                description={stripeDescription}>
-                  <AsyncButton
-                    color='green'
-                    inProgress={inProgress} >
-                    {button}
-                  </AsyncButton>
-              </StripeCheckout>
-            )}
 
-            {hasStripe && !hasPaypal && this.state.applePay && (
-              <button onClick={() => this.beginApplePay(tier, {amount, interval, currency})} id="apple-pay-button"></button>
+            {hasStripe && !hasPaypal && (
+              <div>
+                {this.state.applePay && 
+                  <button 
+                    id="apple-pay-button" 
+                    onClick={() => this.callApplePay(tier, {amount, interval, currency})}>
+                  </button>}
+                  <div className='h4 my2'>
+                    {this.state.applePay &&
+                      <span> You can also </span>
+                    }
+                    <StripeCheckout
+                      token={(token) => ::this.onTokenReceived(tier, {amount, interval, currency, token})}
+                      stripeKey={stripeKey}
+                      name={collective.name}
+                      currency={currency}
+                      bitcoin={collective.settings.bitcoin}
+                      amount={convertToCents(amount)}
+                      description={stripeDescription}>
+                        {this.state.applePay && 
+                          <span className='apple-pay-alternate underline my2'> 
+                            use another payment method.
+                          </span>
+                        }
+                        {!this.state.applePay && 
+                          <AsyncButton
+                            color='green'
+                            inProgress={inProgress} >
+                            {button}
+                          </AsyncButton>}
+                    </StripeCheckout>
+                  </div>
+                  
+              </div>
             )}
-
             </div>
           </div>
 
@@ -172,26 +188,34 @@ export default class Tiers extends Component {
     );
   }
 
-  beginApplePay(tier, payload) {
+  callApplePay(tier, payload) {
     const { collective, onToken } = this.props;
+
+    // setup the payment request
     const paymentRequest = {
-      countryCode: 'US',
+      countryCode: 'US', // TODO: find out if we need to change this for other countries
       currencyCode: collective.currency,
       total: {
-        label: `${collective.name} - Open Collective`,
+        label: collective.name,
         amount: payload.amount
       },
       requiredShippingContactFields: ['email']
     }
+
+    // Build Apple Pay session with all the details
     const session = Stripe.applePay.buildSession(paymentRequest,
       (result, completion) => {
         payload.description = tier.description;
-        payload.token = { id: result.token.id, email: result.shippingContact.emailAddress };
+        payload.token = { 
+          id: result.token.id, 
+          email: result.shippingContact.emailAddress 
+        };
         return onToken(payload)
           .then(() => completion(ApplePaySession.STATUS_SUCCESS))
           .catch(err => completion(ApplePaySession.STATUS_FAILURE));
-        }, error => notify('error', error.message));
-    session.oncancel = () => console.log('User hit cancel button');
+        }, error => console.error(error.message));
+    
+    // begin session
     session.begin();
   }
 }
