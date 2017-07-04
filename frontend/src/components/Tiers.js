@@ -198,7 +198,7 @@ export default class Tiers extends Component {
       currencyCode: collective.currency,
       total: {
         label: collective.name,
-        amount: payload.amount
+        amount: payload.amount // note this can't be in integer. ex: 19.99.
       },
       requiredShippingContactFields: ['email']
     }
