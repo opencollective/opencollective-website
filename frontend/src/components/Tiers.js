@@ -191,13 +191,14 @@ export default class Tiers extends Component {
 
   callApplePay(tier, payload) {
     const { collective, onToken } = this.props;
+    const label = tier.description ? `${collective.name} - ${tier.description}` : collective.name;
 
     // setup the payment request
     const paymentRequest = {
       countryCode: 'US', // TODO: find out if we need to change this for other countries
       currencyCode: collective.currency,
       total: {
-        label: collective.name,
+        label,
         amount: payload.amount // note this can't be in integer. ex: 19.99.
       },
       requiredShippingContactFields: ['email']
