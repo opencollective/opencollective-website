@@ -9,6 +9,9 @@ global.window = {
   addEventListener: () => {}
 };
 
+// Needed for Stripe.js v2 library that's used for Apple Pay
+global.Stripe = {};
+
 // In memory localstorage
 global.localStorage = localStorage;
 
