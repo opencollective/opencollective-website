@@ -29,7 +29,7 @@ export default class Tiers extends Component {
 
   componentWillMount() {
     const { collective } = this.props;
-    if (collective.stripeAccount && collective.stripeAccount.stripePublishableKey) {
+    if (collective.stripeAccount && collective.stripeAccount.stripePublishableKey && collective.settings.applePay) {
       // Stripe.setPublishableKey needs to be called before any other call to Stripe
       Stripe.setPublishableKey && Stripe.setPublishableKey(collective.stripeAccount.stripePublishableKey);
       Stripe.applePay && Stripe.applePay.checkAvailability(available => this.setState({applePayAvailable: available}));
@@ -127,7 +127,7 @@ export default class Tiers extends Component {
 
             {hasStripe && !hasPaypal && (
               <div>
-                {applePayAvailable && 
+                {applePayAvailable &&
                   <button 
                     id="apple-pay-button" 
                     onClick={() => this.callApplePay(tier, {amount, interval, currency})}>
