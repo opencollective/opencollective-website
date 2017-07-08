@@ -240,7 +240,6 @@ export default {
     const format = req.params.format || 'svg';
     const style = req.query.style || 'rounded';
     const limit = Number(req.query.limit) || Infinity;
-    const margin = req.query.margin ? Number(req.query.margin) : 5;
     const imageWidth = Number(req.query.width) || 0;
     const imageHeight = Number(req.query.height) || 0;
     const count = Math.min(limit, users.length);
@@ -253,12 +252,18 @@ export default {
     }
 
     let defaultAvatarHeight = 64;
-    if ( users.length > 50)
+    let defaultMargin = 5;
+    if ( users.length > 50) {
       defaultAvatarHeight = 48;
-    if ( users.length > 150)
+      defaultMargin = 3;
+    }
+    if ( users.length > 150) {
       defaultAvatarHeight = 24;
+      defaultMargin = 2;
+    }
 
     const avatarHeight = Number(req.query.avatarHeight) || defaultAvatarHeight;
+    const margin = Number(req.query.margin) || defaultMargin;
 
     const params = (style === 'rounded') ? { query: `/c_thumb,g_face,h_${avatarHeight*2},r_max,w_${avatarHeight*2},bo_3px_solid_white/c_thumb,h_${avatarHeight*2},r_max,w_${avatarHeight*2},bo_2px_solid_rgb:66C71A/e_trim/f_auto/` } : { width: avatarHeight * 2, height: avatarHeight * 2};
 
