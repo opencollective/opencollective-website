@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
 
 import CollectivePendingExpenses from './CollectivePendingExpenses';
 import CollectiveTransactions from './CollectiveTransactions';
@@ -25,9 +24,9 @@ export default class CollectiveLedger extends Component {
             <CollectiveTransactions {...this.props} transactions={ collective.transactions }/>
             <div className='center pt2'>
               {(collective.transactions.length === 0) && (
-                <Link className='-btn -btn-medium -btn-outline -border-green -ttu -fw-bold' to={`/${collective.slug}/transactions`}>
+                <a className='-btn -btn-medium -btn-outline -border-green -ttu -fw-bold' href={`/${collective.slug}/transactions`}>
                   {i18n.getString('seeAllTransactions')} >
-                </Link>
+                </a>
               )}
             </div>
           </div>

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router';
 
 import CollectiveActivityItem from './CollectiveActivityItem';
 import TransactionEmptyState from '../TransactionEmptyState';
@@ -30,9 +29,9 @@ export default class CollectiveTransactions extends React.Component {
         </div>
         <div className='center pt2'>
           {(transactions.length >= itemsToShow) && (
-            <Link className='-btn -btn-medium -btn-outline -border-green -ttu -fw-bold' to={`/${collective.slug}/transactions`}>
+            <a className='-btn -btn-medium -btn-outline -border-green -ttu -fw-bold' href={`/${collective.slug}/transactions`}>
               {i18n.getString('seeAllTransactions')} >
-            </Link>
+            </a>
           )}
         </div>
       </div>
