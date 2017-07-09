@@ -81,11 +81,9 @@ export default class CollectiveHero extends Component {
               <li className='inline-block'>
                 <a href='#about_us' className='block white -ff-sec -fw-bold'>{ i18n.getString('menuAboutUs') }</a>
               </li>
-              { collective.settings && collective.settings.events &&
-                <li className='inline-block'>
-                  <a href='#events' className='block white -ff-sec -fw-bold'>{ i18n.getString('menuEvents') }</a>
-                </li>
-              }
+              <li className='inline-block'>
+                <a href='#events' className='block white -ff-sec -fw-bold'>{ i18n.getString('menuEvents') }</a>
+              </li>
               { subCollectives  && subCollectives.length > 0 &&
                 <li className='inline-block'>
                   <a href='#collectives' className='block white -ff-sec -fw-bold'>{ i18n.getString('collectives') }</a>
