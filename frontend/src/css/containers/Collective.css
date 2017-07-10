@@ -378,3 +378,8 @@ section .subtitle {
 .apple-pay-alternate {
   color: var(--green);
 }
+
+.CollectiveEvents-container {
+  max-width: 450px;
+  margin: 0 auto;
+}
