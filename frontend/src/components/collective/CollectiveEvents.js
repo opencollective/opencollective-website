@@ -5,7 +5,7 @@ export default class CollectiveEvents extends Component {
   componentDidMount() {
     const s = document.createElement('script');
     s.type = 'text/javascript';
-    s.src = `/${this.props.collective.slug}/events.js`;
+    s.src = `https://opencollective.com/${this.props.collective.slug}/events.js`;
     s.async = true;
     this.instance.appendChild(s);
   }
