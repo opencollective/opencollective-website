@@ -136,9 +136,9 @@ export class Faq extends Component {
           
           <h3 id="investors">Who are your investors?</h3>
           <details>
-            <summary>We raised a total of $815k so far on convertible notes (<a href="https://www.ycombinator.com/docs/SAFE_Cap.rtf">SAFE</a>)</summary>
+            <summary>We raised a total of $2,815,000 so far ($815k on convertible notes in 2015-2016, $2M Series Seed in June 2017)</summary>
 
-            <p>We did a first pre-seed round of $500k in October 2015 (SAFE, $5M cap) with:
+            <p>We did a first pre-seed round of $500k in October 2015 (<a href="https://www.ycombinator.com/docs/SAFE_Cap.rtf">SAFE</a>, $5M cap) with:
               <ul>
                 <li><span>$250k</span> <a href="http://generalcatalyst.com">General Catalyst</a> (SF/NYC/Boston, <a href="https://www.linkedin.com/in/hemanttaneja">Hemant Taneja</a>)</li>
                 <li><span>$50k</span> <a href="https://www.linkedin.com/in/jsiegel">Jonathan Siegel</a> (can't pin down his location)</li>
@@ -155,7 +155,7 @@ export class Faq extends Component {
               </ul>
             </p>
 
-            <p>We did a follow up round of $315k in July 2016 (SAFE, $8M cap) with:
+            <p>We did a follow up round of $315k in July 2016 (<a href="https://www.ycombinator.com/docs/SAFE_Cap.rtf">SAFE</a>, $8M cap) with:
               <ul>
                 <li><span>$100k</span> <a href="https://www.linkedin.com/in/ricardo-gorodisch-9b057889">Ricardo Gorodisch</a> (Argentina, President <a href="http://www.fundacionkaleidos.org/">Foundation Kaleidos</a>)</li>
                 <li><span>$50k</span> <a href="https://www.linkedin.com/in/petekoomen">Pete Koomen</a> (SF, Cofounder/CTO <a href="http://optimizely.com">Optimizely</a>)</li>
@@ -170,6 +170,25 @@ export class Faq extends Component {
                 <li><span>$10k</span> <a href="https://www.linkedin.com/in/derek-parham-b7b5504">Derek Parham</a> (NYC, deputy CTO at Hillary For America)</li>
                 <li><span>$10k</span> <a href="https://www.linkedin.com/in/hbridge">Henry Bridge</a> (NYC, Director of Product at Hillary For America)</li>
                 <li><span>$10k</span> <a href="https://www.linkedin.com/in/antoineperdaens">Antoine Perdaens</a> (Belgium, Cofounder/CEO at <a href="http://knowledgeplaza.net">KnowledgePlaza</a>)</li>
+              </ul>
+            </p>
+
+            <p>We did a Series Seed lead by <a href="https://www.bloombergbeta.com">Bloomberg Beta</a> in June 2017 ($9M pre valuation, Term Sheet to be published soon), including:
+              <ul>
+                <li><span>$1M</span> <a href="https://www.linkedin.com/in/jcham">James Cham</a>, <a href="https://www.linkedin.com/in/roybahat/">Roy Bahat</a>, <a href="https://www.linkedin.com/in/karinklein/">Karin Klein</a> (<a href="https://www.bloombergbeta.com">Bloomberg Beta</a>)</li>
+                <li><span>$350k</span> Angel list syndicate lead by <a href="https://www.linkedin.com/in/daveeisenberg/">Dave Eisenberg</a> and <a href="https://www.linkedin.com/in/nadiaeghbal/">Nadia Eghbal</a></li>
+                <li><span>$200k</span> <a href="https://www.linkedin.com/in/nchirls/">Nicholas Chirls</a> (<a href="http://notationcapital.com">Notation Capital</a>)</li>
+                <li><span>$150k</span> <a href="https://www.linkedin.com/in/daveeisenberg/">Dave Eisenberg</a></li>
+                <li><span>$100k</span> <a href="https://www.linkedin.com/in/semilshah/">Semil Shah</a> (<a href="http://haystack.vc">Haystack.vc</a>)</li>
+                <li><span>$40k</span> <a href="https://www.linkedin.com/in/armin-steuernagel-9719b1b/">Armin Steuernagel</a> (<a href="http://purpose-economy.org/en/">Purpose.ag</a>)</li>
+                <li><span>$35k</span> <a href="https://www.linkedin.com/in/ramyadeeb/">Ramy	Adeeb</a><a href="https://1984.vc">1984.vc</a></li>
+                <li><span>$25k</span> <a href="https://www.linkedin.com/in/johnkobs">John Kobs</a> (SF, Entrepreneur/CEO at <a href="http://ApartmentList.com">ApartmentList</a>)</li>
+                <li><span>$25k</span> <a href="https://www.linkedin.com/in/ydnar/">Randy Reddig</a> (<a href="https://square.com">Square</a>)	</li>
+                <li><span>$25k</span> <a href="https://www.linkedin.com/in/noahw/">Noah	Weiss</a>	</li>
+                <li><span>$20k</span> <a href="https://www.linkedin.com/in/jackherrick/">Jack Herrick</a>	(<a href="https://wikihow.com">WikiHow.com</a>)</li>
+                <li><span>$10k</span> <a href="https://www.linkedin.com/in/kylewild/">Kyle Wild</a> (<a href="https://keen.io">Keen.io</a>)</li>
+                <li><span>$10k</span> <a href="https://www.linkedin.com/in/samgerstenzang/">Sam	Gerstenzang</a>	</li>
+                <li><span>$10k</span> <a href="https://www.linkedin.com/in/davidkingsf/">David King</a>	</li>
               </ul>
             </p>
           </details>
