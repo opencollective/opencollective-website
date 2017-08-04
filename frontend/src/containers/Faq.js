@@ -173,7 +173,7 @@ export class Faq extends Component {
               </ul>
             </p>
 
-            <p>We did a Series Seed lead by <a href="https://www.bloombergbeta.com">Bloomberg Beta</a> in June 2017 ($9M pre valuation, Term Sheet to be published soon), including:
+            <p>We did a Series Seed lead by <a href="https://www.bloombergbeta.com">Bloomberg Beta</a> in June 2017 ($9M pre valuation, <a href="https://www.dropbox.com/s/wa41eciscon8agv/Open%20Collective%20-%20Series%20Seed%20Term%20Sheet.pdf?dl=0">Term Sheet</a>, <a href="https://www.dropbox.com/s/ial1g8cfr2apn73/Open%20Collective%20-%20Stock%20Investment%20Agreement%20%28Series%20Seed%29.redacted.pdf?dl=0">Stock Investment Agreement</a>), including:
               <ul>
                 <li><span>$1M</span> <a href="https://www.linkedin.com/in/jcham">James Cham</a>, <a href="https://www.linkedin.com/in/roybahat/">Roy Bahat</a>, <a href="https://www.linkedin.com/in/karinklein/">Karin Klein</a> (<a href="https://www.bloombergbeta.com">Bloomberg Beta</a>)</li>
                 <li><span>$350k</span> Angel list syndicate lead by <a href="https://www.linkedin.com/in/daveeisenberg/">Dave Eisenberg</a> and <a href="https://www.linkedin.com/in/nadiaeghbal/">Nadia Eghbal</a></li>
@@ -181,13 +181,13 @@ export class Faq extends Component {
                 <li><span>$150k</span> <a href="https://www.linkedin.com/in/daveeisenberg/">Dave Eisenberg</a></li>
                 <li><span>$100k</span> <a href="https://www.linkedin.com/in/semilshah/">Semil Shah</a> (<a href="http://haystack.vc">Haystack.vc</a>)</li>
                 <li><span>$40k</span> <a href="https://www.linkedin.com/in/armin-steuernagel-9719b1b/">Armin Steuernagel</a> (<a href="http://purpose-economy.org/en/">Purpose.ag</a>)</li>
-                <li><span>$35k</span> <a href="https://www.linkedin.com/in/ramyadeeb/">Ramy	Adeeb</a><a href="https://1984.vc">1984.vc</a></li>
+                <li><span>$35k</span> <a href="https://www.linkedin.com/in/ramyadeeb/">Ramy Adeeb</a> (<a href="https://1984.vc">1984.vc</a>)</li>
                 <li><span>$25k</span> <a href="https://www.linkedin.com/in/johnkobs">John Kobs</a> (SF, Entrepreneur/CEO at <a href="http://ApartmentList.com">ApartmentList</a>)</li>
                 <li><span>$25k</span> <a href="https://www.linkedin.com/in/ydnar/">Randy Reddig</a> (<a href="https://square.com">Square</a>)	</li>
-                <li><span>$25k</span> <a href="https://www.linkedin.com/in/noahw/">Noah	Weiss</a>	</li>
+                <li><span>$25k</span> <a href="https://www.linkedin.com/in/noahw/">Noah Weiss</a>	</li>
                 <li><span>$20k</span> <a href="https://www.linkedin.com/in/jackherrick/">Jack Herrick</a>	(<a href="https://wikihow.com">WikiHow.com</a>)</li>
                 <li><span>$10k</span> <a href="https://www.linkedin.com/in/kylewild/">Kyle Wild</a> (<a href="https://keen.io">Keen.io</a>)</li>
-                <li><span>$10k</span> <a href="https://www.linkedin.com/in/samgerstenzang/">Sam	Gerstenzang</a>	</li>
+                <li><span>$10k</span> <a href="https://www.linkedin.com/in/samgerstenzang/">Sam Gerstenzang</a>	</li>
                 <li><span>$10k</span> <a href="https://www.linkedin.com/in/davidkingsf/">David King</a>	</li>
               </ul>
             </p>
