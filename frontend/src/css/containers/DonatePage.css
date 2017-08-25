@@ -52,6 +52,10 @@
       max-width: 600px;
     }
   }
+  .Tier {
+    max-width: none;
+    width: 100%;
+  }
   .Tier-description {
     font-family: Lato;
     font-size: 16px;

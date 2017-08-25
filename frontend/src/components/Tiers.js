@@ -7,7 +7,7 @@ import formatCurrency from '../lib/format_currency';
 import AsyncButton from './AsyncButton';
 import DonationPicker from './DonationPicker';
 import convertToCents from '../lib/convert_to_cents';
-import marked from 'marked';
+import Markdown from './Markdown';
 
 export default class Tiers extends Component {
 
@@ -34,12 +34,6 @@ export default class Tiers extends Component {
       Stripe.setPublishableKey && Stripe.setPublishableKey(collective.stripeAccount.stripePublishableKey);
       Stripe.applePay && Stripe.applePay.checkAvailability(available => this.setState({applePayAvailable: available}));
     }
-  }
-
-  rawMarkup(text) {
-    const rawMarkup = (text) ? marked(text, {sanitize: true}) : '';
-
-    return { __html: rawMarkup };
   }
 
   showTier(tier) {
@@ -92,7 +86,7 @@ export default class Tiers extends Component {
             <span className='bg-color px2 -fw-ultra-bold'>{title}</span>
           </h3>
 
-          <div className='Tier-description' dangerouslySetInnerHTML={ this.rawMarkup(description)} />
+          <Markdown value={description} className="Tier-description" />
 
           {tier.presets &&
               <DonationPicker

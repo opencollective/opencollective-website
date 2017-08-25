@@ -87,7 +87,7 @@ export default class Markdown extends Component {
         videoid = line.match(/watch\?v=([^&]*)/)[1];
 
       if (videoid) {
-        line = `<div class='video'>
+        line = `<div class='video YoutubeVideo'>
           <iframe
             width=560
             height=315
