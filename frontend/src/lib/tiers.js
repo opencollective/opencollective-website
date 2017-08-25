@@ -9,6 +9,10 @@ export default function getTier(query, tiers) {
   });
 
   // We get the first tier for which the totalDonations is higher than the minimum amount for that tier
+  if (query.interval === 'one-time') {
+    query.interval = null;
+  }
+
   const tier = tiers.find((tier) => {
     if (query.interval && query.interval !== tier.interval) return false;
     if (query.amount && parseInt(query.amount, 10) === parseInt(tier.amount,10)) return true;

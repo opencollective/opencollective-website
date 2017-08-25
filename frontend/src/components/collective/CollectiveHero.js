@@ -97,7 +97,7 @@ export default class CollectiveHero extends Component {
                   <a href={`/${collective.slug}/events/new`} className='block white -ff-sec -fw-bold'>Create an Event</a>
                 </li>
               }
-              { collective.backersCount > 0 && canEditCollective &&
+              { canEditCollective &&
                 <li className='inline-block xs-hide'>
                   <a href='#exportMembers' className='block white -ff-sec -fw-bold' onClick={ exportMembers.bind(this, loggedinUser, collective) } >Export members.csv</a>
                 </li>
