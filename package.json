@@ -1,6 +1,6 @@
 {
   "name": "opencollective-website",
-  "version": "0.1.318",
+  "version": "0.1.319",
   "engines": {
     "node": "6.11.0",
     "npm": "3.10.10"
