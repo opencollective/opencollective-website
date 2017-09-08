@@ -221,7 +221,7 @@
     position: relative;
     max-width: 440px;
     height: 450px;
-    background-image: url(../images/bg-brands.png);
+    background-image: url(../images/bg-people.png);
     background-position: top;
     .-img2 {
       position: absolute;
@@ -235,7 +235,7 @@
     }
   }
   .-img.-sponsor {
-    background-image: url(../images/bg-people.png);
+    background-image: url(../images/bg-brands.png);
     .-img2 {
       background-image: url(../images/donation-card-2.png);
     }
