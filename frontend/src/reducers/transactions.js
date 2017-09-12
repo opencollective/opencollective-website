@@ -13,8 +13,8 @@ export default function transactions(state={
       const {transactions} = action;
       const transactionsArr = values(transactions);
       return merge({}, state, transactions, {
-        donations: transactionsArr.filter(t => t.type === 'DONATION'),
-        expenses: transactionsArr.filter(t => t.type === 'EXPENSE')
+        donations: transactionsArr.filter(t => t.type === 'CREDIT'),
+        expenses: transactionsArr.filter(t => t.type === 'DEBIT')
       });
     }
     default:
