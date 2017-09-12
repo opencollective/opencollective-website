@@ -155,7 +155,7 @@ export const getI18nSelector = createSelector(
 
 export const isHostOfCollectiveSelector = createSelector(
   [ getAuthenticatedUserSelector, getCollectiveHostSelector ],
-  (authenticatedUser, host) => host && authenticatedUser && authenticatedUser.id === host.id);
+  (authenticatedUser, host) => host && authenticatedUser && authenticatedUser.id === host.data.UserId);
 
 export const canEditCollectiveSelector = createSelector(
   [ getAuthenticatedUserSelector, getCollectiveMembersSelector, isHostOfCollectiveSelector ],

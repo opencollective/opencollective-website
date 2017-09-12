@@ -50,9 +50,9 @@ class AddFundsForm extends Component {
             <Input
               customClass='js-transaction-title'
               placeholder='ex: T-shirt sales from Threadless'
-              hasError={validationError.title}
-              value={attributes.title}
-              handleChange={title => onChange({title})} />
+              hasError={validationError.description}
+              value={attributes.description}
+              handleChange={description => onChange({description})} />
           </div>
           <div className='col col-12 sm-col-12 md-col-6 lg-col-6 pl1'>
             <label>{i18n.getString('notes')}</label>
