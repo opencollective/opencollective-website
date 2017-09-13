@@ -61,9 +61,9 @@ class AddFundsForm extends Component {
               resize='vertical'
               customClass='js-transaction-notes'
               placeholder='Optional: amount earned by collective from June t-shirt sales'
-              hasError={validationError.notes}
-              value={attributes.notes}
-              onChange={notes => onChange({notes})}
+              hasError={validationError.privateMessage}
+              value={attributes.privateMessage}
+              onChange={privateMessage => onChange({privateMessage})}
               />
           </div>
         </div>

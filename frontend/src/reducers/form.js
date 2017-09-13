@@ -141,11 +141,11 @@ function expense(state=expenseInitialState, action={}) {
  */
 const addFundsInitialState = {
   attributes: {
-    amount: 0,
+    totalAmount: 0,
     email: null,
     name: null,
-    title: '',
-    notes: '',
+    description: '',
+    privateMessage: '',
     fundsFromHost: true
   },
   error: {},

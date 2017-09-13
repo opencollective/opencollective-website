@@ -281,7 +281,7 @@ export function approveExp(expenseId) {
     .then(() => {
       const expense = findExpense(expenseId, collective.unpaidExpenses);
       if (expense) {
-        return notify('success', `Expense approved: ${expense.amount/100} for ${expense.title}`)
+        return notify('success', `Expense approved: ${expense.amount/100} for ${expense.description}`)
       } else {
         return notify('success', 'Expense approved');
       }
@@ -305,7 +305,7 @@ export function rejectExp(expenseId) {
     .then(() => {
       const expense = findExpense(expenseId, collective.unpaidExpenses);
       if (expense) {
-        return notify('success', `Expense rejected: ${expense.amount/100} for ${expense.title}`)
+        return notify('success', `Expense rejected: ${expense.amount/100} for ${expense.description}`)
       } else {
         return notify('success', 'Expense rejected');
       }
@@ -334,7 +334,7 @@ export function payExp(expenseId) {
       const expense = findExpense(expenseId, collective.unpaidExpenses);
       const transaction = findExpense(expenseId, collective.paidExpenses); // in case it's already paid; timing issue.
       if (expense) {
-        return notify('success', `Expense paid: ${expense.amount/100} for ${expense.title}`)
+        return notify('success', `Expense paid: ${expense.amount/100} for ${expense.description}`)
       } else if (transaction) {
         return notify('success', `Expense paid: ${transaction.amount} for ${transaction.description}`)
       } else {
