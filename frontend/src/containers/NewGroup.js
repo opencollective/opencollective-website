@@ -141,7 +141,7 @@ export class NewGroup extends Component {
         <LoginTopBar />
         <div className='NewGroup'>
           { hostCollective && <div className='host'>
-            <img src={hostCollective.logo} />
+            <img src={hostCollective.image} />
             <h2>{hostCollective.name}</h2>
           </div>}
           <h1>Apply to create a collective</h1>
