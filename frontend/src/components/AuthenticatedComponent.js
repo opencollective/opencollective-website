@@ -17,7 +17,9 @@ export function requireAuthentication(Component) {
     checkAuth(isAuthenticated) {
       if (!isAuthenticated) {
         const redirectAfterLogin = this.props.location.pathname;
-        window.location.replace(`${window.location.protocol}//${window.location.host}/signin?next=${redirectAfterLogin}`);
+        if (typeof window !== 'undefined') {
+          window.location.replace(`${window.location.protocol}//${window.location.host}/signin?next=${redirectAfterLogin}`);
+        }
       }
     }
 
