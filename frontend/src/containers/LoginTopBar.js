@@ -82,7 +82,7 @@ export class LoginTopBar extends Component {
               {showProfileMenu && this.renderProfileMenu()}
             </div>
           }
-          {!isAuthenticated && <a className='LoginTopBarLink' href={`/login?next=${redirectRoute || window.location.pathname}`}>Login</a>}
+          {!isAuthenticated && <a className='LoginTopBarLink' href={`/signin?next=${redirectRoute || window.location.pathname}`}>Login</a>}
         </div>
       </div>
     )

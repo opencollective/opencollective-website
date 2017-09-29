@@ -73,11 +73,11 @@ const fetchGroupBySlug = (req, res, next) => {
 };
 
 /**
- * Fetch profile by slug (group or user profile)
+ * Fetch group
  */
 const fetchProfileBySlug = (req, res, next) => {
   api
-    .get(`/profile/${req.params.slug.toLowerCase()}`)
+    .get(`/groups/${req.params.slug.toLowerCase()}`)
     .then(profile => {
       if (profile.username) {
         req.user = profile;

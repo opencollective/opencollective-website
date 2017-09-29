@@ -128,7 +128,7 @@ export class NewGroup extends Component {
     const showFormDetails = (!showConfirmation && (groupType || tags));
 
     const validateSlug = (slug) => {
-      fetch(`/api/profile/${slug}`)
+      fetch(`/api/groups/${slug}`)
         .then(response => {
           this.setState( { slugAvailable: !(response.status === 200) })
         })
