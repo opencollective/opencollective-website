@@ -97,7 +97,7 @@
     }
   }
   &.sponsor {
-    height: 400px !important;
+    height: 380px !important;
     .CollectiveCard-head {
       height: 160px;
       .CollectiveCard-background {
@@ -108,15 +108,8 @@
         }
       }
     }
-    .CollectiveCard-body {
-      .CollectiveCard-name {
-        display: none;
-      }
-      .CollectiveCard-description {
-        margin-top: 25px !important;
-      }
-    }
     .CollectiveCard-footer {
+      display: none;
       & > .clearfix > .col {
         width: 50%;
         &:nth-child(1) {
