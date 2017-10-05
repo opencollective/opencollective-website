@@ -92,7 +92,7 @@ function donation(state={}, action={}) {
 const expenseInitialState = {
   attributes: {
     category: '',
-    title: '',
+    description: '',
     payoutMethod: 'paypal',
     vat: null,
     incurredAt: new Date()

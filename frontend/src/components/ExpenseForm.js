@@ -99,9 +99,9 @@ class ExpenseForm extends Component {
               rows='1'
               resize='vertical'
               customClass='js-transaction-description'
-              hasError={expense.error.title}
-              value={attributes.title}
-              onChange={title => appendExpenseForm({title})}
+              hasError={expense.error.description}
+              value={attributes.description}
+              onChange={description => appendExpenseForm({description})}
               maxLength={255} />
           </div>
         </div>
@@ -158,7 +158,7 @@ class ExpenseForm extends Component {
                 resize='vertical'
                 customClass='js-transaction-description'
                 className='-notes'
-                hasError={expense.error.title}
+                hasError={expense.error.notes}
                 value={attributes.notes}
                 onChange={notes => appendExpenseForm({notes})}
                 maxLength={255} />
