@@ -2,7 +2,6 @@ import fs from 'fs';
 import svg_to_png from 'svg-to-png';
 import crypto from 'crypto';
 import Promise from 'bluebird';
-import filterCollection from '../../../frontend/src/lib/filter_collection';
 import _ from 'lodash';
 
 const readFile = Promise.promisify(fs.readFile);
