@@ -64,7 +64,7 @@ export default class CollectiveCard extends Component {
 
     const {
       backgroundImage,
-      logo,
+      image,
       index,
       name,
       publicUrl,
@@ -99,7 +99,7 @@ export default class CollectiveCard extends Component {
           <div>
             <div className='CollectiveCard-head'>
               <div className='CollectiveCard-background' style={group.settings.style.hero.cover}></div>
-              <div className='CollectiveCard-image' style={{backgroundImage: `url(${logo || defaultLogo})`}}></div>
+              <div className='CollectiveCard-image' style={{backgroundImage: `url(${image || defaultLogo})`}}></div>
             </div>
             <div className='CollectiveCard-body'>
               <div className='CollectiveCard-name'>{name}</div>

@@ -140,9 +140,9 @@ export const getPopulatedCollectiveSelector = createSelector(
         { backersCount: backers.length },
         { contributors },
         { contributorsCount: contributors.length },
-        { unpaidExpenses: filterCollection(unpaidExpenses, { GroupId: collective.id })},
-        { paidExpenses: filterCollection(paidExpenses, { GroupId: collective.id })},
-        { transactions: filterCollection(transactions, {GroupId: collective.id })},
+        { unpaidExpenses: filterCollection(unpaidExpenses, { CollectiveId: collective.id })},
+        { paidExpenses: filterCollection(paidExpenses, { CollectiveId: collective.id })},
+        { transactions: filterCollection(transactions, {CollectiveId: collective.id })},
     ));
 
 /*
@@ -155,7 +155,7 @@ export const getI18nSelector = createSelector(
 
 export const isHostOfCollectiveSelector = createSelector(
   [ getAuthenticatedUserSelector, getCollectiveHostSelector ],
-  (authenticatedUser, host) => host && authenticatedUser && authenticatedUser.id === host.id);
+  (authenticatedUser, host) => host && authenticatedUser && authenticatedUser.id === host.data.UserId);
 
 export const canEditCollectiveSelector = createSelector(
   [ getAuthenticatedUserSelector, getCollectiveMembersSelector, isHostOfCollectiveSelector ],

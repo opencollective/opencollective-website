@@ -128,7 +128,7 @@ export class NewGroup extends Component {
     const showFormDetails = (!showConfirmation && (groupType || tags));
 
     const validateSlug = (slug) => {
-      fetch(`/api/profile/${slug}`)
+      fetch(`/api/groups/${slug}`)
         .then(response => {
           this.setState( { slugAvailable: !(response.status === 200) })
         })
@@ -141,7 +141,7 @@ export class NewGroup extends Component {
         <LoginTopBar />
         <div className='NewGroup'>
           { hostCollective && <div className='host'>
-            <img src={hostCollective.logo} />
+            <img src={hostCollective.image} />
             <h2>{hostCollective.name}</h2>
           </div>}
           <h1>Apply to create a collective</h1>

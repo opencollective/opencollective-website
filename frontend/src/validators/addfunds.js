@@ -7,12 +7,12 @@ import validate from '../lib/validate';
  */
 const schema = Joi.object().keys({
   fundsFromHost: Joi.boolean(),
-  amount: Joi.number().integer().min(1).required()
+  totalAmount: Joi.number().integer().min(1).required()
     .label('Amount'),
-  title: Joi.string().required()
-    .label('Title'),
-  notes: Joi.string()
-    .label('Notes')
+  description: Joi.string().required()
+    .label('Description'),
+  privateMessage: Joi.string()
+    .label('Private message')
     .allow(''),
   name: Joi.when('fundsFromHost', {is: true, otherwise: Joi.string().required()})
     .label('Name'),

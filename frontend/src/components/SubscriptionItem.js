@@ -21,15 +21,15 @@ export default class SubscriptionItem extends Component {
       currency,
       interval,
       isActive,
-      Donation: donation  } = subscription;
+      Order: donation  } = subscription;
 
     const formattedAmount = formatCurrency(amount, currency, {compact: true});
     const formattedInterval = `${interval[0].toUpperCase()}${interval.substr(1)}ly`;
     const formattedCreatedAt = isActive ? `${i18n.getString('since')} ${i18n.moment(createdAt).format('MMM, YYYY')}`: 'Cancelled';
     const { Transactions } = donation;
-    const group = donation.Group;
+    const group = donation.collective;
     const name = group ? group.name : '';
-    const logo = group ? group.logo : '';
+    const logo = group ? group.image : '';
     return (
       <div className='SubscriptionItem'>
         <div className='SubscriptionItem-header'>
@@ -51,7 +51,7 @@ export default class SubscriptionItem extends Component {
             <ul>
               {Transactions.sort((A, B) => B.createdAt > A.createdAt).map((transaction, index) => {
                 const description = transaction.title || transaction.description;
-                const { avatar } = donation.User;
+                const { image: avatar } = donation.createdByUser;
                 const txDate = transaction.incurredAt || transaction.createdAt;
                 return (
                   <li key={index}>

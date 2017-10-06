@@ -117,7 +117,7 @@ export class HomePage extends Component {
             {sponsors.map(sponsor => <CollectiveCard
               key={sponsor.id}
               i18n={i18n}
-              publicUrl={`/${sponsor.username}`}
+              publicUrl={`/${sponsor.slug}`}
               isSponsor={true}
               group={sponsor}
             />)}

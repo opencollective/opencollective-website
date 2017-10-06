@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { pushState } from 'redux-router';
 
 // Taken from https://github.com/joshgeller/react-redux-jwt-auth-example/blob/master/src/components/AuthenticatedComponent.js
 export function requireAuthentication(Component) {
@@ -18,8 +17,9 @@ export function requireAuthentication(Component) {
     checkAuth(isAuthenticated) {
       if (!isAuthenticated) {
         const redirectAfterLogin = this.props.location.pathname;
-        this.props
-        .dispatch(pushState(null, `/login?next=${redirectAfterLogin}`));
+        if (typeof window !== 'undefined' && window.location && window.location.replace) {
+          window.location.replace(`${window.location.protocol}//${window.location.host}/signin?next=${redirectAfterLogin}`);
+        }
       }
     }
 

@@ -10,7 +10,7 @@ export default (slug) => {
   return dispatch => {
     dispatch(request(slug));
 
-    return get(`/profile/${slug.toLowerCase()}`, { schema: Schemas.GROUP })
+    return get(`/groups/${slug.toLowerCase()}`, { schema: Schemas.GROUP })
     .then(json => dispatch(success(slug, json)))
     .catch(error => dispatch(failure(slug, error)));
   };

@@ -82,9 +82,11 @@ export function createManualDonation() {
 
   const attributes = {
     ...addFundsFormAttributes,
-    amount: Math.round(100 * addFundsFormAttributes.amountText)
+    totalAmount: Math.round(100 * addFundsFormAttributes.amountText)
   };
   delete attributes.amountText;
+  delete attributes.amount;
+  console.log(">>> attributes", attributes);
 
   return validateAddFundsRequest(attributes)
   .then(() => addFundsToCollective(collective.slug, {

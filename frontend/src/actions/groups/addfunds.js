@@ -10,7 +10,7 @@ export default (id, donation, options={}) => {
 
   return dispatch => {
     dispatch(request(id, donation));
-    return postJSON(url, {donation})
+    return postJSON(url, { order: donation })
       .then(json => dispatch(success(id, json, options)))
       .catch(error => {
         dispatch(failure(error));
