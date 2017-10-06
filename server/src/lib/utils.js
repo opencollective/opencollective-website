@@ -2,7 +2,6 @@ import fs from 'fs';
 import svg_to_png from 'svg-to-png';
 import crypto from 'crypto';
 import Promise from 'bluebird';
-import filterCollection from '../../../frontend/src/lib/filter_collection';
 import _ from 'lodash';
 
 const readFile = Promise.promisify(fs.readFile);
@@ -29,7 +28,7 @@ export function getCloudinaryUrl(src, { width, height, query }) {
 
 export function filterUsersByTier(users, tiername) {
   if (!tiername) return users;
-  return _.uniq(filterCollection(users, { tier: tiername }), 'id');
+  return _.uniq(users.filter(u => u.tier && u.tier.match(new RegExp(tiername, 'i'))), 'id');
 }
 
 /**
@@ -83,6 +82,7 @@ export function filterUsers(users, filters) {
       break;
     case 'backer':
     case 'sponsor':
+    default:
       users = filterUsersByTier(users, tierSingular);
       break;
   }
