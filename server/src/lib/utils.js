@@ -29,7 +29,7 @@ export function getCloudinaryUrl(src, { width, height, query }) {
 
 export function filterUsersByTier(users, tiername) {
   if (!tiername) return users;
-  return _.uniq(filterCollection(users, { tier: tiername }), 'id');
+  return _.uniq(users.filter(u => u.tier && u.tier.match(new RegExp(tiername, 'i'))), 'id');
 }
 
 /**
@@ -83,6 +83,7 @@ export function filterUsers(users, filters) {
       break;
     case 'backer':
     case 'sponsor':
+    default:
       users = filterUsersByTier(users, tierSingular);
       break;
   }

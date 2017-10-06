@@ -22,6 +22,8 @@ const fetchUsers = (options = {}) => {
       requireAvatar: (typeof options.requireAvatar === 'boolean') ? options.requireAvatar : req.query.requireAvatar !== 'false' // by default, we skip users without avatar
     };
 
+    const tierSingular = filters.tier.replace(/s$/, '');
+
     let fetchUsers;
     switch (filters.tier) {
       case 'contributors':
@@ -41,7 +43,7 @@ const fetchUsers = (options = {}) => {
                             if (filters.tier === 'members') {
                               return (['BACKER', 'MEMBER'].indexOf(u.role) !== -1)
                             }
-                            return u.tier === filters.tier || u.tier === filters.tier.replace(/s$/, '');
+                            return u.tier && u.tier.match(new RegExp(tierSingular, 'i'));
                           } else {
                             return true;
                           }
