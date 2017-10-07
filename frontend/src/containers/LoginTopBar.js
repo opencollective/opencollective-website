@@ -40,7 +40,7 @@ export class LoginTopBar extends Component {
           <ul>
           {this.showCreateBtn && <li><a href='/create'>create a collective</a></li>}
           <li><a href='/discover'>Discover</a></li>
-            <li><a href='#' onClick={this.onClickSubscriptions.bind(this)}>Subscriptions</a></li>
+            <li><a href='/subscriptions'>Subscriptions</a></li>
           </ul>
         </div>
         <div>
@@ -118,11 +118,6 @@ export class LoginTopBar extends Component {
   onClickLogout(e) {
     this.props.logout();
     this.props.decodeJWT();
-    this.toggleProfileMenu(e);
-  }
-
-  onClickSubscriptions(e) {
-    this.props.pushState(null, '/subscriptions')
     this.toggleProfileMenu(e);
   }
 }

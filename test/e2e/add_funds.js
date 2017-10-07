@@ -9,7 +9,7 @@ module.exports = {
     resetDb(client)
       .url(userLoginUrl)
       .waitForElementVisible('body', 1000)
-      .url(`${config.host.website}/testcollective/transactions`)
+      .url(`${config.host.website}/testcollective/expenses`)
       .waitForElementVisible('body', 1000)
       .assert.containsText('body', 'OpenCollective Test Group')
       .assert.visible('.Ledger-container', 5000)
