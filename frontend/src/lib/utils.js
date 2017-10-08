@@ -69,7 +69,7 @@ export function fixURI(weburl) {
 export function getGroupCustomStyles(group) {
   if (!group) return Object.assign({}, DEFAULT_GROUP_STYLES);
 
-  const styles = merge({}, DEFAULT_GROUP_STYLES, group.settings.style);
+  const styles = merge({}, DEFAULT_GROUP_STYLES, group.settings && group.settings.style);
   if (group.backgroundImage) {
     styles.hero.cover.backgroundImage = `url(${resizeImage(group.backgroundImage, { width: 1024 })})`;
   }

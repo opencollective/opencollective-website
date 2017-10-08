@@ -15,12 +15,12 @@ export function invoice(req, res) {
   const props = {
     i18n: i18nlib('en'),
     transaction,
-    paperSize: (transaction.group.currency === 'EUR') ? 'A4' : 'Letter',
+    paperSize: (transaction.collective.currency === 'EUR') ? 'A4' : 'Letter',
     user: { id: transaction.UserId, username }
   };
 
   const invoiceDate = moment(transaction.createdAt);
-  const filename = `${invoiceDate.format('YYYYMMDD')}-${transaction.group.slug}.pdf`;
+  const filename = `${invoiceDate.format('YYYYMMDD')}-${transaction.collective.slug}.pdf`;
   const html = renderToString(<Invoice {...props} />);
 
   req.app.render('pages/invoice', {
