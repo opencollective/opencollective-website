@@ -365,10 +365,10 @@ export default {
     }
 
     const user = users[position] || {};
-    let redirectUrl = `${config.host.website}/${user.username}`;
+    let redirectUrl = `${config.host.website}/${user.slug}`;
     if (tier.match(/sponsor/)) {
       user.twitter = user.twitterHandle ? `https://twitter.com/${user.twitterHandle}` : null;
-      redirectUrl =  user.website || user.twitter || `${config.host.website}/${user.username}`;
+      redirectUrl =  user.website || user.twitter || `${config.host.website}/${user.slug}`;
     }
 
     if (position === users.length) {
