@@ -23,7 +23,7 @@ export default class Invoice extends Component {
     } = this.props;
 
     const createdAt = new Date(transaction.createdAt);
-    const localeDateFormat = (transaction.group.currency === 'USD') ? 'en' : 'fr';
+    const localeDateFormat = (transaction.collective.currency === 'USD') ? 'en' : 'fr';
     i18n.moment.locale(localeDateFormat);
     const columns = [
       {title: 'date', dataIndex: 'date', className: 'date' },
@@ -43,8 +43,8 @@ export default class Invoice extends Component {
     });
 
     const hostBillingAddress = { __html : (transaction.host.billingAddress || '').replace(/\n/g,'<br />') };
-    const userBillingAddress = { __html : (transaction.user.billingAddress || '').replace(/\n/g,'<br />') };
-    const styles = getGroupCustomStyles(transaction.group);
+    const userBillingAddress = { __html : (transaction.createdByUser.billingAddress || '').replace(/\n/g,'<br />') };
+    const styles = getGroupCustomStyles(transaction.collective);
 
     // We need to load images in absolute path for PhantomJS
     if (styles.hero.cover.backgroundImage && styles.hero.cover.backgroundImage.match(/url\(\//)) {
@@ -72,16 +72,16 @@ export default class Invoice extends Component {
         }
         `}</style>
         <div className="header">
-          <a href={`https://opencollective.com/${transaction.group.slug}`}>
+          <a href={`https://opencollective.com/${transaction.collective.slug}`}>
             <div className="hero">
               <div className="cover" style={styles.hero.cover} />
-              <div className="logo" style={{backgroundImage:`url('${transaction.group.logo}')`}} />
+              <div className="logo" style={{backgroundImage:`url('${transaction.collective.logo}')`}} />
             </div>
           </a>
 
           <div className="collectiveInfo">
-            <h1>{transaction.group.name}</h1>
-            <a href={`https://opencollective.com/${transaction.group.slug}`} className="website">https://opencollective.com/{transaction.group.slug}</a>
+            <h1>{transaction.collective.name}</h1>
+            <a href={`https://opencollective.com/${transaction.collective.slug}`} className="website">https://opencollective.com/{transaction.collective.slug}</a>
           </div>
         </div>
 
@@ -90,11 +90,11 @@ export default class Invoice extends Component {
             <div className="invoiceDetails">
               <h2>Invoice</h2>
               <div className="detail"><label>Date:</label> {i18n.moment(createdAt).format('D MMMM YYYY')}</div>
-              <div className="detail reference"><label>Reference:</label> {i18n.moment(createdAt).format('YYYYMM')}-{transaction.GroupId}-{transaction.id}</div>
+              <div className="detail reference"><label>Reference:</label> {i18n.moment(createdAt).format('YYYYMM')}-{transaction.CollectiveId}-{transaction.id}</div>
             </div>
             <div className="userBillingAddress">
               <h2>{i18n.getString('billTo')}:</h2>
-              {transaction.user.name}<br />
+              {transaction.fromCollective.name}<br />
               <div dangerouslySetInnerHTML={userBillingAddress} />
             </div>
           </div>

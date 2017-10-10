@@ -51,15 +51,11 @@ export default class SubscriptionItem extends Component {
             <ul>
               {Transactions.sort((A, B) => B.createdAt > A.createdAt).map((transaction, index) => {
                 const description = transaction.title || transaction.description;
-                const { image: avatar } = donation.createdByUser;
                 const txDate = transaction.incurredAt || transaction.createdAt;
                 return (
                   <li key={index}>
                     <div className='SubscriptionItem-DonationItem'>
                       <div className='flex'>
-                        <div>
-                          <img src={avatar} height='40px' width='40px'/>
-                        </div>
                         <div className='flex-auto'>
                           <div className='flex flex-column'>
                             <div className='flex'>
