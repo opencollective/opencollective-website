@@ -101,7 +101,7 @@ export const getCollectiveHostSelector = createSelector(
 
 export const getCollectiveMembersSelector = createSelector(
   getCollectiveUsersByRoleSelector,
-  (usersByRole) => usersByRole[roles.MEMBER] || []);
+  (usersByRole) => usersByRole[roles.ADMIN] || []);
 
 export const getCollectiveBackersSelector = createSelector(
   getCollectiveUsersByRoleSelector,
@@ -159,5 +159,5 @@ export const isHostOfCollectiveSelector = createSelector(
 
 export const canEditCollectiveSelector = createSelector(
   [ getAuthenticatedUserSelector, getCollectiveMembersSelector, isHostOfCollectiveSelector ],
-  (authenticatedUser, members, isHost) => isHost || (authenticatedUser && !!members.find(u => u.id === authenticatedUser.id)));
+  (authenticatedUser, members, isHost) => isHost || (authenticatedUser && !!members.find(u => u.data && u.data.UserId === authenticatedUser.id)));
 

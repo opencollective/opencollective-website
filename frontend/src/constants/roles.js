@@ -1,5 +1,5 @@
 export default {
   HOST: 'HOST',
-  MEMBER: 'MEMBER',
+  ADMIN: 'ADMIN',
   BACKER: 'BACKER'
 };
