@@ -153,9 +153,15 @@ export const getI18nSelector = createSelector(
   getCollectiveSettingsSelector,
   (settings) => i18nLib(settings.lang || 'en'));
 
+/**
+ * Either we are logged in directly as the host user
+ * Or we can be logged in as one of the ADMIN of the host collective
+ */
 export const isHostOfCollectiveSelector = createSelector(
   [ getAuthenticatedUserSelector, getCollectiveHostSelector ],
-  (authenticatedUser, host) => host && authenticatedUser && authenticatedUser.id === host.data.UserId);
+  (authenticatedUser, host) => {
+    return host && authenticatedUser && ((authenticatedUser.id === host.data.UserId) || (host.admins && !!host.admins.find(admin => admin.UserId === authenticatedUser.id)))
+  });
 
 export const canEditCollectiveSelector = createSelector(
   [ getAuthenticatedUserSelector, getCollectiveMembersSelector, isHostOfCollectiveSelector ],
