@@ -75,7 +75,7 @@ export default class Invoice extends Component {
           <a href={`https://opencollective.com/${transaction.collective.slug}`}>
             <div className="hero">
               <div className="cover" style={styles.hero.cover} />
-              <div className="logo" style={{backgroundImage:`url('${transaction.collective.logo}')`}} />
+              <div className="logo" style={{backgroundImage:`url('${transaction.collective.image}')`}} />
             </div>
           </a>
 
