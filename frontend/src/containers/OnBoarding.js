@@ -160,9 +160,9 @@ export class OnBoarding extends Component {
       if (githubUsername !== owner) {
         const { contributors } = this.props;
         contributors.sort((A, B) => B.contributions - A.contributions);
-        const topTree = contributors.slice(0, 3).map(contributor => contributor.name);
+        const topTen = contributors.slice(0, 10).map(contributor => contributor.name);
 
-        if (topTree.indexOf(githubUsername) === -1) {
+        if (topTen.indexOf(githubUsername) === -1) {
           this.blacklist.push(selectedRepo);
           this.setState({step: 1});
           notify('error', `You need to be a top contributor for ${selectedRepo} in order to create a collective`);
