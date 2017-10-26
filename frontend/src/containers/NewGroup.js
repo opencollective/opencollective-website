@@ -220,7 +220,7 @@ export class NewGroup extends Component {
                 <Input
                   email='email'
                   value={users[0].email}
-                  onChange={(value) => appendGroupForm({users: [{email: value, role: 'MEMBER'}]})}
+                  onChange={(value) => appendGroupForm({users: [{email: value, role: 'ADMIN'}]})}
                   maxLength={128}
                   rows={1}
                   placeholder={getPlaceholder('email')}/>
