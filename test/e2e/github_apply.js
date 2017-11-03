@@ -33,10 +33,6 @@ module.exports = {
       .assert.urlContains('http://localhost:3000/opensource/apply')
       .waitForElementVisible('.OnBoardingButton', 1000)
       .click('.OnBoardingButton') // Repo already selected, click continue
-      .waitForElementVisible('.ContributorPickerItemSearch-list-container', 1000)
-      .click('.ContributorPickerItemSearch-list-container') // pick a collaborator
-      .pause(500)
-      .click('.OnBoardingButton')
       .waitForElementVisible('textarea', 1000)
       .setValue('textarea[name=mission]', 'fund open source projects')
       .setValue('textarea[name=description]', 'pay for servers and tshirts')
