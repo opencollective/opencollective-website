@@ -16,7 +16,7 @@ export function invoice(req, res) {
     i18n: i18nlib('en'),
     transaction,
     paperSize: (transaction.collective.currency === 'EUR') ? 'A4' : 'Letter',
-    user: { id: transaction.UserId, username }
+    user: { id: transaction.createdByUser.id, username }
   };
 
   const invoiceDate = moment(transaction.createdAt);
