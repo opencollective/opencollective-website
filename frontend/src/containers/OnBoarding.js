@@ -9,12 +9,10 @@ import i18n from '../lib/i18n';
 import OnBoardingHeader from '../components/on_boarding/OnBoardingHeader';
 import OnBoardingHero from '../components/on_boarding/OnBoardingHero';
 import OnBoardingStepPickRepository from '../components/on_boarding/OnBoardingStepPickRepository';
-import OnBoardingStepPickCoreContributors from '../components/on_boarding/OnBoardingStepPickCoreContributors';
 import OnBoardingStepCreate from '../components/on_boarding/OnBoardingStepCreate';
 import OnBoardingStepThankYou from '../components/on_boarding/OnBoardingStepThankYou';
 
 import fetchReposFromGitHub from '../actions/github/fetch_repos';
-import fetchContributorsFromGitHub from '../actions/github/fetch_contributors';
 import fetchUserFromGithub from '../actions/github/fetch_user';
 import uploadImage from '../actions/images/upload';
 import notify from '../actions/notification/notify';
@@ -29,14 +27,12 @@ export class OnBoarding extends Component {
   static propTypes = {
     githubUsername: PropTypes.string,
     repositories: PropTypes.arrayOf(PropTypes.object),
-    contributors: PropTypes.arrayOf(PropTypes.object),
     githubForm: PropTypes.object,
   }
 
   static defaultProps = {
     githubUsername: '',
     repositories: [],
-    contributors: [],
   }
 
   constructor(props) {
@@ -79,19 +75,24 @@ export class OnBoarding extends Component {
 
   render() {
     const { step } = this.state;
-    const { contributors, githubForm, repositories, utmSource } = this.props;
+    const { githubForm, repositories, utmSource } = this.props;
     return (
       <div className={`OnBoarding ${step ? '-registering' : ''}`}>
         <Notification autoclose={true} />
-        {step !== 4 && <OnBoardingHeader active={Boolean(step)} username={githubForm.attributes.username} />}
+        {step !== 3 && <OnBoardingHeader active={Boolean(step)} username={githubForm.attributes.username} />}
         {step === 0 && <OnBoardingHero utmSource={utmSource} />}
-        {step === 1 && <OnBoardingStepPickRepository repositories={repositories} blacklist={this.blacklist} onNextStep={(repository) => {
-          if (!githubForm.attributes.repository) githubForm.attributes.repository = repository;
-          this.getContributors(githubForm.attributes.repository, githubForm.attributes.username);
-        }} {...this.props} />}
-        {step === 2 && <OnBoardingStepPickCoreContributors contributors={contributors} onNextStep={() => this.setState({step: 3})} {...this.props} />}
-        {step === 3 && <OnBoardingStepCreate onCreate={this.create.bind(this)} {...this.props} />}
-        {step === 4 && <OnBoardingStepThankYou onContinue={() => window.location = '/opensource' }/>}
+        {step === 1 && <OnBoardingStepPickRepository 
+          repositories={repositories} 
+          blacklist={this.blacklist} 
+          onNextStep={(repository) => {
+            if (!githubForm.attributes.repository) {
+              githubForm.attributes.repository = repository;
+            }
+            this.setState({step: 2, repository});
+          }}
+          {...this.props} />}
+        {step === 2 && <OnBoardingStepCreate onCreate={this.create.bind(this)} {...this.props} />}
+        {step === 3 && <OnBoardingStepThankYou onContinue={() => window.location = '/opensource' }/>}
       </div>
     )
   }
@@ -137,7 +138,6 @@ export class OnBoarding extends Component {
             "interval":"monthly"
           }]
       },
-      users: attr.contributors,
       github_username: attr.username,
       user: githubUser || {},
 
@@ -145,43 +145,13 @@ export class OnBoarding extends Component {
 
     return validateSchema(githubForm.attributes, githubSchema)
       .then(() => createGroupFromGithubRepo(payload, attr.token))
-      .then(() => this.setState({step: 4}))
+      .then(() => this.setState({step: 3}))
       .catch(({message}) => notify('error', message));
-  }
-
-  getContributors(selectedRepo, owner) {
-    const {
-      githubUsername,
-      fetchContributorsFromGitHub,
-      notify } = this.props;
-
-    fetchContributorsFromGitHub(owner, selectedRepo)
-    .then(() => {
-      if (githubUsername !== owner) {
-        const { contributors } = this.props;
-        contributors.sort((A, B) => B.contributions - A.contributions);
-        const topTen = contributors.slice(0, 10).map(contributor => contributor.name);
-
-        if (topTen.indexOf(githubUsername) === -1) {
-          this.blacklist.push(selectedRepo);
-          this.setState({step: 1});
-          notify('error', `You need to be a top contributor for ${selectedRepo} in order to create a collective`);
-          this.props.contributors.length = 0;
-          return
-        }
-      }
-      this.setState({step: 2, selectedRepo})
-    })
-    .catch((error) => {
-      this.setState({step: 1});
-      notify('error', error.message);
-    });
   }
 }
 
 export default connect(mapStateToProps, {
   fetchReposFromGitHub,
-  fetchContributorsFromGitHub,
   fetchUserFromGithub,
   uploadImage,
   appendGithubForm,
@@ -204,7 +174,6 @@ function mapStateToProps({router, github, form}) {
     githubUser: github.user,
     fetchedRepositories: Boolean(github.repositories),
     repositories: github.repositories || [],
-    contributors: github.contributors || [],
     githubForm: form.github,
     i18n: i18n('en'),
     utmSource
