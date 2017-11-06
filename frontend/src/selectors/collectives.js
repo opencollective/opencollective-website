@@ -160,7 +160,7 @@ export const getI18nSelector = createSelector(
 export const isHostOfCollectiveSelector = createSelector(
   [ getAuthenticatedUserSelector, getCollectiveHostSelector ],
   (authenticatedUser, host) => {
-    return host && authenticatedUser && ((authenticatedUser.id === host.data.UserId) || (host.admins && !!host.admins.find(admin => admin.UserId === authenticatedUser.id)))
+    return host && authenticatedUser && ((authenticatedUser.id === host.data && host.data.UserId) || (host.admins && !!host.admins.find(admin => admin.UserId === authenticatedUser.id)))
   });
 
 export const canEditCollectiveSelector = createSelector(
