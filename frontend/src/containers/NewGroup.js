@@ -253,7 +253,7 @@ export class NewGroup extends Component {
   }
 
   create() {
-    const { newGroupForm, validateSchema, createGroup, utmSource, notify, hostCollective } = this.props;
+    const { newGroupForm, validateSchema, createGroup, utmSource, notify, hostCollective, hostId} = this.props;
     const attr = newGroupForm.attributes;
     let tags = attr.tags && attr.tags.split(',').map(x => x.trim());
     if (hostCollective) {
@@ -267,7 +267,7 @@ export class NewGroup extends Component {
       mission: attr.mission,
       longDescription: attr.contribute ? `${attr.description}\n\n# Contribute\n\n${attr.contribute}` : attr.description,
       website: attr.website,
-      HostId: hostCollective && hostCollective.settings.HostId,
+      hostId: hostId,
       hostFeePercent: hostCollective && hostCollective.settings.hostFeePercent || 5,
       data: {
         utmSource
@@ -298,11 +298,13 @@ export function mapStateToProps({router, form, groups}) {
   const groupType = router.params.type;
   const query = router.location.query;
   const utmSource = query.utm_source;
+  const hostId = hostCollective && groups[router.params.slug].id; 
 
   return {
     newGroupForm: form.addgroup,
     hostCollective,
     utmSource,
     groupType,
+    hostId
   };
 }
