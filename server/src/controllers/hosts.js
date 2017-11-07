@@ -1,5 +1,5 @@
 export function apply(req, res, next) {
-  if (!req.collective.settings.HostId) return res.sendStatus(404);
+  if (!req.collective.settings.apply) return res.sendStatus(404);
   next();
 }
 
