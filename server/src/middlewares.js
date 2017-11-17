@@ -22,7 +22,7 @@ const fetchUsers = (options = {}) => {
       requireAvatar: (typeof options.requireAvatar === 'boolean') ? options.requireAvatar : req.query.requireAvatar !== 'false' // by default, we skip users without avatar
     };
 
-    const tierSingular = filters.tier.replace(/s$/, '');
+    const tierSingular = filters.tier && filters.tier.replace(/s$/, '');
 
     let fetchUsers;
     switch (filters.tier) {
