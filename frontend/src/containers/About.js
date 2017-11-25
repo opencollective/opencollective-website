@@ -106,7 +106,7 @@ export class About extends Component {
               <div className='team-member'>
                 <img src='/public/images/aseem.jpg' height='200px' width='200px' alt='Aseem Sood' />
                 <h4>Aseem Sood</h4>
-                <p>Software Engineer</p>
+                <p>Cofounder</p>
                 <ul>
                     <li>
                       <a href='//twitter.com/AseemSood_'>
