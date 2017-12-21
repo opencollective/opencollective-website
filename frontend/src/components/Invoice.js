@@ -48,7 +48,7 @@ export default class Invoice extends Component {
 
     // We need to load images in absolute path for PhantomJS
     if (styles.hero.cover.backgroundImage && styles.hero.cover.backgroundImage.match(/url\('?\//)) {
-      styles.hero.cover.backgroundImage = styles.hero.cover.backgroundImage.replace(/url\('?\//, `url(${config.host.website}/`);
+      styles.hero.cover.backgroundImage = styles.hero.cover.backgroundImage.replace(/url\(('?)\//, `url($1${config.host.website}/`);
     }
 
     const pageStyle = {
