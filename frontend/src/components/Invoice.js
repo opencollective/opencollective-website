@@ -88,7 +88,7 @@ export default class Invoice extends Component {
         <div className="body">
           <div className="row">
             <div className="invoiceDetails">
-              <h2>Invoice</h2>
+              <h2>Donation Receipt</h2>
               <div className="detail"><label>Date:</label> {i18n.moment(createdAt).format('D MMMM YYYY')}</div>
               <div className="detail reference"><label>Reference:</label> {i18n.moment(createdAt).format('YYYYMM')}-{transaction.CollectiveId}-{transaction.id}</div>
             </div>

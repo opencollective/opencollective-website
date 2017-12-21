@@ -8,10 +8,6 @@ export default (i18n) => {
       value: 'paypal'
     },
     {
-      label: i18n.getString('payoutMethods-alreadyReimbursed'),
-      value: 'manual'
-    },
-    {
       label: i18n.getString('payoutMethods-other'),
       value: 'other'
     }
