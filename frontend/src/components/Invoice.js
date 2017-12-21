@@ -47,8 +47,8 @@ export default class Invoice extends Component {
     const styles = getGroupCustomStyles(transaction.collective);
 
     // We need to load images in absolute path for PhantomJS
-    if (styles.hero.cover.backgroundImage && styles.hero.cover.backgroundImage.match(/url\(\//)) {
-      styles.hero.cover.backgroundImage = styles.hero.cover.backgroundImage.replace('url(/', `url(${config.host.website}/`);
+    if (styles.hero.cover.backgroundImage && styles.hero.cover.backgroundImage.match(/url\('?\//)) {
+      styles.hero.cover.backgroundImage = styles.hero.cover.backgroundImage.replace(/url\('?\//, `url(${config.host.website}/`);
     }
 
     const pageStyle = {
