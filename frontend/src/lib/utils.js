@@ -10,6 +10,20 @@ const DEFAULT_GROUP_STYLES = {
   }
 };
 
+export function getQueryParams() {
+  const urlParams = {};
+  let match;
+  const pl     = /\+/g,  // Regex for replacing addition symbol with a space
+        search = /([^&=]+)=?([^&]*)/g,
+        decode = (s) => decodeURIComponent(s.replace(pl, " ")),
+        query  = window.location.search.substring(1);
+
+  while (match = search.exec(query)) { // eslint-disable-line no-cond-assign
+    urlParams[decode(match[1])] = decode(match[2]);
+  }
+  return urlParams;
+}
+
 export function prettyLink(url) {
   if (!url) return '';
   const prettyUrl = url.replace(/^https?:\/\/(www\.)?/i,'').replace(/\?.+/, '');

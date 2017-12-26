@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { pushState } from 'redux-router';
+import * as storage from '../lib/storage';
+import { getQueryParams } from '../lib/utils';
 
 import fetchUser from '../actions/users/fetch_by_id';
 import logout from '../actions/session/logout';
@@ -97,6 +99,14 @@ export class LoginTopBar extends Component {
 
   componentDidMount() {
     this.onClickOutsideRef = this.onClickOutside.bind(this);
+    const urlParams = getQueryParams();
+    console.log(">>> url query params: ", urlParams);
+    if (urlParams.referral) {
+      storage.set('referral', urlParams.referral, 48 * 60 * 60 * 1000); // we keep the referral for 48h or until we receive a new ?referral=
+    }
+    if (urlParams.matchingFund) {
+      storage.set('matchingFund', urlParams.matchingFund, 1 * 60 * 60 * 1000); // we keep the matchingFund for 1h or until we receive a new ?matchingFund=
+    }
     document.addEventListener('click', this.onClickOutsideRef);
   }
 
