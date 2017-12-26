@@ -15,10 +15,10 @@ export function getQueryParams() {
   let match;
   const pl     = /\+/g,  // Regex for replacing addition symbol with a space
         search = /([^&=]+)=?([^&]*)/g,
-        decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+        decode = (s) => decodeURIComponent(s.replace(pl, " ")),
         query  = window.location.search.substring(1);
 
-  while (match = search.exec(query)) {
+  while (match = search.exec(query)) { // eslint-disable-line no-cond-assign
     urlParams[decode(match[1])] = decode(match[2]);
   }
   return urlParams;
