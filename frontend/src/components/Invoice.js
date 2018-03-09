@@ -19,11 +19,15 @@ export default class Invoice extends Component {
     const {
       transaction,
       i18n,
-      paperSize
+      paperSize,
+      user
     } = this.props;
 
     const createdAt = new Date(transaction.createdAt);
     const localeDateFormat = (transaction.collective.currency === 'USD') ? 'en' : 'fr';
+    const amount = user.id === transaction.CreatedByUserId
+      ? transaction.netAmountInCollectiveCurrency
+      : transaction.amount;
     i18n.moment.locale(localeDateFormat);
     const columns = [
       {title: 'date', dataIndex: 'date', className: 'date' },
@@ -34,12 +38,12 @@ export default class Invoice extends Component {
     const data = [{
       date: i18n.moment(createdAt).format('l'),
       description: transaction.description,
-      amount: <Currency value={transaction.amount} currency={transaction.currency} />
+      amount: <Currency value={amount} currency={transaction.currency} />
     }];
 
     data.push({
       description: "Total",
-      amount: <Currency value={transaction.amount} currency={transaction.currency} />
+      amount: <Currency value={amount} currency={transaction.currency} />
     });
 
     const hostBillingAddress = { __html : (transaction.host.billingAddress || '').replace(/\n/g,'<br />') };
