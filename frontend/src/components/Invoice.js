@@ -24,10 +24,14 @@ export default class Invoice extends Component {
     } = this.props;
 
     const createdAt = new Date(transaction.createdAt);
-    const localeDateFormat = (transaction.collective.currency === 'USD') ? 'en' : 'fr';
     const amount = user.id === transaction.CreatedByUserId
-      ? transaction.netAmountInCollectiveCurrency
-      : transaction.amount;
+    ? transaction.netAmountInCollectiveCurrency
+    : transaction.amount;
+    const collective = user.id === transaction.CreatedByUserId
+    ? transaction.fromCollective
+    : transaction.collective;
+
+    const localeDateFormat = (collective.currency === 'USD') ? 'en' : 'fr';
     i18n.moment.locale(localeDateFormat);
     const columns = [
       {title: 'date', dataIndex: 'date', className: 'date' },
@@ -48,7 +52,7 @@ export default class Invoice extends Component {
 
     const hostBillingAddress = { __html : (transaction.host.billingAddress || '').replace(/\n/g,'<br />') };
     const userBillingAddress = { __html : (transaction.createdByUser.billingAddress || '').replace(/\n/g,'<br />') };
-    const styles = getGroupCustomStyles(transaction.collective);
+    const styles = getGroupCustomStyles(collective);
 
     // We need to load images in absolute path for PhantomJS
     if (styles.hero.cover.backgroundImage && styles.hero.cover.backgroundImage.match(/url\('?\//)) {
@@ -76,16 +80,16 @@ export default class Invoice extends Component {
         }
         `}</style>
         <div className="header">
-          <a href={`https://opencollective.com/${transaction.collective.slug}`}>
+          <a href={`https://opencollective.com/${collective.slug}`}>
             <div className="hero">
               <div className="cover" style={styles.hero.cover} />
-              <div className="logo" style={{backgroundImage:`url('${transaction.collective.image}')`}} />
+              <div className="logo" style={{backgroundImage:`url('${collective.image}')`}} />
             </div>
           </a>
 
           <div className="collectiveInfo">
-            <h1>{transaction.collective.name}</h1>
-            <a href={`https://opencollective.com/${transaction.collective.slug}`} className="website">https://opencollective.com/{transaction.collective.slug}</a>
+            <h1>{collective.name}</h1>
+            <a href={`https://opencollective.com/${collective.slug}`} className="website">https://opencollective.com/{collective.slug}</a>
           </div>
         </div>
 
