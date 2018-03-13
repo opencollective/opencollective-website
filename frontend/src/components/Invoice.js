@@ -19,17 +19,16 @@ export default class Invoice extends Component {
     const {
       transaction,
       i18n,
-      paperSize,
-      user
+      paperSize
     } = this.props;
 
     const createdAt = new Date(transaction.createdAt);
-    const amount = user.id === transaction.CreatedByUserId
-    ? transaction.netAmountInCollectiveCurrency
-    : transaction.amount;
-    const collective = user.id === transaction.CreatedByUserId
-    ? transaction.fromCollective
-    : transaction.collective;
+    const amount = transaction.type === 'CREDIT'
+    ? transaction.amount
+    : -transaction.netAmountInCollectiveCurrency;
+    const collective = transaction.type === 'CREDIT'
+    ? transaction.collective
+    : transaction.fromCollective;
 
     const localeDateFormat = (collective.currency === 'USD') ? 'en' : 'fr';
     i18n.moment.locale(localeDateFormat);
