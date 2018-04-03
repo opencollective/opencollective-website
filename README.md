@@ -1,3 +1,9 @@
+# This repository is deprecated
+
+Please refer to the
+[opencollective/frontend](https://github.com/opencollective/frontend)
+repository, which is the replacement of our UI.
+
 # OpenCollective Website
 
 [![Circle CI](https://circleci.com/gh/OpenCollective/opencollective-website/tree/master.svg?style=shield&circle-token=529943730e6598363053a54a31969aa0278f0f33)](https://circleci.com/gh/OpenCollective/opencollective-website/tree/master)
