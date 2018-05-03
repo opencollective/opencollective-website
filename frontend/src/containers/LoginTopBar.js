@@ -8,6 +8,8 @@ import fetchUser from '../actions/users/fetch_by_id';
 import logout from '../actions/session/logout';
 import decodeJWT from '../actions/session/decode_jwt';
 
+import SearchIcon from '../components/SearchIcon';
+
 export class LoginTopBar extends Component {
 
   constructor(props) {
@@ -86,6 +88,14 @@ export class LoginTopBar extends Component {
           }
           {!isAuthenticated && <a className='LoginTopBarLink' href={`/signin?next=${redirectRoute || window.location.pathname}`}>Login</a>}
         </div>
+        <form action="/search" method="GET" className="LoginTopBar-search-form">
+          <div className="LoginTopBar-search-container">
+            <input type="search" name="q" placeholder="Search Open Collective" className="LoginTopBar-search-input" />
+            <button className="LoginTopBar-search-button">
+              <SearchIcon size={16} />
+            </button>
+          </div>
+        </form>
       </div>
     )
   }

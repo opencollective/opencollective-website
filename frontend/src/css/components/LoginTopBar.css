@@ -250,6 +250,50 @@
   padding-right: 0;
 }
 
+.LoginTopBar-search-form {
+  max-width: 300px;
+  padding-top: 18px;
+  padding-left: 75px;
+  width: 50%;
+}
+
+.LoginTopBar-search-container {
+  align-items: center;
+  background-color: white;
+  border: 1px solid #e1e4e6;
+  border-radius: 2px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.LoginTopBar-search-form .LoginTopBar-search-input {
+  background-color: white;
+  border: none;
+  border-radius: 0px;
+  box-shadow: none;
+  box-sizing: border-box;
+  font-size: 12px;
+  height: auto;
+  letter-spacing: 1px;
+  padding: 10px;
+  width: 80%;
+}
+
+.LoginTopBar-search-input:focus ~ .LoginTopBar-search-button {
+  background-color: #97B7F3;
+}
+
+.LoginTopBar-search-button {
+  appearance: none;
+  background-color: #e1e4e6;
+  border: none;
+  border-radius: 2px;
+  box-shadow: none;
+  display: flex;
+  margin-right: 5px;
+  padding: 5px;
+}
+
 @media (min-width: 701px) {
   .LoginTopBar .LoginTopBarProfileMenu {
     .LoginTopBar-Links {
