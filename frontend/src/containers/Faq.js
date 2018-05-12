@@ -81,34 +81,56 @@ export class Faq extends Component {
           <p>No minimum time is required.</p>
           
           <h3>How do I make a donation?</h3>
-          <p>You rock! We are delighted you are asking this question. Go to the Collective’s Public Page (e.g. https://opencollective.com/wwcodeatl), choose your recurring donation amount and hit the Back Us or Donate button, fill out the form et voilà! Now you are part of that collective, your community will appreciate it.</p>
+          <p>You rock! We are delighted you are asking this question. Go to the Collective’s page (e.g. https://opencollective.com/wwcodeatl), choose your recurring donation amount and hit the Back Us or Donate button, fill out the form, et voilà! Now you are part of that collective, your community will appreciate it.</p>
+          <p>If your donation is in the form of an expense you paid, which you don't want to be reimbursed for (as your contribution), please submit the receipt as an expense to the Collective, and choose the "donation" payment method option.</p>
           
-          <h3 id="expense">How do I submit an expense for reimbursement?</h3>
-          <p>Go to the page of the Collective you're submitting the expense to, and click "Submit Expense". You will need to upload a receipt or invoice, and provide your contact details and PayPal address.</p>
-          <p>There are two ways of using your Collective’s money:
+          <h3 id="expense">How do I submit an expense and get paid?</h3>
+          <p>Go to the page of the Collective you're submitting the expense to, and click "Submit Expense". You will need to upload a valid receipt or invoice, and provide your PayPal address.</p>
+          <p>You can submit two kinds of expenses:
             <ul>
-              <li>Submit a receipt for something you paid for, like online services, meals, plane tickets, etc.</li>
-              <li>Submit an invoice for your work. The invoice must include your current address and be made to Open Collective Inc (or to the host if the Collective is hosted by another organisation) with reference to the Collective name. The expense amount will be listed on the Collective page, but the invoice itself is only visible to the host and core contributors (not public).</li>
-             </ul>
-          </p>
+              <li>A **receipt** to be reimbursed for something you paid for (stickers, online services, meals, plane tickets, etc).</li>
+              <li>An **invoice** for your time/work.</li>   
+              </ul> 
+              </p>
+              
+              <p>
+            <a href="https://docs.google.com/document/d/1ROQA11PaYjGtcie-1Ut8cFV5LCISKipSu8sgsY5U7vw/edit?usp=sharing">Here is an invoice template</a>, if you would like to use it. Fill out the blue parts and leave the black parts as is.
+             </p>
+             <p>
+             To be valid, an invoice must include: 
+             <ul>
+               <li>What it is for (feature built, work done, etc)</li>
+               <li>Amount to be paid</li>
+               <li>Your full name</li>
+               <li>Your physical address</li>
+               <li>The name of the Collective</li>
+               <li>The name of the host organization (for open source software projects, it's usually "Open Source Collective")</li>
+              </ul>
+              </p>
+          <p>Open Collective’s host details (for open source projects):</p> 
           <p>
-            <ul>
-              <li>US nationals and/or residents fill up <a href="https://www.irs.gov/pub/irs-pdf/fw9.pdf">this form</a></li>
-              <li>Non US nationals or residents use <a href="https://www.irs.gov/pub/irs-pdf/fw8ben.pdf">this one</a></li>
-            </ul>
-            <a href="https://docs.google.com/document/d/1ROQA11PaYjGtcie-1Ut8cFV5LCISKipSu8sgsY5U7vw/edit?usp=sharing">Here</a> is a template for an invoice. Please leave Open Collective details as they are and edit everything else.
-            </p>        
-          <p>Only expenses approved by core contributors will be paid. To approve your team's expenses, use the links on the notification email or log in to your collective and click on the expense. Expenses are paid once a week on Fridays. Please contact <a href="mailto:support@opencollective.com">Support</a> if you have any questions.</p> 
-          <p>Open Collective’s details:</p> 
-          <p>
-            OpenCollective, Inc.<br />
+            Open Source Collective 501c(6)<br />
             EIN: 47-3896707<br />
             340 S LEMON AVE #3717<br />
             Walnut CA 91789<br />
             USA
           </p>
+              <p>
+               Private information provided on invoices is not viewable publicly. The expense amount will be listed on the Collective page, but the invoice itself is only visible to the host and core contributors.
+         </p>
+          <p>Tax forms:
+            <ul>
+              <li>US nationals/residents fill out <a href="https://www.irs.gov/pub/irs-pdf/fw9.pdf">this form</a></li>
+              <li>Non-US nationals/residents use <a href="https://www.irs.gov/pub/irs-pdf/fw8ben.pdf">this one</a></li>
+            </ul>
+           
+            </p>        
+          <p>In order to be paid, submitted expenses must be approved by the Collective's core contributors, who ensure valid use of the Collective's funds.</p>
+          <p>To approve expenses for your Collective, use the links on the notification email you receive, or log in to your Collective and click on the expense.</p> 
+          <p> Expenses are paid weekly, on Fridays. Please contact <a href="mailto:support@opencollective.com">Support</a> if you have any questions.</p> 
           
-          <h3>Why do you have monthly payments as default?</h3>
+          
+          <h3>Why do you have monthly payments from backers/sponsors as the default?</h3>
           <p>A collective is an organization of people working together towards a common goal. Sometimes these goals take a few months or a few years to achieve. By supporting a collective with a recurring monthly amount, you help the collective plan out its future.</p>
           
           <h3 id="charge-date-notice">Why do you charge recurring monthly subscriptions on 1st of every month?</h3>
