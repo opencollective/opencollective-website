@@ -251,7 +251,7 @@
 }
 
 .LoginTopBar-search-form {
-  max-width: 300px;
+  max-width: 250px;
   padding-top: 18px;
   padding-left: 75px;
   width: 50%;
@@ -292,6 +292,15 @@
   display: flex;
   margin-right: 5px;
   padding: 5px;
+}
+
+@media screen and (max-width: 512px) {
+  .LoginTopBar-search-form {
+    max-width: 90%;
+    padding-left: 20px;
+    padding-top: 70px;
+    width: 100%;
+  }
 }
 
 @media (min-width: 701px) {

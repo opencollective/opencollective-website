@@ -218,6 +218,9 @@
 }
 
 @media (max-width: 512px) {
+  .HomePage {
+    background-position: center 75px;
+  }
   .numbers-container .col,
   .icons-container .col {
     float: none;
