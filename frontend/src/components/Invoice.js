@@ -29,6 +29,9 @@ export default class Invoice extends Component {
     const collective = transaction.type === 'CREDIT'
     ? transaction.collective
     : transaction.fromCollective;
+    const fromCollective = transaction.type === 'CREDIT'
+    ? transaction.fromCollective
+    : transaction.collective;
 
     const localeDateFormat = (collective.currency === 'USD') ? 'en' : 'fr';
     i18n.moment.locale(localeDateFormat);
@@ -56,8 +59,8 @@ export default class Invoice extends Component {
     const hostBillingAddress = { __html : `${hostAddress}${transaction.host.address || ''}`.replace(/\n/g,'<br />') };
 
     let userAddress = '';
-    if (transaction.collective.locationName) {
-      userAddress = `${transaction.collective.address}\n`;
+    if (fromCollective.locationName) {
+      userAddress = `${fromCollective.address}\n`;
     }
     const userBillingAddress = { __html : (transaction.createdByUser.billingAddress || userAddress || '').replace(/\n/g,'<br />') };
     const styles = getGroupCustomStyles(collective);
@@ -110,7 +113,7 @@ export default class Invoice extends Component {
             </div>
             <div className="userBillingAddress">
               <h2>{i18n.getString('billTo')}:</h2>
-              {transaction.collective.name}<br />
+              {fromCollective.name}<br />
               <div dangerouslySetInnerHTML={userBillingAddress} />
             </div>
           </div>
