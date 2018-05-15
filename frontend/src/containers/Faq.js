@@ -109,25 +109,31 @@ export class Faq extends Component {
               </p>
           <p>Open Collective’s host details (for open source projects):</p> 
           <p>
-            Open Source Collective 501c(6)<br />
-            EIN: 47-3896707<br />
-            340 S LEMON AVE #3717<br />
-            Walnut CA 91789<br />
+            Open Source Collective 501c(6)<br>
+            EIN: 82-2037583<br>
+            340 S LEMON AVE #3717<br>
+            Walnut CA 91789<br>
             USA
           </p>
               <p>
                Private information provided on invoices is not viewable publicly. The expense amount will be listed on the Collective page, but the invoice itself is only visible to the host and core contributors.
          </p>
-          <p>Tax forms:
+          <p>
+                 Tax forms:
             <ul>
-              <li>US nationals/residents fill out <a href="https://www.irs.gov/pub/irs-pdf/fw9.pdf">this form</a></li>
-              <li>Non-US nationals/residents use <a href="https://www.irs.gov/pub/irs-pdf/fw8ben.pdf">this one</a></li>
+              <li>US nationals/residents fill out <a href="https://www.irs.gov/pub/irs-pdf/fw9.pdf">this form.</a></li>
+              <li>Non-US nationals/residents use <a href="https://www.irs.gov/pub/irs-pdf/fw8ben.pdf">this form.</a></li>
             </ul>
-           
             </p>        
-          <p>In order to be paid, submitted expenses must be approved by the Collective's core contributors, who ensure valid use of the Collective's funds.</p>
-          <p>To approve expenses for your Collective, use the links on the notification email you receive, or log in to your Collective and click on the expense.</p> 
-          <p> Expenses are paid weekly, on Fridays. Please contact <a href="mailto:support@opencollective.com">Support</a> if you have any questions.</p> 
+          <p>
+                In order to be paid, submitted expenses must be approved by the Collective's core contributors, who ensure valid use of the Collective's funds.
+          </p>
+          <p>
+                To approve expenses for your Collective, use the links on the notification email you receive, or log in to your Collective and click on the expense.
+          </p> 
+          <p> 
+               Expenses are paid weekly, on Fridays. Please contact <a href="mailto:support@opencollective.com">Support</a> if you have any questions.
+          </p> 
           
           
           <h3>Why do you have monthly payments from backers/sponsors as the default?</h3>
