@@ -49,8 +49,17 @@ export default class Invoice extends Component {
       amount: <Currency value={amount} currency={transaction.currency} />
     });
 
-    const hostBillingAddress = { __html : (transaction.host.billingAddress || '').replace(/\n/g,'<br />') };
-    const userBillingAddress = { __html : (transaction.createdByUser.billingAddress || '').replace(/\n/g,'<br />') };
+    let hostAddress = '';
+    if (transaction.host.locationName) {
+      hostAddress = `${transaction.host.locationName}\n`;
+    }
+    const hostBillingAddress = { __html : `${hostAddress}${transaction.host.address || ''}`.replace(/\n/g,'<br />') };
+
+    let userAddress = '';
+    if (transaction.collective.locationName) {
+      userAddress = `${transaction.collective.address}\n`;
+    }
+    const userBillingAddress = { __html : (transaction.createdByUser.billingAddress || userAddress || '').replace(/\n/g,'<br />') };
     const styles = getGroupCustomStyles(collective);
 
     // We need to load images in absolute path for PhantomJS
