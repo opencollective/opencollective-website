@@ -101,7 +101,7 @@ export default class Invoice extends Component {
             </div>
             <div className="userBillingAddress">
               <h2>{i18n.getString('billTo')}:</h2>
-              {transaction.fromCollective.name}<br />
+              {transaction.collective.name}<br />
               <div dangerouslySetInnerHTML={userBillingAddress} />
             </div>
           </div>
