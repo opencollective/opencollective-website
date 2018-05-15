@@ -109,10 +109,10 @@ export class Faq extends Component {
               </p>
           <p>Open Collective’s host details (for open source projects):</p> 
           <p>
-            Open Source Collective 501c(6)<br>
-            EIN: 82-2037583<br>
-            340 S LEMON AVE #3717<br>
-            Walnut CA 91789<br>
+            Open Source Collective 501c(6)<br />
+            EIN: 82-2037583<br />
+            340 S LEMON AVE #3717<br />
+            Walnut CA 91789<br />
             USA
           </p>
               <p>
