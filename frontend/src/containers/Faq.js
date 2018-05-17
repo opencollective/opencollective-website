@@ -86,15 +86,16 @@ export class Faq extends Component {
           
           <h3 id="expense">How do I submit an expense and get paid?</h3>
           <p>Go to the page of the Collective you're submitting the expense to, and click "Submit Expense". You will need to upload a valid receipt or invoice, and provide your PayPal address.</p>
-          <p>You can submit two kinds of expenses:
+          <p> Each collective and host can specify expense policies and helpful info, like the details for invoicing, at the top of the 'new expense' page (<a href="https://opencollective.com/webpack/expenses/new">example</a>).</p>
+         
+         <p>You can submit two kinds of expenses:
             <ul>
-              <li>A **receipt** to be reimbursed for something you paid for (stickers, online services, meals, plane tickets, etc).</li>
-              <li>An **invoice** for your time/work.</li>   
+              <li>A <b>receipt</b> to be reimbursed for something you paid for (stickers, online services, meals, plane tickets, etc).</li>
+              <li>An <b>invoice</b> for your time/work.</li>   
               </ul> 
-              </p>
-              
+              </p> 
               <p>
-            <a href="https://docs.google.com/document/d/1ROQA11PaYjGtcie-1Ut8cFV5LCISKipSu8sgsY5U7vw/edit?usp=sharing">Here is an invoice template</a>, if you would like to use it. Fill out the blue parts and leave the black parts as is.
+            <a href="https://docs.google.com/document/d/1ROQA11PaYjGtcie-1Ut8cFV5LCISKipSu8sgsY5U7vw/edit?usp=sharing">Here is an invoice template</a> you can use. Fill out the blue parts, and change the invoicee to the correct host organization if needed.
              </p>
              <p>
              To be valid, an invoice must include: 
@@ -104,19 +105,11 @@ export class Faq extends Component {
                <li>Your full name</li>
                <li>Your physical address</li>
                <li>The name of the Collective</li>
-               <li>The name of the host organization (for open source software projects, it's usually "Open Source Collective")</li>
+               <li>The name of the host organization (for example, most open source software projects are in the "Open Source Collective" host)</li>
               </ul>
               </p>
-          <p>Open Collective’s host details (for open source projects):</p> 
-          <p>
-            Open Source Collective 501c(6)<br />
-            EIN: 82-2037583<br />
-            340 S LEMON AVE #3717<br />
-            Walnut CA 91789<br />
-            USA
-          </p>
               <p>
-               Private information provided on invoices is not viewable publicly. The expense amount will be listed on the Collective page, but the invoice itself is only visible to the host and core contributors.
+               Private information provided on invoices is not viewable publicly. The expense amount will be listed on the Collective's public page, but the invoice itself is only visible to the host and core contributors.
          </p>
           <p>
                  Tax forms:
