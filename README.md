@@ -1,5 +1,7 @@
 # This repository is deprecated
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/opencollective/opencollective-website.svg)](https://greenkeeper.io/)
+
 Please refer to the
 [opencollective/frontend](https://github.com/opencollective/frontend)
 repository, which is the replacement of our UI.
