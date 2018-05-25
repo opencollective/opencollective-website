@@ -17,13 +17,11 @@ export class LoginTopBar extends Component {
     this.state = {
       showProfileMenu: false
     };
-    this.showCreateBtn = false;
   }
 
   renderLinks() {
     return (
       <ul className='LoginTopBar-Links'>
-        {this.showCreateBtn && <li><a className='LoginTopBarButton' href='/create'>create a collective</a></li>}
         <li><a className='LoginTopBarLink' href='/learn-more'>How it works</a></li>
         <li><a className='LoginTopBarLink' href='/discover'>Discover</a></li>
         <li><a className='LoginTopBarLink' href='https://medium.com/open-collective'>Blog</a></li>
@@ -32,7 +30,7 @@ export class LoginTopBar extends Component {
   }
 
   renderProfileMenu() {
-    const { user } = this.props;
+    const { user = {} } = this.props;
 
     return (
       <div className='LoginTopBarProfileMenu' onClick={(e) => e.nativeEvent.stopImmediatePropagation()}>
@@ -42,7 +40,7 @@ export class LoginTopBar extends Component {
             <div className='-dash'></div>
           </div>
           <ul>
-          {this.showCreateBtn && <li><a href='/create'>create a collective</a></li>}
+          <li><a href='/create'>Create a Collective</a></li>
           <li><a href='/discover'>Discover</a></li>
             <li><a href='/subscriptions'>Subscriptions</a></li>
           </ul>
@@ -53,7 +51,7 @@ export class LoginTopBar extends Component {
             <div className='-dash'></div>
           </div>
           <ul>
-            <li><a href={`/${user.username}`}>Profile</a></li>
+            <li><a href={`/${user.username || 'anon'}`}>Profile</a></li>
           </ul>
           <ul>
             <li><a className='-blue' href='#' onClick={this.onClickLogout.bind(this)}>Logout</a></li>
