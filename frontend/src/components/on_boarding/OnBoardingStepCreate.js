@@ -11,6 +11,7 @@ export default class OnBoardingStepCreate extends React.Component {
     super(props);
     this.state = {
       agreedTOS: false,
+      agreedHostTOS: false,
       logo: '',
       disableCreateButton: false
     }
@@ -19,13 +20,13 @@ export default class OnBoardingStepCreate extends React.Component {
   render() {
     const buttonContainerStyle = {margin: '0 auto', marginTop: '40px', width: '300px', textAlign: 'center'};
     const { uploadImage, appendGithubForm, githubForm, i18n } = this.props;
-    const { agreedTOS } = this.state;
+    const { agreedTOS, agreedHostTOS } = this.state;
 
     const { mission } = githubForm.attributes;
     const { description } = githubForm.attributes;
     const { tags } = githubForm.attributes;
 
-    const canCreate = mission && description && agreedTOS;
+    const canCreate = mission && description && agreedTOS && agreedHostTOS;
 
     return (
       <div className="OnBoardingStepCreate">
@@ -62,6 +63,10 @@ export default class OnBoardingStepCreate extends React.Component {
           <div className="OnBoardingStepCreate-tos">
             <Checkbox checked={agreedTOS} onChange={(checked) => this.setState({agreedTOS: checked})} />
             <span>Agree to <a href="/tos" target='_blank'>Terms &amp; Conditions</a></span>
+          </div>
+          <div className="OnBoardingStepCreate-tos">
+            <Checkbox checked={agreedHostTOS} onChange={(checked) => this.setState({agreedHostTOS: checked})} />
+            <span>Agree to <a href="https://docs.google.com/document/u/3/d/e/2PACX-1vQbiyK2Fe0jLdh4vb9BfHY4bJ1LCo4Qvy0jg9P29ZkiC8y_vKJ_1fNgIbV0p6UdvbcT8Ql1gVto8bf9/pub" target='_blank'>Terms &amp; Conditions</a> of the host that will collect money on behalf of this collective</span>
           </div>
           <div style={buttonContainerStyle}>
             <div className={`OnBoardingButton ${canCreate ? '' : 'disabled'}`} onClick={canCreate && this.onCreate.bind(this)}>create!</div>
