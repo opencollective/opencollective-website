@@ -59,7 +59,7 @@ export default class Invoice extends Component {
     const hostBillingAddress = { __html : `${hostAddress}${transaction.host.address || ''}`.replace(/\n/g,'<br />') };
 
     let userAddress = '';
-    if (fromCollective.locationName) {
+    if (fromCollective.address) {
       userAddress = `${fromCollective.address}\n`;
     }
     const userBillingAddress = { __html : (transaction.createdByUser.billingAddress || userAddress || '').replace(/\n/g,'<br />') };
