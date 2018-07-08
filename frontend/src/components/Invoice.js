@@ -62,7 +62,6 @@ export default class Invoice extends Component {
     if (fromCollective.address) {
       userAddress = `${fromCollective.address}\n`;
     }
-    console.log(">>> fromCollective.address", typeof fromCollective.address, `--[${fromCollective.address}]--`);
     const userBillingAddress = { __html : (transaction.createdByUser.billingAddress || userAddress || '').replace(/\n/g,'<br />') };
     const styles = getGroupCustomStyles(collective);
 
