@@ -29,7 +29,7 @@ export default class CollectiveCard extends Component {
       }      
     }
 
-    stats.push({ label: i18n.getString('annualIncome'), value: formatCurrency(group.yearlyIncome, group.currency, { compact: true, precision: 0 }) });
+    stats.push({ label: i18n.getString('annualBudget'), value: formatCurrency(group.yearlyBudget, group.currency, { compact: true, precision: 0 }) });
     return stats;
   }
 
@@ -38,7 +38,7 @@ export default class CollectiveCard extends Component {
     const stats = [];
     stats.push({label: i18n.getString('backers'), value: group.backersCount});
     stats.push({label: i18n.getString('sponsors'), value: group.sponsorsCount});
-    stats.push({label: i18n.getString('annualIncome'), value: formatCurrency(group.yearlyIncome, group.currency, { compact: true, precision: 0 })});
+    stats.push({label: i18n.getString('annualBudget'), value: formatCurrency(group.yearlyBudget, group.currency, { compact: true, precision: 0 })});
     return stats;
   }
 

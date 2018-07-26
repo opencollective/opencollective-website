@@ -11,10 +11,10 @@ export default class CollectiveStatsHeader extends Component {
   render() {
     const { collective, i18n } = this.props;
 
-    const yearlyIncome = collective.yearlyIncome;
-    const formattedYearlyIncome = yearlyIncome && formatCurrency(yearlyIncome, collective.currency, { compact: true, precision: 0 });
+    const yearlyBudget = collective.yearlyBudget;
+    const formattedYearlyBudget = yearlyBudget && formatCurrency(yearlyBudget, collective.currency, { compact: true, precision: 0 });
 
-    if (yearlyIncome <= 0) {
+    if (yearlyBudget <= 0) {
       return (<div />);
     }
 
@@ -23,9 +23,9 @@ export default class CollectiveStatsHeader extends Component {
         <div className='CollectiveStatsHeader-backer-count-text'>
           {i18n.getString('aYearlyBudgetOf')}
         </div>
-        {yearlyIncome > 0 && (
+        {yearlyBudget > 0 && (
             <div className='CollectiveStatsHeader-backer-yearly-budget'>
-              {formattedYearlyIncome.split('').map((character) => <span className={/[^0-9]/.test(character) ? '-character' : '-digit'}>{character}</span>)}
+              {formattedYearlyBudget.split('').map((character) => <span className={/[^0-9]/.test(character) ? '-character' : '-digit'}>{character}</span>)}
             </div>
           )
         }
