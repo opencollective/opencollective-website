@@ -53,7 +53,7 @@ export class DonatePage extends Component {
     this.state = { view: 'default' };
     this.tier = (this.props.tier.description) ? this.props.tier : getTier(this.props.tier, collective.tiers) || this.props.tier;
     const verb = this.props.params.verb || 'donate';
-    console.log(">>> this.tier", this.tier, "this.props", this.props, "collective.tiers", collective.tiers, "getTier", getTier(this.props.tier, collective.tiers));
+
     if (!this.tier.name || this.tier.presets && this.tier.presets.length > 1) {
       Object.assign(this.tier, {
       name: "custom",

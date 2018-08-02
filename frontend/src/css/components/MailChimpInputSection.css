@@ -36,7 +36,7 @@
     font-size: 16px;
     font-weight: bold;
     text-align: center;
-    color: #ffffff;
+    color: #fff;
     text-transform: uppercase;
     background-color: #d6d6d6;
     &.-valid {
@@ -48,6 +48,9 @@
     &.-valid:hover {
       cursor: pointer;
       opacity: .94;
+    }
+    &[disabled]:hover {
+      color: #fff;
     }
   }
   form {

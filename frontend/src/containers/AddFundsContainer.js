@@ -86,7 +86,6 @@ export function createManualDonation() {
   };
   delete attributes.amountText;
   delete attributes.amount;
-  console.log(">>> attributes", attributes);
 
   return validateAddFundsRequest(attributes)
   .then(() => addFundsToCollective(collective.slug, {
